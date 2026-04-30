@@ -1,11 +1,36 @@
 # 
 ---
 ### Indice
-- Partecipanti
-- Descrizione
-- Attori
-- Funzionalità
-- Schema E-R
+- [Partecipanti](#partecipanti)
+- [Descrizione](#descrizione)
+- [Attori](#attori)
+  - [Amministratore degli utenti](#amministratore-degli-utenti)
+  - [Utente generico](#utente-generico)
+  - [Utente visitatore](#utente-visitatore)
+  - [Utente giocatore](#utente-giocatore)
+  - [Utente dungeon master](#utente-dungeon-master)
+- [Pagina principale](#pagina-principale)
+- [Funzionalità](#funzionalità)
+  - [Registrazione & Gestione Account](#registrazione--gestione-account)
+    - [Registrazione](#registrazione)
+    - [Log-in](#log-in)
+    - [Accesso alle aree riservate](#accesso-alle-aree-riservate)
+    - [Modifica delle Proprie Credenziali](#modifica-delle-proprie-credenziali)
+    - [Log-out](#log-out)
+    - [Eliminazione dell'account](#eliminazione-dellaccount)
+  - [Creazione del Personaggio](#creazione-del-personaggio)
+    - [Note](#note)
+  - [Visualizzazione dei Personaggi Creati](#visualizzazione-dei-personaggi-creati)
+  - [Visualizzazione e modifica scheda Personaggio](#visualizzazione-e-modifica-scheda-personaggio) 
+  - [Iscrizione ad una campagna](#iscrizione-ad-una-campagna)
+  - [Visualizzazione delle campagne a cui si partecipa e disiscrizione](#visualizzazione-delle-campagne-a-cui-si-partecipa-e-disiscrizione)
+  - [Creazione di una Campagna](#creazione-di-una-campagna)
+  - [Visualizzare le campagne a cui si partecipa](#visualizzare-le-campagne-a-cui-si-partecipa)
+  - [Gestire i giocatori all'interno di una campagna](#gestire-i-giocatori-allinterno-di-una-campagna)
+  - [Fare annunci su bacheca](#fare-annunci-su-bacheca)
+  - [Eliminare o terminare una campagna](#eliminare-o-terminare-una-campagna)
+- [Struttura del sito web](#struttura-del-sito-web)
+- [Schema E-R](#schema-e-r)
 
 ---
 ## Partecipanti
@@ -60,13 +85,16 @@ L'utente dungeon master avrà la possibilità di:
 - Operazioni di moderazione nei confronti dei giocatori partecipanti alle proprie campagne
 - Rimuovere un giocatore da una propria campagna
 - Eliminare o terminare una campagna.
+
 ---
-### Funzionalità
-Le Funzionalità minime previste dall'M.V.P. saranno le seguenti:
 
 ### Pagina principale
 La home page del nostro sito web, consiste in una galleria di presentazione delle caratteristiche e funzionalità del sito. Al suo interno sarà presente un menù, attraverso il quale un utente visitatore sarà in grado di registrarsi o di effettuare il log-in e, successivamente, accedere alle aree riservate agli utenti giocatore e dungeon master.
 Infine, con una sezione a piè di pagina saranno presenti informazioni sugli sviluppatori, crediti e riferimenti esterni.
+
+---
+### Funzionalità
+Le Funzionalità minime previste dall'M.V.P. saranno le seguenti:
 
 ##### Registrazione & Gestione Account
 ###### Registrazione

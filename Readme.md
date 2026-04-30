@@ -20,6 +20,7 @@
 <div align=center style="font-style : italic">
 La nostra proposta rappresenta una web app volta al supporto digitale di campagne del gioco di ruolo da tavolo Dungeons & Dragons. In particolare, il nostro progetto si propone di fornire al giocatore medio di una campagna D&D un modo semplice, veloce e intuitivo per la creazione e la gestione dei propri personaggi.
 </div>
+
 ---
 ### Attori
 L'architettura del sito web la seguente gerarchia di attori, ognuno con obiettivi e permessi differenti:

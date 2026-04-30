@@ -1,4 +1,10 @@
-# 
+
+<div align=center>
+<h1> NomeDelSito </h1>
+</div>
+
+## Banner
+
 ---
 ### Indice
 - [Partecipanti](#partecipanti)
@@ -174,6 +180,12 @@ Un utente dungeon master, dalla pagina relativa alla campagna interessata, potr�
 Un utente dungeon master, dalla pagina relativa alla campagna interessata, potrà eliminare la campagna, eliminando di conseguenza tutti i dati relativi e rimuovendo dalla campagna tutti gli utenti giocatori partecipanti.
 
 ---
+### Diagramma dei casi d'uso
+
+
+### Architettura MVC
+
+
 ### Struttura del sito web
 Qui sotto è riportata la struttura delle pagine del sito web sottoforma di grafo/automa a stati finiti.
 

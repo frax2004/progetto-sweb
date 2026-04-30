@@ -1,0 +1,53 @@
+@startuml entity-relationship
+
+entity Amministratore {
+  Account
+}
+
+entity Utente-Generico {
+  Account
+  Utente-Giocatore
+  Utente-Dungeon-Master
+}
+
+entity Utente-Giocatore {
+  Personaggi // riferito ad ID
+  Campagne // riferito ad ID
+}
+
+entity Utente-Dungeon-Master {
+  Campagne // riferito ad ID
+}
+
+entity Account {
+  Email
+  Password
+  Username
+}
+
+' i personaggi si differenziano anche in base al giocatore proprietario
+entity Personaggio {
+  Utente-Generico // riferimento
+  Nome 
+  Classe
+  Specie
+  Background
+  Talenti
+  Incantesimi
+  Equipaggiamento
+  Statistiche
+  Lingue-Parlate
+  [opt] Descrizione
+}
+
+' le campagne si differenziano anche in base al dungeon master proprietario
+entity Campagna {
+  Utente-Generico // riferimento
+  Nome
+  [opt] Banner
+  [opt] Descrizione
+  Bacheca
+  Personaggi
+}
+
+@enduml

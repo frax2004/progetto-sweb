@@ -149,7 +149,7 @@ Un utente dungeon master, dalla pagina relativa alla campagna interessata, potr√
 ### Struttura del sito web
 Qui sotto √® riportata la struttura delle pagine del sito web sottoforma di grafo/automa a stati finiti.
 
-![[website-structure.jpeg]]
+<image src="website-structure.jpeg"></image>
 
 ---
 ### Schema E-R

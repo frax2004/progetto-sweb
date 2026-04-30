@@ -1,11 +1,11 @@
 
 <div align=center>
-<h1> NomeDelSito </h1>
+<h1> D&D Hub </h1>
 </div>
 
-## Banner
-
 ---
+<image src="banner.jpg"></image>
+
 ### Indice
 - [Partecipanti](#partecipanti)
 - [Descrizione](#descrizione)

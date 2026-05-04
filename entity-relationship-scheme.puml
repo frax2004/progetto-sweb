@@ -1,53 +1,140 @@
-@startuml entity-relationship
+@startuml diagram
+
 
 entity Amministratore {
-  Account
+  account: Account
 }
 
-entity Utente-Generico {
-  Account
-  Utente-Giocatore
-  Utente-Dungeon-Master
+entity UtenteGenerico {
+  account: Account
+  utente_giocatore: UtenteGiocatore
+  utente_dungeon_master: UtenteDungeonMaster
 }
 
-entity Utente-Giocatore {
-  Personaggi // riferito ad ID
-  Campagne // riferito ad ID
+entity UtenteGiocatore {
+  ' riferito ad ID
+  personaggi: []Personaggio 
+  ' riferito ad ID
+  campagne: []Campagna 
 }
 
-entity Utente-Dungeon-Master {
-  Campagne // riferito ad ID
+entity UtenteDungeonMaster {
+  ' riferito ad ID
+  campagne: []Campagna 
 }
+
 
 entity Account {
-  Email
-  Password
-  Username
+  email: String
+  password: String
+  username: String
 }
 
 ' i personaggi si differenziano anche in base al giocatore proprietario
 entity Personaggio {
-  Utente-Generico // riferimento
-  Nome 
-  Classe
-  Specie
-  Background
-  Talenti
-  Incantesimi
-  Equipaggiamento
-  Statistiche
-  Lingue-Parlate
-  [opt] Descrizione
+  ' riferimento
+  utente_generico: UtenteGenerico 
+  nome: String 
+  classe_personaggio: ClassePersonaggio
+  sotto_classe_personaggio?: SottoclassePersonaggio
+  specie: Specie
+  background: Background
+  talenti: []Abilita
+  incantesimi?: []Incantesimo
+  equipaggiamento: []Equipaggiabile
+  statistiche: []Statistica
+  lingue_parlate: []String
+  descrizione?: String
+  competenze_extra?: []String
 }
+
+entity Statistica {
+  nome: String
+  descrizione?: String
+  valore: float
+}
+
+entity Equipaggiabile {
+  nome: String
+  descrizione: String
+}
+
+entity Background {
+  nome: String
+  descrizione: String
+  competente: []String
+  abilita: Abilita
+  equipaggiamento: []Equipaggiabile
+}
+
+entity Abilita {
+  nome: String
+  descrizione: String
+}
+
+entity Incantesimo {
+  nome: String
+  descrizione: String
+  livello: int
+  classi_ammesse: []ClassePersonaggio
+  gittata: float
+  durata: float
+  tempo_di_lancio: String
+  concentrazione: bool
+  componenti_materiali?: String
+  componenti_vocali: bool
+  componenti_somatiche: bool
+  scuola_di_magia: int
+}
+
+entity Specie {
+  nome: String
+  descrizione: String
+  sottospecie?: Sottospecie
+  abilita: []Abilita
+  velocita: float
+  taglia: int
+}
+
+entity Sottospecie {
+  nome: String
+  descrizione: String
+  abilita: []Abilita
+}
+
+entity ClassePersonaggio {
+  nome: String
+  sottoclassi_personaggio: []SottoclassePersonaggio
+  abilita: []Abilita
+  dadi_vita: String
+  competenze: []String
+  equipaggiamento: []Equipaggiabile
+}
+
+entity SottoclassePersonaggio {
+  nome: String
+  abilita: []Abilita
+  competenze?: []String
+}
+
 
 ' le campagne si differenziano anche in base al dungeon master proprietario
 entity Campagna {
-  Utente-Generico // riferimento
-  Nome
-  [opt] Banner
-  [opt] Descrizione
-  Bacheca
-  Personaggi
+  ' riferimento ad utente generico per considerare anche il profilo
+  utente_generico: UtenteGenerico 
+  nome: String
+  ' link all'immagine
+  banner?: String 
+  descrizione?: String
+  bacheca: []Post
+  personaggi: []Personaggio
 }
+
+entity Post {
+  dungeon_master: UtenteGenerico
+  text: String
+  timestamp: Timestamp
+}
+
 
 @enduml

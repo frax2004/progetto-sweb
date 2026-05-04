@@ -35,6 +35,7 @@
   - [Gestire i giocatori all'interno di una campagna](#gestire-i-giocatori-allinterno-di-una-campagna)
   - [Fare annunci su bacheca](#fare-annunci-su-bacheca)
   - [Eliminare o terminare una campagna](#eliminare-o-terminare-una-campagna)
+- [Diagramma di flusso del sito web](#diagramma-di-flusso-del-sito-web)
 - [Struttura del sito web](#struttura-del-sito-web)
 - [Architettura MVC](#architettura-mvc)
 - [Schema E-R](#schema-e-r)
@@ -182,7 +183,7 @@ Un utente dungeon master, dalla pagina relativa alla campagna interessata, potr√
 Un utente dungeon master, dalla pagina relativa alla campagna interessata, potr√† eliminare la campagna, eliminando di conseguenza tutti i dati relativi e rimuovendo dalla campagna tutti gli utenti giocatori partecipanti.
 
 ---
-### Diagramma dei casi d'uso
+### Diagramma di flusso del sito web
 <image src="website-structure.jpeg"></image>
 
 

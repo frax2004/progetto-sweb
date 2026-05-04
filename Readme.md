@@ -36,7 +36,6 @@
   - [Fare annunci su bacheca](#fare-annunci-su-bacheca)
   - [Eliminare o terminare una campagna](#eliminare-o-terminare-una-campagna)
 - [Diagramma di flusso del sito web](#diagramma-di-flusso-del-sito-web)
-- [Struttura del sito web](#struttura-del-sito-web)
 - [Architettura MVC](#architettura-mvc)
 - [Schema E-R](#schema-e-r)
 
@@ -184,14 +183,13 @@ Un utente dungeon master, dalla pagina relativa alla campagna interessata, potr�
 
 ---
 ### Diagramma di flusso del sito web
+Qui sotto è riportata la struttura delle pagine del sito web sottoforma di grafo/automa a stati finiti.
 <image src="website-structure.jpeg"></image>
 
 
 ### Architettura MVC
 L'architettura alla base del nostro sito web, che abbiamo deciso di adottare, è il modello Model-View-Controller. Abbiamo ritenuto opportuno questo modello perchè si adatta alla separazione **front-end**, **back-end** e **dbms**. [Vedere i partecipanti per i ruoli](#partecipanti)
 
-### Struttura del sito web
-Qui sotto è riportata la struttura delle pagine del sito web sottoforma di grafo/automa a stati finiti.
 
 ---
 ### Schema E-R

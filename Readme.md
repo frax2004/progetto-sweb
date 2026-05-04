@@ -1,6 +1,6 @@
 
 <div align=center>
-<h1> D&D Hub </h1>
+<h1> DnDHub </h1>
 </div>
 
 ---

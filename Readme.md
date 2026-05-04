@@ -193,3 +193,197 @@ Qui sotto è riportata la struttura delle pagine del sito web sottoforma di graf
 
 ---
 ### Schema E-R
+```plantuml
+@startuml diagram
+
+
+entity Amministratore {
+  account: Account
+}
+
+
+
+entity UtenteGenerico {
+  account: Account
+  utente_giocatore: UtenteGiocatore
+  utente_dungeon_master: UtenteDungeonMaster
+}
+
+entity UtenteGiocatore {
+  utente: UtenteGenerico
+  ' riferito ad ID
+  personaggi: []Personaggio 
+  ' riferito ad ID
+  campagne: []Campagna 
+}
+
+entity UtenteDungeonMaster {
+  utente: UtenteGenerico
+  ' riferito ad ID
+  campagne: []Campagna 
+}
+
+
+entity Account {
+  email: String
+  password: String
+  username: String
+}
+
+' i personaggi si differenziano anche in base al giocatore proprietario
+entity Personaggio {
+  ' riferimento
+  giocatore: UtenteGiocatore 
+  campagna?: Campagna
+  nome: String 
+  classe_personaggio: ClassePersonaggio
+  sotto_classe_personaggio?: SottoclassePersonaggio
+  specie: Specie
+  background: Background
+  talenti: []Abilita
+  incantesimi?: []Incantesimo
+  equipaggiamento: []Equipaggiabile
+  statistiche: []Statistica
+  lingue_parlate: []String
+  descrizione?: String
+  competenze_extra?: []String
+}
+
+entity Statistica {
+  nome: String
+  descrizione?: String
+  valore: float
+}
+
+entity Equipaggiabile {
+  nome: String
+  descrizione: String
+}
+
+entity Background {
+  nome: String
+  descrizione: String
+  competente: []String
+  abilita: Abilita
+  equipaggiamento: []Equipaggiabile
+}
+
+entity Abilita {
+  nome: String
+  descrizione: String
+}
+
+entity Incantesimo {
+  nome: String
+  descrizione: String
+  livello: int
+  classi_ammesse: []ClassePersonaggio
+  gittata: float
+  durata: float
+  tempo_di_lancio: String
+  concentrazione: bool
+  componenti_materiali?: String
+  componenti_vocali: bool
+  componenti_somatiche: bool
+  scuola_di_magia: int
+}
+
+entity Specie {
+  nome: String
+  descrizione: String
+  sottospecie?: []Sottospecie
+  abilita: []Abilita
+  velocita: float
+  taglia: int
+}
+
+entity Sottospecie {
+  nome: String
+  specie: Specie
+  descrizione: String
+  abilita: []Abilita
+}
+
+entity ClassePersonaggio {
+  nome: String
+  sottoclassi_personaggio: []SottoclassePersonaggio
+  abilita: []Abilita
+  dadi_vita: String
+  competenze: []String
+  equipaggiamento: []Equipaggiabile
+  incantesimi_forniti?: []Incantesimo
+}
+
+entity SottoclassePersonaggio {
+  nome: String
+  classe_personaggio: ClassePersonaggio
+  abilita: []Abilita
+  competenze?: []String
+  incantesimi_forniti?: []Incantesimo
+}
+
+
+' le campagne si differenziano anche in base al dungeon master proprietario
+entity Campagna {
+  ' riferimento ad utente generico per considerare anche il profilo
+  dungeon_master: UtenteDungeonMaster
+  nome: String
+  ' link all'immagine
+  banner?: String 
+  descrizione?: String
+  bacheca: []Post
+  personaggi: []Personaggio
+}
+
+entity Post {
+  campagna: Campagna
+  text: String
+  timestamp: Timestamp
+}
+
+Amministratore --|| Account : Possiede
+
+UtenteGenerico --|| Account : Possiede
+UtenteGenerico ||--|| UtenteGiocatore : Può diventare
+UtenteGenerico ||--|| UtenteDungeonMaster : Può diventare
+
+UtenteGiocatore ||--o{ Personaggio : Possiede
+UtenteGiocatore ||--o{ Campagna : Partecipa
+
+UtenteDungeonMaster ||--o{ Campagna : Gestisce
+
+Campagna ||--o{ Post : Contiene
+Campagna |o--o{ Personaggio : Contiene
+
+Personaggio --|| ClassePersonaggio : E' un
+Personaggio --o| SottoclassePersonaggio : E' un
+Personaggio --|| Specie : E' un
+Personaggio --|| Background : Ha un background da
+Personaggio --|{ Abilita : Possiede
+Personaggio --o{ Incantesimo : Possiede
+Personaggio --|{ Equipaggiabile : Possiede
+Personaggio --|{ Statistica : Possiede
+
+Background --|| Abilita : Fornisce
+Background --|{ Equipaggiabile : Fornisce
+
+
+Incantesimo }o--|{ ClassePersonaggio : Ammette
+Incantesimo }o--|{ SottoclassePersonaggio : Ammette
+
+
+ClassePersonaggio ||--|{ SottoclassePersonaggio : Fornisce
+ClassePersonaggio --|{ Abilita : Fornisce
+ClassePersonaggio --|{ Equipaggiabile : Fornisce
+ClassePersonaggio --o{ Incantesimo : Fornisce
+
+SottoclassePersonaggio --|{ Abilita : Fornisce
+SottoclassePersonaggio --o{ Incantesimo : Fornisce
+
+Specie ||--o{ Sottospecie : Può essere
+Specie --|{ Abilita : Fornisce
+
+Sottospecie --|{ Abilita : Fornisce
+
+@enduml
+```

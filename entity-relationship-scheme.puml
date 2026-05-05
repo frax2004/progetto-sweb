@@ -2,19 +2,17 @@
 
 
 entity Amministratore {
-  account: Account
+  {static} account: Account
 }
 
-
-
 entity UtenteGenerico {
-  account: Account
+  {static} account: Account
   utente_giocatore: UtenteGiocatore
   utente_dungeon_master: UtenteDungeonMaster
 }
 
 entity UtenteGiocatore {
-  utente: UtenteGenerico
+  {static} utente: UtenteGenerico
   ' riferito ad ID
   personaggi: []Personaggio 
   ' riferito ad ID
@@ -22,14 +20,14 @@ entity UtenteGiocatore {
 }
 
 entity UtenteDungeonMaster {
-  utente: UtenteGenerico
+  {static} utente: UtenteGenerico
   ' riferito ad ID
   campagne: []Campagna 
 }
 
 
 entity Account {
-  email: String
+  {static} email: String
   password: String
   username: String
 }
@@ -37,9 +35,9 @@ entity Account {
 ' i personaggi si differenziano anche in base al giocatore proprietario
 entity Personaggio {
   ' riferimento
-  giocatore: UtenteGiocatore 
+  {static} giocatore: UtenteGiocatore 
+  {static} nome: String 
   campagna?: Campagna
-  nome: String 
   classe_personaggio: ClassePersonaggio
   sotto_classe_personaggio?: SottoclassePersonaggio
   specie: Specie
@@ -54,31 +52,31 @@ entity Personaggio {
 }
 
 entity Statistica {
-  nome: String
+  {static} nome: String
   descrizione?: String
   valore: float
 }
 
 entity Equipaggiabile {
-  nome: String
+  {static} nome: String
   descrizione: String
 }
 
 entity Background {
-  nome: String
+  {static} nome: String
   descrizione: String
-  competente: []String
+  competenze: []String
   abilita: Abilita
   equipaggiamento: []Equipaggiabile
 }
 
 entity Abilita {
-  nome: String
+  {static} nome: String
   descrizione: String
 }
 
 entity Incantesimo {
-  nome: String
+  {static} nome: String
   descrizione: String
   livello: int
   classi_ammesse: []ClassePersonaggio
@@ -93,7 +91,7 @@ entity Incantesimo {
 }
 
 entity Specie {
-  nome: String
+  {static} nome: String
   descrizione: String
   sottospecie?: []Sottospecie
   abilita: []Abilita
@@ -102,14 +100,14 @@ entity Specie {
 }
 
 entity Sottospecie {
-  nome: String
+  {static} nome: String
   specie: Specie
   descrizione: String
   abilita: []Abilita
 }
 
 entity ClassePersonaggio {
-  nome: String
+  {static} nome: String
   sottoclassi_personaggio: []SottoclassePersonaggio
   abilita: []Abilita
   dadi_vita: String
@@ -119,7 +117,7 @@ entity ClassePersonaggio {
 }
 
 entity SottoclassePersonaggio {
-  nome: String
+  {static} nome: String
   classe_personaggio: ClassePersonaggio
   abilita: []Abilita
   competenze?: []String
@@ -130,8 +128,8 @@ entity SottoclassePersonaggio {
 ' le campagne si differenziano anche in base al dungeon master proprietario
 entity Campagna {
   ' riferimento ad utente generico per considerare anche il profilo
-  dungeon_master: UtenteDungeonMaster
-  nome: String
+  {static} dungeon_master: UtenteDungeonMaster
+  {static} nome: String
   ' link all'immagine
   banner?: String 
   descrizione?: String
@@ -140,9 +138,9 @@ entity Campagna {
 }
 
 entity Post {
-  campagna: Campagna
+  {static} campagna: Campagna
+  {static} timestamp: Timestamp
   text: String
-  timestamp: Timestamp
 }
 
 Amministratore --|| Account : Possiede

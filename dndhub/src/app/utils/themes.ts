@@ -1,19 +1,20 @@
 import * as themes from "../static-data/themes.json";
 
-class Theme {
-  public readonly dominant: string;
-  public readonly secondary: string;
-  public readonly accent: string;
+export namespace Themes {
+  export class Theme {
+    public readonly dominant: string;
+    public readonly secondary: string;
+    public readonly accent: string;
+  
+    public constructor(dominant: string, secondary: string, accent: string) {
+      this.dominant = dominant;
+      this.secondary = secondary;
+      this.accent = accent;
+    }
 
-  constructor(dominant: string, secondary: string, accent: string) {
-    this.dominant = dominant;
-    this.secondary = secondary;
-    this.accent = accent;
   }
-}
-
-class Themes {
-  public static get(name: keyof typeof themes): Theme {
+  
+  export function get(name: keyof typeof themes): Theme {
     return themes[name];
   }
 }

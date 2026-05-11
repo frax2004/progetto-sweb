@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { LoginPage } from "../login-page/login-page";
 
+
 @Component({
   selector: 'app-landing-page',
   imports: [RouterLink, RouterLinkActive, LoginPage],
@@ -9,5 +10,5 @@ import { LoginPage } from "../login-page/login-page";
   styleUrl: './landing-page.css',
 })
 export class LandingPage {
-  
+
 }

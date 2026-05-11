@@ -1,0 +1,17 @@
+{
+  "standard-light": {
+    "dominant": "#ffffff",
+    "secondary": "#ff0000",
+    "accent": "#0000ff"
+  },
+  "standard-dark": {
+    "dominant": "#000000",
+    "secondary": "#ff0000",
+    "accent": "#0000ff"
+  },
+  "debug": {
+    "dominant": "#00ff00",
+    "secondary": "#ffffff",
+    "accent": "#ffffff"
+  }
+}

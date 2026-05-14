@@ -4,7 +4,7 @@
 </div>
 
 ---
-<image src="banner.jpg"></image>
+<image src="res/banner.jpg"></image>
 
 ### Indice
 - [Partecipanti](#partecipanti)
@@ -184,7 +184,7 @@ Un utente dungeon master, dalla pagina relativa alla campagna interessata, potr�
 ---
 ### Diagramma di flusso del sito web
 Qui sotto è riportata la struttura delle pagine del sito web sottoforma di grafo/automa a stati finiti.
-<image src="website-structure.jpeg"></image>
+<image src="docs/website-structure.jpeg"></image>
 
 
 ### Architettura MVC
@@ -195,4 +195,4 @@ L'architettura alla base del nostro sito web, che abbiamo deciso di adottare, è
 ### Schema E-R
 Qui sotto è riportato lo schema entity-relationship che rappresenta il database della nostra architettura (**M**odel-**V**iew-**C**ontroller)
 
-![Alt text](./diagram.svg)
+![Alt text](./docs/diagram.svg)

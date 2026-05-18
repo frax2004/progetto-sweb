@@ -1,0 +1,8 @@
+<ion-accordion-group [multiple]="allowMultipleEnabled">
+  <ion-accordion *ngFor="let accordion of accordions" [value]="accordion.value">
+    <ion-item slot="header" color="light">
+      <ion-label>{{ accordion.title }}</ion-label>
+    </ion-item>
+    <div class="ion-padding" slot="content">{{ accordion.content }}</div>
+  </ion-accordion>
+</ion-accordion-group>

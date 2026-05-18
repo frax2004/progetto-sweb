@@ -1,0 +1,7 @@
+{
+  "name": "dndhub",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
-import { AccordionComponent } from '../accordion/accordion.component';
+import { AccordionComponent } from '../components/accordion/accordion.component';
 
 @Component({
   selector: 'app-home',

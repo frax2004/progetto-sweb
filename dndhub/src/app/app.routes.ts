@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AccordionComponent } from './accordion/accordion.component';
+import { AccordionComponent } from './components/accordion/accordion.component';
 
 export const routes: Routes = [
   {

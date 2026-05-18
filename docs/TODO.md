@@ -1,8 +1,8 @@
 
 ### Component Library
-- Button $\implies$ riccardo
+- Button $\implies$ giov 
 - Checkbox $\implies$
-- RadioButton $\implies$ giov
+- RadioButton $\implies$ giov X
 - Entry $\implies$ pollarà
 - TextArea $\implies$ pollarà
 - ScrollBar $\implies$ giov
@@ -10,7 +10,7 @@
 - Navbar $\implies$ giov
 - ImageFrame $\implies$ riccardo
 - Carosel $\implies$ pollarà
-- Pop $\implies$-up riccardo
-- Dropdown $\implies$ riccardo
+- Pop-up $\implies$ giov 
+- Dropdown $\implies$ riccardo X
 - ListElement $\implies$ giov
 - NumberEntry $\implies$ pollarà

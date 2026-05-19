@@ -10,12 +10,19 @@ import { IonContent } from '@ionic/angular/standalone';
 export class PopUpComponent  implements OnInit {
   public popText!: String;
 
+  public static of(st: String) {
+    class SonOfPopUpComponent extends PopUpComponent {
+      constructor () {super(st);}
+    }
+    return SonOfPopUpComponent;
+  }
+
   public setPopText(st: String) {
     this.popText = st;
   }
 
-  constructor(st?: String) {
-    this.popText = st ?? '';
+  constructor(st: String) {
+    this.popText = st;
   }
 
   ngOnInit() {}

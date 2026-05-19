@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, Injectable } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { ButtonComponent } from '../components/button/button.component';
 import { PopoverController } from '@ionic/angular/standalone';
@@ -10,23 +10,20 @@ import { PopUpComponent } from '../components/pop-up/pop-up.component';
   styleUrls: ['home.page.scss'],
   imports: [IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent],
 })
+
 export class HomePage {
   // Se dovete testare componenti, per favore non cancellate le funzioni relative al bottone e al 
   // pop-up ma mettetele in commento 
-  tmpFunc = {onClick: this.goTo};
+  tmpFunc = {onClick: (a: Event) => this.goTo(a)};
   public popupController: PopoverController;
 
-  constructor(popupController: PopoverController) {
-    this.popupController = popupController;
-    console.log(this.popupController);
+  constructor() {
+    this.popupController = inject(PopoverController);
   }
 
   async goTo(e: Event) {
-    console.log(this.popupController);
-    console.log("\nSono nel goto\n");
-
     const pop = await this.popupController.create({
-      component: PopUpComponent,
+      component: PopUpComponent.of("Pollarà"),
       event: e,
     });
 

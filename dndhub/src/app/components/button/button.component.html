@@ -1,1 +1,6 @@
-<ion-button (click)="buttonFunction.onClick($event)" [expand]="button.expand">{{ button.text }}</ion-button>
+<ion-button 
+    (click)="context.onClick($event)"
+    [expand]="button.expand"
+>
+{{ button.text }}
+</ion-button>

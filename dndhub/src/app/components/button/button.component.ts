@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Button } from './Button';
 import { IonButton } from '@ionic/angular/standalone';
+import { ButtonFunction } from './ButtonFunction';
 
 @Component({
   selector: 'app-button',
@@ -10,6 +11,7 @@ import { IonButton } from '@ionic/angular/standalone';
 })
 export class ButtonComponent  implements OnInit {
   @Input() button!: Button;
+  @Input() buttonFunction!: ButtonFunction;
 
   constructor() { }
 

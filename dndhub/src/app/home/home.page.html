@@ -1,4 +1,23 @@
-<app-button
+<!-- <app-button
   [button] = "{text: 'goToSomewhere', expand: ''}"
   [context] = "buttonCallbacks['button1']"
-></app-button>
+></app-button> -->
+
+<app-navbar 
+  title="Titolo"
+
+  [elements] = "[
+    '{ button = 'b1', context = "buttonCallbacks['button1']"     }',
+    
+  ]"
+>
+  
+  <app-button
+    [button] = "{text: 'ciao', expand: ''}"
+    [context] = "buttonCallbacks['button2']"
+  ></app-button>
+  <app-button
+    [button] = "{text: 'upupipiuop', expand: ''}"
+    [context] = "buttonCallbacks['button3']"
+  ></app-button>
+</app-navbar>

@@ -2,5 +2,7 @@
     @if (title !== undefined && title !== '') {
         <ion-title>{{ title }}</ion-title>
     }
-    @for 
+    @for (button of elements; track button) {
+        button
+    }
 </ion-toolbar>

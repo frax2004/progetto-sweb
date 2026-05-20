@@ -1,17 +1,18 @@
 import { Component, inject, Injectable } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonList } from '@ionic/angular/standalone';
 import { ButtonComponent } from '../components/button/button.component';
 import { PopoverController } from '@ionic/angular/standalone';
 import { Popups } from '../core/core';
 import { NavbarComponent } from "../components/navbar/navbar.component";
 import { expand } from 'rxjs';
 import { Button } from '../components/button/Button';
+import { UnorderedListElementComponent } from "../components/unordered-list-element/unordered-list-element.component";
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, NavbarComponent],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, NavbarComponent, UnorderedListElementComponent, IonList],
 })
 export class HomePage {
   // Se dovete testare componenti, per favore non cancellate le funzioni relative al bottone e al 

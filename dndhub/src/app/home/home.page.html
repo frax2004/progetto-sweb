@@ -3,7 +3,7 @@
   [context] = "buttonCallbacks['button1']"
 ></app-button> -->
 
-<app-navbar 
+<!-- <app-navbar 
   title="Titolo"
 
   [elements] = "[
@@ -20,4 +20,19 @@
     [button] = "{text: 'upupipiuop', expand: ''}"
     [context] = "buttonCallbacks['button3']"
   ></app-button>
-</app-navbar>
+</app-navbar> -->
+
+
+<ion-list>
+    <app-unordered-list-element
+    [text] = "'gianni'"
+    >
+    </app-unordered-list-element>
+    <app-unordered-list-element
+    [text] = "'gianni2'"
+    [context] = "buttonCallbacks['button1']"
+    >
+    </app-unordered-list-element>
+</ion-list>
+
+<!-- ricorda di dire a pollarà che forse è inutile definire componenti composte -->

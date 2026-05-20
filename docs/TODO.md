@@ -3,8 +3,8 @@
 - Button $\implies$ giov X
 - Checkbox $\implies$ X
 - RadioButton $\implies$ giov X
-- Entry $\implies$ pollarà
-- TextArea $\implies$ pollarà
+- Entry $\implies$ pollarà X
+- TextArea $\implies$ pollarà X
 - ScrollBar $\implies$ giov
 - Card $\implies$ pollarà
 - Navbar $\implies$ giov

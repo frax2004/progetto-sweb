@@ -7,12 +7,13 @@ import { NavbarComponent } from "../components/navbar/navbar.component";
 import { expand } from 'rxjs';
 import { Button } from '../components/button/Button';
 import { UnorderedListElementComponent } from "../components/unordered-list-element/unordered-list-element.component";
+import { CardComponent } from '../components/card/card.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, NavbarComponent, UnorderedListElementComponent, IonList],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, NavbarComponent, UnorderedListElementComponent, IonList, CardComponent],
 })
 export class HomePage {
   // Se dovete testare componenti, per favore non cancellate le funzioni relative al bottone e al 

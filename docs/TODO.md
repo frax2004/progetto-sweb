@@ -7,10 +7,10 @@
 - TextArea $\implies$ pollarà X
 - ScrollBar $\implies$ giov
 - Card $\implies$ pollarà
-- Navbar $\implies$ giov
+- Navbar $\implies$ giov (usiamo ionic nativo)
 - ImageFrame $\implies$ riccardo
 - Carosel $\implies$ pollarà
 - Pop-up $\implies$ giov X
 - Dropdown $\implies$ riccardo X
-- ListElement $\implies$ giov X
+- ListElement $\implies$ giov X --> (liste complete ionic nativo)
 - NumberEntry $\implies$ pollarà

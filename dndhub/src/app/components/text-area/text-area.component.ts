@@ -13,7 +13,8 @@ export class TextAreaComponent  implements OnInit {
   @Input() labelPlacement?: String;
   @Input() helperText?: String;
   @Input() errorText?: String;
-  @Input() placeholder?: String;
+  @Input() placeholder: String = "Scrivi qua";
+  @Input() disabled: Boolean = false;
 
   constructor() { }
 

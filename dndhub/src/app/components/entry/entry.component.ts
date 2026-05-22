@@ -11,7 +11,8 @@ export class EntryComponent  implements OnInit {
   @Input() label?: String;
   @Input() labelPlacement?: String;
   @Input() type?: String;
-  @Input() placeholder?: String;
+  @Input() placeholder: String = "Scrivi qui";
+  @Input() disabled: Boolean = false;
 
   constructor() { }
 

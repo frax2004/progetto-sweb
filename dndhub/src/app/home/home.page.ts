@@ -4,15 +4,17 @@ import { ButtonComponent } from '../components/button/button.component';
 import { PopoverController } from '@ionic/angular/standalone';
 import { Popups } from '../core/core';
 import { NavbarComponent } from "../components/navbar/navbar.component";
-import { expand } from 'rxjs';
 import { Button } from '../components/button/Button';
 import { UnorderedListElementComponent } from "../components/unordered-list-element/unordered-list-element.component";
+import { CardComponent } from '../components/card/card.component';
+import { CarouselComponent } from '../components/carousel/carousel.component';
+import { Card } from '../components/card/Card';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, NavbarComponent, UnorderedListElementComponent, IonList],
+  imports: [CarouselComponent, IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, NavbarComponent, UnorderedListElementComponent, IonList, CardComponent],
 })
 export class HomePage {
   // Se dovete testare componenti, per favore non cancellate le funzioni relative al bottone e al 
@@ -27,5 +29,13 @@ export class HomePage {
   b2: Button = {text: 'prova altro testp', expand: ''};
   b3: Button = {text: 'prova', expand: ''};
   
+  cards: Card[] = [
+    { title:'Card 1', subtitle:'Hello, World!', content:'Questo', imageURL: Card.defaultImageURL() },
+    { title:'Card 2', subtitle:'Hello, World!', content:'Non', imageURL: Card.defaultImageURL() },
+    { title:'Card 3', subtitle:'Hello, World!', content:'Dovevi', imageURL: Card.defaultImageURL() },
+    { title:'Card 4', subtitle:'Hello, World!', content:'Farlo', imageURL: Card.defaultImageURL() },
+    { title:'Card 5', subtitle:'Hello, World!', content:'Freezer', imageURL: Card.defaultImageURL() },
+  ]
+
   constructor(public popupController: PopoverController) {}
 }

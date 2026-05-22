@@ -1,0 +1,12 @@
+<div class="carousel">
+  <div class="group">
+    @for (card of cards; track card) {
+      <app-card [card]="card"></app-card>
+    }
+  </div>
+  <div aria-hidden class="group">
+    @for (card of cards; track card) {
+      <app-card [card]="card"></app-card>
+    }
+  </div>
+</div>

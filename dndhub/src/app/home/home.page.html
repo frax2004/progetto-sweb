@@ -1,31 +1,3 @@
-<!-- <app-button
-  [button] = "{text: 'goToSomewhere', expand: ''}"
-  [context] = "buttonCallbacks['button1']"
-></app-button> -->
-
-<app-navbar>
-  
-  <app-button
-    [button] = "{text: 'ciao', expand: ''}"
-    [context] = "buttonCallbacks['button2']"
-  ></app-button>
-  <app-button
-    [button] = "{text: 'upupipiuop', expand: ''}"
-    [context] = "buttonCallbacks['button3']"
-  ></app-button>
-</app-navbar> 
-
-
-<!-- <ion-list>
-    <app-unordered-list-element
-    [text] = "'gianni'"
-    >
-    </app-unordered-list-element>
-    <app-unordered-list-element
-    [text] = "'gianni2'"
-    [context] = "buttonCallbacks['button1']"
-    >
-    </app-unordered-list-element>
-</ion-list> -->
-
-<!-- ricorda di dire a pollarà che forse è inutile definire componenti composte -->
+<body style="max-width: 100%; background-color: white;">
+  <app-carousel [cards]=cards></app-carousel>
+</body>

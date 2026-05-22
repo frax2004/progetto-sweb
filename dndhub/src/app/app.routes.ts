@@ -9,7 +9,12 @@ export const routes: Routes = [
   { path: 'radio-button', component: RadioButtonComponent },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'landing-page',
     pathMatch: 'full',
   },
+  {
+    path: 'landing-page',
+    loadComponent: () => import('./pages/landing-page/landing-page.page').then( m => m.LandingPagePage)
+  },
+
 ];

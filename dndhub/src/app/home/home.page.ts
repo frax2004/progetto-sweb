@@ -3,7 +3,6 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonList } from '@ionic/ang
 import { ButtonComponent } from '../components/button/button.component';
 import { PopoverController } from '@ionic/angular/standalone';
 import { Popups } from '../core/core';
-import { NavbarComponent } from "../components/navbar/navbar.component";
 import { Button } from '../components/button/Button';
 import { UnorderedListElementComponent } from "../components/unordered-list-element/unordered-list-element.component";
 import { CardComponent } from '../components/card/card.component';
@@ -14,7 +13,7 @@ import { Card } from '../components/card/Card';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [CarouselComponent, IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, NavbarComponent, UnorderedListElementComponent, IonList, CardComponent],
+  imports: [CarouselComponent, IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, UnorderedListElementComponent, IonList, CardComponent],
 })
 export class HomePage {
   // Se dovete testare componenti, per favore non cancellate le funzioni relative al bottone e al 

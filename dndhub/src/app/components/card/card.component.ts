@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/angular/standalone';
+import { Card } from './Card';
+
 
 @Component({
   selector: 'app-card',
@@ -8,11 +10,7 @@ import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle }
   imports: [IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonCardSubtitle]
 })
 export class CardComponent  implements OnInit {
-
-  @Input() imageURL: String = "https://ionicframework.com/docs/img/demos/card-media.png";
-  @Input() title?: String;
-  @Input() subtitle?: String;
-  @Input() content?: String;
+  @Input() card!: Card;
 
   constructor() { }
 

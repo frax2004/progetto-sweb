@@ -1,106 +1,102 @@
 <ion-content>
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>DnDHUB</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<!-- ricordarsi che OGNI pagina deve essere dentro tag ion-content -->
-
-<!-- prima sezione dedicata solamente ala carousel con le card  -->
-
-<ion-item class="carouselBlock">
-  <ion-grid>
-    <ion-row>
-      <ion-label>Personaggi creati recentemente</ion-label>
-    </ion-row>
-    <ion-row>
-      <app-carousel [cards]="cards"></app-carousel>
-    </ion-row>
-  </ion-grid>
-</ion-item>
-
-<!-- seconda sezione con svariate card con informazioni varie -->
-
-<ion-item class="galleryBlock">
-  <ion-grid>
-    <ion-row>
-      <app-card
-      [card]= "{ title: 'Galleria 1', subtitle: 'Sottotitolo 1', content: 'Mi piacciono molto i gattini :]', imageURL: 'https://magazine.arcaplanet.it/wp-content/uploads/2022/06/blog-consigli-benessere-gattini-appena-nati.png'}"
-      ></app-card>
-    </ion-row>
-    <ion-row>
-      <app-card
-      [card]= "{ title: 'Galleria 2', subtitle: 'Sottotitolo 2', content: 'UNA TARTARUGA!!!!!', imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO7UMalsSQZGTzND5et3nJ9wsuOIAiPqExzQ&s'}"
-      ></app-card>
-    </ion-row>
-    <ion-row>
-      <app-card
-      [card]= "{ title: 'Galleria 3', subtitle: 'Sottotitolo 3', content: 'Questo puo essere il tuo pg cattivissimo!!!', imageURL: 'https://static.wikitide.net/criticalrolewiki/3/34/Gruumsh_-_Kent_Davis.jpg'}"
-      ></app-card>
-    </ion-row>
-  </ion-grid>
-</ion-item>
-
-<!-- footer che conterrà informazioni utili a sito o contatti e simili -->
-
-<ion-footer class="informationBlock">
-  <ion-grid>
-    <ion-row>
+  <div id="pageTitle">
+    <div id="title">DnDHUB</div>
+  </div>
   
-      <ion-col>
-        <ion-item>
-          <ion-grid>
-            <ion-row>
-              <ion-label class="footerTitle">Informazioni</ion-label>
-            </ion-row>
-            <ion-row>
-              <ion-label class="footerInformation">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                ùModi laboriosam in dignissimos mollitia. 
-                Aliquam eveniet ipsa eaque laboriosam, quisquam cupiditate cum quas, 
-                ratione repudiandae sequi provident exercitationem aperiam, omnis totam.
-              </ion-label>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-      </ion-col>
-
-
-      <ion-col>
-        <ion-item>
-          <ion-grid>
-            <ion-row>
-              <ion-label class="footerTitle">Contattaci</ion-label>
-            </ion-row>
-            <ion-row>
-              <ion-label class="footerInformation">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                ùModi laboriosam in dignissimos mollitia. 
-                Aliquam eveniet ipsa eaque laboriosam, quisquam cupiditate cum quas, 
-                ratione repudiandae sequi provident exercitationem aperiam, omnis totam.
-              </ion-label>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-      </ion-col>
-
-      <ion-col>
-        <ion-item>
-          <ion-grid>
-            <ion-row>
-              <ion-label class="footerTitle">Crediti</ion-label>
-            </ion-row>
-            <ion-row>
-              <ion-label class="footerInformation">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                ùModi laboriosam in dignissimos mollitia. 
-                Aliquam eveniet ipsa eaque laboriosam, quisquam cupiditate cum quas, 
-                ratione repudiandae sequi provident exercitationem aperiam, omnis totam.
-              </ion-label>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-      </ion-col>
-
-    </ion-row>
-  </ion-grid>
-</ion-footer>
+  <!-- ricordarsi che OGNI pagina deve essere dentro tag ion-content -->
+  
+  <!-- prima sezione dedicata solamente ala carousel con le card  -->
+  
+  <ion-item id="carousel-block">
+    <div id="carousel-content">
+      <div id="carousel-title">
+        <div id="carousel-label">Personaggi creati recentemente</div>
+      </div>
+      <app-carousel [cards]="cards"></app-carousel>
+    </div>
+  </ion-item>
+  
+  <!-- seconda sezione con svariate card con informazioni varie -->
+  
+  <ion-item class="galleryBlock">
+    <ion-grid>
+      <ion-row>
+        <app-card
+        [card]= "{ title: 'Galleria 1', subtitle: 'Sottotitolo 1', content: 'Mi piacciono molto i gattini :]', imageURL: 'https://magazine.arcaplanet.it/wp-content/uploads/2022/06/blog-consigli-benessere-gattini-appena-nati.png'}"
+        ></app-card>
+      </ion-row>
+      <ion-row>
+        <app-card
+        [card]= "{ title: 'Galleria 2', subtitle: 'Sottotitolo 2', content: 'UNA TARTARUGA!!!!!', imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO7UMalsSQZGTzND5et3nJ9wsuOIAiPqExzQ&s'}"
+        ></app-card>
+      </ion-row>
+      <ion-row>
+        <app-card
+        [card]= "{ title: 'Galleria 3', subtitle: 'Sottotitolo 3', content: 'Questo puo essere il tuo pg cattivissimo!!!', imageURL: 'https://static.wikitide.net/criticalrolewiki/3/34/Gruumsh_-_Kent_Davis.jpg'}"
+        ></app-card>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  
+  <!-- footer che conterrà informazioni utili a sito o contatti e simili -->
+  
+  <ion-footer class="informationBlock">
+    <ion-grid>
+      <ion-row>
+        
+        <ion-col>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-label class="footerTitle">Informazioni</ion-label>
+              </ion-row>
+              <ion-row>
+                <ion-label class="footerInformation">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                  ùModi laboriosam in dignissimos mollitia. 
+                  Aliquam eveniet ipsa eaque laboriosam, quisquam cupiditate cum quas, 
+                  ratione repudiandae sequi provident exercitationem aperiam, omnis totam.
+                </ion-label>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-col>
+        
+        
+        <ion-col>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-label class="footerTitle">Contattaci</ion-label>
+              </ion-row>
+              <ion-row>
+                <ion-label class="footerInformation">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                  ùModi laboriosam in dignissimos mollitia. 
+                  Aliquam eveniet ipsa eaque laboriosam, quisquam cupiditate cum quas, 
+                  ratione repudiandae sequi provident exercitationem aperiam, omnis totam.
+                </ion-label>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-col>
+        
+        <ion-col>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-label class="footerTitle">Crediti</ion-label>
+              </ion-row>
+              <ion-row>
+                <ion-label class="footerInformation">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                  ùModi laboriosam in dignissimos mollitia. 
+                  Aliquam eveniet ipsa eaque laboriosam, quisquam cupiditate cum quas, 
+                  ratione repudiandae sequi provident exercitationem aperiam, omnis totam.
+                </ion-label>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-col>
+        
+      </ion-row>
+    </ion-grid>
+  </ion-footer>
 </ion-content>

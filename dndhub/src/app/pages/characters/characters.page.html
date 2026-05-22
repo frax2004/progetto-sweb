@@ -1,0 +1,28 @@
+<ion-content>
+  <ion-header [translucent]="true" class="header">
+    <ion-toolbar>
+      <ion-title class="title">Area personale giocatore</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <app-button
+    [button]= "{ text: 'Vai alle campagne', expand: ''}"
+    [context]= "buttonCallbacks['goToCampaigns']"
+  ></app-button>
+
+  <ion-grid>
+    <ion-row>
+      <app-button
+        [button] = "{ text: 'Crea nuovo personaggio (ci andrebbe in realtà il +)', expand: ''}"
+        [context] = "buttonCallbacks['createChar']"
+      ></app-button>
+    </ion-row>
+    <!-- qua l'html dovrebbe essere inizializzato dal db -->
+     <!-- striscia rossa qua -->
+     <ion-row>
+      <app-card
+        [card] = "cards"
+      ></app-card>
+     </ion-row>
+  </ion-grid>
+</ion-content>

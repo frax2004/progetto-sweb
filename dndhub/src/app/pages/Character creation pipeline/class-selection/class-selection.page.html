@@ -1,0 +1,34 @@
+<ion-content>  
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>Scegli la tua classe</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content>
+
+<!-- Sezione dedicata alla scelta della classe con menù a tendina
+     NB: ogni menù a tendina dovrebbe avere all'interno un bottone 
+     (o simile) che permette di selezionare quella classe tramite
+     un booleano (o simile) -->
+
+<ion-item class="classSelectionFrame">
+  <app-accordion
+    [accordions] = "accordions"
+    [allowMultipleEnabled] = "true"
+  ></app-accordion>
+</ion-item>
+
+<!-- Sezione dedicata alla selezione del livello 
+     Ancora con elementi placeholder perché il number
+     selector non è stato ancora implementato -->
+
+<ion-item>
+  <ion-label>
+    Scegli un livello per il personaggio (1-20):
+  </ion-label>
+  <app-text-area
+  [fill] = "'solid'"
+  [errorText] = "'Il valore dovrebbe essere contenuto tra 1 e 20'"
+  >
+  </app-text-area>
+</ion-item>

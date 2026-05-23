@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {
   InfiniteScrollCustomEvent,
   IonAvatar,
@@ -9,31 +9,36 @@ import {
   IonLabel,
   IonList,
 } from '@ionic/angular/standalone';
-
 @Component({
-  selector: 'app-example',
-  templateUrl: 'example.component.html',
-  styleUrls: ['example.component.css'],
-  imports: [IonAvatar, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonItem, IonLabel, IonList],
+  selector: 'app-scrollbar',
+  templateUrl: './scrollbar.component.html',
+  standalone: true,
+  imports: [
+    IonContent,
+    IonInfiniteScroll,
+    IonInfiniteScrollContent,
+    IonItem,
+    IonLabel,
+    IonList
+  ]
+
 })
-export class ExampleComponent implements OnInit {
-  items: string[] = [];
+export class ScrollBarComponent {
 
-  ngOnInit() {
-    this.generateItems();
-  }
+  @Input() items: any[] = [];
 
-  private generateItems() {
-    const count = this.items.length + 1;
-    for (let i = 0; i < 50; i++) {
-      this.items.push(`Item ${count + i}`);
+  @Input() loadMore!: () => Promise<any[]>; // questa è una funzione che viene passata come input al componente, che serve a caricare nuovi elementi dal database
+
+  async onIonInfinite(event: InfiniteScrollCustomEvent) { // questo serve perché deve aspettare che la funzione carichi dal db
+
+    const newItems = await this.loadMore(); // carica nuovi elementi dal database
+
+    this.items.push(...newItems); // aggiunge i nuovi elementi alla lista esistente 
+    // i tre puntini indicano che gli elementi presi dal database vanno presi singolarmente, altrimenti vengono presi tutti insieme
+    event.target.complete(); // segnala la fine del caricamento dei nuovi oggetti
+
+    if (newItems.length === 0) { // se non ci sono più elementi da caricare, disabilita l'infinite scroll
+      event.target.disabled = true;
     }
-  }
-
-  onIonInfinite(event: InfiniteScrollCustomEvent) {
-    this.generateItems();
-    setTimeout(() => {
-      event.target.complete();
-    }, 500);
   }
 }

@@ -1,15 +1,18 @@
 <ion-content>
   <ion-list>
-    @for (item of items; track item; let index = $index) {
-    <ion-item>
-      <ion-avatar slot="start">
-        <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
-      </ion-avatar>
-      <ion-label>{{ item }}</ion-label>
-    </ion-item>
+    @for (item of items; track item.id) {
+      <ion-item>
+        <ion-label>
+          {{ item.name }}
+        </ion-label>
+      </ion-item>
     }
   </ion-list>
-  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+
+  <ion-infinite-scroll
+    (ionInfinite)="onIonInfinite($event)" //  evento che viene triggerato quando si arriva alla fine della lista, chiama onIonInfinite
+  >
+    <ion-infinite-scroll-content> 
+    </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

@@ -1,0 +1,42 @@
+.carousel {
+  width: 90%;
+  display: flex;
+  overflow-x: auto;
+  -webkit-mask-image: linear-gradient(
+    to right, 
+    transparent 0%, 
+    black 10%, 
+    black 90%, 
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right, 
+    transparent 0%, 
+    rgb(0, 0, 0) 10%, 
+    rgb(0, 0, 0) 90%, 
+    transparent 100%
+  );
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5em;
+  animation: spin 15s infinite linear;
+  padding-right: .5em;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+app-card {
+  flex: 0 0 12em;
+}
+
+@keyframes spin {
+  from { translate: 0; }
+  to { translate: -100%; }
+
+}

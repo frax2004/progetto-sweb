@@ -1,43 +1,53 @@
 import { Component, inject, Injectable } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonList } from '@ionic/angular/standalone';
 import { ButtonComponent } from '../components/button/button.component';
 import { PopoverController } from '@ionic/angular/standalone';
 import { Popups } from '../core/core';
 import { CheckboxComponent } from '../components/checkbox/checkbox.component'; 
 import { ScrollBarComponent } from '../components/scrollbar/scrollbar.component';
+import { Button } from '../components/button/Button';
+import { UnorderedListElementComponent } from "../components/unordered-list-element/unordered-list-element.component";
+import { CardComponent } from '../components/card/card.component';
+import { CarouselComponent } from '../components/carousel/carousel.component';
+import { Card } from '../components/card/Card';
 
   @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, CheckboxComponent,  ScrollBarComponent],
+  imports: [CarouselComponent, IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, UnorderedListElementComponent, IonList, CardComponent],
 })
 export class HomePage {
   // Se dovete testare componenti, per favore non cancellate le funzioni relative al bottone e al 
-  // pop-up ma mettetele in commento  
-  /* buttonCallbacks = {
-    button1: { onClick: Popups.ofSimpleText(this.popupController, "Hello, World") }
+  // pop-up ma mettetele in commento
+  buttonCallbacks = {
+    button1: { onClick: Popups.ofSimpleText(this.popupController, "Hello, World") },
+    button2: { onClick: Popups.ofSimpleText(this.popupController, "ciao") },
+    button3: { onClick: Popups.ofSimpleText(this.popupController, "marmellata") }
   };
 
+  b1: Button = {text: 'prova Testo', expand: ''};
+  b2: Button = {text: 'prova altro testp', expand: ''};
+  b3: Button = {text: 'prova', expand: ''};
   
-  constructor(public popupController: PopoverController) {} */
+  //constructor(public popupController: PopoverController) {} 
   items: any[] = [];
 
   limit = 2; //elementi che vengono caricati ogni volta che viene aperta la lista
 
   offset = 0; //è sostanzialmente il contatore che serve a capire dove è arrivato il caricamento del db
 
-  ProvaDragonBall = [ // per provare il db 
-    { id: 1, name: 'Wizard' },
-    { id: 2, name: 'Rogue' },
-    { id: 3, name: 'Paladin' },
-    { id: 4, name: 'Barbarian' },
-    { id: 5, name: 'Druid ' },
-    { id: 6, name: 'Warlock' },
-  ];
+  // ProvaDragonBall = [ // per provare il db 
+  //   { id: 1, name: 'Wizard' },
+  //   { id: 2, name: 'Rogue' },
+  //   { id: 3, name: 'Paladin' },
+  //   { id: 4, name: 'Barbarian' },
+  //   { id: 5, name: 'Druid ' },
+  //   { id: 6, name: 'Warlock' },
+  // ];
   constructor(public popupController: PopoverController) {
 
-  this.initialize(); // questa funzione serve a caricare i primi elementi dal database
+  // this.initialize(); // questa funzione serve a caricare i primi elementi dal database
 
 }
 

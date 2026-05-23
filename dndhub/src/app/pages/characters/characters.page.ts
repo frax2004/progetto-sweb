@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, PopoverController, IonItem, IonGrid, IonRow } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, PopoverController, IonItem, IonGrid, IonRow, NavController } from '@ionic/angular/standalone';
 import { ButtonComponent } from "src/app/components/button/button.component";
-import { Popups } from 'src/app/core/core';
+import { Navigate, Popups } from 'src/app/core/core';
 import { CardComponent } from "src/app/components/card/card.component";
 import { Card } from 'src/app/components/card/Card';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-characters',
@@ -18,14 +19,14 @@ export class CharactersPage implements OnInit {
 
   buttonCallbacks = {
     goToCampaigns: { onClick: Popups.ofSimpleText(this.popupController, "Hello, World") },
-    createChar: { onClick: Popups.ofSimpleText(this.popupController, "Funzione non ancora implementata :]") }
-  }
+    createChar: { onClick: Navigate.toPath(this.router, '/class-selection') },
+  };
 
   img = Card.defaultImageURL();
 
   cards: Card = { title:'Nome personaggio', subtitle:'Razza, classe e livello', content:  'breve descrizione opzionale', imageURL: Card.defaultImageURL() };
 
-  constructor(public popupController: PopoverController) { }
+  constructor(public popupController: PopoverController, private router: Router) { }
 
   ngOnInit() {
   }

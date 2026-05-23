@@ -1,5 +1,9 @@
+import { ButtonComponent } from "../button/button.component";
+
 export interface Accordion {
-  value: string;
-  title: string;
-  content: string;
+  value: String;
+  title: String;
+  content: String;
+  imageURL?: String;
+  button?: ButtonComponent;
 }

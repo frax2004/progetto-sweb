@@ -31,6 +31,14 @@ export const routes: Routes = [
     path: 'background-selection',
     loadComponent: () => import('./pages/Character creation pipeline/background-selection/background-selection.page').then( m => m.BackgroundSelectionPage)
   },
+  {
+    path: 'campaigns',
+    loadComponent: () => import('./pages/campaigns/campaigns.page').then( m => m.CampaignsPage)
+  },
+  {
+    path: 'campaign-creation',
+    loadComponent: () => import('./pages/campaign-creation/campaign-creation.page').then( m => m.CampaignCreationPage)
+  },
 
 
 ];

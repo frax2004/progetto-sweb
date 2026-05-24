@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
-  InfiniteScrollCustomEvent,
   IonAvatar,
   IonContent,
   IonInfiniteScroll,
@@ -9,36 +8,49 @@ import {
   IonLabel,
   IonList,
 } from '@ionic/angular/standalone';
+
+import { FakeDbService } from './fake-db';
+import { Item } from './item';
+
 @Component({
-  selector: 'app-scrollbar',
-  templateUrl: './scrollbar.component.html',
+  selector: 'app-scroll-bar',
+  templateUrl: 'scrollbar.component.html',
   standalone: true,
   imports: [
+    IonAvatar,
     IonContent,
     IonInfiniteScroll,
     IonInfiniteScrollContent,
     IonItem,
     IonLabel,
-    IonList
-  ]
-
+    IonList,
+  ],
 })
-export class ScrollBarComponent {
+export class ScrollBarComponent implements OnInit {
 
-  @Input() items: any[] = [];
+  items: Item[] = [];
 
-  @Input() loadMore!: () => Promise<any[]>; // questa è una funzione che viene passata come input al componente, che serve a caricare nuovi elementi dal database
+  private page = 0;
+  private pageSize = 20;
 
-  async onIonInfinite(event: InfiniteScrollCustomEvent) { // questo serve perché deve aspettare che la funzione carichi dal db
+  constructor(private db: FakeDbService) {}
 
-    const newItems = await this.loadMore(); // carica nuovi elementi dal database
+  ngOnInit() {
+    this.loadMore(); // Carica i primi elementi all'inizio
+  }
 
-    this.items.push(...newItems); // aggiunge i nuovi elementi alla lista esistente 
-    // i tre puntini indicano che gli elementi presi dal database vanno presi singolarmente, altrimenti vengono presi tutti insieme
-    event.target.complete(); // segnala la fine del caricamento dei nuovi oggetti
+  async loadMore(event?: any) { // event è opzionale, viene passato solo quando la funzione è chiamata dall'infinite scroll
+    const newItems = await this.db.getItems(this.page, this.pageSize); // Ottieni nuovi elementi dal servizio
 
-    if (newItems.length === 0) { // se non ci sono più elementi da caricare, disabilita l'infinite scroll
-      event.target.disabled = true;
+    this.items = [...this.items, ...newItems]; // Aggiungi i nuovi elementi alla lista esistente 
+    this.page++; // i ... serve a prendere gli elementi singoli  dall'array altrimenti vengono presi tutti insieme
+
+    if (event) { //
+      event.target.complete();
+
+      if (newItems.length < this.pageSize) { // Se non ci sono più elementi da caricare, disabilita l'infinite scroll
+        event.target.disabled = true;
+      }
     }
   }
 }

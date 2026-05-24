@@ -1,18 +1,17 @@
-<ion-content>
-  <ion-list>
-    @for (item of items; track item.id) {
-      <ion-item>
-        <ion-label>
-          {{ item.name }}
-        </ion-label>
-      </ion-item>
-    }
-  </ion-list>
 
-  <ion-infinite-scroll
-    (ionInfinite)="onIonInfinite($event)" //  evento che viene triggerato quando si arriva alla fine della lista, chiama onIonInfinite
-  >
-    <ion-infinite-scroll-content> 
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-</ion-content>
+<ion-list>
+  @for (item of items; track item.id) {
+    <ion-item>
+      <ion-label>
+        {{ item.name }}
+      </ion-label>
+    </ion-item>
+  }
+</ion-list>
+<!-- //  evento che viene triggerato quando si arriva alla fine della lista, chiama onIonInfinite -->
+<ion-infinite-scroll
+  (ionInfinite)="onIonInfinite($event)"  
+>
+  <ion-infinite-scroll-content> 
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>

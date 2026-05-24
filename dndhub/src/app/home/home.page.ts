@@ -51,24 +51,24 @@ export class HomePage {
 
 }
 
-async initialize() { // questa a differenza di quella di  poco fa, aspetta che ci sia bisogno di caricare i nuovi oggetti dal db, mentre quella di prima carica all'inizializzazione della pagine
+// async initialize() { // questa a differenza di quella di  poco fa, aspetta che ci sia bisogno di caricare i nuovi oggetti dal db, mentre quella di prima carica all'inizializzazione della pagine
 
-  const firstItems = await this.loadMore();  
+//   const firstItems = await this.loadMore();  
 
-  this.items.push(...firstItems); //aggiunge gli elementi caricati alla lista già creata
+//   this.items.push(...firstItems); //aggiunge gli elementi caricati alla lista già creata
 
-}
+// }
 
-async loadMore() { // potrebbe anche inglobare initialize, ma poi se si vuole caricare nuovi elementi dal db basta chiamare questa funzione
+// async loadMore() { // potrebbe anche inglobare initialize, ma poi se si vuole caricare nuovi elementi dal db basta chiamare questa funzione
 
-  const data = this.ProvaDragonBall.slice( // slice si occupa di dividere il pezzo di db che serve
-    this.offset,
-    this.offset + this.limit
-  );
+//   const data = this.ProvaDragonBall.slice( // slice si occupa di dividere il pezzo di db che serve
+//     this.offset,
+//     this.offset + this.limit
+//   );
 
-  this.offset += this.limit;
+//   this.offset += this.limit;
 
-return data; // restituisce gli elementi presi dal database
-}
+// return data; // restituisce gli elementi presi dal database
+// }
 } 
 

@@ -25,7 +25,7 @@ import {
 })
 export class ScrollBarComponent {
 
-  @Input() items: any[] = [];
+  @Input() items?: any[];
 
   @Input() loadMore!: () => Promise<any[]>; // questa è una funzione che viene passata come input al componente, che serve a caricare nuovi elementi dal database
 

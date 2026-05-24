@@ -4,7 +4,7 @@ import { ButtonComponent } from '../components/button/button.component';
 import { PopoverController } from '@ionic/angular/standalone';
 import { Popups } from '../core/core';
 import { CheckboxComponent } from '../components/checkbox/checkbox.component'; 
-import { ScrollBarComponent } from '../components/scrollbar/scrollbar.component';
+import { ScrollBarComponent } from '../components/scrollbar/scrollbar.component';   
 import { Button } from '../components/button/Button';
 import { UnorderedListElementComponent } from "../components/unordered-list-element/unordered-list-element.component";
 import { CardComponent } from '../components/card/card.component';
@@ -15,7 +15,7 @@ import { Card } from '../components/card/Card';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [CarouselComponent, IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, UnorderedListElementComponent, IonList, CardComponent],
+  imports: [CarouselComponent, IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, UnorderedListElementComponent, IonList, CardComponent, ScrollBarComponent],
 })
 export class HomePage {
   // Se dovete testare componenti, per favore non cancellate le funzioni relative al bottone e al 
@@ -30,45 +30,5 @@ export class HomePage {
   b2: Button = {text: 'prova altro testp', expand: ''};
   b3: Button = {text: 'prova', expand: ''};
   
-  //constructor(public popupController: PopoverController) {} 
-  items: any[] = [];
-
-  limit = 2; //elementi che vengono caricati ogni volta che viene aperta la lista
-
-  offset = 0; //è sostanzialmente il contatore che serve a capire dove è arrivato il caricamento del db
-
-  // ProvaDragonBall = [ // per provare il db 
-  //   { id: 1, name: 'Wizard' },
-  //   { id: 2, name: 'Rogue' },
-  //   { id: 3, name: 'Paladin' },
-  //   { id: 4, name: 'Barbarian' },
-  //   { id: 5, name: 'Druid ' },
-  //   { id: 6, name: 'Warlock' },
-  // ];
-  constructor(public popupController: PopoverController) {
-
-  // this.initialize(); // questa funzione serve a caricare i primi elementi dal database
-
+  constructor(public popupController: PopoverController) {} 
 }
-
-// async initialize() { // questa a differenza di quella di  poco fa, aspetta che ci sia bisogno di caricare i nuovi oggetti dal db, mentre quella di prima carica all'inizializzazione della pagine
-
-//   const firstItems = await this.loadMore();  
-
-//   this.items.push(...firstItems); //aggiunge gli elementi caricati alla lista già creata
-
-// }
-
-// async loadMore() { // potrebbe anche inglobare initialize, ma poi se si vuole caricare nuovi elementi dal db basta chiamare questa funzione
-
-//   const data = this.ProvaDragonBall.slice( // slice si occupa di dividere il pezzo di db che serve
-//     this.offset,
-//     this.offset + this.limit
-//   );
-
-//   this.offset += this.limit;
-
-// return data; // restituisce gli elementi presi dal database
-// }
-} 
-

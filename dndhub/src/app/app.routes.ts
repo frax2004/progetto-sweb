@@ -39,6 +39,10 @@ export const routes: Routes = [
     path: 'campaign-creation',
     loadComponent: () => import('./pages/campaign-creation/campaign-creation.page').then( m => m.CampaignCreationPage)
   },
+  {
+    path: 'character-sheet',
+    loadComponent: () => import('./pages/character-sheet/character-sheet.page').then( m => m.CharacterSheetPage)
+  },
 
 
 ];

@@ -43,6 +43,10 @@ export const routes: Routes = [
     path: 'character-sheet',
     loadComponent: () => import('./pages/character-sheet/character-sheet.page').then( m => m.CharacterSheetPage)
   },
+  {
+    path: 'character-spells',
+    loadComponent: () => import('./pages/character-spells/character-spells.page').then( m => m.CharacterSpellsPage)
+  },
 
 
 ];

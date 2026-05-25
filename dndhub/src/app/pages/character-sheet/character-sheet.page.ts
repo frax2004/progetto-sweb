@@ -5,8 +5,9 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonGrid, IonCol, 
 import { CheckboxComponent } from "src/app/components/checkbox/checkbox.component";
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
-import { Popups } from 'src/app/core/core';
+import { Navigate, Popups } from 'src/app/core/core';
 import { EntryComponent } from "src/app/components/entry/entry.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-character-sheet',
@@ -32,10 +33,10 @@ export class CharacterSheetPage implements OnInit {
   }
 
   buttonCallbacks = {
-    placeholder: { onClick: Popups.ofSimpleText(this.popoverController, 'Dovrebbe portare alla pagina incantesimi con link')}
-  }
+    placeholder: { onClick: Navigate.toPath(this.router,'character-spells')},
+  };
   
-  constructor(public popoverController: PopoverController) { }
+  constructor(public popoverController: PopoverController, private router: Router) { }
 
   ngOnInit() {
   }

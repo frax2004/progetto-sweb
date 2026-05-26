@@ -1,0 +1,125 @@
+<ion-content>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>Scegli le statisctiche e le lingue</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- idea: fare una grande grid iniziale con tre radio button, uno per ogni tipo di
+   metodo statistiche: scelta personale, randomico o array standard -->
+  
+  <ion-item class="gridContainer">
+    <ion-grid>
+      <!-- prima parte con scelta personale stats -->
+      <ion-row>
+        <!-- da finire -->
+        <ion-col>
+          <app-radio-button
+          [radios] = "radioPersonalChoice"
+          [groupValue] = "groupValue"
+          ></app-radio-button>
+        </ion-col>
+
+        <ion-col>
+          
+          <!-- riga nomi stats -->
+          <ion-row>
+            
+            <!-- forza -->
+            <ion-col>
+              <ion-item>
+                <ion-label>Forza</ion-label>
+              </ion-item>
+            </ion-col>
+
+            <!-- destrezza -->
+            <ion-col>
+              <ion-item>
+                <ion-label>Destrezza</ion-label>
+              </ion-item>
+            </ion-col>
+
+            <!-- costituzione -->
+            <ion-col>
+              <ion-item>
+                <ion-label>Costituzione</ion-label>
+              </ion-item>
+            </ion-col>
+
+            <!-- intelligenza -->
+            <ion-col>
+              <ion-item>
+                <ion-label>Intelligenza</ion-label>
+              </ion-item>
+            </ion-col>
+
+            <!-- saggezza -->
+            <ion-col>
+              <ion-item>
+                <ion-label>Saggezza</ion-label>
+              </ion-item>
+            </ion-col>
+
+            <!-- carisma -->
+            <ion-col>
+              <ion-item>
+                <ion-label>Carisma</ion-label>
+              </ion-item>
+            </ion-col>
+
+          </ion-row>
+
+          <!-- riga con le number entry -->
+          <ion-row>
+
+            <!-- number entry forza -->
+            <ion-col>
+              <ion-item>
+                <ion-label>Placeholder number entry</ion-label>
+              </ion-item>
+            </ion-col>
+
+            <!-- number entry destrezza -->
+            <ion-col>
+              <ion-item>
+                <ion-label>Placeholder number entry</ion-label>
+              </ion-item>
+            </ion-col>
+
+            <!-- number entry costituzione -->
+            <ion-col>
+              <ion-item>
+                <ion-label>Placeholder number entry</ion-label>
+              </ion-item>
+            </ion-col>
+
+            <!-- number entry intelligenza -->
+            <ion-col>
+              <ion-item>
+                <ion-label>Placeholder number entry</ion-label>
+              </ion-item>
+            </ion-col>
+
+            <!-- number entry saggezza -->
+            <ion-col>
+              <ion-item>
+                <ion-label>Placeholder number entry</ion-label>
+              </ion-item>
+            </ion-col>
+
+            <!-- number entry carisma -->
+            <ion-col>
+              <ion-item>
+                <ion-label>Placeholder number entry</ion-label>
+              </ion-item>
+            </ion-col>
+
+          </ion-row>
+
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+</ion-content>

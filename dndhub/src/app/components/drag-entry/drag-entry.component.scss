@@ -1,0 +1,32 @@
+
+#entry-block {
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  justify-content: center;
+}
+
+#entry {
+  text-align: center;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+  background-color: rgb(48, 48, 48);
+  &:hover {
+    background-color: rgb(91, 91, 91);;
+  }
+}
+
+.entry-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px 0 4px;
+  
+  background-color: rgb(48, 48, 48);
+  &:hover {
+    background-color: rgb(91, 91, 91);;
+  }
+  user-select: none;
+}

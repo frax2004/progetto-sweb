@@ -4,122 +4,155 @@
       <ion-title>Scegli le statisctiche e le lingue</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <!-- idea: fare una grande grid iniziale con tre radio button, uno per ogni tipo di
-   metodo statistiche: scelta personale, randomico o array standard -->
   
+  <!-- tre bottoni, uno accanto all'altro che permettono di modificare il metodo di selezione statistiche -->
+
   <ion-item class="gridContainer">
     <ion-grid>
-      <!-- prima parte con scelta personale stats -->
       <ion-row>
-        <!-- da finire -->
+
+        <!-- bottono selezione manuale -->
         <ion-col>
-          <app-radio-button
-          [radios] = "radioPersonalChoice"
-          [groupValue] = "groupValue"
-          ></app-radio-button>
+          <app-button
+          [button] = "{ text: 'Scelta manuale', expand: ''}"
+          [context] = "buttonCallbacks['manual']"
+          ></app-button>
         </ion-col>
 
+        <!-- bottone selezione array standard -->
         <ion-col>
-          
-          <!-- riga nomi stats -->
-          <ion-row>
-            
-            <!-- forza -->
-            <ion-col>
-              <ion-item>
-                <ion-label>Forza</ion-label>
-              </ion-item>
-            </ion-col>
+          <app-button
+          [button] = "{ text: 'Scelta array standard', expand: ''}"
+          [context] = "buttonCallbacks['stdArr']"
+          ></app-button>
+        </ion-col>
 
-            <!-- destrezza -->
-            <ion-col>
-              <ion-item>
-                <ion-label>Destrezza</ion-label>
-              </ion-item>
-            </ion-col>
-
-            <!-- costituzione -->
-            <ion-col>
-              <ion-item>
-                <ion-label>Costituzione</ion-label>
-              </ion-item>
-            </ion-col>
-
-            <!-- intelligenza -->
-            <ion-col>
-              <ion-item>
-                <ion-label>Intelligenza</ion-label>
-              </ion-item>
-            </ion-col>
-
-            <!-- saggezza -->
-            <ion-col>
-              <ion-item>
-                <ion-label>Saggezza</ion-label>
-              </ion-item>
-            </ion-col>
-
-            <!-- carisma -->
-            <ion-col>
-              <ion-item>
-                <ion-label>Carisma</ion-label>
-              </ion-item>
-            </ion-col>
-
-          </ion-row>
-
-          <!-- riga con le number entry -->
-          <ion-row>
-
-            <!-- number entry forza -->
-            <ion-col>
-              <ion-item>
-                <ion-label>Placeholder number entry</ion-label>
-              </ion-item>
-            </ion-col>
-
-            <!-- number entry destrezza -->
-            <ion-col>
-              <ion-item>
-                <ion-label>Placeholder number entry</ion-label>
-              </ion-item>
-            </ion-col>
-
-            <!-- number entry costituzione -->
-            <ion-col>
-              <ion-item>
-                <ion-label>Placeholder number entry</ion-label>
-              </ion-item>
-            </ion-col>
-
-            <!-- number entry intelligenza -->
-            <ion-col>
-              <ion-item>
-                <ion-label>Placeholder number entry</ion-label>
-              </ion-item>
-            </ion-col>
-
-            <!-- number entry saggezza -->
-            <ion-col>
-              <ion-item>
-                <ion-label>Placeholder number entry</ion-label>
-              </ion-item>
-            </ion-col>
-
-            <!-- number entry carisma -->
-            <ion-col>
-              <ion-item>
-                <ion-label>Placeholder number entry</ion-label>
-              </ion-item>
-            </ion-col>
-
-          </ion-row>
-
+        <!-- bottone selezione casuale (4d6 drop one) -->
+        <ion-col>
+          <app-button
+          [button] = "{ text: 'Scelta casuale', expand: ''}"
+          [context] = "buttonCallbacks['random']"
+          ></app-button>
         </ion-col>
 
       </ion-row>
     </ion-grid>
   </ion-item>
+
+  <!-- adesso tre grid diverse in base alla flag attiva -->
+  @if (manualSelection===true) {
+    <ion-item  class="gridContainer"> 
+      <ion-grid>
+
+        <!-- riga con i nomi delle stats -->
+        <ion-row>
+
+          <!-- selettore FORZA -->
+          <ion-col>
+            <ion-item>
+              <ion-label>Forza</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- selettore DESTREZZA -->
+          <ion-col>
+            <ion-item>
+              <ion-label>Destrezza</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- selettore COSTITUZIONE -->
+          <ion-col>
+            <ion-item>
+              <ion-label>Costituzione</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- selettore INTELLIGENZA -->
+          <ion-col>
+            <ion-item>
+              <ion-label>Intelligenza</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- selettore SAGGEZZA -->
+          <ion-col>
+            <ion-item>
+              <ion-label>Saggezza</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- selettore CARISMA -->
+          <ion-col>
+            <ion-item>
+              <ion-label>Carisma</ion-label>
+            </ion-item>
+          </ion-col>
+
+        </ion-row>
+
+        <!-- riga con number entry -->
+        <ion-row>
+
+          <!-- selettore forza -->
+          <ion-col>
+            <ion-item>
+              <ion-label>Placeholder number entry</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- selettore destrezza -->
+          <ion-col>
+            <ion-item>
+              <ion-label>Placeholder number entry</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- selettore costituzione -->
+          <ion-col>
+            <ion-item>
+              <ion-label>Placeholder number entry</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- selettore intelligenza -->
+          <ion-col>
+            <ion-item>
+              <ion-label>Placeholder number entry</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- selettore saggezza -->
+          <ion-col>
+            <ion-item>
+              <ion-label>Placeholder number entry</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- selettore carisma -->
+          <ion-col>
+            <ion-item>
+              <ion-label>Placeholder number entry</ion-label>
+            </ion-item>
+          </ion-col>
+
+        </ion-row>
+
+      </ion-grid>
+    </ion-item>
+  }
+
+  @if (stdArray===true) {
+    <app-radio-button
+    [radios] = "radios"
+    [groupValue] = "'radioGroup'"
+    ></app-radio-button>
+  }
+
+  @if (randomSelection===true) {
+    <ion-item>
+      <ion-label>Le statistiche rollate sono: {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}}</ion-label>
+    </ion-item>
+  }
 
 </ion-content>

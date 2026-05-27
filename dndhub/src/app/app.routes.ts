@@ -55,6 +55,10 @@ export const routes: Routes = [
     path: 'stats-selection',
     loadComponent: () => import('./pages/Character creation pipeline/stats-selection/stats-selection.page').then( m => m.StatsSelectionPage)
   },
+  {
+    path: 'overview',
+    loadComponent: () => import('./pages/Character creation pipeline/overview/overview.page').then( m => m.OverviewPage)
+  },
 
 
 ];

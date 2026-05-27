@@ -1,0 +1,38 @@
+<ion-accordion-group [multiple]="allowMultipleEnabled">
+  @for (accordion of accordions; track accordion) {
+    <ion-accordion [value]="accordion.value">
+      <ion-item slot="header" color="light">
+        @if (accordion.imageURL !== undefined) {
+          <ion-thumbnail slot="start">
+            <img alt="placeholder img" src="accordion.imageURL">
+          </ion-thumbnail>
+        }
+        @else {
+          <ion-thumbnail slot="start">
+            <img alt="placeholder img" src="plcImg">
+          </ion-thumbnail>
+        }
+        <ion-label>{{ accordion.title }}</ion-label>
+        
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        {{ accordion.content }}
+        @if (accordion.button !== undefined) {
+          <ion-item>
+            <app-button
+              [button] = "accordion.button.button"
+              [context] = "accordion.button.context"
+            >
+            </app-button>
+          </ion-item>
+        }
+      </div>
+    </ion-accordion>
+  }
+  <!-- <ion-accordion *ngFor="let accordion of accordions" [value]="accordion.value">
+    <ion-item slot="header" color="light">
+      <ion-label>{{ accordion.title }}</ion-label>
+    </ion-item>
+    <div class="ion-padding" slot="content">{{ accordion.content }}</div>
+  </ion-accordion> -->
+</ion-accordion-group>

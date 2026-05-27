@@ -1,0 +1,27 @@
+.firstHalf {
+    width: 30vw;
+    overflow-y: auto;
+}
+
+.secondHalf {
+    width: 70vw;
+}
+
+.gridContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.upperDetails {
+    display: flex;
+    flex-direction: row;
+}
+
+.accordions {
+    width: 70vw;
+}
+
+.HPchoice {
+    display: flex;
+    flex-direction: row;
+}

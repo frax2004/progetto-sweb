@@ -1,0 +1,21 @@
+*{
+	border: 1px solid red;
+}
+
+#toolbar {
+	display: flex;
+}
+
+.title {
+	justify-content: center;
+	justify-self: center;
+	justify-items: center;
+	align-items: center;
+	align-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.header {
+	width: 70vw;
+}

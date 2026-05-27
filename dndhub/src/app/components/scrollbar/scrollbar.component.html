@@ -1,0 +1,21 @@
+
+  <ion-list>
+    @for (item of items; track item.id) {
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="item.image" />
+        </ion-avatar>
+
+        <ion-label>
+          {{ item.title }}
+        </ion-label>
+      </ion-item>
+    }
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content
+      loadingText="Loading more items..."
+      loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>

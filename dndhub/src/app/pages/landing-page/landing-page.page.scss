@@ -1,0 +1,41 @@
+* {
+  border: 1px solid rgb(0, 255, 0);
+}
+
+#carousel-block {
+  width: 70%;
+  margin: 0 auto; /* Centra il blocco orizzontalmente */
+}
+
+#carousel-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Forza il contenuto a occupare tutta la larghezza disponibile */
+}
+
+#carousel-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+#carousel-label {
+  font-size: 5cqmin;
+}
+
+#pageTitle {
+  width: 100%;
+  height: 100%;
+  container-type: size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#title {
+  font-size: 15cqmin;
+}

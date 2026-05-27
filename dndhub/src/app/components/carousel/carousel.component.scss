@@ -1,0 +1,51 @@
+.carousel {  
+  width: max-content;
+  margin: 0 auto;
+
+  display: flex;
+  overflow: hidden;
+
+  -webkit-mask-image: linear-gradient(
+    to right, 
+    transparent 0%, 
+    black 10%, 
+    black 90%, 
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right, 
+    transparent 0%, 
+    rgb(0, 0, 0) 10%, 
+    rgb(0, 0, 0) 90%, 
+    transparent 100%
+  );
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: .5em;
+  padding-right: .5em;
+  flex-shrink: 0;
+  animation: spin 15s infinite linear;
+  width: max-content;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+app-card {
+  flex: 0 0 5em;
+  height: 100%;
+}
+
+@keyframes spin {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

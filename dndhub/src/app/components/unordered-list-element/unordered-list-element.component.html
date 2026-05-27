@@ -1,0 +1,24 @@
+<ion-item>
+  @if (context !== undefined) {
+    <ion-label (click)="context.onClick($event)">{{ text }}</ion-label>
+  }
+  @else {
+    <ion-label>{{ text }}</ion-label>
+  }
+</ion-item>
+
+<!-- 
+  Una lista andrebbe creata come:
+  <ion-list>
+    <app-unordered-list-element
+    text= "gianni"
+    >
+    </app-unordered-list-element>
+    <app-unordered-list-element
+    text= "gianni2"
+    onClick = "funzione"
+    >
+    </app-unordered-list-element>
+  </ion-list>  
+-->
+

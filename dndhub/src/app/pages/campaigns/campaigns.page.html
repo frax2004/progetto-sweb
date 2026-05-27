@@ -1,0 +1,30 @@
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <!-- sarebbe carino mettere qua (se siamo nell'area personale dungeon master) anche 
+       il titolo "area personale dungeon master" -->
+      <ion-title size="large">Campagne</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- all'inizio big aaah bottono per inserire nuova campagna
+       poi tutte le campagne di cui si fa parte -->
+
+  <ion-item>
+    <ion-grid>
+      <!-- prima riga con bottone creazione nuova campagna -->
+      <ion-row>
+        <app-button
+        [button] = "{ text: 'Crea nuova campagna (da sostituire con +)', expand: ''}"
+        [context] = "buttonCallbacks['createCampaign']"
+        ></app-button>
+      </ion-row>
+      <!-- for per la scrittura di tutte le proprie campagne -->
+      @for (card of campaignCards; track card) {
+        <app-card
+        [card] = "card"
+        ></app-card>
+      }
+    </ion-grid>
+  </ion-item>
+</ion-content>

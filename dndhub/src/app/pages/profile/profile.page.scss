@@ -1,0 +1,20 @@
+.imgFrame {
+    max-width: 40vmin;
+    max-height: 40vmin;
+}
+
+.contentContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.optionButtons {
+    display: flex;
+    flex-direction: column;
+}
+
+.informationContainer {
+    display: flex;
+    flex-direction: row;
+}
+

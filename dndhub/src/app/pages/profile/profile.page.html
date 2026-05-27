@@ -1,0 +1,69 @@
+<ion-content>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>Profilo personale</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="contentContainer">
+    <div class="imgAndOptions">
+      <div class="goBack">
+        <app-button
+        [button] = "{ text: 'Torna indietro', expand: ''}"
+        [context] = "buttonCallbacks['placeholder']"
+        ></app-button>
+      </div>
+
+
+      <div class="imgFrame">
+        <img src="'https://www.dndbeyond.com/attachments/thumbnails/3/907/300/494/spring-eladrin.png'" alt="'imgPlaceholder'">
+      </div>
+
+      <div class="optionButtons">
+        <!-- modifica account (username, password ecc ecc) -->
+        <app-button
+        [button] = "{ text: 'Modifica account', expand: ''}"
+        [context] = "buttonCallbacks['placeholder']"
+        ></app-button>
+        <!-- Log out -->
+        <app-button
+        [button] = "{ text: 'Log out', expand: ''}"
+        [context] = "buttonCallbacks['placeholder']"
+        ></app-button>
+        <!-- elimina account -->
+        <app-button
+        [button] = "{ text: 'Elimina account', expand: ''}"
+        [context] = "buttonCallbacks['placeholder']"
+        ></app-button>
+      </div>
+    </div>
+
+    <!-- per questa div se si trova in desktop allora direzione row
+        se si trova su telefono allora direzione column -->
+    <div class="informationContainer">
+      <div class="genericInformation">
+        <ion-list>
+          <app-unordered-list-element [text]="'Personaggi creati: 4'"></app-unordered-list-element>
+          <app-unordered-list-element [text]="'Campagne create: 6'"></app-unordered-list-element>
+          <app-unordered-list-element [text]="'Campagne a cui si partecipa: 8'"></app-unordered-list-element>
+        </ion-list>
+      </div>
+
+      <div class="genericInformation">
+        <ion-list>
+          <app-unordered-list-element [text]="'Username: gianni'"></app-unordered-list-element>
+          <app-unordered-list-element [text]="'Email: gianni@chiocciola.gmail.it'"></app-unordered-list-element>
+          <ion-item>
+            <ion-label>Password: {{showPassword()}}</ion-label>
+            <app-button
+            [button] = "{text: 'Mostra password', expand:''}"
+            [context] = "buttonCallbacks['uncensor']"
+            >
+            </app-button>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

@@ -1,9 +1,9 @@
 <ion-content>
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title>Scegli le statisctiche e le lingue</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div id="pageTitle">
+    <div>
+      <ion-title id="title">Scegli le statistiche</ion-title>
+    </div>
+  </div>
   
   <!-- tre bottoni, uno accanto all'altro che permettono di modificare il metodo di selezione statistiche -->
 
@@ -48,95 +48,145 @@
         <ion-row>
 
           <!-- selettore FORZA -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Forza</ion-label>
-            </ion-item>
-          </ion-col>
+          <div class="firstCol">
+            <ion-col>
+                <ion-label>Forza</ion-label>
+            </ion-col>
+          </div>
 
-          <!-- selettore DESTREZZA -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Destrezza</ion-label>
-            </ion-item>
-          </ion-col>
+          <!-- selettore forza -->
+          <div class="secondCol">
+            <ion-col>
+              <app-drag-entry
+              id="strenghtDragEntry"
+              [sensitivity] = 1
+              [max] = 20
+              [min] = 1
+              ></app-drag-entry>
+            </ion-col>
+          </div>
 
-          <!-- selettore COSTITUZIONE -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Costituzione</ion-label>
-            </ion-item>
-          </ion-col>
-
-          <!-- selettore INTELLIGENZA -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Intelligenza</ion-label>
-            </ion-item>
-          </ion-col>
-
-          <!-- selettore SAGGEZZA -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Saggezza</ion-label>
-            </ion-item>
-          </ion-col>
-
-          <!-- selettore CARISMA -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Carisma</ion-label>
-            </ion-item>
-          </ion-col>
 
         </ion-row>
 
         <!-- riga con number entry -->
         <ion-row>
 
-          <!-- selettore forza -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Placeholder number entry</ion-label>
-            </ion-item>
-          </ion-col>
+          <!-- selettore DESTREZZA -->
+          <div class="firstCol">
+            <ion-col>
+                <ion-label>Destrezza</ion-label>
+            </ion-col>
+          </div>
 
           <!-- selettore destrezza -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Placeholder number entry</ion-label>
-            </ion-item>
-          </ion-col>
+          <div class="secondCol">
+            <ion-col>
+              <app-drag-entry
+              id="dexterityDragEntry"
+              [sensitivity] = 1
+              [max] = 20
+              [min] = 1
+              ></app-drag-entry>
+            </ion-col>
+          </div>
+        </ion-row>
+
+        <ion-row>
+
+          <!-- selettore COSTITUZIONE -->
+          <div class="firstCol">
+            <ion-col>
+              <div>
+                <ion-label>Costituzione</ion-label>
+              </div>
+            </ion-col>
+          </div>
 
           <!-- selettore costituzione -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Placeholder number entry</ion-label>
-            </ion-item>
-          </ion-col>
+          <div class="secondCol">
+            <ion-col>
+              <app-drag-entry
+              id="constitutionDragEntry"
+              [sensitivity] = 1
+              [max] = 20
+              [min] = 1
+              ></app-drag-entry>
+            </ion-col>
+          </div>
+        </ion-row>
+
+          
+        <ion-row>
+
+          <!-- selettore INTELLIGENZA -->
+          <div class="firstCol">
+            <ion-col>
+                <ion-label>Intelligenza</ion-label>
+            </ion-col>
+          </div>
 
           <!-- selettore intelligenza -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Placeholder number entry</ion-label>
-            </ion-item>
-          </ion-col>
-
-          <!-- selettore saggezza -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Placeholder number entry</ion-label>
-            </ion-item>
-          </ion-col>
-
-          <!-- selettore carisma -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Placeholder number entry</ion-label>
-            </ion-item>
-          </ion-col>
+          <div class="secondCol">
+            <ion-col>
+              <app-drag-entry
+              id="intelligenceDragEntry"
+              [sensitivity] = 1
+              [max] = 20
+              [min] = 1
+              ></app-drag-entry>
+            </ion-col>
+          </div>
 
         </ion-row>
+
+        <ion-row>
+
+          <!-- selettore SAGGEZZA -->
+          <div class="firstCol">
+            <ion-col>
+                <ion-label>Saggezza</ion-label>
+            </ion-col>
+          </div>
+
+          <!-- selettore saggezza -->
+          <div class="secondCol">
+            <ion-col>
+              <app-drag-entry
+              id="wisdomDragEntry"
+              [sensitivity] = 1
+              [max] = 20
+              [min] = 1
+              ></app-drag-entry>
+            </ion-col>
+          </div>
+
+        </ion-row>
+
+
+        <ion-row>
+
+          <!-- selettore CARISMA -->
+          <div class="firstCol">
+            <ion-col>
+                <ion-label>Carisma</ion-label>
+            </ion-col>
+          </div>
+
+          <!-- selettore carisma -->
+          <div class="secondCol">
+            <ion-col>
+              <app-drag-entry
+              id="charismaDragEntry"
+              [sensitivity] = 1
+              [max] = 20
+              [min] = 1
+              ></app-drag-entry>
+            </ion-col>
+          </div>
+
+        </ion-row>
+
 
       </ion-grid>
     </ion-item>

@@ -1,9 +1,9 @@
 <ion-content>
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title>Seleziona l'equipaggiamento</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-item id="pageTitle">
+    <div>
+      <ion-title id="title">Scegli l'equipaggiamento</ion-title>
+    </div>
+  </ion-item>
 
   <!-- grid dove si andrà a mettere tutto quello che ci interessa -->
   <ion-item class="gridContainer">
@@ -77,9 +77,11 @@
 
           <!-- quantità oggetto -->
           <ion-col>
-            <ion-item>
-              <ion-label>Placeholder fino a quando non avrò number entry</ion-label>
-            </ion-item>
+            <app-drag-entry
+            [sensitivity] = 1
+            [min] = 0
+            >
+            </app-drag-entry>
           </ion-col>
 
         </ion-row>

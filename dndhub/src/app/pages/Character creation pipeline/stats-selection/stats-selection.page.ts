@@ -4,17 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonGrid, IonRow, IonCol, IonLabel } from '@ionic/angular/standalone';
 import { RadioButtonComponent } from "src/app/components/radio-button/radio-button.component";
 import { ButtonComponent } from "src/app/components/button/button.component";
-import { CheckboxComponent } from 'src/app/components/checkbox/checkbox.component'; 
-import { IonCheckbox } from '@ionic/angular';
-import { Navigate } from 'src/app/core/core';
-import { LandingPagePage } from '../../landing-page/landing-page.page';
 
 @Component({
   selector: 'app-stats-selection',
   templateUrl: './stats-selection.page.html',
   styleUrls: ['./stats-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem , IonGrid, IonRow, RadioButtonComponent, IonCol, IonLabel, ButtonComponent, CheckboxComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, IonRow, RadioButtonComponent, IonCol, IonLabel, ButtonComponent]
 })
 export class StatsSelectionPage implements OnInit {
   manualSelection: Boolean = true;

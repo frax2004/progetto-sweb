@@ -1,0 +1,13 @@
+<div id="entry-block">
+  <div class="entry-arrow" (click)="changeValue(-1)"><</div>
+  <input #entry
+    type="text" 
+    id="entry" 
+    value="0"
+    (input)="assertNumericInput($event)" 
+    (mousedown)="onMouseDown($event)" 
+    (mousemove)="onMouseMove($event)"
+    (mouseup)="onMouseUp()"
+  >
+  <div class="entry-arrow" (click)="changeValue(1)">></div>
+</div>

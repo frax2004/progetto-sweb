@@ -55,6 +55,18 @@ export const routes: Routes = [
     path: 'stats-selection',
     loadComponent: () => import('./pages/Character creation pipeline/stats-selection/stats-selection.page').then( m => m.StatsSelectionPage)
   },
+  {
+    path: 'overview',
+    loadComponent: () => import('./pages/Character creation pipeline/overview/overview.page').then( m => m.OverviewPage)
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./pages/profile/profile.page').then( m => m.ProfilePage)
+  },
+  {
+    path: 'campaign-chat',
+    loadComponent: () => import('./pages/campaign-chat/campaign-chat.page').then( m => m.CampaignChatPage)
+  },
 
 
 ];

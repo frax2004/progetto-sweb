@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  InfiniteScrollCustomEvent,
   IonAvatar,
   IonContent,
   IonInfiniteScroll,
@@ -10,30 +9,48 @@ import {
   IonList,
 } from '@ionic/angular/standalone';
 
+import { FakeDbService } from './fake-db';
+import { Item } from './item';
+
 @Component({
-  selector: 'app-example',
-  templateUrl: 'example.component.html',
-  styleUrls: ['example.component.css'],
-  imports: [IonAvatar, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonItem, IonLabel, IonList],
+  selector: 'app-scroll-bar',
+  templateUrl: 'scrollbar.component.html',
+  standalone: true,
+  imports: [
+    IonAvatar,
+    IonContent,
+    IonInfiniteScroll,
+    IonInfiniteScrollContent,
+    IonItem,
+    IonLabel,
+    IonList,
+  ],
 })
-export class ExampleComponent implements OnInit {
-  items: string[] = [];
+export class ScrollBarComponent implements OnInit {
+
+  items: Item[] = [];
+
+  private page = 0;
+  private pageSize = 20;
+
+  constructor(private db: FakeDbService) {}
 
   ngOnInit() {
-    this.generateItems();
+    this.loadMore(); // Carica i primi elementi all'inizio
   }
 
-  private generateItems() {
-    const count = this.items.length + 1;
-    for (let i = 0; i < 50; i++) {
-      this.items.push(`Item ${count + i}`);
-    }
-  }
+  async loadMore(event?: any) { // event è opzionale, viene passato solo quando la funzione è chiamata dall'infinite scroll
+    const newItems = await this.db.getItems(this.page, this.pageSize); // Ottieni nuovi elementi dal servizio
 
-  onIonInfinite(event: InfiniteScrollCustomEvent) {
-    this.generateItems();
-    setTimeout(() => {
+    this.items = [...this.items, ...newItems]; // Aggiungi i nuovi elementi alla lista esistente 
+    this.page++; // i ... serve a prendere gli elementi singoli  dall'array altrimenti vengono presi tutti insieme
+
+    if (event) { //
       event.target.complete();
-    }, 500);
+
+      if (newItems.length < this.pageSize) { // Se non ci sono più elementi da caricare, disabilita l'infinite scroll
+        event.target.disabled = true;
+      }
+    }
   }
 }

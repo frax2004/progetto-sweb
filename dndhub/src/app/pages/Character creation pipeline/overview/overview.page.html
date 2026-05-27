@@ -1,0 +1,85 @@
+<ion-content>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>overview</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<!-- la pagina sarà divisa in due metà  (1/3 + 2/3) per larghezza -->
+  <div class="gridContainer">
+    <div class="upperDetails">
+      <ion-item>
+        <ion-label>Velocità totale</ion-label>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Taglia</ion-label>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Background</ion-label>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>CA</ion-label>
+      </ion-item>
+    </div>
+
+    <div class="accordions">
+      <app-accordion
+      [accordions] = "accordions"
+      [allowMultipleEnabled] = "true"
+      ></app-accordion>
+    </div>
+
+    <div class="finalChoices">
+      <ion-item class="nameChoice">
+        <app-text-area [label]="'Inserisci nome del personaggio: '"></app-text-area>
+      </ion-item>
+
+      <ion-item class="imgChoice">
+        <app-text-area [label]="'(opzionale) Inserisci URL immagine del personaggio: '"></app-text-area>
+      </ion-item>
+
+       <div class="HPchoice">
+        <ion-label>Seleziona metodo di calcolo HP -></ion-label>
+        <div class="HPbuttons">
+          <app-button
+          [button] = "{ text: 'Media', expand: ''}"
+          [context] = "buttonCallbacks['avHP']"
+          ></app-button>
+          <app-button
+          [button] = "{ text: 'Manualmente', expand: ''}"
+          [context] = "buttonCallbacks['manHP']"
+          ></app-button>
+        </div>
+        
+        
+        </div>
+
+      <div class="showHP">
+          
+          @if(averageHP===true) {
+                <ion-label>{{avHPlabel}}</ion-label>
+          }
+
+          @if(manualHP===true) {
+              <ion-label>Inserire HP in range {{HPrange(lvl,HPdice)}}:</ion-label>
+
+              <ion-label>Placeholder number entry</ion-label>
+          }
+
+      </div>
+    </div>
+
+    <div class="finalButton">
+      <app-button
+      [button] = "{ text: 'Crea personaggio', expand: ''}"
+      [context] = "buttonCallbacks['completeChar']"
+      ></app-button>
+    </div>
+
+  </div>
+
+
+</ion-content>

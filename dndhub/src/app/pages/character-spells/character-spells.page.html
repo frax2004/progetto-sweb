@@ -1,0 +1,323 @@
+<ion-content>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>Lista degli incatesimi del personaggio</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <!-- prima giga-griglia con bottone "goBack", caratteristiche incantatore e slot incantesimo -->
+
+  <ion-item class="gridContainer">
+    <ion-grid>
+      <ion-row>
+
+        <!-- prima e unica colonna per tasto goBack -->
+        <ion-col>
+          <ion-row>
+            <ion-col>
+              <ion-item class="buttonContainer">
+                <app-button
+                [button] = "{ text: 'Torna indietro', expand:''}"
+                [context] = "buttonCallbacks['indietro']"
+                ></app-button>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <!-- toggle mago -->
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <app-button
+                [button] = "{ text: 'Mago', expand:''}"
+                [context] = "buttonCallbacks['mago']"
+                ></app-button>
+              </ion-item>
+            </ion-col>
+
+            <!-- toggle chierico -->
+            <ion-col>
+              <ion-item>
+                <app-button
+                [button] = "{ text: 'Chierico', expand:''}"
+                [context] = "buttonCallbacks['chierico']"
+                ></app-button>
+              </ion-item>
+            </ion-col>
+
+            <!-- toggle warlock -->
+            <ion-col>
+              <ion-item>
+                <app-button
+                [button] = "{ text: 'Warlock', expand:''}"
+                [context] = "buttonCallbacks['warlock']"
+                ></app-button>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          
+        </ion-col>
+
+        <!-- caratteristiche incantatore -->
+
+        <!-- ATTENZIONE nel caso di multiclassi, fare attenzione agli slot incantesimo.
+         se una delle classi è il warlock, fare una pagina a parte per gli incantesimi warlock -->
+        <ion-col>
+          <ion-row>
+            
+            <!-- colonna caratteristiche incantatore -->
+            <ion-col>
+              <ion-item>
+                <ion-label>Caratteristica da incantatore: {{ currAbility }}</ion-label>
+              </ion-item>
+            </ion-col>
+
+            @if (currClass!=='Warlock') {
+              <!-- colonna slot 1 -->
+              <ion-col>
+                <ion-item>
+                  <ion-label>Slot lvl 1 -> 4</ion-label>
+                </ion-item>
+              </ion-col>
+
+              <!-- colonna slot 4 -->
+              <ion-col>
+                <ion-item>
+                  <ion-label>Slot lvl 4 -> 3</ion-label>
+                </ion-item>
+              </ion-col>
+
+              <!-- colonna slot 7 -->
+              <ion-col>
+                <ion-item>
+                  <ion-label>Slot lvl 7 -> 2</ion-label>
+                </ion-item>
+              </ion-col>
+            }
+            
+
+          </ion-row>
+
+          <ion-row>
+
+            <!-- modificatore da incantatore -->
+            <ion-col>
+              <ion-item>
+                <ion-label>Modificatore da incantatore: {{ currModifier }}</ion-label>
+              </ion-item>
+            </ion-col>
+
+            @if (currClass!=='Warlock') {
+              <!-- colonna slot 2 -->
+              <ion-col>
+                <ion-item>
+                  <ion-label>Slot lvl 2 -> 4</ion-label>
+                </ion-item>
+              </ion-col>
+
+              <!-- colonna slot 5 -->
+              <ion-col>
+                <ion-item>
+                  <ion-label>Slot lvl 5 -> 3</ion-label>
+                </ion-item>
+              </ion-col>
+
+              <!-- colonna slot 8 -->
+              <ion-col>
+                <ion-item>
+                  <ion-label>Slot lvl 8 -> 1</ion-label>
+                </ion-item>
+              </ion-col>
+            }
+            @else {
+              <!-- slot warlock -->
+              <ion-col>
+                <ion-item>
+                  <ion-label>Slot lvl 5 -> 3</ion-label>
+                </ion-item>
+              </ion-col>
+            }
+            
+
+          </ion-row>
+
+          <ion-row>
+
+            <!-- CD tiro salvezza -->
+            <ion-col>
+              <ion-item>
+                <ion-label>CD tiro salvezza: {{ currCD }}</ion-label>
+              </ion-item>
+            </ion-col>
+
+            @if (currClass!=='Warlock') {
+              <!-- colonna slot 3 -->
+              <ion-col>
+                <ion-item>
+                  <ion-label>Slot lvl 3 -> 4</ion-label>
+                </ion-item>
+              </ion-col>
+
+              <!-- colonna slot 6 -->
+              <ion-col>
+                <ion-item>
+                  <ion-label>Slot lvl 6 -> 3</ion-label>
+                </ion-item>
+              </ion-col>
+
+              <!-- colonna slot 9 -->
+              <ion-col>
+                <ion-item>
+                  <ion-label>Slot lvl 9 -> 1</ion-label>
+                </ion-item>
+              </ion-col>
+            }
+            
+
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Bonus attacco incantesimo: {{ currAttBonus }}</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+  <!-- altra mega griglia per incantesimi -->
+
+  <ion-item class="gridContainer">
+    <ion-grid>
+      
+      <ion-row>
+
+        <!-- nome -->
+        <ion-col>
+          <ion-item>
+            <ion-label>Nome</ion-label>
+          </ion-item>
+        </ion-col>
+
+        <!-- Livello -->
+        <ion-col>
+          <ion-item>
+            <ion-label>Livello</ion-label>
+          </ion-item>
+        </ion-col>
+
+        <!-- tempo di lancio + rituale -->
+        <ion-col>
+          <ion-item>
+            <ion-label>Tempo di lancio</ion-label>
+          </ion-item>
+        </ion-col>
+
+        <!-- durata -->
+        <ion-col>
+          <ion-item>
+            <ion-label>Durata</ion-label>
+          </ion-item>
+        </ion-col>
+
+        <!-- gittata -->
+        <ion-col>
+          <ion-item>
+            <ion-label>Gittata</ion-label>
+          </ion-item>
+        </ion-col>
+
+        <!-- concentrazione -->
+        <ion-col>
+          <ion-item>
+            <ion-label>Concentrazione</ion-label>
+          </ion-item>
+        </ion-col>
+
+        <!-- componenti -->
+        <ion-col>
+          <ion-item>
+            <ion-label>Componenti</ion-label>
+          </ion-item>
+        </ion-col>
+
+        <!-- Scuola di magia -->
+        <ion-col>
+          <ion-item>
+            <ion-label>Scuola di magia</ion-label>
+          </ion-item>
+        </ion-col>
+
+      </ion-row>
+
+      @for (incantesimo of currIncantesimi; track incantesimo) {
+        <ion-row>
+
+          <!-- nome -->
+          <ion-col>
+            <ion-item>
+              <ion-label (click)="incantesimo.descrizione($event)">{{incantesimo.nome}}</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- Livello -->
+          <ion-col>
+            <ion-item>
+              <ion-label>{{incantesimo.livello}}</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- tempo di lancio + rituale -->
+          <ion-col>
+            <ion-item>
+              <ion-label>{{incantesimo.tmpLanc}}</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- durata -->
+          <ion-col>
+            <ion-item>
+              <ion-label>{{incantesimo.durata}}</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- gittata -->
+          <ion-col>
+            <ion-item>
+              <ion-label>{{incantesimo.gittata}}</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- concentrazione -->
+          <ion-col>
+            <ion-item>
+              <ion-label>{{incantesimo.concentrazione}}</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- componenti -->
+          <ion-col>
+            <ion-item>
+              <ion-label>{{incantesimo.componenti}}</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- Scuola di magia -->
+          <ion-col>
+            <ion-item>
+              <ion-label>{{incantesimo.scMag}}</ion-label>
+            </ion-item>
+          </ion-col>
+
+        </ion-row>
+      }
+
+    </ion-grid>
+  </ion-item>
+
+</ion-content>

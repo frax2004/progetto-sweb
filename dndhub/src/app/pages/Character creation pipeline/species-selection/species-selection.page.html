@@ -1,0 +1,25 @@
+<ion-content>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>Scegli la tua specie</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- prima sezione con menù a tendina -->
+   <ion-item class="speciesSelectionFrame">
+    <app-accordion
+      [accordions] = "accordions"
+      [allowMultipleEnabled] = "true"
+    ></app-accordion>
+  </ion-item>
+
+  <!-- footer con bottone per andare alla prossima pagina -->
+  <ion-footer>
+    <ion-item slot="end">
+      <app-button
+      [button] = "b1_button"
+      [context] = "b2_context"
+      ></app-button>
+    </ion-item>
+  </ion-footer>
+</ion-content>

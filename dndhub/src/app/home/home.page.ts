@@ -3,6 +3,8 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonList } from '@ionic/ang
 import { ButtonComponent } from '../components/button/button.component';
 import { PopoverController } from '@ionic/angular/standalone';
 import { Popups } from '../core/core';
+import { CheckboxComponent } from '../components/checkbox/checkbox.component'; 
+import { ScrollBarComponent } from '../components/scrollbar/scrollbar.component';   
 import { Button } from '../components/button/Button';
 import { UnorderedListElementComponent } from "../components/unordered-list-element/unordered-list-element.component";
 import { CardComponent } from '../components/card/card.component';
@@ -10,11 +12,12 @@ import { CarouselComponent } from '../components/carousel/carousel.component';
 import { Card } from '../components/card/Card';
 import { DragEntryComponent } from '../components/drag-entry/drag-entry.component';
 
-@Component({
+  @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   imports: [DragEntryComponent, CarouselComponent, IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, UnorderedListElementComponent, IonList, CardComponent],
+  imports: [CarouselComponent, IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, UnorderedListElementComponent, IonList, CardComponent, ScrollBarComponent],
 })
 export class HomePage {
   // Se dovete testare componenti, per favore non cancellate le funzioni relative al bottone e al 
@@ -29,13 +32,5 @@ export class HomePage {
   b2: Button = {text: 'prova altro testp', expand: ''};
   b3: Button = {text: 'prova', expand: ''};
   
-  cards: Card[] = [
-    { title:'Card 1', subtitle:'Hello, World!', content:'Questo', imageURL: Card.defaultImageURL() },
-    { title:'Card 2', subtitle:'Hello, World!', content:'Non', imageURL: Card.defaultImageURL() },
-    { title:'Card 3', subtitle:'Hello, World!', content:'Dovevi', imageURL: Card.defaultImageURL() },
-    { title:'Card 4', subtitle:'Hello, World!', content:'Farlo', imageURL: Card.defaultImageURL() },
-    { title:'Card 5', subtitle:'Hello, World!', content:'Freezer', imageURL: Card.defaultImageURL() },
-  ]
-
-  constructor(public popupController: PopoverController) {}
+  constructor(public popupController: PopoverController) {} 
 }

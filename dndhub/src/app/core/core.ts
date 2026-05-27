@@ -1,5 +1,6 @@
 import { PopoverController } from "@ionic/angular/standalone";
 import { PopUpComponent } from "../components/pop-up/pop-up.component";
+import { Router } from "@angular/router";
 
 
 export namespace Popups {
@@ -13,6 +14,15 @@ export namespace Popups {
 
       await pop.present();
     }
+
+    return f;
+  }
+}
+
+export namespace Navigate {
+  // il path deve essere quello specificato su app.routes.ts, non il path delle cartelle
+  export function toPath(router: Router, path: String) {
+    function f() {router.navigate([path]);}
 
     return f;
   }

@@ -13,5 +13,5 @@ export class CheckboxComponent  implements OnInit {
 
   ngOnInit() {}
 
-  @Input() testo!: string;
+  @Input() testo: string = '';
 }

@@ -1,12 +1,12 @@
 <div class="carousel">
   <div class="group">
-    @for (card of cards; track card) {
+    @for (card of cards; track $index) {
       <app-card [card]="card"></app-card>
     }
   </div>
   <div aria-hidden class="group">
-    @for (card of cards; track card) {
-      <app-card [card]="card"></app-card>
+    @for (card2 of cards; track $index) {
+      <app-card [card]="card2"></app-card>
     }
   </div>
 </div>

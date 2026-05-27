@@ -155,4 +155,25 @@
     </ion-item>
   }
 
+  
+  <ion-item>
+    <ion-label>Seleziona 3 lingue conosciute dal tuo personaggio, Ancora {{LingueSelezionate.length}}/{{maxLingue}}</ion-label>
+  </ion-item>
+@for (lingua of lingue; track lingua.id) {
+
+  <app-checkbox
+    [testo]="lingua.name"
+    [checked]="LingueSelezionate.includes(lingua.name)"
+    [disabled]="
+      LingueSelezionate.length >= maxLingue &&
+      !LingueSelezionate.includes(lingua.name)
+    "
+    (checkedChange)="onLanguageSelect(lingua)">
+  </app-checkbox>
+
+}
+ 
+<!-- Io immaginavo un toogle per fare apparire un botton una volta che sia le lingue che le stats 
+erano state selezionate però boh poi ditemi voi -->
+
 </ion-content>

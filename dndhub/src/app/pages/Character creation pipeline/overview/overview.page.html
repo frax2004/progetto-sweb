@@ -1,131 +1,85 @@
 <ion-content>
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>overview</ion-title>
-  </ion-toolbar>
-</ion-header> -->
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>overview</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
 <!-- la pagina sarà divisa in due metà  (1/3 + 2/3) per larghezza -->
-  <ion-item class="gridContainer">
-    <ion-grid>
-      <ion-row>
+  <div class="gridContainer">
+    <div class="upperDetails">
+      <ion-item>
+        <ion-label>Velocità totale</ion-label>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Taglia</ion-label>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Background</ion-label>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>CA</ion-label>
+      </ion-item>
+    </div>
 
-        <!-- 1/3 di schermo solo questa colonna -->
-        <ion-col class="firstHalf" size="4">
-          <ion-title>Overview</ion-title>
-          <ion-grid>
-            <!-- <app-scroll-bar></app-scroll-bar> -->
-            <ion-row>
-              
-              <ion-col>
-                <ion-item>
-                  <ion-label>Velocità totale</ion-label>
-                </ion-item>
-              </ion-col>
+    <div class="accordions">
+      <app-accordion
+      [accordions] = "accordions"
+      [allowMultipleEnabled] = "true"
+      ></app-accordion>
+    </div>
 
-              <ion-col>
-                <ion-item>
-                  <ion-label>Taglia</ion-label>
-                </ion-item>
-              </ion-col>
+    <div class="finalChoices">
+      <ion-item class="nameChoice">
+        <app-text-area [label]="'Inserisci nome del personaggio: '"></app-text-area>
+      </ion-item>
 
-              <ion-col>
-                <ion-item>
-                  <ion-label>Background</ion-label>
-                </ion-item>
-              </ion-col>
+      <ion-item class="imgChoice">
+        <app-text-area [label]="'(opzionale) Inserisci URL immagine del personaggio: '"></app-text-area>
+      </ion-item>
 
-              <ion-col>
-                <ion-item>
-                  <ion-label>CA</ion-label>
-                </ion-item>
-              </ion-col>
+       <div class="HPchoice">
+        <ion-label>Seleziona metodo di calcolo HP -></ion-label>
+        <div class="HPbuttons">
+          <app-button
+          [button] = "{ text: 'Media', expand: ''}"
+          [context] = "buttonCallbacks['avHP']"
+          ></app-button>
+          <app-button
+          [button] = "{ text: 'Manualmente', expand: ''}"
+          [context] = "buttonCallbacks['manHP']"
+          ></app-button>
+        </div>
+        
+        
+        </div>
 
-            </ion-row>
-          </ion-grid>
-
-          <app-accordion
-          [accordions] = "accordions"
-          [allowMultipleEnabled] = "true"
-          ></app-accordion>
-        </ion-col>
-
-        <!-- prende la restante percentuale di spazio -->
-        <ion-col class="secondHalf" size="8">
-          <ion-row>
-            <ion-col>
-              <app-text-area [label]="'Inserisci nome del personaggio: '"></app-text-area>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col>
-              <app-text-area [label]="'(opzionale) Inserisci URL immagine del personaggio: '"></app-text-area>
-            </ion-col>
-          </ion-row>
-
-          <!-- sezione per rollare hp -->
-          <ion-row>
-            <ion-col>
-              <ion-label>Seleziona metodo di calcolo HP -></ion-label>
-            </ion-col>
-
-            <!-- bottone per selezione hp tramite media -->
-            <ion-col>
-              <app-button
-              [button] = "{ text: 'Media', expand: ''}"
-              [context] = "buttonCallbacks['avHP']"
-              ></app-button>
-            </ion-col>
-
-            <!-- bottone per selezione manuale -->
-            <ion-col>
-              <app-button
-              [button] = "{ text: 'Manualmente', expand: ''}"
-              [context] = "buttonCallbacks['manHP']"
-              ></app-button>
-            </ion-col>
-          </ion-row>
-
+      <div class="showHP">
+          
           @if(averageHP===true) {
-            <ion-row>
-              <ion-col>
                 <ion-label>{{avHPlabel}}</ion-label>
-              </ion-col>
-            </ion-row>
           }
 
           @if(manualHP===true) {
-            <ion-row>
-              <ion-col>
-                <ion-label>Inserire HP in range {{HPrange(lvl,HPdice)}}:</ion-label>
-              </ion-col>
+              <ion-label>Inserire HP in range {{HPrange(lvl,HPdice)}}:</ion-label>
 
-              <ion-col>
-                <ion-label>Placeholder number entry</ion-label>
-              </ion-col>
-            </ion-row>
+              <ion-label>Placeholder number entry</ion-label>
           }
-          
-          <ion-row>
-            <ion-col>
-              <app-button
-              [button] = "{ text: 'Crea personaggio', expand: ''}"
-              [context] = "buttonCallbacks['completeChar']"
-              ></app-button>
-            </ion-col>
-          </ion-row>
 
-        </ion-col>
+      </div>
+    </div>
 
-      
-        
+    <div class="finalButton">
+      <app-button
+      [button] = "{ text: 'Crea personaggio', expand: ''}"
+      [context] = "buttonCallbacks['completeChar']"
+      ></app-button>
+    </div>
 
-      </ion-row>
-      
-    </ion-grid>
-
-  </ion-item>
+  </div>
 
 
 </ion-content>

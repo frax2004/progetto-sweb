@@ -8,12 +8,13 @@ import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.com
 import { Router } from '@angular/router';
 import { Navigate } from 'src/app/core/core';
 
+import { CheckboxComponent } from 'src/app/components/checkbox/checkbox.component';
 @Component({
   selector: 'app-stats-selection',
   templateUrl: './stats-selection.page.html',
   styleUrls: ['./stats-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, IonRow, RadioButtonComponent, IonCol, IonLabel, ButtonComponent, DragEntryComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, IonRow, RadioButtonComponent, IonCol, IonLabel, ButtonComponent, CheckboxComponent,  DragEntryComponent]
 })
 export class StatsSelectionPage implements OnInit {
   manualSelection: Boolean = true;
@@ -67,6 +68,33 @@ export class StatsSelectionPage implements OnInit {
     return sum.toString();
   }
 
+  lingue = [
+    { name: 'Comune', id: 1, selector : false},
+    { name: 'Elfico', id: 2, selector : false},
+    { name: 'Nanico', id: 3, selector : false},
+    { name: 'Orchesco', id: 4, selector : false},
+    { name: 'Goblin', id: 5, selector : false},
+    { name: 'Draconico', id: 6, selector : false},
+  ];  
+
+  LingueSelezionate: string[] = [];
+  maxLingue = 3;
+
+onLanguageSelect(lingua: any) {
+
+  const name = lingua.name;
+
+  const index = this.LingueSelezionate.indexOf(name);
+
+  if (index !== -1) {
+    this.LingueSelezionate.splice(index, 1);
+    return;
+  }
+
+  if (this.LingueSelezionate.length < this.maxLingue) {
+    this.LingueSelezionate.push(name);
+  }
+}
 
   constructor(private router: Router) { }
 

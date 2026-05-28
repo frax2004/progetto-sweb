@@ -1,9 +1,16 @@
 <ion-content>
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title>Seleziona l'equipaggiamento</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-item id="pageTitle">
+    <div>
+      <ion-title id="title">Scegli l'equipaggiamento</ion-title>
+    </div>
+  </ion-item>
+
+  <div class="goBack">
+    <app-button
+    [button] = "{ text: 'Torna indietro', expand: ''}"
+    [context] = "buttonCallbacks['previousPage']"
+    ></app-button>
+  </div>
 
   <!-- grid dove si andrà a mettere tutto quello che ci interessa -->
   <ion-item class="gridContainer">
@@ -77,9 +84,11 @@
 
           <!-- quantità oggetto -->
           <ion-col>
-            <ion-item>
-              <ion-label>Placeholder fino a quando non avrò number entry</ion-label>
-            </ion-item>
+            <app-drag-entry
+            [sensitivity] = 1
+            [min] = 0
+            >
+            </app-drag-entry>
           </ion-col>
 
         </ion-row>
@@ -91,13 +100,11 @@
   
   </ion-item>
 
-  <ion-footer>
-    <ion-item slot="end">
-      <app-button
-      [button] = "{ text: 'Accetta e vai avanti', expand: ''}"
-      [context] = "buttonCallbacks['nextPage']"
-      ></app-button>
-    </ion-item>
-  </ion-footer>
+  <div class="nextPage">
+    <app-button
+    [button] = "{ text: 'Vai alla prossima pagina', expand: ''}"
+    [context] = "buttonCallbacks['nextPage']"
+    ></app-button>
+  </div>
 
 </ion-content>

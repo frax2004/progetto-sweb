@@ -1,9 +1,16 @@
 <ion-content>
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title>Scegli il tuo background</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div id="pageTitle">
+    <div>
+      <ion-title id="title">Scegli il tuo background</ion-title>
+    </div>
+  </div>
+
+  <div class="goBack">
+    <app-button
+    [button] = "{ text: 'Torna indietro', expand: ''}"
+    [context] = "buttonCallbacks['previousPage']"
+    ></app-button>
+  </div>
 
   <!-- Sezione iniziale per la scelta dei background -->
   <ion-item class="backgroundSelectionFrame">
@@ -14,12 +21,10 @@
   </ion-item>
 
   <!-- footer con bottone per andare alla prossima pagina -->
-  <ion-footer>
-    <ion-item slot="end">
+  <div class="nextPage">
       <app-button
-      [button] = "b1_button"
-      [context] = "b2_context"
+      [button] = "{ text: 'Prossima pagina', expand: ''}"
+      [context] = "buttonCallbacks['nextPage']"
       ></app-button>
-    </ion-item>
-  </ion-footer>
+  </div>
 </ion-content>

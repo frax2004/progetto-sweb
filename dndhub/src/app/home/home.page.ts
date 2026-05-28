@@ -16,7 +16,7 @@ import { DragEntryComponent } from '../components/drag-entry/drag-entry.componen
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [CarouselComponent, IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, UnorderedListElementComponent, IonList, CardComponent, ScrollBarComponent],
+  imports: [DragEntryComponent, ScrollBarComponent, CarouselComponent, IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, UnorderedListElementComponent, IonList, CardComponent],
 })
 export class HomePage {
   // Se dovete testare componenti, per favore non cancellate le funzioni relative al bottone e al 

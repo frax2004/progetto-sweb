@@ -4,13 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonGrid, IonRow, IonCol, IonLabel } from '@ionic/angular/standalone';
 import { RadioButtonComponent } from "src/app/components/radio-button/radio-button.component";
 import { ButtonComponent } from "src/app/components/button/button.component";
+import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.component";
+import { Router } from '@angular/router';
+import { Navigate } from 'src/app/core/core';
 
+import { CheckboxComponent } from 'src/app/components/checkbox/checkbox.component';
 @Component({
   selector: 'app-stats-selection',
   templateUrl: './stats-selection.page.html',
   styleUrls: ['./stats-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, IonRow, RadioButtonComponent, IonCol, IonLabel, ButtonComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, IonRow, RadioButtonComponent, IonCol, IonLabel, ButtonComponent, CheckboxComponent,  DragEntryComponent]
 })
 export class StatsSelectionPage implements OnInit {
   manualSelection: Boolean = true;
@@ -39,6 +43,8 @@ export class StatsSelectionPage implements OnInit {
       this.randomSelection=true;
       } 
     },
+    previousPage: { onClick: Navigate.toPath(this.router,'equipment-selection')},
+    nextPage: { onClick: Navigate.toPath(this.router,'overview')},
   };
 
 
@@ -62,8 +68,35 @@ export class StatsSelectionPage implements OnInit {
     return sum.toString();
   }
 
+  lingue = [
+    { name: 'Comune', id: 1, selector : false},
+    { name: 'Elfico', id: 2, selector : false},
+    { name: 'Nanico', id: 3, selector : false},
+    { name: 'Orchesco', id: 4, selector : false},
+    { name: 'Goblin', id: 5, selector : false},
+    { name: 'Draconico', id: 6, selector : false},
+  ];  
 
-  constructor() { }
+  LingueSelezionate: string[] = [];
+  maxLingue = 3;
+
+onLanguageSelect(lingua: any) {
+
+  const name = lingua.name;
+
+  const index = this.LingueSelezionate.indexOf(name);
+
+  if (index !== -1) {
+    this.LingueSelezionate.splice(index, 1);
+    return;
+  }
+
+  if (this.LingueSelezionate.length < this.maxLingue) {
+    this.LingueSelezionate.push(name);
+  }
+}
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }

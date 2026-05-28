@@ -1,0 +1,50 @@
+.contentContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.postContent {
+    width: 95%;
+    height: 65%;
+}
+
+.postContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.imgFrame {
+    max-width: 10%;
+    max-height: 10%;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.postBox {
+    display: flex;
+    flex-direction: column;
+    height: 40vh;
+}
+
+.postLowerInformation {
+    display: flex;
+    flex-direction: row;
+}
+
+* {
+    border: 1px green solid;
+}
+
+.playerNames {
+    display: flex;
+    flex-direction: row;
+}

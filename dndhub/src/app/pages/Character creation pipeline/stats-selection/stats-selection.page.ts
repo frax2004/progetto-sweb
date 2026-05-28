@@ -5,6 +5,8 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonGrid, IonRow, 
 import { RadioButtonComponent } from "src/app/components/radio-button/radio-button.component";
 import { ButtonComponent } from "src/app/components/button/button.component";
 import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.component";
+import { Router } from '@angular/router';
+import { Navigate } from 'src/app/core/core';
 
 @Component({
   selector: 'app-stats-selection',
@@ -40,6 +42,8 @@ export class StatsSelectionPage implements OnInit {
       this.randomSelection=true;
       } 
     },
+    previousPage: { onClick: Navigate.toPath(this.router,'equipment-selection')},
+    nextPage: { onClick: Navigate.toPath(this.router,'overview')},
   };
 
 
@@ -64,7 +68,7 @@ export class StatsSelectionPage implements OnInit {
   }
 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }

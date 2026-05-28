@@ -9,14 +9,16 @@ import { ButtonComponent } from 'src/app/components/button/button.component';
 import { expand } from 'rxjs';
 import { Button } from 'src/app/components/button/Button';
 import { ButtonContext } from 'src/app/components/button/ButtonContext';
-import { Popups } from 'src/app/core/core';
+import { Navigate, Popups } from 'src/app/core/core';
+import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-class-selection',
   templateUrl: './class-selection.page.html',
   styleUrls: ['./class-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, AccordionComponent, IonLabel, TextAreaComponent, IonCol, ButtonComponent, IonRow, IonFooter]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, AccordionComponent, IonLabel, TextAreaComponent, IonCol, ButtonComponent, IonRow, IonFooter, DragEntryComponent]
 })
 export class ClassSelectionPage implements OnInit {
   b1_button: Button = { text: 'clicca qui', expand: ''};
@@ -31,6 +33,11 @@ export class ClassSelectionPage implements OnInit {
 
   b2_context: ButtonContext = { onClick: Popups.ofSimpleText(this.popoverController, "Andiamo les go les go milano")};
 
+  buttonCallbacks = {
+    // manca la pagina precedente a cui linkare il primo bottone
+    nextPage: { onClick: Navigate.toPath(this.router,'species-selection')}
+  }
+
   //da cambiare quando avremo un db come si deve
   accordions: Accordion[] = [
     { value: 'barbaro accordion', title: 'Barbaro', content: 'Al barbaro piace stare mezzo nudo e piacchiare la gente forte e essere arrabbiato e essere pelato e ascoltare sludge', button: this.b1},
@@ -41,7 +48,7 @@ export class ClassSelectionPage implements OnInit {
 
   
 
-  constructor(public popoverController: PopoverController) { }
+  constructor(public popoverController: PopoverController, private router: Router) { }
 
   ngOnInit() {
   }

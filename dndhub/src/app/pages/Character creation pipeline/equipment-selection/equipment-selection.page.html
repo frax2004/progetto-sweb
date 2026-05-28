@@ -5,6 +5,13 @@
     </div>
   </ion-item>
 
+  <div class="goBack">
+    <app-button
+    [button] = "{ text: 'Torna indietro', expand: ''}"
+    [context] = "buttonCallbacks['previousPage']"
+    ></app-button>
+  </div>
+
   <!-- grid dove si andrà a mettere tutto quello che ci interessa -->
   <ion-item class="gridContainer">
     <ion-grid>
@@ -93,13 +100,11 @@
   
   </ion-item>
 
-  <ion-footer>
-    <ion-item slot="end">
-      <app-button
-      [button] = "{ text: 'Accetta e vai avanti', expand: ''}"
-      [context] = "buttonCallbacks['nextPage']"
-      ></app-button>
-    </ion-item>
-  </ion-footer>
+  <div class="nextPage">
+    <app-button
+    [button] = "{ text: 'Vai alla prossima pagina', expand: ''}"
+    [context] = "buttonCallbacks['nextPage']"
+    ></app-button>
+  </div>
 
 </ion-content>

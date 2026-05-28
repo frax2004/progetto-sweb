@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCol, IonItem, IonLabel, IonRow, IonGrid, IonFooter } from '@ionic/angular/standalone';
 import { ButtonComponent } from "src/app/components/button/button.component";
 import { PopoverController } from '@ionic/angular/standalone';
-import { Popups } from 'src/app/core/core';
+import { Navigate, Popups } from 'src/app/core/core';
 import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-equipment-selection',
@@ -23,11 +24,12 @@ export class EquipmentSelectionPage implements OnInit {
   ];
 
   buttonCallbacks = {
-    nextPage: { onClick: Popups.ofSimpleText(this.popoverController,'Pagina seguente non ancora implementata')},
+    nextPage: { onClick: Navigate.toPath(this.router,'stats-selection')},
+    previousPage: { onClick: Navigate.toPath(this.router,'background-selection')},
   };
 
 
-  constructor(public popoverController: PopoverController) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }

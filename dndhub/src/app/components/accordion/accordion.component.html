@@ -1,15 +1,15 @@
-<ion-accordion-group [multiple]="allowMultipleEnabled">
+<ion-accordion-group [multiple]="allowMultipleEnabled" expand="inset">
   @for (accordion of accordions; track accordion) {
-    <ion-accordion [value]="accordion.value">
-      <ion-item slot="header" color="light">
+    <ion-accordion [value]="accordion.value" >
+      <ion-item id="accHeader" slot="header" color="light">
         @if (accordion.imageURL !== undefined) {
           <ion-thumbnail slot="start">
-            <img alt="placeholder img" src="accordion.imageURL">
+            <img id="accImg" alt="placeholder img" [src]="accordion.imageURL">
           </ion-thumbnail>
         }
         @else {
           <ion-thumbnail slot="start">
-            <img alt="placeholder img" src="plcImg">
+            <img alt="placeholder img" [src]="plcImg">
           </ion-thumbnail>
         }
         <ion-label>{{ accordion.title }}</ion-label>
@@ -18,13 +18,14 @@
       <div class="ion-padding" slot="content">
         {{ accordion.content }}
         @if (accordion.button !== undefined) {
-          <ion-item>
+          <div id="buttonContainer">
             <app-button
+              [margin] = "false"
               [button] = "accordion.button.button"
               [context] = "accordion.button.context"
             >
             </app-button>
-          </ion-item>
+          </div>
         }
       </div>
     </ion-accordion>

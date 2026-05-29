@@ -9,13 +9,14 @@ import { ButtonComponent } from 'src/app/components/button/button.component';
 import { ButtonContext } from 'src/app/components/button/ButtonContext';
 import { Navigate, Popups } from 'src/app/core/core';
 import { Router } from '@angular/router';
+import { TitleComponent } from "src/app/components/title/title.component";
 
 @Component({
   selector: 'app-background-selection',
   templateUrl: './background-selection.page.html',
   styleUrls: ['./background-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, AccordionComponent, IonFooter, ButtonComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, AccordionComponent, IonFooter, ButtonComponent, TitleComponent]
 })
 export class BackgroundSelectionPage implements OnInit {
   b1_button: Button = { text: 'clicca qui', expand: ''};

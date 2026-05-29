@@ -1,9 +1,7 @@
 <ion-content>
-  <div id="pageTitle">
-    <div>
-      <ion-title id="title">Scegli il tuo background</ion-title>
-    </div>
-  </div>
+  <app-title
+  [title] = "'Scegli il tuo background'"
+  ></app-title>
 
   <div class="goBack">
     <app-button
@@ -13,12 +11,12 @@
   </div>
 
   <!-- Sezione iniziale per la scelta dei background -->
-  <ion-item class="backgroundSelectionFrame">
+  <div class="backgroundSelectionFrame">
     <app-accordion
       [accordions] = "accordions"
       [allowMultipleEnabled] = "true"
     ></app-accordion>
-  </ion-item>
+  </div>
 
   <!-- footer con bottone per andare alla prossima pagina -->
   <div class="nextPage">

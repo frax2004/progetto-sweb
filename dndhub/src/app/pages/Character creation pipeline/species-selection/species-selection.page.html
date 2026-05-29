@@ -1,9 +1,7 @@
 <ion-content>
-  <div id="pageTitle">
-    <div>
-      <ion-title id="title">Scegli la tua specie</ion-title>
-    </div>
-  </div>
+  <app-title
+  [title] = "'Scegli la tua specie'"
+  ></app-title>
 
   <div class="goBack">
     <app-button
@@ -13,12 +11,12 @@
   </div>
 
   <!-- prima sezione con menù a tendina -->
-   <ion-item class="speciesSelectionFrame">
+   <div class="speciesSelectionFrame">
     <app-accordion
       [accordions] = "accordions"
       [allowMultipleEnabled] = "true"
     ></app-accordion>
-  </ion-item>
+  </div>
 
   <!-- footer con bottone per andare alla prossima pagina -->
   <div class="nextPage">

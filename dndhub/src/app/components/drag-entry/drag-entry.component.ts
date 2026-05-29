@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, HostListener } from '@angular/core';
 import { IonItem } from '@ionic/angular/standalone';
+import $ from 'jquery';
 
 @Component({
   selector: 'app-drag-entry',
@@ -23,7 +24,12 @@ export class DragEntryComponent implements OnInit {
   private initialValue: number = 0;
   private dragThreshold: number = 4;
 
-  ngOnInit() {}
+  ngOnInit() {
+    // //uso jquery per sistemare css
+    // $(function() {
+    //   $(".entry-arrow").css("height", $(#entry).height());
+    // });
+  }
 
   private getValue(): number {
     return this.previousInput === "" ? 0 : parseFloat(this.previousInput);
@@ -121,4 +127,6 @@ export class DragEntryComponent implements OnInit {
       }
     }
   }
+
+  
 }

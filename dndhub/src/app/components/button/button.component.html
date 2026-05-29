@@ -1,7 +1,24 @@
-<ion-button
-    class = "genericButton"
-    (click)="context.onClick($event)"
-    [expand]="button.expand"
->
-{{ button.text }}
-</ion-button>
+@if (margin === true) {
+    <ion-button
+        class = "genericButton"
+        (click)="context.onClick($event)"
+        [expand]="button.expand"
+    >
+    {{ button.text }}
+    </ion-button>
+}
+@else {
+    <ion-button
+        style = "
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+        "
+        class = "genericButton"
+        (click)="context.onClick($event)"
+        [expand]="button.expand"
+    >
+    {{ button.text }}
+    </ion-button>
+}

@@ -1,9 +1,7 @@
 <ion-content>
-  <ion-item id="pageTitle">
-    <div>
-      <ion-title id="title">Scegli l'equipaggiamento</ion-title>
-    </div>
-  </ion-item>
+  <app-title
+  [title] = "'Scegli l\'equipaggiamento'"
+   ></app-title>
 
   <div class="goBack">
     <app-button
@@ -17,12 +15,12 @@
     <ion-grid>
       
       <!-- riga prima della prima riga per mostrare oro corrente -->
-      <ion-row>
+      <ion-row class="budgetRow">
         <!-- oro corrente -->
-        <ion-col>
-          <ion-item>
+        <ion-col class="budgetCol">
+          <div class="budgetDiv">
             <ion-label>Budget attuale: {{budgetTotale}} monete d'oro</ion-label>
-          </ion-item>
+          </div>
         </ion-col>
       </ion-row>
 
@@ -30,30 +28,30 @@
       <ion-row>
         <!-- Nome oggetto -->
         <ion-col>
-          <ion-item>
+          <div class="categoryTitle">
             <ion-label>Oggetto</ion-label>
-          </ion-item>
+          </div>
         </ion-col>
 
         <!-- Costo oggetto -->
         <ion-col>
-          <ion-item>
+          <div class="categoryTitle">
             <ion-label>Costo</ion-label>
-          </ion-item>
+          </div>
         </ion-col>
 
         <!-- descrizione oggetto -->
         <ion-col>
-          <ion-item>
+          <div class="categoryTitle">
             <ion-label>Descrizione</ion-label>
-          </ion-item>
+          </div>
         </ion-col>
 
         <!-- Quantità oggetto -->
         <ion-col>
-          <ion-item>
+          <div class="categoryTitle">
             <ion-label>Quantità</ion-label>
-          </ion-item>
+          </div>
         </ion-col>
 
       </ion-row>
@@ -63,28 +61,29 @@
 
           <!-- Nome oggetto -->
           <ion-col>
-            <ion-item>
+            <div class="listElement">
               <ion-label>{{object.nome}}</ion-label>
-            </ion-item>
+            </div>
           </ion-col>
 
           <!-- Costo oggetto -->
           <ion-col>
-            <ion-item>
+            <div class="listElement">
               <ion-label>{{object.costo}} monete d'oro</ion-label>
-            </ion-item>
+            </div>
           </ion-col>
 
           <!-- Descrizione oggetto -->
           <ion-col>
-            <ion-item>
+            <div class="listElement">
               <ion-label>{{object.descrizione}}</ion-label>
-            </ion-item>
+            </div>
           </ion-col>
 
           <!-- quantità oggetto -->
           <ion-col>
             <app-drag-entry
+            class="listElement dragEntryElement"
             [sensitivity] = 1
             [min] = 0
             >

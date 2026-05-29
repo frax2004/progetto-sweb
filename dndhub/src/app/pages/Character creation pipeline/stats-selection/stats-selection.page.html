@@ -1,9 +1,7 @@
 <ion-content>
-  <div id="pageTitle">
-    <div>
-      <ion-title id="title">Scegli le statistiche</ion-title>
-    </div>
-  </div>
+  <app-title
+  [title] = "'Scegli le statistiche'"
+  ></app-title>
   
   <!-- tre bottoni, uno accanto all'altro che permettono di modificare il metodo di selezione statistiche -->
 
@@ -15,32 +13,44 @@
     <!-- manca il context -->
   </div>
 
-  <ion-item class="gridContainer">
+  <ion-item class="gridContainer buttonGrid">
     <ion-grid>
       <ion-row>
 
         <!-- bottono selezione manuale -->
         <ion-col>
-          <app-button
-          [button] = "{ text: 'Scelta manuale', expand: ''}"
-          [context] = "buttonCallbacks['manual']"
-          ></app-button>
+          <div class="HPchoiceButtonContainer">
+            <app-button
+            class = "HPchoiceButton"
+            [margin] = "false"
+            [button] = "{ text: 'Scelta manuale', expand: ''}"
+            [context] = "buttonCallbacks['manual']"
+            ></app-button>
+          </div>
         </ion-col>
 
         <!-- bottone selezione array standard -->
         <ion-col>
-          <app-button
-          [button] = "{ text: 'Scelta array standard', expand: ''}"
-          [context] = "buttonCallbacks['stdArr']"
-          ></app-button>
+          <div class="HPchoiceButtonContainer">
+            <app-button
+            [margin] = "false"
+            class = "HPchoiceButton"
+            [button] = "{ text: 'Scelta array standard', expand: ''}"
+            [context] = "buttonCallbacks['stdArr']"
+            ></app-button>
+          </div>
         </ion-col>
 
         <!-- bottone selezione casuale (4d6 drop one) -->
         <ion-col>
-          <app-button
-          [button] = "{ text: 'Scelta casuale', expand: ''}"
-          [context] = "buttonCallbacks['random']"
-          ></app-button>
+          <div class="HPchoiceButtonContainer">
+            <app-button
+            [margin] = "false"
+            class = "HPchoiceButton"
+            [button] = "{ text: 'Scelta casuale', expand: ''}"
+            [context] = "buttonCallbacks['random']"
+            ></app-button>
+          </div>
         </ion-col>
 
       </ion-row>
@@ -49,7 +59,7 @@
 
   <!-- adesso tre grid diverse in base alla flag attiva -->
   @if (manualSelection===true) {
-    <ion-item  class="gridContainer"> 
+    <ion-item  class="gridContainer manualHPgrid"> 
       <ion-grid>
 
         <!-- riga con i nomi delle stats -->
@@ -201,21 +211,23 @@
   }
 
   @if (stdArray===true) {
-    <app-radio-button
-    [radios] = "radios"
-    [groupValue] = "'radioGroup'"
-    ></app-radio-button>
+    <ion-item class="gridContainer">
+      <app-radio-button
+      [radios] = "radios"
+      [groupValue] = "'radioGroup'"
+      ></app-radio-button>
+    </ion-item>
   }
 
   @if (randomSelection===true) {
-    <ion-item>
+    <ion-item class="gridContainer">
       <ion-label>Le statistiche rollate sono: {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}}</ion-label>
     </ion-item>
   }
 <!-- 
-  <ion-item>
+  <div>
     <ion-label>Seleziona 3 lingue conosciute dal tuo personaggio, Ancora {{LingueSelezionate.length}}/{{maxLingue}}</ion-label>
-  </ion-item>
+  </div>
 @for (lingua of lingue; track lingua.id) {
 
   <app-checkbox

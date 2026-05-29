@@ -9,13 +9,14 @@ import { ButtonContext } from 'src/app/components/button/ButtonContext';
 import { Navigate, Popups } from 'src/app/core/core';
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { Router } from '@angular/router';
+import { TitleComponent } from "src/app/components/title/title.component";
 
 @Component({
   selector: 'app-species-selection',
   templateUrl: './species-selection.page.html',
   styleUrls: ['./species-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, AccordionComponent, IonFooter, ButtonComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, AccordionComponent, IonFooter, ButtonComponent, TitleComponent]
 })
 export class SpeciesSelectionPage implements OnInit {
   b1_button: Button = { text: 'clicca qui', expand: ''};

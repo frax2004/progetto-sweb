@@ -7,13 +7,14 @@ import { PopoverController } from '@ionic/angular/standalone';
 import { Navigate, Popups } from 'src/app/core/core';
 import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.component";
 import { Router } from '@angular/router';
+import { TitleComponent } from "src/app/components/title/title.component";
 
 @Component({
   selector: 'app-equipment-selection',
   templateUrl: './equipment-selection.page.html',
   styleUrls: ['./equipment-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCol, IonItem, IonLabel, IonRow, IonGrid, ButtonComponent, IonFooter, DragEntryComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCol, IonItem, IonLabel, IonRow, IonGrid, ButtonComponent, IonFooter, DragEntryComponent, TitleComponent]
 })
 export class EquipmentSelectionPage implements OnInit {
   budgetTotale: Number = 300;

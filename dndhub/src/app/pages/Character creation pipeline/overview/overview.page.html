@@ -1,61 +1,67 @@
 <ion-content>
-  <div id="pageTitle">
-    <div>
-      <ion-title id="title">Overview</ion-title>
-    </div>
-  </div>
+  <app-title
+  [title] = "'Overview'"
+  ></app-title>
 
 <!-- la pagina sarà divisa in due metà  (1/3 + 2/3) per larghezza -->
-  <div class="gridContainer">
+  
     <div class="upperDetails">
-      <ion-item>
+      <div class="upperDetailsContainer">
         <ion-label>Velocità totale</ion-label>
-      </ion-item>
+      </div>
       
-      <ion-item>
+      <div class="upperDetailsContainer">
         <ion-label>Taglia</ion-label>
-      </ion-item>
+      </div>
       
-      <ion-item>
+      <div class="upperDetailsContainer">
         <ion-label>Background</ion-label>
-      </ion-item>
+      </div>
       
-      <ion-item>
+      <div class="upperDetailsContainer">
         <ion-label>CA</ion-label>
-      </ion-item>
+      </div>
     </div>
 
-    <div class="accordions">
-      <app-accordion
-      [accordions] = "accordions"
-      [allowMultipleEnabled] = "true"
-      ></app-accordion>
-    </div>
+  <div class="accordions">
+    <app-accordion
+    [accordions] = "accordions"
+    [allowMultipleEnabled] = "true"
+    ></app-accordion>
+  </div>
 
+  <!-- quale preferite tra i due tipi di text area? -->
+  <ion-item class="finalChoicesContainer">
     <div class="finalChoices">
-      <ion-item class="nameChoice">
-        <app-text-area [label]="'Inserisci nome del personaggio: '"></app-text-area>
-      </ion-item>
+      <div class="nameChoice">
+        <app-text-area
+        [fill] = "'solid'"
+        [label]="'Inserisci nome del personaggio: '"></app-text-area>
+      </div>
 
-      <ion-item class="imgChoice">
-        <app-text-area [label]="'(opzionale) Inserisci URL immagine del personaggio: '"></app-text-area>
-      </ion-item>
+      <div class="imgChoice">
+        <app-text-area
+        [fill] = "''" 
+        [label]="'(opzionale) Inserisci URL immagine del personaggio: '"></app-text-area>
+      </div>
 
-       <div class="HPchoice">
-        <ion-label>Seleziona metodo di calcolo HP -></ion-label>
+      <div class="HPchoice">
+        <ion-label class="HPlabel">Seleziona metodo di calcolo HP</ion-label>
         <div class="HPbuttons">
           <app-button
+          [margin] = "false"
           [button] = "{ text: 'Media', expand: ''}"
           [context] = "buttonCallbacks['avHP']"
           ></app-button>
           <app-button
+          [margin] = "false"
           [button] = "{ text: 'Manualmente', expand: ''}"
           [context] = "buttonCallbacks['manHP']"
           ></app-button>
         </div>
         
         
-        </div>
+      </div>
 
       <div class="showHP">
           
@@ -72,13 +78,15 @@
       </div>
     </div>
 
-    <div class="finalButton">
-      <app-button
-      [button] = "{ text: 'Crea personaggio', expand: ''}"
-      [context] = "buttonCallbacks['completeChar']"
-      ></app-button>
-    </div>
+    
 
+  </ion-item>
+
+  <div class="finalButton">
+    <app-button
+    [button] = "{ text: 'Crea personaggio', expand: ''}"
+    [context] = "buttonCallbacks['completeChar']"
+    ></app-button>
   </div>
 
 

@@ -1,9 +1,7 @@
 <ion-content>  
-  <div id="pageTitle">
-    <div>
-      <ion-title id="title">Scegli la tua classe</ion-title>
-    </div>
-  </div>
+  <app-title
+  [title] = "'Scegli la tua classe'"
+  ></app-title>
 
 
   <!-- Sezione dedicata alla scelta della classe con menù a tendina
@@ -11,7 +9,7 @@
       (o simile) che permette di selezionare quella classe tramite
       un booleano (o simile) -->
 
-  <div class="goBack">
+  <div class="goBack genericButton">
     <app-button
     [button] = "{ text: 'Torna indietro', expand: ''}"
     [context] = "b2_context"
@@ -30,7 +28,7 @@
       selector non è stato ancora implementato -->
 
   <div class="levelSelectionFrame">
-    <ion-label>
+    <ion-label class="levelSelectionLabel">
         Scegli un livello per il personaggio (1-20):
     </ion-label>
     <app-drag-entry
@@ -40,7 +38,7 @@
     ></app-drag-entry>
   </div>
 
-  <div class="nextPage">
+  <div class="nextPage genericButton">
     <app-button
     [button] = "{ text: 'Prossima pagina', expand: ''}"
     [context] = "buttonCallbacks['nextPage']"

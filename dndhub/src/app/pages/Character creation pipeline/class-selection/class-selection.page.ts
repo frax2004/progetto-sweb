@@ -12,13 +12,14 @@ import { ButtonContext } from 'src/app/components/button/ButtonContext';
 import { Navigate, Popups } from 'src/app/core/core';
 import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.component";
 import { Router } from '@angular/router';
+import { TitleComponent } from "src/app/components/title/title.component";
 
 @Component({
   selector: 'app-class-selection',
   templateUrl: './class-selection.page.html',
   styleUrls: ['./class-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, AccordionComponent, IonLabel, TextAreaComponent, IonCol, ButtonComponent, IonRow, IonFooter, DragEntryComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, AccordionComponent, IonLabel, TextAreaComponent, IonCol, ButtonComponent, IonRow, IonFooter, DragEntryComponent, TitleComponent]
 })
 export class ClassSelectionPage implements OnInit {
   b1_button: Button = { text: 'clicca qui', expand: ''};

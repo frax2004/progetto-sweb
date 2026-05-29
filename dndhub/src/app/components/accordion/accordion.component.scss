@@ -1,4 +1,34 @@
 ion-accordion {
     width: 100%;
     height: 100%;
+
+    margin: 0 auto;
+
+    .ion-accordion-toggle-icon {
+        //non capisco come cambiare i colori
+        --color: var(--ion-color-red);
+    }
+}
+
+ion-accordion.accordion-collapsing,
+ion-accordion.accordion-collapsed {
+  width: calc(100% - 32px);
+  box-shadow: 0 4px 4px rgba(200,202,200, 0.20);
+
+  margin: 0px auto;
+}
+
+ion-accordion.accordion-expanding,
+ion-accordion.accordion-expanded {
+    margin: 16px auto;
+
+    box-shadow: 0 8px 8px rgba(55, 37, 147, 0.4);
+
+}
+
+#buttonContainer {
+    display: grid;
+    justify-items: self-end;
+    padding-top: 20px;
+    padding-bottom: 5px;
 }

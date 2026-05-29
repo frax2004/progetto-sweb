@@ -41,6 +41,9 @@ export class ClassSelectionPage implements OnInit {
 
   //da cambiare quando avremo un db come si deve
   accordions: Accordion[] = [
+    
+    
+    
     { value: 'barbaro accordion', title: 'Barbaro', content: 'Al barbaro piace stare mezzo nudo e piacchiare la gente forte e essere arrabbiato e essere pelato e ascoltare sludge', button: this.b1},
     { value: 'mago accordion', title: 'Mago', content: 'Il mago è un secchione che tira magie e puo\' (quasi) letteralemente piegare la realtà alla sua volontà una volta arrivato ad un determinato livello', button: this.b1},
     { value: 'ranger accordion', title: 'Ranger', content: 'è scarso, non sceglierlo :[', button: this.b1},

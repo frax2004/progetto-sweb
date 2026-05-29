@@ -1,6 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, HostListener } from '@angular/core';
 import { IonItem } from '@ionic/angular/standalone';
-import $ from 'jquery';
 
 @Component({
   selector: 'app-drag-entry',

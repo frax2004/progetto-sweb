@@ -3,7 +3,7 @@ create table if not exists APIReference (
     name text not null,
     url text not null,
     note text
-);
+)
 
 create table if not exists DifficultyClass (
     -- in teoria questo dc_type dovrebbe essere riferimento
@@ -14,7 +14,7 @@ create table if not exists DifficultyClass (
 
     foreign key (dc_type)
     references APIReference(index)
-);
+)
 
 create table if not exists Damage (
     damage_type text not null primary key,
@@ -47,6 +47,20 @@ create table if not exists AbilityBonus (
 
     foreign key (ability_score)
     references APIReference
+)
+
+create table if not exists Action (
+    action_name text not null primary key,
+    count number not null,
+    type text not null,
+    desc text
+)
+
+create table if not exists Breath (
+    name text not null primary key,
+    dc text not null,
+    damage 
+
 )
 
 create table if not exists Option (

@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-export const LanguageSchema = z.strictObject({
-  index: z.string(),
-  name: z.string(),
-  is_rare: z.boolean(),
-  note: z.string(),
-  url: z.string(),
-});
+// export const LanguageSchema = z.strictObject({
+//   index: z.string(),
+//   name: z.string(),
+//   is_rare: z.boolean(),
+//   note: z.string(),
+//   url: z.string(),
+// });

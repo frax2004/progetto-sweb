@@ -1,0 +1,37 @@
+<div class="request-card">
+
+  <div
+    class="avatar"
+    [style.backgroundImage]="'url(' + richiesta.giocatore.immagine + ')'">
+  </div>
+
+  <div class="info">
+    <p class="row">
+      Nome: {{ richiesta.giocatore.nome }}
+    </p>
+    <p class="row">
+      Classe: {{ richiesta.giocatore.classe }}
+    </p>
+    <p class="row">
+      Razza: {{ richiesta.giocatore.razza }}
+    </p>
+    <p class="row">
+      Livello: {{ richiesta.giocatore.livello }}
+    </p>
+  </div>
+
+  <div class="actions">
+
+    <app-button
+      [button]="acceptButton"
+      [context]="acceptContext">
+    </app-button>
+
+    <app-button
+      [button]="rejectButton"
+      [context]="rejectContext">
+    </app-button>
+
+  </div>
+
+</div>

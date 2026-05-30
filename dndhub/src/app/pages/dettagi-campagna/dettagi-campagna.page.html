@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Nome campagna PINO</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="dettagli-campagna-content">
+
+<ion-item>
+<img src="https://th.bing.com/th/id/OIP.h63Sl6C7z4Evuo-_6a8WXQHaLH?w=115&h=180&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3" alt="Immagine della campagna" class="campaign-image">
+</ion-item> 
+  <p>Descrizione della campagna: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<ion-item>
+    <p class="proprietario">Nome del proprietario della campagna</p>
+</ion-item>
+
+<div class ="contenitore">
+
+  <div class="left">
+    @for (giocatore of player; track giocatore.id) {
+
+      <app-player-card class="player-pannello"
+        [player]="giocatore">
+      </app-player-card>
+
+  }
+  </div>
+
+  <div class="right">
+    <p class="Risponsta">Richieste alla campagna</p>
+    @if (richieste.length === 0) {
+      <p>Non ci sono richieste in sospeso</p>
+    } @else {
+      @for (richiesta of richieste; track richiesta.id_richiesta) {
+        <app-request-card
+          [richiesta]="richiesta">
+        </app-request-card>
+      }
+    }
+  </div>
+</div>
+
+</ion-content>

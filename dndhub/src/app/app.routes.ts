@@ -15,7 +15,8 @@ export const routes: Routes = [
   {
     path: 'landing-page',
     loadComponent: () => import('./pages/landing-page/landing-page.page').then( m => m.LandingPagePage)
-  },  {
+  },
+  {
     path: 'characters',
     loadComponent: () => import('./pages/characters/characters.page').then( m => m.CharactersPage)
   },
@@ -55,6 +56,16 @@ export const routes: Routes = [
     path: 'stats-selection',
     loadComponent: () => import('./pages/Character creation pipeline/stats-selection/stats-selection.page').then( m => m.StatsSelectionPage)
   },
-
-
+  {
+    path: 'dettagi-campagna',
+    loadComponent: () => import('./pages/dettagi-campagna/dettagi-campagna.page').then( m => m.DettagiCampagnaPage)
+  },
+  {
+    path: 'login-page',
+    loadComponent: () => import('./pages/login-page/login-page.page').then( m => m.LoginPagePage)
+  },
+  { 
+    path: 'signin-page',
+    loadComponent: () => import('./pages/signin-page/signin-page.page').then( m => m.SigninPagePage)
+  },
 ];

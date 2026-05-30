@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="Logo">DnDhub</ion-title>
+    <ion-title class="Titolo">Accedi o Registrati</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="login-content">
+
+  <div class="background"></div>
+
+  <div class="content">
+
+    <ion-text class="subtitle">
+      Inserisci le tue credenziali per accedere o registrarti.
+    </ion-text>
+
+    <ion-item lines="full">
+      <ion-input type="text" placeholder="Email o username"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-input type="password" placeholder="Password"></ion-input>
+    </ion-item>
+
+    <div class="button-wrapper">
+      <app-button 
+        [button]="loginButton"
+        [context]="loginContext">
+      </app-button>
+    </div>
+
+    <div class="link-wrapper">
+      <ion-text>
+        Hai già un account?
+      </ion-text>
+
+      <a routerLink="/login-page" class="login-page-link">
+        Accedi ora!
+      </a> 
+    </div>
+
+  </div>
+
+</ion-content>

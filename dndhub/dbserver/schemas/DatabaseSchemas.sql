@@ -8,9 +8,9 @@ create table if not exists APIReference (
 );
 
 create table if not exists DifficultyClass (
-  -- in teoria questo dc_type dovrebbe essere riferimento
-  -- 
-  dc_type text not null primary key,
+  -- forse id può essere auto increment
+  id number primary key,
+  dc_type text not null,
   dc_value number,
   success_type check(success_type='none' or  success_type='half' or  success_type='other'),
 
@@ -44,77 +44,12 @@ create table if not exists ArrayDamage (
   array_id number not null,
   damage_type text not null,
   damage_dice text not null,
-  dc text,
+  dc number,
   index number not null,
 
+  foreign key (dc) references DifficultyClass(id)
   foreign key (damage_type) references APIReference(index),
   primary key(array_id,index)
-);
-
-create table if not exists OptionAbilityBonus (
-  ability_score text not null primary key,
-  bonus number not null,
-  
-  foreign key (ability_score) references APIReference(index)
-);
-
-create table if not exists OptionAction (
-  action_name text not null primary key,
-  count number not null,
-  type text not null,
-  desc text
-);
-
-create table if not exists OptionBreath (
-  name text not null primary key,
-  dc text not null,
-  damageArray_id number not null,
-  -- breath voleva un array di option schema
-  -- per fare ciò ho bisogno di una tabella in più
-
-  foreign key (dc) references DifficultyClass(cd),
-  foreign key (damageArray_id) references ArrayDamage(damageArray_id)
-);
-
--- altra tabella array che mi serve per countedreference
-create table if not exists ArrayPrerequisites (
-  type text not null,
-  proficency text,
-  index number not null,
-  array_id number not null,
-
-  foreign key (proficency) references APIReference(proficency),
-  primary key (array_id,index)
-);
-
-create table if not exists OptionCountedReference (
-  count number not null,
-  of text not null,
-  prerequisites number,
-
-  foreign key (of) references APIReference(index),
-  foreign key (prerequisites) references ArrayPrerequisites(array_id)
-);
-
-create table if not exists OptionDamage (
-  -- TODO non so quali di questi due attributi possano essere chiavi primarie
-  damage_dice text not null,
-  damage_type text not null,
-  notes text,
-
-  foreign key (damage_type) references APIReference(index)
-);
-
-
--- In teoria questa tabella non ci serve perché
--- non stiamo mettendo alignment da nessuna parte
--- create table if not exists OptionIdeal (
-
--- )
-
-create table if not exists OptionMoney (
-  count number not null,
-  unit text not null primary key
 );
 
 -- OptionArray mi serve per multiple
@@ -127,100 +62,87 @@ create table if not exists ArrayOption (
   foreign key (item_id) references Option(id)
 );
 
-create table if not exists OptionMultiple (
-  array_id number not null,
-  desc text,
-
-  foreign key (array_id) references ArrayOption(array_id)
-);
-
-create table if not exists OptionScorePrerequisite (
-  -- anche qui quale chiave primaria?
-  ability_score text not null,
-  minimum_score number not null,
-
-  foreign key (ability_score) references APIReference(index)
-);
-
-create table if not exists OptionSize (
-  size text not null primary key
-);
-
 create table if not exists Option (
-  -- ho dovuto mettere un id come chiave perché altrimenti che chiave metto?
-  id number not null primary key,
-  option_kind text check (
-    option_kind='reference' or
-    option_kind='choice' or
-    option_kind='string' or
-    option_kind='ability bonus' or 
-    option_kind='action' or
-    option_kind='breath' or
-    option_kind='counted_reference' or
-    option_kind='damage' or
-    option_kind='ideal' or
-    option_kind='money' or
-    option_kind='multiple' or
-    option_kind='score-prerequisite' or 
-    option_kind='size'
-  ) not null,
-  item text,
-  choice text,
-  string text,
-  ability_bonus text,
-  action text,
-  breath text,
-  countedReference text,
+    id number not null autoincrement primary key, 
+    -- pseudo-tabella reference
+    reference_item text,
+    -- pseudo-tabella choice
+    choice_id number,
+    -- pseudo-tabella string
+    string text,
+    -- pseudo-tabella ability bonus 
+    ability_score_bonus text,
+    bonus number,
+    -- pseudo-tabella action
+    action_name text,
+    action_count number,
+    action_type text,
+    action_desc text,
+    -- pseudo-tabella breath
+    breath_name text,
+    breath_dc number,
+    breath_damage_type text,
+    breath_damage_dice text,
+    breath_damage_dc number, -- questo attributo potrebbe essere inutile, l'ho messo per si e per no
+    -- pseudo-tabella countedReference
+    counted_reference_count number,
+    of text,
+    prerequisites number,
+    -- pseudo-tabella damage
+    damage_dice text,
+    damage_type text, -- foreign key
+    damage_notes text,
+    -- pseudo-tabella ideal
+    -- teoricamente inutile perché non stiamo facendo alignment ma la copio perché piccola
+    alignments number, -- foreign key
+    align_desc text,
+    -- pseudo-tabella money
+    money_count number,
+    money_unit text,
+    -- pseudo-tabella multiple
+    multiple_items number, -- foreign key
+    multiple_desc text,
+    -- pseudo-tabella score_prerequisite
+    ability_score_prerequisite text, -- foreign key 
+    minimum_score_prerequisite number,
+    -- pseuso-tabella size
+    size text,
 
-  -- non so che chiavi usare, per ora lo lascio così
-
-  foreign key (item) references APIReference(item),
-  foreign key (choice) references Choice(choice),
-  foreign key (string) references String(string)
+    foreign key (reference_item) references APIReference(index),
+    foreign key (choice_id) references Choice(opt_id),
+    foreign key (ability_score_bonus) references APIReference(index),
+    foreign key (breath_dc) references DifficultyClass(id), 
+    foreign key (breath_damage_type) references APIReference(index),
+    foreign key (breath_damage_dc) references DifficultyClass(id),
+    foreign key (of) references APIReference(index),
+    foreign key (prerequisites) references ArrayPrerequisites(array_id),
+    foreign key (damage_type) references APIReference(index),
+    foreign key (alignments) references ArrayAPIReference(array_id),
+    foreign key (multiple_items) references ArrayOption(array_id),
+    foreign key (ability_score_prerequisite) references APIReference(index)
 );
 
-create table if not exists EquipmentCategory (
-  equipment_category text not null primary key,
-
-  foreign key (equipment_category) references APIReference(index)
-);
-
-create table if not exists ResourceList (
-  resource_list_url text not null primary key
-);
-
-create table if not exists OptionAndString (
-  -- non sapevo che chiave dargli
-  id number not null primary key,
-  option_schema number not null,
-  string text not null,
-
-  foreign key (option_schema) references Option(id)
-);
-
-create table if not exists ArrayOfOptions (
+create table if not exists ArrayOfOptionsAndString (
   opt_id number not null,
+  string text not null,
   index number not null,
   array_id number not null,
 
   primary key (array_id,index),
-  foreign key (opt_id) references OptionAndString(id)
+  foreign key (opt_id) references Option(id)
 );
 
 create table if not exists OptionSet (
-  id number not null primary key,
-  option_kind text check (
-    option_kind='equipment_category' or
-    option_kind='resource_list' or
-    option_kind='options_array' 
-  ) not null,
-  equip text,
-  resourceList text,
-  optArray_id number,
+    id number not null primary key autoincrement,
+    -- pseudo-tabella equipment_category
+    equipment_category text, -- foreign key
+    -- pseudo-tabella resource_list
+    resource_list_url text,
+    -- pseudo_tabella options_array
+    options_array number, -- foreign key
 
-  foreign key (equip) references EquipmentCategory(equipment_category),
-  foreign key (resourceList) references ResourceList(resource_list_url),
-  foreign key (optArray_id) references ArrayOfOptions(array_id)
+    foreign key (equipment_category) references APIReference(index),
+    foreign key (options_array) references ArrayOfOptionsAndString(array,id)
 );
 
 -- tabelle di DamageTypes.ts
@@ -473,20 +395,6 @@ create table if not exists Class (
 
 -- tabelle di Equipments.ts
 
-create table if not exists Range (
-    normal number not null,
-    long number,
-
-    primary key (normal,long)
-);
-
-create table if not exists ThrowRange (
-    normal number not null,
-    long number not null,
-
-    primary key (normal, long)
-);
-
 create table if not exists Content (
     item text not null primary key,
     quantity number not null,
@@ -505,10 +413,19 @@ create table if not exists ArrayContent (
 
 create table if not exists Utilize (
     name text not null primary key,
-    dc text not null,
+    dc number not null,
 
-    foreign key (dc) references DifficultyClass(dc_type)
+    foreign key (dc) references DifficultyClass(id)
 );
+
+create table if not exists ArrayUtilize (
+    array_id number not null,
+    index number not null,
+    item text not null,
+
+    primary key (array_id,index),
+    foreign key (item) references Utilize(name)
+) 
 
 create table if not exists Equipment (
     index text not null primary key,
@@ -526,11 +443,181 @@ create table if not exists Equipment (
     contents number, 
     ability text,
     craft number,
-    damage 
+    damage_type text,
+    damage_dice text,
+    damage_dc number,
+    doff_time text,
+    don_time text,
+    image text,
+    mastery text,
+    notes text,
+    properties number,
+    quantity number,
+    storage text,
+    range_normal number,
+    range_long number,
+    stealth_disadvantage boolean,
+    str_minimum number,
+    throw_range_normal number,
+    throw_range_long number,
+    two_handed_damage_type text,
+    two_handed_damage_dice text,
+    two_handed_damage_dc number,
+    utilize number,
 
     foreign key (equipment_categories) references ArrayAPIReference(array_id),
     foreign key (ammunition) references APIReference(index),
     foreign key (contents) references ArrayContent(array_id),
     foreign key (ability) references APIReference(index),
-    foreign key (craft) references ArrayAPIReference(array_id)
+    foreign key (craft) references ArrayAPIReference(array_id),
+    foreign key (damage_type) references APIReference(index),
+    foreign key (mastery) references APIReference(index),
+    foreign key (properties) references ArrayAPIReference(array_id),
+    foreign key (storage) references APIReference(index),
+    foreign key (utilize) references ArrayUtilize(array_id),
+    foreign key (damage_dc) references DifficultyClass(id),
+    foreign key (two_handed_damage_dc) references DifficultyClass(id)
+);
+
+-- tabelle di Feats.ts
+
+create table if not exists Feat (
+    index text not null primary key,
+    name text not null,
+    description text not null,
+    type text not null,
+    repeatable text,
+    prerequisite_minimum_level number,
+    prerequisite_feature_named text,
+    prerequisite_options number,
+    url text not null,
+
+    foreign key (prerequisite_options) references Choice(opt_id)
+);
+
+-- tabelle di MagicItems.ts
+
+create table if not exists MagicItem (
+    index text not null primary key,
+    name text not null,
+    url text not null,
+    image text not null,
+    equipment_category text,
+    variant boolean not null,
+    variants number not null,
+    attunement boolean not null,
+    rarity text not null,
+    desc text not null,
+    limited_to text,
+
+    foreign key (equipment_category) references APIReference(index),
+    foreign key (variants) references ArrayAPIReference(array_id)
+);
+
+-- tabelle di species
+
+create table if not exists Species (
+    index text not null primary key,
+    name text not null,
+    url text not null,
+    type text not null,
+    size text,
+    size_options number,
+    speed number not null,
+    traits number,
+    subspecies number,
+
+    foreign key (size_options) references Choice(opt_id),
+    foreign key (traits) references ArrayAPIReference(array_id),
+    foreign key (subspecies) references ArrayAPIReference(array_id)
+);
+
+-- tabelle di Subclass.ts
+
+create table if not exists ArraySubclassFeature (
+    array_id number not null,
+    array_idx number not null,
+    name text not null,
+    level number not null,
+    description text not null,
+
+    primary key (array_id,array_idx)
+)
+
+create table if not exists Subclass (
+    index text not null primary key,
+    url text not null,
+    name text not null,
+    class text not null,
+    summary text not null,
+    description text not null,
+    features number not null,
+
+    foreign key (class) references APIReference(index),
+    foreign key (features) references ArraySubclassFeature(array_id)
+);
+
+-- tabelle di Subspecies.ts
+
+create table if not exists ArraySubspeciesTrait (
+    index text not null,
+    array_id number not null,
+    array_idx number not null,
+    name text not null,
+    url text not null,
+    level number not null,
+
+    primary key (array_id,array_idx)
+);
+
+create table if not exists SubspeciesSchema (
+    index text not null primary key,
+    name text not null,
+    url text not null,
+    species text not null,
+    traits number not null,
+    damage_type text,
+
+    foreign key (species) references APIReference(index),
+    foreign key (traits) references ArraySubspeciesTrait(array_id),
+    foreign key (damage_type) references APIReference(index)
+); 
+
+-- tabelle di Traits.ts
+
+create table if not exists ArraySpellTrait (
+    array_id number not null,
+    array_idx number not null,
+    spell text not null,
+    uses text,
+    recovery text,
+
+    primary key (array_id,array_idx),
+    foreign key (spell) references APIReference(index)
+);
+
+create table if not exists Trait (
+    index text not null primary key,
+    name text not null,
+    url text not null,
+    description text not null,
+    species number not null,
+    spells number,
+    subspecies number,
+    proficency_choices number,
+    speed number,
+
+    foreign key (species) references ArrayAPIReference(array_id),
+    foreign key (spells) references ArraySpellTrait(array_id), 
+    foreign key (subspecies) references ArrayAPIReference(array_id),
+    foreign key (proficency_choices) references Choice(opt_id)
+);
+
+-- tabelle di WeaponProperties.ts
+
+create table if not exists WeaponProperty (
+    index text not null primary key,
+    name text not null,
+    description text not null,
+    url text not null
 );

@@ -1,20 +1,20 @@
-import { z } from 'zod';
-import { APIReferenceSchema } from './common';
+// import { z } from 'zod';
+// import { APIReferenceSchema } from './common';
 
-const RaritySchema = z.strictObject({
-  name: z.string(),
-});
+// const RaritySchema = z.strictObject({
+//   name: z.string(),
+// });
 
-export const MagicItemSchema = z.strictObject({
-  name: z.string(),
-  index: z.string(),
-  url: z.string(),
-  image: z.string(),
-  equipment_category: APIReferenceSchema,
-  variant: z.boolean(),
-  variants: z.array(APIReferenceSchema),
-  attunement: z.boolean(),
-  rarity: RaritySchema,
-  desc: z.string(),
-  'limited-to': z.string().optional(),
-});
+// export const MagicItemSchema = z.strictObject({
+//   name: z.string(),
+//   index: z.string(),
+//   url: z.string(),
+//   image: z.string(),
+//   equipment_category: APIReferenceSchema,
+//   variant: z.boolean(),
+//   variants: z.array(APIReferenceSchema),
+//   attunement: z.boolean(),
+//   rarity: RaritySchema,
+//   desc: z.string(),
+//   'limited-to': z.string().optional(),
+// });

@@ -5,13 +5,15 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonCol, PopoverController,
 import { Popups } from 'src/app/core/core';
 import { ButtonComponent } from "src/app/components/button/button.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
+import { LabelComponent } from "src/app/components/label/label.component";
+import { TitleComponent } from "src/app/components/title/title.component";
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCol, ButtonComponent, IonLabel, IonList, UnorderedListElementComponent, IonItem]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCol, ButtonComponent, IonLabel, IonList, UnorderedListElementComponent, IonItem, LabelComponent, TitleComponent]
 })
 export class ProfilePage implements OnInit {
   censor: boolean = true;

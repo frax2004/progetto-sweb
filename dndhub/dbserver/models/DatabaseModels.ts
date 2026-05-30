@@ -1,3 +1,4 @@
+  // tabelle di common.ts
 
 export namespace models {
   export interface APIReference {
@@ -14,6 +15,8 @@ export namespace models {
   }
 
   export interface DifficultyClass {
+    // forse id può essere auto increment
+    id: number;
     dc_type: string;
     dc_value?: number;
     success_type: SuccessType;
@@ -29,7 +32,7 @@ export namespace models {
 
   export interface AreaOfEffect {
     size: number;
-    type: AreaOfEffectType;
+    type: AreaOfEffect;
   }
 
   export interface Choice {
@@ -43,146 +46,86 @@ export namespace models {
     array_id: number;
     damage_type: string;
     damage_dice: string;
-    dc?: string;
+    dc?: number;
     index: number;
-
   }
 
-  export interface OptionAbilityBonus {
-    ability_score: string;
-    bonus: number;
-  }
-
-  export interface OptionAction {
-    action_name: string;
-    count: number;
-    type: string;
-    desc?: string;
-  }
-
-  export interface OptionBreath {
-    name: string;
-    dc: string;
-    damageArray_id: number;
-  }
-
-  export interface ArrayPrerequisites {
-    type: string;
-    proficency?: string;
-    index: number;
-    array_id: number;
-  }
-
-  export interface OptionCountedReference {
-    count: number;
-    of: string;
-    prerequisites?: number;
-  }
-
-  export interface OptionDamage {
-    damage_dice: string;
-    damage_type: string;
-    notes?: string;
-  }
-
-  export interface OptionMoney {
-    count: number;
-    unit: string;
-  }
-
+  // OptionArray mi serve per multiple
   export interface ArrayOption {
     item_id: number;
     index: number;
     array_id: number;
-
-  }
-
-  export interface OptionMultiple {
-    array_id: number;
-    desc?: string;
-
-  }
-
-  export interface OptionScorePrerequisite {
-    ability_score: string;
-    minimum_score: number;
-
-  }
-
-  export interface OptionSize {
-    size: string;
-  }
-
-  export enum OptionType {
-    "reference",
-    "choice",
-    "string",
-    "ability-bonus",
-    "action",
-    "breath",
-    "counted-reference",
-    "damage",
-    "ideal",
-    "money",
-    "multiple",
-    "score-prerequisite",
-    "size",
   }
 
   export interface Option {
     id: number;
-    option_kind: OptionType;
-    item?: string;
-    choice?: string;
+    // pseudo-tabella reference
+    reference_item?: string;
+    // pseudo-tabella choice
+    choice_id?: number;
+    // pseudo-tabella string
     string?: string;
-    ability_bonus?: string;
-    action?: string;
-    breath?: string;
-    countedReference?: string;
+    // pseudo-tabella ability bonus 
+    ability_score_bonus?: string;
+    bonus?: number;
+    // pseudo-tabella action
+    action_name?: string;
+    action_count?: number;
+    action_type?: string;
+    action_desc?: string;
+    // pseudo-tabella breath
+    breath_name?: string;
+    breath_dc?: number;
+    breath_damage_type?: string;
+    breath_damage_dice?: string;
+    breath_damage_dc?: number; // questo attributo potrebbe essere inutile; l'ho messo per si e per no
+    // pseudo-tabella countedReference
+    counted_reference_count?: number;
+    counted_item?: string;
+    prerequisites?: number;
+    // pseudo-tabella damage
+    damage_dice?: string;
+    damage_type?: string; 
+    // pseudo-tabella ideal
+    // teoricamente inutile perché non stiamo facendo alignment ma la copio perché piccola
+    alignments?: number; 
+    // pseudo-tabella money
+    money_count?: number;
+    money_unit?: string;
+    // pseudo-tabella multiple
+    multiple_items?: number; 
+    // pseudo-tabella score_prerequisite
+    ability_score_prerequisite?: string;
+    // pseuso-tabella size
+    size?: string;
   }
 
-  export interface EquipmentCategory {
-    equipment_category: string;
-  }
-
-  export interface ResourceList {
-    resource_list_url: string
-  }
-
-  export interface OptionAndString {
-    id: number;
-    option_schema: number;
-    string: string;
-  }
-
-  export interface ArrayOfOptions {
+  export interface ArrayOfOptionsAndString {
     opt_id: number;
+    string: string;
     index: number;
     array_id: number;
   }
 
-  export enum OptionSetType {
-    equipment_category,
-    resource_list,
-    options_array,
-  } 
-
   export interface OptionSet {
     id: number;
-    option_kind: OptionSetType;
-    equip?: string;
-    resourceList?: string;
-    optArray_id?: number;
+    // pseudo-tabella equipment_category
+    equipment_category?: string;
+    resource_list_url?: string;
+    // pseudo_tabella options_array
+    options_array?: number; 
   }
 
+  // tabelle di DamageTypes.ts
 
   export interface DamageTypes {
     index: string;
     name: string;
     description: string;
-    url: string;
+    url: string
   }
 
+  // tabelle di AbilityScores.ts
 
   export interface AbilityScore {
     index: string;
@@ -193,6 +136,8 @@ export namespace models {
     url: string;
   }
 
+  // tabelle di Alignments
+  // in teoria inutili ma copiata comunque perché piccola
 
   export interface Alignment {
     index: string;
@@ -202,6 +147,7 @@ export namespace models {
     url: string;
   }
 
+  // tabelle di Backgrounds.ts
 
   export interface BackgroundFeatReference {
     index: string;
@@ -233,6 +179,7 @@ export namespace models {
     url?: string;
   }
 
+  // tabelle di Condition.ts
 
   export interface Condition {
     index: string;
@@ -241,6 +188,7 @@ export namespace models {
     url: string;
   }
 
+  // tabelle di EquipmentCategories.ts
 
   export interface EquipmentCategory {
     index: string;
@@ -249,6 +197,7 @@ export namespace models {
     url: string;
   } 
 
+  // tabelle di Language.ts
 
   export interface Language {
     index: string;
@@ -258,6 +207,7 @@ export namespace models {
     url: string;
   }
 
+  // tabelle di MagicSchools.ts
 
   export interface MagicSchool {
     index: string;
@@ -266,7 +216,9 @@ export namespace models {
     url: string;
   }
 
+  // monsters non ci serve
 
+  // tabelle di Proficiencies.ts
 
   export interface Proficiency {
     index: string;
@@ -278,6 +230,7 @@ export namespace models {
     url?: string;
   }
 
+  // tabelle di Skills.ts
 
   export interface Skill {
     index: string;
@@ -285,8 +238,10 @@ export namespace models {
     description: string;
     ability_score: string;
     url?: string;
+
   }
 
+  // tabelle di WeaponMasteryProperties.ts
 
   export interface WeaponMasteryProperty {
     index: string;
@@ -295,6 +250,7 @@ export namespace models {
     url: string;
   }
 
+  // tabelle di Classes.ts
 
   export interface SpellcastingInfo {
     name: string;
@@ -338,7 +294,6 @@ export namespace models {
     desc: string;
     ability_scores?: number;
     ability_score_options?: number;
-
   }
 
   export interface Class {
@@ -358,16 +313,7 @@ export namespace models {
     url: string;
   }
 
-  export interface Range {
-    normal: number;
-    long?: number;
-  }
-
-  export interface ThrowRange {
-    normal: number;
-    long: number;
-  }
-    
+  // tabelle di Equipments.ts
 
   export interface Content {
     item: string;
@@ -382,8 +328,14 @@ export namespace models {
 
   export interface Utilize {
     name: string;
-    dc: string;
+    dc: number;
   }
+
+  export interface ArrayUtilize {
+    array_id: number;
+    index: number;
+    item: string;
+  };
 
   export interface Equipment {
     index: string;
@@ -401,6 +353,141 @@ export namespace models {
     contents?: number; 
     ability?: string;
     craft?: number;
-    damage: any; // TODO: da completare
+    damage_type?: string;
+    damage_dice?: string;
+    damage_dc?: number;
+    doff_time?: string;
+    don_time?: string;
+    image?: string;
+    mastery?: string;
+    notes?: string;
+    properties?: number;
+    quantity?: number;
+    storage?: string;
+    range_normal?: number;
+    range_long?: number;
+    stealth_disadvantage?: boolean;
+    str_minimum?: number;
+    throw_range_normal?: number;
+    throw_range_long?: number;
+    two_handed_damage_type?: string;
+    two_handed_damage_dice?: string;
+    two_handed_damage_dc?: number;
+    utilize?: number;
+  }
+
+  // tabelle di Feats.ts
+
+  export interface Feat {
+    index: string;
+    name: string;
+    description: string;
+    type: string;
+    repeatable?: string;
+    prerequisite_minimum_level?: number;
+    prerequisite_feature_named?: string;
+    prerequisite_options?: number;
+    url: string;
+  }
+
+  // tabelle di MagicItems.ts
+
+  export interface MagicItem {
+    index: string;
+    name: string;
+    url: string;
+    image: string;
+    equipment_category?: string;
+    variant: boolean;
+    variants: number;
+    attunement: boolean;
+    rarity: string;
+    desc: string;
+    limited_to?: string;
+  }
+
+  // tabelle di species
+
+  export interface Species {
+    index: string;
+    name: string;
+    url: string;
+    type: string;
+    size?: string;
+    size_options?: number;
+    speed: number;
+    traits?: number;
+    subspecies?: number;
+  }
+
+  // tabelle di Subclass.ts
+
+  export interface ArraySubclassFeature {
+    array_id: number;
+    array_idx: number;
+    name: string;
+    level: number;
+    description: string;
+  }
+
+  export interface Subclass {
+    index: string;
+    url: string;
+    name: string;
+    class: string;
+    summary: string;
+    description: string;
+    features: number;
+  }
+
+  // tabelle di Subspecies.ts
+
+  export interface ArraySubspeciesTrait {
+    index: string;
+    array_id: number;
+    array_idx: number;
+    name: string;
+    url: string;
+    level: number;
+  }
+
+  export interface SubspeciesSchema {
+    index: string;
+    name: string;
+    url: string;
+    species: string;
+    traits: number;
+    damage_type?: string;
+  } 
+
+  // tabelle di Traits.ts
+
+  export interface ArraySpellTrait {
+    array_id: number;
+    array_idx: number;
+    spell: string;
+    uses?: string;
+    recovery?: string;
+  }
+
+  export interface Trait {
+    index: string;
+    name: string;
+    url: string;
+    description: string;
+    species: number;
+    spells?: number;
+    subspecies?: number;
+    proficency_choices?: number;
+    speed?: number;
+  }
+
+  // tabelle di WeaponProperties.ts
+
+  export interface WeaponProperty {
+    index: string;
+    name: string;
+    description: string;
+    url: string;
   }
 }

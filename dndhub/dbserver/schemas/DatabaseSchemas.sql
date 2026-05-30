@@ -33,7 +33,7 @@ create table if not exists AreaOfEffect (
     or type='cube'
     or type='cylinder'
     or type='line'
-    or type='cone')
+    or type='cone') not null
 );
 
 create table if not exists Choice (
@@ -49,12 +49,13 @@ create table if not exists String (
   string text not null primary key
 );
 
-create table if not exists DamageArray (
-  array_id number primary key not null,
+create table if not exists ArrayDamage (
+  array_id number not null,
   damage_item text not null,
   index number not null,
 
-  foreign key (damage_item) references Damage(damage_type)
+  foreign key (damage_item) references Damage(damage_type),
+  primary key(array_id,index)
 );
 
 create table if not exists OptionAbilityBonus (
@@ -79,17 +80,18 @@ create table if not exists OptionBreath (
   -- per fare ciò ho bisogno di una tabella in più
 
   foreign key (dc) references DifficultyClass(cd),
-  foreign key (damageArray_id) references DamageArray(damageArray_id)
+  foreign key (damageArray_id) references ArrayDamage(damageArray_id)
 );
 
 -- altra tabella array che mi serve per countedreference
-create table if not exists PrerequisitesArray (
+create table if not exists ArrayPrerequisites (
   type text not null,
   proficency text,
   index number not null,
-  array_id number primary key not null,
+  array_id number not null,
 
-  foreign key (proficency) references APIReference(proficency)
+  foreign key (proficency) references APIReference(proficency),
+  primary key (array_id,index)
 );
 
 create table if not exists OptionCountedReference (
@@ -98,7 +100,7 @@ create table if not exists OptionCountedReference (
   prerequisites number,
 
   foreign key (of) references APIReference(index),
-  foreign key (prerequisites) references PrerequisitesArray(array_id)
+  foreign key (prerequisites) references ArrayPrerequisites(array_id)
 );
 
 create table if not exists OptionDamage (
@@ -123,17 +125,20 @@ create table if not exists OptionMoney (
 );
 
 -- OptionArray mi serve per multiple
-create table if not exists OptionArray (
+create table if not exists ArrayOption (
   item_id number not null,
   index number not null,
-  array_id number not null primary key 
+  array_id number not null,
+
+  primary key (array_id, index),
+  foreign key (item_id) references Option(id)
 );
 
 create table if not exists OptionMultiple (
   array_id number not null,
   desc text,
 
-  foreign key (array_id) references OptionArray(array_id)
+  foreign key (array_id) references ArrayOption(array_id)
 );
 
 create table if not exists OptionScorePrerequisite (
@@ -200,11 +205,12 @@ create table if not exists OptionAndString (
   foreign key (option_schema) references Option(id)
 );
 
-create table if not exists OptionsArray (
+create table if not exists ArrayOfOptions (
   opt_id number not null,
   index number not null,
-  array_id number not null primary key,
+  array_id number not null,
 
+  primary key (array_id,index),
   foreign key (opt_id) references OptionAndString(id)
 );
 
@@ -221,7 +227,7 @@ create table if not exists OptionSet (
 
   foreign key (equip) references EquipmentCategory(equipment_category),
   foreign key (resourceList) references ResourceList(resource_list_url),
-  foreign key (optArray_id) references OptionsArray(array_id)
+  foreign key (optArray_id) references ArrayOfOptions(array_id)
 );
 
 -- tabelle di DamageTypes.ts
@@ -267,18 +273,20 @@ create table if not exists BackgroundFeatReference (
 );
 
 create table if not exists ArrayAPIReference (
-  array_id number not null primary key,
+  array_id number not null,
   item text not null,
   index not null number,
 
+  primary key (array_id,index),
   foreign key (item) references APIReference(index)
 );
 
 create table if not exists ArrayChoice (
-  array_id number not null primary key,
+  array_id number not null,
   id number not null,
   index number not null,
 
+  primary key (array_id,index),
   foreign key (id) references Choice(opt_id)
 );
 
@@ -468,4 +476,68 @@ create table if not exists Class (
   foreign key (starting_equipment_options) references ArrayChoice(array_id),
   foreign key (subclasses) references ArrayAPIReference(array_id),
   foreign key (spellcasting) references Spellcasting(spellcasting_ability)
+);
+
+-- tabelle di Equipments.ts
+
+create table if not exists Range (
+    normal number not null,
+    long number,
+
+    primary key (normal,long)
+);
+
+create table if not exists ThrowRange (
+    normal number not null,
+    long number not null,
+
+    primary key (normal, long)
+);
+
+create table if not exists Content (
+    item text not null primary key,
+    quantity number not null,
+
+    foreign key (item) references APIReference(index)
+);
+
+create table if not exists ArrayContent (
+    item text not null,
+    array_id number not null,
+    array_idx number not null,
+
+    foreign key (item) references Content(item),
+    primary key (array_id,array_idx)
+);
+
+create table if not exists Utilize (
+    name text not null primary key,
+    dc text not null,
+
+    foreign key (dc) references DifficultyClass(dc_type)
+);
+
+create table if not exists Equipment (
+    index text not null primary key,
+    name text not null,
+    equipment_categories number not null,
+    cost_quantity number not null,
+    cost_unit number not null,
+    url text not null,
+    description text,
+    weight text,
+    ammunition text,
+    armor_class_base number,
+    armor_class_dex_bonus boolean,
+    armor_class_max_bonus number,
+    contents number, 
+    ability text,
+    craft number,
+    damage 
+
+    foreign key (equipment_categories) references ArrayAPIReference(array_id),
+    foreign key (ammunition) references APIReference(index),
+    foreign key (contents) references ArrayContent(array_id),
+    foreign key (ability) references APIReference(index),
+    foreign key (craft) references ArrayAPIReference(array_id)
 );

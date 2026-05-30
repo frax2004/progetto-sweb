@@ -44,6 +44,7 @@ export const EquipmentSchema = z.strictObject({
   armor_class: ArmorClassSchema.optional(),
   contents: z.array(ContentSchema).optional(),
   ability: APIReferenceSchema.optional(),
+  --
   craft: z.array(APIReferenceSchema).optional(),
   damage: DamageSchema.optional(),
   doff_time: z.string().optional(),

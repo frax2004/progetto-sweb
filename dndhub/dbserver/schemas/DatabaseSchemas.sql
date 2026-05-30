@@ -268,7 +268,7 @@ create table if not exists BackgroundFeatReference (
 create table if not exists ArrayAPIReference (
   array_id number not null,
   item text not null,
-  index not null number,
+  index number not null,
 
   primary key (array_id,index),
   foreign key (item) references APIReference(index)

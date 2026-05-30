@@ -9,7 +9,7 @@ create table if not exists APIReference (
 
 create table if not exists DifficultyClass (
   -- forse id può essere auto increment
-  id number primary key,
+  id number not null primary key,
   dc_type text not null,
   dc_value number,
   success_type check(success_type='none' or  success_type='half' or  success_type='other'),

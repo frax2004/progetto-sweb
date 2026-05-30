@@ -12,11 +12,11 @@
             <img alt="placeholder img" [src]="plcImg">
           </ion-thumbnail>
         }
-        <ion-label>{{ accordion.title }}</ion-label>
+        <app-label [fontSize]="'3.5cqmin'">{{ accordion.title }}</app-label>
         
       </ion-item>
       <div class="ion-padding" slot="content">
-        {{ accordion.content }}
+        <app-label> {{ accordion.content }} </app-label>
         @if (accordion.button !== undefined) {
           <div id="buttonContainer">
             <app-button

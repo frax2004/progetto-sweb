@@ -68,7 +68,7 @@
           <!-- selettore FORZA -->
           <div class="firstCol">
             <ion-col>
-                <ion-label>Forza</ion-label>
+                <app-label>Forza</app-label>
             </ion-col>
           </div>
 
@@ -93,7 +93,7 @@
           <!-- selettore DESTREZZA -->
           <div class="firstCol">
             <ion-col>
-                <ion-label>Destrezza</ion-label>
+                <app-label>Destrezza</app-label>
             </ion-col>
           </div>
 
@@ -116,7 +116,7 @@
           <div class="firstCol">
             <ion-col>
               <div>
-                <ion-label>Costituzione</ion-label>
+                <app-label>Costituzione</app-label>
               </div>
             </ion-col>
           </div>
@@ -140,7 +140,7 @@
           <!-- selettore INTELLIGENZA -->
           <div class="firstCol">
             <ion-col>
-                <ion-label>Intelligenza</ion-label>
+                <app-label>Intelligenza</app-label>
             </ion-col>
           </div>
 
@@ -163,7 +163,7 @@
           <!-- selettore SAGGEZZA -->
           <div class="firstCol">
             <ion-col>
-                <ion-label>Saggezza</ion-label>
+                <app-label>Saggezza</app-label>
             </ion-col>
           </div>
 
@@ -187,7 +187,7 @@
           <!-- selettore CARISMA -->
           <div class="firstCol">
             <ion-col>
-                <ion-label>Carisma</ion-label>
+                <app-label>Carisma</app-label>
             </ion-col>
           </div>
 
@@ -221,12 +221,12 @@
 
   @if (randomSelection===true) {
     <ion-item class="gridContainer">
-      <ion-label>Le statistiche rollate sono: {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}}</ion-label>
+      <app-label id="randomLabel">Le statistiche rollate sono: {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}}</app-label>
     </ion-item>
   }
 <!-- 
   <div>
-    <ion-label>Seleziona 3 lingue conosciute dal tuo personaggio, Ancora {{LingueSelezionate.length}}/{{maxLingue}}</ion-label>
+    <app-label>Seleziona 3 lingue conosciute dal tuo personaggio, Ancora {{LingueSelezionate.length}}/{{maxLingue}}</app-label>
   </div>
 @for (lingua of lingue; track lingua.id) {
 

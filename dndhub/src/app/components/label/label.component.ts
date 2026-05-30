@@ -13,13 +13,14 @@ import { LabelStyle } from './LabelStyle';
         border_radius: {{style.border_radius}};
       "
     >
-      <div id="text"><ng-content/></div>
+      <div id="text" style="font-size: {{fontSize}};"><ng-content/></div>
     </div>
   `,
   styleUrls: ['./label.component.scss'],
 })
 export class LabelComponent  implements OnInit {
   @Input() style: LabelStyle = new LabelStyle();
+  @Input() fontSize?: string = '2.5cqmin';
 
   constructor() { }
 

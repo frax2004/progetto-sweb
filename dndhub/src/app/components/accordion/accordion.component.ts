@@ -4,12 +4,13 @@ import { Accordion } from './Accordion';
 import { CommonModule } from '@angular/common';
 import { Card } from '../card/Card';
 import { ButtonComponent } from "../button/button.component";
+import { LabelComponent } from "../label/label.component";
 
 @Component({
   selector: 'app-accordion',
   templateUrl: './accordion.component.html',
   styleUrls: ['./accordion.component.scss'],
-  imports: [IonAccordion, IonAccordionGroup, IonItem, IonLabel, CommonModule, IonThumbnail, ButtonComponent]
+  imports: [IonAccordion, IonAccordionGroup, IonItem, IonLabel, CommonModule, IonThumbnail, ButtonComponent, LabelComponent]
 })
 export class AccordionComponent  implements OnInit {
   @Input() accordions: Accordion[] = [];

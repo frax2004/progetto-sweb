@@ -7,19 +7,19 @@
   
     <div class="upperDetails">
       <div class="upperDetailsContainer">
-        <ion-label>Velocità totale</ion-label>
+        <app-label>Velocità totale</app-label>
       </div>
       
       <div class="upperDetailsContainer">
-        <ion-label>Taglia</ion-label>
+        <app-label>Taglia</app-label>
       </div>
       
       <div class="upperDetailsContainer">
-        <ion-label>Background</ion-label>
+        <app-label>Background</app-label>
       </div>
       
       <div class="upperDetailsContainer">
-        <ion-label>CA</ion-label>
+        <app-label>CA</app-label>
       </div>
     </div>
 
@@ -46,7 +46,7 @@
       </div>
 
       <div class="HPchoice">
-        <ion-label class="HPlabel">Seleziona metodo di calcolo HP</ion-label>
+        <app-label class="HPlabel">Seleziona metodo di calcolo HP</app-label>
         <div class="HPbuttons">
           <app-button
           [margin] = "false"
@@ -66,13 +66,13 @@
       <div class="showHP">
           
           @if(averageHP===true) {
-                <ion-label>{{avHPlabel}}</ion-label>
+                <app-label>{{avHPlabel}}</app-label>
           }
 
           @if(manualHP===true) {
-              <ion-label>Inserire HP in range {{HPrange(lvl,HPdice)}}:</ion-label>
+              <app-label>Inserire HP in range {{HPrange(lvl,HPdice)}}:</app-label>
 
-              <ion-label>Placeholder number entry</ion-label>
+              <app-label>Placeholder number entry</app-label>
           }
 
       </div>

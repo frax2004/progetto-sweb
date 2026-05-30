@@ -9,13 +9,14 @@ import { TextAreaComponent } from "src/app/components/text-area/text-area.compon
 import { ButtonComponent } from "src/app/components/button/button.component";
 import { Popups } from 'src/app/core/core';
 import { TitleComponent } from "src/app/components/title/title.component";
+import { LabelComponent } from "src/app/components/label/label.component";
 
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.page.html',
   styleUrls: ['./overview.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ScrollBarComponent, IonItem, IonRow, IonCol, IonGrid, IonLabel, AccordionComponent, IonInput, EntryComponent, TextAreaComponent, ButtonComponent, TitleComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ScrollBarComponent, IonItem, IonRow, IonCol, IonGrid, IonLabel, AccordionComponent, IonInput, EntryComponent, TextAreaComponent, ButtonComponent, TitleComponent, LabelComponent]
 })
 export class OverviewPage implements OnInit {
   averageHP: boolean = true;

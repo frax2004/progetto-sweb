@@ -86,7 +86,7 @@ create table if not exists Option (
     breath_damage_dc number, -- questo attributo potrebbe essere inutile, l'ho messo per si e per no
     -- pseudo-tabella countedReference
     counted_reference_count number,
-    of text,
+    counted_item text, -- foreign key
     prerequisites number,
     -- pseudo-tabella damage
     damage_dice text,
@@ -114,7 +114,7 @@ create table if not exists Option (
     foreign key (breath_dc) references DifficultyClass(id), 
     foreign key (breath_damage_type) references APIReference(index),
     foreign key (breath_damage_dc) references DifficultyClass(id),
-    foreign key (of) references APIReference(index),
+    foreign key (counted_item) references APIReference(index),
     foreign key (prerequisites) references ArrayPrerequisites(array_id),
     foreign key (damage_type) references APIReference(index),
     foreign key (alignments) references ArrayAPIReference(array_id),
@@ -425,7 +425,7 @@ create table if not exists ArrayUtilize (
 
     primary key (array_id,index),
     foreign key (item) references Utilize(name)
-) 
+);
 
 create table if not exists Equipment (
     index text not null primary key,
@@ -542,7 +542,7 @@ create table if not exists ArraySubclassFeature (
     description text not null,
 
     primary key (array_id,array_idx)
-)
+);
 
 create table if not exists Subclass (
     index text not null primary key,

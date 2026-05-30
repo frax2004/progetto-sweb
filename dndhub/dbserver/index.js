@@ -1,8 +1,9 @@
-import { Routes } from './database.routes';
-import { Database } from './database';
+import { Routes } from './database.routes.js';
+import { Database } from './database.js';
+import fs from 'fs';
 
-const express = require('express');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
 
 const app = express();
 const PORT = 10000;
@@ -10,11 +11,32 @@ const PORT = 10000;
 app.use(cors());
 app.use(express.json());
 
+
+const api_references = JSON
+.parse(fs.readFileSync('./models/data/api_references.json', 'utf8'));
+
 app.get('/', (request, response) => {
   Database.loadSchema('./schemas/DatabaseSchemas.sql');
+
+  const queries = api_references
+  .map((obj) => {
+    const index = obj.idx;
+    const name = obj.name;
+    const url = obj.url;
+    const note = obj.note || null;
+
+    return `
+      insert or ignore into APIReference (idx, name, url, note) values ("${index}", "${name}", "${url}", "${note}")
+    `;
+  })
+  .join('; ');
+
+  Database.get().exec(queries);
+
+  Database.get().all("SELECT * from APIReference", (err, rows) => {
+    response.send(JSON.stringify(rows, null, 2))
+  })
 });
-
-
 
 
 
@@ -26,11 +48,6 @@ app.get('/', (request, response) => {
 
 app.get(Routes.SPECIES, (req, res) => {
 
-  const query = `
-    insert or ignore into Species (index, name, url, type, size, size_options, speed, traits, subspecies) values (
-
-    )
-  `;
   Database.get().run(query);
 });
 

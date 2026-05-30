@@ -67,5 +67,4 @@ const api_references = fs
 );
 
 
-console.log(JSON.stringify(api_references));
-
+console.log(JSON.stringify(api_references).split("index").join("idx"));

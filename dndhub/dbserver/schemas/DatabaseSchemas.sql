@@ -1,7 +1,7 @@
 -- tabelle di common.ts
 
 create table if not exists APIReference (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   url text not null,
   note text
@@ -14,7 +14,7 @@ create table if not exists DifficultyClass (
   dc_value number,
   success_type check(success_type='none' or  success_type='half' or  success_type='other'),
 
-  foreign key (dc_type) references APIReference(index)
+  foreign key (dc_type) references APIReference(idx)
 );
 
 create table if not exists AreaOfEffect (
@@ -45,25 +45,25 @@ create table if not exists ArrayDamage (
   damage_type text not null,
   damage_dice text not null,
   dc number,
-  index number not null,
+  idx number not null,
 
   foreign key (dc) references DifficultyClass(id)
-  foreign key (damage_type) references APIReference(index),
-  primary key(array_id,index)
+  foreign key (damage_type) references APIReference(idx),
+  primary key(array_id,idx)
 );
 
 -- OptionArray mi serve per multiple
 create table if not exists ArrayOption (
   item_id number not null,
-  index number not null,
+  idx number not null,
   array_id number not null,
 
-  primary key (array_id, index),
+  primary key (array_id, idx),
   foreign key (item_id) references Option(id)
 );
 
 create table if not exists Option (
-  id number not null autoincrement primary key, 
+  id number not null primary key, 
   -- pseudo-tabella reference
   reference_item text,
   -- pseudo-tabella choice
@@ -108,32 +108,32 @@ create table if not exists Option (
   -- pseuso-tabella size
   size text,
 
-  foreign key (reference_item) references APIReference(index),
+  foreign key (reference_item) references APIReference(idx),
   foreign key (choice_id) references Choice(opt_id),
-  foreign key (ability_score_bonus) references APIReference(index),
+  foreign key (ability_score_bonus) references APIReference(idx),
   foreign key (breath_dc) references DifficultyClass(id), 
-  foreign key (breath_damage_type) references APIReference(index),
+  foreign key (breath_damage_type) references APIReference(idx),
   foreign key (breath_damage_dc) references DifficultyClass(id),
-  foreign key (of) references APIReference(index),
+  foreign key (of) references APIReference(idx),
   foreign key (prerequisites) references ArrayPrerequisites(array_id),
-  foreign key (damage_type) references APIReference(index),
+  foreign key (damage_type) references APIReference(idx),
   foreign key (alignments) references ArrayAPIReference(array_id),
   foreign key (multiple_items) references ArrayOption(array_id),
-  foreign key (ability_score_prerequisite) references APIReference(index)
+  foreign key (ability_score_prerequisite) references APIReference(idx)
 );
 
 create table if not exists ArrayOfOptionsAndString (
   opt_id number not null,
   string text not null,
-  index number not null,
+  idx number not null,
   array_id number not null,
 
-  primary key (array_id,index),
+  primary key (array_id,idx),
   foreign key (opt_id) references Option(id)
 );
 
 create table if not exists OptionSet (
-  id number not null primary key autoincrement,
+  id number not null primary key,
   -- pseudo-tabella equipment_category
   equipment_category text, -- foreign key
   -- pseudo-tabella resource_list
@@ -141,14 +141,14 @@ create table if not exists OptionSet (
   -- pseudo_tabella options_array
   options_array number, -- foreign key
 
-  foreign key (equipment_category) references APIReference(index),
+  foreign key (equipment_category) references APIReference(idx),
   foreign key (options_array) references ArrayOfOptionsAndString(array,id)
 );
 
 -- tabelle di DamageTypes.ts
 
 create table if not exists DamageTypes (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   description text not null,
   url text not null
@@ -157,21 +157,21 @@ create table if not exists DamageTypes (
 -- tabelle di AbilityScores.ts
 
 create table if not exists AbilityScore (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   full_name text not null,
   description text not null,
   skills text not null,
   url text not null,
 
-  foreign key (skills) references APIReference(index)
+  foreign key (skills) references APIReference(idx)
 );
 
 -- tabelle di Alignments
 -- in teoria inutili ma copiata comunque perché piccola
 
 create table if not exists Alignment (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   abbreviation text not null,
   description text not null,
@@ -181,7 +181,7 @@ create table if not exists Alignment (
 -- tabelle di Backgrounds.ts
 
 create table if not exists BackgroundFeatReference (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   url text not null,
   note text
@@ -190,23 +190,23 @@ create table if not exists BackgroundFeatReference (
 create table if not exists ArrayAPIReference (
   array_id number not null,
   item text not null,
-  index number not null,
+  idx number not null,
 
-  primary key (array_id,index),
-  foreign key (item) references APIReference(index)
+  primary key (array_id,idx),
+  foreign key (item) references APIReference(idx)
 );
 
 create table if not exists ArrayChoice (
   array_id number not null,
   id number not null,
-  index number not null,
+  idx number not null,
 
-  primary key (array_id,index),
+  primary key (array_id,idx),
   foreign key (id) references Choice(opt_id)
 );
 
 create table if not exists Background (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   ability_scores number not null,
   feat text not null,
@@ -217,7 +217,7 @@ create table if not exists Background (
 
 
   foreign key (ability_scores) references ArrayAPIReference(array_id),
-  foreign key (feat) references BackgroundFeatReference(index),
+  foreign key (feat) references BackgroundFeatReference(idx),
   foreign key (proficiencies) references ArrayAPIReference(array_id),
   foreign key (proficiency_choices) references ArrayChoice(id),
   foreign key (equipment_options) references ArrayChoice(id)
@@ -226,7 +226,7 @@ create table if not exists Background (
 -- tabelle di Condition.ts
 
 create table if not exists Condition (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   description text not null,
   url text not null
@@ -236,7 +236,7 @@ create table if not exists Condition (
 -- tabelle di EquipmentCategories.ts
 
 create table if not exists EquipmentCategory (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   equipment number not null,
   url text not null,
@@ -247,7 +247,7 @@ create table if not exists EquipmentCategory (
 -- tabelle di Language.ts
 
 create table if not exists Language (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   is_rare boolean not null,
   note text not null,
@@ -257,7 +257,7 @@ create table if not exists Language (
 -- tabelle di MagicSchools.ts
 
 create table if not exists MagicSchool (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   description text not null,
   url text not null
@@ -268,7 +268,7 @@ create table if not exists MagicSchool (
 -- tabelle di Proficiencies.ts
 
 create table if not exists Proficiency (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   type text not null,
   backgrounds number not null,
@@ -278,25 +278,25 @@ create table if not exists Proficiency (
 
   foreign key (backgrounds) references ArrayAPIReference(array_id),
   foreign key (classes) references ArrayAPIReference(array_id),
-  foreign key (reference) references APIReference(index)
+  foreign key (reference) references APIReference(idx)
 );
 
 -- tabelle di Skills.ts
 
 create table if not exists Skill (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   description text not null,
   ability_score text not null,
   url text,
 
-  foreign key (ability_score) references APIReference(index)
+  foreign key (ability_score) references APIReference(idx)
 );
 
 -- tabelle di WeaponMasteryProperties.ts
 
 create table if not exists WeaponMasteryProperty (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   description text not null,
   url text not null
@@ -323,7 +323,7 @@ create table if not exists Spellcasting (
   spellcasting_ability text not null primary key,
   info number not null,
 
-  foreign key (spellcasting_ability) references APIReference(index),
+  foreign key (spellcasting_ability) references APIReference(idx),
   foreign key (info) references ArraySpellcastingInfo(array_id)
 );
 
@@ -332,7 +332,7 @@ create table if not exists MultiClassingPrereq (
   ability_score text,
   minimum_score number not null,
 
-  foreign key (ability_score) references APIReference(index)
+  foreign key (ability_score) references APIReference(idx)
 );
 
 
@@ -368,7 +368,7 @@ create table if not exists PrimaryAbility (
 );
 
 create table if not exists Class (
-  index text not null,
+  idx text not null,
   name text not null primary key,
   primary_ability text not null,
   hit_die number not null,
@@ -399,7 +399,7 @@ create table if not exists Content (
   item text not null primary key,
   quantity number not null,
 
-  foreign key (item) references APIReference(index)
+  foreign key (item) references APIReference(idx)
 );
 
 create table if not exists ArrayContent (
@@ -420,15 +420,15 @@ create table if not exists Utilize (
 
 create table if not exists ArrayUtilize (
   array_id number not null,
-  index number not null,
+  idx number not null,
   item text not null,
 
-  primary key (array_id,index),
+  primary key (array_id,idx),
   foreign key (item) references Utilize(name)
-) 
+);
 
 create table if not exists Equipment (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   equipment_categories number not null,
   cost_quantity number not null,
@@ -466,14 +466,14 @@ create table if not exists Equipment (
   utilize number,
 
   foreign key (equipment_categories) references ArrayAPIReference(array_id),
-  foreign key (ammunition) references APIReference(index),
+  foreign key (ammunition) references APIReference(idx),
   foreign key (contents) references ArrayContent(array_id),
-  foreign key (ability) references APIReference(index),
+  foreign key (ability) references APIReference(idx),
   foreign key (craft) references ArrayAPIReference(array_id),
-  foreign key (damage_type) references APIReference(index),
-  foreign key (mastery) references APIReference(index),
+  foreign key (damage_type) references APIReference(idx),
+  foreign key (mastery) references APIReference(idx),
   foreign key (properties) references ArrayAPIReference(array_id),
-  foreign key (storage) references APIReference(index),
+  foreign key (storage) references APIReference(idx),
   foreign key (utilize) references ArrayUtilize(array_id),
   foreign key (damage_dc) references DifficultyClass(id),
   foreign key (two_handed_damage_dc) references DifficultyClass(id)
@@ -482,7 +482,7 @@ create table if not exists Equipment (
 -- tabelle di Feats.ts
 
 create table if not exists Feat (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   description text not null,
   type text not null,
@@ -498,7 +498,7 @@ create table if not exists Feat (
 -- tabelle di MagicItems.ts
 
 create table if not exists MagicItem (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   url text not null,
   image text not null,
@@ -510,14 +510,14 @@ create table if not exists MagicItem (
   desc text not null,
   limited_to text,
 
-  foreign key (equipment_category) references APIReference(index),
+  foreign key (equipment_category) references APIReference(idx),
   foreign key (variants) references ArrayAPIReference(array_id)
 );
 
 -- tabelle di species
 
 create table if not exists Species (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   url text not null,
   type text not null,
@@ -542,10 +542,10 @@ create table if not exists ArraySubclassFeature (
   description text not null,
 
   primary key (array_id,array_idx)
-)
+);
 
 create table if not exists Subclass (
-  index text not null primary key,
+  idx text not null primary key,
   url text not null,
   name text not null,
   class text not null,
@@ -553,14 +553,14 @@ create table if not exists Subclass (
   description text not null,
   features number not null,
 
-  foreign key (class) references APIReference(index),
+  foreign key (class) references APIReference(idx),
   foreign key (features) references ArraySubclassFeature(array_id)
 );
 
 -- tabelle di Subspecies.ts
 
 create table if not exists ArraySubspeciesTrait (
-  index text not null,
+  idx text not null,
   array_id number not null,
   array_idx number not null,
   name text not null,
@@ -571,16 +571,16 @@ create table if not exists ArraySubspeciesTrait (
 );
 
 create table if not exists SubspeciesSchema (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   url text not null,
   species text not null,
   traits number not null,
   damage_type text,
 
-  foreign key (species) references APIReference(index),
+  foreign key (species) references APIReference(idx),
   foreign key (traits) references ArraySubspeciesTrait(array_id),
-  foreign key (damage_type) references APIReference(index)
+  foreign key (damage_type) references APIReference(idx)
 ); 
 
 -- tabelle di Traits.ts
@@ -593,11 +593,11 @@ create table if not exists ArraySpellTrait (
   recovery text,
 
   primary key (array_id,array_idx),
-  foreign key (spell) references APIReference(index)
+  foreign key (spell) references APIReference(idx)
 );
 
 create table if not exists Trait (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   url text not null,
   description text not null,
@@ -616,7 +616,7 @@ create table if not exists Trait (
 -- tabelle di WeaponProperties.ts
 
 create table if not exists WeaponProperty (
-  index text not null primary key,
+  idx text not null primary key,
   name text not null,
   description text not null,
   url text not null

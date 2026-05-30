@@ -2,7 +2,7 @@
 
 export namespace models {
   export class APIReference {
-    index!: string;
+    idx!: string;
     name!: string;
     url!: string;
     note?: string;
@@ -47,13 +47,13 @@ export namespace models {
     damage_type!: string;
     damage_dice!: string;
     dc?: number;
-    index!: number;
+    idx!: number;
   }
 
   // OptionArray mi serve per multiple
   export class ArrayOption {
     item_id!: number;
-    index!: number;
+    idx!: number;
     array_id!: number;
   }
 
@@ -103,7 +103,7 @@ export namespace models {
   export class ArrayOfOptionsAndString {
     opt_id!: number;
     string!: string;
-    index!: number;
+    idx!: number;
     array_id!: number;
   }
 
@@ -119,7 +119,7 @@ export namespace models {
   // tabelle di DamageTypes.ts
 
   export class DamageTypes {
-    index!: string;
+    idx!: string;
     name!: string;
     description!: string;
     url!: string
@@ -128,7 +128,7 @@ export namespace models {
   // tabelle di AbilityScores.ts
 
   export class AbilityScore {
-    index!: string;
+    idx!: string;
     name!: string;
     full_name!: string;
     description!: string;
@@ -140,7 +140,7 @@ export namespace models {
   // in teoria inutili ma copiata comunque perché piccola
 
   export class Alignment {
-    index!: string;
+    idx!: string;
     name!: string;
     abbreviation!: string;
     description!: string;
@@ -150,7 +150,7 @@ export namespace models {
   // tabelle di Backgrounds.ts
 
   export class BackgroundFeatReference {
-    index!: string;
+    idx!: string;
     name!: string;
     url!: string;
     note?: string;
@@ -159,17 +159,17 @@ export namespace models {
   export class ArrayAPIReference {
     array_id!: number;
     item!: string;
-    index!: number;
+    idx!: number;
   }
 
   export class ArrayChoice {
     array_id!: number;
     id!: number;
-    index!: number;
+    idx!: number;
   }
 
   export class Background {
-    index!: string;
+    idx!: string;
     name!: string;
     ability_scores!: number;
     feat!: string;
@@ -182,7 +182,7 @@ export namespace models {
   // tabelle di Condition.ts
 
   export class Condition {
-    index!: string;
+    idx!: string;
     name!: string;
     description!: string;
     url!: string;
@@ -191,7 +191,7 @@ export namespace models {
   // tabelle di EquipmentCategories.ts
 
   export class EquipmentCategory {
-    index!: string;
+    idx!: string;
     name!: string;
     equipment!: number;
     url!: string;
@@ -200,7 +200,7 @@ export namespace models {
   // tabelle di Language.ts
 
   export class Language {
-    index!: string;
+    idx!: string;
     name!: string;
     is_rare!: boolean;
     note!: string;
@@ -210,7 +210,7 @@ export namespace models {
   // tabelle di MagicSchools.ts
 
   export class MagicSchool {
-    index!: string;
+    idx!: string;
     name!: string;
     description!: string;
     url!: string;
@@ -221,7 +221,7 @@ export namespace models {
   // tabelle di Proficiencies.ts
 
   export class Proficiency {
-    index!: string;
+    idx!: string;
     name!: string;
     type!: string;
     backgrounds!: number;
@@ -233,7 +233,7 @@ export namespace models {
   // tabelle di Skills.ts
 
   export class Skill {
-    index!: string;
+    idx!: string;
     name!: string;
     description!: string;
     ability_score!: string;
@@ -244,7 +244,7 @@ export namespace models {
   // tabelle di WeaponMasteryProperties.ts
 
   export class WeaponMasteryProperty {
-    index!: string;
+    idx!: string;
     name!: string;
     description!: string;
     url!: string;
@@ -297,7 +297,7 @@ export namespace models {
   }
 
   export class Class {
-    index!: string;
+    idx!: string;
     name!: string;
     primary_ability!: string;
     hit_die!: number;
@@ -333,12 +333,12 @@ export namespace models {
 
   export class ArrayUtilize {
     array_id!: number;
-    index!: number;
+    idx!: number;
     item!: string;
   };
 
   export class Equipment {
-    index!: string;
+    idx!: string;
     name!: string;
     equipment_categories!: number;
     cost_quantity!: number;
@@ -379,7 +379,7 @@ export namespace models {
   // tabelle di Feats.ts
 
   export class Feat {
-    index!: string;
+    idx!: string;
     name!: string;
     description!: string;
     type!: string;
@@ -393,7 +393,7 @@ export namespace models {
   // tabelle di MagicItems.ts
 
   export class MagicItem {
-    index!: string;
+    idx!: string;
     name!: string;
     url!: string;
     image!: string;
@@ -409,7 +409,7 @@ export namespace models {
   // tabelle di species
 
   export class Species {
-    index!: string;
+    idx!: string;
     name!: string;
     url!: string;
     type!: string;
@@ -431,7 +431,7 @@ export namespace models {
   }
 
   export class Subclass {
-    index!: string;
+    idx!: string;
     url!: string;
     name!: string;
     class!: string;
@@ -443,7 +443,7 @@ export namespace models {
   // tabelle di Subspecies.ts
 
   export class ArraySubspeciesTrait {
-    index!: string;
+    idx!: string;
     array_id!: number;
     array_idx!: number;
     name!: string;
@@ -452,7 +452,7 @@ export namespace models {
   }
 
   export class SubspeciesSchema {
-    index!: string;
+    idx!: string;
     name!: string;
     url!: string;
     species!: string;
@@ -471,7 +471,7 @@ export namespace models {
   }
 
   export class Trait {
-    index!: string;
+    idx!: string;
     name!: string;
     url!: string;
     description!: string;
@@ -485,7 +485,7 @@ export namespace models {
   // tabelle di WeaponProperties.ts
 
   export class WeaponProperty {
-    index!: string;
+    idx!: string;
     name!: string;
     description!: string;
     url!: string;

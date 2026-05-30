@@ -17,15 +17,6 @@ create table if not exists DifficultyClass (
   foreign key (dc_type) references APIReference(index)
 );
 
-create table if not exists Damage (
-  damage_type text not null primary key,
-  damage_dice text not null,
-  dc text,
-
-  foreign key (damage_type)  references APIReference(index),
-  foreign key (dc) references DifficultyClass(dc_type)
-);
-
 create table if not exists AreaOfEffect (
   size number not null primary key,
   type check(
@@ -51,10 +42,12 @@ create table if not exists String (
 
 create table if not exists ArrayDamage (
   array_id number not null,
-  damage_item text not null,
+  damage_type text not null,
+  damage_dice text not null,
+  dc text,
   index number not null,
 
-  foreign key (damage_item) references Damage(damage_type),
+  foreign key (damage_type) references APIReference(index),
   primary key(array_id,index)
 );
 

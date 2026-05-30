@@ -1,25 +1,28 @@
 <ion-content>
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title>Scegli la tua specie</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <app-title
+  [title] = "'Scegli la tua specie'"
+  ></app-title>
+
+  <div class="goBack">
+    <app-button
+    [button] = "{ text: 'Torna indietro', expand: ''}"
+    [context] = "buttonCallbacks['previousPage']"
+    ></app-button>
+  </div>
 
   <!-- prima sezione con menù a tendina -->
-   <ion-item class="speciesSelectionFrame">
+   <div class="speciesSelectionFrame">
     <app-accordion
       [accordions] = "accordions"
       [allowMultipleEnabled] = "true"
     ></app-accordion>
-  </ion-item>
+  </div>
 
   <!-- footer con bottone per andare alla prossima pagina -->
-  <ion-footer>
-    <ion-item slot="end">
-      <app-button
-      [button] = "b1_button"
-      [context] = "b2_context"
-      ></app-button>
-    </ion-item>
-  </ion-footer>
+  <div class="nextPage">
+    <app-button
+    [button] = "{ text: 'Prossima pagina', expand: ''}"
+    [context] = "buttonCallbacks['nextPage']"
+    ></app-button>
+  </div>
 </ion-content>

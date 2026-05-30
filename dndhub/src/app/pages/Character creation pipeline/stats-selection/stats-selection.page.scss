@@ -1,0 +1,58 @@
+.firstCol , .secondCol{
+    display: grid;
+    justify-content: center;
+    width: 100%;
+}
+
+.firstCol{
+    margin-bottom: 10px;
+    border-top: 3px solid rgb(196, 28, 28);
+    border-radius: 20px;
+}
+
+.secondCol{
+    margin-top: 5px;
+    border-bottom: 3px solid rgb(196, 28, 28);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.nextPage {
+    display: grid;
+    justify-content: end;
+}
+
+.gridContainer {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    width: 90vw;
+    margin: 0 auto;
+    border-radius: 18px;
+}
+
+.buttonGrid {
+    margin-bottom: 10px;
+}
+
+.HPchoiceButtonContainer {
+    display: grid;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.HPchoiceButton {
+    width: 100%;
+}
+
+.manualHPgrid {
+    margin: 0 auto;
+}
+
+ion-grid {
+    padding: 0;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+}

@@ -7,3 +7,20 @@
     align-self: center;
     align-content: center;
 }
+
+.nextPage {
+    display: grid;
+    justify-content: end;
+}
+
+.levelSelectionFrame {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    flex-direction: column;
+}
+
+.levelSelectionLabel {
+    padding-bottom: 20px;
+}

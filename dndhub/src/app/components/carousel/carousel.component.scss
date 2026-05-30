@@ -1,7 +1,10 @@
-.carousel {
-  width: 90%;
+.carousel {  
+  width: max-content;
+  margin: 0 auto;
+
   display: flex;
-  overflow-x: auto;
+  overflow: hidden;
+
   -webkit-mask-image: linear-gradient(
     to right, 
     transparent 0%, 
@@ -21,10 +24,12 @@
 .group {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: .5em;
-  animation: spin 15s infinite linear;
   padding-right: .5em;
+  flex-shrink: 0;
+  animation: spin 15s infinite linear;
+  width: max-content;
 }
 
 .carousel::-webkit-scrollbar {
@@ -32,11 +37,15 @@
 }
 
 app-card {
-  flex: 0 0 12em;
+  flex: 0 0 5em;
+  height: 100%;
 }
 
 @keyframes spin {
-  from { translate: 0; }
-  to { translate: -100%; }
-
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }

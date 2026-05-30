@@ -1,13 +1,21 @@
+*{
+	border: 1px solid red;
+}
+
+#toolbar {
+	display: flex;
+}
+
 .title {
-    // da levare qualcuno di questi quando capisco a cosa serve ciascuno di essi
-    justify-content: center;
-    justify-self: center;
-    justify-items: center;
-    align-items: center;
-    align-content: center;
-    align-items: center;
+	justify-content: center;
+	justify-self: center;
+	justify-items: center;
+	align-items: center;
+	align-content: center;
+	align-items: center;
+	width: 100%;
 }
 
 .header {
-    width: 70vw;
+	width: 70vw;
 }

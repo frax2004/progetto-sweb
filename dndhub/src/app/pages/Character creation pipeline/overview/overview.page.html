@@ -1,0 +1,93 @@
+<ion-content>
+  <app-title
+  [title] = "'Overview'"
+  ></app-title>
+
+<!-- la pagina sarà divisa in due metà  (1/3 + 2/3) per larghezza -->
+  
+    <div class="upperDetails">
+      <div class="upperDetailsContainer">
+        <ion-label>Velocità totale</ion-label>
+      </div>
+      
+      <div class="upperDetailsContainer">
+        <ion-label>Taglia</ion-label>
+      </div>
+      
+      <div class="upperDetailsContainer">
+        <ion-label>Background</ion-label>
+      </div>
+      
+      <div class="upperDetailsContainer">
+        <ion-label>CA</ion-label>
+      </div>
+    </div>
+
+  <div class="accordions">
+    <app-accordion
+    [accordions] = "accordions"
+    [allowMultipleEnabled] = "true"
+    ></app-accordion>
+  </div>
+
+  <!-- quale preferite tra i due tipi di text area? -->
+  <ion-item class="finalChoicesContainer">
+    <div class="finalChoices">
+      <div class="nameChoice">
+        <app-text-area
+        [fill] = "'solid'"
+        [label]="'Inserisci nome del personaggio: '"></app-text-area>
+      </div>
+
+      <div class="imgChoice">
+        <app-text-area
+        [fill] = "''" 
+        [label]="'(opzionale) Inserisci URL immagine del personaggio: '"></app-text-area>
+      </div>
+
+      <div class="HPchoice">
+        <ion-label class="HPlabel">Seleziona metodo di calcolo HP</ion-label>
+        <div class="HPbuttons">
+          <app-button
+          [margin] = "false"
+          [button] = "{ text: 'Media', expand: ''}"
+          [context] = "buttonCallbacks['avHP']"
+          ></app-button>
+          <app-button
+          [margin] = "false"
+          [button] = "{ text: 'Manualmente', expand: ''}"
+          [context] = "buttonCallbacks['manHP']"
+          ></app-button>
+        </div>
+        
+        
+      </div>
+
+      <div class="showHP">
+          
+          @if(averageHP===true) {
+                <ion-label>{{avHPlabel}}</ion-label>
+          }
+
+          @if(manualHP===true) {
+              <ion-label>Inserire HP in range {{HPrange(lvl,HPdice)}}:</ion-label>
+
+              <ion-label>Placeholder number entry</ion-label>
+          }
+
+      </div>
+    </div>
+
+    
+
+  </ion-item>
+
+  <div class="finalButton">
+    <app-button
+    [button] = "{ text: 'Crea personaggio', expand: ''}"
+    [context] = "buttonCallbacks['completeChar']"
+    ></app-button>
+  </div>
+
+
+</ion-content>

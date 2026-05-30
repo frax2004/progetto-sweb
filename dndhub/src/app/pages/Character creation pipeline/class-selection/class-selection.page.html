@@ -1,9 +1,7 @@
 <ion-content>  
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title>Scegli la tua classe</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <app-title
+  [title] = "'Scegli la tua classe'"
+  ></app-title>
 
 
   <!-- Sezione dedicata alla scelta della classe con menù a tendina
@@ -11,44 +9,39 @@
       (o simile) che permette di selezionare quella classe tramite
       un booleano (o simile) -->
 
-  <ion-item class="classSelectionFrame">
+  <div class="goBack genericButton">
+    <app-button
+    [button] = "{ text: 'Torna indietro', expand: ''}"
+    [context] = "b2_context"
+    ></app-button>
+  </div>
+
+  <div class="classSelectionFrame">
     <app-accordion
       [accordions] = "accordions"
       [allowMultipleEnabled] = "true"
     ></app-accordion>
-  </ion-item>
+  </div>
 
   <!-- Sezione dedicata alla selezione del livello 
       Ancora con elementi placeholder perché il number
       selector non è stato ancora implementato -->
 
-  <ion-footer>    
-  <ion-item>
-    <ion-grid>
-      <ion-row>
-        <!-- prima colonna label -->
-        <ion-col>
-        <ion-label>
-          Scegli un livello per il personaggio (1-20):
-        </ion-label>
-      </ion-col>
-      <!-- seconda colonna number picker -->
-      <ion-col>
-        <app-text-area
-        [fill] = "'solid'"
-        [errorText] = "'Il valore dovrebbe essere contenuto tra 1 e 20'"
-        >
-        </app-text-area>
-      </ion-col>
-      <!-- terza colonna bottone di conferma scelta -->
-      <ion-col>
-        <app-button
-        [button] = "b1_button"
-        [context] = "b2_context"
-        ></app-button>
-      </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-item>
-  </ion-footer>
+  <div class="levelSelectionFrame">
+    <ion-label class="levelSelectionLabel">
+        Scegli un livello per il personaggio (1-20):
+    </ion-label>
+    <app-drag-entry
+    [min] = 1
+    [max] = 20
+    [sensitivity] = 1
+    ></app-drag-entry>
+  </div>
+
+  <div class="nextPage genericButton">
+    <app-button
+    [button] = "{ text: 'Prossima pagina', expand: ''}"
+    [context] = "buttonCallbacks['nextPage']"
+    ></app-button>
+  </div>
 </ion-content>

@@ -10,12 +10,14 @@ import { UnorderedListElementComponent } from "../components/unordered-list-elem
 import { CardComponent } from '../components/card/card.component';
 import { CarouselComponent } from '../components/carousel/carousel.component';
 import { Card } from '../components/card/Card';
+import { DragEntryComponent } from '../components/drag-entry/drag-entry.component';
+import { LabelComponent } from '../components/label/label.component';
 
   @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [CarouselComponent, IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, UnorderedListElementComponent, IonList, CardComponent, ScrollBarComponent],
+  imports: [LabelComponent, DragEntryComponent, ScrollBarComponent, CarouselComponent, IonHeader, IonToolbar, IonTitle, IonContent, ButtonComponent, UnorderedListElementComponent, IonList, CardComponent],
 })
 export class HomePage {
   // Se dovete testare componenti, per favore non cancellate le funzioni relative al bottone e al 

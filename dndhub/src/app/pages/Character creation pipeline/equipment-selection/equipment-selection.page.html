@@ -1,21 +1,26 @@
 <ion-content>
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title>Seleziona l'equipaggiamento</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <app-title
+  [title] = "'Scegli l\'equipaggiamento'"
+   ></app-title>
+
+  <div class="goBack">
+    <app-button
+    [button] = "{ text: 'Torna indietro', expand: ''}"
+    [context] = "buttonCallbacks['previousPage']"
+    ></app-button>
+  </div>
 
   <!-- grid dove si andrà a mettere tutto quello che ci interessa -->
   <ion-item class="gridContainer">
     <ion-grid>
       
       <!-- riga prima della prima riga per mostrare oro corrente -->
-      <ion-row>
+      <ion-row class="budgetRow">
         <!-- oro corrente -->
-        <ion-col>
-          <ion-item>
-            <ion-label>Budget attuale: {{budgetTotale}} monete d'oro</ion-label>
-          </ion-item>
+        <ion-col class="budgetCol">
+          <div class="budgetDiv">
+            <app-label>Budget attuale: {{budgetTotale}} monete d'oro</app-label>
+          </div>
         </ion-col>
       </ion-row>
 
@@ -23,30 +28,30 @@
       <ion-row>
         <!-- Nome oggetto -->
         <ion-col>
-          <ion-item>
-            <ion-label>Oggetto</ion-label>
-          </ion-item>
+          <div class="categoryTitle">
+            <app-label>Oggetto</app-label>
+          </div>
         </ion-col>
 
         <!-- Costo oggetto -->
         <ion-col>
-          <ion-item>
-            <ion-label>Costo</ion-label>
-          </ion-item>
+          <div class="categoryTitle">
+            <app-label>Costo</app-label>
+          </div>
         </ion-col>
 
         <!-- descrizione oggetto -->
         <ion-col>
-          <ion-item>
-            <ion-label>Descrizione</ion-label>
-          </ion-item>
+          <div class="categoryTitle">
+            <app-label>Descrizione</app-label>
+          </div>
         </ion-col>
 
         <!-- Quantità oggetto -->
         <ion-col>
-          <ion-item>
-            <ion-label>Quantità</ion-label>
-          </ion-item>
+          <div class="categoryTitle">
+            <app-label>Quantità</app-label>
+          </div>
         </ion-col>
 
       </ion-row>
@@ -56,30 +61,33 @@
 
           <!-- Nome oggetto -->
           <ion-col>
-            <ion-item>
-              <ion-label>{{object.nome}}</ion-label>
-            </ion-item>
+            <div class="listElement">
+              <app-label>{{object.nome}}</app-label>
+            </div>
           </ion-col>
 
           <!-- Costo oggetto -->
           <ion-col>
-            <ion-item>
-              <ion-label>{{object.costo}} monete d'oro</ion-label>
-            </ion-item>
+            <div class="listElement">
+              <app-label>{{object.costo}} monete d'oro</app-label>
+            </div>
           </ion-col>
 
           <!-- Descrizione oggetto -->
           <ion-col>
-            <ion-item>
-              <ion-label>{{object.descrizione}}</ion-label>
-            </ion-item>
+            <div class="listElement">
+              <app-label>{{object.descrizione}}</app-label>
+            </div>
           </ion-col>
 
           <!-- quantità oggetto -->
           <ion-col>
-            <ion-item>
-              <ion-label>Placeholder fino a quando non avrò number entry</ion-label>
-            </ion-item>
+            <app-drag-entry
+            class="listElement dragEntryElement"
+            [sensitivity] = 1
+            [min] = 0
+            >
+            </app-drag-entry>
           </ion-col>
 
         </ion-row>
@@ -91,13 +99,11 @@
   
   </ion-item>
 
-  <ion-footer>
-    <ion-item slot="end">
-      <app-button
-      [button] = "{ text: 'Accetta e vai avanti', expand: ''}"
-      [context] = "buttonCallbacks['nextPage']"
-      ></app-button>
-    </ion-item>
-  </ion-footer>
+  <div class="nextPage">
+    <app-button
+    [button] = "{ text: 'Vai alla prossima pagina', expand: ''}"
+    [context] = "buttonCallbacks['nextPage']"
+    ></app-button>
+  </div>
 
 </ion-content>

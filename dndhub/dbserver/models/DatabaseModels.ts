@@ -1,25 +1,25 @@
   // tabelle di common.ts
 
 export namespace models {
-  export interface APIReference {
-    index: string;
-    name: string;
-    url: string;
+  export class APIReference {
+    index!: string;
+    name!: string;
+    url!: string;
     note?: string;
   }
-
+    
   export enum SuccessType {
     none,
     half,
     other,
   }
 
-  export interface DifficultyClass {
+  export class DifficultyClass {
     // forse id può essere auto increment
-    id: number;
-    dc_type: string;
+    id!: number;
+    dc_type!: string;
     dc_value?: number;
-    success_type: SuccessType;
+    success_type!: SuccessType;
   }
 
   export enum AreaOfEffectType {
@@ -30,35 +30,35 @@ export namespace models {
     cone,
   }
 
-  export interface AreaOfEffect {
-    size: number;
-    type: AreaOfEffect;
+  export class AreaOfEffect {
+    size!: number;
+    type!: AreaOfEffect;
   }
 
-  export interface Choice {
+  export class Choice {
     desc?: string;
-    choose: number;
+    choose!: number;
     type?: string;
-    opt_id: number;
+    opt_id!: number;
   }
 
-  export interface ArrayDamage {
-    array_id: number;
-    damage_type: string;
-    damage_dice: string;
+  export class ArrayDamage {
+    array_id!: number;
+    damage_type!: string;
+    damage_dice!: string;
     dc?: number;
-    index: number;
+    index!: number;
   }
 
   // OptionArray mi serve per multiple
-  export interface ArrayOption {
-    item_id: number;
-    index: number;
-    array_id: number;
+  export class ArrayOption {
+    item_id!: number;
+    index!: number;
+    array_id!: number;
   }
 
-  export interface Option {
-    id: number;
+  export class Option {
+    id!: number;
     // pseudo-tabella reference
     reference_item?: string;
     // pseudo-tabella choice
@@ -100,15 +100,15 @@ export namespace models {
     size?: string;
   }
 
-  export interface ArrayOfOptionsAndString {
-    opt_id: number;
-    string: string;
-    index: number;
-    array_id: number;
+  export class ArrayOfOptionsAndString {
+    opt_id!: number;
+    string!: string;
+    index!: number;
+    array_id!: number;
   }
 
-  export interface OptionSet {
-    id: number;
+  export class OptionSet {
+    id!: number;
     // pseudo-tabella equipment_category
     equipment_category?: string;
     resource_list_url?: string;
@@ -118,62 +118,62 @@ export namespace models {
 
   // tabelle di DamageTypes.ts
 
-  export interface DamageTypes {
-    index: string;
-    name: string;
-    description: string;
-    url: string
+  export class DamageTypes {
+    index!: string;
+    name!: string;
+    description!: string;
+    url!: string
   }
 
   // tabelle di AbilityScores.ts
 
-  export interface AbilityScore {
-    index: string;
-    name: string;
-    full_name: string;
-    description: string;
-    skills: string;
-    url: string;
+  export class AbilityScore {
+    index!: string;
+    name!: string;
+    full_name!: string;
+    description!: string;
+    skills!: string;
+    url!: string;
   }
 
   // tabelle di Alignments
   // in teoria inutili ma copiata comunque perché piccola
 
-  export interface Alignment {
-    index: string;
-    name: string;
-    abbreviation: string;
-    description: string;
-    url: string;
+  export class Alignment {
+    index!: string;
+    name!: string;
+    abbreviation!: string;
+    description!: string;
+    url!: string;
   }
 
   // tabelle di Backgrounds.ts
 
-  export interface BackgroundFeatReference {
-    index: string;
-    name: string;
-    url: string;
+  export class BackgroundFeatReference {
+    index!: string;
+    name!: string;
+    url!: string;
     note?: string;
   }
 
-  export interface ArrayAPIReference {
-    array_id: number;
-    item: string;
-    index: number;
+  export class ArrayAPIReference {
+    array_id!: number;
+    item!: string;
+    index!: number;
   }
 
-  export interface ArrayChoice {
-    array_id: number;
-    id: number;
-    index: number;
+  export class ArrayChoice {
+    array_id!: number;
+    id!: number;
+    index!: number;
   }
 
-  export interface Background {
-    index: string;
-    name: string;
-    ability_scores: number;
-    feat: string;
-    proficiencies: number;
+  export class Background {
+    index!: string;
+    name!: string;
+    ability_scores!: number;
+    feat!: string;
+    proficiencies!: number;
     proficiency_choices?: number;
     equipment_options?: number;
     url?: string;
@@ -181,169 +181,169 @@ export namespace models {
 
   // tabelle di Condition.ts
 
-  export interface Condition {
-    index: string;
-    name: string;
-    description: string;
-    url: string;
+  export class Condition {
+    index!: string;
+    name!: string;
+    description!: string;
+    url!: string;
   }
 
   // tabelle di EquipmentCategories.ts
 
-  export interface EquipmentCategory {
-    index: string;
-    name: string;
-    equipment: number;
-    url: string;
+  export class EquipmentCategory {
+    index!: string;
+    name!: string;
+    equipment!: number;
+    url!: string;
   } 
 
   // tabelle di Language.ts
 
-  export interface Language {
-    index: string;
-    name: string;
-    is_rare: boolean;
-    note: string;
-    url: string;
+  export class Language {
+    index!: string;
+    name!: string;
+    is_rare!: boolean;
+    note!: string;
+    url!: string;
   }
 
   // tabelle di MagicSchools.ts
 
-  export interface MagicSchool {
-    index: string;
-    name: string;
-    description: string;
-    url: string;
+  export class MagicSchool {
+    index!: string;
+    name!: string;
+    description!: string;
+    url!: string;
   }
 
   // monsters non ci serve
 
   // tabelle di Proficiencies.ts
 
-  export interface Proficiency {
-    index: string;
-    name: string;
-    type: string;
-    backgrounds: number;
-    classes: number;
+  export class Proficiency {
+    index!: string;
+    name!: string;
+    type!: string;
+    backgrounds!: number;
+    classes!: number;
     reference?: string;
     url?: string;
   }
 
   // tabelle di Skills.ts
 
-  export interface Skill {
-    index: string;
-    name: string;
-    description: string;
-    ability_score: string;
+  export class Skill {
+    index!: string;
+    name!: string;
+    description!: string;
+    ability_score!: string;
     url?: string;
 
   }
 
   // tabelle di WeaponMasteryProperties.ts
 
-  export interface WeaponMasteryProperty {
-    index: string;
-    name: string;
-    description: string;
-    url: string;
+  export class WeaponMasteryProperty {
+    index!: string;
+    name!: string;
+    description!: string;
+    url!: string;
   }
 
   // tabelle di Classes.ts
 
-  export interface SpellcastingInfo {
-    name: string;
-    desc: string;
+  export class SpellcastingInfo {
+    name!: string;
+    desc!: string;
   }
 
-  export interface ArraySpellcastingInfo {
-    array_id: number;
-    array_idx: number;
-    item: string;
+  export class ArraySpellcastingInfo {
+    array_id!: number;
+    array_idx!: number;
+    item!: string;
   }
 
-  export interface Spellcasting {
-    level: number;
-    spellcasting_ability: string;
-    info: number;
+  export class Spellcasting {
+    level!: number;
+    spellcasting_ability!: string;
+    info!: number;
   }
 
-  export interface MultiClassingPrereq {
-    id: number;
+  export class MultiClassingPrereq {
+    id!: number;
     ability_score?: string;
-    minimum_score: number;
+    minimum_score!: number;
   }
 
 
-  export interface ArrayMultiClassingPrereq {
-    array_id: number;
-    array_idx: number;
-    item: number;
+  export class ArrayMultiClassingPrereq {
+    array_id!: number;
+    array_idx!: number;
+    item!: number;
   }
 
-  export interface MultiClassing {
-    id: number;
+  export class MultiClassing {
+    id!: number;
     prerequisites?: number;
     prerequisite_options?: number;
     proficiencies?: number;
     proficiency_choices?: number;
   }
 
-  export interface PrimaryAbility {
-    desc: string;
+  export class PrimaryAbility {
+    desc!: string;
     ability_scores?: number;
     ability_score_options?: number;
   }
 
-  export interface Class {
-    index: string;
-    name: string;
-    primary_ability: string;
-    hit_die: number;
-    class_levels: string;
+  export class Class {
+    index!: string;
+    name!: string;
+    primary_ability!: string;
+    hit_die!: number;
+    class_levels!: string;
     multi_classing?: number;
     proficiencies?: number;
-    proficiency_choices: number;
+    proficiency_choices!: number;
     saving_throws?: number;
-    starting_equipment_options: number;
+    starting_equipment_options!: number;
     subclasses?: number;
     spellcasting?: string;
     spells?: string;
-    url: string;
+    url!: string;
   }
 
   // tabelle di Equipments.ts
 
-  export interface Content {
-    item: string;
-    quantity: number;
+  export class Content {
+    item!: string;
+    quantity!: number;
   }
 
-  export interface ArrayContent {
-    item: string;
-    array_id: number;
-    array_idx: number;
+  export class ArrayContent {
+    item!: string;
+    array_id!: number;
+    array_idx!: number;
   }
 
-  export interface Utilize {
-    name: string;
-    dc: number;
+  export class Utilize {
+    name!: string;
+    dc!: number;
   }
 
-  export interface ArrayUtilize {
-    array_id: number;
-    index: number;
-    item: string;
+  export class ArrayUtilize {
+    array_id!: number;
+    index!: number;
+    item!: string;
   };
 
-  export interface Equipment {
-    index: string;
-    name: string;
-    equipment_categories: number;
-    cost_quantity: number;
-    cost_unit: number;
-    url: string;
+  export class Equipment {
+    index!: string;
+    name!: string;
+    equipment_categories!: number;
+    cost_quantity!: number;
+    cost_unit!: number;
+    url!: string;
     description?: string;
     weight?: string;
     ammunition?: string;
@@ -378,104 +378,104 @@ export namespace models {
 
   // tabelle di Feats.ts
 
-  export interface Feat {
-    index: string;
-    name: string;
-    description: string;
-    type: string;
+  export class Feat {
+    index!: string;
+    name!: string;
+    description!: string;
+    type!: string;
     repeatable?: string;
     prerequisite_minimum_level?: number;
     prerequisite_feature_named?: string;
     prerequisite_options?: number;
-    url: string;
+    url!: string;
   }
 
   // tabelle di MagicItems.ts
 
-  export interface MagicItem {
-    index: string;
-    name: string;
-    url: string;
-    image: string;
+  export class MagicItem {
+    index!: string;
+    name!: string;
+    url!: string;
+    image!: string;
     equipment_category?: string;
-    variant: boolean;
-    variants: number;
-    attunement: boolean;
-    rarity: string;
-    desc: string;
+    variant!: boolean;
+    variants!: number;
+    attunement!: boolean;
+    rarity!: string;
+    desc!: string;
     limited_to?: string;
   }
 
   // tabelle di species
 
-  export interface Species {
-    index: string;
-    name: string;
-    url: string;
-    type: string;
+  export class Species {
+    index!: string;
+    name!: string;
+    url!: string;
+    type!: string;
     size?: string;
     size_options?: number;
-    speed: number;
+    speed!: number;
     traits?: number;
     subspecies?: number;
   }
 
   // tabelle di Subclass.ts
 
-  export interface ArraySubclassFeature {
-    array_id: number;
-    array_idx: number;
-    name: string;
-    level: number;
-    description: string;
+  export class ArraySubclassFeature {
+    array_id!: number;
+    array_idx!: number;
+    name!: string;
+    level!: number;
+    description!: string;
   }
 
-  export interface Subclass {
-    index: string;
-    url: string;
-    name: string;
-    class: string;
-    summary: string;
-    description: string;
-    features: number;
+  export class Subclass {
+    index!: string;
+    url!: string;
+    name!: string;
+    class!: string;
+    summary!: string;
+    description!: string;
+    features!: number;
   }
 
   // tabelle di Subspecies.ts
 
-  export interface ArraySubspeciesTrait {
-    index: string;
-    array_id: number;
-    array_idx: number;
-    name: string;
-    url: string;
-    level: number;
+  export class ArraySubspeciesTrait {
+    index!: string;
+    array_id!: number;
+    array_idx!: number;
+    name!: string;
+    url!: string;
+    level!: number;
   }
 
-  export interface SubspeciesSchema {
-    index: string;
-    name: string;
-    url: string;
-    species: string;
-    traits: number;
+  export class SubspeciesSchema {
+    index!: string;
+    name!: string;
+    url!: string;
+    species!: string;
+    traits!: number;
     damage_type?: string;
   } 
 
   // tabelle di Traits.ts
 
-  export interface ArraySpellTrait {
-    array_id: number;
-    array_idx: number;
-    spell: string;
+  export class ArraySpellTrait {
+    array_id!: number;
+    array_idx!: number;
+    spell!: string;
     uses?: string;
     recovery?: string;
   }
 
-  export interface Trait {
-    index: string;
-    name: string;
-    url: string;
-    description: string;
-    species: number;
+  export class Trait {
+    index!: string;
+    name!: string;
+    url!: string;
+    description!: string;
+    species!: number;
     spells?: number;
     subspecies?: number;
     proficency_choices?: number;
@@ -484,10 +484,10 @@ export namespace models {
 
   // tabelle di WeaponProperties.ts
 
-  export interface WeaponProperty {
-    index: string;
-    name: string;
-    description: string;
-    url: string;
+  export class WeaponProperty {
+    index!: string;
+    name!: string;
+    description!: string;
+    url!: string;
   }
 }

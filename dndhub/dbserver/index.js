@@ -15,7 +15,18 @@ app.get('/', (request, response) => {
 });
 app.listen(PORT, () => () => {console.log(`Server in ascolto su http://localhost:${PORT}`);});
 
-app.get('api/DamageTypes', (request, response) => {
-    const damageTypes = database.loadSchema('./schemas/5e-Damage-Types.sql');
-    damageTypes.run('INSERT OR IGNORE INTO DamageTypes (index,name,description,url) VALUES ('index1', 'gianni', 'descrizione', 'url')');
+app.get('/users', (request, response) => {
+    // response.send('Route aperta 5');
+    const db = database.loadSchema('./schemas/DatabaseSchemas.sql');
+    db.run("INSERT OR IGNORE INTO DamageTypes (idx,name,description,url) VALUES ('index1', 'gianni', 'descrizione', 'url')",
+        (err,res) => {
+            if (err!==null) console.log('Ciao mi chiamo pollara');
+        }
+    );
+    db.all("SELECT * FROM DamageTypes", 
+        (err,res) => {
+            if (!err) response.json(res);
+            else response.status(500).json(err.message);
+        }
+    );
 });

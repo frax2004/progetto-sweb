@@ -59,7 +59,6 @@ export namespace models {
 
   export class Option {
     id!: number;
-    option_type!: string;
     // pseudo-tabella reference
     reference_item?: string;
     // pseudo-tabella choice

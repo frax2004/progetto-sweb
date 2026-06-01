@@ -63,8 +63,7 @@ create table if not exists ArrayOption (
 );
 
 create table if not exists Option (
-  id number not null primary key,
-  option_type text not null, 
+  id number not null primary key, 
   -- pseudo-tabella reference
   reference_item text,
   -- pseudo-tabella choice
@@ -143,7 +142,7 @@ create table if not exists OptionSet (
   options_array number, -- foreign key
 
   foreign key (equipment_category) references APIReference(idx),
-  foreign key (options_array) references ArrayOfOptionsAndString(array_id)
+  foreign key (options_array) references ArrayOfOptionsAndString(array,id)
 );
 
 -- tabelle di DamageTypes.ts

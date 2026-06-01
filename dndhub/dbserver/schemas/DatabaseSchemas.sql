@@ -636,7 +636,7 @@ create table if not exists ArrayClass (
 create table if not exists ArrayComponents (
   array_id number not null,
   array_idx number not null,
-  item check(item='v' or item='s' or item='m'),
+  item check(item='v' or item='s' or item='m') not null,
 
   primary key (array_id,array_idx)
 );
@@ -742,4 +742,4 @@ create table if not exists Level (
   foreign key (class) references APIReference(idx),
   foreign key (class_specific) references ClassSpecific(id),
   foreign key (subclass) references APIReference(idx)
-)
+);

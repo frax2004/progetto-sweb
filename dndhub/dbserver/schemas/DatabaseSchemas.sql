@@ -621,3 +621,14 @@ create table if not exists WeaponProperty (
   description text not null,
   url text not null
 );
+
+-- tabelle di Spells.ts
+
+create table if not exists Spells (
+  name text not null primary key,
+  level number not null,
+  school text not null,
+
+
+  foreign key (school) references MagicSchool(idx),
+)

@@ -159,6 +159,11 @@ class Option {
   size: string = "";
 }
 
+class AreaOfEffect {
+  size: number = 0;
+  type: string = "";
+}
+
 
 extract<APIReference>(
   new APIReference(),
@@ -170,3 +175,4 @@ extract<Option>(new Option(), "options.json");
 extract<Choice>(new Choice(), "choices.json");
 extract<Damage>(new Damage(), "damage.json");
 extract<DifficultyClass>(new DifficultyClass(), "difficulty_class.json");
+extract<AreaOfEffect>(new AreaOfEffect(), "area_of_effect.json");

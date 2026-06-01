@@ -156,8 +156,13 @@ __decorate([
     required(),
     __metadata("design:type", String)
 ], Option.prototype, "option_type", void 0);
+class AreaOfEffect {
+    size = 0;
+    type = "";
+}
 extract(new APIReference(), "api_references.json", (s) => s.split("index").join("idx"));
 extract(new Option(), "options.json");
 extract(new Choice(), "choices.json");
 extract(new Damage(), "damage.json");
 extract(new DifficultyClass(), "difficulty_class.json");
+extract(new AreaOfEffect(), "area_of_effect.json");

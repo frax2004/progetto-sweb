@@ -9,9 +9,9 @@ export namespace models {
   }
     
   export enum SuccessType {
-    none;
-    half;
-    other;
+    none,
+    half,
+    other,
   }
 
   export class DifficultyClass {
@@ -23,11 +23,11 @@ export namespace models {
   }
 
   export enum AreaOfEffectType {
-    sphere;
-    cube;
-    cylinder;
-    line;
-    cone;
+    sphere,
+    cube,
+    cylinder,
+    line,
+    cone,
   }
 
   export class AreaOfEffect {
@@ -497,110 +497,104 @@ export namespace models {
     class?: string;
   }
 
+  export enum Components {
+    v,
+    s,
+    m,
+  }
+
   export class ArrayComponents {    
-    array_id number !;
-    array_idx number !;
-    item check(item='v' or item='s' or item='m');
-
-    primary key (array_id;array_idx)
+    array_id!: number;
+    array_idx!: number;
+    item!: Components;
   }
 
-  export class Spells {    name string ! primary key;
-    level number !;
-    school string !;
-    classes number !;
-    actionType string !;
-    concentration boolean !;
-    ritual boolean !;
-    range string !;
-    components number;
-    material string;
-    duration string !;
-    description string !;
-
-    foreign key (school) references MagicSchool(idx);
-    foreign key (components) references ArrayComponents(array_id);
-    foreign key (classes) references ArrayClass(array_id)
+  export class Spells {    
+    name!: string;
+    level!: number;
+    school!: string;
+    classes!: number;
+    actionType!: string;
+    concentration!: boolean ;
+    ritual!: boolean ;
+    range!: string ;
+    components?: number;
+    material?: string;
+    duration!: string ;
+    description!: string ;
   }
 
-  -- tabelle di level.ts
-
-  export class ArrayCreatingSpellSlots {    array_idx number !;
-    array_id number !;
-    sorcery_point_cost number !;
-    spell_slot_level number !;
-
-    primary key (array_id;array_idx)
+  export class ArrayCreatingSpellSlots {    
+    array_idx!: number;
+    array_id!: number;
+    sorcery_point_cost!: number;
+    spell_slot_level!: number;
   }
 
-  export class ClassSpecific {    id number ! primary key;
-    action_surges number;
-    arcane_recovery_levels number;
-    aura_range number;
-    bardic_inspiration_die number;
-    brutal_critical_dice number;
-    channel_divinity_charges number;
-    creating_spell_slots number;
-    destroy_undead_cr number;
-    extra_attacks number;
-    favored_enemies number;
-    favored_terrain number;
-    indomitable_uses number;
-    invocations_known number;
-    ki_points number;
-    magical_secrets_max_5 number;
-    magical_secrets_max_7 number;
-    magical_secrets_max_9 number;
-    -- i due qua sotto sono attributi "flattenati"
-    martial_arts_dice_count number;
-    martial_arts_dice_value number;
-    metamagic_known number;
-    mystic_arcanum_level_6 number;
-    mystic_arcanum_level_7 number;
-    mystic_arcanum_level_8 number;
-    mystic_arcanum_level_9 number;
-    rage_count number;
-    rage_damage_bonus number;
-    -- i due qua sotto sono attributi "flattenati"
-    sneak_attack_dice_count number;
-    sneak_attack_dice_value number;
-    song_of_rest_die number;
-    sorcery_points number;
-    unarmored_movement number;
-    wild_shape_fly boolean;
-    wild_shape_max_cr number;
-    wild_shape_swim boolean;
-
-    foreign key (creating_spell_slots) references ArrayCreatingSpellSlots(array_id) 
+  export class ClassSpecific {    
+    id!: number;
+    action_surges?: number;
+    arcane_recovery_levels?: number;
+    aura_range?: number;
+    bardic_inspiration_die?: number;
+    brutal_critical_dice?: number;
+    channel_divinity_charges?: number;
+    creating_spell_slots?: number;
+    destroy_undead_cr?: number;
+    extra_attacks?: number;
+    favored_enemies?: number;
+    favored_terrain?: number;
+    indomitable_uses?: number;
+    invocations_known?: number;
+    ki_points?: number;
+    magical_secrets_max_5?: number;
+    magical_secrets_max_7?: number;
+    magical_secrets_max_9?: number;
+    // i due qua sotto sono attributi "flattenati"
+    martial_arts_dice_count?: number;
+    martial_arts_dice_value?: number;
+    metamagic_known?: number;
+    mystic_arcanum_level_6?: number;
+    mystic_arcanum_level_7?: number;
+    mystic_arcanum_level_8?: number;
+    mystic_arcanum_level_9?: number;
+    rage_count?: number;
+    rage_damage_bonus?: number;
+    // i due qua sotto sono attributi "flattenati"
+    sneak_attack_dice_count?: number;
+    sneak_attack_dice_value?: number;
+    song_of_rest_die?: number;
+    sorcery_points?: number;
+    unarmored_movement?: number;
+    wild_shape_fly?: boolean;
+    wild_shape_max_cr?: number;
+    wild_shape_swim?: boolean;
   }
 
-  export class Level {    index string ! primary key;
-    level number !;
-    ability_score_bonuses number;
-    prof_bonus number;
-    features number;
-    class string !;
-    class_specific number;
-    subclass string;
-    url string;
-    -- le prossime cose sono tutte flatten di altre tabelle
-    cantrips_known number;
-    spell_slots_level_1 number;
-    spell_slots_level_2 number;
-    spell_slots_level_3 number;
-    spell_slots_level_4 number;
-    spell_slots_level_5 number;
-    spell_slots_level_6 number;
-    spell_slots_level_7 number;
-    spell_slots_level_8 number;
-    spell_slots_level_9 number;
-    spells_known number;
-    additional_magical_secrets_max_lvl: number;
-    aura_range number;
-
-    foreign key (features) references ArrayAPIReference(array_id);
-    foreign key (class) references APIReference(idx);
-    foreign key (class_specific) references ClassSpecific(id);
-    foreign key (subclass) references APIReference(idx)
-  )
+  export class Level {    
+    index!: string;
+    level!: number;
+    ability_score_bonuses?: number;
+    prof_bonus?: number;
+    features?: number;
+    //non potevo chiamarla class
+    character_class!: string;
+    class_specific?: number;
+    subclass?: string;
+    url!: string;
+    // le prossime cose sono tutte flatten di altre tabelle
+    cantrips_known?: number;
+    spell_slots_level_1?: number;
+    spell_slots_level_2?: number;
+    spell_slots_level_3?: number;
+    spell_slots_level_4?: number;
+    spell_slots_level_5?: number;
+    spell_slots_level_6?: number;
+    spell_slots_level_7?: number;
+    spell_slots_level_8?: number;
+    spell_slots_level_9?: number;
+    spells_known?: number;
+    additional_magical_secrets_max_lvl?: number;
+    aura_range?: number;
+  }
 }

@@ -719,9 +719,9 @@ create table if not exists Level (
   ability_score_bonuses number,
   prof_bonus number,
   features number,
-  class text not null,
+  character_class text not null,
   class_specific number,
-  subclass text,
+  subclass text not null,
   url text,
   -- le prossime cose sono tutte flatten di altre tabelle
   cantrips_known number,
@@ -735,7 +735,7 @@ create table if not exists Level (
   spell_slots_level_8 number,
   spell_slots_level_9 number,
   spells_known number,
-  additional_magical_secrets_max_lvl: number,
+  additional_magical_secrets_max_lvl number,
   aura_range number,
 
   foreign key (features) references ArrayAPIReference(array_id),

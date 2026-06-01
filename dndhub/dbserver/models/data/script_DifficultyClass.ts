@@ -26,15 +26,15 @@ export function decompose<T>(root: unknown, predicate: (obj: any) => boolean): T
   return result;
 }
 
-export class SuccessType {
-    static none: number = 0;
-    static half: number = 1;
-    static other: number = 2;
-}
+// export enum SuccessType {
+//     'none',
+//     'half',
+//     'other',
+// }
 
 // da sistemare
 
-const api_references = fs
+const difficulty_classes = fs
 .readdirSync('.', 'utf8')
 .filter((path: string) => path.startsWith('5e'))
 .flatMap(
@@ -46,7 +46,7 @@ const api_references = fs
       //id!: number;
       dc_type!: string; // è foreign key di api reference
       dc_value?: number;
-      success_type!: SuccessType;
+      success_type!: string;
     }
 
     return decompose<DifficultyClass>(data, (obj: any) => {
@@ -63,8 +63,8 @@ const api_references = fs
         && obj !== null 
         &&
         //typeof obj.id === "number" &&
-        typeof obj.dc_type === "string" && (
-        typeof obj.dc_value === "string" 
+        typeof obj.dc_type === "object" && (
+        typeof obj.dc_value === "number" 
         || obj.dc_value === undefined) &&
         // number perché in teoria è enum?
         typeof obj.success_type === "string"
@@ -74,4 +74,4 @@ const api_references = fs
 );
 
 
-console.log(JSON.stringify(api_references).split("index").join("idx"));
+console.log(JSON.stringify(difficulty_classes).split("index").join("idx"));

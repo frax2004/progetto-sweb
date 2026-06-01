@@ -26,48 +26,41 @@ export function decompose<T>(root: unknown, predicate: (obj: any) => boolean): T
   return result;
 }
 
-export class SuccessType {
-    static none: number = 0;
-    static half: number = 1;
-    static other: number = 2;
-}
-
-// da sistemare
 
 const api_references = fs
 .readdirSync('.', 'utf8')
-.filter((path: string) => path.startsWith('5e'))
+.filter(path => path.startsWith('5e'))
 .flatMap(
-  (path: any) => {
+  path => {
     const data = JSON.parse(fs.readFileSync(path, 'utf8'));
     
-    class DifficultyClass {
-    // in teoria nei json non abbiamo id, lo devo aggiungere tramite funzione
-      //id!: number;
-      dc_type!: string; // è foreign key di api reference
-      dc_value?: number;
-      success_type!: SuccessType;
+    class APIReference {
+      index!: string;
+      name!: string;
+      url!: string;
+      note?: string;
     }
 
-    return decompose<DifficultyClass>(data, (obj: any) => {
+    return decompose<APIReference>(data, (obj: any) => {
       const actual = Object.keys(obj);
     
       const expected = [
-        'dc_type',
-        'dc_value',
-        'success_type'
+        'index',
+        'name',
+        'url',
+        'note'
       ];
     
       return actual.every(s => expected.includes(s)) && (
         typeof obj === "object" 
         && obj !== null 
         &&
-        //typeof obj.id === "number" &&
-        typeof obj.dc_type === "string" && (
-        typeof obj.dc_value === "string" 
-        || obj.dc_value === undefined) &&
-        // number perché in teoria è enum?
-        typeof obj.success_type === "string"
+        typeof obj.index === "string" &&
+        typeof obj.name === "string" &&
+        typeof obj.url === "string" && (
+          obj.note === undefined 
+          || typeof obj.note === "string"
+        )
       );
     });
   }

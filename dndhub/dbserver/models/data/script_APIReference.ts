@@ -1,70 +1,172 @@
 import fs from 'fs';
+import 'reflect-metadata';
 
-export function decompose<T>(root: unknown, predicate: (obj: any) => boolean): T[] {
-  const result: T[] = [];
+const REQUIRED_META = Symbol('required');
 
-  const visit = (value: unknown) => {
-    if (value === null || typeof value !== "object") {
-      return;
-    } else if (predicate(value)) {
-      result.push(value as T);
-      return;
-    } else if (Array.isArray(value)) {
-      for (const item of value) {
-        visit(item);
-      }
-      return;
-    } else {
-      for (const child of Object.values(value)) {
-        visit(child);
-      }
-      return;
-    }
-  };
+function required() {
+  return Reflect.metadata(REQUIRED_META, true);
+}
 
-  visit(root);
-  return result;
+function isRequired(self: any, field: string) {
+  return Reflect.getMetadata(REQUIRED_META, self, field);
 }
 
 
-const api_references = fs
-.readdirSync('.', 'utf8')
-.filter((path: string) => path.startsWith('5e'))
-.flatMap(
-  (path: any) => {
-    const data = JSON.parse(fs.readFileSync(path, 'utf8'));
-    
-    class APIReference {
-      index!: string;
-      name!: string;
-      url!: string;
-      note?: string;
-    }
+export class Shapes {
+  static match(obj: any, shape: any): boolean {
+    if(shape === obj) return true;
 
-    return decompose<APIReference>(data, (obj: any) => {
-      const actual = Object.keys(obj);
+    if(typeof shape == 'function') shape = new shape();
+
+    const T = typeof shape;
+    const U = typeof obj;
     
-      const expected = [
-        'index',
-        'name',
-        'url',
-        'note'
-      ];
+    if(T !== U) return false;
+    if(T !== 'object') return true;
     
-      return actual.every(s => expected.includes(s)) && (
-        typeof obj === "object" 
-        && obj !== null 
-        &&
-        typeof obj.index === "string" &&
-        typeof obj.name === "string" &&
-        typeof obj.url === "string" && (
-          obj.note === undefined 
-          || typeof obj.note === "string"
-        )
-      );
-    });
+    if(Array.isArray(shape) && Array.isArray(obj)) {
+      return obj.every(o => Shapes.match(o, new shape[0]()));
+    } else if(Array.isArray(shape) || Array.isArray(obj)) return false;
+
+    const keyMatch = (key: any) => key in shape && Shapes.match(obj[key], shape[key]);
+
+    return Object
+    .keys(shape)
+    .filter(key => isRequired(shape, key))
+    .every(key => key in obj)
+    && Object
+    .keys(obj)
+    .every(keyMatch);
   }
+
+  static decompose<T>(obj: unknown, shape: any): T[] {
+    let result: T[] = [];
+    
+    const visit = (value: unknown) => {
+      if(value === null || typeof value !== "object") {
+        return;
+      } else if(Shapes.match(value, shape)) {
+        result.push(value as T);
+        return;
+      } else if(Array.isArray(value)) {
+        for(const item of value) {
+          visit(item);
+        }
+        return;
+      } else {
+        for(const child of Object.values(value)) {
+          visit(child);
+        }
+        return;
+      }
+    };
+  
+    visit(obj);
+    return result;
+  }
+  
+}
+
+
+function extract<T>(shape: any, outputPath: string, mapper?: (s: string) => string) {
+  const json = fs
+  .readdirSync('.', 'utf8')
+  .filter((path: string) => path.startsWith('5e'))
+  .map(
+    path => {
+      const data = JSON.parse(fs.readFileSync(path, 'utf8'));
+      return Shapes.decompose<T>(data, shape);
+    }
+  )
+  .filter(array => array.length !== 0)
+  .flatMap(x => x)
+
+  let s = JSON.stringify(json);
+  fs.writeFileSync(outputPath, mapper ? mapper(s) : s);
+}
+
+class APIReference {
+  index: string = "";
+  name: string = "";
+  url: string = "";
+  note: string = "";
+}
+
+class Choice {
+  desc: string = "";
+  choose: number = 0;
+  type: string = "";
+  from = OptionSet;
+}
+
+class DifficultyClass {
+  dc_type = APIReference;
+  dc_value: number = 0;
+  success_type: string = "";
+}
+
+class Damage {
+  damage_type = APIReference;
+  damage_dice: string = "";
+  dc = DifficultyClass;
+}
+
+class OptionSet {
+  @required()
+  option_set_type: string = "";
+  equipment_category = APIReference;
+  resource_list_url: string = "";
+  options = [
+    Option
+  ]
+}
+
+class Option {
+  @required()
+  option_type: string = "";
+  item = APIReference;
+  choice = Choice;
+  string: string = "";
+  ability_score = APIReference;
+  bonus: number = 0;
+  action_name: string = "";
+  count: number = 0;
+  type: string = "";
+  desc: string = "";
+  name: string = "";
+  dc = DifficultyClass;
+  damage = [
+    Damage
+  ];
+  of = APIReference;
+  prerequisites = [
+    class {
+      type: string = "";
+      proficiency = APIReference;
+    }
+  ];
+  damage_dice: string = "";
+  damage_type = APIReference;
+  notes: string = "";
+  alignments = [
+    APIReference
+  ];
+  unit: string = "";
+  items = [
+    Option
+  ];
+  minimum_score: number = 0;
+  size: string = "";
+}
+
+
+extract<APIReference>(
+  new APIReference(),
+  "api_references.json",
+  (s: string) => s.split("index").join("idx")
 );
 
-
-console.log(JSON.stringify(api_references).split("index").join("idx"));
+extract<Option>(new Option(), "options.json");
+extract<Choice>(new Choice(), "choices.json");
+extract<Damage>(new Damage(), "damage.json");
+extract<DifficultyClass>(new DifficultyClass(), "difficulty_class.json");

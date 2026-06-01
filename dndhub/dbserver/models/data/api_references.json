@@ -9478,6 +9478,9 @@
     "url": "/api/2024/equipment-categories/armor"
   },
   {
+    "name": "Uncommon"
+  },
+  {
     "idx": "weapons",
     "name": "Weapons",
     "url": "/api/2024/equipment-categories/weapons"
@@ -9498,9 +9501,7 @@
     "url": "/api/2024/magic-items/ammunition-3"
   },
   {
-    "idx": "weapons",
-    "name": "Weapons",
-    "url": "/api/2024/equipment-categories/weapons"
+    "name": "Uncommon (+1), Rare (+2), or Very Rare (+3)"
   },
   {
     "idx": "weapons",
@@ -9508,14 +9509,31 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
-    "idx": "weapons",
-    "name": "Weapons",
-    "url": "/api/2024/equipment-categories/weapons"
+    "name": "Uncommon (+1)"
   },
   {
     "idx": "weapons",
     "name": "Weapons",
     "url": "/api/2024/equipment-categories/weapons"
+  },
+  {
+    "name": "Rare (+2)"
+  },
+  {
+    "idx": "weapons",
+    "name": "Weapons",
+    "url": "/api/2024/equipment-categories/weapons"
+  },
+  {
+    "name": "Very Rare (+3)"
+  },
+  {
+    "idx": "weapons",
+    "name": "Weapons",
+    "url": "/api/2024/equipment-categories/weapons"
+  },
+  {
+    "name": "Very Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9523,14 +9541,23 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Very Rare"
   },
   {
     "idx": "armor",
@@ -9538,9 +9565,15 @@
     "url": "/api/2024/equipment-categories/armor"
   },
   {
+    "name": "Very Rare"
+  },
+  {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Legendary"
   },
   {
     "idx": "armor",
@@ -9563,9 +9596,7 @@
     "name": "Armor +3"
   },
   {
-    "idx": "armor",
-    "name": "Armor",
-    "url": "/api/2024/equipment-categories/armor"
+    "name": "Rare (+1), Very Rare (+2), or Legendary (+3)"
   },
   {
     "idx": "armor",
@@ -9573,9 +9604,7 @@
     "url": "/api/2024/equipment-categories/armor"
   },
   {
-    "idx": "armor",
-    "name": "Armor",
-    "url": "/api/2024/equipment-categories/armor"
+    "name": "Rare"
   },
   {
     "idx": "armor",
@@ -9583,9 +9612,7 @@
     "url": "/api/2024/equipment-categories/armor"
   },
   {
-    "idx": "armor",
-    "name": "Armor",
-    "url": "/api/2024/equipment-categories/armor"
+    "name": "Very Rare"
   },
   {
     "idx": "armor",
@@ -9593,14 +9620,39 @@
     "url": "/api/2024/equipment-categories/armor"
   },
   {
+    "name": "Legendary"
+  },
+  {
     "idx": "armor",
     "name": "Armor",
     "url": "/api/2024/equipment-categories/armor"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Legendary"
+  },
+  {
+    "idx": "armor",
+    "name": "Armor",
+    "url": "/api/2024/equipment-categories/armor"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "armor",
+    "name": "Armor",
+    "url": "/api/2024/equipment-categories/armor"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "armor",
+    "name": "Armor",
+    "url": "/api/2024/equipment-categories/armor"
+  },
+  {
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9608,9 +9660,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9618,9 +9668,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Very Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9628,9 +9676,39 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
+    "name": "Uncommon"
+  },
+  {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rarity Varies"
   },
   {
     "idx": "weapons",
@@ -9638,9 +9716,7 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9648,9 +9724,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Uncommon"
   },
   {
     "idx": "wondrous-items",
@@ -9658,9 +9732,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9668,9 +9740,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9678,9 +9748,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Uncommon"
   },
   {
     "idx": "wondrous-items",
@@ -9688,9 +9756,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Uncommon"
   },
   {
     "idx": "wondrous-items",
@@ -9698,9 +9764,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9708,9 +9772,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Uncommon"
   },
   {
     "idx": "wondrous-items",
@@ -9718,9 +9780,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9728,9 +9788,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9738,9 +9796,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Uncommon"
   },
   {
     "idx": "wondrous-items",
@@ -9748,9 +9804,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Uncommon"
   },
   {
     "idx": "wondrous-items",
@@ -9758,9 +9812,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Very Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9768,9 +9820,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9778,9 +9828,127 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
+    "name": "Very Rare"
+  },
+  {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Legendary"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Legendary"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Legendary"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Legendary"
   },
   {
     "idx": "weapons",
@@ -9788,9 +9956,15 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
+    "name": "Rare"
+  },
+  {
     "idx": "weapons",
     "name": "Weapons",
     "url": "/api/2024/equipment-categories/weapons"
+  },
+  {
+    "name": "Very Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9798,14 +9972,23 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
+    "name": "Uncommon"
+  },
+  {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
+    "name": "Uncommon"
+  },
+  {
     "idx": "weapons",
     "name": "Weapons",
     "url": "/api/2024/equipment-categories/weapons"
+  },
+  {
+    "name": "Legendary"
   },
   {
     "idx": "armor",
@@ -9813,14 +9996,23 @@
     "url": "/api/2024/equipment-categories/armor"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Very Rare"
   },
   {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Artifact"
   },
   {
     "idx": "armor",
@@ -9828,14 +10020,15 @@
     "url": "/api/2024/equipment-categories/armor"
   },
   {
+    "name": "Very Rare"
+  },
+  {
     "idx": "weapons",
     "name": "Weapons",
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9843,9 +10036,23 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
+    "name": "Uncommon"
+  },
+  {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
   },
   {
     "idx": "armor",
@@ -9853,14 +10060,15 @@
     "url": "/api/2024/equipment-categories/armor"
   },
   {
+    "name": "Very Rare"
+  },
+  {
     "idx": "weapons",
     "name": "Weapons",
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Very Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9868,9 +10076,23 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
+    "name": "Uncommon"
+  },
+  {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
   },
   {
     "idx": "armor",
@@ -9878,9 +10100,7 @@
     "url": "/api/2024/equipment-categories/armor"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9888,9 +10108,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Uncommon"
   },
   {
     "idx": "wondrous-items",
@@ -9898,14 +10116,39 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Uncommon"
   },
   {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rarity Varies"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rarity Varies"
   },
   {
     "idx": "weapons",
@@ -9913,9 +10156,15 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
+    "name": "Rare"
+  },
+  {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
   },
   {
     "idx": "weapons",
@@ -9923,9 +10172,7 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Very Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9933,14 +10180,31 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
+    "name": "Uncommon"
+  },
+  {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
   },
   {
     "idx": "weapons",
     "name": "Weapons",
     "url": "/api/2024/equipment-categories/weapons"
+  },
+  {
+    "name": "Rare"
   },
   {
     "idx": "armor",
@@ -9948,9 +10212,7 @@
     "url": "/api/2024/equipment-categories/armor"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9958,9 +10220,23 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
+    "name": "Uncommon"
+  },
+  {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
   },
   {
     "idx": "weapons",
@@ -9968,9 +10244,7 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Legendary"
   },
   {
     "idx": "wondrous-items",
@@ -9978,9 +10252,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -9988,9 +10260,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Uncommon"
   },
   {
     "idx": "wondrous-items",
@@ -9998,9 +10268,39 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
+    "name": "Uncommon"
+  },
+  {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
   },
   {
     "idx": "weapons",
@@ -10008,9 +10308,15 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
+    "name": "Legendary"
+  },
+  {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -10038,9 +10344,7 @@
     "name": "Iron Horn of Valhalla"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare (Silver or Brass), Very Rare (Bronze), or Legendary (Iron)"
   },
   {
     "idx": "wondrous-items",
@@ -10048,9 +10352,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -10058,9 +10360,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -10068,9 +10368,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Very Rare"
   },
   {
     "idx": "wondrous-items",
@@ -10078,9 +10376,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Legendary"
   },
   {
     "idx": "wondrous-items",
@@ -10088,9 +10384,55 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
+    "name": "Very Rare"
+  },
+  {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rarity Varies"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Legendary"
   },
   {
     "idx": "weapons",
@@ -10098,9 +10440,15 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
+    "name": "Uncommon"
+  },
+  {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
   },
   {
     "idx": "weapons",
@@ -10108,9 +10456,7 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
-    "idx": "weapons",
-    "name": "Weapons",
-    "url": "/api/2024/equipment-categories/weapons"
+    "name": "Legendary"
   },
   {
     "idx": "weapons",
@@ -10118,14 +10464,23 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
+    "name": "Rare"
+  },
+  {
     "idx": "weapons",
     "name": "Weapons",
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
+  },
+  {
+    "idx": "weapons",
+    "name": "Weapons",
+    "url": "/api/2024/equipment-categories/weapons"
+  },
+  {
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -10133,9 +10488,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -10143,9 +10496,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Very Rare"
   },
   {
     "idx": "wondrous-items",
@@ -10153,14 +10504,47 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Very Rare"
   },
   {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Very Rare"
   },
   {
     "idx": "armor",
@@ -10168,9 +10552,7 @@
     "url": "/api/2024/equipment-categories/armor"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Uncommon"
   },
   {
     "idx": "wondrous-items",
@@ -10178,14 +10560,31 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Legendary"
   },
   {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
   },
   {
     "idx": "weapons",
@@ -10193,14 +10592,15 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
+    "name": "Very Rare"
+  },
+  {
     "idx": "weapons",
     "name": "Weapons",
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
+    "name": "Very Rare"
   },
   {
     "idx": "potions",
@@ -10208,29 +10608,7 @@
     "url": "/api/2024/equipment-categories/potions"
   },
   {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
-  },
-  {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
-  },
-  {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
-  },
-  {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "potions",
@@ -10238,14 +10616,71 @@
     "url": "/api/2024/equipment-categories/potions"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Very Rare"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Uncommon"
   },
   {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
   },
   {
     "idx": "armor",
@@ -10253,199 +10688,7 @@
     "url": "/api/2024/equipment-categories/armor"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
-  },
-  {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "potions",
-    "name": "Potions",
-    "url": "/api/2024/equipment-categories/potions"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
-  },
-  {
-    "idx": "rings",
-    "name": "Rings",
-    "url": "/api/2024/equipment-categories/rings"
+    "name": "Legendary"
   },
   {
     "idx": "wondrous-items",
@@ -10453,9 +10696,311 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Common"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Rarity Varies"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Rarity Varies"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "potions",
+    "name": "Potions",
+    "url": "/api/2024/equipment-categories/potions"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Legendary"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Legendary"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Legendary"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Legendary"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Legendary"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "rings",
+    "name": "Rings",
+    "url": "/api/2024/equipment-categories/rings"
+  },
+  {
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -10463,9 +11008,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -10473,9 +11016,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Very Rare"
   },
   {
     "idx": "wondrous-items",
@@ -10483,9 +11024,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Very Rare"
   },
   {
     "idx": "wondrous-items",
@@ -10493,9 +11032,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Legendary"
   },
   {
     "idx": "wondrous-items",
@@ -10503,19 +11040,79 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Uncommon"
   },
   {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Legendary"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Legendary"
   },
   {
     "idx": "weapons",
     "name": "Weapons",
     "url": "/api/2024/equipment-categories/weapons"
+  },
+  {
+    "name": "Very Rare"
   },
   {
     "idx": "armor",
@@ -10538,9 +11135,7 @@
     "name": "Shield +3"
   },
   {
-    "idx": "armor",
-    "name": "Armor",
-    "url": "/api/2024/equipment-categories/armor"
+    "name": "Uncommon (+1), Rare (+2), or Very Rare (+3)"
   },
   {
     "idx": "armor",
@@ -10548,9 +11143,7 @@
     "url": "/api/2024/equipment-categories/armor"
   },
   {
-    "idx": "armor",
-    "name": "Armor",
-    "url": "/api/2024/equipment-categories/armor"
+    "name": "Uncommon"
   },
   {
     "idx": "armor",
@@ -10558,14 +11151,7 @@
     "url": "/api/2024/equipment-categories/armor"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
-  },
-  {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "armor",
@@ -10573,9 +11159,15 @@
     "url": "/api/2024/equipment-categories/armor"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Very Rare"
+  },
+  {
+    "idx": "armor",
+    "name": "Armor",
+    "url": "/api/2024/equipment-categories/armor"
+  },
+  {
+    "name": "Rare"
   },
   {
     "idx": "wondrous-items",
@@ -10583,64 +11175,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "staffs",
-    "name": "Staffs",
-    "url": "/api/2024/equipment-categories/staffs"
-  },
-  {
-    "idx": "staffs",
-    "name": "Staffs",
-    "url": "/api/2024/equipment-categories/staffs"
-  },
-  {
-    "idx": "staffs",
-    "name": "Staffs",
-    "url": "/api/2024/equipment-categories/staffs"
-  },
-  {
-    "idx": "staffs",
-    "name": "Staffs",
-    "url": "/api/2024/equipment-categories/staffs"
-  },
-  {
-    "idx": "staffs",
-    "name": "Staffs",
-    "url": "/api/2024/equipment-categories/staffs"
-  },
-  {
-    "idx": "staffs",
-    "name": "Staffs",
-    "url": "/api/2024/equipment-categories/staffs"
-  },
-  {
-    "idx": "staffs",
-    "name": "Staffs",
-    "url": "/api/2024/equipment-categories/staffs"
-  },
-  {
-    "idx": "staffs",
-    "name": "Staffs",
-    "url": "/api/2024/equipment-categories/staffs"
-  },
-  {
-    "idx": "staffs",
-    "name": "Staffs",
-    "url": "/api/2024/equipment-categories/staffs"
-  },
-  {
-    "idx": "staffs",
-    "name": "Staffs",
-    "url": "/api/2024/equipment-categories/staffs"
-  },
-  {
-    "idx": "staffs",
-    "name": "Staffs",
-    "url": "/api/2024/equipment-categories/staffs"
-  },
-  {
-    "idx": "staffs",
-    "name": "Staffs",
-    "url": "/api/2024/equipment-categories/staffs"
+    "name": "Uncommon"
   },
   {
     "idx": "wondrous-items",
@@ -10648,9 +11183,143 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
+    "name": "Legendary"
+  },
+  {
+    "idx": "armor",
+    "name": "Armor",
+    "url": "/api/2024/equipment-categories/armor"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rarity Varies"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Legendary"
+  },
+  {
+    "idx": "staffs",
+    "name": "Staffs",
+    "url": "/api/2024/equipment-categories/staffs"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "staffs",
+    "name": "Staffs",
+    "url": "/api/2024/equipment-categories/staffs"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "staffs",
+    "name": "Staffs",
+    "url": "/api/2024/equipment-categories/staffs"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "staffs",
+    "name": "Staffs",
+    "url": "/api/2024/equipment-categories/staffs"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "staffs",
+    "name": "Staffs",
+    "url": "/api/2024/equipment-categories/staffs"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "staffs",
+    "name": "Staffs",
+    "url": "/api/2024/equipment-categories/staffs"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "staffs",
+    "name": "Staffs",
+    "url": "/api/2024/equipment-categories/staffs"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "staffs",
+    "name": "Staffs",
+    "url": "/api/2024/equipment-categories/staffs"
+  },
+  {
+    "name": "Legendary"
+  },
+  {
+    "idx": "staffs",
+    "name": "Staffs",
+    "url": "/api/2024/equipment-categories/staffs"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "staffs",
+    "name": "Staffs",
+    "url": "/api/2024/equipment-categories/staffs"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "staffs",
+    "name": "Staffs",
+    "url": "/api/2024/equipment-categories/staffs"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "staffs",
+    "name": "Staffs",
+    "url": "/api/2024/equipment-categories/staffs"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Uncommon"
   },
   {
     "idx": "weapons",
@@ -10658,9 +11327,7 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
-    "idx": "weapons",
-    "name": "Weapons",
-    "url": "/api/2024/equipment-categories/weapons"
+    "name": "Rare"
   },
   {
     "idx": "weapons",
@@ -10668,39 +11335,7 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
-    "idx": "weapons",
-    "name": "Weapons",
-    "url": "/api/2024/equipment-categories/weapons"
-  },
-  {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
-  },
-  {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
-  },
-  {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
-  },
-  {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
-  },
-  {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
-  },
-  {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
   },
   {
     "idx": "weapons",
@@ -10708,14 +11343,63 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "weapons",
+    "name": "Weapons",
+    "url": "/api/2024/equipment-categories/weapons"
+  },
+  {
+    "name": "Rare"
+  },
+  {
     "idx": "wondrous-items",
     "name": "Wondrous Items",
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "weapons",
-    "name": "Weapons",
-    "url": "/api/2024/equipment-categories/weapons"
+    "name": "Legendary"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Legendary"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Legendary"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Very Rare"
   },
   {
     "idx": "weapons",
@@ -10723,9 +11407,31 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
-    "idx": "wands",
-    "name": "Wands",
-    "url": "/api/2024/equipment-categories/wands"
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
+  },
+  {
+    "name": "Legendary"
+  },
+  {
+    "idx": "weapons",
+    "name": "Weapons",
+    "url": "/api/2024/equipment-categories/weapons"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "weapons",
+    "name": "Weapons",
+    "url": "/api/2024/equipment-categories/weapons"
+  },
+  {
+    "name": "Legendary"
   },
   {
     "idx": "wands",
@@ -10733,9 +11439,7 @@
     "url": "/api/2024/equipment-categories/wands"
   },
   {
-    "idx": "wands",
-    "name": "Wands",
-    "url": "/api/2024/equipment-categories/wands"
+    "name": "Rare"
   },
   {
     "idx": "wands",
@@ -10743,9 +11447,7 @@
     "url": "/api/2024/equipment-categories/wands"
   },
   {
-    "idx": "wands",
-    "name": "Wands",
-    "url": "/api/2024/equipment-categories/wands"
+    "name": "Rare"
   },
   {
     "idx": "wands",
@@ -10753,9 +11455,7 @@
     "url": "/api/2024/equipment-categories/wands"
   },
   {
-    "idx": "wands",
-    "name": "Wands",
-    "url": "/api/2024/equipment-categories/wands"
+    "name": "Rare"
   },
   {
     "idx": "wands",
@@ -10763,14 +11463,55 @@
     "url": "/api/2024/equipment-categories/wands"
   },
   {
-    "idx": "wands",
-    "name": "Wands",
-    "url": "/api/2024/equipment-categories/wands"
+    "name": "Rare"
   },
   {
     "idx": "wands",
     "name": "Wands",
     "url": "/api/2024/equipment-categories/wands"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wands",
+    "name": "Wands",
+    "url": "/api/2024/equipment-categories/wands"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wands",
+    "name": "Wands",
+    "url": "/api/2024/equipment-categories/wands"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wands",
+    "name": "Wands",
+    "url": "/api/2024/equipment-categories/wands"
+  },
+  {
+    "name": "Rare"
+  },
+  {
+    "idx": "wands",
+    "name": "Wands",
+    "url": "/api/2024/equipment-categories/wands"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "wands",
+    "name": "Wands",
+    "url": "/api/2024/equipment-categories/wands"
+  },
+  {
+    "name": "Uncommon"
   },
   {
     "idx": "wands",
@@ -10793,9 +11534,7 @@
     "name": "Wand of the War Mage +3"
   },
   {
-    "idx": "wands",
-    "name": "Wands",
-    "url": "/api/2024/equipment-categories/wands"
+    "name": "Uncommon (+1), Rare (+2), or Very Rare (+3)"
   },
   {
     "idx": "wands",
@@ -10803,9 +11542,7 @@
     "url": "/api/2024/equipment-categories/wands"
   },
   {
-    "idx": "wands",
-    "name": "Wands",
-    "url": "/api/2024/equipment-categories/wands"
+    "name": "Uncommon"
   },
   {
     "idx": "wands",
@@ -10813,9 +11550,31 @@
     "url": "/api/2024/equipment-categories/wands"
   },
   {
+    "name": "Rare"
+  },
+  {
     "idx": "wands",
     "name": "Wands",
     "url": "/api/2024/equipment-categories/wands"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "wands",
+    "name": "Wands",
+    "url": "/api/2024/equipment-categories/wands"
+  },
+  {
+    "name": "Uncommon"
+  },
+  {
+    "idx": "wands",
+    "name": "Wands",
+    "url": "/api/2024/equipment-categories/wands"
+  },
+  {
+    "name": "Rare"
   },
   {
     "idx": "weapons",
@@ -10838,9 +11597,7 @@
     "name": "Weapon +3"
   },
   {
-    "idx": "weapons",
-    "name": "Weapons",
-    "url": "/api/2024/equipment-categories/weapons"
+    "name": "Uncommon (+1), Rare (+2), or Very Rare (+3)"
   },
   {
     "idx": "weapons",
@@ -10848,9 +11605,7 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
-    "idx": "weapons",
-    "name": "Weapons",
-    "url": "/api/2024/equipment-categories/weapons"
+    "name": "Uncommon"
   },
   {
     "idx": "weapons",
@@ -10858,9 +11613,23 @@
     "url": "/api/2024/equipment-categories/weapons"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Rare"
+  },
+  {
+    "idx": "weapons",
+    "name": "Weapons",
+    "url": "/api/2024/equipment-categories/weapons"
+  },
+  {
+    "name": "Very Rare"
+  },
+  {
+    "idx": "weapons",
+    "name": "Weapons",
+    "url": "/api/2024/equipment-categories/weapons"
+  },
+  {
+    "name": "Uncommon"
   },
   {
     "idx": "wondrous-items",
@@ -10868,9 +11637,7 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "wondrous-items",
-    "name": "Wondrous Items",
-    "url": "/api/2024/equipment-categories/wondrous-items"
+    "name": "Legendary"
   },
   {
     "idx": "wondrous-items",
@@ -10878,159 +11645,23 @@
     "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "saving-throw-con",
-    "name": "Saving Throw: CON",
-    "url": "/api/2024/proficiencies/saving-throw-con"
+    "name": "Uncommon"
   },
   {
-    "idx": "saving-throw-int",
-    "name": "Saving Throw: INT",
-    "url": "/api/2024/proficiencies/saving-throw-int"
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "saving-throw-wis",
-    "name": "Saving Throw: WIS",
-    "url": "/api/2024/proficiencies/saving-throw-wis"
+    "name": "Uncommon"
   },
   {
-    "idx": "skill-history",
-    "name": "Skill: History",
-    "url": "/api/2024/proficiencies/skill-history"
+    "idx": "wondrous-items",
+    "name": "Wondrous Items",
+    "url": "/api/2024/equipment-categories/wondrous-items"
   },
   {
-    "idx": "skill-perception",
-    "name": "Skill: Perception",
-    "url": "/api/2024/proficiencies/skill-perception"
-  },
-  {
-    "idx": "con",
-    "name": "CON",
-    "url": "/api/2024/ability-scores/con"
-  },
-  {
-    "idx": "str",
-    "name": "STR",
-    "url": "/api/2024/ability-scores/str"
-  },
-  {
-    "idx": "bludgeoning",
-    "name": "Bludgeoning",
-    "url": "/api/2024/damage-types/bludgeoning"
-  },
-  {
-    "idx": "int",
-    "name": "INT",
-    "url": "/api/2024/ability-scores/int"
-  },
-  {
-    "idx": "psychic",
-    "name": "Psychic",
-    "url": "/api/2024/damage-types/psychic"
-  },
-  {
-    "idx": "wis",
-    "name": "WIS",
-    "url": "/api/2024/ability-scores/wis"
-  },
-  {
-    "idx": "saving-throw-dex",
-    "name": "Saving Throw: DEX",
-    "url": "/api/2024/proficiencies/saving-throw-dex"
-  },
-  {
-    "idx": "saving-throw-wis",
-    "name": "Saving Throw: WIS",
-    "url": "/api/2024/proficiencies/saving-throw-wis"
-  },
-  {
-    "idx": "skill-perception",
-    "name": "Skill: Perception",
-    "url": "/api/2024/proficiencies/skill-perception"
-  },
-  {
-    "idx": "skill-stealth",
-    "name": "Skill: Stealth",
-    "url": "/api/2024/proficiencies/skill-stealth"
-  },
-  {
-    "idx": "slashing",
-    "name": "Slashing",
-    "url": "/api/2024/damage-types/slashing"
-  },
-  {
-    "idx": "acid",
-    "name": "Acid",
-    "url": "/api/2024/damage-types/acid"
-  },
-  {
-    "idx": "dex",
-    "name": "DEX",
-    "url": "/api/2024/ability-scores/dex"
-  },
-  {
-    "idx": "acid",
-    "name": "Acid",
-    "url": "/api/2024/damage-types/acid"
-  },
-  {
-    "idx": "cha",
-    "name": "CHA",
-    "url": "/api/2024/ability-scores/cha"
-  },
-  {
-    "idx": "dex",
-    "name": "DEX",
-    "url": "/api/2024/ability-scores/dex"
-  },
-  {
-    "idx": "poison",
-    "name": "Poison",
-    "url": "/api/2024/damage-types/poison"
-  },
-  {
-    "idx": "saving-throw-dex",
-    "name": "Saving Throw: DEX",
-    "url": "/api/2024/proficiencies/saving-throw-dex"
-  },
-  {
-    "idx": "saving-throw-wis",
-    "name": "Saving Throw: WIS",
-    "url": "/api/2024/proficiencies/saving-throw-wis"
-  },
-  {
-    "idx": "skill-perception",
-    "name": "Skill: Perception",
-    "url": "/api/2024/proficiencies/skill-perception"
-  },
-  {
-    "idx": "skill-stealth",
-    "name": "Skill: Stealth",
-    "url": "/api/2024/proficiencies/skill-stealth"
-  },
-  {
-    "idx": "slashing",
-    "name": "Slashing",
-    "url": "/api/2024/damage-types/slashing"
-  },
-  {
-    "idx": "lightning",
-    "name": "Lightning",
-    "url": "/api/2024/damage-types/lightning"
-  },
-  {
-    "idx": "dex",
-    "name": "DEX",
-    "url": "/api/2024/ability-scores/dex"
-  },
-  {
-    "idx": "lightning",
-    "name": "Lightning",
-    "url": "/api/2024/damage-types/lightning"
-  },
-  {
-    "idx": "cha",
-    "name": "CHA",
-    "url": "/api/2024/ability-scores/cha"
+    "name": "Rare"
   },
   {
     "idx": "barbarian",

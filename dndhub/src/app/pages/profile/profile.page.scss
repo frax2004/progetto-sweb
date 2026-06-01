@@ -1,11 +1,18 @@
-.imgFrame {
-    max-width: 40vmin;
-    max-height: 40vmin;
+
+
+.imgAndOptions {
+    border: 1px solid yellow;
 }
 
 .contentContainer {
     display: flex;
     flex-direction: row;
+    width: 90vw;
+    height: 90vh;
+    margin-top: 40px;
+    border: 1px green solid;
+    justify-content: center;
+    align-items: center;
 }
 
 .optionButtons {
@@ -13,10 +20,17 @@
     flex-direction: column;
 }
 
+
+
 .informationContainer {
+    border: 1px green solid;
     display: flex;
     flex-direction: row;
+    align-self: center;
+    height: 100%;
 }
 
-
-
+.informationBox {
+    height: 20vh;
+    width: 20vw;
+}

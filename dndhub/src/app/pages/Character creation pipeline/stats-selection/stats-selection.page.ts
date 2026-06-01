@@ -10,12 +10,13 @@ import { Navigate } from 'src/app/core/core';
 
 import { CheckboxComponent } from 'src/app/components/checkbox/checkbox.component';
 import { TitleComponent } from "src/app/components/title/title.component";
+import { LabelComponent } from "src/app/components/label/label.component";
 @Component({
   selector: 'app-stats-selection',
   templateUrl: './stats-selection.page.html',
   styleUrls: ['./stats-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, IonRow, RadioButtonComponent, IonCol, IonLabel, ButtonComponent, CheckboxComponent, DragEntryComponent, TitleComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, IonRow, RadioButtonComponent, IonCol, IonLabel, ButtonComponent, CheckboxComponent, DragEntryComponent, TitleComponent, LabelComponent]
 })
 export class StatsSelectionPage implements OnInit {
   manualSelection: Boolean = true;

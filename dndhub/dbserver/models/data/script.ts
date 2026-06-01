@@ -26,19 +26,27 @@ export function decompose<T>(root: unknown, predicate: (obj: any) => boolean): T
   return result;
 }
 
+// export enum SuccessType {
+//     'none',
+//     'half',
+//     'other',
+// }
 
-const api_references = fs
+// da sistemare
+
+const difficulty_classes = fs
 .readdirSync('.', 'utf8')
 .filter(path => path.startsWith('5e'))
 .flatMap(
   path => {
     const data = JSON.parse(fs.readFileSync(path, 'utf8'));
     
-    class APIReference {
-      index!: string;
-      name!: string;
-      url!: string;
-      note?: string;
+    class DifficultyClass {
+    // in teoria nei json non abbiamo id, lo devo aggiungere tramite funzione
+      //id!: number;
+      dc_type!: string; // è foreign key di api reference
+      dc_value?: number;
+      success_type!: string;
     }
 
     return decompose<APIReference>(data, (obj: any) => {
@@ -55,16 +63,16 @@ const api_references = fs
         typeof obj === "object" 
         && obj !== null 
         &&
-        typeof obj.index === "string" &&
-        typeof obj.name === "string" &&
-        typeof obj.url === "string" && (
-          obj.note === undefined 
-          || typeof obj.note === "string"
-        )
+        //typeof obj.id === "number" &&
+        typeof obj.dc_type === "object" && (
+        typeof obj.dc_value === "number" 
+        || obj.dc_value === undefined) &&
+        // number perché in teoria è enum?
+        typeof obj.success_type === "string"
       );
     });
   }
 );
 
 
-console.log(JSON.stringify(api_references).split("index").join("idx"));
+console.log(JSON.stringify(difficulty_classes).split("index").join("idx"));

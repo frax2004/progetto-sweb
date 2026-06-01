@@ -1,14 +1,13 @@
 <ion-content>
-  <div id="pageTitle">
-    <div>
-      <ion-title id="title">Profilo personale</ion-title>
-    </div>
-  </div>
+  <app-title
+  [title] = "'Profilo personale'"
+  ></app-title>
 
   <div class="contentContainer">
     <div class="imgAndOptions">
       <div class="goBack">
         <app-button
+        [margin]="false"
         [button] = "{ text: 'Torna indietro', expand: ''}"
         [context] = "buttonCallbacks['placeholder']"
         ></app-button>
@@ -22,16 +21,19 @@
       <div class="optionButtons">
         <!-- modifica account (username, password ecc ecc) -->
         <app-button
+        [margin]="false"
         [button] = "{ text: 'Modifica account', expand: ''}"
         [context] = "buttonCallbacks['placeholder']"
         ></app-button>
         <!-- Log out -->
         <app-button
+        [margin]="false"
         [button] = "{ text: 'Log out', expand: ''}"
         [context] = "buttonCallbacks['placeholder']"
         ></app-button>
         <!-- elimina account -->
         <app-button
+        [margin]="false"
         [button] = "{ text: 'Elimina account', expand: ''}"
         [context] = "buttonCallbacks['placeholder']"
         ></app-button>
@@ -43,18 +45,18 @@
     <div class="informationContainer">
       <div class="genericInformation">
         <ion-list>
-          <app-unordered-list-element [text]="'Personaggi creati: 4'"></app-unordered-list-element>
-          <app-unordered-list-element [text]="'Campagne create: 6'"></app-unordered-list-element>
-          <app-unordered-list-element [text]="'Campagne a cui si partecipa: 8'"></app-unordered-list-element>
+          <app-unordered-list-element class="informatinBox" [text]="'Personaggi creati: 4'"></app-unordered-list-element>
+          <app-unordered-list-element class="informatinBox" [text]="'Campagne create: 6'"></app-unordered-list-element>
+          <app-unordered-list-element class="informatinBox" [text]="'Campagne a cui si partecipa: 8'"></app-unordered-list-element>
         </ion-list>
       </div>
 
       <div class="genericInformation">
         <ion-list>
-          <app-unordered-list-element [text]="'Username: gianni'"></app-unordered-list-element>
-          <app-unordered-list-element [text]="'Email: gianni@chiocciola.gmail.it'"></app-unordered-list-element>
-          <ion-item>
-            <ion-label>Password: {{showPassword()}}</ion-label>
+          <app-unordered-list-element class="informatinBox" [text]="'Username: gianni'"></app-unordered-list-element>
+          <app-unordered-list-element class="informatinBox" [text]="'Email: gianni@chiocciola.gmail.it'"></app-unordered-list-element>
+          <ion-item class="informatinBox">
+            <app-label>Password: {{showPassword()}}</app-label>
             <app-button
             [button] = "{text: 'Mostra password', expand:''}"
             [context] = "buttonCallbacks['uncensor']"

@@ -27,44 +27,49 @@ export function decompose<T>(root: unknown, predicate: (obj: any) => boolean): T
 }
 
 
-const api_references = fs
+const choices = fs
 .readdirSync('.', 'utf8')
-.filter(path => path.startsWith('5e'))
+.filter((path: string) => path.startsWith('5e'))
 .flatMap(
-  path => {
+  (path: any) => {
     const data = JSON.parse(fs.readFileSync(path, 'utf8'));
     
-    class APIReference {
-      index!: string;
-      name!: string;
-      url!: string;
-      note?: string;
+    class Choice {
+      desc?: string;
+      choose!: string;
+      type?: string;
+      // in teoria opt_id è reference ad options, 
+      // ho prima bisogno di quello?
+      // from sarebbe opt_id
+      opt_id!: number;
     }
 
-    return decompose<APIReference>(data, (obj: any) => {
+    return decompose<Choice>(data, (obj: any) => {
       const actual = Object.keys(obj);
     
       const expected = [
-        'index',
-        'name',
-        'url',
-        'note'
+        'desc',
+        'choose',
+        'type',
+        'from'
       ];
     
       return actual.every(s => expected.includes(s)) && (
         typeof obj === "object" 
         && obj !== null 
-        &&
-        typeof obj.index === "string" &&
-        typeof obj.name === "string" &&
-        typeof obj.url === "string" && (
-          obj.note === undefined 
-          || typeof obj.note === "string"
-        )
+        && (
+          obj.desc === undefined 
+          || typeof obj.desc === "string"
+        ) &&
+        typeof obj.choose === "number" && (
+          obj.type === undefined 
+          || typeof obj.type === "string"
+        ) 
+        && typeof obj.from === "object"
       );
     });
   }
 );
 
 
-console.log(JSON.stringify(api_references).split("index").join("idx"));
+console.log(JSON.stringify(choices).split("index").join("idx"));

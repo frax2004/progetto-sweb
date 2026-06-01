@@ -26,7 +26,7 @@ export function decompose<T>(root: unknown, predicate: (obj: any) => boolean): T
   return result;
 }
 
-// prova commit
+// commit prova
 
 // export enum SuccessType {
 //     'none',

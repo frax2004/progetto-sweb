@@ -624,11 +624,122 @@ create table if not exists WeaponProperty (
 
 -- tabelle di Spells.ts
 
+create table if not exists ArrayClass (
+  array_id number not null,
+  array_idx number not null,
+  class text not null,
+
+  primary key (arra_id,array_idx),
+  foreign key (class) references Class(idx)
+);
+
+create table if not exists ArrayComponents (
+  array_id number not null,
+  array_idx number not null,
+  item check(item='v' or item='s' or item='m'),
+
+  primary key (array_id,array_idx)
+);
+
 create table if not exists Spells (
   name text not null primary key,
   level number not null,
   school text not null,
-
+  classes number not null,
+  actionType text not null,
+  concentration boolean not null,
+  ritual boolean not null,
+  range text not null,
+  components number,
+  material text,
+  duration text not null,
+  description text not null,
 
   foreign key (school) references MagicSchool(idx),
+  foreign key (components) references ArrayComponents(array_id),
+  foreign key (classes) references ArrayClass(array_id)
+);
+
+-- tabelle di level.ts
+
+create table if not exists ArrayCreatingSpellSlots (
+  array_idx number not null,
+  array_id number not null,
+  sorcery_point_cost number not null,
+  spell_slot_level number not null,
+
+  primary key (array_id,array_idx)
+);
+
+create table if not exists ClassSpecific (
+  id number not null primary key,
+  action_surges number,
+  arcane_recovery_levels number,
+  aura_range number,
+  bardic_inspiration_die number,
+  brutal_critical_dice number,
+  channel_divinity_charges number,
+  creating_spell_slots number,
+  destroy_undead_cr number,
+  extra_attacks number,
+  favored_enemies number,
+  favored_terrain number,
+  indomitable_uses number,
+  invocations_known number,
+  ki_points number,
+  magical_secrets_max_5 number,
+  magical_secrets_max_7 number,
+  magical_secrets_max_9 number,
+  -- i due qua sotto sono attributi "flattenati"
+  martial_arts_dice_count number,
+  martial_arts_dice_value number,
+  metamagic_known number,
+  mystic_arcanum_level_6 number,
+  mystic_arcanum_level_7 number,
+  mystic_arcanum_level_8 number,
+  mystic_arcanum_level_9 number,
+  rage_count number,
+  rage_damage_bonus number,
+  -- i due qua sotto sono attributi "flattenati"
+  sneak_attack_dice_count number,
+  sneak_attack_dice_value number,
+  song_of_rest_die number,
+  sorcery_points number,
+  unarmored_movement number,
+  wild_shape_fly boolean,
+  wild_shape_max_cr number,
+  wild_shape_swim boolean,
+
+  foreign key (creating_spell_slots) references ArrayCreatingSpellSlots(array_id) 
+);
+
+create table if not exists Level (
+  index text not null primary key,
+  level number not null,
+  ability_score_bonuses number,
+  prof_bonus number,
+  features number,
+  class text not null,
+  class_specific number,
+  subclass text,
+  url text,
+  -- le prossime cose sono tutte flatten di altre tabelle
+  cantrips_known number,
+  spell_slots_level_1 number,
+  spell_slots_level_2 number,
+  spell_slots_level_3 number,
+  spell_slots_level_4 number,
+  spell_slots_level_5 number,
+  spell_slots_level_6 number,
+  spell_slots_level_7 number,
+  spell_slots_level_8 number,
+  spell_slots_level_9 number,
+  spells_known number,
+  additional_magical_secrets_max_lvl: number,
+  aura_range number,
+
+  foreign key (features) references ArrayAPIReference(array_id),
+  foreign key (class) references APIReference(idx),
+  foreign key (class_specific) references ClassSpecific(id),
+  foreign key (subclass) references APIReference(idx)
 )

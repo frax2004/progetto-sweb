@@ -3,7 +3,8 @@
         class = "genericButton"
         (click)="context.onClick($event)"
         [expand]="button.expand"
-        style="--background: {{button.color}}"
+        style="
+        --background: {{button.color}};"
     >
     {{ button.text }}
     </ion-button>

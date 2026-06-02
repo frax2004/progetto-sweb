@@ -485,24 +485,45 @@ export namespace models {
 
   // tabelle di Traits.ts
 
-  export class ArraySpellTrait {
+  export class ArrayBreathWeaponDamage {
+    damage_type!: string;
     array_id!: number;
     array_idx!: number;
-    spell!: string;
-    uses?: string;
-    recovery?: string;
+    character_level!: string;
+    damage_dice!: string;
+  }
+
+  export class BreathWeapon {
+    id!: number;
+    name!: string;
+    desc!: string;
+    area_of_effect!: number;
+    usage_type!: string;
+    usage_times!: number;
+    dc!: number;
+    damage!: number;
+  }
+
+  export class TraitSpecific {
+    id!: number;
+    damage_type?: string;
+    breath_weapon?: number;
+    spell_options?: number;
+    subtrait_options?: number;
   }
 
   export class Trait {
     idx!: string;
     name!: string;
     url!: string;
-    description!: string;
+    desc!: string;
     species!: number;
-    spells?: number;
     subspecies?: number;
-    proficency_choices?: number;
-    speed?: number;
+    proficiencies?: number;
+    proficiency_choices?: number;
+    language_options?: number;
+    parent?: string;
+    trait_specific?: number;
   }
 
   // tabelle di WeaponProperties.ts

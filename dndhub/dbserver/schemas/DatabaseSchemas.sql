@@ -626,6 +626,17 @@ create table if not exists Subspecies (
 
 -- tabelle di Traits.ts
 
+create table if not exists ArrayBreathWeaponDamage (
+  damage_type text not null,
+  array_id number not null,
+  array_idx number not null,
+  character_level text not null,
+  damage_dice text not null,
+
+  primary key (array_id,array_idx), 
+  foreign key (damage_type) references APIReference(idx)
+);
+
 create table if not exists BreathWeapon (
   id number not null primary key,
   name text not null,
@@ -635,9 +646,9 @@ create table if not exists BreathWeapon (
   usage_type text not null,
   usage_times number not null,
   dc number not null,
-  damage text not null,
-  -- damage è il flatten di breathweapondamage
+  damage number not null,
 
+  foreign key (damage) references ArratBreathWeaponDamage(array_id),
   foreign key (area_of_effect) references AreaOfEffect(id),
   foreign key (dc) references DifficultyClass(id)
 );
@@ -658,13 +669,13 @@ create table if not exists TraitSpecific (
 create table if not exists Trait (
   idx text not null primary key,
   name text not null,
+  url text not null,
   desc text not null,
   species number not null,
   subspecies number,
   proficiencies number,
   proficency_choices number,
   language_options number,
-  url text not null,
   parent text,
   trait_specific number,
 

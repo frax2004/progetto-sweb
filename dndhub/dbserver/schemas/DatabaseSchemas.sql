@@ -180,13 +180,6 @@ create table if not exists Alignment (
 
 -- tabelle di Backgrounds.ts
 
-create table if not exists BackgroundFeatReference (
-  idx text not null primary key,
-  name text not null,
-  url text not null,
-  note text
-);
-
 create table if not exists ArrayAPIReference (
   array_id number not null,
   item text not null,
@@ -205,22 +198,46 @@ create table if not exists ArrayChoice (
   foreign key (id) references Choice(opt_id)
 );
 
+
+create table if not exists ArrayStartingEquipment (
+  array_id number not null,
+  array_idx number not null,
+  equipment text not null,
+  quantity number not null,
+
+  primary key (array_id,array_idx),
+  foreign key (equipment) references APIReference(idx)
+);
+
+-- originalmente questa tabelle farebbe riferimento
+-- ad altre tre tabelle ma essendo esse molto semplici, faccio flatten
 create table if not exists Background (
   idx text not null primary key,
   name text not null,
-  ability_scores number not null,
-  feat text not null,
-  proficiencies number not null,
-  proficiency_choices number,
-  equipment_options number,
+  starting_proficiencies number not null, -- foreign key
+  language_options number, -- foreign key
+  starting_equipment number, -- foreign key
+  -- primo flatten
+  starting_gold_quantity number,
+  starting_gold unit number,
+  -- secondo flatten
+  feature_name text,
+  feature_desc text, -- in teoria è array di string ma posssiamo fare flatMap
+  --
+  personality_traits number, -- foreign key
+  ideals number, -- foreign key
+  bonds number, -- foreign key
+  flaws number, -- foreign key
   url text,
 
 
-  foreign key (ability_scores) references ArrayAPIReference(array_id),
-  foreign key (feat) references BackgroundFeatReference(idx),
-  foreign key (proficiencies) references ArrayAPIReference(array_id),
-  foreign key (proficiency_choices) references ArrayChoice(id),
-  foreign key (equipment_options) references ArrayChoice(id)
+  foreign key (language_options) references Choice(opt_id),
+  foreign key (starting_proficiencies) references ArrayAPIReference(array_id),
+  foreign key (starting_equipment) references ArrayStartingEquipment(array_id),
+  foreign key (personality_traits) references Choice(opt_id),
+  foreign key (ideals) references Choice(opt_id),
+  foreign key (bonds) references Choice(opt_id),
+  foreign key (flaws) references Choice(opt_id)
 );
 
 -- tabelle di Condition.ts
@@ -358,39 +375,30 @@ create table if not exists MultiClassing (
   foreign key (proficiency_choices) references ArrayChoice(array_id)
 );
 
-create table if not exists PrimaryAbility (
-  desc text not null primary key,
-  ability_scores number,
-  ability_score_options number,
-
-  foreign key (ability_scores) references ArrayAPIReference(array_id),
-  foreign key (ability_score_options) references Choice(opt_id)
-);
-
 create table if not exists Class (
   idx text not null,
   name text not null primary key,
-  primary_ability text not null,
   hit_die number not null,
   class_levels text not null,
   multi_classing number,
   proficiencies number,
   proficiency_choices number not null,
   saving_throws number,
+  starting_equipment number, -- foreign key
   starting_equipment_options number not null,
   subclasses number,
   spellcasting text,
   spells text,
   url text not null,
 
-  foreign key (primary_ability) references PrimaryAbility(desc),
   foreign key (multi_classing) references MultiClassing(id),
   foreign key (proficiencies) references ArrayAPIReference(array_id),
   foreign key (proficiency_choices) references ArrayChoice(array_id),
   foreign key (saving_throws) references ArrayAPIReference(array_id),
   foreign key (starting_equipment_options) references ArrayChoice(array_id),
   foreign key (subclasses) references ArrayAPIReference(array_id),
-  foreign key (spellcasting) references Spellcasting(spellcasting_ability)
+  foreign key (spellcasting) references Spellcasting(spellcasting_ability),
+  foreign key (starting_equipment) references ArrayStartingEquipment(array_id)
 );
 
 -- tabelle di Equipments.ts
@@ -516,32 +524,72 @@ create table if not exists MagicItem (
 
 -- tabelle di species
 
+create table if not exists ArrayAbilityBonus (
+  ability_score text not null,
+  bonus number not null,
+  array_id number not null,
+  array_idx number not null,
+
+  primary key (array_id,array_idx),
+  foreign key (ability_score) references APIReference(idx)
+);
+
 create table if not exists Species (
   idx text not null primary key,
   name text not null,
-  url text not null,
-  type text not null,
-  size text,
-  size_options number,
   speed number not null,
-  traits number,
-  subspecies number,
+  ability_bonuses number not null, -- foreign key
+  ability_bonus_options number,
+  alignment text not null,
+  age text not null,
+  size text not null,
+  size_description text not null,
+  starting_proficiencies number, -- foreign key
+  starting_proficiency_options number, -- foreign key
+  languages number not null, -- foreign key
+  languages_desc text not null,
+  language_options number, -- foreign key
+  traits number, -- foreign key
+  subspecies number, -- subraces nella versione 2014, foreign key
+  url text not null,
 
-  foreign key (size_options) references Choice(opt_id),
+  foreign key (ability_bonuses) references ArrayAbilityBonus(array_id),
+  foreign key (ability_bonus_options) references Choice(opt_id),
+  foreign key (starting_proficiencies) references ArrayAPIReference(array_id),
+  foreign key (startin_profinciency_options) references Choice(opt_id),
+  foreign key (languages) references ArrayAPIReference(array_id),
+  foreign key (language_options) references Choice(opt_id),
   foreign key (traits) references ArrayAPIReference(array_id),
-  foreign key (subspecies) references ArrayAPIReference(array_id)
+  foreign key (subpecies) references ArrayAPIReference(array_id)
 );
 
 -- tabelle di Subclass.ts
 
-create table if not exists ArraySubclassFeature (
+create table if not exists SubclassSpellPrerequisite (
+  idx text not null primary key,
+  type text not null,
+  name text not null,
+  url text not null
+);
+
+create table if not exists ArraySubclassSpellPrerequisite (
+  item text not null,
+  array_id number not null,
+  array_idx number not null, 
+
+  primary key (array_id,array_idx),
+  foreign key (item) references SubclassSpellPrerequisite(idx)
+);
+
+create table if not exists ArraySubclassSpell (
+  prerequisite number not null,
+  spell text not null,
   array_id number not null,
   array_idx number not null,
-  name text not null,
-  level number not null,
-  description text not null,
 
-  primary key (array_id,array_idx)
+  primary key (array_id,array_idx),
+  foreign key (prerequisite) references ArraySubclassSpellPrerequisite(array_id),
+  foreign key (spell) references APIReference(idx)
 );
 
 create table if not exists Subclass (
@@ -549,38 +597,30 @@ create table if not exists Subclass (
   url text not null,
   name text not null,
   class text not null,
-  summary text not null,
-  description text not null,
-  features number not null,
+  subclass_flavor text not null,
+  desc text not null, -- dovrebbe essere un'array, facciamo flatmap
+  subclass_levels text not null,
+  spells number,
 
   foreign key (class) references APIReference(idx),
-  foreign key (features) references ArraySubclassFeature(array_id)
+  foreign key (spells) references ArraySubclassSpell(array_id)
 );
 
 -- tabelle di Subspecies.ts
 
-create table if not exists ArraySubspeciesTrait (
-  idx text not null,
-  array_id number not null,
-  array_idx number not null,
-  name text not null,
-  url text not null,
-  level number not null,
 
-  primary key (array_id,array_idx)
-);
-
-create table if not exists SubspeciesSchema (
+create table if not exists Subspecies (
   idx text not null primary key,
   name text not null,
   url text not null,
-  species text not null,
-  traits number not null,
-  damage_type text,
+  species text not null, -- si chiama race nel 2014
+  desc text not null,
+  ability_bonuses number not null, -- foreign key
+  racial_traits number, -- foreign key
 
   foreign key (species) references APIReference(idx),
-  foreign key (traits) references ArraySubspeciesTrait(array_id),
-  foreign key (damage_type) references APIReference(idx)
+  foreign key (ability_bonuses) references ArrayAbilityBonus(array_id),
+  foreign key (racial_traits) references ArrayAPIReference(array_id)
 ); 
 
 -- tabelle di Traits.ts

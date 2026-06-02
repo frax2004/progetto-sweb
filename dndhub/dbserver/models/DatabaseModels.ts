@@ -149,11 +149,11 @@ export namespace models {
 
   // tabelle di Backgrounds.ts
 
-  export class BackgroundFeatReference {
-    idx!: string;
-    name!: string;
-    url!: string;
-    note?: string;
+  export class ArrayStartingEquipment {
+    array_id!: number;
+    array_idx!: number;
+    equipment!: string;
+    quantity!: number;
   }
 
   export class ArrayAPIReference {
@@ -171,11 +171,19 @@ export namespace models {
   export class Background {
     idx!: string;
     name!: string;
-    ability_scores!: number;
-    feat!: string;
-    proficiencies!: number;
-    proficiency_choices?: number;
-    equipment_options?: number;
+    starting_proficiencies!: number;
+    language_options?: number;
+    starting_equipment?: number;
+    // primo flatten
+    starting_gold_quantity?: number;
+    starting_gold_unit?: number;
+    // secondo flatten
+    feature_name?: string;
+    feature_desc?: string;
+    personality_traits?: number;
+    ideals?: number;
+    bonds?: number;
+    flaws?: number;
     url?: string;
   }
 
@@ -290,12 +298,6 @@ export namespace models {
     proficiency_choices?: number;
   }
 
-  export class PrimaryAbility {
-    desc!: string;
-    ability_scores?: number;
-    ability_score_options?: number;
-  }
-
   export class Class {
     idx!: string;
     name!: string;
@@ -306,6 +308,7 @@ export namespace models {
     proficiencies?: number;
     proficiency_choices!: number;
     saving_throws?: number;
+    starting_equipment?: number;
     starting_equipment_options!: number;
     subclasses?: number;
     spellcasting?: string;
@@ -408,26 +411,53 @@ export namespace models {
 
   // tabelle di species
 
+  export class ArrayAbilityBonus {
+    ability_score!: string;
+    bonus!: number; 
+    array_id!: number; 
+    array_idx!: number; 
+  }
+
   export class Species {
     idx!: string;
     name!: string;
-    url!: string;
-    type!: string;
-    size?: string;
-    size_options?: number;
     speed!: number;
+    ability_bonuses!: number;
+    ability_bonus_options?: number;
+    alignment!: string;
+    age!: string;
+    starting_proficiencies?: number;
+    starting_proficiency_options?: number;
+    languages!: number;
+    languages_desc!: string;
+    language_options?: number;
+    url!: string;
+    size!: string;
+    size_description!: string;
     traits?: number;
     subspecies?: number;
   }
 
   // tabelle di Subclass.ts
 
-  export class ArraySubclassFeature {
+  export class SubclassSpellPrerequisite {    
+    idx!: string;
+    type!: string;
+    name!: string;
+    url!: string; 
+  }
+
+  export class ArraySubclassSpellPrerequisite {    
+    item!: string;
+    array_id!: number;
+    array_idx!: number; 
+  }
+
+  export class ArraySubclassSpell {    
+    prerequisite!: number;
+    spell!: string;
     array_id!: number;
     array_idx!: number;
-    name!: string;
-    level!: number;
-    description!: string;
   }
 
   export class Subclass {
@@ -435,29 +465,22 @@ export namespace models {
     url!: string;
     name!: string;
     class!: string;
-    summary!: string;
-    description!: string;
-    features!: number;
+    subclass_flavor!: string;
+    desc!: string;
+    subclass_levels!: string;
+    spells?: number;
   }
 
   // tabelle di Subspecies.ts
 
-  export class ArraySubspeciesTrait {
-    idx!: string;
-    array_id!: number;
-    array_idx!: number;
-    name!: string;
-    url!: string;
-    level!: number;
-  }
-
-  export class SubspeciesSchema {
+  export class Subspecies {
     idx!: string;
     name!: string;
     url!: string;
     species!: string;
-    traits!: number;
-    damage_type?: string;
+    desc!: string;
+    ability_bonuses!: number;
+    racial_traits?: number;
   } 
 
   // tabelle di Traits.ts

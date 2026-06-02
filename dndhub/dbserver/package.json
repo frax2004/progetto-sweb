@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.6",
+    "deep-equal": "^2.2.3",
     "deno": "^2.8.1",
     "express": "^5.2.1",
     "fs": "^0.0.1-security",

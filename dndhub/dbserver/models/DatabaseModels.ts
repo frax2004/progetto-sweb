@@ -544,7 +544,8 @@ export namespace models {
     components?: number;
     material?: string;
     duration!: string ;
-    description!: string ;
+    description!: string;
+    cantripUpgrade?: string;
   }
 
   export class ArrayCreatingSpellSlots {    

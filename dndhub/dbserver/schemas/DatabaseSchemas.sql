@@ -18,7 +18,8 @@ create table if not exists DifficultyClass (
 );
 
 create table if not exists AreaOfEffect (
-  size number not null primary key,
+  id number not null primary key,
+  size number not null,
   type check(
   type='sphere'
   or type='cube'
@@ -625,32 +626,56 @@ create table if not exists Subspecies (
 
 -- tabelle di Traits.ts
 
-create table if not exists ArraySpellTrait (
-  array_id number not null,
-  array_idx number not null,
-  spell text not null,
-  uses text,
-  recovery text,
+create table if not exists BreathWeapon (
+  id number not null primary key,
+  name text not null,
+  desc text not null,
+  area_of_effect number not null,
+  -- i prossimi due sono flatten
+  usage_type text not null,
+  usage_times number not null,
+  dc number not null,
+  damage text not null,
+  -- damage è il flatten di breathweapondamage
 
-  primary key (array_id,array_idx),
-  foreign key (spell) references APIReference(idx)
+  foreign key (area_of_effect) references AreaOfEffect(id),
+  foreign key (dc) references DifficultyClass(id)
+);
+
+create table if not exists TraitSpecific (
+  id number not null primary key,
+  damage_type text,
+  breath_weapon number,
+  spell_options number,
+  subtrait_options number,
+
+  foreign key (damage_type) references APIReference(idx),
+  foreign key (breath_weapon) references BreathWeapon(id),
+  foreign key (spell_options) references Choice(opt_id),
+  foreign key (subtrait_options) references Choice(opt_id)
 );
 
 create table if not exists Trait (
   idx text not null primary key,
   name text not null,
-  url text not null,
-  description text not null,
+  desc text not null,
   species number not null,
-  spells number,
   subspecies number,
+  proficiencies number,
   proficency_choices number,
-  speed number,
+  language_options number,
+  url text not null,
+  parent text,
+  trait_specific number,
+
 
   foreign key (species) references ArrayAPIReference(array_id),
-  foreign key (spells) references ArraySpellTrait(array_id), 
   foreign key (subspecies) references ArrayAPIReference(array_id),
-  foreign key (proficency_choices) references Choice(opt_id)
+  foreign key (proficency_choices) references Choice(opt_id),
+  foreign key (proficiencies) references ArrayAPIReference(array_id),
+  foreign key (language_options) references Choice(opt_id),
+  foreign key (parent) references APIReference(idx),
+  foreign key (trait_specific) references TraitSpecific(id)
 );
 
 -- tabelle di WeaponProperties.ts

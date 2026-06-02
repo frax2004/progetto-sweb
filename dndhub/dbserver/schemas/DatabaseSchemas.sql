@@ -694,6 +694,7 @@ create table if not exists Spells (
   material text,
   duration text not null,
   description text not null,
+  cantripUpgrade text,
 
   foreign key (school) references MagicSchool(idx),
   foreign key (components) references ArrayComponents(array_id),

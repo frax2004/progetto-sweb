@@ -234,46 +234,6 @@ class Background {
   url: string = "";
 }
 
-class SubclassSpellPrerequisite {
-  @required()
-  index: string = "";
-  @required()
-  type: string = "";
-  @required()
-  name: string = "";
-  @required()
-  url: string = "";
-}
-
-class SubclassSpell {
-  prerequisites = [SubclassSpellPrerequisite];
-  spell = APIReference;
-}
-
-class Subclass {
-  index: string = "";
-  name: string = "";
-  //si chiama class, problema?
-  class = APIReference;
-  subclass_flavor: string = "";
-  desc = [String];
-  subclass_levels: string = "";
-  spells = [SubclassSpell];
-  url: string = "";
-}
-
-class Subrace {
-  index: string = "";
-  name: string = "";
-  race = APIReference;
-  desc: string = "";
-  ability_bonus = [AbilityBonus];
-  racial_traits = [APIReference];
-  url: string = "";
-}
-
-
-
 extract<APIReference>(
   new APIReference(),
   "api_references.json",

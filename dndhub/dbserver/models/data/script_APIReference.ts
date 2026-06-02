@@ -68,10 +68,8 @@ export class Shapes {
 }
 
 
-function extract<T>(shape: any, outputPath: string, mapper?: (s: string) => string) {
-  const json = fs
-  .readdirSync('.', 'utf8')
-  .filter((path: string) => path.startsWith('5e'))
+function extract<T>(shape: any, inputPaths: string[], transformer?: (s: any) => any) {
+  return inputPaths
   .map(
     path => {
       const data = JSON.parse(fs.readFileSync(path, 'utf8'));
@@ -80,9 +78,7 @@ function extract<T>(shape: any, outputPath: string, mapper?: (s: string) => stri
   )
   .filter(array => array.length !== 0)
   .flatMap(x => x)
-
-  let s = JSON.stringify(json);
-  fs.writeFileSync(outputPath, mapper ? mapper(s) : s);
+  .map(transformer || (x => x));
 }
 
 class APIReference {
@@ -234,20 +230,247 @@ class Background {
   url: string = "";
 }
 
-extract<APIReference>(
-  new APIReference(),
-  "api_references.json",
-  (s: string) => s.split("index").join("idx")
-);
 
-extract<Option>(new Option(), "options.json");
-extract<Choice>(new Choice(), "choices.json");
-extract<Damage>(new Damage(), "damage.json");
-extract<DifficultyClass>(new DifficultyClass(), "difficulty_class.json");
-//extract<AreaOfEffect>(new AreaOfEffect(), "area_of_effect.json");
-extract<OptionSet>(new OptionSet(), 'option_set.json');
-extract<DamageTypes>(new DamageTypes, 'damage_types.json');
-extract<AbilityScore>(new AbilityScore, 'ability_score.json');
-// salto alignment
-extract<StartingEquipment>(new StartingEquipment(), 'starting_equipment.json');
-extract<Background>(new Background(), 'background.json');
+class SpellcastingInfo {
+  name: string = "";
+  desc = [String];
+}
+
+class SpellCasting {
+  level: number = 0;
+  spellcasting_ability = APIReference;
+  info = [SpellcastingInfo];
+}
+
+class MultiClassingPrereq {
+  ability_score = APIReference;
+  minimum_score: number = 0;
+}
+
+class MultiClassing {
+  prerequisites = [MultiClassingPrereq];
+  prerequisite_options = Choice;
+  proficiencies = [APIReference];
+  proficiency_choices = [Choice];
+}
+
+class Class {
+  @required()
+  index: string = "";
+  @required()
+  name: string = "";
+  @required()
+  hit_die: number = 0;
+  @required()
+  class_levels: string = "";
+  multi_classing = MultiClassing;
+  proficiencies = [APIReference];
+  proficiency_choices = [Choice];
+  saving_throws = [APIReference];
+  starting_equipment = [StartingEquipment];
+  starting_equipment_options = [Choice];
+  subclasses = [APIReference];
+  spellcasting = SpellCasting;
+  spells: string = "";
+  url: string = "";
+}
+
+class Condition {
+  index: string = "";
+  name: string = "";
+  desc = [String];
+  url: string = "";
+}
+
+class EquipmentCategory {
+  index: string = "";
+  name: string = "";
+  equipment = [APIReference];
+  url: string = "";
+}
+
+class ArmorClass {
+  @required()
+  base: number = 0;
+  @required()
+  dex_bonus: boolean = false;
+  max_bonus: number = 0;
+}
+
+class _Range {
+  @required()
+  normal: number = 0;
+  long: number = 0;
+}
+
+class ThrowRange {
+  @required()
+  normal: number = 0;
+  @required()
+  long: number = 0;
+}
+
+class Content {
+  @required()
+  item = APIReference;
+  @required()
+  quantity: number = 0;
+}
+
+class Utilize {
+  @required()
+  name: string = "";
+  @required()
+  dc = DifficultyClass;
+}
+
+class Equipment {
+  index: string = "";
+  name: string = "";
+  equipment_categories = [APIReference];
+  cost = Cost;
+  url: string = "";
+  description: string = "";
+  weight: number = 0;
+  ammunition = APIReference;
+  armor_class = ArmorClass;
+  contents = [Content];
+  ability = APIReference;
+  craft = [APIReference];
+  damage = Damage;
+  doff_time: string = "";
+  don_time: string = "";
+  image: string = "";
+  mastery = APIReference;
+  notes = [String];
+  properties = [APIReference];
+  quantity: number = 0;
+  storage = APIReference;
+  range = _Range;
+  stealth_disadvantage: boolean = false;
+  str_minimum: number = 0;
+  throw_range = ThrowRange;
+  two_handed_damage = Damage;
+  utilize = [Utilize];
+}
+
+class FeatPrerequisites {
+  minimum_level: number = 0;
+  feature_named: string = "";
+}
+
+class Feat {
+  index: string = "";
+  name: string = "";
+  description: string = "";
+  type: string = "";
+  repeatable: string = "";
+  prerequisites = FeatPrerequisites;
+  prerequisite_options = Choice;
+  url: string = "";
+}
+
+class Language {
+  index: string = "";
+  name: string = "";
+  is_rare: boolean = false;
+  note: string = "";
+  url: string = "";
+}
+
+class MagicItem {
+  name: string = "";
+  index: string = "";
+  url: string = "";
+  image: string = "";
+  equipment_category = APIReference;
+  variant: boolean = false;
+  variants = [APIReference];
+  attunement: boolean = false;
+  rarity: string = "";
+  desc: string = "";
+  'limited-to': string = "";
+}
+
+class MagicSchool {
+  @required()
+  index: string = "";
+  @required()
+  name: string = "";
+  @required()
+  description: string = "";
+  @required()
+  url: string = "";
+}
+
+class Proficiency {
+  @required()
+  index: string = "";
+  @required()
+  name: string = "";
+  @required()
+  type: string = "";
+  backgrounds = [APIReference];
+  classes = [APIReference];
+  reference = APIReference;
+  url: string = "";
+}
+
+class Skill {
+  @required()
+  index: string = "";
+  @required()
+  name: string = "";
+  @required()
+  description: string = "";
+  @required()
+  url: string = "";
+  ability_score = APIReference;
+}
+
+class AbilityBonus {
+  ability_score = APIReference;
+  bonus: number = 0;
+}
+
+class Species {
+  @required()
+  index: string = "";
+  @required()
+  name: string = "";
+  @required()
+  speed: number = 0;
+  ability_bonuses = [AbilityBonus];
+  ability_bonus_options = Choice;
+  alignment: string = "";
+  age: string = "";
+  size: string = "";
+  size_description: string = "";
+  starting_proficiencies = [APIReference];
+  starting_proficiency_options = Choice;
+  languages = [APIReference];
+  language_desc: string = "";
+  language_options = Choice;
+  traits = [APIReference];
+  subraces = [APIReference];
+  url: string = "";
+}
+
+const allFiles = fs
+.readdirSync('.', 'utf8')
+.filter((path: string) => path.startsWith('5e'));
+
+extract<APIReference>(new APIReference(), allFiles);
+
+extract<Option>(new Option(), allFiles);
+extract<Choice>(new Choice(), allFiles);
+extract<Damage>(new Damage(), allFiles);
+extract<DifficultyClass>(new DifficultyClass(), allFiles);
+
+extract<OptionSet>(new OptionSet(), allFiles);
+extract<DamageTypes>(new DamageTypes(), allFiles);
+extract<AbilityScore>(new AbilityScore(), ["5e-SRC-Ability-Scores.json"]);
+
+extract<StartingEquipment>(new StartingEquipment(), ["5e-SRD-Backgrounds.json", "5e-SRD-Classes.json"]);
+extract<Background>(new Background(), ["5e-SRD-Backgrounds.json"]);
+extract<Class>(new Class(), ["5e-SRD-Classes.json"]);

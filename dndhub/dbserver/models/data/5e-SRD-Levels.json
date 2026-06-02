@@ -9218,17 +9218,3 @@
     "index": "evocation-14"
   }
 ]
-
-export const LevelSchema = z.strictObject({
-  index: z.string(),
-  level: z.number(),
-  ability_score_bonuses: z.number().optional(),
-  prof_bonus: z.number().optional(),
-  features: z.array(APIReferenceSchema).optional(),
-  class: APIReferenceSchema,
-  class_specific: ClassSpecificSchema.optional(),
-  spellcasting: LevelSpellcastingSchema.optional(),
-  subclass: APIReferenceSchema.optional(),
-  subclass_specific: SubclassSpecificSchema.optional(),
-  url: z.string(),
-});

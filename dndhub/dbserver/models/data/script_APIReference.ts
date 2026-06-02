@@ -159,10 +159,37 @@ class Option {
   size: string = "";
 }
 
-class AreaOfEffect {
-  size: number = 0;
-  type: string = "";
+// class AreaOfEffect {
+//   size: number = 0;
+//   type: string = "";
+// }
+
+class DamageTypes {
+  @required()
+  index: string = "";
+  @required()
+  name: string = "";
+  @required()
+  description: string = "";
+  @required()
+  url: string = "";
 }
+
+class AbilityScore {
+  @required()
+  index: string = "";
+  name: string = ""
+  @required()
+  full_name: string = "";
+  description: string = "";
+  skills = [
+    APIReference
+  ];
+  url: string = "";
+}
+
+//non faccio alignment, c'è già tutto nel file dedicato
+
 
 
 extract<APIReference>(
@@ -175,4 +202,7 @@ extract<Option>(new Option(), "options.json");
 extract<Choice>(new Choice(), "choices.json");
 extract<Damage>(new Damage(), "damage.json");
 extract<DifficultyClass>(new DifficultyClass(), "difficulty_class.json");
-extract<AreaOfEffect>(new AreaOfEffect(), "area_of_effect.json");
+//extract<AreaOfEffect>(new AreaOfEffect(), "area_of_effect.json");
+extract<OptionSet>(new OptionSet(), 'option_set.json');
+extract<DamageTypes>(new DamageTypes, 'damage_types.json');
+extract<AbilityScore>(new AbilityScore, 'ability_score.json');

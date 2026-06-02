@@ -156,13 +156,56 @@ __decorate([
     required(),
     __metadata("design:type", String)
 ], Option.prototype, "option_type", void 0);
-class AreaOfEffect {
-    size = 0;
-    type = "";
+// class AreaOfEffect {
+//   size: number = 0;
+//   type: string = "";
+// }
+class DamageTypes {
+    index = "";
+    name = "";
+    description = "";
+    url = "";
 }
+__decorate([
+    required(),
+    __metadata("design:type", String)
+], DamageTypes.prototype, "index", void 0);
+__decorate([
+    required(),
+    __metadata("design:type", String)
+], DamageTypes.prototype, "name", void 0);
+__decorate([
+    required(),
+    __metadata("design:type", String)
+], DamageTypes.prototype, "description", void 0);
+__decorate([
+    required(),
+    __metadata("design:type", String)
+], DamageTypes.prototype, "url", void 0);
+class AbilityScore {
+    index = "";
+    name = "";
+    full_name = "";
+    description = "";
+    skills = [
+        APIReference
+    ];
+    url = "";
+}
+__decorate([
+    required(),
+    __metadata("design:type", String)
+], AbilityScore.prototype, "index", void 0);
+__decorate([
+    required(),
+    __metadata("design:type", String)
+], AbilityScore.prototype, "full_name", void 0);
 extract(new APIReference(), "api_references.json", (s) => s.split("index").join("idx"));
 extract(new Option(), "options.json");
 extract(new Choice(), "choices.json");
 extract(new Damage(), "damage.json");
 extract(new DifficultyClass(), "difficulty_class.json");
-extract(new AreaOfEffect(), "area_of_effect.json");
+//extract<AreaOfEffect>(new AreaOfEffect(), "area_of_effect.json");
+extract(new OptionSet(), 'option_set.json');
+extract(new DamageTypes, 'damage_types.json');
+extract(new AbilityScore, 'ability_score.json');

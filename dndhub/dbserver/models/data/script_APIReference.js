@@ -31,8 +31,7 @@ export class Shapes {
         if (Array.isArray(shape) && Array.isArray(obj)) {
             return obj.every(o => Shapes.match(o, new shape[0]()));
         }
-        else if (Array.isArray(shape) || Array.isArray(obj))
-            return false;
+        //else if(Array.isArray(shape) || Array.isArray(obj)) return false;
         const keyMatch = (key) => key in shape && Shapes.match(obj[key], shape[key]);
         return Object
             .keys(shape)
@@ -200,6 +199,52 @@ __decorate([
     required(),
     __metadata("design:type", String)
 ], AbilityScore.prototype, "full_name", void 0);
+//non faccio alignment, c'è già tutto nel file dedicato
+class StartingEquipment {
+    equipment = APIReference;
+    quantity = 0;
+}
+// cost e backgroundFeature non esistono nel db, 
+// mi servono ai fini del riconoscimento di background
+class Cost {
+    quantity = 0;
+    unit = "";
+}
+class BackgroundFeature {
+    name = "";
+    desc = [
+        String
+    ];
+}
+class Background {
+    index = "";
+    name = "";
+    starting_proficiencies = [
+        APIReference
+    ];
+    language_options = Choice;
+    starting_equipment = [
+        StartingEquipment
+    ];
+    starting_equipment_options = [
+        Choice
+    ];
+    starting_gold = Cost;
+    feature = BackgroundFeature;
+    personality_traits = Choice;
+    ideals = Choice;
+    bonds = Choice;
+    flaws = Choice;
+    url = "";
+}
+__decorate([
+    required(),
+    __metadata("design:type", String)
+], Background.prototype, "index", void 0);
+__decorate([
+    required(),
+    __metadata("design:type", String)
+], Background.prototype, "name", void 0);
 extract(new APIReference(), "api_references.json", (s) => s.split("index").join("idx"));
 extract(new Option(), "options.json");
 extract(new Choice(), "choices.json");
@@ -209,3 +254,6 @@ extract(new DifficultyClass(), "difficulty_class.json");
 extract(new OptionSet(), 'option_set.json');
 extract(new DamageTypes, 'damage_types.json');
 extract(new AbilityScore, 'ability_score.json');
+// salto alignment
+extract(new StartingEquipment(), 'starting_equipment.json');
+extract(new Background(), 'background.json');

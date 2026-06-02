@@ -190,7 +190,49 @@ class AbilityScore {
 
 //non faccio alignment, c'è già tutto nel file dedicato
 
+class StartingEquipment {
+  equipment = APIReference;
+  quantity: number = 0;
+}
 
+// cost e backgroundFeature non esistono nel db, 
+// mi servono ai fini del riconoscimento di background
+
+class Cost {
+  quantity: number = 0;
+  unit: string = "";
+}
+
+class BackgroundFeature {
+  name: string = "";
+  desc = [
+    String
+  ];
+}
+
+class Background {
+  @required()
+  index: string = "";
+  @required()
+  name: string = "";
+  starting_proficiencies = [
+    APIReference
+  ];
+  language_options = Choice;
+  starting_equipment = [
+    StartingEquipment
+  ];
+  starting_equipment_options = [
+    Choice
+  ];
+  starting_gold = Cost;
+  feature = BackgroundFeature;
+  personality_traits = Choice;
+  ideals = Choice;
+  bonds = Choice;
+  flaws = Choice;
+  url: string = "";
+}
 
 extract<APIReference>(
   new APIReference(),
@@ -206,3 +248,6 @@ extract<DifficultyClass>(new DifficultyClass(), "difficulty_class.json");
 extract<OptionSet>(new OptionSet(), 'option_set.json');
 extract<DamageTypes>(new DamageTypes, 'damage_types.json');
 extract<AbilityScore>(new AbilityScore, 'ability_score.json');
+// salto alignment
+extract<StartingEquipment>(new StartingEquipment(), 'starting_equipment.json');
+extract<Background>(new Background(), 'background.json');

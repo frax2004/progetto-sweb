@@ -9,6 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import fs from 'fs';
 import 'reflect-metadata';
+import { models } from '../DatabaseModels.js';
+import { isDeepStrictEqual } from 'util';
 const REQUIRED_META = Symbol('required');
 function required() {
     return Reflect.metadata(REQUIRED_META, true);
@@ -115,6 +117,18 @@ var data;
         damage_type = APIReference;
         damage_dice = "";
         dc = DifficultyClass;
+        static equals(lhs, rhs) {
+            return lhs.damage_type === rhs.damage_type?.index;
+        }
+        static transform(x, array_id, array_idx) {
+            return {
+                array_id: array_id,
+                damage_type: x.damage_type.index,
+                damage_dice: x.damage_dice,
+                dc: getOrInsertId(data.difficulty_classes, x.dc),
+                idx: array_idx
+            };
+        }
     }
     data.Damage = Damage;
     class OptionSet {
@@ -130,6 +144,23 @@ var data;
         __metadata("design:type", String)
     ], OptionSet.prototype, "option_set_type", void 0);
     data.OptionSet = OptionSet;
+    class OptionPrerequisite {
+        type = "";
+        proficiency = APIReference;
+        static equals(lhs, rhs) {
+            return lhs.item === rhs.proficiency?.index;
+        }
+        static transform(x, array_id, array_idx) {
+            // console.log(x);
+            return {
+                string: x.type,
+                item: x.proficiency?.index,
+                array_id: array_id,
+                array_idx: array_idx
+            };
+        }
+    }
+    data.OptionPrerequisite = OptionPrerequisite;
     class Option {
         option_type = "";
         item = APIReference;
@@ -147,12 +178,7 @@ var data;
             Damage
         ];
         of = APIReference;
-        prerequisites = [
-            class {
-                type = "";
-                proficiency = APIReference;
-            }
-        ];
+        prerequisites = [OptionPrerequisite];
         damage_dice = "";
         damage_type = APIReference;
         notes = "";
@@ -165,6 +191,161 @@ var data;
         ];
         minimum_score = 0;
         size = "";
+        static equals(lhs, rhs) {
+            return lhs.array_id === getOrInsertId(data.options, rhs);
+            // if(rhs.option_type !== lhs.option_type) return false;
+            // switch (rhs.option_type) {
+            //   case 'reference':
+            //     return rhs.item.index === lhs.reference_item;
+            //   case 'choice':
+            //     return getOrInsertId(data.option_sets,rhs.choice.from)===lhs.choice_id;
+            //   case 'string':
+            //     return rhs.string === lhs.string;
+            //   case 'ability_bonus':
+            //     return rhs.ability_score.index === lhs.ability_score_bonus
+            //     && rhs.bonus === lhs.bonus;
+            //   case 'action':
+            //     return rhs.action_name === lhs.action_name
+            //     && rhs.count === lhs.action_count
+            //     && rhs.type === lhs.action_type
+            //     && rhs.desc === lhs.action_desc;
+            //   case 'breath':
+            //     return rhs.name === lhs.breath_name
+            //     && rhs.dc === lhs.breath_dc
+            //     && getOrInsertArrayId(
+            //       data.ArrayDamage,
+            //       rhs.damage,
+            //       data.Damage.equals,
+            //       data.Damage.transform
+            //     )===lhs.breath_damage;
+            //   case 'counted_reference':
+            //     return rhs.count === lhs.counted_reference_count
+            //     && rhs.of?.index === lhs.counted_item
+            //     && getOrInsertArrayId(
+            //       data.ArrayOptionPrerequisite,
+            //       rhs.prerequisites,
+            //       data.OptionPrerequisite.equals,
+            //       data.OptionPrerequisite.transform
+            //     )===lhs.prerequisites;
+            //   case 'damage':
+            //     return rhs.damage_dice === lhs.damage_dice
+            //     && rhs.damage_type.index === lhs.damage_type
+            //     && rhs.notes === lhs.damage_notes;
+            //   case 'ideal':
+            //     return getOrInsertArrayId(
+            //       data.ArrayAPIReference,
+            //       rhs.alignments,
+            //       data.APIReference.equals,
+            //       data.APIReference.transform
+            //     )===lhs.alignments
+            //     && rhs.desc === lhs.align_desc;
+            //   case 'money':
+            //     return rhs.count === lhs.money_count
+            //     && rhs.unit === lhs.money_unit;
+            //   case 'multiple':
+            //     return getOrInsertArrayId(
+            //       data.ArrayOption,
+            //       rhs.items,
+            //       data.Option.equals,
+            //       data.Option.transform
+            //     )===lhs.multiple_items
+            //     && rhs.desc === lhs.multiple_desc;
+            //   case 'score_prerequisite':
+            //     return rhs.ability_score.index === lhs.ability_score_prerequisite
+            //     && rhs.minimum_score === lhs.minimum_score_prerequisite;
+            //   case 'size':
+            //     return rhs.size === lhs.size;
+            //   default:
+            //     return false;
+            // }
+        }
+        static transform(x, array_id, array_idx) {
+            return {
+                item_id: getOrInsertId(data.options, x),
+                idx: array_idx,
+                array_id: array_idx
+            };
+            //   let res = new models.Option();
+            //   res.option_type = x.option_type;
+            //   switch (x.option_type) {
+            //     case 'reference':
+            //       res.reference_item = x.item.index;
+            //       break;
+            //     case 'choice':
+            //       res.choice_id = getOrInsertId(data.option_sets,x.choice.from);
+            //       break;
+            //     case 'string':
+            //       res.string = x.string;
+            //       break;
+            //     case 'ability_bonus':
+            //       res.ability_score_bonus = x.ability_score.index;
+            //       res.bonus = x.bonus;
+            //       break;
+            //     case 'action':
+            //       res.action_name = x.action_name;
+            //       res.action_count = x.count;
+            //       res.action_type = x.type;
+            //       res.action_desc = x.desc;
+            //       break;
+            //     case 'breath':
+            //       res.breath_name = x.name;
+            //       res.breath_dc = x.dc;
+            //       res.breath_damage = getOrInsertArrayId(
+            //         data.ArrayDamage,
+            //         x.damage,
+            //         data.Damage.equals,
+            //         data.Damage.transform
+            //       );
+            //       break;
+            //     case 'counted_reference':
+            //       res.counted_reference_count = x.count;
+            //       res.counted_item = x.of.index;
+            //       res.prerequisites = getOrInsertArrayId(
+            //         data.ArrayOptionPrerequisite,
+            //         x.prerequisites,
+            //         data.OptionPrerequisite.equals,
+            //         data.OptionPrerequisite.transform
+            //       );
+            //       break;
+            //     case 'damage':
+            //       res.damage_dice = x.damage_dice;
+            //       res.damage_type = x.damage_type.index;
+            //       res.damage_notes = x.notes;
+            //       break;
+            //     case 'ideal':
+            //       res.alignments = getOrInsertArrayId(
+            //         data.ArrayAPIReference,
+            //         x.alignments,
+            //         data.APIReference.equals,
+            //         data.APIReference.transform
+            //       );
+            //       res.align_desc = x.desc;
+            //       break;
+            //     case 'money':
+            //       res.money_count = x.count;
+            //       res.money_unit = x.unit;
+            //       break;
+            //     case 'multiple':
+            //       res.multiple_items = getOrInsertArrayId(
+            //         data.ArrayOption,
+            //         x.items,
+            //         data.Option.equals,
+            //         data.Option.transform
+            //       );
+            //       res.multiple_desc = x.desc;
+            //       break;
+            //     case 'score_prerequisite':
+            //       res.ability_score_prerequisite = x.ability_score.index;
+            //       res.minimum_score_prerequisite = x.minimum_score;  
+            //       break;
+            //     case 'size':
+            //       res.size = x.size;
+            //       break;
+            //     default:
+            //       break;
+            //   }
+            //   return res;
+        }
     }
     __decorate([
         required(),
@@ -789,10 +970,31 @@ var data;
     // si assegnaerà ad ogni elemento di ogni array, l'indice del proprio array
     // e poi si farà il flatten: [[{index: 0}, {}, {}], [{index: 1}], [...]]
     data.ArrayAPIReference = [];
+    data.ArrayOptionPrerequisite = [];
+    data.ArrayOption = [];
+    data.ArrayDamage = [];
+    data.option_sets = [];
+    data.difficulty_classes = [];
+    data.options = [];
 })(data || (data = {}));
-function getOrInsertId(table, actual, equals, transform) {
+function getOrInsertId(array, searched) {
+    if (searched === undefined)
+        return undefined;
+    const id = array.findIndex(item => isDeepStrictEqual(searched, item));
+    if (id < 0) {
+        const result = array.length;
+        array.push(searched);
+        return result;
+    }
+    else
+        return id;
+}
+function getOrInsertArrayId(table, actual, equals, transform) {
+    if (actual === undefined)
+        return undefined;
+    if (actual.length === 0)
+        return undefined;
     const i = table.findIndex(expected => {
-        return false;
         if (expected.length !== actual.length)
             return false;
         for (let j = 0; j < expected.length; ++j) {
@@ -856,37 +1058,39 @@ const allFiles = fs
     {
         extractor: (extract),
         shape: new data.Option(),
-        mapper: (x) => x,
-        // function(x: any): models.Option {
-        //   return {
-        //     id: models.Option.id(),
-        //     reference_item: x.item,
-        // choice_id: ,
-        // string?: string,
-        // ability_score_bonus?: string,
-        // bonus?: number,
-        // action_name?: string,
-        // action_count?: number,
-        // action_type?: string,
-        // action_desc?: string,
-        // breath_name?: string,
-        // breath_dc?: number,
-        // breath_damage_type?: string,
-        // breath_damage_dice?: string,
-        // breath_damage_dc?: number,
-        // counted_reference_count?: number,
-        // counted_item?: string,
-        // prerequisites?: number,
-        // damage_dice?: string,
-        // damage_type?: string, 
-        // alignments?: number, 
-        // money_count?: number,
-        // money_unit?: string,
-        // multiple_items?: number, 
-        // ability_score_prerequisite?: string,
-        // size?: string
-        //   }
-        // },
+        mapper: function (x) {
+            return {
+                id: models.Option.id(),
+                option_type: x.option_type,
+                reference_item: x.item,
+                choice_id: getOrInsertId(data.option_sets, x.choice?.from),
+                string: x.string,
+                ability_score_bonus: x.ability_score?.index,
+                bonus: x.bonus,
+                action_name: x.action_name,
+                action_count: x.count,
+                action_type: x.type,
+                action_desc: x.desc,
+                breath_name: x.name,
+                breath_dc: getOrInsertId(data.difficulty_classes, x.dc),
+                breath_damage: getOrInsertArrayId(data.ArrayDamage, x.damage, data.Damage.equals, data.Damage.transform),
+                counted_reference_count: x.count,
+                counted_item: x.item?.index,
+                prerequisites: getOrInsertArrayId(data.ArrayOptionPrerequisite, x.prerequisites, data.OptionPrerequisite.equals, data.OptionPrerequisite.transform),
+                damage_dice: x.damage_dice,
+                damage_type: x.damage_type?.index,
+                alignments: getOrInsertArrayId(data.ArrayOptionPrerequisite, x.alignments, data.OptionPrerequisite.equals, data.OptionPrerequisite.transform),
+                money_count: x.count,
+                money_unit: x.unit,
+                multiple_items: getOrInsertArrayId(data.ArrayOption, x.items, data.Option.equals, data.Option.transform),
+                ability_score_prerequisite: x.ability_score?.index,
+                damage_notes: x.notes,
+                align_desc: x.desc,
+                multiple_desc: x.desc,
+                minimum_score_prerequisite: x.minimum_score,
+                size: x.size,
+            };
+        },
         inputs: allFiles,
         output: "options.json"
     },
@@ -982,7 +1186,7 @@ const allFiles = fs
                 idx: x.index,
                 name: x.name,
                 url: x.url,
-                equipment: getOrInsertId(data.ArrayAPIReference, x.equipment, data.APIReference.equals, data.APIReference.transform)
+                equipment: getOrInsertArrayId(data.ArrayAPIReference, x.equipment, data.APIReference.equals, data.APIReference.transform)
             };
         },
         inputs: ["5e-SRD-Equipment-Categories.json"],
@@ -1210,3 +1414,6 @@ function printArray(array, output) {
     fs.writeFileSync("new-data/" + output, JSON.stringify(array.flatMap(x => x)), 'utf8');
 }
 printArray(data.ArrayAPIReference, 'array_api_references.json');
+printArray(data.ArrayDamage, 'array_damages.json');
+printArray(data.ArrayOption, 'array_options.json');
+printArray(data.ArrayOptionPrerequisite, 'array_option_prerequisites.json');

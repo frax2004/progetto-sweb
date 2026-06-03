@@ -67,6 +67,7 @@ create table if not exists ArrayPrerequisitesItem (
   array_idx number not null,
   array_id number not null,
   item text not null,
+  string text not null,
 
   primary key (array_id,array_idx),
   foreign key (item) references APIReference(idx)
@@ -92,12 +93,10 @@ create table if not exists Option (
   -- pseudo-tabella breath
   breath_name text,
   breath_dc number,
-  breath_damage_type text,
-  breath_damage_dice text,
-  breath_damage_dc number, -- questo attributo potrebbe essere inutile, l'ho messo per si e per no
+  breath_damage number, -- questo attributo potrebbe essere inutile, l'ho messo per si e per no
   -- pseudo-tabella countedReference
   counted_reference_count number,
-  of text,
+  counted_item text,
   prerequisites number,
   -- pseudo-tabella damage
   damage_dice text,
@@ -123,8 +122,7 @@ create table if not exists Option (
   foreign key (choice_id) references Choice(opt_id),
   foreign key (ability_score_bonus) references APIReference(idx),
   foreign key (breath_dc) references DifficultyClass(id), 
-  foreign key (breath_damage_type) references APIReference(idx),
-  foreign key (breath_damage_dc) references DifficultyClass(id),
+  foreign key (breath_damage) references ArrayDamageItem(array_id),
   foreign key (of) references APIReference(idx),
   foreign key (prerequisites) references ArrayPrerequisitesItem(array_id),
   foreign key (damage_type) references APIReference(idx),

@@ -52,7 +52,7 @@ export namespace models {
 
   // OptionArray mi serve per multiple
   export class ArrayOptionItem {
-    item_id!: number;
+    item_id?: number;
     idx!: number;
     array_id!: number;
   }
@@ -61,6 +61,7 @@ export namespace models {
     array_idx!: number;
     array_id!: number;
     item!: string;
+    string!: string;
   }
 
   export class Option {
@@ -83,9 +84,7 @@ export namespace models {
     // pseudo-tabella breath
     breath_name?: string;
     breath_dc?: number;
-    breath_damage_type?: string;
-    breath_damage_dice?: string;
-    breath_damage_dc?: number; // questo attributo potrebbe essere inutile; l'ho messo per si e per no
+    breath_damage?: number //foreign key
     // pseudo-tabella countedReference
     counted_reference_count?: number;
     counted_item?: string;
@@ -93,16 +92,20 @@ export namespace models {
     // pseudo-tabella damage
     damage_dice?: string;
     damage_type?: string; 
+    damage_notes?: string;
     // pseudo-tabella ideal
     // teoricamente inutile perché non stiamo facendo alignment ma la copio perché piccola
     alignments?: number; 
+    align_desc?: string;
     // pseudo-tabella money
     money_count?: number;
     money_unit?: string;
     // pseudo-tabella multiple
     multiple_items?: number; 
+    multiple_desc?: string;
     // pseudo-tabella score_prerequisite
     ability_score_prerequisite?: string;
+    minimum_score_prerequisite?: number;
     // pseuso-tabella size
     size?: string;
 
@@ -215,7 +218,7 @@ export namespace models {
   export class EquipmentCategory {
     idx!: string;
     name!: string;
-    equipment!: number;
+    equipment?: number;
     url!: string;
   } 
 

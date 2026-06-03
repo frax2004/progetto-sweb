@@ -57,8 +57,16 @@ export var models;
         array_id;
     }
     models.ArrayOptionItem = ArrayOptionItem;
+    class ArrayPrerequisitesItem {
+        array_idx;
+        array_id;
+        item;
+        string;
+    }
+    models.ArrayPrerequisitesItem = ArrayPrerequisitesItem;
     class Option {
         id;
+        option_type;
         // pseudo-tabella reference
         reference_item;
         // pseudo-tabella choice
@@ -76,9 +84,7 @@ export var models;
         // pseudo-tabella breath
         breath_name;
         breath_dc;
-        breath_damage_type;
-        breath_damage_dice;
-        breath_damage_dc; // questo attributo potrebbe essere inutile; l'ho messo per si e per no
+        breath_damage; //foreign key
         // pseudo-tabella countedReference
         counted_reference_count;
         counted_item;
@@ -86,16 +92,20 @@ export var models;
         // pseudo-tabella damage
         damage_dice;
         damage_type;
+        damage_notes;
         // pseudo-tabella ideal
         // teoricamente inutile perché non stiamo facendo alignment ma la copio perché piccola
         alignments;
+        align_desc;
         // pseudo-tabella money
         money_count;
         money_unit;
         // pseudo-tabella multiple
         multiple_items;
+        multiple_desc;
         // pseudo-tabella score_prerequisite
         ability_score_prerequisite;
+        minimum_score_prerequisite;
         // pseuso-tabella size
         size;
         static ID = 0;
@@ -113,6 +123,7 @@ export var models;
     models.ArrayOfOptionsAndStringItem = ArrayOfOptionsAndStringItem;
     class OptionSet {
         id;
+        option_set_type;
         // pseudo-tabella equipment_category
         equipment_category;
         resource_list_url;

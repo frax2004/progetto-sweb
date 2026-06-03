@@ -1,7 +1,8 @@
 import fs from 'fs';
 import 'reflect-metadata';
-import { models } from '../DatabaseModels';
-import { deepEqual } from 'assert';
+import { models } from '../DatabaseModels.js';
+import { isDeepStrictEqual } from 'util';
+
 
 const REQUIRED_META = Symbol('required');
 
@@ -120,6 +121,19 @@ namespace data {
     damage_type = APIReference;
     damage_dice: string = "";
     dc = DifficultyClass;
+
+    public static equals (lhs: models.ArrayDamageItem, rhs: any) {
+      return lhs.damage_type === rhs.damage_type?.index;
+    }
+    public static transform (x: any, array_id: number, array_idx: number): models.ArrayDamageItem {
+      return {
+        array_id: array_id,
+        damage_type: x.damage_type.index,
+        damage_dice: x.damage_dice,
+        dc: getOrInsertId(data.difficulty_classes,x.dc),
+        idx: array_idx
+      }
+    }
   }
 
   export class OptionSet {
@@ -137,11 +151,13 @@ namespace data {
     proficiency = APIReference;
 
     public static equals(lhs: models.ArrayPrerequisitesItem, rhs: any) {
-      return lhs.item === rhs.proficiency.index;
+      return lhs.item === rhs.proficiency?.index;
     }
     public static transform(x: any, array_id: number, array_idx: number): models.ArrayPrerequisitesItem {
+      // console.log(x);
       return {
-        item: x.prerequisite.index,
+        string: x.type,
+        item: x.proficiency?.index,
         array_id: array_id,
         array_idx: array_idx
       };
@@ -180,13 +196,161 @@ namespace data {
     minimum_score: number = 0;
     size: string = "";
 
-    public static equals(lhs: models.Option, rhs: any) {
-      if(rhs.option_type !== lhs.option_type) return false;
-      
+    public static equals(lhs: models.ArrayOptionItem, rhs: any) {
+      return lhs.array_id === getOrInsertId(data.options, rhs);
+      // if(rhs.option_type !== lhs.option_type) return false;
+      // switch (rhs.option_type) {
+      //   case 'reference':
+      //     return rhs.item.index === lhs.reference_item;
+      //   case 'choice':
+      //     return getOrInsertId(data.option_sets,rhs.choice.from)===lhs.choice_id;
+      //   case 'string':
+      //     return rhs.string === lhs.string;
+      //   case 'ability_bonus':
+      //     return rhs.ability_score.index === lhs.ability_score_bonus
+      //     && rhs.bonus === lhs.bonus;
+      //   case 'action':
+      //     return rhs.action_name === lhs.action_name
+      //     && rhs.count === lhs.action_count
+      //     && rhs.type === lhs.action_type
+      //     && rhs.desc === lhs.action_desc;
+      //   case 'breath':
+      //     return rhs.name === lhs.breath_name
+      //     && rhs.dc === lhs.breath_dc
+      //     && getOrInsertArrayId(
+      //       data.ArrayDamage,
+      //       rhs.damage,
+      //       data.Damage.equals,
+      //       data.Damage.transform
+      //     )===lhs.breath_damage;
+      //   case 'counted_reference':
+      //     return rhs.count === lhs.counted_reference_count
+      //     && rhs.of?.index === lhs.counted_item
+      //     && getOrInsertArrayId(
+      //       data.ArrayOptionPrerequisite,
+      //       rhs.prerequisites,
+      //       data.OptionPrerequisite.equals,
+      //       data.OptionPrerequisite.transform
+      //     )===lhs.prerequisites;
+      //   case 'damage':
+      //     return rhs.damage_dice === lhs.damage_dice
+      //     && rhs.damage_type.index === lhs.damage_type
+      //     && rhs.notes === lhs.damage_notes;
+      //   case 'ideal':
+      //     return getOrInsertArrayId(
+      //       data.ArrayAPIReference,
+      //       rhs.alignments,
+      //       data.APIReference.equals,
+      //       data.APIReference.transform
+      //     )===lhs.alignments
+      //     && rhs.desc === lhs.align_desc;
+      //   case 'money':
+      //     return rhs.count === lhs.money_count
+      //     && rhs.unit === lhs.money_unit;
+      //   case 'multiple':
+      //     return getOrInsertArrayId(
+      //       data.ArrayOption,
+      //       rhs.items,
+      //       data.Option.equals,
+      //       data.Option.transform
+      //     )===lhs.multiple_items
+      //     && rhs.desc === lhs.multiple_desc;
+      //   case 'score_prerequisite':
+      //     return rhs.ability_score.index === lhs.ability_score_prerequisite
+      //     && rhs.minimum_score === lhs.minimum_score_prerequisite;
+      //   case 'size':
+      //     return rhs.size === lhs.size;
+      //   default:
+      //     return false;
+      // }
     }
 
-    public static transform(x: any): models.Option {
-      
+    public static transform(x: any, array_id: number, array_idx: number): models.ArrayOptionItem {
+      return {
+        item_id: getOrInsertId(data.options,x),
+        idx: array_idx,
+        array_id: array_idx
+      }
+    //   let res = new models.Option();
+    //   res.option_type = x.option_type;
+    //   switch (x.option_type) {
+    //     case 'reference':
+    //       res.reference_item = x.item.index;
+    //       break;
+    //     case 'choice':
+    //       res.choice_id = getOrInsertId(data.option_sets,x.choice.from);
+    //       break;
+    //     case 'string':
+    //       res.string = x.string;
+    //       break;
+    //     case 'ability_bonus':
+    //       res.ability_score_bonus = x.ability_score.index;
+    //       res.bonus = x.bonus;
+    //       break;
+    //     case 'action':
+    //       res.action_name = x.action_name;
+    //       res.action_count = x.count;
+    //       res.action_type = x.type;
+    //       res.action_desc = x.desc;
+    //       break;
+    //     case 'breath':
+    //       res.breath_name = x.name;
+    //       res.breath_dc = x.dc;
+    //       res.breath_damage = getOrInsertArrayId(
+    //         data.ArrayDamage,
+    //         x.damage,
+    //         data.Damage.equals,
+    //         data.Damage.transform
+    //       );
+    //       break;
+    //     case 'counted_reference':
+    //       res.counted_reference_count = x.count;
+    //       res.counted_item = x.of.index;
+    //       res.prerequisites = getOrInsertArrayId(
+    //         data.ArrayOptionPrerequisite,
+    //         x.prerequisites,
+    //         data.OptionPrerequisite.equals,
+    //         data.OptionPrerequisite.transform
+    //       );
+    //       break;
+    //     case 'damage':
+    //       res.damage_dice = x.damage_dice;
+    //       res.damage_type = x.damage_type.index;
+    //       res.damage_notes = x.notes;
+    //       break;
+    //     case 'ideal':
+    //       res.alignments = getOrInsertArrayId(
+    //         data.ArrayAPIReference,
+    //         x.alignments,
+    //         data.APIReference.equals,
+    //         data.APIReference.transform
+    //       );
+    //       res.align_desc = x.desc;
+    //       break;
+    //     case 'money':
+    //       res.money_count = x.count;
+    //       res.money_unit = x.unit;
+    //       break;
+    //     case 'multiple':
+    //       res.multiple_items = getOrInsertArrayId(
+    //         data.ArrayOption,
+    //         x.items,
+    //         data.Option.equals,
+    //         data.Option.transform
+    //       );
+    //       res.multiple_desc = x.desc;
+    //       break;
+    //     case 'score_prerequisite':
+    //       res.ability_score_prerequisite = x.ability_score.index;
+    //       res.minimum_score_prerequisite = x.minimum_score;  
+    //       break;
+    //     case 'size':
+    //       res.size = x.size;
+    //       break;
+    //     default:
+    //       break;
+    //   }
+    //   return res;
     }
   }
 
@@ -684,15 +848,17 @@ namespace data {
   export let ArrayAPIReference: models.ArrayAPIReferenceItem[][] = [];
   export let ArrayOptionPrerequisite: models.ArrayPrerequisitesItem[][] = [];
   export let ArrayOption: models.ArrayOptionItem[][] = [];
+  export let ArrayDamage: models.ArrayDamageItem[][] = [];
 
   export let option_sets: any[] = [];
   export let difficulty_classes: any[] = [];
+  export let options: any[] = [];
 }
 
 function getOrInsertId(array: any[], searched: any): number | undefined {
   if(searched === undefined) return undefined;
 
-  const id = array.findIndex(item => deepEqual(searched, item));
+  const id = array.findIndex(item => isDeepStrictEqual(searched, item));
   if(id < 0) {
     const result = array.length;
     array.push(searched);
@@ -700,7 +866,9 @@ function getOrInsertId(array: any[], searched: any): number | undefined {
   } else return id;
 }
 
-function getOrInsertArrayId(table: any[], actual: any[], equals: (lhs: any, rhs: any) => boolean, transform: (x: any, array_id: number, array_idx: number) => any): number {
+function getOrInsertArrayId(table: any[], actual: any[], equals: (lhs: any, rhs: any) => boolean, transform: (x: any, array_id: number, array_idx: number) => any): number | undefined {
+  if (actual===undefined) return undefined;
+  if (actual.length === 0) return undefined;
   const i = table.findIndex(expected => {
     if(expected.length !== actual.length) return false;
     for(let j = 0; j < expected.length; ++j) {
@@ -779,10 +947,11 @@ const allFiles = fs
     mapper: function(x: any): models.Option {
       return {
         id: models.Option.id(),
+        option_type: x.option_type,
         reference_item: x.item,
-        choice_id: getOrInsertId(data.option_sets, x.choice.from),
+        choice_id: getOrInsertId(data.option_sets, x.choice?.from),
         string: x.string,
-        ability_score_bonus: x.ability_score.index,
+        ability_score_bonus: x.ability_score?.index,
         bonus: x.bonus,
         action_name: x.action_name,
         action_count: x.count,
@@ -790,11 +959,14 @@ const allFiles = fs
         action_desc: x.desc,
         breath_name: x.name,
         breath_dc: getOrInsertId(data.difficulty_classes, x.dc),
-        breath_damage_type: x.damage_type.index,
-        breath_damage_dice: x.damage_dice,
-        breath_damage_dc: getOrInsertId(data.difficulty_classes, x.dc),
+        breath_damage: getOrInsertArrayId(
+          data.ArrayDamage,
+          x.damage,
+          data.Damage.equals,
+          data.Damage.transform
+        ),
         counted_reference_count: x.count,
-        counted_item: x.item.index,
+        counted_item: x.item?.index,
         prerequisites: getOrInsertArrayId(
           data.ArrayOptionPrerequisite, 
           x.prerequisites, 
@@ -802,7 +974,7 @@ const allFiles = fs
           data.OptionPrerequisite.transform
         ),
         damage_dice: x.damage_dice,
-        damage_type: x.damage_type.index, 
+        damage_type: x.damage_type?.index, 
         alignments: getOrInsertArrayId(
           data.ArrayOptionPrerequisite, 
           x.alignments,
@@ -817,8 +989,12 @@ const allFiles = fs
           data.Option.equals,
           data.Option.transform
         ), 
-        ability_score_prerequisite: ,
-        size: 
+        ability_score_prerequisite: x.ability_score?.index,
+        damage_notes: x.notes,
+        align_desc: x.desc,
+        multiple_desc: x.desc,
+        minimum_score_prerequisite: x.minimum_score,
+        size: x.size,
       }
     },
     inputs: allFiles,
@@ -1152,3 +1328,6 @@ function printArray(array: any[], output: string): void {
 }
 
 printArray(data.ArrayAPIReference, 'array_api_references.json');
+printArray(data.ArrayDamage, 'array_damages.json');
+printArray(data.ArrayOption, 'array_options.json');
+printArray(data.ArrayOptionPrerequisite, 'array_option_prerequisites.json');

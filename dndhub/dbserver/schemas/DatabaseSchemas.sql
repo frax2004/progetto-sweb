@@ -73,7 +73,8 @@ create table if not exists ArrayPrerequisitesItem (
 );
 
 create table if not exists Option (
-  id number not null primary key, 
+  id number not null primary key,
+  option_type text not null, 
   -- pseudo-tabella reference
   reference_item text,
   -- pseudo-tabella choice
@@ -144,6 +145,7 @@ create table if not exists ArrayOfOptionsAndStringItem (
 
 create table if not exists OptionSet (
   id number not null primary key,
+  option_set_type text not null,
   -- pseudo-tabella equipment_category
   equipment_category text, -- foreign key
   -- pseudo-tabella resource_list

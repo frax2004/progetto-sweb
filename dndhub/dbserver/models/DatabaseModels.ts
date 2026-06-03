@@ -57,6 +57,12 @@ export namespace models {
     array_id!: number;
   }
 
+  export class ArrayPrerequisitesItem {
+    array_idx!: number;
+    array_id!: number;
+    item!: string;
+  }
+
   export class Option {
     id!: number;
     // pseudo-tabella reference

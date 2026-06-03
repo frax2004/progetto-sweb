@@ -63,6 +63,15 @@ create table if not exists ArrayOptionItem (
   foreign key (item_id) references Option(id)
 );
 
+create table if not exists ArrayPrerequisitesItem (
+  array_idx number not null,
+  array_id number not null,
+  item text not null,
+
+  primary key (array_id,array_idx),
+  foreign key (item) references APIReference(idx)
+);
+
 create table if not exists Option (
   id number not null primary key, 
   -- pseudo-tabella reference

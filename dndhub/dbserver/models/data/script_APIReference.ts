@@ -89,6 +89,18 @@ namespace data {
     name: string = "";
     url: string = "";
     note: string = "";
+
+    static equals(lhs: models.ArrayAPIReferenceItem, rhs: data.APIReference): boolean {
+      return lhs.item === rhs.index;
+    }
+
+    static transform(x: data.APIReference, array_id: number, array_idx: number) {
+      return {
+        array_id: array_id,
+        idx: array_idx,
+        item: x.index
+      };
+    }
   }
 
   export class Choice {
@@ -120,6 +132,12 @@ namespace data {
     ]
   }
 
+  class ArrayPrerequisitesItem {
+    type: string = "";
+    proficiency = APIReference;
+  }
+
+
   export class Option {
     @required()
     option_type: string = "";
@@ -138,12 +156,7 @@ namespace data {
       Damage
     ];
     of = APIReference;
-    prerequisites = [
-      class {
-        type: string = "";
-        proficiency = APIReference;
-      }
-    ];
+    prerequisites = [ArrayPrerequisitesItem];
     damage_dice: string = "";
     damage_type = APIReference;
     notes: string = "";
@@ -649,14 +662,36 @@ namespace data {
   // prima di scrivere il json che conterrà questo oggetto
   // si assegnaerà ad ogni elemento di ogni array, l'indice del proprio array
   // e poi si farà il flatten: [[{index: 0}, {}, {}], [{index: 1}], [...]]
-  export let ArrayAPIReference: models.APIReference[] = []
+  export let ArrayAPIReference: models.ArrayAPIReferenceItem[][] = [];
+
+  export let option_sets: any[] = [];
+  export let difficulty_classes: any[] = [];
 }
 
+function getOrInsertId(array: any[], searched: any): number | undefined {
+  if(searched === undefined) return undefined;
 
-function getIndex(table: any[], array: any[]): number {
-  const i = table.findIndex(x => deepEqual(x, array));
+  const id = array.findIndex(item => deepEqual(searched, item));
+  if(id < 0) {
+    const result = array.length;
+    array.push(searched);
+    return result;
+  } else return id;
+}
+
+function getOrInsertArrayId(table: any[], actual: any[], equals: (lhs: any, rhs: any) => boolean, transform: (x: any, array_id: number, array_idx: number) => any): number {
+  const i = table.findIndex(expected => {
+    if(expected.length !== actual.length) return false;
+    for(let j = 0; j < expected.length; ++j) {
+      if(!equals(expected[j], actual[j])) return false;
+    }
+    return true;
+  });
+
   if(i < 0) {
-    return table.push(array)-1;
+    const id = table.length;
+    table.push(actual.map((x, k) => transform(x, id, k)));
+    return id;
   } else return i;
 }
 
@@ -720,7 +755,36 @@ const allFiles = fs
   {
     extractor: extract<data.Option>,
     shape: new data.Option(),
-    mapper: (x: any) => x,
+    mapper: function(x: any): models.Option {
+      return {
+        id: models.Option.id(),
+        reference_item: x.item,
+        choice_id: getOrInsertId(data.option_sets, x.choice.from),
+        string: x.string,
+        ability_score_bonus: x.ability_score.index,
+        bonus: x.bonus,
+        action_name: x.action_name,
+        action_count: x.count,
+        action_type: x.type,
+        action_desc: x.desc,
+        breath_name: x.name,
+        breath_dc: getOrInsertId(data.difficulty_classes, x.dc),
+        breath_damage_type: x.damage_type.index,
+        breath_damage_dice: x.damage_dice,
+        breath_damage_dc: getOrInsertId(data.difficulty_classes, x.dc),
+        counted_reference_count: x.count,
+        counted_item: x.item.index,
+        prerequisites: ,
+        damage_dice: ,
+        damage_type: , 
+        alignments: , 
+        money_count: ,
+        money_unit: ,
+        multiple_items: , 
+        ability_score_prerequisite: ,
+        size: 
+      }
+    },
     inputs: allFiles,
     output: "options.json"
   },
@@ -816,7 +880,12 @@ const allFiles = fs
         idx: x.index,
         name: x.name,
         url: x.url,
-        equipment: getIndex(data.ArrayAPIReference, x.equipment)
+        equipment: getOrInsertArrayId(
+          data.ArrayAPIReference, 
+          x.equipment, 
+          data.APIReference.equals,
+          data.APIReference.transform
+        )
       };
     },
     inputs: ["5e-SRD-Equipment-Categories.json"],
@@ -1040,3 +1109,10 @@ const allFiles = fs
     output: "levels.json"
   },
 ].forEach(translate);
+
+
+function printArray(array: any[], output: string): void {
+  fs.writeFileSync("new-data/" + output, JSON.stringify(array.flatMap(x => x)), 'utf8');
+}
+
+printArray(data.ArrayAPIReference, 'array_api_references.json');

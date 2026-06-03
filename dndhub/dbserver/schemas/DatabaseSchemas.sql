@@ -829,3 +829,184 @@ create table if not exists Level (
   foreign key (class_specific) references ClassSpecific(id),
   foreign key (subclass) references APIReference(idx)
 );
+
+
+-- a partire da qui in poi scrivo tabelle lato utente
+
+create table if not exists Account (
+  email text not null primary key,
+  password text not null,
+  username text not null
+);
+
+create table if not exists Amministratore (
+  account text not null primary key,
+
+  foreign key (account) references Account(email)
+);
+
+create table if not exists UtenteGenerico (
+  account text not null primary key,
+  -- le chiavi di utente giocatore e utente dm si potrebbero
+  -- creare 'sommando' alla email delle stringhe 
+  -- come '-giocatore' e '-dm'
+  utente_giocatore text not null,
+  utente_dungeon_master text not null,
+
+  foreign key (account) references Account(email),
+  foreign key (utente_giocatore) references UtenteGiocatore(utente_giocatore),
+  foreign key (utente_dungeon_master) references UtenteDungeonMaster(utente_dungeon_master)
+);
+
+create table if not exists ArrayFeatItem (
+  item text not null,
+  idx_personaggio text not null,
+  array_idx number not null,
+
+  primary key (idx_personaggio,array_idx),
+  foreign key (item) references Feat(idx)
+);
+
+create table if not exists ArraySpellItem (
+  item text not null,
+  idx_personaggio text not null,
+  array_idx number not null,
+
+  primary key (idx_personaggio,array_idx),
+  foreign key (item) references Spell(name)
+);
+
+create table if not exists ArrayEquipmentItem (
+  item text not null,
+  idx_personaggio text not null,
+  array_idx number not null,
+
+  primary key (idx_personaggio,array_idx),
+  foreign key (item) references Equipment(idx)
+);
+
+create table if not exists ArrayLanguageItem (
+  item text not null,
+  idx_personaggio text not null,
+  array_idx number not null,
+
+  primary key (idx_personaggio,array_idx),
+  foreign key (item) references Language(idx)
+);
+
+create table if not exists ArrayStatsItem (
+  stat_idx text not null,
+  stat_value number not null,
+  idx_personaggio text not null,
+  array_idx number not null,
+
+  primary key (idx_personaggio,array_idx),
+  foreign key (stat_idx) references AbilityScore(idx)
+);
+
+create table if not exists Personaggio (
+  utente_giocatore text not null,
+  nome text not null,
+  -- primary key creata da interpolazione
+  -- utente_giocatore + nome
+  idx_personaggio text not null primary key,
+  campagna text,
+  classe text not null,
+  sottoclasse text,
+  specie text not null,
+  sottospecie text,
+  background text not null,
+  -- i talenti sono salvati su un array come foreign keys
+  -- stessa cosa vale per equipaggiamenti, incantesimi e lingue parlate
+  -- e anche per statistiche
+
+ -- tranne che non li salviamo come ArrayAPIReference?
+
+  -- in teoria la proprietà è array di 
+  -- stringhe, lascio come semplice stringa?
+  abilita_extra text,
+  descrizione_personaggio text,
+
+  primary key (utente_giocatore,nome),
+  foreign key (classe) references Class(idx),
+  foreign key (campagna)
+  foreign key (idx_personaggio) references ArrayFeatItem(idx_personaggio),
+  foreign key (idx_personaggio) references ArraySpellItem(idx_personaggio),
+  foreign key (idx_personaggio) references ArrayEquipmentItem(idx_personaggio),
+  foreign key (idx_personaggio) references ArrayLanguageItem(idx_personaggio),
+  foreign key (idx_personaggio) references ArrayStatsItem(idx_personaggio),
+  foreign key (utente_giocatore) references UtenteGiocatore(utente_giocatore),
+  foreign key (sottoclasse) references Subclass(idx),
+  foreign key (specie) references Species(idx),
+  foreign key (sottospecie) references Subspecies(idx),
+  foreign key (background) references Background(idx)
+);
+
+create table if not exists ArrayPostItem (
+  idx_campagna text not null,
+  timestamp text not null,
+  contenuto text not null,
+
+  primary key (idx_campagna,timestamp),
+  foreign key (idx_campagna) references Campagna(idx_campagna)
+);
+
+create table if not exists ArrayCampagnaPersonaggiItem (
+  idx_campagna text not null,
+  idx_personaggio text not null,
+
+  primary key (idx_campagna,idx_personaggio),
+  foreign key (idx_personaggio) references Personaggio(idx_personaggio),
+  foreign key (idx_campagna) references Campagna(idx_campagna)
+);
+
+create table if not exists Campagna (
+  utente_dungeon_master text not null,
+  nome text not null,
+  -- primary key creata da interpolazione
+  -- utente_dungeo_master + nome
+  idx_campagna text not null primary key,
+  banner text,
+  descrizione text,
+  -- i post vengono acceduti tramite foreign key
+  -- non so cosa fare con i personaggi
+  -- avrebbe più senso avere un array di giocatori?
+
+  -- comunque personaggio sono anch'essi acceduti come foreign key
+
+  foreign key (idx_campagna) references ArrayPostItem(idx_campagna),
+  foreign key (idx_campagna) references ArrayCampagnaPersonaggiItem(idx_campagna)
+);
+
+create table if not exists ArrayIdxPersonaggioItem (
+  utente_giocatore text not null,
+  idx_personaggio text not null,
+
+  primary key (utente_giocatore,idx_personaggio),
+  foreign key (idx_personaggio) references Personaggio(idx_personaggio),
+  foreign key (idx_personaggio) references ArrayCampagnaPersonaggiItem(idx_personaggio)
+);
+
+create table if not exists UtenteGiocatore (
+  utente_giocatore text not null primary key,
+  
+  -- personaggi e campagne acceduti con idx personaggio
+  -- tramite tabella direttamente sopra
+  foreign key (utente_giocatore) references ArrayIdxPersonaggioItem(utente_giocatore)
+);
+
+create table if not exists ArrayIdxCampagnaItem (
+  utente_dungeon_master text not null,
+  idx_campagna text not null,
+
+  primary key (utente_dungeon_master,idx_campagna),
+  foreign key (idx_campagna) references Campagna(idx_campagna)
+)
+
+create table if not exists UtenteDungeonMaster (
+  utente_dungeon_master text not null primary key,
+
+  -- campagne si raggiungono tramite 
+  -- foreign key a tabella sopra
+  foreign key (utente_dungeon_master) references ArrayIdxCampagnaItem(utente_dungeon_master)
+);

@@ -132,11 +132,21 @@ namespace data {
     ]
   }
 
-  class ArrayPrerequisitesItem {
+  export class OptionPrerequisite {
     type: string = "";
     proficiency = APIReference;
-  }
 
+    public static equals(lhs: models.ArrayPrerequisitesItem, rhs: any) {
+      return lhs.item === rhs.proficiency.index;
+    }
+    public static transform(x: any, array_id: number, array_idx: number): models.ArrayPrerequisitesItem {
+      return {
+        item: x.prerequisite.index,
+        array_id: array_id,
+        array_idx: array_idx
+      };
+    } 
+  }
 
   export class Option {
     @required()
@@ -156,7 +166,7 @@ namespace data {
       Damage
     ];
     of = APIReference;
-    prerequisites = [ArrayPrerequisitesItem];
+    prerequisites = [OptionPrerequisite];
     damage_dice: string = "";
     damage_type = APIReference;
     notes: string = "";
@@ -169,6 +179,15 @@ namespace data {
     ];
     minimum_score: number = 0;
     size: string = "";
+
+    public static equals(lhs: models.Option, rhs: any) {
+      if(rhs.option_type !== lhs.option_type) return false;
+      
+    }
+
+    public static transform(x: any): models.Option {
+      
+    }
   }
 
   export class DamageType {
@@ -663,6 +682,8 @@ namespace data {
   // si assegnaerà ad ogni elemento di ogni array, l'indice del proprio array
   // e poi si farà il flatten: [[{index: 0}, {}, {}], [{index: 1}], [...]]
   export let ArrayAPIReference: models.ArrayAPIReferenceItem[][] = [];
+  export let ArrayOptionPrerequisite: models.ArrayPrerequisitesItem[][] = [];
+  export let ArrayOption: models.ArrayOptionItem[][] = [];
 
   export let option_sets: any[] = [];
   export let difficulty_classes: any[] = [];
@@ -774,13 +795,28 @@ const allFiles = fs
         breath_damage_dc: getOrInsertId(data.difficulty_classes, x.dc),
         counted_reference_count: x.count,
         counted_item: x.item.index,
-        prerequisites: ,
-        damage_dice: ,
-        damage_type: , 
-        alignments: , 
-        money_count: ,
-        money_unit: ,
-        multiple_items: , 
+        prerequisites: getOrInsertArrayId(
+          data.ArrayOptionPrerequisite, 
+          x.prerequisites, 
+          data.OptionPrerequisite.equals,
+          data.OptionPrerequisite.transform
+        ),
+        damage_dice: x.damage_dice,
+        damage_type: x.damage_type.index, 
+        alignments: getOrInsertArrayId(
+          data.ArrayOptionPrerequisite, 
+          x.alignments,
+          data.OptionPrerequisite.equals,
+          data.OptionPrerequisite.transform
+        ), 
+        money_count: x.count,
+        money_unit: x.unit,
+        multiple_items: getOrInsertArrayId(
+          data.ArrayOption,
+          x.items,
+          data.Option.equals,
+          data.Option.transform
+        ), 
         ability_score_prerequisite: ,
         size: 
       }

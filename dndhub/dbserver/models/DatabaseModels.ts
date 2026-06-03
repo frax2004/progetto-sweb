@@ -65,6 +65,7 @@ export namespace models {
 
   export class Option {
     id!: number;
+    option_type!: string;
     // pseudo-tabella reference
     reference_item?: string;
     // pseudo-tabella choice
@@ -121,6 +122,7 @@ export namespace models {
 
   export class OptionSet {
     id!: number;
+    option_set_type!: string;
     // pseudo-tabella equipment_category
     equipment_category?: string;
     resource_list_url?: string;

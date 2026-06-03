@@ -1,0 +1,3247 @@
+[
+  {
+    "array_id": 0,
+    "idx": 0,
+    "item": "acid"
+  },
+  {
+    "array_id": 0,
+    "idx": 1,
+    "item": "alchemists-fire"
+  },
+  {
+    "array_id": 0,
+    "idx": 2,
+    "item": "amulet"
+  },
+  {
+    "array_id": 0,
+    "idx": 3,
+    "item": "antitoxin"
+  },
+  {
+    "array_id": 0,
+    "idx": 4,
+    "item": "backpack"
+  },
+  {
+    "array_id": 0,
+    "idx": 5,
+    "item": "ball-bearings"
+  },
+  {
+    "array_id": 0,
+    "idx": 6,
+    "item": "barrel"
+  },
+  {
+    "array_id": 0,
+    "idx": 7,
+    "item": "basket"
+  },
+  {
+    "array_id": 0,
+    "idx": 8,
+    "item": "bedroll"
+  },
+  {
+    "array_id": 0,
+    "idx": 9,
+    "item": "bell"
+  },
+  {
+    "array_id": 0,
+    "idx": 10,
+    "item": "blanket"
+  },
+  {
+    "array_id": 0,
+    "idx": 11,
+    "item": "block-and-tackle"
+  },
+  {
+    "array_id": 0,
+    "idx": 12,
+    "item": "book"
+  },
+  {
+    "array_id": 0,
+    "idx": 13,
+    "item": "bottle-glass"
+  },
+  {
+    "array_id": 0,
+    "idx": 14,
+    "item": "bucket"
+  },
+  {
+    "array_id": 0,
+    "idx": 15,
+    "item": "burglars-pack"
+  },
+  {
+    "array_id": 0,
+    "idx": 16,
+    "item": "caltrops"
+  },
+  {
+    "array_id": 0,
+    "idx": 17,
+    "item": "candle"
+  },
+  {
+    "array_id": 0,
+    "idx": 18,
+    "item": "case-crossbow-bolt"
+  },
+  {
+    "array_id": 0,
+    "idx": 19,
+    "item": "case-map-or-scroll"
+  },
+  {
+    "array_id": 0,
+    "idx": 20,
+    "item": "chain"
+  },
+  {
+    "array_id": 0,
+    "idx": 21,
+    "item": "chest"
+  },
+  {
+    "array_id": 0,
+    "idx": 22,
+    "item": "climbers-kit"
+  },
+  {
+    "array_id": 0,
+    "idx": 23,
+    "item": "clothes-fine"
+  },
+  {
+    "array_id": 0,
+    "idx": 24,
+    "item": "clothes-travelers"
+  },
+  {
+    "array_id": 0,
+    "idx": 25,
+    "item": "component-pouch"
+  },
+  {
+    "array_id": 0,
+    "idx": 26,
+    "item": "costume"
+  },
+  {
+    "array_id": 0,
+    "idx": 27,
+    "item": "crowbar"
+  },
+  {
+    "array_id": 0,
+    "idx": 28,
+    "item": "crystal"
+  },
+  {
+    "array_id": 0,
+    "idx": 29,
+    "item": "diplomat-pack"
+  },
+  {
+    "array_id": 0,
+    "idx": 30,
+    "item": "dungeoneer-pack"
+  },
+  {
+    "array_id": 0,
+    "idx": 31,
+    "item": "emblem"
+  },
+  {
+    "array_id": 0,
+    "idx": 32,
+    "item": "flask"
+  },
+  {
+    "array_id": 0,
+    "idx": 33,
+    "item": "grappling-hook"
+  },
+  {
+    "array_id": 0,
+    "idx": 34,
+    "item": "healers-kit"
+  },
+  {
+    "array_id": 0,
+    "idx": 35,
+    "item": "holy-water"
+  },
+  {
+    "array_id": 0,
+    "idx": 36,
+    "item": "hunting-trap"
+  },
+  {
+    "array_id": 0,
+    "idx": 37,
+    "item": "ink"
+  },
+  {
+    "array_id": 0,
+    "idx": 38,
+    "item": "ink-pen"
+  },
+  {
+    "array_id": 0,
+    "idx": 39,
+    "item": "jug"
+  },
+  {
+    "array_id": 0,
+    "idx": 40,
+    "item": "ladder"
+  },
+  {
+    "array_id": 0,
+    "idx": 41,
+    "item": "lamp"
+  },
+  {
+    "array_id": 0,
+    "idx": 42,
+    "item": "lantern-bullseye"
+  },
+  {
+    "array_id": 0,
+    "idx": 43,
+    "item": "lantern-hooded"
+  },
+  {
+    "array_id": 0,
+    "idx": 44,
+    "item": "lock"
+  },
+  {
+    "array_id": 0,
+    "idx": 45,
+    "item": "magnifying-glass"
+  },
+  {
+    "array_id": 0,
+    "idx": 46,
+    "item": "manacles"
+  },
+  {
+    "array_id": 0,
+    "idx": 47,
+    "item": "map"
+  },
+  {
+    "array_id": 0,
+    "idx": 48,
+    "item": "mirror"
+  },
+  {
+    "array_id": 0,
+    "idx": 49,
+    "item": "net"
+  },
+  {
+    "array_id": 0,
+    "idx": 50,
+    "item": "oil"
+  },
+  {
+    "array_id": 0,
+    "idx": 51,
+    "item": "orb"
+  },
+  {
+    "array_id": 0,
+    "idx": 52,
+    "item": "paper"
+  },
+  {
+    "array_id": 0,
+    "idx": 53,
+    "item": "parchment"
+  },
+  {
+    "array_id": 0,
+    "idx": 54,
+    "item": "perfume"
+  },
+  {
+    "array_id": 0,
+    "idx": 55,
+    "item": "poison-basic"
+  },
+  {
+    "array_id": 0,
+    "idx": 56,
+    "item": "pouch"
+  },
+  {
+    "array_id": 0,
+    "idx": 57,
+    "item": "pole"
+  },
+  {
+    "array_id": 0,
+    "idx": 58,
+    "item": "pot-iron"
+  },
+  {
+    "array_id": 0,
+    "idx": 59,
+    "item": "potion-of-healing"
+  },
+  {
+    "array_id": 0,
+    "idx": 60,
+    "item": "priests-pack"
+  },
+  {
+    "array_id": 0,
+    "idx": 61,
+    "item": "quiver"
+  },
+  {
+    "array_id": 0,
+    "idx": 62,
+    "item": "ram-portable"
+  },
+  {
+    "array_id": 0,
+    "idx": 63,
+    "item": "rations"
+  },
+  {
+    "array_id": 0,
+    "idx": 64,
+    "item": "reliquary"
+  },
+  {
+    "array_id": 0,
+    "idx": 65,
+    "item": "robe"
+  },
+  {
+    "array_id": 0,
+    "idx": 66,
+    "item": "rod"
+  },
+  {
+    "array_id": 0,
+    "idx": 67,
+    "item": "rope"
+  },
+  {
+    "array_id": 0,
+    "idx": 68,
+    "item": "sack"
+  },
+  {
+    "array_id": 0,
+    "idx": 69,
+    "item": "scholars-pack"
+  },
+  {
+    "array_id": 0,
+    "idx": 70,
+    "item": "shovel"
+  },
+  {
+    "array_id": 0,
+    "idx": 71,
+    "item": "signal-whistle"
+  },
+  {
+    "array_id": 0,
+    "idx": 72,
+    "item": "spell-scroll-cantrip"
+  },
+  {
+    "array_id": 0,
+    "idx": 73,
+    "item": "spell-scroll-level-1"
+  },
+  {
+    "array_id": 0,
+    "idx": 74,
+    "item": "spikes-iron"
+  },
+  {
+    "array_id": 0,
+    "idx": 75,
+    "item": "sprig-of-mistletoe"
+  },
+  {
+    "array_id": 0,
+    "idx": 76,
+    "item": "spyglass"
+  },
+  {
+    "array_id": 0,
+    "idx": 77,
+    "item": "staff"
+  },
+  {
+    "array_id": 0,
+    "idx": 78,
+    "item": "string"
+  },
+  {
+    "array_id": 0,
+    "idx": 79,
+    "item": "tent"
+  },
+  {
+    "array_id": 0,
+    "idx": 80,
+    "item": "tinderbox"
+  },
+  {
+    "array_id": 0,
+    "idx": 81,
+    "item": "torch"
+  },
+  {
+    "array_id": 0,
+    "idx": 82,
+    "item": "vial"
+  },
+  {
+    "array_id": 0,
+    "idx": 83,
+    "item": "wand"
+  },
+  {
+    "array_id": 0,
+    "idx": 84,
+    "item": "waterskin"
+  },
+  {
+    "array_id": 0,
+    "idx": 85,
+    "item": "yew-wand"
+  },
+  {
+    "array_id": 1,
+    "idx": 0,
+    "item": "acid"
+  },
+  {
+    "array_id": 1,
+    "idx": 1,
+    "item": "alchemists-fire"
+  },
+  {
+    "array_id": 1,
+    "idx": 2,
+    "item": "amulet"
+  },
+  {
+    "array_id": 1,
+    "idx": 3,
+    "item": "antitoxin"
+  },
+  {
+    "array_id": 1,
+    "idx": 4,
+    "item": "backpack"
+  },
+  {
+    "array_id": 1,
+    "idx": 5,
+    "item": "ball-bearings"
+  },
+  {
+    "array_id": 1,
+    "idx": 6,
+    "item": "barrel"
+  },
+  {
+    "array_id": 1,
+    "idx": 7,
+    "item": "basket"
+  },
+  {
+    "array_id": 1,
+    "idx": 8,
+    "item": "bedroll"
+  },
+  {
+    "array_id": 1,
+    "idx": 9,
+    "item": "bell"
+  },
+  {
+    "array_id": 1,
+    "idx": 10,
+    "item": "blanket"
+  },
+  {
+    "array_id": 1,
+    "idx": 11,
+    "item": "block-and-tackle"
+  },
+  {
+    "array_id": 1,
+    "idx": 12,
+    "item": "book"
+  },
+  {
+    "array_id": 1,
+    "idx": 13,
+    "item": "bottle-glass"
+  },
+  {
+    "array_id": 1,
+    "idx": 14,
+    "item": "bucket"
+  },
+  {
+    "array_id": 1,
+    "idx": 15,
+    "item": "burglars-pack"
+  },
+  {
+    "array_id": 1,
+    "idx": 16,
+    "item": "caltrops"
+  },
+  {
+    "array_id": 1,
+    "idx": 17,
+    "item": "candle"
+  },
+  {
+    "array_id": 1,
+    "idx": 18,
+    "item": "case-crossbow-bolt"
+  },
+  {
+    "array_id": 1,
+    "idx": 19,
+    "item": "case-map-or-scroll"
+  },
+  {
+    "array_id": 1,
+    "idx": 20,
+    "item": "chain"
+  },
+  {
+    "array_id": 1,
+    "idx": 21,
+    "item": "chest"
+  },
+  {
+    "array_id": 1,
+    "idx": 22,
+    "item": "climbers-kit"
+  },
+  {
+    "array_id": 1,
+    "idx": 23,
+    "item": "clothes-fine"
+  },
+  {
+    "array_id": 1,
+    "idx": 24,
+    "item": "clothes-travelers"
+  },
+  {
+    "array_id": 1,
+    "idx": 25,
+    "item": "component-pouch"
+  },
+  {
+    "array_id": 1,
+    "idx": 26,
+    "item": "costume"
+  },
+  {
+    "array_id": 1,
+    "idx": 27,
+    "item": "crowbar"
+  },
+  {
+    "array_id": 1,
+    "idx": 28,
+    "item": "crystal"
+  },
+  {
+    "array_id": 1,
+    "idx": 29,
+    "item": "diplomat-pack"
+  },
+  {
+    "array_id": 1,
+    "idx": 30,
+    "item": "dungeoneer-pack"
+  },
+  {
+    "array_id": 1,
+    "idx": 31,
+    "item": "emblem"
+  },
+  {
+    "array_id": 1,
+    "idx": 32,
+    "item": "flask"
+  },
+  {
+    "array_id": 1,
+    "idx": 33,
+    "item": "grappling-hook"
+  },
+  {
+    "array_id": 1,
+    "idx": 34,
+    "item": "healers-kit"
+  },
+  {
+    "array_id": 1,
+    "idx": 35,
+    "item": "holy-water"
+  },
+  {
+    "array_id": 1,
+    "idx": 36,
+    "item": "hunting-trap"
+  },
+  {
+    "array_id": 1,
+    "idx": 37,
+    "item": "ink"
+  },
+  {
+    "array_id": 1,
+    "idx": 38,
+    "item": "ink-pen"
+  },
+  {
+    "array_id": 1,
+    "idx": 39,
+    "item": "jug"
+  },
+  {
+    "array_id": 1,
+    "idx": 40,
+    "item": "ladder"
+  },
+  {
+    "array_id": 1,
+    "idx": 41,
+    "item": "lamp"
+  },
+  {
+    "array_id": 1,
+    "idx": 42,
+    "item": "lantern-bullseye"
+  },
+  {
+    "array_id": 1,
+    "idx": 43,
+    "item": "lantern-hooded"
+  },
+  {
+    "array_id": 1,
+    "idx": 44,
+    "item": "lock"
+  },
+  {
+    "array_id": 1,
+    "idx": 45,
+    "item": "magnifying-glass"
+  },
+  {
+    "array_id": 1,
+    "idx": 46,
+    "item": "manacles"
+  },
+  {
+    "array_id": 1,
+    "idx": 47,
+    "item": "map"
+  },
+  {
+    "array_id": 1,
+    "idx": 48,
+    "item": "mirror"
+  },
+  {
+    "array_id": 1,
+    "idx": 49,
+    "item": "net"
+  },
+  {
+    "array_id": 1,
+    "idx": 50,
+    "item": "oil"
+  },
+  {
+    "array_id": 1,
+    "idx": 51,
+    "item": "orb"
+  },
+  {
+    "array_id": 1,
+    "idx": 52,
+    "item": "paper"
+  },
+  {
+    "array_id": 1,
+    "idx": 53,
+    "item": "parchment"
+  },
+  {
+    "array_id": 1,
+    "idx": 54,
+    "item": "perfume"
+  },
+  {
+    "array_id": 1,
+    "idx": 55,
+    "item": "poison-basic"
+  },
+  {
+    "array_id": 1,
+    "idx": 56,
+    "item": "pouch"
+  },
+  {
+    "array_id": 1,
+    "idx": 57,
+    "item": "pole"
+  },
+  {
+    "array_id": 1,
+    "idx": 58,
+    "item": "pot-iron"
+  },
+  {
+    "array_id": 1,
+    "idx": 59,
+    "item": "potion-of-healing"
+  },
+  {
+    "array_id": 1,
+    "idx": 60,
+    "item": "priests-pack"
+  },
+  {
+    "array_id": 1,
+    "idx": 61,
+    "item": "quiver"
+  },
+  {
+    "array_id": 1,
+    "idx": 62,
+    "item": "ram-portable"
+  },
+  {
+    "array_id": 1,
+    "idx": 63,
+    "item": "rations"
+  },
+  {
+    "array_id": 1,
+    "idx": 64,
+    "item": "reliquary"
+  },
+  {
+    "array_id": 1,
+    "idx": 65,
+    "item": "robe"
+  },
+  {
+    "array_id": 1,
+    "idx": 66,
+    "item": "rod"
+  },
+  {
+    "array_id": 1,
+    "idx": 67,
+    "item": "rope"
+  },
+  {
+    "array_id": 1,
+    "idx": 68,
+    "item": "sack"
+  },
+  {
+    "array_id": 1,
+    "idx": 69,
+    "item": "scholars-pack"
+  },
+  {
+    "array_id": 1,
+    "idx": 70,
+    "item": "shovel"
+  },
+  {
+    "array_id": 1,
+    "idx": 71,
+    "item": "signal-whistle"
+  },
+  {
+    "array_id": 1,
+    "idx": 72,
+    "item": "spell-scroll-cantrip"
+  },
+  {
+    "array_id": 1,
+    "idx": 73,
+    "item": "spell-scroll-level-1"
+  },
+  {
+    "array_id": 1,
+    "idx": 74,
+    "item": "spikes-iron"
+  },
+  {
+    "array_id": 1,
+    "idx": 75,
+    "item": "sprig-of-mistletoe"
+  },
+  {
+    "array_id": 1,
+    "idx": 76,
+    "item": "spyglass"
+  },
+  {
+    "array_id": 1,
+    "idx": 77,
+    "item": "staff"
+  },
+  {
+    "array_id": 1,
+    "idx": 78,
+    "item": "string"
+  },
+  {
+    "array_id": 1,
+    "idx": 79,
+    "item": "tent"
+  },
+  {
+    "array_id": 1,
+    "idx": 80,
+    "item": "tinderbox"
+  },
+  {
+    "array_id": 1,
+    "idx": 81,
+    "item": "torch"
+  },
+  {
+    "array_id": 1,
+    "idx": 82,
+    "item": "vial"
+  },
+  {
+    "array_id": 1,
+    "idx": 83,
+    "item": "wand"
+  },
+  {
+    "array_id": 1,
+    "idx": 84,
+    "item": "waterskin"
+  },
+  {
+    "array_id": 1,
+    "idx": 85,
+    "item": "yew-wand"
+  },
+  {
+    "array_id": 2,
+    "idx": 0,
+    "item": "arrows"
+  },
+  {
+    "array_id": 2,
+    "idx": 1,
+    "item": "bolts"
+  },
+  {
+    "array_id": 2,
+    "idx": 2,
+    "item": "bullets-firearm"
+  },
+  {
+    "array_id": 2,
+    "idx": 3,
+    "item": "bullets-sling"
+  },
+  {
+    "array_id": 2,
+    "idx": 4,
+    "item": "needles"
+  },
+  {
+    "array_id": 3,
+    "idx": 0,
+    "item": "crystal"
+  },
+  {
+    "array_id": 3,
+    "idx": 1,
+    "item": "orb"
+  },
+  {
+    "array_id": 3,
+    "idx": 2,
+    "item": "quarterstaff"
+  },
+  {
+    "array_id": 3,
+    "idx": 3,
+    "item": "rod"
+  },
+  {
+    "array_id": 3,
+    "idx": 4,
+    "item": "staff"
+  },
+  {
+    "array_id": 3,
+    "idx": 5,
+    "item": "wand"
+  },
+  {
+    "array_id": 4,
+    "idx": 0,
+    "item": "breastplate"
+  },
+  {
+    "array_id": 4,
+    "idx": 1,
+    "item": "chain-mail"
+  },
+  {
+    "array_id": 4,
+    "idx": 2,
+    "item": "chain-shirt"
+  },
+  {
+    "array_id": 4,
+    "idx": 3,
+    "item": "half-plate-armor"
+  },
+  {
+    "array_id": 4,
+    "idx": 4,
+    "item": "hide-armor"
+  },
+  {
+    "array_id": 4,
+    "idx": 5,
+    "item": "leather-armor"
+  },
+  {
+    "array_id": 4,
+    "idx": 6,
+    "item": "padded-armor"
+  },
+  {
+    "array_id": 4,
+    "idx": 7,
+    "item": "plate-armor"
+  },
+  {
+    "array_id": 4,
+    "idx": 8,
+    "item": "ring-mail"
+  },
+  {
+    "array_id": 4,
+    "idx": 9,
+    "item": "scale-mail"
+  },
+  {
+    "array_id": 4,
+    "idx": 10,
+    "item": "shield"
+  },
+  {
+    "array_id": 4,
+    "idx": 11,
+    "item": "splint-armor"
+  },
+  {
+    "array_id": 4,
+    "idx": 12,
+    "item": "studded-leather-armor"
+  },
+  {
+    "array_id": 5,
+    "idx": 0,
+    "item": "alchemists-supplies"
+  },
+  {
+    "array_id": 5,
+    "idx": 1,
+    "item": "brewers-supplies"
+  },
+  {
+    "array_id": 5,
+    "idx": 2,
+    "item": "calligraphers-supplies"
+  },
+  {
+    "array_id": 5,
+    "idx": 3,
+    "item": "carpenters-tools"
+  },
+  {
+    "array_id": 5,
+    "idx": 4,
+    "item": "cartographer-tools"
+  },
+  {
+    "array_id": 5,
+    "idx": 5,
+    "item": "cobblers-tools"
+  },
+  {
+    "array_id": 5,
+    "idx": 6,
+    "item": "cooks-utensils"
+  },
+  {
+    "array_id": 5,
+    "idx": 7,
+    "item": "glassblowers-tools"
+  },
+  {
+    "array_id": 5,
+    "idx": 8,
+    "item": "jewelers-tools"
+  },
+  {
+    "array_id": 5,
+    "idx": 9,
+    "item": "leatherworkers-tools"
+  },
+  {
+    "array_id": 5,
+    "idx": 10,
+    "item": "masons-tools"
+  },
+  {
+    "array_id": 5,
+    "idx": 11,
+    "item": "painters-supplies"
+  },
+  {
+    "array_id": 5,
+    "idx": 12,
+    "item": "potters-tools"
+  },
+  {
+    "array_id": 5,
+    "idx": 13,
+    "item": "smiths-tools"
+  },
+  {
+    "array_id": 5,
+    "idx": 14,
+    "item": "tinkers-tools"
+  },
+  {
+    "array_id": 5,
+    "idx": 15,
+    "item": "weavers-tools"
+  },
+  {
+    "array_id": 5,
+    "idx": 16,
+    "item": "woodcarvers-tools"
+  },
+  {
+    "array_id": 6,
+    "idx": 0,
+    "item": "quarterstaff"
+  },
+  {
+    "array_id": 6,
+    "idx": 1,
+    "item": "sprig-of-mistletoe"
+  },
+  {
+    "array_id": 6,
+    "idx": 2,
+    "item": "staff"
+  },
+  {
+    "array_id": 6,
+    "idx": 3,
+    "item": "yew-wand"
+  },
+  {
+    "array_id": 7,
+    "idx": 0,
+    "item": "burglars-pack"
+  },
+  {
+    "array_id": 7,
+    "idx": 1,
+    "item": "diplomat-pack"
+  },
+  {
+    "array_id": 7,
+    "idx": 2,
+    "item": "explorers-pack"
+  },
+  {
+    "array_id": 7,
+    "idx": 3,
+    "item": "dungeoneer-pack"
+  },
+  {
+    "array_id": 7,
+    "idx": 4,
+    "item": "priests-pack"
+  },
+  {
+    "array_id": 7,
+    "idx": 5,
+    "item": "scholars-pack"
+  },
+  {
+    "array_id": 8,
+    "idx": 0,
+    "item": "dice"
+  },
+  {
+    "array_id": 8,
+    "idx": 1,
+    "item": "dragonchess"
+  },
+  {
+    "array_id": 8,
+    "idx": 2,
+    "item": "playing-cards"
+  },
+  {
+    "array_id": 8,
+    "idx": 3,
+    "item": "three-dragon-ante"
+  },
+  {
+    "array_id": 9,
+    "idx": 0,
+    "item": "chain-mail"
+  },
+  {
+    "array_id": 9,
+    "idx": 1,
+    "item": "plate-armor"
+  },
+  {
+    "array_id": 9,
+    "idx": 2,
+    "item": "ring-mail"
+  },
+  {
+    "array_id": 9,
+    "idx": 3,
+    "item": "splint-armor"
+  },
+  {
+    "array_id": 10,
+    "idx": 0,
+    "item": "amulet"
+  },
+  {
+    "array_id": 10,
+    "idx": 1,
+    "item": "emblem"
+  },
+  {
+    "array_id": 10,
+    "idx": 2,
+    "item": "reliquary"
+  },
+  {
+    "array_id": 11,
+    "idx": 0,
+    "item": "leather-armor"
+  },
+  {
+    "array_id": 11,
+    "idx": 1,
+    "item": "padded-armor"
+  },
+  {
+    "array_id": 11,
+    "idx": 2,
+    "item": "studded-leather-armor"
+  },
+  {
+    "array_id": 12,
+    "idx": 0,
+    "item": "battleaxe"
+  },
+  {
+    "array_id": 12,
+    "idx": 1,
+    "item": "blowgun"
+  },
+  {
+    "array_id": 12,
+    "idx": 2,
+    "item": "flail"
+  },
+  {
+    "array_id": 12,
+    "idx": 3,
+    "item": "glaive"
+  },
+  {
+    "array_id": 12,
+    "idx": 4,
+    "item": "greataxe"
+  },
+  {
+    "array_id": 12,
+    "idx": 5,
+    "item": "greatsword"
+  },
+  {
+    "array_id": 12,
+    "idx": 6,
+    "item": "hand-crossbow"
+  },
+  {
+    "array_id": 12,
+    "idx": 7,
+    "item": "halberd"
+  },
+  {
+    "array_id": 12,
+    "idx": 8,
+    "item": "heavy-crossbow"
+  },
+  {
+    "array_id": 12,
+    "idx": 9,
+    "item": "lance"
+  },
+  {
+    "array_id": 12,
+    "idx": 10,
+    "item": "longbow"
+  },
+  {
+    "array_id": 12,
+    "idx": 11,
+    "item": "longsword"
+  },
+  {
+    "array_id": 12,
+    "idx": 12,
+    "item": "maul"
+  },
+  {
+    "array_id": 12,
+    "idx": 13,
+    "item": "morningstar"
+  },
+  {
+    "array_id": 12,
+    "idx": 14,
+    "item": "musket"
+  },
+  {
+    "array_id": 12,
+    "idx": 15,
+    "item": "pike"
+  },
+  {
+    "array_id": 12,
+    "idx": 16,
+    "item": "pistol"
+  },
+  {
+    "array_id": 12,
+    "idx": 17,
+    "item": "rapier"
+  },
+  {
+    "array_id": 12,
+    "idx": 18,
+    "item": "scimitar"
+  },
+  {
+    "array_id": 12,
+    "idx": 19,
+    "item": "shortsword"
+  },
+  {
+    "array_id": 12,
+    "idx": 20,
+    "item": "trident"
+  },
+  {
+    "array_id": 12,
+    "idx": 21,
+    "item": "warhammer"
+  },
+  {
+    "array_id": 12,
+    "idx": 22,
+    "item": "war-pick"
+  },
+  {
+    "array_id": 12,
+    "idx": 23,
+    "item": "whip"
+  },
+  {
+    "array_id": 13,
+    "idx": 0,
+    "item": "battleaxe"
+  },
+  {
+    "array_id": 13,
+    "idx": 1,
+    "item": "flail"
+  },
+  {
+    "array_id": 13,
+    "idx": 2,
+    "item": "glaive"
+  },
+  {
+    "array_id": 13,
+    "idx": 3,
+    "item": "greataxe"
+  },
+  {
+    "array_id": 13,
+    "idx": 4,
+    "item": "greatsword"
+  },
+  {
+    "array_id": 13,
+    "idx": 5,
+    "item": "halberd"
+  },
+  {
+    "array_id": 13,
+    "idx": 6,
+    "item": "lance"
+  },
+  {
+    "array_id": 13,
+    "idx": 7,
+    "item": "maul"
+  },
+  {
+    "array_id": 13,
+    "idx": 8,
+    "item": "morningstar"
+  },
+  {
+    "array_id": 13,
+    "idx": 9,
+    "item": "pike"
+  },
+  {
+    "array_id": 13,
+    "idx": 10,
+    "item": "rapier"
+  },
+  {
+    "array_id": 13,
+    "idx": 11,
+    "item": "scimitar"
+  },
+  {
+    "array_id": 13,
+    "idx": 12,
+    "item": "shortsword"
+  },
+  {
+    "array_id": 13,
+    "idx": 13,
+    "item": "trident"
+  },
+  {
+    "array_id": 13,
+    "idx": 14,
+    "item": "warhammer"
+  },
+  {
+    "array_id": 13,
+    "idx": 15,
+    "item": "war-pick"
+  },
+  {
+    "array_id": 13,
+    "idx": 16,
+    "item": "whip"
+  },
+  {
+    "array_id": 14,
+    "idx": 0,
+    "item": "blowgun"
+  },
+  {
+    "array_id": 14,
+    "idx": 1,
+    "item": "hand-crossbow"
+  },
+  {
+    "array_id": 14,
+    "idx": 2,
+    "item": "heavy-crossbow"
+  },
+  {
+    "array_id": 14,
+    "idx": 3,
+    "item": "longbow"
+  },
+  {
+    "array_id": 14,
+    "idx": 4,
+    "item": "musket"
+  },
+  {
+    "array_id": 14,
+    "idx": 5,
+    "item": "pistol"
+  },
+  {
+    "array_id": 15,
+    "idx": 0,
+    "item": "breastplate"
+  },
+  {
+    "array_id": 15,
+    "idx": 1,
+    "item": "chain-shirt"
+  },
+  {
+    "array_id": 15,
+    "idx": 2,
+    "item": "half-plate-armor"
+  },
+  {
+    "array_id": 15,
+    "idx": 3,
+    "item": "hide-armor"
+  },
+  {
+    "array_id": 15,
+    "idx": 4,
+    "item": "scale-mail"
+  },
+  {
+    "array_id": 16,
+    "idx": 0,
+    "item": "battleaxe"
+  },
+  {
+    "array_id": 16,
+    "idx": 1,
+    "item": "club"
+  },
+  {
+    "array_id": 16,
+    "idx": 2,
+    "item": "dagger"
+  },
+  {
+    "array_id": 16,
+    "idx": 3,
+    "item": "flail"
+  },
+  {
+    "array_id": 16,
+    "idx": 4,
+    "item": "glaive"
+  },
+  {
+    "array_id": 16,
+    "idx": 5,
+    "item": "greataxe"
+  },
+  {
+    "array_id": 16,
+    "idx": 6,
+    "item": "greatclub"
+  },
+  {
+    "array_id": 16,
+    "idx": 7,
+    "item": "greatsword"
+  },
+  {
+    "array_id": 16,
+    "idx": 8,
+    "item": "halberd"
+  },
+  {
+    "array_id": 16,
+    "idx": 9,
+    "item": "handaxe"
+  },
+  {
+    "array_id": 16,
+    "idx": 10,
+    "item": "javelin"
+  },
+  {
+    "array_id": 16,
+    "idx": 11,
+    "item": "lance"
+  },
+  {
+    "array_id": 16,
+    "idx": 12,
+    "item": "light-hammer"
+  },
+  {
+    "array_id": 16,
+    "idx": 13,
+    "item": "longsword"
+  },
+  {
+    "array_id": 16,
+    "idx": 14,
+    "item": "mace"
+  },
+  {
+    "array_id": 16,
+    "idx": 15,
+    "item": "maul"
+  },
+  {
+    "array_id": 16,
+    "idx": 16,
+    "item": "morningstar"
+  },
+  {
+    "array_id": 16,
+    "idx": 17,
+    "item": "pike"
+  },
+  {
+    "array_id": 16,
+    "idx": 18,
+    "item": "quarterstaff"
+  },
+  {
+    "array_id": 16,
+    "idx": 19,
+    "item": "rapier"
+  },
+  {
+    "array_id": 16,
+    "idx": 20,
+    "item": "scimitar"
+  },
+  {
+    "array_id": 16,
+    "idx": 21,
+    "item": "shortsword"
+  },
+  {
+    "array_id": 16,
+    "idx": 22,
+    "item": "sickle"
+  },
+  {
+    "array_id": 16,
+    "idx": 23,
+    "item": "spear"
+  },
+  {
+    "array_id": 16,
+    "idx": 24,
+    "item": "trident"
+  },
+  {
+    "array_id": 16,
+    "idx": 25,
+    "item": "warhammer"
+  },
+  {
+    "array_id": 16,
+    "idx": 26,
+    "item": "war-pick"
+  },
+  {
+    "array_id": 16,
+    "idx": 27,
+    "item": "whip"
+  },
+  {
+    "array_id": 17,
+    "idx": 0,
+    "item": "bagpipes"
+  },
+  {
+    "array_id": 17,
+    "idx": 1,
+    "item": "drum"
+  },
+  {
+    "array_id": 17,
+    "idx": 2,
+    "item": "dulcimer"
+  },
+  {
+    "array_id": 17,
+    "idx": 3,
+    "item": "flute"
+  },
+  {
+    "array_id": 17,
+    "idx": 4,
+    "item": "horn"
+  },
+  {
+    "array_id": 17,
+    "idx": 5,
+    "item": "lute"
+  },
+  {
+    "array_id": 17,
+    "idx": 6,
+    "item": "lyre"
+  },
+  {
+    "array_id": 17,
+    "idx": 7,
+    "item": "pan-flute"
+  },
+  {
+    "array_id": 17,
+    "idx": 8,
+    "item": "shawm"
+  },
+  {
+    "array_id": 17,
+    "idx": 9,
+    "item": "viol"
+  },
+  {
+    "array_id": 18,
+    "idx": 0,
+    "item": "disguise-kit"
+  },
+  {
+    "array_id": 18,
+    "idx": 1,
+    "item": "forgery-kit"
+  },
+  {
+    "array_id": 18,
+    "idx": 2,
+    "item": "herbalism-kit"
+  },
+  {
+    "array_id": 18,
+    "idx": 3,
+    "item": "navigators-tools"
+  },
+  {
+    "array_id": 18,
+    "idx": 4,
+    "item": "poisoners-kit"
+  },
+  {
+    "array_id": 18,
+    "idx": 5,
+    "item": "thieves-tools"
+  },
+  {
+    "array_id": 19,
+    "idx": 0,
+    "item": "oil-of-etherealness"
+  },
+  {
+    "array_id": 19,
+    "idx": 1,
+    "item": "oil-of-sharpness"
+  },
+  {
+    "array_id": 19,
+    "idx": 2,
+    "item": "oil-of-slipperiness"
+  },
+  {
+    "array_id": 19,
+    "idx": 3,
+    "item": "philter-of-love"
+  },
+  {
+    "array_id": 19,
+    "idx": 4,
+    "item": "potion-of-animal-friendship"
+  },
+  {
+    "array_id": 19,
+    "idx": 5,
+    "item": "potion-of-clairvoyance"
+  },
+  {
+    "array_id": 19,
+    "idx": 6,
+    "item": "potion-of-climbing"
+  },
+  {
+    "array_id": 19,
+    "idx": 7,
+    "item": "potion-of-diminution"
+  },
+  {
+    "array_id": 19,
+    "idx": 8,
+    "item": "potion-of-flying"
+  },
+  {
+    "array_id": 19,
+    "idx": 9,
+    "item": "potion-of-growth"
+  },
+  {
+    "array_id": 19,
+    "idx": 10,
+    "item": "potions-of-healing"
+  },
+  {
+    "array_id": 19,
+    "idx": 11,
+    "item": "potion-of-gaseous-form"
+  },
+  {
+    "array_id": 19,
+    "idx": 12,
+    "item": "potion-of-heroism"
+  },
+  {
+    "array_id": 19,
+    "idx": 13,
+    "item": "potion-of-giant-strength"
+  },
+  {
+    "array_id": 19,
+    "idx": 14,
+    "item": "potion-of-invisibility"
+  },
+  {
+    "array_id": 19,
+    "idx": 15,
+    "item": "potion-of-mind-reading"
+  },
+  {
+    "array_id": 19,
+    "idx": 16,
+    "item": "potion-of-poison"
+  },
+  {
+    "array_id": 19,
+    "idx": 17,
+    "item": "potion-of-resistance"
+  },
+  {
+    "array_id": 19,
+    "idx": 18,
+    "item": "potion-of-speed"
+  },
+  {
+    "array_id": 19,
+    "idx": 19,
+    "item": "potion-of-water-breathing"
+  },
+  {
+    "array_id": 20,
+    "idx": 0,
+    "item": "blowgun"
+  },
+  {
+    "array_id": 20,
+    "idx": 1,
+    "item": "dart"
+  },
+  {
+    "array_id": 20,
+    "idx": 2,
+    "item": "hand-crossbow"
+  },
+  {
+    "array_id": 20,
+    "idx": 3,
+    "item": "heavy-crossbow"
+  },
+  {
+    "array_id": 20,
+    "idx": 4,
+    "item": "light-crossbow"
+  },
+  {
+    "array_id": 20,
+    "idx": 5,
+    "item": "longbow"
+  },
+  {
+    "array_id": 20,
+    "idx": 6,
+    "item": "musket"
+  },
+  {
+    "array_id": 20,
+    "idx": 7,
+    "item": "pistol"
+  },
+  {
+    "array_id": 20,
+    "idx": 8,
+    "item": "shortbow"
+  },
+  {
+    "array_id": 20,
+    "idx": 9,
+    "item": "sling"
+  },
+  {
+    "array_id": 21,
+    "idx": 0,
+    "item": "ring-of-animal-influence"
+  },
+  {
+    "array_id": 21,
+    "idx": 1,
+    "item": "ring-of-djinni-summoning"
+  },
+  {
+    "array_id": 21,
+    "idx": 2,
+    "item": "ring-of-elemental-command"
+  },
+  {
+    "array_id": 21,
+    "idx": 3,
+    "item": "ring-of-evasion"
+  },
+  {
+    "array_id": 21,
+    "idx": 4,
+    "item": "ring-of-feather-falling"
+  },
+  {
+    "array_id": 21,
+    "idx": 5,
+    "item": "ring-of-free-action"
+  },
+  {
+    "array_id": 21,
+    "idx": 6,
+    "item": "ring-of-invisibility"
+  },
+  {
+    "array_id": 21,
+    "idx": 7,
+    "item": "ring-of-jumping"
+  },
+  {
+    "array_id": 21,
+    "idx": 8,
+    "item": "ring-of-mind-shielding"
+  },
+  {
+    "array_id": 21,
+    "idx": 9,
+    "item": "ring-of-protection"
+  },
+  {
+    "array_id": 21,
+    "idx": 10,
+    "item": "ring-of-regeneration"
+  },
+  {
+    "array_id": 21,
+    "idx": 11,
+    "item": "ring-of-resistance"
+  },
+  {
+    "array_id": 21,
+    "idx": 12,
+    "item": "ring-of-shooting-stars"
+  },
+  {
+    "array_id": 21,
+    "idx": 13,
+    "item": "ring-of-spell-storing"
+  },
+  {
+    "array_id": 21,
+    "idx": 14,
+    "item": "ring-of-spell-turning"
+  },
+  {
+    "array_id": 21,
+    "idx": 15,
+    "item": "ring-of-swimming"
+  },
+  {
+    "array_id": 21,
+    "idx": 16,
+    "item": "ring-of-telekinesis"
+  },
+  {
+    "array_id": 21,
+    "idx": 17,
+    "item": "ring-of-the-ram"
+  },
+  {
+    "array_id": 21,
+    "idx": 18,
+    "item": "ring-of-three-wishes"
+  },
+  {
+    "array_id": 21,
+    "idx": 19,
+    "item": "ring-of-warmth"
+  },
+  {
+    "array_id": 21,
+    "idx": 20,
+    "item": "ring-of-water-walking"
+  },
+  {
+    "array_id": 21,
+    "idx": 21,
+    "item": "ring-of-x-ray-vision"
+  },
+  {
+    "array_id": 22,
+    "idx": 0,
+    "item": "shield"
+  },
+  {
+    "array_id": 23,
+    "idx": 0,
+    "item": "club"
+  },
+  {
+    "array_id": 23,
+    "idx": 1,
+    "item": "dagger"
+  },
+  {
+    "array_id": 23,
+    "idx": 2,
+    "item": "greatclub"
+  },
+  {
+    "array_id": 23,
+    "idx": 3,
+    "item": "handaxe"
+  },
+  {
+    "array_id": 23,
+    "idx": 4,
+    "item": "javelin"
+  },
+  {
+    "array_id": 23,
+    "idx": 5,
+    "item": "light-hammer"
+  },
+  {
+    "array_id": 23,
+    "idx": 6,
+    "item": "mace"
+  },
+  {
+    "array_id": 23,
+    "idx": 7,
+    "item": "quarterstaff"
+  },
+  {
+    "array_id": 23,
+    "idx": 8,
+    "item": "sickle"
+  },
+  {
+    "array_id": 23,
+    "idx": 9,
+    "item": "spear"
+  },
+  {
+    "array_id": 24,
+    "idx": 0,
+    "item": "dart"
+  },
+  {
+    "array_id": 24,
+    "idx": 1,
+    "item": "light-crossbow"
+  },
+  {
+    "array_id": 24,
+    "idx": 2,
+    "item": "shortbow"
+  },
+  {
+    "array_id": 24,
+    "idx": 3,
+    "item": "sling"
+  },
+  {
+    "array_id": 25,
+    "idx": 0,
+    "item": "club"
+  },
+  {
+    "array_id": 25,
+    "idx": 1,
+    "item": "dagger"
+  },
+  {
+    "array_id": 25,
+    "idx": 2,
+    "item": "dart"
+  },
+  {
+    "array_id": 25,
+    "idx": 3,
+    "item": "greatclub"
+  },
+  {
+    "array_id": 25,
+    "idx": 4,
+    "item": "handaxe"
+  },
+  {
+    "array_id": 25,
+    "idx": 5,
+    "item": "javelin"
+  },
+  {
+    "array_id": 25,
+    "idx": 6,
+    "item": "light-crossbow"
+  },
+  {
+    "array_id": 25,
+    "idx": 7,
+    "item": "light-hammer"
+  },
+  {
+    "array_id": 25,
+    "idx": 8,
+    "item": "mace"
+  },
+  {
+    "array_id": 25,
+    "idx": 9,
+    "item": "quarterstaff"
+  },
+  {
+    "array_id": 25,
+    "idx": 10,
+    "item": "shortbow"
+  },
+  {
+    "array_id": 25,
+    "idx": 11,
+    "item": "sickle"
+  },
+  {
+    "array_id": 25,
+    "idx": 12,
+    "item": "sling"
+  },
+  {
+    "array_id": 25,
+    "idx": 13,
+    "item": "spear"
+  },
+  {
+    "array_id": 26,
+    "idx": 0,
+    "item": "staff-of-charming"
+  },
+  {
+    "array_id": 26,
+    "idx": 1,
+    "item": "staff-of-fire"
+  },
+  {
+    "array_id": 26,
+    "idx": 2,
+    "item": "staff-of-frost"
+  },
+  {
+    "array_id": 26,
+    "idx": 3,
+    "item": "staff-of-healing"
+  },
+  {
+    "array_id": 26,
+    "idx": 4,
+    "item": "staff-of-power"
+  },
+  {
+    "array_id": 26,
+    "idx": 5,
+    "item": "staff-of-striking"
+  },
+  {
+    "array_id": 26,
+    "idx": 6,
+    "item": "staff-of-swarming-insects"
+  },
+  {
+    "array_id": 26,
+    "idx": 7,
+    "item": "staff-of-the-magi"
+  },
+  {
+    "array_id": 26,
+    "idx": 8,
+    "item": "staff-of-the-python"
+  },
+  {
+    "array_id": 26,
+    "idx": 9,
+    "item": "staff-of-the-woodlands"
+  },
+  {
+    "array_id": 26,
+    "idx": 10,
+    "item": "staff-of-thunder-and-lightning"
+  },
+  {
+    "array_id": 26,
+    "idx": 11,
+    "item": "staff-of-withering"
+  },
+  {
+    "array_id": 27,
+    "idx": 0,
+    "item": "alchemists-supplies"
+  },
+  {
+    "array_id": 27,
+    "idx": 1,
+    "item": "bagpipes"
+  },
+  {
+    "array_id": 27,
+    "idx": 2,
+    "item": "brewers-supplies"
+  },
+  {
+    "array_id": 27,
+    "idx": 3,
+    "item": "calligraphers-supplies"
+  },
+  {
+    "array_id": 27,
+    "idx": 4,
+    "item": "carpenters-tools"
+  },
+  {
+    "array_id": 27,
+    "idx": 5,
+    "item": "cartographer-tools"
+  },
+  {
+    "array_id": 27,
+    "idx": 6,
+    "item": "cobblers-tools"
+  },
+  {
+    "array_id": 27,
+    "idx": 7,
+    "item": "cooks-utensils"
+  },
+  {
+    "array_id": 27,
+    "idx": 8,
+    "item": "dice"
+  },
+  {
+    "array_id": 27,
+    "idx": 9,
+    "item": "disguise-kit"
+  },
+  {
+    "array_id": 27,
+    "idx": 10,
+    "item": "dragonchess"
+  },
+  {
+    "array_id": 27,
+    "idx": 11,
+    "item": "drum"
+  },
+  {
+    "array_id": 27,
+    "idx": 12,
+    "item": "dulcimer"
+  },
+  {
+    "array_id": 27,
+    "idx": 13,
+    "item": "flute"
+  },
+  {
+    "array_id": 27,
+    "idx": 14,
+    "item": "glassblowers-tools"
+  },
+  {
+    "array_id": 27,
+    "idx": 15,
+    "item": "herbalism-kit"
+  },
+  {
+    "array_id": 27,
+    "idx": 16,
+    "item": "horn"
+  },
+  {
+    "array_id": 27,
+    "idx": 17,
+    "item": "jewelers-tools"
+  },
+  {
+    "array_id": 27,
+    "idx": 18,
+    "item": "leatherworkers-tools"
+  },
+  {
+    "array_id": 27,
+    "idx": 19,
+    "item": "lute"
+  },
+  {
+    "array_id": 27,
+    "idx": 20,
+    "item": "lyre"
+  },
+  {
+    "array_id": 27,
+    "idx": 21,
+    "item": "masons-tools"
+  },
+  {
+    "array_id": 27,
+    "idx": 22,
+    "item": "navigators-tools"
+  },
+  {
+    "array_id": 27,
+    "idx": 23,
+    "item": "painters-supplies"
+  },
+  {
+    "array_id": 27,
+    "idx": 24,
+    "item": "pan-flute"
+  },
+  {
+    "array_id": 27,
+    "idx": 25,
+    "item": "playing-cards"
+  },
+  {
+    "array_id": 27,
+    "idx": 26,
+    "item": "poisoners-kit"
+  },
+  {
+    "array_id": 27,
+    "idx": 27,
+    "item": "potters-tools"
+  },
+  {
+    "array_id": 27,
+    "idx": 28,
+    "item": "shawm"
+  },
+  {
+    "array_id": 27,
+    "idx": 29,
+    "item": "smiths-tools"
+  },
+  {
+    "array_id": 27,
+    "idx": 30,
+    "item": "thieves-tools"
+  },
+  {
+    "array_id": 27,
+    "idx": 31,
+    "item": "three-dragon-ante"
+  },
+  {
+    "array_id": 27,
+    "idx": 32,
+    "item": "tinkers-tools"
+  },
+  {
+    "array_id": 27,
+    "idx": 33,
+    "item": "viol"
+  },
+  {
+    "array_id": 27,
+    "idx": 34,
+    "item": "weavers-tools"
+  },
+  {
+    "array_id": 27,
+    "idx": 35,
+    "item": "woodcarvers-tools"
+  },
+  {
+    "array_id": 28,
+    "idx": 0,
+    "item": "wand-of-binding"
+  },
+  {
+    "array_id": 28,
+    "idx": 1,
+    "item": "wand-of-enemy-detection"
+  },
+  {
+    "array_id": 28,
+    "idx": 2,
+    "item": "wand-of-fear"
+  },
+  {
+    "array_id": 28,
+    "idx": 3,
+    "item": "wand-of-fireballs"
+  },
+  {
+    "array_id": 28,
+    "idx": 4,
+    "item": "wand-of-lightning-bolts"
+  },
+  {
+    "array_id": 28,
+    "idx": 5,
+    "item": "wand-of-magic-detection"
+  },
+  {
+    "array_id": 28,
+    "idx": 6,
+    "item": "wand-of-magic-missiles"
+  },
+  {
+    "array_id": 28,
+    "idx": 7,
+    "item": "wand-of-paralysis"
+  },
+  {
+    "array_id": 28,
+    "idx": 8,
+    "item": "wand-of-polymorph"
+  },
+  {
+    "array_id": 28,
+    "idx": 9,
+    "item": "wand-of-secrets"
+  },
+  {
+    "array_id": 28,
+    "idx": 10,
+    "item": "wand-of-the-war-mage"
+  },
+  {
+    "array_id": 28,
+    "idx": 11,
+    "item": "wand-of-the-war-mage-1"
+  },
+  {
+    "array_id": 28,
+    "idx": 12,
+    "item": "wand-of-the-war-mage-2"
+  },
+  {
+    "array_id": 28,
+    "idx": 13,
+    "item": "wand-of-the-war-mage-3"
+  },
+  {
+    "array_id": 28,
+    "idx": 14,
+    "item": "wand-of-web"
+  },
+  {
+    "array_id": 28,
+    "idx": 15,
+    "item": "wand-of-wonder"
+  },
+  {
+    "array_id": 29,
+    "idx": 0,
+    "item": "battleaxe"
+  },
+  {
+    "array_id": 29,
+    "idx": 1,
+    "item": "blowgun"
+  },
+  {
+    "array_id": 29,
+    "idx": 2,
+    "item": "club"
+  },
+  {
+    "array_id": 29,
+    "idx": 3,
+    "item": "dagger"
+  },
+  {
+    "array_id": 29,
+    "idx": 4,
+    "item": "dart"
+  },
+  {
+    "array_id": 29,
+    "idx": 5,
+    "item": "flail"
+  },
+  {
+    "array_id": 29,
+    "idx": 6,
+    "item": "glaive"
+  },
+  {
+    "array_id": 29,
+    "idx": 7,
+    "item": "greataxe"
+  },
+  {
+    "array_id": 29,
+    "idx": 8,
+    "item": "greatclub"
+  },
+  {
+    "array_id": 29,
+    "idx": 9,
+    "item": "greatsword"
+  },
+  {
+    "array_id": 29,
+    "idx": 10,
+    "item": "halberd"
+  },
+  {
+    "array_id": 29,
+    "idx": 11,
+    "item": "hand-crossbow"
+  },
+  {
+    "array_id": 29,
+    "idx": 12,
+    "item": "handaxe"
+  },
+  {
+    "array_id": 29,
+    "idx": 13,
+    "item": "heavy-crossbow"
+  },
+  {
+    "array_id": 29,
+    "idx": 14,
+    "item": "javelin"
+  },
+  {
+    "array_id": 29,
+    "idx": 15,
+    "item": "lance"
+  },
+  {
+    "array_id": 29,
+    "idx": 16,
+    "item": "light-crossbow"
+  },
+  {
+    "array_id": 29,
+    "idx": 17,
+    "item": "light-hammer"
+  },
+  {
+    "array_id": 29,
+    "idx": 18,
+    "item": "longbow"
+  },
+  {
+    "array_id": 29,
+    "idx": 19,
+    "item": "longsword"
+  },
+  {
+    "array_id": 29,
+    "idx": 20,
+    "item": "mace"
+  },
+  {
+    "array_id": 29,
+    "idx": 21,
+    "item": "maul"
+  },
+  {
+    "array_id": 29,
+    "idx": 22,
+    "item": "morningstar"
+  },
+  {
+    "array_id": 29,
+    "idx": 23,
+    "item": "musket"
+  },
+  {
+    "array_id": 29,
+    "idx": 24,
+    "item": "pike"
+  },
+  {
+    "array_id": 29,
+    "idx": 25,
+    "item": "pistol"
+  },
+  {
+    "array_id": 29,
+    "idx": 26,
+    "item": "quarterstaff"
+  },
+  {
+    "array_id": 29,
+    "idx": 27,
+    "item": "rapier"
+  },
+  {
+    "array_id": 29,
+    "idx": 28,
+    "item": "scimitar"
+  },
+  {
+    "array_id": 29,
+    "idx": 29,
+    "item": "shortbow"
+  },
+  {
+    "array_id": 29,
+    "idx": 30,
+    "item": "shortsword"
+  },
+  {
+    "array_id": 29,
+    "idx": 31,
+    "item": "sickle"
+  },
+  {
+    "array_id": 29,
+    "idx": 32,
+    "item": "sling"
+  },
+  {
+    "array_id": 29,
+    "idx": 33,
+    "item": "spear"
+  },
+  {
+    "array_id": 29,
+    "idx": 34,
+    "item": "trident"
+  },
+  {
+    "array_id": 29,
+    "idx": 35,
+    "item": "warhammer"
+  },
+  {
+    "array_id": 29,
+    "idx": 36,
+    "item": "war-pick"
+  },
+  {
+    "array_id": 29,
+    "idx": 37,
+    "item": "whip"
+  },
+  {
+    "array_id": 30,
+    "idx": 0,
+    "item": "amulet-of-health"
+  },
+  {
+    "array_id": 30,
+    "idx": 1,
+    "item": "amulet-of-proof-against-detection-and-location"
+  },
+  {
+    "array_id": 30,
+    "idx": 2,
+    "item": "amulet-of-the-planes"
+  },
+  {
+    "array_id": 30,
+    "idx": 3,
+    "item": "apparatus-of-the-crab"
+  },
+  {
+    "array_id": 30,
+    "idx": 4,
+    "item": "bag-of-beans"
+  },
+  {
+    "array_id": 30,
+    "idx": 5,
+    "item": "bag-of-devouring"
+  },
+  {
+    "array_id": 30,
+    "idx": 6,
+    "item": "bag-of-holding"
+  },
+  {
+    "array_id": 30,
+    "idx": 7,
+    "item": "bag-of-tricks"
+  },
+  {
+    "array_id": 30,
+    "idx": 8,
+    "item": "bead-of-force"
+  },
+  {
+    "array_id": 30,
+    "idx": 9,
+    "item": "belt-of-dwarvenkind"
+  },
+  {
+    "array_id": 30,
+    "idx": 10,
+    "item": "belt-of-giant-strength"
+  },
+  {
+    "array_id": 30,
+    "idx": 11,
+    "item": "boots-of-elvenkind"
+  },
+  {
+    "array_id": 30,
+    "idx": 12,
+    "item": "boots-of-levitation"
+  },
+  {
+    "array_id": 30,
+    "idx": 13,
+    "item": "boots-of-speed"
+  },
+  {
+    "array_id": 30,
+    "idx": 14,
+    "item": "boots-of-striding-and-springing"
+  },
+  {
+    "array_id": 30,
+    "idx": 15,
+    "item": "boots-of-the-winterlands"
+  },
+  {
+    "array_id": 30,
+    "idx": 16,
+    "item": "bowl-of-commanding-water-elementals"
+  },
+  {
+    "array_id": 30,
+    "idx": 17,
+    "item": "bracers-of-archery"
+  },
+  {
+    "array_id": 30,
+    "idx": 18,
+    "item": "bracers-of-defense"
+  },
+  {
+    "array_id": 30,
+    "idx": 19,
+    "item": "brazier-of-commanding-fire-elementals"
+  },
+  {
+    "array_id": 30,
+    "idx": 20,
+    "item": "brooch-of-shielding"
+  },
+  {
+    "array_id": 30,
+    "idx": 21,
+    "item": "broom-of-flying"
+  },
+  {
+    "array_id": 30,
+    "idx": 22,
+    "item": "candle-of-invocation"
+  },
+  {
+    "array_id": 30,
+    "idx": 23,
+    "item": "cape-of-the-mountebank"
+  },
+  {
+    "array_id": 30,
+    "idx": 24,
+    "item": "carpet-of-flying"
+  },
+  {
+    "array_id": 30,
+    "idx": 25,
+    "item": "censer-of-controlling-air-elementals"
+  },
+  {
+    "array_id": 30,
+    "idx": 26,
+    "item": "chime-of-opening"
+  },
+  {
+    "array_id": 30,
+    "idx": 27,
+    "item": "circlet-of-blasting"
+  },
+  {
+    "array_id": 30,
+    "idx": 28,
+    "item": "cloak-of-arachnida"
+  },
+  {
+    "array_id": 30,
+    "idx": 29,
+    "item": "cloak-of-displacement"
+  },
+  {
+    "array_id": 30,
+    "idx": 30,
+    "item": "cloak-of-elvenkind"
+  },
+  {
+    "array_id": 30,
+    "idx": 31,
+    "item": "cloak-of-protection"
+  },
+  {
+    "array_id": 30,
+    "idx": 32,
+    "item": "cloak-of-the-bat"
+  },
+  {
+    "array_id": 30,
+    "idx": 33,
+    "item": "cloak-of-the-manta-ray"
+  },
+  {
+    "array_id": 30,
+    "idx": 34,
+    "item": "crystal-ball"
+  },
+  {
+    "array_id": 30,
+    "idx": 35,
+    "item": "crystal-ball-of-mind-reading"
+  },
+  {
+    "array_id": 30,
+    "idx": 36,
+    "item": "crystal-ball-of-telepathy"
+  },
+  {
+    "array_id": 30,
+    "idx": 37,
+    "item": "crystal-ball-of-true-seeing"
+  },
+  {
+    "array_id": 30,
+    "idx": 38,
+    "item": "cube-of-force"
+  },
+  {
+    "array_id": 30,
+    "idx": 39,
+    "item": "cubic-gate"
+  },
+  {
+    "array_id": 30,
+    "idx": 40,
+    "item": "decanter-of-endless-water"
+  },
+  {
+    "array_id": 30,
+    "idx": 41,
+    "item": "deck-of-illusions"
+  },
+  {
+    "array_id": 30,
+    "idx": 42,
+    "item": "dimensional-shackles"
+  },
+  {
+    "array_id": 30,
+    "idx": 43,
+    "item": "dragon-orb"
+  },
+  {
+    "array_id": 30,
+    "idx": 44,
+    "item": "dust-of-disappearance"
+  },
+  {
+    "array_id": 30,
+    "idx": 45,
+    "item": "dust-of-dryness"
+  },
+  {
+    "array_id": 30,
+    "idx": 46,
+    "item": "dust-of-sneezing-and-choking"
+  },
+  {
+    "array_id": 30,
+    "idx": 47,
+    "item": "efficient-quiver"
+  },
+  {
+    "array_id": 30,
+    "idx": 48,
+    "item": "efreeti-bottle"
+  },
+  {
+    "array_id": 30,
+    "idx": 49,
+    "item": "elemental-gem"
+  },
+  {
+    "array_id": 30,
+    "idx": 50,
+    "item": "eversmoking-bottle"
+  },
+  {
+    "array_id": 30,
+    "idx": 51,
+    "item": "eyes-of-charming"
+  },
+  {
+    "array_id": 30,
+    "idx": 52,
+    "item": "eyes-of-minute-seeing"
+  },
+  {
+    "array_id": 30,
+    "idx": 53,
+    "item": "eyes-of-the-eagle"
+  },
+  {
+    "array_id": 30,
+    "idx": 54,
+    "item": "feather-token"
+  },
+  {
+    "array_id": 30,
+    "idx": 55,
+    "item": "figurine-of-wondrous-power"
+  },
+  {
+    "array_id": 30,
+    "idx": 56,
+    "item": "folding-boat"
+  },
+  {
+    "array_id": 30,
+    "idx": 57,
+    "item": "gauntlets-of-ogre-power"
+  },
+  {
+    "array_id": 30,
+    "idx": 58,
+    "item": "gem-of-brightness"
+  },
+  {
+    "array_id": 30,
+    "idx": 59,
+    "item": "gem-of-seeing"
+  },
+  {
+    "array_id": 30,
+    "idx": 60,
+    "item": "gloves-of-missile-snaring"
+  },
+  {
+    "array_id": 30,
+    "idx": 61,
+    "item": "gloves-of-swimming-and-climbing"
+  },
+  {
+    "array_id": 30,
+    "idx": 62,
+    "item": "goggles-of-night"
+  },
+  {
+    "array_id": 30,
+    "idx": 63,
+    "item": "handy-haversack"
+  },
+  {
+    "array_id": 30,
+    "idx": 64,
+    "item": "hat-of-disguise"
+  },
+  {
+    "array_id": 30,
+    "idx": 65,
+    "item": "headband-of-intellect"
+  },
+  {
+    "array_id": 30,
+    "idx": 66,
+    "item": "helm-of-brilliance"
+  },
+  {
+    "array_id": 30,
+    "idx": 67,
+    "item": "helm-of-comprehending-languages"
+  },
+  {
+    "array_id": 30,
+    "idx": 68,
+    "item": "helm-of-telepathy"
+  },
+  {
+    "array_id": 30,
+    "idx": 69,
+    "item": "helm-of-teleportation"
+  },
+  {
+    "array_id": 30,
+    "idx": 70,
+    "item": "horn-of-blasting"
+  },
+  {
+    "array_id": 30,
+    "idx": 71,
+    "item": "horn-of-valhalla"
+  },
+  {
+    "array_id": 30,
+    "idx": 72,
+    "item": "horn-of-valhalla-1"
+  },
+  {
+    "array_id": 30,
+    "idx": 73,
+    "item": "horn-of-valhalla-2"
+  },
+  {
+    "array_id": 30,
+    "idx": 74,
+    "item": "horn-of-valhalla-3"
+  },
+  {
+    "array_id": 30,
+    "idx": 75,
+    "item": "horn-of-valhalla-4"
+  },
+  {
+    "array_id": 30,
+    "idx": 76,
+    "item": "horseshoes-of-a-zephyr"
+  },
+  {
+    "array_id": 30,
+    "idx": 77,
+    "item": "horseshoes-of-speed"
+  },
+  {
+    "array_id": 30,
+    "idx": 78,
+    "item": "immovable-rod"
+  },
+  {
+    "array_id": 30,
+    "idx": 79,
+    "item": "instant-fortress"
+  },
+  {
+    "array_id": 30,
+    "idx": 80,
+    "item": "ioun-stone"
+  },
+  {
+    "array_id": 30,
+    "idx": 81,
+    "item": "iron-bands"
+  },
+  {
+    "array_id": 30,
+    "idx": 82,
+    "item": "iron-flask"
+  },
+  {
+    "array_id": 30,
+    "idx": 83,
+    "item": "lantern-of-revealing"
+  },
+  {
+    "array_id": 30,
+    "idx": 84,
+    "item": "mantle-of-spell-resistance"
+  },
+  {
+    "array_id": 30,
+    "idx": 85,
+    "item": "manual-of-bodily-health"
+  },
+  {
+    "array_id": 30,
+    "idx": 86,
+    "item": "manual-of-gainful-exercise"
+  },
+  {
+    "array_id": 30,
+    "idx": 87,
+    "item": "manual-of-golems"
+  },
+  {
+    "array_id": 30,
+    "idx": 88,
+    "item": "manual-of-quickness-of-action"
+  },
+  {
+    "array_id": 30,
+    "idx": 89,
+    "item": "marvelous-pigments"
+  },
+  {
+    "array_id": 30,
+    "idx": 90,
+    "item": "medallion-of-thoughts"
+  },
+  {
+    "array_id": 30,
+    "idx": 91,
+    "item": "mirror-of-life-trapping"
+  },
+  {
+    "array_id": 30,
+    "idx": 92,
+    "item": "mysterious-deck"
+  },
+  {
+    "array_id": 30,
+    "idx": 93,
+    "item": "necklace-of-adaptation"
+  },
+  {
+    "array_id": 30,
+    "idx": 94,
+    "item": "necklace-of-fireballs"
+  },
+  {
+    "array_id": 30,
+    "idx": 95,
+    "item": "necklace-of-prayer-beads"
+  },
+  {
+    "array_id": 30,
+    "idx": 96,
+    "item": "pearl-of-power"
+  },
+  {
+    "array_id": 30,
+    "idx": 97,
+    "item": "periapt-of-health"
+  },
+  {
+    "array_id": 30,
+    "idx": 98,
+    "item": "periapt-of-proof-against-poison"
+  },
+  {
+    "array_id": 30,
+    "idx": 99,
+    "item": "periapt-of-wound-closure"
+  },
+  {
+    "array_id": 30,
+    "idx": 100,
+    "item": "pipes-of-haunting"
+  },
+  {
+    "array_id": 30,
+    "idx": 101,
+    "item": "pipes-of-the-sewers"
+  },
+  {
+    "array_id": 30,
+    "idx": 102,
+    "item": "portable-hole"
+  },
+  {
+    "array_id": 30,
+    "idx": 103,
+    "item": "robe-of-eyes"
+  },
+  {
+    "array_id": 30,
+    "idx": 104,
+    "item": "robe-of-scintillating-colors"
+  },
+  {
+    "array_id": 30,
+    "idx": 105,
+    "item": "robe-of-stars"
+  },
+  {
+    "array_id": 30,
+    "idx": 106,
+    "item": "robe-of-the-archmagi"
+  },
+  {
+    "array_id": 30,
+    "idx": 107,
+    "item": "robe-of-useful-items"
+  },
+  {
+    "array_id": 30,
+    "idx": 108,
+    "item": "rod-of-absorption"
+  },
+  {
+    "array_id": 30,
+    "idx": 109,
+    "item": "rod-of-alertness"
+  },
+  {
+    "array_id": 30,
+    "idx": 110,
+    "item": "rod-of-lordly-might"
+  },
+  {
+    "array_id": 30,
+    "idx": 111,
+    "item": "rod-of-rulership"
+  },
+  {
+    "array_id": 30,
+    "idx": 112,
+    "item": "rod-of-security"
+  },
+  {
+    "array_id": 30,
+    "idx": 113,
+    "item": "rope-of-climbing"
+  },
+  {
+    "array_id": 30,
+    "idx": 114,
+    "item": "rope-of-entanglement"
+  },
+  {
+    "array_id": 30,
+    "idx": 115,
+    "item": "scarab-of-protection"
+  },
+  {
+    "array_id": 30,
+    "idx": 116,
+    "item": "slippers-of-spider-climbing"
+  },
+  {
+    "array_id": 30,
+    "idx": 117,
+    "item": "sovereign-glue"
+  },
+  {
+    "array_id": 30,
+    "idx": 118,
+    "item": "spell-scroll"
+  },
+  {
+    "array_id": 30,
+    "idx": 119,
+    "item": "sphere-of-annihilation"
+  },
+  {
+    "array_id": 30,
+    "idx": 120,
+    "item": "stone-of-controlling-earth-elementals"
+  },
+  {
+    "array_id": 30,
+    "idx": 121,
+    "item": "stone-of-good-luck-(luckstone)"
+  },
+  {
+    "array_id": 30,
+    "idx": 122,
+    "item": "talisman-of-pure-good"
+  },
+  {
+    "array_id": 30,
+    "idx": 123,
+    "item": "talisman-of-the-sphere"
+  },
+  {
+    "array_id": 30,
+    "idx": 124,
+    "item": "talisman-of-ultimate-evil"
+  },
+  {
+    "array_id": 30,
+    "idx": 125,
+    "item": "tome-of-clear-thought"
+  },
+  {
+    "array_id": 30,
+    "idx": 126,
+    "item": "tome-of-leadership-and-influence"
+  },
+  {
+    "array_id": 30,
+    "idx": 127,
+    "item": "tome-of-understanding"
+  },
+  {
+    "array_id": 30,
+    "idx": 128,
+    "item": "universal-solvent"
+  },
+  {
+    "array_id": 30,
+    "idx": 129,
+    "item": "well-of-many-worlds"
+  },
+  {
+    "array_id": 30,
+    "idx": 130,
+    "item": "wind-fan"
+  },
+  {
+    "array_id": 30,
+    "idx": 131,
+    "item": "winged-boots"
+  },
+  {
+    "array_id": 30,
+    "idx": 132,
+    "item": "wings-of-flying"
+  }
+]

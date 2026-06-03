@@ -86,6 +86,16 @@ var data;
         name = "";
         url = "";
         note = "";
+        static equals(lhs, rhs) {
+            return lhs.item === rhs.index;
+        }
+        static transform(x, array_id, array_idx) {
+            return {
+                array_id: array_id,
+                idx: array_idx,
+                item: x.index
+            };
+        }
     }
     data.APIReference = APIReference;
     class Choice {
@@ -775,10 +785,33 @@ var data;
         url = "";
     }
     data.Level = Level;
+    // prima di scrivere il json che conterrà questo oggetto
+    // si assegnaerà ad ogni elemento di ogni array, l'indice del proprio array
+    // e poi si farà il flatten: [[{index: 0}, {}, {}], [{index: 1}], [...]]
+    data.ArrayAPIReference = [];
 })(data || (data = {}));
+function getOrInsertId(table, actual, equals, transform) {
+    const i = table.findIndex(expected => {
+        return false;
+        if (expected.length !== actual.length)
+            return false;
+        for (let j = 0; j < expected.length; ++j) {
+            if (!equals(expected[j], actual[j]))
+                return false;
+        }
+        return true;
+    });
+    if (i < 0) {
+        const id = table.length;
+        table.push(actual.map((x, k) => transform(x, id, k)));
+        return id;
+    }
+    else
+        return i;
+}
 function translate(ctx) {
     const extracted = ctx.extractor(ctx.shape, ctx.inputs);
-    const translated = ctx.mapper(extracted);
+    const translated = extracted.map(ctx.mapper);
     fs.writeFileSync("new-data/" + ctx.output, JSON.stringify(translated), 'utf8');
 }
 const allFiles = fs
@@ -824,6 +857,36 @@ const allFiles = fs
         extractor: (extract),
         shape: new data.Option(),
         mapper: (x) => x,
+        // function(x: any): models.Option {
+        //   return {
+        //     id: models.Option.id(),
+        //     reference_item: x.item,
+        // choice_id: ,
+        // string?: string,
+        // ability_score_bonus?: string,
+        // bonus?: number,
+        // action_name?: string,
+        // action_count?: number,
+        // action_type?: string,
+        // action_desc?: string,
+        // breath_name?: string,
+        // breath_dc?: number,
+        // breath_damage_type?: string,
+        // breath_damage_dice?: string,
+        // breath_damage_dc?: number,
+        // counted_reference_count?: number,
+        // counted_item?: string,
+        // prerequisites?: number,
+        // damage_dice?: string,
+        // damage_type?: string, 
+        // alignments?: number, 
+        // money_count?: number,
+        // money_unit?: string,
+        // multiple_items?: number, 
+        // ability_score_prerequisite?: string,
+        // size?: string
+        //   }
+        // },
         inputs: allFiles,
         output: "options.json"
     },
@@ -914,7 +977,14 @@ const allFiles = fs
     {
         extractor: (extract),
         shape: new data.EquipmentCategory(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                url: x.url,
+                equipment: getOrInsertId(data.ArrayAPIReference, x.equipment, data.APIReference.equals, data.APIReference.transform)
+            };
+        },
         inputs: ["5e-SRD-Equipment-Categories.json"],
         output: "equipment_categories.json"
     },
@@ -1136,3 +1206,7 @@ const allFiles = fs
         output: "levels.json"
     },
 ].forEach(translate);
+function printArray(array, output) {
+    fs.writeFileSync("new-data/" + output, JSON.stringify(array.flatMap(x => x)), 'utf8');
+}
+printArray(data.ArrayAPIReference, 'array_api_references.json');

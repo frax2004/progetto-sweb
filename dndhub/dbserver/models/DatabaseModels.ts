@@ -42,7 +42,7 @@ export namespace models {
     opt_id!: number;
   }
 
-  export class ArrayDamage {
+  export class ArrayDamageItem {
     array_id!: number;
     damage_type!: string;
     damage_dice!: string;
@@ -51,7 +51,7 @@ export namespace models {
   }
 
   // OptionArray mi serve per multiple
-  export class ArrayOption {
+  export class ArrayOptionItem {
     item_id!: number;
     idx!: number;
     array_id!: number;
@@ -104,9 +104,15 @@ export namespace models {
     ability_score_prerequisite?: string;
     // pseuso-tabella size
     size?: string;
+
+    private static ID = 0;
+
+    public static id() {
+      return models.Option.ID++;
+    }
   }
 
-  export class ArrayOfOptionsAndString {
+  export class ArrayOfOptionsAndStringItem {
     opt_id!: number;
     string!: string;
     idx!: number;
@@ -155,20 +161,20 @@ export namespace models {
 
   // tabelle di Backgrounds.ts
 
-  export class ArrayStartingEquipment {
+  export class ArrayStartingEquipmentItem {
     array_id!: number;
     array_idx!: number;
     equipment!: string;
     quantity!: number;
   }
 
-  export class ArrayAPIReference {
+  export class ArrayAPIReferenceItem {
     array_id!: number;
     item!: string;
     idx!: number;
   }
 
-  export class ArrayChoice {
+  export class ArrayChoiceItem {
     array_id!: number;
     id!: number;
     idx!: number;
@@ -271,7 +277,7 @@ export namespace models {
     desc!: string;
   }
 
-  export class ArraySpellcastingInfo {
+  export class ArraySpellcastingInfoItem {
     array_id!: number;
     array_idx!: number;
     item!: string;
@@ -290,7 +296,7 @@ export namespace models {
   }
 
 
-  export class ArrayMultiClassingPrereq {
+  export class ArrayMultiClassingPrereqItem {
     array_id!: number;
     array_idx!: number;
     item!: number;
@@ -329,7 +335,7 @@ export namespace models {
     quantity!: number;
   }
 
-  export class ArrayContent {
+  export class ArrayContentItem {
     item!: string;
     array_id!: number;
     array_idx!: number;
@@ -340,7 +346,7 @@ export namespace models {
     dc!: number;
   }
 
-  export class ArrayUtilize {
+  export class ArrayUtilizeItem {
     array_id!: number;
     idx!: number;
     item!: string;
@@ -417,7 +423,7 @@ export namespace models {
 
   // tabelle di species
 
-  export class ArrayAbilityBonus {
+  export class ArrayAbilityBonusItem {
     ability_score!: string;
     bonus!: number; 
     array_id!: number; 
@@ -453,13 +459,13 @@ export namespace models {
     url!: string; 
   }
 
-  export class ArraySubclassSpellPrerequisite {    
+  export class ArraySubclassSpellPrerequisiteItem {    
     item!: string;
     array_id!: number;
     array_idx!: number; 
   }
 
-  export class ArraySubclassSpell {    
+  export class ArraySubclassSpellItem {    
     prerequisite!: number;
     spell!: string;
     array_id!: number;
@@ -491,7 +497,7 @@ export namespace models {
 
   // tabelle di Traits.ts
 
-  export class ArrayBreathWeaponDamage {
+  export class ArrayBreathWeaponDamageItem {
     damage_type!: string;
     array_id!: number;
     array_idx!: number;
@@ -541,7 +547,7 @@ export namespace models {
     url!: string;
   }
 
-  export class ArrayClass {    
+  export class ArrayClassItem {    
     array_id!: number;
     array_idx!: number;
     class?: string;
@@ -553,7 +559,7 @@ export namespace models {
     m,
   }
 
-  export class ArrayComponents {    
+  export class ArrayComponentsItem {    
     array_id!: number;
     array_idx!: number;
     item!: Components;
@@ -575,7 +581,7 @@ export namespace models {
     cantripUpgrade?: string;
   }
 
-  export class ArrayCreatingSpellSlots {    
+  export class ArrayCreatingSpellSlotsItem {    
     array_idx!: number;
     array_id!: number;
     sorcery_point_cost!: number;

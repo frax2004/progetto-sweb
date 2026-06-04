@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const config = require('../config/env');
 
 const verifyToken = (req, res, next) => {
     // TODO: controllare la correttezza di questo codice

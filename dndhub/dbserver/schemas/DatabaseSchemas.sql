@@ -800,7 +800,7 @@ create table if not exists ClassSpecific (
 );
 
 create table if not exists Level (
-  index text not null primary key,
+  idx text not null primary key,
   level number not null,
   ability_score_bonuses number,
   prof_bonus number,
@@ -910,12 +910,13 @@ create table if not exists Personaggio (
   -- primary key creata da interpolazione
   -- utente_giocatore + nome
   idx_personaggio text not null primary key,
-  campagna text,
+  campagna text, -- un personaggio una sola campagna altrimenti problemi di modifica pg
   classe text not null,
   sottoclasse text,
   specie text not null,
   sottospecie text,
   background text not null,
+  livello text not null,
   -- i talenti sono salvati su un array come foreign keys
   -- stessa cosa vale per equipaggiamenti, incantesimi e lingue parlate
   -- e anche per statistiche
@@ -939,7 +940,8 @@ create table if not exists Personaggio (
   foreign key (sottoclasse) references Subclass(idx),
   foreign key (specie) references Species(idx),
   foreign key (sottospecie) references Subspecies(idx),
-  foreign key (background) references Background(idx)
+  foreign key (background) references Background(idx),
+  foreign key (livello) references Level(idx)
 );
 
 create table if not exists ArrayPostItem (

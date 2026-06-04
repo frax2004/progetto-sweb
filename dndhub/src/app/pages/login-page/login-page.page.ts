@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { IonContent,IonInput, IonHeader, IonTitle, IonText, IonToolbar, IonItem, IonGrid, IonLabel, IonCol, IonRow, IonFooter,  } from '@ionic/angular/standalone';
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { Accordion } from 'src/app/components/accordion/Accordion';
@@ -9,10 +9,10 @@ import { ButtonComponent } from 'src/app/components/button/button.component';
 import { expand } from 'rxjs';
 import { Button } from 'src/app/components/button/Button';
 import { ButtonContext } from 'src/app/components/button/ButtonContext';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { PopoverController } from '@ionic/angular/standalone';
-import { Popups } from 'src/app/core/core';
+import { Navigate, Popups } from 'src/app/core/core';
 
 @Component({
   selector: 'app-login-page',
@@ -23,31 +23,64 @@ import { Popups } from 'src/app/core/core';
 })
 export class LoginPagePage implements OnInit {
 
-  constructor(private authService: AuthService, public popoverController: PopoverController) { }
+  constructor(private authService: AuthService, public popoverController: PopoverController, private router: Router) { }
 
   formGroup: FormGroup = new FormGroup({
     email: new FormControl('',[Validators.required, Validators.email]),
-    password: new FormControl('',[Validators.required]),
+    password: new FormControl('',[Validators.required, LoginPagePage.getPasswordValidator()]),
   });
 
+  public static getPasswordValidator(): ValidatorFn {
+    return function (control: AbstractControl): ValidationErrors | null {
+      const candidate = control.value as string;
+
+      if(!candidate) {
+        return null;
+      }
+
+      const assertLength = candidate.length >= 8;
+      const assertIsLegal = /[a-zA-Z_0-9@#$!?'\-]+/.exec(candidate)?.includes(candidate);
+      const assertHasCapital = /[A-Z]+/.test(candidate);
+      const assertHasLower = /[a-z]+/.test(candidate);
+      const assertHasNumber = /[0-9]+/.test(candidate);
+
+      const correct = assertLength
+      && assertIsLegal
+      && assertHasCapital
+      && assertHasLower
+      && assertHasNumber;
+
+      return correct ? null : {
+        Length: assertLength,
+        IsLegal: assertIsLegal,
+        HasCapital: assertHasCapital,
+        HasLower: assertHasLower,
+        HasNumber: assertHasNumber,
+      };
+    };
+  }
+
   ngOnInit() {}
+
+  doLogin() {
+    this.authService.login(
+      this.formGroup.get('email')?.value || '',
+      this.formGroup.get('password')?.value || ''
+    ).subscribe({
+      next: (value) => {
+        Navigate.toPath(this.router, 'landing-page');
+      },
+      error: (err) => {
+        Popups.ofSimpleText(this.popoverController, err.message);
+      }
+    })
+  }
+
+  
   buttonCallbacks = {
     authLogin: {
-      onClick: () => {
-        Popups.ofSimpleText(this.popoverController,'ENTRO');
-        this.authService.login(
-          this.formGroup.get('email')?.value || '',
-          this.formGroup.get('password')?.value || ''
-        ).subscribe({
-          next: (value) => {
-            console.log(value);
-          },
-          error: (err) => {
-            console.log(err);
-          }
-        })
+      onClick: this.doLogin
     }
-  }
   };
 
   loginButton: Button = { text: 'Login', expand: 'block', color: '#ff0000'};

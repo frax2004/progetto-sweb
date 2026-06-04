@@ -1,4 +1,3 @@
-import { Routes } from './routes/database.routes.js';
 import { Database } from './database.js';
 import fs from 'fs';
 import { authRouter } from './routes/auth.routes.js';
@@ -11,7 +10,7 @@ const PORT = 10000;
 
 app.use(cors());
 app.use(express.json());
-app.use("/api/auth", AuthMiddleware, authRouter);
+app.use("/api/auth", authRouter);
 
 
 // const api_references = JSON
@@ -56,14 +55,10 @@ app.get('/', (request, response) => {
 
 
 
+// app.get(Routes.SPECIES, (req, res) => {
 
-
-
-
-app.get(Routes.SPECIES, (req, res) => {
-
-  Database.get().run(query);
-});
+//   Database.get().run(query);
+// });
 
 
 

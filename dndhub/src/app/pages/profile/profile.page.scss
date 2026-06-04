@@ -18,20 +18,17 @@
 .imgAndOptions {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
+    gap: 16px;
     width: 15vw;
     height: 100%;
 }
 
-// non riesco a centrare i bottoni AAAAAAAAAAAAAAAAH
-.imgAndOptions>.buttonContainer , .imgAndOptions>.goBack {
-    align-self: center;
-    justify-self: center;
-}
 
 .informationBox {
+    display: flex;
     justify-content: center;
+    align-items: center;
     height: 15vh;
     background-color: rgba(30, 28, 28, 0.685);
     border-radius: 10px;
@@ -46,6 +43,13 @@
     width: 100%;
 }
 
+.buttonContainer,
+.goBack {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .gridContainer {
     margin-top: 3vh;
 }
@@ -56,7 +60,8 @@ ion-grid {
 
 .passwordContainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: center;
+    text-align: center;
 }
 
 .passwordButton {

@@ -6,38 +6,91 @@
 
 <ion-content [fullscreen]="true" class="dettagli-campagna-content">
 
-<ion-item>
-<img src="https://th.bing.com/th/id/OIP.h63Sl6C7z4Evuo-_6a8WXQHaLH?w=115&h=180&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3" alt="Immagine della campagna" class="campaign-image">
-</ion-item> 
-  <p>Descrizione della campagna: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-<ion-item>
-    <p class="proprietario">Nome del proprietario della campagna</p>
-</ion-item>
+  <div class="wrapper-pagina">
 
-<div class ="contenitore">
+    <div class="immagine-campagna">
+      <img
+        src="https://th.bing.com/th/id/OIP.h63Sl6C7z4Evuo-_6a8WXQHaLH?w=115&h=180&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3"
+        class="immagine-centrata"
+      >
+    </div>
 
-  <div class="left">
-    @for (giocatore of player; track giocatore.id) {
+    <p class="card">
+      Descrizione della campagna: Lorem ipsumooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.    </p>
+    <ion-item>
+      <ion-label class="proprietario">
+        Nome del proprietario della campagna
+      </ion-label>
 
-      <app-player-card class="player-pannello"
-        [player]="giocatore">
-      </app-player-card>
+    </ion-item>
+    <div class="contenitore">
+      <div class="left">
+        <p class="Risposta">Giocatori</p>
 
-  }
-  </div>
+        @for (giocatore of player; track giocatore.id) {
+          <app-player-card
+            class="player-pannello"
+            [player]="giocatore">
+          </app-player-card>
+        }
+      </div>
+      <div class="right">
+        <p class="Risposta">Richieste alla campagna</p>
 
-  <div class="right">
-    <p class="Risponsta">Richieste alla campagna</p>
-    @if (richieste.length === 0) {
-      <p>Non ci sono richieste in sospeso</p>
-    } @else {
-      @for (richiesta of richieste; track richiesta.id_richiesta) {
-        <app-request-card
-          [richiesta]="richiesta">
-        </app-request-card>
+        @if (richieste.length === 0) {
+          <p class="Risposta">
+            Non ci sono richieste in sospeso
+          </p>
+        } @else {
+          @for (richiesta of richieste; track richiesta.id_richiesta) {
+            <app-request-card
+              [richiesta]="richiesta">
+            </app-request-card>
+          }
+        }
+      </div>
+
+    </div>
+
+    <div class="specifiche">
+
+      <app-label class="codice">
+        Codice campagna: 123456
+      </app-label>
+
+      <app-label class="link-join">
+        Link per unirsi alla campagna:
+        <a
+          class="links"
+          href="#"
+          target="_blank">
+          http://localhost:8100/dettagli-campagna
+        </a>
+      </app-label>
+
+    </div>
+
+    <div class="button-wrapper">
+      <app-button
+        [button]="DocButton"
+        [context]="DocContext">
+      </app-button>
+    </div>
+
+    <div class="lista-documenti">
+      @if (Docs) {
+        @for (doc of documenti; track doc.title) {
+          <ion-item button (click)="download(doc)">
+            <ion-label>
+              {{ doc.title }}
+            </ion-label>
+            <ion-icon
+              slot="end"
+              name="document-outline">
+            </ion-icon>
+          </ion-item>
+        }
       }
-    }
+    </div>
   </div>
-</div>
-
 </ion-content>

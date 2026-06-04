@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonGrid, IonRow, IonItem, IonCol, IonLabel, PopoverController } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonGrid, IonRow, IonItem, IonCheckbox ,IonCol, IonLabel, PopoverController } from '@ionic/angular/standalone';
 import { Navigate, Popups } from 'src/app/core/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from "src/app/components/button/button.component";
@@ -11,12 +11,12 @@ import { ButtonComponent } from "src/app/components/button/button.component";
   templateUrl: './character-spells.page.html',
   styleUrls: ['./character-spells.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonGrid, IonRow, IonItem, IonCol, ButtonComponent, IonLabel]
+  imports: [IonContent, IonCheckbox, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonGrid, IonRow, IonItem, IonCol, ButtonComponent, IonLabel]
 })
 export class CharacterSpellsPage implements OnInit {
   buttonCallbacks = {
     indietro: { onClick: Navigate.toPath(this.router,'character-sheet')},
-    mago: { onClick: this.toggleClass('Mago')},
+    mago: { onClick: this.toggleClass('Mago'),},
     chierico: { onClick: this.toggleClass('Chierico')},
     warlock: { onClick: this.toggleClass('Warlock')},
   };
@@ -80,7 +80,6 @@ export class CharacterSpellsPage implements OnInit {
 
     return f;
   }
-
 
   constructor(private router: Router, public popoverController: PopoverController) { }
 

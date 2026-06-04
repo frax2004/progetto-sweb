@@ -57,7 +57,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/Character creation pipeline/stats-selection/stats-selection.page').then( m => m.StatsSelectionPage)
   },
   {
-    path: 'dettagi-campagna',
+    path: 'dettagli-campagna',
     loadComponent: () => import('./pages/dettagi-campagna/dettagi-campagna.page').then( m => m.DettagiCampagnaPage)
   },
   {
@@ -80,6 +80,11 @@ export const routes: Routes = [
     path: 'campaign-chat',
     loadComponent: () => import('./pages/campaign-chat/campaign-chat.page').then( m => m.CampaignChatPage)
   },
+  {
+    path: 'type-player-login',
+    loadComponent: () => import('./pages/type-player-login/type-player-login.page').then( m => m.TypePlayerLoginPage)
+  },
+
 
 
 ];

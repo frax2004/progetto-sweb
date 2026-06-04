@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent,IonInput, IonHeader, IonTitle, IonText, IonToolbar, IonItem, IonGrid, IonLabel, IonCol, IonRow, IonFooter,  } from '@ionic/angular/standalone';
+import { IonContent,IonInput, IonHeader, IonTitle, IonButton, IonText, IonToolbar,IonIcon, IonItem, IonGrid, IonLabel, IonCol, IonRow, IonFooter,  } from '@ionic/angular/standalone';
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { Accordion } from 'src/app/components/accordion/Accordion';
 import { TextAreaComponent } from "src/app/components/text-area/text-area.component";
@@ -14,13 +14,14 @@ import { DatiRichiesta } from 'src/app/components/dati-richiesta';
 import { DatiGiocatore } from 'src/app/components/dati-giocatore';
 import { PlayerCardComponent } from 'src/app/components/player-card/player-card.component';
 import { RequestCardComponent } from 'src/app/components/request-card/request-card.component';
+import { LabelComponent } from 'src/app/components/label/label.component';
 
 @Component({
   selector: 'app-dettagi-campagna',
   templateUrl: './dettagi-campagna.page.html',
   styleUrls: ['./dettagi-campagna.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, RequestCardComponent, PlayerCardComponent ,IonTitle, IonToolbar, CommonModule, FormsModule, AccordionComponent, TextAreaComponent, ButtonComponent, RouterLink, IonItem, IonGrid, IonLabel, IonCol, IonRow, IonFooter, IonInput, IonText, AccordionComponent, ButtonComponent]
+  imports: [IonContent, LabelComponent ,IonHeader, IonButton, RequestCardComponent, IonIcon, PlayerCardComponent ,IonTitle, IonToolbar, CommonModule, FormsModule, AccordionComponent, TextAreaComponent, ButtonComponent, RouterLink, IonItem, IonGrid, IonLabel, IonCol, IonRow, IonFooter, IonInput, IonText, AccordionComponent, ButtonComponent]
 })
 export class DettagiCampagnaPage implements OnInit {
 
@@ -73,6 +74,23 @@ player: DatiGiocatore[] = [
         immagine: 'https://th.bing.com/th/id/OIP.9a8cOMAkPDkQQl16CkfzyQHaHm?w=179&h=184&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3'
       }
     }
+  ];
+Docs: boolean = false;
+DocButton: Button = { text: 'documenti', expand: 'block', color:'#ff0000' };
+DocContext: ButtonContext = {
+onClick: () => this.toggleDocs()
+};
+toggleDocs() {
+  this.Docs = !this.Docs;
+}
+
+download(doc: Accordion) {
+console.log('Scarico:', doc.title);
+} // ci sarà da fare un'interfaccia per scaricare i documenti, per ora accordion perché provavo un'altra cosa
+    documenti: Accordion[] = [
+    { value: 'Documento1 accordion', title: 'Documento1', content: ''},
+    { value: 'Documento2 accordion', title: 'Documento2', content: '' },
+    { value: 'Documento3 accordion', title: 'Documento3', content: '' },
   ];
   constructor() { }
 

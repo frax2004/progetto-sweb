@@ -15,7 +15,7 @@
       Inserisci le tue credenziali per accedere o registrarti.
     </ion-text>
 
-    <form [formGroup]="formGroup">
+    <form [formGroup]="formGroup" (ngSubmit)="doLogin()">
       <ion-item lines="full">
         <ion-input 
         formControlName="email"

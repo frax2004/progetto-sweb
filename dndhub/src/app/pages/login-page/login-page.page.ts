@@ -83,7 +83,7 @@ export class LoginPagePage implements OnInit {
     }
   };
 
-  loginButton: Button = { text: 'Login', expand: 'block', color: '#ff0000'};
+  loginButton: Button = { text: 'Login', expand: 'block', color: '#ff0000', type: "submit"};
   loginContext: ButtonContext = { onClick: () => { alert("Login effettuato!"); } };
 
 

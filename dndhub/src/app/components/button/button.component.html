@@ -5,6 +5,7 @@
         [expand]="button.expand"
         style="
         --background: {{button.color}};"
+        type = "button.type"
     >
     {{ button.text }}
     </ion-button>
@@ -21,6 +22,7 @@
         class = "genericButton"
         (click)="context.onClick($event)"
         [expand]="button.expand"
+        type = "button.type"
     >
     {{ button.text }}
     </ion-button>

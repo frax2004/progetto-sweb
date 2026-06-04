@@ -1,0 +1,71 @@
+.informationContainer {
+    width: 70vw;
+    margin-right: 8vw;
+    height: 100%;
+    border-radius: 10px;
+    background-color: rgba(46, 53, 65, 0.753);
+}
+
+.imgFrame {
+    display: flex;
+    align-items: center;
+    max-width: 25vmin;
+    max-height: 25vmin;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.imgAndOptions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 15vw;
+    height: 100%;
+}
+
+
+.informationBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+    background-color: rgba(30, 28, 28, 0.685);
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px rgba(85, 85, 85, 0.342);
+}
+
+.goBack {
+    width: 100%;
+}
+
+.buttonContainer {
+    width: 100%;
+}
+
+.buttonContainer,
+.goBack {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.gridContainer {
+    margin-top: 3vh;
+}
+
+ion-grid {
+    height: 100%;
+}
+
+.passwordContainer {
+    display: flex;
+    flex-direction: center;
+    text-align: center;
+}
+
+.passwordButton {
+    align-self: center;
+    height: 50%;
+    width: 40%;
+}

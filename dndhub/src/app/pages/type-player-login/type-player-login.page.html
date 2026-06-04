@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="Logo">DnDhub</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="login-content">
+
+  <div class="background"></div>
+  <ion-title class="Titolo">Accedi</ion-title>
+<div class="grid-centrale">
+  <div class="portal dm" (click)=" VaiLandingPage()">
+    <div class="portal-content">
+      <h2>Dungeon Master</h2>
+      <p class="desc">Crea il tuo mondo</p>
+    </div>
+  </div>
+
+  <div class="portal player" (click)=" VaiLandingPage()">
+    <div class="portal-content">
+      <h2>Giocatore</h2>
+      <p class="desc">Crea il tuo personaggio</p>
+    </div>
+  </div>
+
+</div>
+</ion-content>

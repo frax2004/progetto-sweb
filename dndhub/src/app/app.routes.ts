@@ -15,7 +15,8 @@ export const routes: Routes = [
   {
     path: 'landing-page',
     loadComponent: () => import('./pages/landing-page/landing-page.page').then( m => m.LandingPagePage)
-  },  {
+  },
+  {
     path: 'characters',
     loadComponent: () => import('./pages/characters/characters.page').then( m => m.CharactersPage)
   },
@@ -56,9 +57,36 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/Character creation pipeline/stats-selection/stats-selection.page').then( m => m.StatsSelectionPage)
   },
   {
-    path: 'overview',
+    path: 'dettagli-campagna',
+    loadComponent: () => import('./pages/dettagi-campagna/dettagi-campagna.page').then( m => m.DettagiCampagnaPage)
+  },
+  {
+    path: 'login-page',
+    loadComponent: () => import('./pages/login-page/login-page.page').then( m => m.LoginPagePage)
+  },
+  { 
+    path: 'signin-page',
+    loadComponent: () => import('./pages/signin-page/signin-page.page').then( m => m.SigninPagePage)
+  },
+  {
+   path: 'overview',
     loadComponent: () => import('./pages/Character creation pipeline/overview/overview.page').then( m => m.OverviewPage)
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./pages/profile/profile.page').then( m => m.ProfilePage)
+  },
+  {
+    path: 'campaign-chat',
+    loadComponent: () => import('./pages/campaign-chat/campaign-chat.page').then( m => m.CampaignChatPage)
+  },
+  {
+    path: 'type-player-login',
+    loadComponent: () => import('./pages/type-player-login/type-player-login.page').then( m => m.TypePlayerLoginPage)
   },
 
 
+
 ];
+   
+

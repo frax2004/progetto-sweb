@@ -7,14 +7,16 @@ import { Accordion } from 'src/app/components/accordion/Accordion';
 import { Button } from 'src/app/components/button/Button';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { ButtonContext } from 'src/app/components/button/ButtonContext';
-import { Popups } from 'src/app/core/core';
+import { Navigate, Popups } from 'src/app/core/core';
+import { Router } from '@angular/router';
+import { TitleComponent } from "src/app/components/title/title.component";
 
 @Component({
   selector: 'app-background-selection',
   templateUrl: './background-selection.page.html',
   styleUrls: ['./background-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, AccordionComponent, IonFooter, ButtonComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, AccordionComponent, IonFooter, ButtonComponent, TitleComponent]
 })
 export class BackgroundSelectionPage implements OnInit {
   b1_button: Button = { text: 'clicca qui', expand: ''};
@@ -29,6 +31,11 @@ export class BackgroundSelectionPage implements OnInit {
 
   b2_context: ButtonContext = { onClick: Popups.ofSimpleText(this.popoverController, "Andiamo les go les go milano")};
 
+  buttonCallbacks = {
+    nextPage: { onClick: Navigate.toPath(this.router,'equipment-selection')},
+    previousPage: { onClick: Navigate.toPath(this.router,'species-selection')},
+  }
+
   accordions: Accordion[] = [
     { value: 'saggio accordion', title: 'Saggio', content: 'Il backgorund del saggio riguarda tutti i personaggi che hanno studiato assai prima di partire in avventura', button: this.b1},
     { value: 'viandante accordion', title: 'Viandante', content: 'Letteralemente il background dei senzatetto', button: this.b1},
@@ -36,7 +43,7 @@ export class BackgroundSelectionPage implements OnInit {
   ];
 
 
-  constructor(public popoverController: PopoverController) { }
+  constructor(public popoverController: PopoverController, private router: Router) { }
 
   ngOnInit() {
   }

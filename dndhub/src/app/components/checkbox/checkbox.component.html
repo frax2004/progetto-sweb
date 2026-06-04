@@ -1,1 +1,13 @@
-<ion-checkbox>{{ testo }}</ion-checkbox>
+<ion-item lines="nessuna"> 
+
+  <ion-checkbox
+    [checked]="checked"
+    [disabled]="disabled"
+    (ionChange)="onChange($event)"> 
+  </ion-checkbox>
+
+  <ion-label>
+    {{ testo }}
+  </ion-label>
+
+    </ion-item>

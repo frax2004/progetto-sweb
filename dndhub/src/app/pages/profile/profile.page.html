@@ -1,0 +1,110 @@
+<ion-content>
+  <app-title
+  [title] = "'Profilo personale'"
+  ></app-title>
+
+  <!-- sto riscrivendo questa pagina daccapo perché fa schifo -->
+
+  <div class="gridContainer"> 
+    <ion-grid>
+
+      <!-- metto tutto sulla stessa riga -->
+      <ion-row>
+        <!-- colonna con i bottoni -->
+        <ion-col>
+
+          <div class="imgAndOptions">
+            <div class="goBack">
+              <app-button
+              [margin]="false"
+              [button] = "{ text: 'Torna indietro', expand: ''}"
+              [context] = "buttonCallbacks['placeholder']"
+              ></app-button>
+            </div>
+
+
+            <div class="outerImgFrame">
+              <div class="imgFrame">
+                <img src="https://static.wikia.nocookie.net/dragonball/images/9/91/SSJ4_20.jpg/revision/latest/scale-to-width-down/985?cb=20240630012825" alt="'imgPlaceholder'">
+              </div>
+            </div>
+
+            <div class="buttonContainer">
+              <app-button
+              [margin]="false"
+              [button] = "{ text: 'Modifica account', expand: ''}"
+              [context] = "buttonCallbacks['placeholder']"
+              ></app-button>
+            </div>
+
+            <div class="buttonContainer">
+              <app-button
+              [margin]="false"
+              [button] = "{ text: 'Elimina account', expand: ''}"
+              [context] = "buttonCallbacks['placeholder']"
+              ></app-button>
+            </div>
+
+            
+            <div class="buttonContainer">
+              <app-button
+              [margin]="false"
+              [button] = "{ text: 'Log out', expand: ''}"
+              [context] = "buttonCallbacks['placeholder']"
+              ></app-button>
+            </div>
+          </div>
+
+        </ion-col>
+
+        <!-- colonna informazioni -->
+        <ion-col>
+
+          <ion-row>
+            <div class="informationContainer">
+              <ion-col>
+                <ion-row>
+                  <ion-col>
+                  <app-label class="informationBox" >Personaggi creati: 4</app-label>
+                  </ion-col>
+
+                  <ion-col>
+                  <app-label class="informationBox">Username: gianni</app-label>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+
+              <ion-col>
+                <ion-row>
+                  <ion-col>
+                  <app-label class="informationBox">Campagne create: 6</app-label>
+                  </ion-col>
+
+                  <ion-col>
+                  <app-label class="informationBox">Email: gianni@chiocciola.gmail.it</app-label>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+
+              <ion-col>
+                <ion-row>
+                  <ion-col>
+                  <app-label class="informationBox">Campagne a cui si partecipa: 8</app-label>
+                  </ion-col>
+
+                  <ion-col>
+                  <div class="informationBox passwordContainer">
+                      <ion-input type="password" placeholder="Password"></ion-input>
+                  </div>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+
+            </div>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </div>
+</ion-content>

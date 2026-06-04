@@ -1,103 +1,56 @@
 <ion-content>
-  <app-scroll-bar></app-scroll-bar>
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title>Crea una campagna</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="background"></div>
 
-  <!-- grid super big con tutte le textarea all'interno -->
-  <ion-item>
-    <ion-grid>
-      
-      <!-- prima riga con nome campagna e "invita giocatori" -->
-      <ion-row>
+  <div class="pageTitle">
+    <ion-title class="title">Crea una campagna</ion-title>
+  </div>
 
-        <!-- prima colonna con nome campagna -->
-        <ion-col>
-          <div>
-            <!-- uso div per dare ordine con flex -->
-            <ion-label>Inserire il nome della campagna: </ion-label>
-            <!-- la text area non capisco perché non funziona  -->
-            <ion-input></ion-input>
-          </div>
-        </ion-col>
+  <div class="grid">
 
-        <!-- seconda colonna con nomi dei giocatori da aggiungere -->
-        <ion-col>
-          <div>
-            <!-- uso div per dare ordine con flex -->
-            <ion-label>Inserire i giocatori che parteciperanno: </ion-label>
-            <!-- la text area non capisco perché non funziona  -->
-            <ion-input></ion-input>
-          </div>
-        </ion-col>
+    <!-- Riga 1 -->
+    <div class="riquadro">
+      <ion-label>Inserire il nome della campagna:</ion-label>
+      <ion-input placeholder="Nome campagna"></ion-input>
+    </div>
 
-      </ion-row>
+    <div class="riquadro">
+      <ion-label>Inserire i giocatori che parteciperanno:</ion-label>
+      <ion-input placeholder="Giocatori"></ion-input>
+    </div>
 
-      <!-- seconda riga con descrizione della campagna
-           idealmente questa div dovrebbe avere una scrollbar piuttosto che occupare un sacco di spazio -->
-      <ion-row>
-        <div>
-          <ion-label>Descrizione campagna: </ion-label>
-          <!-- Secondo div per la scrollbar -->
-          <div class="scrollDiv">
-            <app-text-area></app-text-area>
-          </div>
-        </div>
-      </ion-row>
+    <!-- Riga 2 -->
+    <div class="riquadro descrizione">
+      <ion-label>Descrizione campagna:</ion-label>
 
-    <!-- terza riga per link d'invito generato e link immagine banner da aggiungere -->
-    <ion-row>
+      <div class="scrollDiv">
+        <app-text-area> </app-text-area>
+      </div>
+    </div>
 
-      <!-- prima colonna con link d'invito -->
-      <ion-col>
-        <div>
-          <!-- uso div per dare ordine con flex -->
-          <ion-label>Inserire il nome della campagna: </ion-label>
-          <ion-label>LINK</ion-label>
-        </div>
-      </ion-col>
+    <!-- Riga 3 -->
+    <div class="riquadro">
+      <ion-label>Link d'invito:</ion-label>
+      <ion-input placeholder="Link"></ion-input>
+    </div>
 
-      <!-- seconda colonna con link banner -->
-      <ion-col>
-        <div>
-          <!-- uso div per dare ordine con flex -->
-          <ion-label>Link dell'immagine banner: </ion-label>
-          <!-- la text area non capisco perché non funziona  -->
-            <ion-input></ion-input>
-        </div>
-      </ion-col>
-      
-    </ion-row>
+    <div class="riquadro">
+      <ion-label>Link dell'immagine banner:</ion-label>
+      <ion-input placeholder="Banner"></ion-input>
+    </div>
 
-    <!-- quarta e ultima riga con link a documenti utili e bottone di completamento -->
+    <!-- Riga 4 -->
+    <div class="riquadro">
+      <ion-label>Link(s) a documenti utili:</ion-label>
+      <ion-input placeholder="Documenti"></ion-input>
+    </div>
 
-    <ion-row>
+    <div class="riquadro button-riquadro">
+      <app-button
+        [button]="{ text: 'Conferma e crea campagna', expand: '' }"
+        [context]="buttonCallbacks['finishCreation']">
+      </app-button>
+    </div>
 
-      <!-- prima colonna con link utili -->
-      <ion-col>
-        <div>
-          <!-- uso div per dare ordine con flex -->
-          <ion-label>Link(s) a documenti utili: </ion-label>
-          <!-- la text area non capisco perché non funziona  -->
-            <ion-input></ion-input>
-        </div>
-      </ion-col>
+  </div>
 
-      <!-- seconda colonna con bottone -->
-
-      <ion-col>
-        <div>
-          <app-button
-          [button] = "{ text: 'conferma e crea campagna', expand: ''}"
-          [context] = "buttonCallbacks['finishCreation']"
-          >
-          </app-button>
-        </div>
-      </ion-col>
-    </ion-row>
-
-    </ion-grid>
-  </ion-item>
 </ion-content>

@@ -1,4 +1,63 @@
 .scrollDiv {
-    overflow-y: scroll;
-    height: 20vh;
+  max-height: 20vh;
+  overflow-y: auto;
+}
+
+.background {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+   background-image: url('/assets/icon/sfondo-dndhub2.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.20;
+  filter: blur(1px);
+
+}
+
+.descrizione {
+  grid-column: 1 / -1;
+}
+
+app-text-area {
+  display: block;
+  height: 100%;
+}
+
+.title{
+    text-align: center;
+    font-weight: 500;
+    font-size: clamp(32px, 4px, 48px);
+    border: 6px solid gold;
+    border-radius: 12px;
+    margin-top: 12px;
+    padding: 12px 24px;
+    margin-bottom: 36px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 40% 40%;
+  justify-content: center;
+  gap: 8px;
+}
+
+.riquadro{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    border:3px solid orange;
+    border-radius: 16px; 
+    padding: 8px;
+    font-weight: 300;
+    font-size: clamp(16px, 4px, 32px);
+}
+
+.full-width{
+    width: 100%;
 }

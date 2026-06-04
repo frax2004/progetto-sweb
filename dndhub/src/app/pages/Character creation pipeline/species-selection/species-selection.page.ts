@@ -6,15 +6,17 @@ import { Accordion } from 'src/app/components/accordion/Accordion';
 import { Button } from 'src/app/components/button/Button';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { ButtonContext } from 'src/app/components/button/ButtonContext';
-import { Popups } from 'src/app/core/core';
+import { Navigate, Popups } from 'src/app/core/core';
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
+import { Router } from '@angular/router';
+import { TitleComponent } from "src/app/components/title/title.component";
 
 @Component({
   selector: 'app-species-selection',
   templateUrl: './species-selection.page.html',
   styleUrls: ['./species-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, AccordionComponent, IonFooter, ButtonComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, AccordionComponent, IonFooter, ButtonComponent, TitleComponent]
 })
 export class SpeciesSelectionPage implements OnInit {
   b1_button: Button = { text: 'clicca qui', expand: ''};
@@ -29,6 +31,11 @@ export class SpeciesSelectionPage implements OnInit {
 
   b2_context: ButtonContext = { onClick: Popups.ofSimpleText(this.popoverController, "Andiamo les go les go milano")};
 
+  buttonCallbacks = {
+    nextPage: { onClick: Navigate.toPath(this.router,'background-selection')},
+    previousPage: { onClick: Navigate.toPath(this.router,'class-selection')},
+  } 
+
   accordions: Accordion[] = [
     { value: 'elf accordion', title: 'Elfo', content: 'gli elfi hanno le orecchie a punta e vivono molto a lungo, le possibili sottorazze sono elfo dei boschi e elfo alto', button: this.b1},
     { value: 'dwarf accordion', title: 'Nano', content: 'i nani non hanno le orecchie a punta, non sono alti e minano i minerali :]', button: this.b1},
@@ -36,7 +43,7 @@ export class SpeciesSelectionPage implements OnInit {
   ];
 
 
-  constructor(public popoverController: PopoverController) { }
+  constructor(public popoverController: PopoverController, private router: Router ) { }
 
   ngOnInit() {
   }

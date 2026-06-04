@@ -1,27 +1,83 @@
-.firstHalf {
-    width: 30vw;
-    overflow-y: auto;
-}
-
-.secondHalf {
-    width: 70vw;
-}
-
-.gridContainer {
-    display: flex;
-    flex-direction: column;
-}
-
 .upperDetails {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+    background-color: rgba(61, 41, 41, 0.708);
+    height: 6vh;
 }
 
 .accordions {
     width: 70vw;
 }
 
-.HPchoice {
+.HPchoice .HPlabel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+
+.upperDetailsContainer {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+ion-label {
+    width: 100%;
+    height: 100%;
+}
+
+.accordions {
+    width: 70vw;
+    justify-content: center;
+    justify-self: center;
+    justify-items: center;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+}
+
+.finalChoices {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
+.finalButton {
+    display: grid;
+    justify-content: end;
+}
+
+.finalChoicesContainer {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+
+    margin: 0 auto;
+    border-radius: 18px;
+    width: 90vw;
+}
+
+.nameChoice , .imgChoice {
+    margin: 0 auto;
+    width: 90vw;
+    margin-bottom: 15px;
+}
+
+.HPbuttons {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.showHP {
+    margin-top: 15px;
+    align-self: center;
 }

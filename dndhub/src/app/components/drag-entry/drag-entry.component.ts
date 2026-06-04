@@ -23,7 +23,12 @@ export class DragEntryComponent implements OnInit {
   private initialValue: number = 0;
   private dragThreshold: number = 4;
 
-  ngOnInit() {}
+  ngOnInit() {
+    // //uso jquery per sistemare css
+    // $(function() {
+    //   $(".entry-arrow").css("height", $(#entry).height());
+    // });
+  }
 
   private getValue(): number {
     return this.previousInput === "" ? 0 : parseFloat(this.previousInput);
@@ -121,4 +126,6 @@ export class DragEntryComponent implements OnInit {
       }
     }
   }
+
+  
 }

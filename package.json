@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@ionic/angular": "^8.8.7"
+    "@ionic/angular": "^8.8.7",
+    "typescript": "^6.0.3"
   }
 }

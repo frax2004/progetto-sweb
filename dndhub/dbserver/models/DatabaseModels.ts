@@ -654,4 +654,10 @@ export namespace models {
     additional_magical_secrets_max_lvl?: number;
     aura_range?: number;
   }
+
+  export class Account {
+    email!: string;
+    password!: string;
+    username!: string;
+  }
 }

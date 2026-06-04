@@ -15,20 +15,30 @@
       Inserisci le tue credenziali per accedere o registrarti.
     </ion-text>
 
-    <ion-item lines="full">
-      <ion-input type="text" placeholder="Email o username"></ion-input>
-    </ion-item>
+    <form [formGroup]="formGroup">
+      <ion-item lines="full">
+        <ion-input 
+        formControlName="email"
+        id="emailArea" 
+        type="text" 
+        placeholder="Email o username"></ion-input>
+      </ion-item>
 
-    <ion-item lines="full">
-      <ion-input type="password" placeholder="Password"></ion-input>
-    </ion-item>
+      <ion-item lines="full">
+        <ion-input
+        formControlName="" 
+        id="passwordArea" 
+        type="password" 
+        placeholder="Password"></ion-input>
+      </ion-item>
 
-    <div class="button-wrapper">
-      <app-button 
-        [button]="loginButton"
-        [context]="loginContext">
-      </app-button>
-    </div>
+      <div class="button-wrapper">
+        <app-button 
+          [button]="loginButton"
+          [context]="buttonCallbacks['authLogin']">
+        </app-button>
+      </div>
+    </form>
 
     <div class="link-wrapper">
       <ion-text>

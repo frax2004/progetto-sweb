@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { IonContent,IonInput, IonHeader, IonTitle, IonText, IonToolbar, IonItem, IonGrid, IonLabel, IonCol, IonRow, IonFooter,  } from '@ionic/angular/standalone';
+import { IonContent, IonInput, IonHeader, IonTitle, IonText, IonToolbar, IonItem, IonGrid, IonLabel, IonCol, IonRow, IonFooter, IonButton, IonInputPasswordToggle } from '@ionic/angular/standalone';
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { Accordion } from 'src/app/components/accordion/Accordion';
 import { TextAreaComponent } from "src/app/components/text-area/text-area.component";
@@ -19,7 +19,7 @@ import { Navigate, Popups } from 'src/app/core/core';
   templateUrl: './login-page.page.html',
   styleUrls: ['./login-page.page.scss'],
   standalone: true,
-  imports: [IonContent,IonInput, RouterLink, IonHeader, IonTitle, IonText , IonToolbar, IonItem, IonGrid, IonLabel, IonCol, IonRow, IonFooter, CommonModule, ReactiveFormsModule, ButtonComponent, AccordionComponent, TextAreaComponent]
+  imports: [IonContent, IonInput, RouterLink, IonHeader, IonTitle, IonText, IonToolbar, IonItem, IonGrid, IonLabel, IonCol, IonRow, IonFooter, CommonModule, ReactiveFormsModule, ButtonComponent, AccordionComponent, TextAreaComponent, IonButton, IonInputPasswordToggle]
 })
 export class LoginPagePage implements OnInit {
 
@@ -63,6 +63,7 @@ export class LoginPagePage implements OnInit {
   ngOnInit() {}
 
   doLogin() {
+    //console.log("sono nella funzione");
     this.authService.login(
       this.formGroup.get('email')?.value || '',
       this.formGroup.get('password')?.value || ''
@@ -71,7 +72,8 @@ export class LoginPagePage implements OnInit {
         Navigate.toPath(this.router, 'landing-page');
       },
       error: (err) => {
-        Popups.ofSimpleText(this.popoverController, err.message);
+        console.log(err);
+        alert(err.message);
       }
     })
   }

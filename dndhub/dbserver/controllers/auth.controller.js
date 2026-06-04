@@ -25,9 +25,10 @@ function insertPlayer(req, res, id) {
         message: "Non è stato possibile registrare il giocatore."
       });
     } else {
-      ctx.USER.player_token = jwt.sign(
+      // ctx.USER.player_token 
+      const token = jwt.sign(
         { id: id },
-        ctx.JWT_SECRET,
+        'filafiabeelamagamago',
         { expiresIn: '24h' }
       );
     }
@@ -40,13 +41,14 @@ function insertPlayer(req, res, id) {
 
 function insertDM(req, res, id) {
 
-  const query = `INSERT OR IGNORE INTO UtenteDungeonMaster (utente_dungeon_master, utente_generico) values (
+  const query = `INSERT OR IGNORE INTO UtenteDungeonMaster (utente_dungeon_master, utente_generico) VALUES (
     '${id}', 
     '${req.body.email}'
   )`;
 
   let ok = true;
 
+  // TODO: togliere tutti questi minchia di send
   Database
   .get()
   .run(query, (err) => {
@@ -60,9 +62,10 @@ function insertDM(req, res, id) {
         message: "Non è stato possibile registrare il dungeon master."
       });
     } else {
-      ctx.USER.dm_token = jwt.sign(
+      // ctx.USER.dm_token
+      const token = jwt.sign(
         { id: id },
-        ctx.JWT_SECRET,
+        'filafiabeelamagamago',
         { expiresIn: '24h' }
       );
     }
@@ -79,13 +82,14 @@ function generateToken(req, res, email) {
   // NON generarlo casualmente.
 
   //possiamo mettere altri parametri come data di scadenza MA NON LO FAREMO
+  // non trova ctx.JWT_TOKEN
+  // ctx.USER.generic_token 
   const token = jwt.sign(
     { email: email },
-    ctx.JWT_SECRET,
+    'filafiabeelamagamago',
     { expiresIn: '24h' }
   );
 
-  ctx.USER.generic_token = token;
 }
 
 
@@ -127,15 +131,21 @@ function login(req, res) {
 
 function register(req, res) {
 
-  const { email, password, username } = req.body;
+  console.log("Voglio piangere");
 
-  const query = `SELECT * FROM Account WHERE email = ${email}`;
+  // const { email, password, username } = req.body;
+  const email = req.body.email;
+  const password = req.body.password;
+  const username = req.body.username;
+
+  const query = `SELECT * FROM Account WHERE email = ${email}`; 
 
   Database
   .get()
   .get(query, (err, row) => {
     if(err) {
       // register
+      console.log("Sono qui");
       const registerQuery = `INSERT OR IGNORE INTO Account (email, password, username) VALUES (
         '${email}', 
         '${password}', 
@@ -150,8 +160,16 @@ function register(req, res) {
             message: "Non è stato possibile effettuare la registrazione."
           });
         } else {
-          const assertInsertPlayer = insertPlayer(req, res, ctx.UserInstance.getPlayerId(email));
-          const assertInsertDm = insertDM(req, res, ctx.UserInstance.getDmId(email));
+          // ctx.UserInstance.getPlayerId(email) --> non funziona
+          // ctx.UserInstance.getDmId(email) --> non funziona
+          const playerId = `(giocatore): '${email}'`;
+          const dmId = `(dungeon_master): '${email}'`;
+          
+          // creare prima l'utente generico
+
+          const assertInsertDm = insertDM(req, res, dmId);
+          const assertInsertPlayer = insertPlayer(req, res, playerId);
+          
 
           if(assertInsertPlayer && assertInsertDm) {
             generateToken(req, res, email);

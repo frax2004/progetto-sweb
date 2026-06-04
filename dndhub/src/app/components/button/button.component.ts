@@ -11,7 +11,7 @@ import { ButtonContext } from './ButtonContext';
 })
 export class ButtonComponent  implements OnInit {
   @Input() button!: Button;
-  @Input() context!: ButtonContext;
+  @Input() context?: ButtonContext;
   @Input() margin?: boolean = true;
 
   constructor() { }

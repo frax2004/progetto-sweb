@@ -26,17 +26,20 @@
 
       <ion-item lines="full">
         <ion-input
-        formControlName="" 
+        formControlName="password" 
         id="passwordArea" 
         type="password" 
-        placeholder="Password"></ion-input>
+        placeholder="Password">
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
       </ion-item>
 
       <div class="button-wrapper">
+          <!-- /* [button]="loginButton" -->
+          <!-- [context]="buttonCallbacks['authLogin']" */ -->
         <app-button 
           [button]="loginButton"
-          [context]="buttonCallbacks['authLogin']">
-        </app-button>
+        ></app-button>
       </div>
     </form>
 

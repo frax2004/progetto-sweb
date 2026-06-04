@@ -1,7 +1,7 @@
 @if (margin === true) {
     <ion-button
         class = "genericButton"
-        (click)="context.onClick($event)"
+        (click)="context?.onClick($event)"
         [expand]="button.expand"
         style="
         --background: {{button.color}};"
@@ -20,7 +20,7 @@
         "
         style="--background: {{button.color}}"
         class = "genericButton"
-        (click)="context.onClick($event)"
+        (click)="context?.onClick($event)"
         [expand]="button.expand"
         [type] = "button.type"
     >

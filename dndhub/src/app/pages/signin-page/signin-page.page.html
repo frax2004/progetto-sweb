@@ -15,20 +15,39 @@
       Inserisci le tue credenziali per accedere o registrarti.
     </ion-text>
 
-    <ion-item lines="full">
-      <ion-input type="text" placeholder="Email o username"></ion-input>
-    </ion-item>
+    <form [formGroup]="formGroup" (ngSubmit)="doRegister()">
+      <ion-item lines="full">
+        <ion-input
+        formControlName = "email" 
+        type="text" 
+        placeholder="Email"></ion-input>
+      </ion-item>
 
-    <ion-item lines="full">
-      <ion-input type="password" placeholder="Password"></ion-input>
-    </ion-item>
+      <ion-item lines="full">
+        <ion-input
+        formControlName = "password" 
+        type="password" 
+        placeholder="Password"
+        >
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
 
-    <div class="button-wrapper">
-      <app-button 
-        [button]="loginButton"
-        [context]="loginContext">
-      </app-button>
-    </div>
+      <ion-item lines="full">
+        <ion-input
+        formControlName = "username" 
+        type="text" 
+        placeholder="Username"
+        ></ion-input>
+      </ion-item>
+
+      <div class="button-wrapper">
+        <app-button 
+          [button]="loginButton"
+        >
+        </app-button>
+      </div>
+    </form>
 
     <div class="link-wrapper">
       <ion-text>

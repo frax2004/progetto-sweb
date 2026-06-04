@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import fs from 'fs';
 import 'reflect-metadata';
-import { models } from '../DatabaseModels.js';
 import { isDeepStrictEqual } from 'util';
 const REQUIRED_META = Symbol('required');
 function required() {
@@ -105,6 +104,16 @@ var data;
         choose = 0;
         type = "";
         from = OptionSet;
+        static equals(lhs, rhs) {
+            return lhs.id === getOrInsertId(data.option_sets, rhs.from);
+        }
+        static transform(x, array_id, array_idx) {
+            return {
+                array_id: array_id,
+                idx: array_idx,
+                id: getOrInsertId(data.option_sets, x.from)
+            };
+        }
     }
     data.Choice = Choice;
     class DifficultyClass {
@@ -398,6 +407,18 @@ var data;
     class StartingEquipment {
         equipment = APIReference;
         quantity = 0;
+        static equals(lhs, rhs) {
+            return lhs.equipment === rhs.equipment?.index
+                && lhs.quantity === rhs.quantity;
+        }
+        static transform(x, array_id, array_idx) {
+            return {
+                array_id: array_id,
+                array_idx: array_idx,
+                equipment: x.equipment?.index,
+                quantity: x.quantity
+            };
+        }
     }
     data.StartingEquipment = StartingEquipment;
     // cost e backgroundFeature non esistono nel db, 
@@ -445,6 +466,16 @@ var data;
     class SpellcastingInfo {
         name = "";
         desc = [""];
+        static equals(lhs, rhs) {
+            return lhs.item === rhs.name;
+        }
+        static transform(x, array_id, array_idx) {
+            return {
+                array_id: array_id,
+                array_idx: array_idx,
+                item: x.name,
+            };
+        }
     }
     data.SpellcastingInfo = SpellcastingInfo;
     class SpellCasting {
@@ -456,6 +487,16 @@ var data;
     class MultiClassingPrereq {
         ability_score = APIReference;
         minimum_score = 0;
+        static equals(lhs, rhs) {
+            return lhs.item === getOrInsertId(data.multiclassing_prereqs, rhs);
+        }
+        static transform(x, array_id, array_idx) {
+            return {
+                item: getOrInsertId(data.multiclassing_prereqs, x),
+                array_id: array_id,
+                array_idx: array_idx
+            };
+        }
     }
     data.MultiClassingPrereq = MultiClassingPrereq;
     class MultiClassing {
@@ -551,6 +592,18 @@ var data;
     class Content {
         item = APIReference;
         quantity = 0;
+        static equals(lhs, rhs) {
+            return lhs.item === rhs.item?.index
+                && lhs.quantity === rhs.quantity;
+        }
+        static transform(x, array_id, array_idx) {
+            return {
+                item: x.item?.index,
+                quantity: x.quantity,
+                array_id: array_id,
+                array_idx: array_idx,
+            };
+        }
     }
     __decorate([
         required(),
@@ -564,6 +617,18 @@ var data;
     class Utilize {
         name = "";
         dc = DifficultyClass;
+        static equals(lhs, rhs) {
+            return lhs.item === rhs.name
+                && lhs.dc === getOrInsertId(data.difficulty_classes, rhs.dc);
+        }
+        static transform(x, array_id, array_idx) {
+            return {
+                array_id: array_id,
+                idx: array_idx,
+                item: x.name,
+                dc: getOrInsertId(data.difficulty_classes, x.dc)
+            };
+        }
     }
     __decorate([
         required(),
@@ -637,7 +702,9 @@ var data;
         variant = false;
         variants = [APIReference];
         attunement = false;
-        rarity = "";
+        rarity = class {
+            name = "";
+        };
         desc = "";
         'limited-to' = "";
     }
@@ -714,6 +781,18 @@ var data;
     class AbilityBonus {
         ability_score = APIReference;
         bonus = 0;
+        static equals(lhs, rhs) {
+            return lhs.ability_score === rhs.ability_score?.index
+                && lhs.bonus === rhs.bonus;
+        }
+        static transform(x, array_id, array_idx) {
+            return {
+                ability_score: x.ability_score?.index,
+                bonus: x.bonus,
+                array_id: array_id,
+                array_idx: array_idx
+            };
+        }
     }
     data.AbilityBonus = AbilityBonus;
     class Species {
@@ -753,6 +832,16 @@ var data;
         type = "";
         name = "";
         url = "";
+        static equals(lhs, rhs) {
+            return lhs.item === rhs.index;
+        }
+        static transform(x, array_id, array_idx) {
+            return {
+                array_id: array_id,
+                array_idx: array_idx,
+                item: x.index
+            };
+        }
     }
     __decorate([
         required(),
@@ -774,6 +863,18 @@ var data;
     class SubclassSpell {
         prerequisites = [SubclassSpellPrerequisite];
         spell = APIReference;
+        static equals(lhs, rhs) {
+            return lhs.spell === rhs.spell?.index
+                && lhs.prerequisite === getOrInsertArrayId(data.ArraySubclassSpellPrerequisite, rhs.prerequisites, data.SubclassSpellPrerequisite.equals, data.SubclassSpellPrerequisite.transform);
+        }
+        static transform(x, array_id, array_idx) {
+            return {
+                spell: x.spell?.index,
+                prerequisite: getOrInsertArrayId(data.ArraySubclassSpellPrerequisite, x.prerequisites, data.SubclassSpellPrerequisite.equals, data.SubclassSpellPrerequisite.transform),
+                array_id: array_id,
+                array_idx: array_idx
+            };
+        }
     }
     data.SubclassSpell = SubclassSpell;
     class Subclass {
@@ -848,6 +949,18 @@ var data;
             "11" = "";
             "16" = "";
         };
+        static equals(lhs, rhs) {
+            return lhs.damage_type === rhs.damage_type?.index
+                && lhs.character_level === JSON.stringify(rhs.damage_at_character_level);
+        }
+        static transform(x, array_id, array_idx) {
+            return {
+                damage_type: x.damage_type,
+                array_id: array_id,
+                array_idx: array_idx,
+                character_level: JSON.stringify(x.damage_at_character_level),
+            };
+        }
     }
     data.BreathWeaponDamage = BreathWeaponDamage;
     class BreathWeapon {
@@ -973,7 +1086,24 @@ var data;
     data.ArrayOptionPrerequisite = [];
     data.ArrayOption = [];
     data.ArrayDamage = [];
+    data.ArrayStartingEquipment = [];
+    data.ArrayChoice = [];
+    data.ArraySpellcastingInfo = [];
+    data.ArrayMultiClassingPrereqs = [];
+    data.ArrayContents = [];
+    data.ArrayUtilize = [];
+    data.ArrayAbilityBonus = [];
+    data.ArraySubclassSpell = [];
+    data.ArraySubclassSpellPrerequisite = [];
+    data.ArrayBreathWeaponDamage = [];
+    data.ArrayCreatingSpellSlots = [];
+    data.class_specifics = [];
+    data.trait_specifics = [];
+    data.area_of_effects = [];
+    data.breath_weapons = [];
+    data.multiclassings = [];
     data.option_sets = [];
+    data.multiclassing_prereqs = [];
     data.difficulty_classes = [];
     data.options = [];
 })(data || (data = {}));
@@ -1030,14 +1160,28 @@ const allFiles = fs
     {
         extractor: (extract),
         shape: new data.Choice(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                choose: x.choose,
+                desc: x.desc,
+                type: x.type,
+                opt_id: getOrInsertId(data.option_sets, x.from)
+            };
+        },
         inputs: allFiles,
         output: "choices.json"
     },
     {
         extractor: (extract),
         shape: new data.DifficultyClass(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                id: getOrInsertId(data.difficulty_classes, x),
+                dc_type: x.dc_type,
+                dc_value: x.dc_value,
+                success_type: x.success_type
+            };
+        },
         inputs: allFiles,
         output: "difficulty_classes.json"
     },
@@ -1051,7 +1195,15 @@ const allFiles = fs
     {
         extractor: (extract),
         shape: new data.OptionSet(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                id: getOrInsertId(data.option_sets, x),
+                option_set_type: x.option_set_type,
+                equipment_category: x.equipment_category?.index,
+                resource_list_url: x.resource_list_url,
+                options_array: getOrInsertArrayId(data.ArrayOption, x.options, data.Option.equals, data.Option.transform)
+            };
+        },
         inputs: allFiles,
         output: "option_sets.json"
     },
@@ -1060,7 +1212,7 @@ const allFiles = fs
         shape: new data.Option(),
         mapper: function (x) {
             return {
-                id: models.Option.id(),
+                id: getOrInsertId(data.options, x),
                 option_type: x.option_type,
                 reference_item: x.item,
                 choice_id: getOrInsertId(data.option_sets, x.choice?.from),
@@ -1097,14 +1249,30 @@ const allFiles = fs
     {
         extractor: (extract),
         shape: new data.DamageType(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                description: x.description,
+                url: x.url,
+            };
+        },
         inputs: ["5e-SRD-Damage-Types.json"],
         output: "damage_types.json"
     },
     {
         extractor: (extract),
         shape: new data.AbilityScore(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                full_name: x.full_name,
+                description: x.description,
+                skills: getOrInsertArrayId(data.ArrayAPIReference, x.skills, data.APIReference.equals, data.APIReference.transform),
+                url: x.url,
+            };
+        },
         inputs: ["5e-SRD-Ability-Scores.json"],
         output: "ability_scores.json"
     },
@@ -1132,49 +1300,116 @@ const allFiles = fs
     {
         extractor: (extract),
         shape: new data.Background(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                starting_proficiencies: getOrInsertArrayId(data.ArrayAPIReference, x.starting_proficiencies, data.APIReference.equals, data.APIReference.transform),
+                language_options: getOrInsertId(data.option_sets, x.language_options?.from),
+                starting_equipment: getOrInsertArrayId(data.ArrayStartingEquipment, x.starting_equipment, data.StartingEquipment.equals, data.StartingEquipment.transform),
+                starting_gold_quantity: x.starting_gold?.quantity,
+                starting_gold_unit: x.starting_gold?.unit,
+                starting_equipment_options: getOrInsertArrayId(data.ArrayChoice, x.starting_equipment_options, data.Choice.equals, data.Choice.transform),
+                feature_name: x.feature?.name,
+                feature_desc: x.feature?.desc,
+                personality_traits: getOrInsertId(data.option_sets, x.personality_traits?.from),
+                ideals: getOrInsertId(data.option_sets, x.ideals?.from),
+                bonds: getOrInsertId(data.option_sets, x.bonds?.from),
+                flaws: getOrInsertId(data.option_sets, x.flaws?.from),
+                url: x.url,
+            };
+        },
         inputs: ["5e-SRD-Backgrounds.json"],
         output: "backgronds.json"
     },
     {
         extractor: (extract),
         shape: new data.SpellcastingInfo(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                name: x.name,
+                desc: x.desc?.join("$$$"),
+            };
+        },
         inputs: ["5e-SRD-Classes.json"],
         output: "spellcasting_infos.json"
     },
     {
         extractor: (extract),
         shape: new data.SpellCasting(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                level: x.level,
+                spellcasting_ability: x.spellcasting_ability?.index,
+                info: getOrInsertArrayId(data.ArraySpellcastingInfo, x.info, data.SpellcastingInfo.equals, data.SpellcastingInfo.transform)
+            };
+        },
         inputs: ["5e-SRD-Classes.json"],
         output: "spellcastings.json"
     },
     {
         extractor: (extract),
         shape: new data.MultiClassingPrereq(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                id: getOrInsertId(data.multiclassing_prereqs, x),
+                ability_score: x.ability_score?.index,
+                minimum_score: x.minimum_score,
+            };
+        },
         inputs: ["5e-SRD-Classes.json"],
         output: "multi_classing_prereqs.json"
     },
     {
         extractor: (extract),
         shape: new data.MultiClassing(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                id: getOrInsertId(data.multiclassings, x),
+                prerequisites: getOrInsertArrayId(data.ArrayMultiClassingPrereqs, x.prerequisites, data.MultiClassingPrereq.equals, data.MultiClassingPrereq.transform),
+                prerequisite_options: getOrInsertId(data.option_sets, x.prerequisite_options),
+                proficiencies: getOrInsertArrayId(data.ArrayAPIReference, x.proficiencies, data.APIReference.equals, data.APIReference.transform),
+                proficiency_choices: getOrInsertArrayId(data.ArrayChoice, x.proficiency_choices, data.Choice.equals, data.Choice.transform),
+            };
+        },
         inputs: ["5e-SRD-Classes.json"],
         output: "multi_classing.json"
     },
     {
         extractor: (extract),
         shape: new data.Class(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                hit_die: x.hit_die,
+                class_levels: x.class_levels,
+                multi_classing: getOrInsertId(data.multiclassings, x.multi_classing),
+                proficiencies: getOrInsertArrayId(data.ArrayAPIReference, x.proficiencies, data.APIReference.equals, data.APIReference.transform),
+                proficiency_choices: getOrInsertArrayId(data.ArrayChoice, x.proficiency_choices, data.Choice.equals, data.Choice.transform),
+                saving_throws: getOrInsertArrayId(data.ArrayAPIReference, x.saving_throws, data.APIReference.equals, data.APIReference.transform),
+                starting_equipment: getOrInsertArrayId(data.ArrayStartingEquipment, x.starting_equipment, data.StartingEquipment.equals, data.StartingEquipment.transform),
+                starting_equipment_options: getOrInsertArrayId(data.ArrayChoice, x.starting_equipment_options, data.Choice.equals, data.Choice.transform),
+                subclasses: getOrInsertArrayId(data.ArrayAPIReference, x.subclasses, data.APIReference.equals, data.APIReference.transform),
+                spellcasting: x.spellcasting?.spellcasting_ability?.index,
+                spells: x.spells,
+                url: x.url,
+            };
+        },
         inputs: ["5e-SRD-Classes.json"],
         output: "classes.json"
     },
     {
         extractor: (extract),
         shape: new data.Condition(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                description: x.description,
+                url: x.url,
+            };
+        },
         inputs: ["5e-SRD-Conditions.json"],
         output: "conditions.json"
     },
@@ -1216,21 +1451,70 @@ const allFiles = fs
     {
         extractor: (extract),
         shape: new data.Content(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                item: x.item?.index,
+                quantity: x.quantity
+            };
+        },
         inputs: ["5e-SRD-Equipments.json"],
         output: "contents.json"
     },
     {
         extractor: (extract),
         shape: new data.Utilize(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                name: x.name,
+                dc: getOrInsertId(data.difficulty_classes, x.dc)
+            };
+        },
         inputs: ["5e-SRD-Equipments.json"],
         output: "utilizes.json"
     },
     {
         extractor: (extract),
         shape: new data.Equipment(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                equipment_categories: getOrInsertArrayId(data.ArrayAPIReference, x.equipment_categories, data.APIReference.equals, data.APIReference.transform),
+                cost_quantity: x.cost?.quantity,
+                cost_unit: x.cost?.unit,
+                url: x.url,
+                description: x.description,
+                weight: x.weight,
+                ammunition: x.ammunition?.index,
+                armor_class_base: x.armor_class?.base,
+                armor_class_dex_bonus: x.armor_class?.dex_bonus,
+                armor_class_max_bonus: x.armor_class?.max_bonus,
+                contents: getOrInsertArrayId(data.ArrayContents, x.contents, data.Content.equals, data.Content.transform),
+                ability: x.ability?.index,
+                craft: getOrInsertArrayId(data.ArrayAPIReference, x.craft, data.APIReference.equals, data.APIReference.transform),
+                damage_type: x.damage?.damage_type?.index,
+                damage_dice: x.damage?.damage_dice,
+                damage_dc: getOrInsertId(data.difficulty_classes, x.damage?.dc),
+                doff_time: x.doff_time,
+                don_time: x.don_time,
+                image: x.image,
+                mastery: x.mastery?.index,
+                notes: x.notes?.join("$$$"),
+                properties: getOrInsertArrayId(data.ArrayAPIReference, x.properties, data.APIReference.equals, data.APIReference.transform),
+                quantity: x.quantity,
+                storage: x.storage?.index,
+                range_normal: x.range?.normal,
+                range_long: x.range?.long,
+                stealth_disadvantage: x.stealth_disadvantage,
+                str_minimum: x.str_minimum,
+                throw_range_normal: x.throw_range?.normal,
+                throw_range_long: x.throw_range?.long,
+                two_handed_damage_type: x.two_handed_damage?.damage_type,
+                two_handed_damage_dice: x.two_handed_damage?.damage_dice,
+                two_handed_damage_dc: getOrInsertId(data.difficulty_classes, x.two_handed_damage?.damage_dc),
+                utilize: getOrInsertArrayId(data.ArrayUtilize, x.utilize, data.Utilize.equals, data.Utilize.transform),
+            };
+        },
         inputs: ["5e-SRD-Equipments.json"],
         output: "equipments.json"
     },
@@ -1244,42 +1528,101 @@ const allFiles = fs
     {
         extractor: (extract),
         shape: new data.Feat(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                description: x.description,
+                type: x.type,
+                repeatable: x.repeatable,
+                prerequisite_minimum_level: x.prerequisites?.minimum_level,
+                prerequisite_feature_named: x.prerequisites?.feature_named,
+                prerequisite_options: getOrInsertId(data.option_sets, x.prerequisite_options?.from),
+                url: x.url,
+            };
+        },
         inputs: ["5e-SRD-Feats.json"],
         output: "feats.json"
     },
     {
         extractor: (extract),
         shape: new data.Language(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                is_rare: x.is_rage,
+                note: x.note,
+                url: x.url,
+            };
+        },
         inputs: ["5e-SRD-Languages.json"],
         output: "languages.json"
     },
     {
         extractor: (extract),
         shape: new data.MagicItem(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                url: x.url,
+                image: x.image,
+                equipment_category: x.equipment_category?.index,
+                variant: x.variant,
+                variants: getOrInsertArrayId(data.ArrayAPIReference, x.variants, data.APIReference.equals, data.APIReference.transform),
+                attunement: x.attunement,
+                rarity: x.rarity?.name,
+                desc: x.desc,
+                limited_to: x["limited-to"],
+            };
+        },
         inputs: ["5e-SRD-Magic-Items.json"],
         output: "magic_items.json"
     },
     {
         extractor: (extract),
         shape: new data.MagicSchool(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                description: x.description,
+                url: x.url,
+            };
+        },
         inputs: ["5e-SRD-Magic-Schools.json"],
         output: "magic_schools.json"
     },
     {
         extractor: (extract),
         shape: new data.Proficiency(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                type: x.type,
+                backgrounds: getOrInsertArrayId(data.ArrayAPIReference, x.backgrounds, data.APIReference.equals, data.APIReference.transform),
+                classes: getOrInsertArrayId(data.ArrayAPIReference, x.classes, data.APIReference.equals, data.APIReference.transform),
+                reference: x.reference?.index,
+                url: x.url,
+            };
+        },
         inputs: ["5e-SRD-Proficiencies.json"],
         output: "proficiencies.json"
     },
     {
         extractor: (extract),
         shape: new data.Skill(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                description: x.description,
+                ability_score: x.ability_score?.index,
+                url: x.url,
+            };
+        },
         inputs: ["5e-SRD-Skills.json"],
         output: "skills.json"
     },
@@ -1293,49 +1636,123 @@ const allFiles = fs
     {
         extractor: (extract),
         shape: new data.Species(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                speed: x.speed,
+                ability_bonuses: getOrInsertArrayId(data.ArrayAbilityBonus, x.ability_bonuses, data.AbilityBonus.equals, data.AbilityBonus.transform),
+                ability_bonus_options: getOrInsertId(data.option_sets, x.ability_bonus_options?.from),
+                alignment: x.alignment,
+                age: x.age,
+                starting_proficiencies: getOrInsertArrayId(data.ArrayAPIReference, x.starting_proficiencies, data.APIReference.equals, data.APIReference.transform),
+                starting_proficiency_options: getOrInsertId(data.option_sets, x.starting_proficiency_options?.from),
+                languages: getOrInsertArrayId(data.ArrayAPIReference, x.languages, data.APIReference.equals, data.APIReference.transform),
+                languages_desc: x.languages_desc,
+                language_options: getOrInsertId(data.option_sets, x.language_options?.from),
+                url: x.url,
+                size: x.size,
+                size_description: x.size_description,
+                traits: getOrInsertArrayId(data.ArrayAPIReference, x.traits, data.APIReference.equals, data.APIReference.transform),
+                subspecies: getOrInsertArrayId(data.ArrayAPIReference, x.subspecies, data.APIReference.equals, data.APIReference.transform),
+            };
+        },
         inputs: ["5e-SRD-Species.json"],
         output: "species.json"
     },
     {
         extractor: (extract),
         shape: new data.SubclassSpellPrerequisite(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                type: x.type,
+                name: x.name,
+                url: x.url,
+            };
+        },
         inputs: ["5e-SRD-Subclasses.json"],
         output: "subclass_spell_prereqs.json"
     },
     {
         extractor: (extract),
         shape: new data.SubclassSpell(),
-        mapper: (x) => x,
+        mapper: (x) => {
+            return {
+                prerequisites: getOrInsertArrayId(data.ArraySubclassSpellPrerequisite, x.prerequisites, data.SubclassSpellPrerequisite.equals, data.SubclassSpellPrerequisite.transform),
+                spell: x.spell?.index,
+            };
+        },
         inputs: ["5e-SRD-Subclasses.json"],
         output: "subclass_spells.json"
     },
     {
         extractor: (extract),
         shape: new data.Subclass(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                url: x.url,
+                name: x.name,
+                class: x.class?.index,
+                subclass_flavor: x.subclass_flavor,
+                desc: x.desc?.join("$$$"),
+                subclass_levels: x.subclass_levels,
+                spells: getOrInsertArrayId(data.ArraySubclassSpell, x.spells, data.SubclassSpell.equals, data.SubclassSpell.transform),
+            };
+        },
         inputs: ["5e-SRD-Subclasses.json"],
         output: "subclasses.json"
     },
     {
         extractor: (extract),
         shape: new data.Subrace(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                url: x.url,
+                species: x.race?.index,
+                desc: x.desc,
+                ability_bonuses: getOrInsertArrayId(data.ArrayAbilityBonus, x.ability_bonus, data.AbilityBonus.equals, data.AbilityBonus.transform),
+                racial_traits: getOrInsertArrayId(data.ArrayAPIReference, x.racial_traits, data.APIReference.equals, data.APIReference.transform),
+            };
+        },
         inputs: ["5e-SRD-Subspecies.json"],
         output: "subspecies.json"
     },
     {
         extractor: (extract),
         shape: new data.Spell(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                name: x.name,
+                level: x.level,
+                school: x.school,
+                classes: x.classes?.join("$$$"),
+                actionType: x.action_type,
+                concentration: x.concentration,
+                ritual: x.ritual,
+                range: x.range,
+                components: x.components?.join("$$$"),
+                material: x.material,
+                duration: x.duration,
+                description: x.description,
+                cantripUpgrade: x.cantripUpgrade,
+            };
+        },
         inputs: ["5e-SRD-Spells.json"],
         output: "spells.json"
     },
     {
         extractor: (extract),
         shape: new data.AreaOfEffect(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                size: x.size,
+                type: x.type,
+            };
+        },
         inputs: allFiles,
         output: "areas_of_effect.json"
     },
@@ -1356,35 +1773,125 @@ const allFiles = fs
     {
         extractor: (extract),
         shape: new data.BreathWeapon(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                id: getOrInsertId(data.breath_weapons, x),
+                name: x.name,
+                desc: x.desc,
+                area_of_effect: getOrInsertId(data.area_of_effects, x.area_of_effect),
+                usage_type: x.usage?.type,
+                usage_times: x.usage?.times,
+                dc: getOrInsertId(data.difficulty_classes, x.dc),
+                damage: getOrInsertArrayId(data.ArrayBreathWeaponDamage, x.damage, data.BreathWeaponDamage.equals, data.BreathWeaponDamage.transform),
+            };
+        },
         inputs: ["5e-SRD-Traits.json"],
         output: "breath_weapons.json"
     },
     {
         extractor: (extract),
         shape: new data.TraitSpecific(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                id: getOrInsertId(data.trait_specifics, x),
+                damage_type: x.damage_type?.index,
+                breath_weapon: getOrInsertId(data.breath_weapons, x.breath_weapon),
+                spell_options: getOrInsertId(data.option_sets, x.spell_options?.from),
+                subtrait_options: getOrInsertId(data.option_sets, x.subtrait_options?.from),
+            };
+        },
         inputs: ["5e-SRD-Traits.json"],
         output: "trait_specifics.json"
     },
     {
         extractor: (extract),
         shape: new data.Trait(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                url: x.url,
+                desc: x.desc,
+                species: getOrInsertArrayId(data.ArrayAPIReference, x.races, data.APIReference.equals, data.APIReference.transform),
+                subspecies: getOrInsertArrayId(data.ArrayAPIReference, x.subraces, data.APIReference.equals, data.APIReference.transform),
+                proficiencies: getOrInsertArrayId(data.ArrayAPIReference, x.proficiencies, data.APIReference.equals, data.APIReference.transform),
+                proficiency_choices: getOrInsertId(data.option_sets, x.proficiency_choices?.from),
+                language_options: getOrInsertId(data.option_sets, x.language_options?.from),
+                parent: x.parent?.index,
+                trait_specific: getOrInsertId(data.trait_specifics, x.trait_specific),
+            };
+        },
         inputs: ["5e-SRD-Traits.json"],
         output: "traits.json"
     },
     {
         extractor: (extract),
         shape: new data.WeaponProperty(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                name: x.name,
+                description: x.description,
+                url: x.url,
+            };
+        },
         inputs: ["5e-SRD-Weapon-Properties.json"],
         output: "weapon_properties.json"
     },
     {
         extractor: (extract),
         shape: new data.ClassSpecific(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                id: getOrInsertId(data.class_specifics, x),
+                action_surges: x.action_surges,
+                arcane_recovery_levels: x.arcane_recovery_levels,
+                aura_range: x.aura_range,
+                bardic_inspiration_die: x.bardic_inspiration_die,
+                brutal_critical_dice: x.brutal_critical_dice,
+                channel_divinity_charges: x.channel_divinity_charges,
+                creating_spell_slots: getOrInsertArrayId(data.ArrayCreatingSpellSlots, x.creating_spell_slots, (lhs, rhs) => {
+                    return lhs.sorcery_point_cost === rhs.sorcery_point_cost
+                        && lhs.spell_slot_level === rhs.spell_slot_level;
+                }, function (x, array_id, array_idx) {
+                    return {
+                        array_idx: array_idx,
+                        array_id: array_id,
+                        sorcery_point_cost: x.sorcery_point_cost,
+                        spell_slot_level: x.spell_slot_level,
+                    };
+                }),
+                destroy_undead_cr: x.destroy_undead_cr,
+                extra_attacks: x.extra_attacks,
+                favored_enemies: x.favored_enemies,
+                favored_terrain: x.favored_terrain,
+                indomitable_uses: x.indomitable_uses,
+                invocations_known: x.invocations_known,
+                ki_points: x.ki_points,
+                magical_secrets_max_5: x.magical_secrets_max_5,
+                magical_secrets_max_7: x.magical_secrets_max_7,
+                magical_secrets_max_9: x.magical_secrets_max_9,
+                // i due qua sotto sono attributi "flattenati"
+                martial_arts_dice_count: x.martial_arts?.dice_count,
+                martial_arts_dice_value: x.martial_arts?.dice_value,
+                metamagic_known: x.metamagic_known,
+                mystic_arcanum_level_6: x.mystic_arcanum_level_6,
+                mystic_arcanum_level_7: x.mystic_arcanum_level_7,
+                mystic_arcanum_level_8: x.mystic_arcanum_level_8,
+                mystic_arcanum_level_9: x.mystic_arcanum_level_9,
+                rage_count: x.rage_count,
+                rage_damage_bonus: x.rage_damage_bonus,
+                // i due qua sotto sono attributi "flattenati"
+                sneak_attack_dice_count: x.sneak_attack?.dice_count,
+                sneak_attack_dice_value: x.sneak_attack?.dice_value,
+                song_of_rest_die: x.song_of_rest_die,
+                sorcery_points: x.sorcery_points,
+                unarmored_movement: x.unarmored_movement,
+                wild_shape_fly: x.wild_shape_fly,
+                wild_shape_max_cr: x.wild_shape_max_cr,
+                wild_shape_swim: x.wild_shape_swim,
+            };
+        },
         inputs: ["5e-SRD-Levels.json"],
         output: "class_specifics.json"
     },
@@ -1405,7 +1912,32 @@ const allFiles = fs
     {
         extractor: (extract),
         shape: new data.Level(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                index: x.index,
+                level: x.level,
+                ability_score_bonuses: x.ability_score_bonuses,
+                prof_bonus: x.prof_bonus,
+                features: getOrInsertArrayId(data.ArrayAPIReference, x.features, data.APIReference.equals, data.APIReference.transform),
+                character_class: x.class?.index,
+                class_specific: getOrInsertId(data.class_specifics, x.class_specific),
+                subclass: x.subclass?.index,
+                url: x.url,
+                cantrips_known: x.spellcasting?.cantrips_known,
+                spell_slots_level_1: x.spellcasting?.spell_slots_level_1,
+                spell_slots_level_2: x.spellcasting?.spell_slots_level_2,
+                spell_slots_level_3: x.spellcasting?.spell_slots_level_3,
+                spell_slots_level_4: x.spellcasting?.spell_slots_level_4,
+                spell_slots_level_5: x.spellcasting?.spell_slots_level_5,
+                spell_slots_level_6: x.spellcasting?.spell_slots_level_6,
+                spell_slots_level_7: x.spellcasting?.spell_slots_level_7,
+                spell_slots_level_8: x.spellcasting?.spell_slots_level_8,
+                spell_slots_level_9: x.spellcasting?.spell_slots_level_9,
+                spells_known: x.spellcasting?.spells_known,
+                additional_magical_secrets_max_lvl: x.subclass_specific?.additional_magical_secrets_max_lvl,
+                aura_range: x.subclass_specific?.aura_range,
+            };
+        },
         inputs: ["5e-SRD-Levels.json"],
         output: "levels.json"
     },
@@ -1414,6 +1946,17 @@ function printArray(array, output) {
     fs.writeFileSync("new-data/" + output, JSON.stringify(array.flatMap(x => x)), 'utf8');
 }
 printArray(data.ArrayAPIReference, 'array_api_references.json');
-printArray(data.ArrayDamage, 'array_damages.json');
-printArray(data.ArrayOption, 'array_options.json');
 printArray(data.ArrayOptionPrerequisite, 'array_option_prerequisites.json');
+printArray(data.ArrayOption, 'array_options.json');
+printArray(data.ArrayDamage, 'array_damages.json');
+printArray(data.ArrayStartingEquipment, 'array_starting_equipments.json');
+printArray(data.ArrayChoice, 'array_choices.json');
+printArray(data.ArraySpellcastingInfo, 'array_spellcasting_infos.json');
+printArray(data.ArrayMultiClassingPrereqs, 'array_multiclassing_prereqs.json');
+printArray(data.ArrayContents, 'array_contents.json');
+printArray(data.ArrayUtilize, 'array_utilizes.json');
+printArray(data.ArrayAbilityBonus, 'array_ability_bonuses.json');
+printArray(data.ArraySubclassSpell, 'array_subclass_spells.json');
+printArray(data.ArraySubclassSpellPrerequisite, 'array_subclass_spell_prerequisites.json');
+printArray(data.ArrayBreathWeaponDamage, 'array_breath_weapon_damages.json');
+printArray(data.ArrayCreatingSpellSlots, 'array_creating_spell_slots.json');

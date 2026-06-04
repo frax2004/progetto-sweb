@@ -108,10 +108,6 @@ export var models;
         minimum_score_prerequisite;
         // pseuso-tabella size
         size;
-        static ID = 0;
-        static id() {
-            return models.Option.ID++;
-        }
     }
     models.Option = Option;
     class ArrayOfOptionsAndStringItem {
@@ -189,6 +185,7 @@ export var models;
         starting_gold_quantity;
         starting_gold_unit;
         // secondo flatten
+        starting_equipment_options;
         feature_name;
         feature_desc;
         personality_traits;
@@ -301,7 +298,6 @@ export var models;
     class Class {
         idx;
         name;
-        primary_ability;
         hit_die;
         class_levels;
         multi_classing;
@@ -324,6 +320,7 @@ export var models;
     models.Content = Content;
     class ArrayContentItem {
         item;
+        quantity;
         array_id;
         array_idx;
     }
@@ -337,6 +334,7 @@ export var models;
         array_id;
         idx;
         item;
+        dc;
     }
     models.ArrayUtilizeItem = ArrayUtilizeItem;
     ;
@@ -484,7 +482,6 @@ export var models;
         array_id;
         array_idx;
         character_level;
-        damage_dice;
     }
     models.ArrayBreathWeaponDamageItem = ArrayBreathWeaponDamageItem;
     class BreathWeapon {
@@ -546,7 +543,7 @@ export var models;
         item;
     }
     models.ArrayComponentsItem = ArrayComponentsItem;
-    class Spells {
+    class Spell {
         name;
         level;
         school;
@@ -561,7 +558,7 @@ export var models;
         description;
         cantripUpgrade;
     }
-    models.Spells = Spells;
+    models.Spell = Spell;
     class ArrayCreatingSpellSlotsItem {
         array_idx;
         array_id;

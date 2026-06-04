@@ -640,7 +640,6 @@ create table if not exists ArrayBreathWeaponDamageItem (
   array_id number not null,
   array_idx number not null,
   character_level text not null,
-  damage_dice text not null,
 
   primary key (array_id,array_idx), 
   foreign key (damage_type) references APIReference(idx)

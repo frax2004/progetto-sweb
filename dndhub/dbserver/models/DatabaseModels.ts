@@ -2,7 +2,7 @@
 
 export namespace models {
   export class APIReference {
-    idx!: string;
+    idx?: string;
     name!: string;
     url!: string;
     note?: string;
@@ -16,7 +16,7 @@ export namespace models {
 
   export class DifficultyClass {
     // forse id può essere auto increment
-    id!: number;
+    id?: number;
     dc_type!: string;
     dc_value?: number;
     success_type!: SuccessType;
@@ -39,33 +39,33 @@ export namespace models {
     desc?: string;
     choose!: number;
     type?: string;
-    opt_id!: number;
+    opt_id?: number;
   }
 
   export class ArrayDamageItem {
-    array_id!: number;
+    array_id?: number;
     damage_type!: string;
     damage_dice!: string;
     dc?: number;
-    idx!: number;
+    idx?: number;
   }
 
   // OptionArray mi serve per multiple
   export class ArrayOptionItem {
     item_id?: number;
-    idx!: number;
-    array_id!: number;
+    idx?: number;
+    array_id?: number;
   }
 
   export class ArrayPrerequisitesItem {
-    array_idx!: number;
-    array_id!: number;
+    array_idx?: number;
+    array_id?: number;
     item!: string;
     string!: string;
   }
 
   export class Option {
-    id!: number;
+    id?: number;
     option_type!: string;
     // pseudo-tabella reference
     reference_item?: string;
@@ -108,23 +108,17 @@ export namespace models {
     minimum_score_prerequisite?: number;
     // pseuso-tabella size
     size?: string;
-
-    private static ID = 0;
-
-    public static id() {
-      return models.Option.ID++;
-    }
   }
 
   export class ArrayOfOptionsAndStringItem {
-    opt_id!: number;
+    opt_id?: number;
     string!: string;
-    idx!: number;
-    array_id!: number;
+    idx?: number;
+    array_id?: number;
   }
 
   export class OptionSet {
-    id!: number;
+    id?: number;
     option_set_type!: string;
     // pseudo-tabella equipment_category
     equipment_category?: string;
@@ -136,7 +130,7 @@ export namespace models {
   // tabelle di DamageTypes.ts
 
   export class DamageTypes {
-    idx!: string;
+    idx?: string;
     name!: string;
     description!: string;
     url!: string
@@ -145,11 +139,11 @@ export namespace models {
   // tabelle di AbilityScores.ts
 
   export class AbilityScore {
-    idx!: string;
+    idx?: string;
     name!: string;
     full_name!: string;
     description!: string;
-    skills!: string;
+    skills?: number;
     url!: string;
   }
 
@@ -157,7 +151,7 @@ export namespace models {
   // in teoria inutili ma copiata comunque perché piccola
 
   export class Alignment {
-    idx!: string;
+    idx?: string;
     name!: string;
     abbreviation!: string;
     description!: string;
@@ -167,34 +161,35 @@ export namespace models {
   // tabelle di Backgrounds.ts
 
   export class ArrayStartingEquipmentItem {
-    array_id!: number;
-    array_idx!: number;
+    array_id?: number;
+    array_idx?: number;
     equipment!: string;
     quantity!: number;
   }
 
   export class ArrayAPIReferenceItem {
-    array_id!: number;
+    array_id?: number;
     item!: string;
-    idx!: number;
+    idx?: number;
   }
 
   export class ArrayChoiceItem {
-    array_id!: number;
-    id!: number;
-    idx!: number;
+    array_id?: number;
+    id?: number;
+    idx?: number;
   }
 
   export class Background {
-    idx!: string;
+    idx?: string;
     name!: string;
-    starting_proficiencies!: number;
+    starting_proficiencies?: number;
     language_options?: number;
     starting_equipment?: number;
     // primo flatten
     starting_gold_quantity?: number;
     starting_gold_unit?: number;
     // secondo flatten
+    starting_equipment_options?: number;
     feature_name?: string;
     feature_desc?: string;
     personality_traits?: number;
@@ -207,7 +202,7 @@ export namespace models {
   // tabelle di Condition.ts
 
   export class Condition {
-    idx!: string;
+    idx?: string;
     name!: string;
     description!: string;
     url!: string;
@@ -216,7 +211,7 @@ export namespace models {
   // tabelle di EquipmentCategories.ts
 
   export class EquipmentCategory {
-    idx!: string;
+    idx?: string;
     name!: string;
     equipment?: number;
     url!: string;
@@ -225,7 +220,7 @@ export namespace models {
   // tabelle di Language.ts
 
   export class Language {
-    idx!: string;
+    idx?: string;
     name!: string;
     is_rare!: boolean;
     note!: string;
@@ -235,7 +230,7 @@ export namespace models {
   // tabelle di MagicSchools.ts
 
   export class MagicSchool {
-    idx!: string;
+    idx?: string;
     name!: string;
     description!: string;
     url!: string;
@@ -246,11 +241,11 @@ export namespace models {
   // tabelle di Proficiencies.ts
 
   export class Proficiency {
-    idx!: string;
+    idx?: string;
     name!: string;
     type!: string;
-    backgrounds!: number;
-    classes!: number;
+    backgrounds?: number;
+    classes?: number;
     reference?: string;
     url?: string;
   }
@@ -258,7 +253,7 @@ export namespace models {
   // tabelle di Skills.ts
 
   export class Skill {
-    idx!: string;
+    idx?: string;
     name!: string;
     description!: string;
     ability_score!: string;
@@ -269,7 +264,7 @@ export namespace models {
   // tabelle di WeaponMasteryProperties.ts
 
   export class WeaponMasteryProperty {
-    idx!: string;
+    idx?: string;
     name!: string;
     description!: string;
     url!: string;
@@ -283,32 +278,32 @@ export namespace models {
   }
 
   export class ArraySpellcastingInfoItem {
-    array_id!: number;
-    array_idx!: number;
+    array_id?: number;
+    array_idx?: number;
     item!: string;
   }
 
   export class Spellcasting {
     level!: number;
     spellcasting_ability!: string;
-    info!: number;
+    info?: number;
   }
 
   export class MultiClassingPrereq {
-    id!: number;
+    id?: number;
     ability_score?: string;
     minimum_score!: number;
   }
 
 
   export class ArrayMultiClassingPrereqItem {
-    array_id!: number;
-    array_idx!: number;
-    item!: number;
+    array_id?: number;
+    array_idx?: number;
+    item?: number;
   }
 
   export class MultiClassing {
-    id!: number;
+    id?: number;
     prerequisites?: number;
     prerequisite_options?: number;
     proficiencies?: number;
@@ -316,17 +311,16 @@ export namespace models {
   }
 
   export class Class {
-    idx!: string;
+    idx?: string;
     name!: string;
-    primary_ability!: string;
     hit_die!: number;
     class_levels!: string;
     multi_classing?: number;
     proficiencies?: number;
-    proficiency_choices!: number;
+    proficiency_choices?: number;
     saving_throws?: number;
     starting_equipment?: number;
-    starting_equipment_options!: number;
+    starting_equipment_options?: number;
     subclasses?: number;
     spellcasting?: string;
     spells?: string;
@@ -342,25 +336,27 @@ export namespace models {
 
   export class ArrayContentItem {
     item!: string;
-    array_id!: number;
-    array_idx!: number;
+    quantity!: number;
+    array_id?: number;
+    array_idx?: number;
   }
 
   export class Utilize {
     name!: string;
-    dc!: number;
+    dc?: number;
   }
 
   export class ArrayUtilizeItem {
-    array_id!: number;
-    idx!: number;
+    array_id?: number;
+    idx?: number;
     item!: string;
+    dc?: number;
   };
 
   export class Equipment {
-    idx!: string;
+    idx?: string;
     name!: string;
-    equipment_categories!: number;
+    equipment_categories?: number;
     cost_quantity!: number;
     cost_unit!: number;
     url!: string;
@@ -399,7 +395,7 @@ export namespace models {
   // tabelle di Feats.ts
 
   export class Feat {
-    idx!: string;
+    idx?: string;
     name!: string;
     description!: string;
     type!: string;
@@ -413,13 +409,13 @@ export namespace models {
   // tabelle di MagicItems.ts
 
   export class MagicItem {
-    idx!: string;
+    idx?: string;
     name!: string;
     url!: string;
     image!: string;
     equipment_category?: string;
     variant!: boolean;
-    variants!: number;
+    variants?: number;
     attunement!: boolean;
     rarity!: string;
     desc!: string;
@@ -431,21 +427,21 @@ export namespace models {
   export class ArrayAbilityBonusItem {
     ability_score!: string;
     bonus!: number; 
-    array_id!: number; 
-    array_idx!: number; 
+    array_id?: number; 
+    array_idx?: number; 
   }
 
   export class Species {
-    idx!: string;
+    idx?: string;
     name!: string;
     speed!: number;
-    ability_bonuses!: number;
+    ability_bonuses?: number;
     ability_bonus_options?: number;
     alignment!: string;
     age!: string;
     starting_proficiencies?: number;
     starting_proficiency_options?: number;
-    languages!: number;
+    languages?: number;
     languages_desc!: string;
     language_options?: number;
     url!: string;
@@ -458,7 +454,7 @@ export namespace models {
   // tabelle di Subclass.ts
 
   export class SubclassSpellPrerequisite {    
-    idx!: string;
+    idx?: string;
     type!: string;
     name!: string;
     url!: string; 
@@ -466,19 +462,19 @@ export namespace models {
 
   export class ArraySubclassSpellPrerequisiteItem {    
     item!: string;
-    array_id!: number;
-    array_idx!: number; 
+    array_id?: number;
+    array_idx?: number; 
   }
 
   export class ArraySubclassSpellItem {    
-    prerequisite!: number;
+    prerequisite?: number;
     spell!: string;
-    array_id!: number;
-    array_idx!: number;
+    array_id?: number;
+    array_idx?: number;
   }
 
   export class Subclass {
-    idx!: string;
+    idx?: string;
     url!: string;
     name!: string;
     class!: string;
@@ -491,12 +487,12 @@ export namespace models {
   // tabelle di Subspecies.ts
 
   export class Subspecies {
-    idx!: string;
+    idx?: string;
     name!: string;
     url!: string;
     species!: string;
     desc!: string;
-    ability_bonuses!: number;
+    ability_bonuses?: number;
     racial_traits?: number;
   } 
 
@@ -504,25 +500,24 @@ export namespace models {
 
   export class ArrayBreathWeaponDamageItem {
     damage_type!: string;
-    array_id!: number;
-    array_idx!: number;
+    array_id?: number;
+    array_idx?: number;
     character_level!: string;
-    damage_dice!: string;
   }
 
   export class BreathWeapon {
-    id!: number;
+    id?: number;
     name!: string;
     desc!: string;
-    area_of_effect!: number;
+    area_of_effect?: number;
     usage_type!: string;
     usage_times!: number;
-    dc!: number;
-    damage!: number;
+    dc?: number;
+    damage?: number;
   }
 
   export class TraitSpecific {
-    id!: number;
+    id?: number;
     damage_type?: string;
     breath_weapon?: number;
     spell_options?: number;
@@ -530,11 +525,11 @@ export namespace models {
   }
 
   export class Trait {
-    idx!: string;
+    idx?: string;
     name!: string;
     url!: string;
     desc!: string;
-    species!: number;
+    species?: number;
     subspecies?: number;
     proficiencies?: number;
     proficiency_choices?: number;
@@ -546,15 +541,15 @@ export namespace models {
   // tabelle di WeaponProperties.ts
 
   export class WeaponProperty {
-    idx!: string;
+    idx?: string;
     name!: string;
     description!: string;
     url!: string;
   }
 
   export class ArrayClassItem {    
-    array_id!: number;
-    array_idx!: number;
+    array_id?: number;
+    array_idx?: number;
     class?: string;
   }
 
@@ -565,12 +560,12 @@ export namespace models {
   }
 
   export class ArrayComponentsItem {    
-    array_id!: number;
-    array_idx!: number;
+    array_id?: number;
+    array_idx?: number;
     item!: Components;
   }
 
-  export class Spells {    
+  export class Spell {    
     name!: string;
     level!: number;
     school!: string;
@@ -587,14 +582,14 @@ export namespace models {
   }
 
   export class ArrayCreatingSpellSlotsItem {    
-    array_idx!: number;
-    array_id!: number;
+    array_idx?: number;
+    array_id?: number;
     sorcery_point_cost!: number;
     spell_slot_level!: number;
   }
 
   export class ClassSpecific {    
-    id!: number;
+    id?: number;
     action_surges?: number;
     arcane_recovery_levels?: number;
     aura_range?: number;

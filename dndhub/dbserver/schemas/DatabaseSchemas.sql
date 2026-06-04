@@ -123,7 +123,7 @@ create table if not exists Option (
   foreign key (ability_score_bonus) references APIReference(idx),
   foreign key (breath_dc) references DifficultyClass(id), 
   foreign key (breath_damage) references ArrayDamageItem(array_id),
-  foreign key (of) references APIReference(idx),
+  foreign key (counted_item) references APIReference(idx),
   foreign key (prerequisites) references ArrayPrerequisitesItem(array_id),
   foreign key (damage_type) references APIReference(idx),
   foreign key (alignments) references ArrayAPIReferenceItem(array_id),
@@ -152,7 +152,7 @@ create table if not exists OptionSet (
   options_array number, -- foreign key
 
   foreign key (equipment_category) references APIReference(idx),
-  foreign key (options_array) references ArrayOfOptionsAndStringItem(array,id)
+  foreign key (options_array) references ArrayOfOptionsAndStringItem(array_id)
 );
 
 -- tabelle di DamageTypes.ts
@@ -171,10 +171,10 @@ create table if not exists AbilityScore (
   name text not null,
   full_name text not null,
   description text not null,
-  skills text not null,
+  skills number not null,
   url text not null,
 
-  foreign key (skills) references APIReference(idx)
+  foreign key (skills) references ArrayAPIReference(array_id)
 );
 
 -- tabelle di Alignments
@@ -227,6 +227,7 @@ create table if not exists Background (
   starting_proficiencies number not null, -- foreign key
   language_options number, -- foreign key
   starting_equipment number, -- foreign key
+  starting_equipment_options number, -- foreign key
   -- primo flatten
   starting_gold_quantity number,
   starting_gold unit number,
@@ -244,6 +245,7 @@ create table if not exists Background (
   foreign key (language_options) references Choice(opt_id),
   foreign key (starting_proficiencies) references ArrayAPIReferenceItem(array_id),
   foreign key (starting_equipment) references ArrayStartingEquipmentItem(array_id),
+  foreign key (starting_equipment_options) references ArrayChoice(array_id),
   foreign key (personality_traits) references Choice(opt_id),
   foreign key (ideals) references Choice(opt_id),
   foreign key (bonds) references Choice(opt_id),
@@ -566,11 +568,11 @@ create table if not exists Species (
   foreign key (ability_bonuses) references ArrayAbilityBonusItem(array_id),
   foreign key (ability_bonus_options) references Choice(opt_id),
   foreign key (starting_proficiencies) references ArrayAPIReferenceItem(array_id),
-  foreign key (startin_profinciency_options) references Choice(opt_id),
+  foreign key (starting_proficiency_options) references Choice(opt_id),
   foreign key (languages) references ArrayAPIReferenceItem(array_id),
   foreign key (language_options) references Choice(opt_id),
   foreign key (traits) references ArrayAPIReferenceItem(array_id),
-  foreign key (subpecies) references ArrayAPIReferenceItem(array_id)
+  foreign key (subspecies) references ArrayAPIReferenceItem(array_id)
 );
 
 -- tabelle di Subclass.ts
@@ -714,7 +716,7 @@ create table if not exists ArrayClassItem (
   array_idx number not null,
   class text not null,
 
-  primary key (arra_id,array_idx),
+  primary key (array_id,array_idx),
   foreign key (class) references Class(idx)
 );
 
@@ -825,7 +827,7 @@ create table if not exists Level (
   aura_range number,
 
   foreign key (features) references ArrayAPIReferenceItem(array_id),
-  foreign key (class) references APIReference(idx),
+  foreign key (character_class) references APIReference(idx),
   foreign key (class_specific) references ClassSpecific(id),
   foreign key (subclass) references APIReference(idx)
 );
@@ -928,9 +930,8 @@ create table if not exists Personaggio (
   abilita_extra text,
   descrizione_personaggio text,
 
-  primary key (utente_giocatore,nome),
   foreign key (classe) references Class(idx),
-  foreign key (campagna)
+  foreign key (campagna) references Campagna(idx_campagna),
   foreign key (idx_personaggio) references ArrayFeatItem(idx_personaggio),
   foreign key (idx_personaggio) references ArraySpellItem(idx_personaggio),
   foreign key (idx_personaggio) references ArrayEquipmentItem(idx_personaggio),
@@ -1003,7 +1004,7 @@ create table if not exists ArrayIdxCampagnaItem (
 
   primary key (utente_dungeon_master,idx_campagna),
   foreign key (idx_campagna) references Campagna(idx_campagna)
-)
+);
 
 create table if not exists UtenteDungeonMaster (
   utente_dungeon_master text not null primary key,

@@ -415,36 +415,39 @@ create table if not exists Class (
 
 -- tabelle di Equipments.ts
 
-create table if not exists Content (
-  item text not null primary key,
-  quantity number not null,
+-- create table if not exists Content (
+--   item text not null,
+--   quantity number not null,
 
-  foreign key (item) references APIReference(idx)
-);
+--   primary key ()
+--   foreign key (item) references APIReference(idx)
+-- );
 
 create table if not exists ArrayContentItem (
   item text not null,
+  quantity number not null,
   array_id number not null,
   array_idx number not null,
 
-  foreign key (item) references Content(item),
+  foreign key (item) references APIReference(idx),
   primary key (array_id,array_idx)
 );
 
-create table if not exists Utilize (
-  name text not null primary key,
-  dc number not null,
+-- create table if not exists Utilize (
+--   name text not null primary key,
+--   dc number not null,
 
-  foreign key (dc) references DifficultyClass(id)
-);
+--   foreign key (dc) references DifficultyClass(id)
+-- );
 
 create table if not exists ArrayUtilizeItem (
   array_id number not null,
   idx number not null,
-  item text not null,
+  name text not null,
+  dc number not null,
 
   primary key (array_id,idx),
-  foreign key (item) references Utilize(name)
+  foreign key (dc) references DifficultyClass(id)
 );
 
 create table if not exists Equipment (
@@ -992,9 +995,12 @@ create table if not exists ArrayIdxPersonaggioItem (
 
 create table if not exists UtenteGiocatore (
   utente_giocatore text not null primary key,
+  utente_generico text not null,
+
   
   -- personaggi e campagne acceduti con idx personaggio
   -- tramite tabella direttamente sopra
+  foreign key (utente_generico) references UtenteGenerico(account),
   foreign key (utente_giocatore) references ArrayIdxPersonaggioItem(utente_giocatore)
 );
 
@@ -1008,8 +1014,10 @@ create table if not exists ArrayIdxCampagnaItem (
 
 create table if not exists UtenteDungeonMaster (
   utente_dungeon_master text not null primary key,
+  utente_generico text not null,
 
   -- campagne si raggiungono tramite 
   -- foreign key a tabella sopra
+  foreign key (utente_generico) references UtenteGenerico(account),
   foreign key (utente_dungeon_master) references ArrayIdxCampagnaItem(utente_dungeon_master)
 );

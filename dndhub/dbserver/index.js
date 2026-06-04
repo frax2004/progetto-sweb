@@ -1,6 +1,7 @@
-import { Routes } from './database.routes.js';
+import { Routes } from './routes/database.routes.js';
 import { Database } from './database.js';
 import fs from 'fs';
+import { authRouter } from './routes/auth.routes.js';
 
 import express from 'express';
 import cors from 'cors';
@@ -10,6 +11,9 @@ const PORT = 10000;
 
 app.use(cors());
 app.use(express.json());
+app.use("/api/auth", authRouter);
+
+
 
 
 // const api_references = JSON

@@ -11,9 +11,7 @@ const PORT = 10000;
 
 app.use(cors());
 app.use(express.json());
-app.use("/api/auth", authRouter);
-
-
+app.use("/api/auth", AuthMiddleware, authRouter);
 
 
 // const api_references = JSON

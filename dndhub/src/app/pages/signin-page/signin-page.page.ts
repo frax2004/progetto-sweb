@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonContent, IonInput, IonHeader, IonTitle, IonText, IonToolbar, IonItem, IonGrid, IonLabel, IonCol, IonRow, IonFooter, IonInputPasswordToggle } from '@ionic/angular/standalone';
+import { IonContent, IonInput, IonHeader, IonTitle, IonText, IonToolbar, IonItem, IonGrid, IonLabel, IonCol, IonRow, IonFooter, IonInputPasswordToggle, PopoverController } from '@ionic/angular/standalone';
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { Accordion } from 'src/app/components/accordion/Accordion';
 import { TextAreaComponent } from "src/app/components/text-area/text-area.component";
@@ -12,7 +12,7 @@ import { ButtonContext } from 'src/app/components/button/ButtonContext';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginPagePage } from '../login-page/login-page.page';
-import { Navigate } from 'src/app/core/core';
+import { Navigate, Popups } from 'src/app/core/core';
 
 @Component({
   selector: 'app-signin-page',
@@ -23,7 +23,7 @@ import { Navigate } from 'src/app/core/core';
 })
 export class SigninPagePage implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, public popover: PopoverController) {}
 
   formGroup: FormGroup = new FormGroup({
     email: new FormControl('',[Validators.required, Validators.email]),
@@ -33,7 +33,7 @@ export class SigninPagePage implements OnInit {
 
   passwordType = 'password';
 
-  doRegister() {
+  doRegister(event: Event) {
       //console.log("sono nella funzione");
       this.authService.register(
         this.formGroup.get('email')?.value || '',
@@ -44,19 +44,19 @@ export class SigninPagePage implements OnInit {
           this.router.navigate(['landing-page']);
         },
         error: (err) => {
-          console.log(err);
-          alert(err.message);
+          Popups.ofSimpleText(this.popover, err.message)(event);
+          // alert(err.message);
         }
       })
     }
 
   ngOnInit() {}
-loginButton: Button = { text: 'Registrati', expand: 'block', color: '#ff0000', type: "submit"};
-// loginContext: ButtonContext = { onClick: this.router.navigate(['/landing_page']) };
+  loginButton: Button = { text: 'Registrati', expand: 'block', color: '#ff0000', type: "submit"};
+  // loginContext: ButtonContext = { onClick: this.router.navigate(['/landing_page']) };
 
-buttonCallbacks = {
-  nextPage: { onClick: Navigate.toPath(this.router,'landing-page')},
-}
+  buttonCallbacks = {
+    nextPage: { onClick: Navigate.toPath(this.router,'landing-page')},
+  }
 
 
 

@@ -62,18 +62,18 @@ export class LoginPagePage implements OnInit {
 
   ngOnInit() {}
 
-  doLogin() {
+  doLogin(event: Event) {
     //console.log("sono nella funzione");
     this.authService.login(
       this.formGroup.get('email')?.value || '',
       this.formGroup.get('password')?.value || ''
     ).subscribe({
       next: (value) => {
-        Navigate.toPath(this.router, 'landing-page');
+        Navigate.toPath(this.router, 'landing-page')();
       },
       error: (err) => {
         console.log(err);
-        alert(err.message);
+        Popups.ofSimpleText(this.popoverController, err.message)(event);
       }
     })
   }

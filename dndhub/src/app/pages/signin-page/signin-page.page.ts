@@ -41,7 +41,7 @@ export class SigninPagePage implements OnInit {
         this.formGroup.get('username')?.value || ''
       ).subscribe({
         next: (value) => {
-          this.router.navigate(['landing-page']);
+          Navigate.toPath(this.router, 'landing-page')();
         },
         error: (err) => {
           Popups.ofSimpleText(this.popover, err.message)(event);

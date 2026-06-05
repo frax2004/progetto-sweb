@@ -858,8 +858,8 @@ create table if not exists UtenteGenerico (
   utente_dungeon_master text not null,
 
   foreign key (account) references Account(email),
-  foreign key (utente_giocatore) references UtenteGiocatore(utente_giocatore),
-  foreign key (utente_dungeon_master) references UtenteDungeonMaster(utente_dungeon_master)
+  foreign key (utente_dungeon_master) references ArrayIdxCampagnaItem(utente_dungeon_master),
+  foreign key (utente_giocatore) references ArrayIdxPersonaggioItem(utente_giocatore)
 );
 
 create table if not exists ArrayFeatItem (
@@ -969,7 +969,7 @@ create table if not exists Campagna (
   utente_dungeon_master text not null,
   nome text not null,
   -- primary key creata da interpolazione
-  -- utente_dungeo_master + nome
+  -- utente_dungeon_master + nome
   idx_campagna text not null primary key,
   banner text,
   descrizione text,
@@ -977,7 +977,7 @@ create table if not exists Campagna (
   -- non so cosa fare con i personaggi
   -- avrebbe più senso avere un array di giocatori?
 
-  -- comunque personaggio sono anch'essi acceduti come foreign key
+  -- comunque personaggi sono anch'essi acceduti come foreign key
 
   foreign key (idx_campagna) references ArrayPostItem(idx_campagna),
   foreign key (idx_campagna) references ArrayCampagnaPersonaggiItem(idx_campagna)
@@ -992,16 +992,16 @@ create table if not exists ArrayIdxPersonaggioItem (
   foreign key (idx_personaggio) references ArrayCampagnaPersonaggiItem(idx_personaggio)
 );
 
-create table if not exists UtenteGiocatore (
-  utente_giocatore text not null primary key,
-  utente_generico text not null,
+-- create table if not exists UtenteGiocatore (
+--   utente_giocatore text not null primary key,
+--   utente_generico text not null,
 
   
-  -- personaggi e campagne acceduti con idx personaggio
-  -- tramite tabella direttamente sopra
-  foreign key (utente_generico) references UtenteGenerico(account),
-  foreign key (utente_giocatore) references ArrayIdxPersonaggioItem(utente_giocatore)
-);
+--   -- personaggi e campagne acceduti con idx personaggio
+--   -- tramite tabella direttamente sopra
+--   foreign key (utente_generico) references UtenteGenerico(account),
+--   foreign key (utente_giocatore) references ArrayIdxPersonaggioItem(utente_giocatore)
+-- );
 
 create table if not exists ArrayIdxCampagnaItem (
   utente_dungeon_master text not null,
@@ -1011,12 +1011,12 @@ create table if not exists ArrayIdxCampagnaItem (
   foreign key (idx_campagna) references Campagna(idx_campagna)
 );
 
-create table if not exists UtenteDungeonMaster (
-  utente_dungeon_master text not null primary key,
-  utente_generico text not null,
+-- create table if not exists UtenteDungeonMaster (
+--   utente_dungeon_master text not null primary key,
+--   utente_generico text not null,
 
-  -- campagne si raggiungono tramite 
-  -- foreign key a tabella sopra
-  foreign key (utente_generico) references UtenteGenerico(account),
-  foreign key (utente_dungeon_master) references ArrayIdxCampagnaItem(utente_dungeon_master)
-);
+--   -- campagne si raggiungono tramite 
+--   -- foreign key a tabella sopra
+--   foreign key (utente_generico) references UtenteGenerico(account),
+--   foreign key (utente_dungeon_master) references ArrayIdxCampagnaItem(utente_dungeon_master)
+-- );

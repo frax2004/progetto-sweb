@@ -15,33 +15,33 @@ app.use(express.json());
 app.use("/api/auth", authRouter);
 
 
-// const api_references = JSON
-// .parse(fs.readFileSync('./models/data/api_references.json', 'utf8'));
+const api_references = JSON
+.parse(fs.readFileSync('./models/data/new-data/api_references.json', 'utf8'));
 
 app.get('/', (request, response) => {
   Database.loadSchema('./schemas/DatabaseSchemas.sql');
 
-  response.send("cioa");
+  // response.send("ciao");
 
   // response.send("Server aperto");
-  // const queries = api_references
-  // .map((obj) => {
-  //   const index = obj.idx;
-  //   const name = obj.name;
-  //   const url = obj.url;
-  //   const note = obj.note || null;
+  const queries = api_references
+  .map((obj) => {
+    const index = obj.index;
+    const name = obj.name;
+    const url = obj.url;
+    const note = obj.note || null;
 
-  //   return `
-  //     insert or ignore into APIReference (idx, name, url, note) values ("${index}", "${name}", "${url}", "${note}")
-  //   `;
-  // })
-  // .join('; ');
+    return `
+      insert or ignore into APIReference (idx, name, url, note) values ("${index}", "${name}", "${url}", "${note}")
+    `;
+  })
+  .join('; ');
 
-  // Database.get().exec(queries);
+  Database.get().exec(queries);
 
-  // Database.get().all("SELECT * from APIReference", (err, rows) => {
-  //   response.send(JSON.stringify(rows, null, 2))
-  // })
+  Database.get().all("SELECT * from APIReference", (err, rows) => {
+    response.send(JSON.stringify(rows, null, 2))
+  })
 
   // Database.get()
   // .run(

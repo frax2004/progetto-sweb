@@ -41,7 +41,7 @@ export class SigninPagePage implements OnInit {
         this.formGroup.get('username')?.value || ''
       ).subscribe({
         next: (value) => {
-          Navigate.toPath(this.router, 'landing-page');
+          this.router.navigate(['landing-page']);
         },
         error: (err) => {
           console.log(err);
@@ -52,7 +52,11 @@ export class SigninPagePage implements OnInit {
 
   ngOnInit() {}
 loginButton: Button = { text: 'Registrati', expand: 'block', color: '#ff0000', type: "submit"};
-loginContext: ButtonContext = { onClick: () => { alert("Registrazione effettuata!"); } };
+// loginContext: ButtonContext = { onClick: this.router.navigate(['/landing_page']) };
+
+buttonCallbacks = {
+  nextPage: { onClick: Navigate.toPath(this.router,'landing-page')},
+}
 
 
 

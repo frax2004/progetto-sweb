@@ -49,6 +49,12 @@
       </div>
     </form>
 
+    <app-button 
+          [button]="{ text: 'ciao', expand: ''}"
+          [context]="buttonCallbacks['nextPage']"
+        >
+        </app-button>
+
     <div class="link-wrapper">
       <ion-text>
         Hai già un account?

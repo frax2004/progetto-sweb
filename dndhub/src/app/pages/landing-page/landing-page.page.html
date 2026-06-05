@@ -1,16 +1,32 @@
 <ion-content>
+  <div class="accordionDiv">
+    <ion-accordion-group>
+        <ion-accordion class="optsAccordion"value="first">
+          <div slot="header" class="accImgFrame">
+            <img id="optImg" alt="placeholderImg" src="./assets/icon/menu-expand.svg">
+          </div>
+          <div class="ion-padding" slot="content" class="accContent">
+            <ion-list>
+              <!-- @if(!isLogged) {
+                @for(el of notLoggedListElements; track el) {
+                  <label 
+                  (click) = "el.onClick"
+                  >{{el.text}}</label>
+                }
+              } -->
+            </ion-list>
+          </div>
+        </ion-accordion>
+      
+    </ion-accordion-group>    
+  </div>
+
+
+  
+
   <div id="pageTitle">
     <div>
       <ion-title id="title">DnDHUB</ion-title>
-    </div>
-    <div class="accordionDiv">
-        <ion-accordion id="titleAccordion">
-          <ion-thumbnail slot="header">
-          </ion-thumbnail>
-          <div slot="content">
-            ciao
-          </div>
-        </ion-accordion>
     </div>
   </div>
   

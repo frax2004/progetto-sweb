@@ -1,6 +1,6 @@
 <ion-item>
   @if (context !== undefined) {
-    <app-label (click)="context.onClick($event)">{{ text }}</app-label>
+    <app-label (click)="context?.onClick($event)">{{ text }}</app-label>
   }
   @else {
     <app-label>{{ text }}</app-label>

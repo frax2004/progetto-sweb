@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonItem, IonFooter, IonGrid, IonRow, IonCol } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonItem, IonFooter, IonGrid, IonRow, IonCol, IonAccordion, IonAccordionGroup, IonThumbnail } from '@ionic/angular/standalone';
 import { Card } from 'src/app/components/card/Card';
 import { CarouselComponent } from "src/app/components/carousel/carousel.component";
 import { CardComponent } from "src/app/components/card/card.component";
@@ -12,7 +12,7 @@ import { AccordionComponent } from "src/app/components/accordion/accordion.compo
   templateUrl: './landing-page.page.html',
   styleUrls: ['./landing-page.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonLabel, IonItem, CarouselComponent, IonFooter, CardComponent, IonGrid, IonRow, IonCol, AccordionComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonLabel, IonItem, CarouselComponent, IonFooter, CardComponent, IonGrid, IonRow, IonCol, AccordionComponent, IonAccordion, IonAccordionGroup, IonThumbnail]
 })
 export class LandingPagePage implements OnInit {
   cards: Card[] = [

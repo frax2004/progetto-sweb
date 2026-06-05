@@ -633,4 +633,10 @@ export var models;
         aura_range;
     }
     models.Level = Level;
+    class Account {
+        email;
+        password;
+        username;
+    }
+    models.Account = Account;
 })(models || (models = {}));

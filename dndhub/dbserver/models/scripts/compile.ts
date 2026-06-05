@@ -1,9 +1,11 @@
 import fs from 'fs';
 import 'reflect-metadata';
-import { models } from '../DatabaseModels.js';
+import { models } from '../models.js';
 import { isDeepStrictEqual } from 'util';
 
 
+const RUNTIME_INPUT_DIR = "../old-data/";
+const RUNTIME_OUTPUT_DIR = "../data/";
 const REQUIRED_META = Symbol('required');
 
 function required() {
@@ -75,7 +77,7 @@ function extract<T>(shape: any, inputPaths: string[], transformer?: (s: any) => 
   return inputPaths
   .map(
     path => {
-      const data = JSON.parse(fs.readFileSync(path, 'utf8'));
+      const data = JSON.parse(fs.readFileSync(RUNTIME_INPUT_DIR + path, 'utf8'));
       return Shapes.decompose<T>(data, shape);
     }
   )
@@ -1063,13 +1065,13 @@ interface TranslateContext {
 function translate(ctx: TranslateContext): void {
   const extracted = ctx.extractor(ctx.shape, ctx.inputs);
   const translated = extracted.map(ctx.mapper);
-  fs.writeFileSync("new-data/" + ctx.output, JSON.stringify(translated), 'utf8');
+  fs.writeFileSync(RUNTIME_OUTPUT_DIR + ctx.output, JSON.stringify(translated), 'utf8');
 }
 
 
 
 const allFiles = fs
-.readdirSync('.', 'utf8')
+.readdirSync(RUNTIME_INPUT_DIR, 'utf8')
 .filter((path: string) => path.startsWith('5e'));
 
 [
@@ -2146,7 +2148,7 @@ const allFiles = fs
 
 
 function printArray(array: any[], output: string): void {
-  fs.writeFileSync("new-data/" + output, JSON.stringify(array.flatMap(x => x)), 'utf8');
+  fs.writeFileSync(RUNTIME_OUTPUT_DIR + output, JSON.stringify(array.flatMap(x => x)), 'utf8');
 }
 
 

@@ -67,7 +67,11 @@ export class UserInstance {
 
 }
 
-
+export const generateToken = (body) => jwt.sign(
+  body, 
+  JWT_SECRET, 
+  { expiresIn: '24h' }
+);
 
 export const JWT_SECRET = 'filafiabeelamagamago';
 

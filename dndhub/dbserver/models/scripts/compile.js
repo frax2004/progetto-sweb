@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import fs from 'fs';
 import 'reflect-metadata';
 import { isDeepStrictEqual } from 'util';
+const RUNTIME_INPUT_DIR = "../old-data/";
+const RUNTIME_OUTPUT_DIR = "../data/";
 const REQUIRED_META = Symbol('required');
 function required() {
     return Reflect.metadata(REQUIRED_META, true);
@@ -73,7 +75,7 @@ export class Shapes {
 function extract(shape, inputPaths, transformer) {
     return inputPaths
         .map(path => {
-        const data = JSON.parse(fs.readFileSync(path, 'utf8'));
+        const data = JSON.parse(fs.readFileSync(RUNTIME_INPUT_DIR + path, 'utf8'));
         return Shapes.decompose(data, shape);
     })
         .filter(array => array.length !== 0)
@@ -1144,10 +1146,10 @@ function getOrInsertArrayId(table, actual, equals, transform) {
 function translate(ctx) {
     const extracted = ctx.extractor(ctx.shape, ctx.inputs);
     const translated = extracted.map(ctx.mapper);
-    fs.writeFileSync("new-data/" + ctx.output, JSON.stringify(translated), 'utf8');
+    fs.writeFileSync(RUNTIME_OUTPUT_DIR + ctx.output, JSON.stringify(translated), 'utf8');
 }
 const allFiles = fs
-    .readdirSync('.', 'utf8')
+    .readdirSync(RUNTIME_INPUT_DIR, 'utf8')
     .filter((path) => path.startsWith('5e'));
 [
     {
@@ -1943,7 +1945,7 @@ const allFiles = fs
     },
 ].forEach(translate);
 function printArray(array, output) {
-    fs.writeFileSync("new-data/" + output, JSON.stringify(array.flatMap(x => x)), 'utf8');
+    fs.writeFileSync(RUNTIME_OUTPUT_DIR + output, JSON.stringify(array.flatMap(x => x)), 'utf8');
 }
 printArray(data.ArrayAPIReference, 'array_api_references.json');
 printArray(data.ArrayOptionPrerequisite, 'array_option_prerequisites.json');

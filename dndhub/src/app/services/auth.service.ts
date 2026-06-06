@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 // TODO QUANDO SI DEVE TESTARE QUALCOSA, SETTARE IL PROPRIO IPv4 (da cmd => ipconfig => guarda verso la fine)
-const POLLARA_IP_ADDRESS = "192.168.1.36";
-const GIOVANNI_IP_ADDRESS = "192.168.1.9";
-const CURRENT_IP_ADDRESS = POLLARA_IP_ADDRESS;
-const FRONTEND_PORT = 10000;
+
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +14,7 @@ export class AuthService {
 
   register(email: string, password: string, username: string): Observable<any> {
     return this.httpclient.post<any>(
-      `http://${CURRENT_IP_ADDRESS}:${FRONTEND_PORT}/api/auth/register`,
+      `${environment.api_url}/api/auth/register`,
       { email: email, password: password, username: username }
     )
     .pipe(
@@ -28,7 +26,7 @@ export class AuthService {
 
   login(email: string, password: string): Observable<any> {
     return this.httpclient.post<any>(
-      `http://${CURRENT_IP_ADDRESS}:${FRONTEND_PORT}/api/auth/login`,
+      `${environment.api_url}/api/auth/login`,
       { email: email, password: password }
     );
     // .pipe(

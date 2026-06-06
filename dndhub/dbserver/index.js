@@ -4,6 +4,7 @@ import cors from 'cors';
 import { Database } from './database.js';
 import { DatabasePaths } from './database.paths.js';
 import { authRouter } from './routes/auth.routes.js';
+import { userUtilitiesRouter } from './routes/user.utilities.routes.js';
 
 
 const app = express();
@@ -12,7 +13,8 @@ const PORT = 10000;
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRouter);
-
+// probabilmente ci andrà un middleware di autenticazione
+app.use("/api/user-utilities", userUtilitiesRouter);
 
 const api_references = JSON
 .parse(fs.readFileSync('./models/data/api_references.json', 'utf8'));

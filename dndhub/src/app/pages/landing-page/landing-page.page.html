@@ -8,24 +8,25 @@
           <div class="ion-padding" slot="content" class="accContent">
               @if(!isLogged) {
                 <div class="linkContainer">
-                  <a routerLink="/login-page">
+                  <!-- gli href sono da rivedere: sintatticamente incorretti -->
+                  <a href="/login-page">
                     Login
                   </a>
                 </div>
                 <div class="linkContainer bottomLinkContainer">
-                  <a routerLink="/signin-page">
+                  <a href="/signin-page">
                     Registrati
                   </a>
                 </div>
               }
               @else {
                 <div class="linkContainer">
-                  <a routerLink="/type-player-login">
+                  <a href="/type-player-login">
                     Accedi alle aree personali
                   </a>
                 </div>
                 <div class="linkContainer bottomLinkContainer">
-                  <a routerLink="/profile">
+                  <a href="/profile">
                     Profilo personale
                   </a>
                 </div>

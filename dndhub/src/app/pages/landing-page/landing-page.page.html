@@ -6,15 +6,30 @@
             <img id="optImg" alt="placeholderImg" src="./assets/icon/menu-expand.svg">
           </div>
           <div class="ion-padding" slot="content" class="accContent">
-            <ion-list>
-              <!-- @if(!isLogged) {
-                @for(el of notLoggedListElements; track el) {
-                  <label 
-                  (click) = "el.onClick"
-                  >{{el.text}}</label>
-                }
-              } -->
-            </ion-list>
+              @if(!isLogged) {
+                <div class="linkContainer">
+                  <a routerLink="/login-page">
+                    Login
+                  </a>
+                </div>
+                <div class="linkContainer">
+                  <a routerLink="/signin-page">
+                    Registrati
+                  </a>
+                </div>
+              }
+              @else {
+                <div class="linkContainer">
+                  <a routerLink="/type-player-login">
+                    Accedi alle aree personali
+                  </a>
+                </div>
+                <div class="linkContainer">
+                  <a routerLink="/profile">
+                    Profilo personale
+                  </a>
+                </div>
+              }
           </div>
         </ion-accordion>
       

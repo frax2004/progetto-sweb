@@ -25,11 +25,15 @@ export class LandingPagePage implements OnInit {
     { title:'L\'uomo piu\' sexy di Lignano Sabbiadoro', subtitle:'Fata (trilli) bardo lvl 5', imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStbWsAJpOJ-za6GReXxAYlj-WYYPKqWtIpGw&s" },
   ]
 
-  // notLoggedListElements = [
-  //   { text: 'Login', onClick:  Navigate.toPath(this.router,'login-page')()}
-  // ]
+  notLoggedListElements = [
+    // { text: 'Login', onClick:  Navigate.toPath(this.router,'landing-page')()}
+  ];
 
-  // isLogged = false;
+  logContext(event: Event) {
+    return this.router.navigate(['landing-page']);
+  }
+
+  isLogged = false;
 
   constructor(private router: Router) { }
 

@@ -31,6 +31,7 @@ export var models;
         AreaOfEffectType[AreaOfEffectType["cone"] = 4] = "cone";
     })(AreaOfEffectType = models.AreaOfEffectType || (models.AreaOfEffectType = {}));
     class AreaOfEffect {
+        id;
         size;
         type;
     }
@@ -607,7 +608,7 @@ export var models;
     }
     models.ClassSpecific = ClassSpecific;
     class Level {
-        index;
+        idx;
         level;
         ability_score_bonuses;
         prof_bonus;

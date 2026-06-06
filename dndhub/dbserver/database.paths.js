@@ -8,4 +8,7 @@ export class DatabasePaths {
     return "./schemas/DatabaseSchemas.sql";
   }
 
+  static get DATA_DIR() {
+    return "./models/data/";
+  }
 }

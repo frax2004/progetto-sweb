@@ -134,7 +134,7 @@ var data;
         static transform(x, array_id, array_idx) {
             return {
                 array_id: array_id,
-                damage_type: x.damage_type.index,
+                damage_type: x.damage_type?.index,
                 damage_dice: x.damage_dice,
                 dc: getOrInsertId(data.difficulty_classes, x.dc),
                 idx: array_idx
@@ -159,7 +159,7 @@ var data;
         type = "";
         proficiency = APIReference;
         static equals(lhs, rhs) {
-            return lhs.item === rhs.proficiency?.index;
+            return lhs.item === rhs.proficiency?.index && lhs.string === rhs.type;
         }
         static transform(x, array_id, array_idx) {
             // console.log(x);
@@ -233,7 +233,7 @@ var data;
             //     return rhs.count === lhs.counted_reference_count
             //     && rhs.of?.index === lhs.counted_item
             //     && getOrInsertArrayId(
-            //       data.ArrayOptionPrerequisite,
+            //       data.ArrayPrerequisite,
             //       rhs.prerequisites,
             //       data.OptionPrerequisite.equals,
             //       data.OptionPrerequisite.transform
@@ -312,7 +312,7 @@ var data;
             //       res.counted_reference_count = x.count;
             //       res.counted_item = x.of.index;
             //       res.prerequisites = getOrInsertArrayId(
-            //         data.ArrayOptionPrerequisite,
+            //         data.ArrayPrerequisite,
             //         x.prerequisites,
             //         data.OptionPrerequisite.equals,
             //         data.OptionPrerequisite.transform
@@ -896,7 +896,7 @@ var data;
         name = "";
         race = APIReference;
         desc = "";
-        ability_bonus = [AbilityBonus];
+        ability_bonuses = [AbilityBonus];
         racial_traits = [APIReference];
         url = "";
     }
@@ -957,7 +957,7 @@ var data;
         }
         static transform(x, array_id, array_idx) {
             return {
-                damage_type: x.damage_type,
+                damage_type: x.damage_type?.index,
                 array_id: array_id,
                 array_idx: array_idx,
                 character_level: JSON.stringify(x.damage_at_character_level),
@@ -1085,7 +1085,7 @@ var data;
     // si assegnaerà ad ogni elemento di ogni array, l'indice del proprio array
     // e poi si farà il flatten: [[{index: 0}, {}, {}], [{index: 1}], [...]]
     data.ArrayAPIReference = [];
-    data.ArrayOptionPrerequisite = [];
+    data.ArrayPrerequisite = [];
     data.ArrayOption = [];
     data.ArrayDamage = [];
     data.ArrayStartingEquipment = [];
@@ -1155,9 +1155,16 @@ const allFiles = fs
     {
         extractor: (extract),
         shape: new data.APIReference(),
-        mapper: (x) => x,
+        mapper: function (x) {
+            return {
+                idx: x.index,
+                url: x.url,
+                name: x.name,
+                note: x.note,
+            };
+        },
         inputs: allFiles,
-        output: "api_references.json"
+        output: "APIReference.json"
     },
     {
         extractor: (extract),
@@ -1171,7 +1178,7 @@ const allFiles = fs
             };
         },
         inputs: allFiles,
-        output: "choices.json"
+        output: "Choice.json"
     },
     {
         extractor: (extract),
@@ -1179,20 +1186,20 @@ const allFiles = fs
         mapper: function (x) {
             return {
                 id: getOrInsertId(data.difficulty_classes, x),
-                dc_type: x.dc_type,
+                dc_type: x.dc_type?.index,
                 dc_value: x.dc_value,
                 success_type: x.success_type
             };
         },
         inputs: allFiles,
-        output: "difficulty_classes.json"
+        output: "DifficultyClass.json"
     },
     {
         extractor: (extract),
         shape: new data.Damage(),
         mapper: (x) => x,
         inputs: allFiles,
-        output: "damages.json"
+        output: "Damage.json"
     },
     {
         extractor: (extract),
@@ -1207,7 +1214,7 @@ const allFiles = fs
             };
         },
         inputs: allFiles,
-        output: "option_sets.json"
+        output: "OptionSet.json"
     },
     {
         extractor: (extract),
@@ -1216,7 +1223,7 @@ const allFiles = fs
             return {
                 id: getOrInsertId(data.options, x),
                 option_type: x.option_type,
-                reference_item: x.item,
+                reference_item: x.item?.index,
                 choice_id: getOrInsertId(data.option_sets, x.choice?.from),
                 string: x.string,
                 ability_score_bonus: x.ability_score?.index,
@@ -1230,10 +1237,10 @@ const allFiles = fs
                 breath_damage: getOrInsertArrayId(data.ArrayDamage, x.damage, data.Damage.equals, data.Damage.transform),
                 counted_reference_count: x.count,
                 counted_item: x.item?.index,
-                prerequisites: getOrInsertArrayId(data.ArrayOptionPrerequisite, x.prerequisites, data.OptionPrerequisite.equals, data.OptionPrerequisite.transform),
+                prerequisites: getOrInsertArrayId(data.ArrayPrerequisite, x.prerequisites, data.OptionPrerequisite.equals, data.OptionPrerequisite.transform),
                 damage_dice: x.damage_dice,
                 damage_type: x.damage_type?.index,
-                alignments: getOrInsertArrayId(data.ArrayOptionPrerequisite, x.alignments, data.OptionPrerequisite.equals, data.OptionPrerequisite.transform),
+                alignments: getOrInsertArrayId(data.ArrayPrerequisite, x.alignments, data.OptionPrerequisite.equals, data.OptionPrerequisite.transform),
                 money_count: x.count,
                 money_unit: x.unit,
                 multiple_items: getOrInsertArrayId(data.ArrayOption, x.items, data.Option.equals, data.Option.transform),
@@ -1246,7 +1253,7 @@ const allFiles = fs
             };
         },
         inputs: allFiles,
-        output: "options.json"
+        output: "Option.json"
     },
     {
         extractor: (extract),
@@ -1260,7 +1267,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Damage-Types.json"],
-        output: "damage_types.json"
+        output: "DamageType.json"
     },
     {
         extractor: (extract),
@@ -1276,28 +1283,28 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Ability-Scores.json"],
-        output: "ability_scores.json"
+        output: "AbilityScore.json"
     },
     {
         extractor: (extract),
         shape: new data.StartingEquipment(),
         mapper: (x) => x,
         inputs: ["5e-SRD-Backgrounds.json", "5e-SRD-Classes.json"],
-        output: "starting_equipments.json"
+        output: "StartingEquipment.json"
     },
     {
         extractor: (extract),
         shape: new data.Cost(),
         mapper: (x) => x,
         inputs: ["5e-SRD-Backgrounds.json", "5e-SRD-Equipments.json"],
-        output: "costs.json"
+        output: "Cost.json"
     },
     {
         extractor: (extract),
         shape: new data.BackgroundFeature(),
         mapper: (x) => x,
         inputs: ["5e-SRD-Backgrounds.json"],
-        output: "background_features.json"
+        output: "BackgroundFeature.json"
     },
     {
         extractor: (extract),
@@ -1322,7 +1329,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Backgrounds.json"],
-        output: "backgronds.json"
+        output: "Background.json"
     },
     {
         extractor: (extract),
@@ -1334,7 +1341,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Classes.json"],
-        output: "spellcasting_infos.json"
+        output: "SpellcastingInfo.json"
     },
     {
         extractor: (extract),
@@ -1347,7 +1354,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Classes.json"],
-        output: "spellcastings.json"
+        output: "Spellcasting.json"
     },
     {
         extractor: (extract),
@@ -1360,7 +1367,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Classes.json"],
-        output: "multi_classing_prereqs.json"
+        output: "MultiClassingPrereq.json"
     },
     {
         extractor: (extract),
@@ -1375,7 +1382,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Classes.json"],
-        output: "multi_classing.json"
+        output: "MultiClassing.json"
     },
     {
         extractor: (extract),
@@ -1399,7 +1406,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Classes.json"],
-        output: "classes.json"
+        output: "Class.json"
     },
     {
         extractor: (extract),
@@ -1413,7 +1420,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Conditions.json"],
-        output: "conditions.json"
+        output: "Condition.json"
     },
     {
         extractor: (extract),
@@ -1427,28 +1434,28 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Equipment-Categories.json"],
-        output: "equipment_categories.json"
+        output: "EquipmentCategory.json"
     },
     {
         extractor: (extract),
         shape: new data.ArmorClass(),
         mapper: (x) => x,
         inputs: ["5e-SRD-Equipments.json"],
-        output: "armor_classes.json"
+        output: "ArmorClass.json"
     },
     {
         extractor: (extract),
         shape: new data._Range(),
         mapper: (x) => x,
         inputs: ["5e-SRD-Equipments.json"],
-        output: "ranges.json"
+        output: "Range.json"
     },
     {
         extractor: (extract),
         shape: new data.ThrowRange(),
         mapper: (x) => x,
         inputs: ["5e-SRD-Equipments.json"],
-        output: "throw_ranges.json"
+        output: "ThrowRange.json"
     },
     {
         extractor: (extract),
@@ -1460,7 +1467,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Equipments.json"],
-        output: "contents.json"
+        output: "Content.json"
     },
     {
         extractor: (extract),
@@ -1472,7 +1479,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Equipments.json"],
-        output: "utilizes.json"
+        output: "Utilize.json"
     },
     {
         extractor: (extract),
@@ -1511,21 +1518,21 @@ const allFiles = fs
                 str_minimum: x.str_minimum,
                 throw_range_normal: x.throw_range?.normal,
                 throw_range_long: x.throw_range?.long,
-                two_handed_damage_type: x.two_handed_damage?.damage_type,
+                two_handed_damage_type: x.two_handed_damage?.damage_type?.index,
                 two_handed_damage_dice: x.two_handed_damage?.damage_dice,
                 two_handed_damage_dc: getOrInsertId(data.difficulty_classes, x.two_handed_damage?.damage_dc),
                 utilize: getOrInsertArrayId(data.ArrayUtilize, x.utilize, data.Utilize.equals, data.Utilize.transform),
             };
         },
         inputs: ["5e-SRD-Equipments.json"],
-        output: "equipments.json"
+        output: "Equipment.json"
     },
     {
         extractor: (extract),
         shape: new data.FeatPrerequisites(),
         mapper: (x) => x,
         inputs: ["5e-SRD-Feats.json"],
-        output: "feat_prereqs.json"
+        output: "FeatPrereq.json"
     },
     {
         extractor: (extract),
@@ -1544,7 +1551,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Feats.json"],
-        output: "feats.json"
+        output: "Feat.json"
     },
     {
         extractor: (extract),
@@ -1553,13 +1560,13 @@ const allFiles = fs
             return {
                 idx: x.index,
                 name: x.name,
-                is_rare: x.is_rage,
+                is_rare: x.is_rare,
                 note: x.note,
                 url: x.url,
             };
         },
         inputs: ["5e-SRD-Languages.json"],
-        output: "languages.json"
+        output: "Language.json"
     },
     {
         extractor: (extract),
@@ -1580,7 +1587,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Magic-Items.json"],
-        output: "magic_items.json"
+        output: "MagicItem.json"
     },
     {
         extractor: (extract),
@@ -1594,7 +1601,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Magic-Schools.json"],
-        output: "magic_schools.json"
+        output: "MagicSchool.json"
     },
     {
         extractor: (extract),
@@ -1611,7 +1618,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Proficiencies.json"],
-        output: "proficiencies.json"
+        output: "Proficiency.json"
     },
     {
         extractor: (extract),
@@ -1626,14 +1633,14 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Skills.json"],
-        output: "skills.json"
+        output: "Skill.json"
     },
     {
         extractor: (extract),
         shape: new data.AbilityBonus(),
         mapper: (x) => x,
         inputs: allFiles,
-        output: "ability_bonuses.json"
+        output: "AbilityBonus.json"
     },
     {
         extractor: (extract),
@@ -1660,7 +1667,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Species.json"],
-        output: "species.json"
+        output: "Species.json"
     },
     {
         extractor: (extract),
@@ -1674,7 +1681,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Subclasses.json"],
-        output: "subclass_spell_prereqs.json"
+        output: "SubclassSpellPrereq.json"
     },
     {
         extractor: (extract),
@@ -1686,7 +1693,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Subclasses.json"],
-        output: "subclass_spells.json"
+        output: "SubclassSpell.json"
     },
     {
         extractor: (extract),
@@ -1704,7 +1711,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Subclasses.json"],
-        output: "subclasses.json"
+        output: "Subclass.json"
     },
     {
         extractor: (extract),
@@ -1716,12 +1723,12 @@ const allFiles = fs
                 url: x.url,
                 species: x.race?.index,
                 desc: x.desc,
-                ability_bonuses: getOrInsertArrayId(data.ArrayAbilityBonus, x.ability_bonus, data.AbilityBonus.equals, data.AbilityBonus.transform),
+                ability_bonuses: getOrInsertArrayId(data.ArrayAbilityBonus, x.ability_bonuses, data.AbilityBonus.equals, data.AbilityBonus.transform),
                 racial_traits: getOrInsertArrayId(data.ArrayAPIReference, x.racial_traits, data.APIReference.equals, data.APIReference.transform),
             };
         },
         inputs: ["5e-SRD-Subspecies.json"],
-        output: "subspecies.json"
+        output: "Subspecies.json"
     },
     {
         extractor: (extract),
@@ -1744,33 +1751,34 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Spells.json"],
-        output: "spells.json"
+        output: "Spell.json"
     },
     {
         extractor: (extract),
         shape: new data.AreaOfEffect(),
         mapper: function (x) {
             return {
+                id: getOrInsertId(data.area_of_effects, x),
                 size: x.size,
                 type: x.type,
             };
         },
         inputs: allFiles,
-        output: "areas_of_effect.json"
+        output: "AreaOfEffect.json"
     },
     {
         extractor: (extract),
         shape: new data.BreathWeaponUsage(),
         mapper: (x) => x,
         inputs: ["5e-SRD-Traits.json"],
-        output: "breath_weapon_usages.json"
+        output: "BreathWeaponUsage.json"
     },
     {
         extractor: (extract),
         shape: new data.BreathWeaponDamage(),
         mapper: (x) => x,
         inputs: ["5e-SRD-Traits.json"],
-        output: "breath_weapon_damages.json"
+        output: "BreathWeaponDamage.json"
     },
     {
         extractor: (extract),
@@ -1788,7 +1796,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Traits.json"],
-        output: "breath_weapons.json"
+        output: "BreathWeapon.json"
     },
     {
         extractor: (extract),
@@ -1803,7 +1811,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Traits.json"],
-        output: "trait_specifics.json"
+        output: "TraitSpecific.json"
     },
     {
         extractor: (extract),
@@ -1824,7 +1832,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Traits.json"],
-        output: "traits.json"
+        output: "Trait.json"
     },
     {
         extractor: (extract),
@@ -1838,7 +1846,7 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Weapon-Properties.json"],
-        output: "weapon_properties.json"
+        output: "WeaponProperty.json"
     },
     {
         extractor: (extract),
@@ -1895,28 +1903,28 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Levels.json"],
-        output: "class_specifics.json"
+        output: "ClassSpecific.json"
     },
     {
         extractor: (extract),
         shape: new data.LevelSpellcasting(),
         mapper: (x) => x,
         inputs: ["5e-SRD-Levels.json"],
-        output: "level_spellcastings.json"
+        output: "LevelSpellcasting.json"
     },
     {
         extractor: (extract),
         shape: new data.SubclassSpecific(),
         mapper: (x) => x,
         inputs: ["5e-SRD-Levels.json"],
-        output: "subclass_specifics.json"
+        output: "SubclassSpecific.json"
     },
     {
         extractor: (extract),
         shape: new data.Level(),
         mapper: function (x) {
             return {
-                index: x.index,
+                idx: x.index,
                 level: x.level,
                 ability_score_bonuses: x.ability_score_bonuses,
                 prof_bonus: x.prof_bonus,
@@ -1941,24 +1949,24 @@ const allFiles = fs
             };
         },
         inputs: ["5e-SRD-Levels.json"],
-        output: "levels.json"
+        output: "Level.json"
     },
 ].forEach(translate);
 function printArray(array, output) {
     fs.writeFileSync(RUNTIME_OUTPUT_DIR + output, JSON.stringify(array.flatMap(x => x)), 'utf8');
 }
-printArray(data.ArrayAPIReference, 'array_api_references.json');
-printArray(data.ArrayOptionPrerequisite, 'array_option_prerequisites.json');
-printArray(data.ArrayOption, 'array_options.json');
-printArray(data.ArrayDamage, 'array_damages.json');
-printArray(data.ArrayStartingEquipment, 'array_starting_equipments.json');
-printArray(data.ArrayChoice, 'array_choices.json');
-printArray(data.ArraySpellcastingInfo, 'array_spellcasting_infos.json');
-printArray(data.ArrayMultiClassingPrereqs, 'array_multiclassing_prereqs.json');
-printArray(data.ArrayContents, 'array_contents.json');
-printArray(data.ArrayUtilize, 'array_utilizes.json');
-printArray(data.ArrayAbilityBonus, 'array_ability_bonuses.json');
-printArray(data.ArraySubclassSpell, 'array_subclass_spells.json');
-printArray(data.ArraySubclassSpellPrerequisite, 'array_subclass_spell_prerequisites.json');
-printArray(data.ArrayBreathWeaponDamage, 'array_breath_weapon_damages.json');
-printArray(data.ArrayCreatingSpellSlots, 'array_creating_spell_slots.json');
+printArray(data.ArrayAPIReference, 'ArrayApiReferenceItem.json');
+printArray(data.ArrayPrerequisite, 'ArrayPrerequisiteItem.json');
+printArray(data.ArrayOption, 'ArrayOptionItem.json');
+printArray(data.ArrayDamage, 'ArrayDamageItem.json');
+printArray(data.ArrayStartingEquipment, 'ArrayStartingEquipmentItem.json');
+printArray(data.ArrayChoice, 'ArrayChoiceItem.json');
+printArray(data.ArraySpellcastingInfo, 'ArraySpellcastingInfoItem.json');
+printArray(data.ArrayMultiClassingPrereqs, 'ArrayMultiClassingPrereqItem.json');
+printArray(data.ArrayContents, 'ArrayContentItem.json');
+printArray(data.ArrayUtilize, 'ArrayUtilizeItem.json');
+printArray(data.ArrayAbilityBonus, 'ArrayAbilityBonusItem.json');
+printArray(data.ArraySubclassSpell, 'ArraySubclassSpellItem.json');
+printArray(data.ArraySubclassSpellPrerequisite, 'ArraySubclassSpellPrerequisiteItem.json');
+printArray(data.ArrayBreathWeaponDamage, 'ArrayBreathWeaponDamageItem.json');
+printArray(data.ArrayCreatingSpellSlots, 'ArrayCreatingSpellSlotItem.json');

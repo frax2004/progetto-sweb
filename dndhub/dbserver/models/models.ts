@@ -31,6 +31,7 @@ export namespace models {
   }
 
   export class AreaOfEffect {
+    id?: number;
     size!: number;
     type!: AreaOfEffect;
   }
@@ -187,7 +188,7 @@ export namespace models {
     starting_equipment?: number;
     // primo flatten
     starting_gold_quantity?: number;
-    starting_gold_unit?: number;
+    starting_gold_unit?: string;
     // secondo flatten
     starting_equipment_options?: number;
     feature_name?: string;
@@ -437,7 +438,7 @@ export namespace models {
     speed!: number;
     ability_bonuses?: number;
     ability_bonus_options?: number;
-    alignment!: string;
+    alignment?: string;
     age!: string;
     starting_proficiencies?: number;
     starting_proficiency_options?: number;
@@ -571,12 +572,12 @@ export namespace models {
     school!: string;
     classes!: number;
     actionType!: string;
-    concentration!: boolean ;
+    concentration!: boolean;
     ritual!: boolean ;
     range!: string ;
     components?: number;
     material?: string;
-    duration!: string ;
+    duration!: string;
     description!: string;
     cantripUpgrade?: string;
   }
@@ -629,7 +630,7 @@ export namespace models {
   }
 
   export class Level {    
-    index!: string;
+    idx!: string;
     level!: number;
     ability_score_bonuses?: number;
     prof_bonus?: number;

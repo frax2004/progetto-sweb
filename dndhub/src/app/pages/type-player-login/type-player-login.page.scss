@@ -73,18 +73,22 @@ ion-content {
 }
 
 .dm{
+    transition: all 500ms;
     background-image: url('/assets/icon/sfondo-dndhub-loginplayer.jpeg');
 }
 
 .dm:hover{
+    transition: all 500ms;
     background-image: url('/assets/icon/sfondo-DM-hover.jpeg');
 }
 
 .player{
+    transition: all 500ms;
     background-image: url('/assets/icon/Sfondo-Player-1.jpeg');
 }
 
 .player:hover{
+    transition: all 500ms;
     background-image: url('/assets/icon/Sfondo-Player-2.jpeg');
 }
 

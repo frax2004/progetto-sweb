@@ -4,6 +4,7 @@ import cors from 'cors';
 import { Database } from './database.js';
 import { DatabasePaths } from './database.paths.js';
 import { authRouter } from './routes/auth.routes.js';
+import { userUtilitiesRouter } from './routes/user.utilities.routes.js';
 
 
 const app = express();
@@ -16,6 +17,8 @@ app.use("/api/auth", authRouter);
 
 // per impostare la formattazione a 2 spazi di indentazione
 app.set('json spaces', 2);
+// probabilmente ci andrà un middleware di autenticazione
+app.use("/api/user-utilities", userUtilitiesRouter);
 
 
 function loadTable(name) {

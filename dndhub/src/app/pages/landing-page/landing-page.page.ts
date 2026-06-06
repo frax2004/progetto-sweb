@@ -10,6 +10,8 @@ import { LabelComponent } from "src/app/components/label/label.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
 import { Navigate } from 'src/app/core/core';
 import { Router } from '@angular/router';
+import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
+
 
 @Component({
   selector: 'app-landing-page',
@@ -25,15 +27,40 @@ export class LandingPagePage implements OnInit {
     { title:'L\'uomo piu\' sexy di Lignano Sabbiadoro', subtitle:'Fata (trilli) bardo lvl 5', imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStbWsAJpOJ-za6GReXxAYlj-WYYPKqWtIpGw&s" },
   ]
 
-  // notLoggedListElements = [
-  //   { text: 'Login', onClick:  Navigate.toPath(this.router,'login-page')()}
-  // ]
+  notLoggedListElements = [
+    // { text: 'Login', onClick:  Navigate.toPath(this.router,'landing-page')()}
+  ];
 
-  // isLogged = false;
+  logContext(event: Event) {
+    return this.router.navigate(['landing-page']);
+  }
 
-  constructor(private router: Router) { }
+  isLogged: boolean;
+
+  constructor(private router: Router, private userUtilities: UserUtilitiesService) { 
+    userUtilities.isLogged()
+    .subscribe({
+      next: (value) => {
+        this.isLogged = value.isLogged;
+        console.log(this.isLogged);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
 
   ngOnInit() {
+    this.userUtilities.isLogged()
+    .subscribe({
+      next: (value) => {
+        this.isLogged = value.isLogged;
+        console.log(this.isLogged);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
   }
 
 }

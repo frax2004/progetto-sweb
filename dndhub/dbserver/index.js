@@ -18,7 +18,7 @@ const api_references = JSON
 .parse(fs.readFileSync('./models/data/api_references.json', 'utf8'));
 
 const test = (req, res) => {
-  const db = Database.get();
+  const db = Database.INSTANCE;
 
   const queries = api_references
   .map((obj) => {

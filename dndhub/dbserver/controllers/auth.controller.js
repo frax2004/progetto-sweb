@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import { Database } from "../database.js";
 import { UserInstance, generateToken } from "../global.context.js";
 import { AuthResponses } from "./auth.controller.responses.js";
@@ -25,7 +24,7 @@ function login(req, res) {
 
   if(!ok) return;
 
-  const db = Database.get();
+  const db = Database.INSTANCE;
 
   const generic_user_callback = (err, user) => {
     if(user === undefined) {
@@ -65,7 +64,7 @@ function register(req, res) {
 
   if(!ok) return;
 
-  const db = Database.get();
+  const db = Database.INSTANCE;
 
 
   const signin_callback = (err) => {

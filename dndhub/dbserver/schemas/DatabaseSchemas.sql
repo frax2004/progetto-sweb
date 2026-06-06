@@ -158,7 +158,7 @@ create table if not exists AbilityScore (
   name text not null,
   full_name text not null,
   description text not null,
-  skills number not null,
+  skills number,
   url text not null,
 
   foreign key (skills) references ArrayAPIReference(array_id)

@@ -5,6 +5,7 @@ import { Database } from './database.js';
 import { DatabasePaths } from './database.paths.js';
 import { authRouter } from './routes/auth.routes.js';
 import { userUtilitiesRouter } from './routes/user.utilities.routes.js';
+import { characterManagementRouter } from './routes/character.management.routes.js';
 
 
 const app = express();
@@ -14,11 +15,13 @@ const PORT = 10000;
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRouter);
+// probabilmente ci andrà un middleware di autenticazione
+app.use("/api/user-utilities", userUtilitiesRouter);
+app.use("/api/character-management", characterManagementRouter)
 
 // per impostare la formattazione a 2 spazi di indentazione
 app.set('json spaces', 2);
-// probabilmente ci andrà un middleware di autenticazione
-app.use("/api/user-utilities", userUtilitiesRouter);
+
 
 
 function loadTable(name) {

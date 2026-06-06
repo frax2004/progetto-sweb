@@ -40,7 +40,7 @@ export var models;
         desc;
         choose;
         type;
-        opt_id;
+        id;
     }
     models.Choice = Choice;
     class ArrayDamageItem {

@@ -40,7 +40,7 @@ export namespace models {
     desc?: string;
     choose!: number;
     type?: string;
-    opt_id?: number;
+    id?: number;
   }
 
   export class ArrayDamageItem {

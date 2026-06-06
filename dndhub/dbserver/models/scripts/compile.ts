@@ -292,7 +292,7 @@ namespace data {
       return {
         item_id: getOrInsertId(data.options, x),
         idx: array_idx,
-        array_id: array_idx
+        array_id: array_id
       }
     //   let res = new models.Option();
     //   res.option_type = x.option_type;
@@ -1099,7 +1099,7 @@ const allFiles = fs
         choose: x.choose,
         desc: x.desc,
         type: x.type,
-        opt_id: getOrInsertId(data.option_sets, x.from)
+        id: getOrInsertId(data.option_sets, x.from)
       }
     },
     inputs: allFiles,

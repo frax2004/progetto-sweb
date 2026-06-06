@@ -43,20 +43,20 @@ create table if not exists ArrayDamageItem (
   damage_type text ,
   damage_dice text ,
   dc number,
-  idx number ,
+  array_idx number ,
 
   foreign key (dc) references DifficultyClass(id)
   foreign key (damage_type) references APIReference(idx),
-  primary key(array_id,idx)
+  primary key(array_id,array_idx)
 );
 
 -- OptionArray miItem serve per multiple
 create table if not exists ArrayOptionItem (
   item_id number ,
-  idx number ,
+  array_idx number ,
   array_id number ,
 
-  primary key (array_id, idx),
+  primary key (array_id, array_idx),
   foreign key (item_id) references Option(id)
 );
 
@@ -180,18 +180,18 @@ create table if not exists Alignment (
 create table if not exists ArrayAPIReferenceItem (
   array_id number ,
   item text ,
-  idx number ,
+  array_idx number ,
 
-  primary key (array_id,idx),
+  primary key (array_id,array_idx),
   foreign key (item) references APIReference(idx)
 );
 
 create table if not exists ArrayChoiceItem (
   array_id number ,
   id number ,
-  idx number ,
+  array_idx number ,
 
-  primary key (array_id,idx),
+  primary key (array_id,array_idx),
   foreign key (id) references Choice(opt_id)
 );
 
@@ -421,11 +421,11 @@ create table if not exists ArrayContentItem (
 
 create table if not exists ArrayUtilizeItem (
   array_id number ,
-  idx number ,
+  array_idx number ,
   item text ,
   dc number ,
 
-  primary key (array_id,idx),
+  primary key (array_id,array_idx),
   foreign key (dc) references DifficultyClass(id)
 );
 

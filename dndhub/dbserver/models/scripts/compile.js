@@ -95,7 +95,7 @@ var data;
         static transform(x, array_id, array_idx) {
             return {
                 array_id: array_id,
-                idx: array_idx,
+                array_idx: array_idx,
                 item: x.index
             };
         }
@@ -112,7 +112,7 @@ var data;
         static transform(x, array_id, array_idx) {
             return {
                 array_id: array_id,
-                idx: array_idx,
+                array_idx: array_idx,
                 id: getOrInsertId(data.option_sets, x.from)
             };
         }
@@ -137,7 +137,7 @@ var data;
                 damage_type: x.damage_type?.index,
                 damage_dice: x.damage_dice,
                 dc: getOrInsertId(data.difficulty_classes, x.dc),
-                idx: array_idx
+                array_idx: array_idx
             };
         }
     }
@@ -273,7 +273,7 @@ var data;
         static transform(x, array_id, array_idx) {
             return {
                 item_id: getOrInsertId(data.options, x),
-                idx: array_idx,
+                array_idx: array_idx,
                 array_id: array_id
             };
             //   let res = new models.Option();
@@ -626,7 +626,7 @@ var data;
         static transform(x, array_id, array_idx) {
             return {
                 array_id: array_id,
-                idx: array_idx,
+                array_idx: array_idx,
                 item: x.name,
                 dc: getOrInsertId(data.difficulty_classes, x.dc)
             };

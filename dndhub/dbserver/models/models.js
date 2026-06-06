@@ -48,13 +48,13 @@ export var models;
         damage_type;
         damage_dice;
         dc;
-        idx;
+        array_idx;
     }
     models.ArrayDamageItem = ArrayDamageItem;
     // OptionArray mi serve per multiple
     class ArrayOptionItem {
         item_id;
-        idx;
+        array_idx;
         array_id;
     }
     models.ArrayOptionItem = ArrayOptionItem;
@@ -111,13 +111,6 @@ export var models;
         size;
     }
     models.Option = Option;
-    class ArrayOfOptionsAndStringItem {
-        opt_id;
-        string;
-        idx;
-        array_id;
-    }
-    models.ArrayOfOptionsAndStringItem = ArrayOfOptionsAndStringItem;
     class OptionSet {
         id;
         option_set_type;
@@ -167,13 +160,13 @@ export var models;
     class ArrayAPIReferenceItem {
         array_id;
         item;
-        idx;
+        array_idx;
     }
     models.ArrayAPIReferenceItem = ArrayAPIReferenceItem;
     class ArrayChoiceItem {
         array_id;
         id;
-        idx;
+        array_idx;
     }
     models.ArrayChoiceItem = ArrayChoiceItem;
     class Background {
@@ -333,7 +326,7 @@ export var models;
     models.Utilize = Utilize;
     class ArrayUtilizeItem {
         array_id;
-        idx;
+        array_idx;
         item;
         dc;
     }

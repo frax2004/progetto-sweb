@@ -9,9 +9,9 @@ export namespace models {
   }
     
   export enum SuccessType {
-    none,
-    half,
-    other,
+    'none',
+    'half',
+    'other',
   }
 
   export class DifficultyClass {
@@ -23,11 +23,11 @@ export namespace models {
   }
 
   export enum AreaOfEffectType {
-    sphere,
-    cube,
-    cylinder,
-    line,
-    cone,
+    'sphere',
+    'cube',
+    'cylinder',
+    'line',
+    'cone',
   }
 
   export class AreaOfEffect {
@@ -48,13 +48,13 @@ export namespace models {
     damage_type!: string;
     damage_dice!: string;
     dc?: number;
-    idx?: number;
+    array_idx?: number;
   }
 
   // OptionArray mi serve per multiple
   export class ArrayOptionItem {
     item_id?: number;
-    idx?: number;
+    array_idx?: number;
     array_id?: number;
   }
 
@@ -111,12 +111,6 @@ export namespace models {
     size?: string;
   }
 
-  export class ArrayOfOptionsAndStringItem {
-    opt_id?: number;
-    string!: string;
-    idx?: number;
-    array_id?: number;
-  }
 
   export class OptionSet {
     id?: number;
@@ -171,13 +165,13 @@ export namespace models {
   export class ArrayAPIReferenceItem {
     array_id?: number;
     item!: string;
-    idx?: number;
+    array_idx?: number;
   }
 
   export class ArrayChoiceItem {
     array_id?: number;
     id?: number;
-    idx?: number;
+    array_idx?: number;
   }
 
   export class Background {
@@ -349,7 +343,7 @@ export namespace models {
 
   export class ArrayUtilizeItem {
     array_id?: number;
-    idx?: number;
+    array_idx?: number;
     item!: string;
     dc?: number;
   };
@@ -555,9 +549,9 @@ export namespace models {
   }
 
   export enum Components {
-    v,
-    s,
-    m,
+    'v',
+    's',
+    'm',
   }
 
   export class ArrayComponentsItem {    

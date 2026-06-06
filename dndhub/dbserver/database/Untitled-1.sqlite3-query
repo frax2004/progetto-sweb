@@ -1,11 +1,15 @@
--- database: ../../database/dndhub.db
+-- database: ./dndhub.db
 
 CREATE VIEW castoro as SELECT * FROM Choice WHERE id in (
         SELECT id FROM ArrayChoiceItem WHERE array_id = 4
     );
 
-SELECT * FROM OptionSet WHERE id in (
+CREATE VIEW gianfranco as SELECT * FROM OptionSet WHERE id in (
     SELECT id FROM castoro
 );
 
-SELECT * FROM ArrayOptionItem WHERE array_id = 4;
+SELECT * FROM gianfranco;
+
+SELECT * FROM ArrayOptionItem WHERE array_id in (
+    SELECT options_array FROM gianfranco
+);

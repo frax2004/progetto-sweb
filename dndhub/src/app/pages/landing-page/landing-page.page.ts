@@ -1,18 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonItem, IonFooter, IonGrid, IonRow, IonCol } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonItem, IonFooter, IonGrid, IonRow, IonCol, IonAccordion, IonAccordionGroup, IonThumbnail, IonList } from '@ionic/angular/standalone';
 import { Card } from 'src/app/components/card/Card';
 import { CarouselComponent } from "src/app/components/carousel/carousel.component";
 import { CardComponent } from "src/app/components/card/card.component";
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
+import { LabelComponent } from "src/app/components/label/label.component";
+import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
+import { Navigate } from 'src/app/core/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.page.html',
   styleUrls: ['./landing-page.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonLabel, IonItem, CarouselComponent, IonFooter, CardComponent, IonGrid, IonRow, IonCol, AccordionComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonLabel, IonItem, CarouselComponent, IonFooter, CardComponent, IonGrid, IonRow, IonCol, AccordionComponent, IonAccordion, IonAccordionGroup, IonThumbnail, LabelComponent, IonList, UnorderedListElementComponent]
 })
 export class LandingPagePage implements OnInit {
   cards: Card[] = [
@@ -21,8 +25,13 @@ export class LandingPagePage implements OnInit {
     { title:'L\'uomo piu\' sexy di Lignano Sabbiadoro', subtitle:'Fata (trilli) bardo lvl 5', imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStbWsAJpOJ-za6GReXxAYlj-WYYPKqWtIpGw&s" },
   ]
 
+  // notLoggedListElements = [
+  //   { text: 'Login', onClick:  Navigate.toPath(this.router,'login-page')()}
+  // ]
 
-  constructor() { }
+  // isLogged = false;
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }

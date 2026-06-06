@@ -1,6 +1,4 @@
-* {
-  border: 1px solid rgb(0, 255, 0);
-}
+
 
 #carousel-block {
   width: 70%;
@@ -25,6 +23,64 @@
 
 #carousel-label {
   font-size: 5cqmin;
+}
+
+#titleAccordion {
+  width: 20vw;
+  height: 20vw;
+}
+
+ion-accordion.accordion-expanding,
+ion-accordion.accordion-expanded {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  width: 70vw;
+  height: 70vh;
+  box-shadow: 6px 6px 5px 0px rgba(237, 126, 126, 0.783);
+  transition: all 500ms;
+
+  .accImgFrame {
+    background-color: rgba(161, 153, 153, 0.105);
+    
+    transition: all 500ms;
+  }
+}
+
+.optLabel {
+  color: black;
+}
+
+#optImg {
+  border-radius: 12px;
+  overflow: hidden;
+  align-self: center;
+  justify-self: center;
+  max-width: 7vmin;
+  max-height: 7vmin;
+}
+
+.accImgFrame {
+  display: flex;
+  overflow: hidden;
+  background-color: white;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
+.accContent {
+  background-color: white;
+  width: 100%;
+  height: 70vmin;
+}
+
+.accordionDiv {
+  position: absolute;
+  top: 2vmin;
+  left: 2vmin;
+  width: 7vmin;
+  height: 7vmin;
+  background-color: white;
 }
 
 #pageTitle {

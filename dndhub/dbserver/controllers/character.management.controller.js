@@ -6,6 +6,8 @@ function sendResponse(obj, res) {
   if(canSend) {
     res.status(obj.status_code).json(obj);
     canSend = false;
+    canSend=true;
+    //da togliere
   } else throw new Error("Chiamata a sendResponse() gia effettuata");
 }
 
@@ -34,6 +36,8 @@ export function displayClasses(req, res) {
       res
     );
   });
+
+  canSend = true;
 }
 
 export default {

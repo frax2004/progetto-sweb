@@ -53,13 +53,7 @@ export class ClassSelectionPage implements OnInit {
     .displayClasses()
     .subscribe({
       next: (value: any) => {
-        this.accordions = value.classes.map(function (item: any): Accordion {
-          return {
-            value: item.name + " accordion",
-            title: item.name,
-            content: item.proficiencies.map(JSON.stringify).join("\n")
-          };
-        });
+         = value.classes;
       },
       error: (err) => {
         console.log(err);

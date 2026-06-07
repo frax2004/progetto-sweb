@@ -100,6 +100,18 @@ var data;
             };
         }
     }
+    __decorate([
+        required(),
+        __metadata("design:type", String)
+    ], APIReference.prototype, "index", void 0);
+    __decorate([
+        required(),
+        __metadata("design:type", String)
+    ], APIReference.prototype, "name", void 0);
+    __decorate([
+        required(),
+        __metadata("design:type", String)
+    ], APIReference.prototype, "url", void 0);
     data.APIReference = APIReference;
     class Choice {
         desc = "";

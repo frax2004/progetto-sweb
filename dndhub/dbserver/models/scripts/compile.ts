@@ -88,8 +88,11 @@ function extract<T>(shape: any, inputPaths: string[], transformer?: (s: any) => 
 
 namespace data {
   export class APIReference {
+    @required()
     index: string = "";
+    @required()
     name: string = "";
+    @required()
     url: string = "";
     note: string = "";
 

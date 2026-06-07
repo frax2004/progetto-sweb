@@ -1,5 +1,5 @@
-import { UserInstance, generateToken } from "../global.context.js";
-import { Database } from "../database.js";
+import { DatabaseQueries } from "../database.queries.js";
+
 
 let canSend = true;
 function sendResponse(obj, res) {
@@ -10,68 +10,32 @@ function sendResponse(obj, res) {
 }
 
 
-function getClass(classRow) {
-    const query = `SELECT * FROM Levels WHERE character_class = '${classRow.idx}'`;
 
-    Database.INSTANCE
-    .all(query, (err, levels) =>{
-        if (levels === undefined) {
-            console.log('Errore :[ --> ', err.message);
-            sendResponse({
-                status_code: 404,
-                message: 'Non ho trovato i livelli sul db',
-                success: false,
-            }, res);
-        } 
-        else if (err) {
-            console.log('Errore :[ --> ', err.message);
-            sendResponse({
-                status_code: 404,
-                message: err.message,
-                success: false,
-            }, res);
-        }
-        else {
-            console.log('Ho trovato i livelli relativi a ', classRow.idx);
-            retValue = {
-                idx: classRow.idx,
-                name: classRow.name,
-                hit_die: classRow.hit_die,
-                
-            }
-        }
-    });
-} 
 
-function displayClasses(req, res) {
-    const query = `SELECT * FROM Class`;
+export function displayClasses(req, res) {
+  canSend = true;
 
-    const db = Database.INSTANCE;
-
-    db.all(query, (err, classes) => {
-        if (classes === undefined) {
-            console.log('Errore :[ --> ', err.message);
-            sendResponse({
-                status_code: 404,
-                message: 'Non ho trovato le classi sul db',
-                success: false,
-            }, res);
-        }
-        else if (err) {
-            console.log('Errore :[ --> ', err.message);
-            sendResponse({
-                status_code: 404,
-                message: err.message,
-                success: false,
-            }, res);
-        }
-        else {
-            console.log("Ho trovato le classi");
-            classArray = classes.map(getClass);
-        }
-    });
+  DatabaseQueries.retrieve("SELECT * FROM Class", DatabaseQueries.unwrapClass)
+  .catch(err => {
+    sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare le classi dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then(classes => {
+    sendResponse({
+        classes: classes,
+        status_code: 200,
+        success: true,
+        message: 'Classi caricate con successo'
+      },
+      res
+    );
+  });
 }
 
 export default {
-    displayClasses,
+  displayClasses,
 }

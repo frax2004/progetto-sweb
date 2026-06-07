@@ -24,10 +24,25 @@ app.set('json spaces', 2);
 
 
 
-const api_references = JSON
-.parse(fs.readFileSync('./models/data/api_references.json', 'utf8'));
+function loadTable(name) {
+  const text = fs.readFileSync(
+    DatabasePaths.DATA_DIR + name + ".json", 
+    'utf8'
+  );
 
-const test = (req, res) => {
+  const ObjToString = (x) => {
+    return "'" + x.toString().split(/['"]/).join("") + "'";
+  };
+
+  const query = JSON
+  .parse(text)
+  .map(obj => {""
+    const keys = Object.keys(obj).join(", ");
+    const values = Object.values(obj).map(ObjToString).join(", ");
+    return `INSERT OR IGNORE INTO ${name} (${keys}) VALUES (${values})`;
+  })
+  .join("; ");
+
   const db = Database.INSTANCE;
 
   db.exec(query, err => { if(err) console.log(err); else console.log("lodaded '", name, "' table"); });

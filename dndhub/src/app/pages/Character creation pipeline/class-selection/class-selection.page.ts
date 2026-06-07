@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonGrid, IonLabel, PopoverController, IonCol, IonRow, IonFooter } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonGrid, IonLabel, PopoverController, IonCol, IonRow, IonFooter, IonAccordionGroup, IonAccordion, IonThumbnail } from '@ionic/angular/standalone';
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { Accordion } from 'src/app/components/accordion/Accordion';
 import { TextAreaComponent } from "src/app/components/text-area/text-area.component";
@@ -21,7 +21,7 @@ import { CharacterManagementService } from 'src/app/services/character.managemen
   templateUrl: './class-selection.page.html',
   styleUrls: ['./class-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, AccordionComponent, IonLabel, TextAreaComponent, IonCol, ButtonComponent, IonRow, IonFooter, DragEntryComponent, TitleComponent, LabelComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, AccordionComponent, IonLabel, TextAreaComponent, IonCol, ButtonComponent, IonRow, IonFooter, DragEntryComponent, TitleComponent, LabelComponent, IonAccordionGroup, IonAccordion, IonThumbnail]
 })
 export class ClassSelectionPage implements OnInit {
   b1_button: Button = { text: 'clicca qui', expand: ''};
@@ -41,6 +41,8 @@ export class ClassSelectionPage implements OnInit {
     nextPage: { onClick: Navigate.toPath(this.router,'species-selection')}
   }
 
+  classesArray = [];
+
   //da cambiare quando avremo un db come si deve
   accordions: Accordion[] = [
     // { value: 'barbaro accordion', title: 'Barbaro', content: 'Al barbaro piace stare mezzo nudo e piacchiare la gente forte e essere arrabbiato e essere pelato e ascoltare sludge', button: this.b1},
@@ -53,7 +55,27 @@ export class ClassSelectionPage implements OnInit {
     .displayClasses()
     .subscribe({
       next: (value: any) => {
-         = value.classes;
+        this.classesArray = value.classes.map(function (item: any) {
+          return {
+            imageURL: undefined,
+            value: item.name + " accordion",
+            title: item.name,
+            hit_die: item.hit_die, 
+            desc: 'descrizione placeholder',
+            content: [
+              { value: "proficiencies accordion",  title: "Competenze", content: item.proficiencies},
+              { value: "saving_throws accordion",  title: "Tiri salvezza", content: item.saving_throws},
+              { value: "proficiency_choices accordion",  title: "Competenze a scelta", content: item.proficiency_choices},
+              { value: "multiclassing accordion",  title: "Opzioni di multiclasse", content: item.multiclassing},
+              //livelli da mettere qui, per ora provo senza
+              { value: "starting_equipment accordion",  title: "Equipaggiamento di partenza", content: item.starting_equipment},
+              { value: "starting_equipment_options accordion",  title: "Equipaggiamento di partenza a scelta", content: item.starting_equipment_options},
+              { value: "spellcasting accordion",  title: "Caratteristiche da incantatore", content: item.spellcasting},
+              { value: "spell accordion",  title: "Lista possibili incantesimi", content: item.spells},
+              { value: "subclasses accordion",  title: "Sottoclassi possibili", content: item.subclasses},
+            ]
+          };
+        });
       },
       error: (err) => {
         console.log(err);

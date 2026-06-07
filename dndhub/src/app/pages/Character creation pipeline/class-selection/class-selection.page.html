@@ -15,13 +15,60 @@
     [context] = "b2_context"
     ></app-button>
   </div>
-
+<!-- 
   <div class="classSelectionFrame">
     <app-accordion
       [accordions] = "accordions"
       [allowMultipleEnabled] = "true"
     ></app-accordion>
+  </div> -->
+
+  <!-- uso ion-accordion piuttosto che la nostra componente perché più semplice da modificare
+   se mi piace, farò una componente di questo particolare tipo di accordion -->
+
+  <div class="classSelectionFrame">
+    <ion-accordion-group [multiple]="true" expand="inset">
+      @for (class of classesArray; track class) {
+        <ion-accordion [value]="class.value">
+          <ion-item id="accHeader" slot="header" color="light">
+            <!-- togliere commento se prima o poi vogliamo una immagine nell'accordion -->
+            @if (class.imageURL !== undefined) {
+              <ion-thumbnail slot="start">
+                <img id="accImg" alt="placeholder img" [src]="class.imageURL">
+              </ion-thumbnail>
+            }
+            @else {
+              <ion-thumbnail slot="start">
+                <img alt="placeholder img" [src]="'Card.defaultImageURL()'">
+              </ion-thumbnail>
+            }
+            <app-label [fontSize]="'3.5cqmin'">{{ class.title }} - Dado Vita d{{class.hit_die}}</app-label>
+          </ion-item>
+          <!-- div relativo al contenuto -->
+          <div class="ionPadding" slot="content">
+            <app-label>{{class.desc}}</app-label>
+              <ion-accordion-group class="innerAccordions">
+            @for(accordion of class.content; track accordion) {
+              <!-- accordion di proficiencies -->
+              @if(accordion.content !== undefined && accordion.content !== null && accordion.content !== []) {
+                <ion-accordion [value]="accordion.value">
+                  <ion-item id="accHeader" slot="header" color="light">
+                    <app-label [fontSize]="'3.5cqmin'">{{accordion.title}}</app-label>
+                    <div class="ionPaddin innerContent" slot="content">
+                      <app-label>{{accordion.content}}</app-label>
+                    </div>
+                  </ion-item>
+                </ion-accordion>
+              }
+            }
+            </ion-accordion-group>
+          </div>
+        </ion-accordion>
+      }
+
+    </ion-accordion-group>
   </div>
+
 
   <!-- Sezione dedicata alla selezione del livello 
       Ancora con elementi placeholder perché il number

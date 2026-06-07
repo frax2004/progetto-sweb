@@ -13,7 +13,7 @@ function sendResponse(obj, res) {
 
 
 export function displayClasses(req, res) {
-  canSend = true;
+  canSend=true;
 
   DatabaseQueries.retrieve("SELECT * FROM Class", DatabaseQueries.unwrapClass)
   .catch(err => {

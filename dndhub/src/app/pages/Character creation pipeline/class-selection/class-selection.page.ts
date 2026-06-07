@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonGrid, IonLabel, PopoverController, IonCol, IonRow, IonFooter, IonAccordionGroup, IonAccordion, IonThumbnail } from '@ionic/angular/standalone';
@@ -63,19 +63,20 @@ export class ClassSelectionPage implements OnInit {
             hit_die: item.hit_die, 
             desc: 'descrizione placeholder',
             content: [
-              { value: "proficiencies accordion",  title: "Competenze", content: item.proficiencies},
-              { value: "saving_throws accordion",  title: "Tiri salvezza", content: item.saving_throws},
-              { value: "proficiency_choices accordion",  title: "Competenze a scelta", content: item.proficiency_choices},
-              { value: "multiclassing accordion",  title: "Opzioni di multiclasse", content: item.multiclassing},
+              { value: "proficiencies accordion",  title: "Competenze", content: JSON.stringify(item.proficiencies)},
+              { value: "saving_throws accordion",  title: "Tiri salvezza", content: JSON.stringify(item.saving_throws)},
+              { value: "proficiency_choices accordion",  title: "Competenze a scelta", content: JSON.stringify(item.proficiency_choices)},
+              { value: "multiclassing accordion",  title: "Opzioni di multiclasse", content: JSON.stringify(item.multiclassing)},
               //livelli da mettere qui, per ora provo senza
-              { value: "starting_equipment accordion",  title: "Equipaggiamento di partenza", content: item.starting_equipment},
-              { value: "starting_equipment_options accordion",  title: "Equipaggiamento di partenza a scelta", content: item.starting_equipment_options},
-              { value: "spellcasting accordion",  title: "Caratteristiche da incantatore", content: item.spellcasting},
-              { value: "spell accordion",  title: "Lista possibili incantesimi", content: item.spells},
-              { value: "subclasses accordion",  title: "Sottoclassi possibili", content: item.subclasses},
+              { value: "starting_equipment accordion",  title: "Equipaggiamento di partenza", content: JSON.stringify(item.starting_equipment)},
+              { value: "starting_equipment_options accordion",  title: "Equipaggiamento di partenza a scelta", content: JSON.stringify(item.starting_equipment_options)},
+              { value: "spellcasting accordion",  title: "Caratteristiche da incantatore", content: JSON.stringify(item.spellcasting)},
+              { value: "spell accordion",  title: "Lista possibili incantesimi", content: JSON.stringify(item.spells)},
+              { value: "subclasses accordion",  title: "Sottoclassi possibili", content: JSON.stringify(item.subclasses)},
             ]
           };
         });
+        this.displayProficiencies('ciao',this.classesArray[0].content[0].content);
       },
       error: (err) => {
         console.log(err);
@@ -83,7 +84,28 @@ export class ClassSelectionPage implements OnInit {
     });
   }
 
+  // @ gianni: ElementRef<HTMLElement>;
+  // [{"idx":"light-armor","name":"Light Armor"}]
 
+  displayProficiencies(className,proficiencies) {
+    
+    // let listElement = new HTMLIonListElement();
+    // for (const el of proficiencies) {
+    //   console.log(el);
+    //   let item = new HTMLLIElement();
+    //   item.innerHTML = el.name;
+    //   listElement.appendChild(item);
+    // }
+    // this.gianni.nativeElement.appendChild(listElement);
+    document.getElementById('gianni')
+    .innerHTML = 
+    `
+    <ul>
+      <li>gianni</li>
+      <li>gianni2</li>
+    </ul>
+    `;
+  }
 
   ngOnInit() {}
 

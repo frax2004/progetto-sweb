@@ -27,7 +27,7 @@
    se mi piace, farò una componente di questo particolare tipo di accordion -->
 
   <div class="classSelectionFrame">
-    <ion-accordion-group [multiple]="true" expand="inset">
+    <ion-accordion-group value="fatherAccordion" [multiple]="false" expand="inset">
       @for (class of classesArray; track class) {
         <ion-accordion [value]="class.value">
           <ion-item id="accHeader" slot="header" color="light">
@@ -47,17 +47,18 @@
           <!-- div relativo al contenuto -->
           <div class="ionPadding" slot="content">
             <app-label>{{class.desc}}</app-label>
-              <ion-accordion-group class="innerAccordions">
+            <ion-accordion-group [value]="class.value + 'group accordion'" class="innerAccordions" [multiple]="true" expand="inset">
             @for(accordion of class.content; track accordion) {
-              <!-- accordion di proficiencies -->
               @if(accordion.content !== undefined && accordion.content !== null && accordion.content !== []) {
                 <ion-accordion [value]="accordion.value">
                   <ion-item id="accHeader" slot="header" color="light">
                     <app-label [fontSize]="'3.5cqmin'">{{accordion.title}}</app-label>
-                    <div class="ionPaddin innerContent" slot="content">
-                      <app-label>{{accordion.content}}</app-label>
-                    </div>
                   </ion-item>
+                  <div id="gianni"
+                  class="ionPaddin innerContent" slot="content">
+
+                    <app-label>{{accordion.content}}</app-label>
+                  </div>
                 </ion-accordion>
               }
             }

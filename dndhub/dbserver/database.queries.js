@@ -10,6 +10,85 @@ export class DatabaseQueries {
     return result;
   }
 
+  static async unwrapAbilityScore(score) {
+    let skills = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${score.skills}`);
+    
+    return {
+      idx: score.idx,
+      name: score.name,
+      full_name: score.full_name,
+      description: score.description,
+      skills: await DatabaseQueries.map(await skills, DatabaseQueries.unwrapArrayAbilityBonusItem),
+    };
+  }
+
+  static async unwrapBackground(bg) {
+    let starting_proficiencies = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${bg.starting_proficiencies}`);
+    let language_options = Database.queryAll(`SELECT * FROM Choice WHERE id = ${bg.language_options}`);
+    let starting_equipment = Database.queryAll(`SELECT * FROM ArrayStartingEquipmentItem WHERE array_id = ${bg.starting_equipment}`);
+    let starting_equipment_options = Database.queryAll(`SELECT * FROM ArrayChoiceItem WHERE array_id = ${bg.starting_equipment_options}`);
+    let personality_traits = Database.queryAll(`SELECT * FROM Choice WHERE id = ${bg.personality_traits}`);
+    let ideals = Database.queryAll(`SELECT * FROM Choice WHERE id = ${bg.ideals}`);
+    let bonds = Database.queryAll(`SELECT * FROM Choice WHERE id = ${bg.bonds}`);
+    let flaws = Database.queryAll(`SELECT * FROM Choice WHERE id = ${bg.flaws}`);
+
+    return {
+      idx: bg.idx,
+      name: bg.name, 
+      starting_gold_quantity: bg.starting_gold_quantity, 
+      starting_gold_unit: bg.starting_gold_unit, 
+      feature: {
+        name: bg.feature_name,
+        desc: bg.feature_desc,
+      },
+      starting_proficiencies: await DatabaseQueries.map(await starting_proficiencies, DatabaseQueries.unwrapArrayAPIReferenceItem),
+      language_options: (await DatabaseQueries.map(await language_options, DatabaseQueries.unwrapChoice))[0],
+      starting_equipment: await DatabaseQueries.map(await starting_equipment, DatabaseQueries.unwrapArrayStartingEquipmentItem),
+      starting_equipment_options: await DatabaseQueries.map(await starting_equipment_options, DatabaseQueries.unwrapArrayChoiceItem),
+      personality_traits: (await DatabaseQueries.map(await personality_traits, DatabaseQueries.unwrapChoice))[0],
+      ideals: (await DatabaseQueries.map(await ideals, DatabaseQueries.unwrapChoice))[0],
+      bonds: (await DatabaseQueries.map(await bonds, DatabaseQueries.unwrapChoice))[0],
+      flaws: (await DatabaseQueries.map(await flaws, DatabaseQueries.unwrapChoice))[0],
+    };
+  }
+
+  static async unwrapArrayAbilityBonusItem(item) {
+    let ref = Database.queryAll(`SELECT * FROM APIReference WHERE idx = ${item.ability_score}`);
+    return {
+      ability_score: (await DatabaseQueries.map(await ref, DatabaseQueries.unwrapAPIReference))[0],
+      bonus: item.bonus
+    };
+  }
+
+  static async unwrapSpecies(species) {
+    let ability_bonuses = Database.queryAll(`SELECT * FROM ArrayAbilityBonusItem WHERE array_id = ${species.ability_bonuses}`);
+    let ability_bonus_options = Database.queryAll(`SELECT * FROM Choice WHERE id = ${species.ability_bonus_options}`);
+    let starting_proficiencies = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${species.starting_proficiencies}`);
+    let starting_proficiency_options = Database.queryAll(`SELECT * FROM Choice WHERE id = ${species.starting_proficiency_options}`);
+    let languages = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${species.languages}`);
+    let language_options = Database.queryAll(`SELECT * FROM Choice WHERE id = ${species.language_options}`);
+    let traits = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${species.traits}`);
+    let subspecies = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${species.subspecies}`);
+
+    return {
+      idx: species.idx,
+      name: species.name,
+      speed: species.speed,
+      alignment: species.alignment,
+      age: species.age,
+      size: species.size,
+      size_description: species.size_description,
+      language_desc: species.language_desc,
+      ability_bonuses: await DatabaseQueries.map(await ability_bonuses, DatabaseQueries.unwrapArrayAbilityBonusItem),
+      ability_bonus_options: (await DatabaseQueries.map(await ability_bonus_options, DatabaseQueries.unwrapChoice))[0],
+      starting_proficiencies: await DatabaseQueries.map(await starting_proficiencies, DatabaseQueries.unwrapArrayAPIReferenceItem),
+      starting_proficiency_options: (await DatabaseQueries.map(await starting_proficiency_options, DatabaseQueries.unwrapChoice))[0],
+      languages: await DatabaseQueries.map(await languages, DatabaseQueries.unwrapArrayAPIReferenceItem),
+      language_options: (await DatabaseQueries.map(await language_options, DatabaseQueries.unwrapChoice))[0],
+      traits: await DatabaseQueries.map(await traits, DatabaseQueries.unwrapArrayAPIReferenceItem),
+      subspecies: await DatabaseQueries.map(await subspecies, DatabaseQueries.unwrapArrayAPIReferenceItem),
+    };
+  }
 
   static async unwrapAPIReference(ref) {
     return {
@@ -21,7 +100,7 @@ export class DatabaseQueries {
   
   static async unwrapMultiClassingPrereq(prereq) {
     let ability_scores = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${prereq.ability_score}'`);
-  
+
     return {
       ability_score: (await DatabaseQueries.map(await ability_scores, DatabaseQueries.unwrapAPIReference))[0],
       minimum_score: prereq.minimum_score

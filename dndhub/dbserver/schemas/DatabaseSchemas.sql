@@ -161,7 +161,7 @@ create table if not exists AbilityScore (
   skills number,
   url text ,
 
-  foreign key (skills) references ArrayAPIReference(array_id)
+  foreign key (skills) references ArrayAPIReferenceItem(array_id)
 );
 
 -- tabelle di Alignments
@@ -232,7 +232,7 @@ create table if not exists Background (
   foreign key (language_options) references Choice(id),
   foreign key (starting_proficiencies) references ArrayAPIReferenceItem(array_id),
   foreign key (starting_equipment) references ArrayStartingEquipmentItem(array_id),
-  foreign key (starting_equipment_options) references ArrayChoice(array_id),
+  foreign key (starting_equipment_options) references ArrayChoiceItem(array_id),
   foreign key (personality_traits) references Choice(id),
   foreign key (ideals) references Choice(id),
   foreign key (bonds) references Choice(id),

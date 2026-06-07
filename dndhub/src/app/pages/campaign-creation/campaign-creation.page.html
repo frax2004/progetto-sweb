@@ -10,24 +10,33 @@
     <!-- Riga 1 -->
     <div class="riquadro">
       <ion-label>Inserire il nome della campagna:</ion-label>
-      <ion-input placeholder="Nome campagna"></ion-input>
+      <ion-input [(ngModel)]="nome" placeholder="nome"></ion-input>
     </div>
 
     <div class="riquadro">
       <ion-label>Inserire i giocatori che parteciperanno:</ion-label>
-      <ion-input placeholder="Giocatori"></ion-input>
+      <ion-input [(ngModel)]="giocatori" placeholder="giocatori"></ion-input>
     </div>
 
     <!-- Riga 2 -->
     <div class="riquadro descrizione">
-      <ion-label>Descrizione campagna:</ion-label>
+      <ion-label>descrizione:</ion-label>
 
       <div class="scrollDiv">
-        <app-text-area> </app-text-area>
+      <ion-label class="textarea"></ion-label>
+      <ion-input [(ngModel)]="descrizione" placeholder="descrizione"></ion-input>
+       
+
+        <!-- <ion-textarea
+        [value]="descrizione"
+        (ionInput)="descrizione = $event.detail.value"
+        placeholder="Descrizione">
+        </ion-textarea> -->
       </div>
     </div>
 
     <!-- Riga 3 -->
+     <!-- questo non dovrermmo generarlo noi? -->
     <div class="riquadro">
       <ion-label>Link d'invito:</ion-label>
       <ion-input placeholder="Link"></ion-input>
@@ -35,7 +44,7 @@
 
     <div class="riquadro">
       <ion-label>Link dell'immagine banner:</ion-label>
-      <ion-input placeholder="Banner"></ion-input>
+      <ion-input [(ngModel)]="banner" placeholder="Banner"></ion-input>
     </div>
 
     <!-- Riga 4 -->

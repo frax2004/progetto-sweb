@@ -7,6 +7,7 @@ import { ButtonComponent } from "src/app/components/button/button.component";
 import { Popups } from 'src/app/core/core';
 import { EntryComponent } from "src/app/components/entry/entry.component";
 import { ScrollBarComponent } from "src/app/components/scrollbar/scrollbar.component";
+import { CampagnaService } from 'src/app/services/campagna';
 
 @Component({
   selector: 'app-campaign-creation',
@@ -16,14 +17,34 @@ import { ScrollBarComponent } from "src/app/components/scrollbar/scrollbar.compo
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, IonRow, IonCol, IonLabel, TextAreaComponent, ButtonComponent, EntryComponent, IonInput, ScrollBarComponent]
 })
 export class CampaignCreationPage implements OnInit {
-  buttonCallbacks = {
-    finishCreation: {onClick: Popups.ofSimpleText(this.popoverController, 'Funzione non ancora implementata :]')}
+buttonCallbacks = {
+  finishCreation: {
+    onClick: () => this.creaCampagna()
   }
+}
 
 
-  constructor(public popoverController: PopoverController) { }
+constructor(public popoverController: PopoverController ,private campagnaService: CampagnaService) {}
 
+creaCampagna() {
+
+  const data = {
+    nome: this.nome,
+    giocatori: this.giocatori,
+    descrizione: this.descrizione,
+    banner: this.banner,
+    utente_dungeon_master: "email@utente.com"
+  };
+
+  this.campagnaService.createCampaign(data)
+    .subscribe(res => {
+      console.log("Campagna creata", res);
+    });
+}
   ngOnInit() {
   }
-
+nome = '';
+giocatori = '';
+descrizione = '';
+banner = '';
 }

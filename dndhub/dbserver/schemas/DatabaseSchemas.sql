@@ -116,7 +116,7 @@ create table if not exists Option (
   size text,
 
   foreign key (reference_item) references APIReference(idx),
-  foreign key (choice_id) references Choice(opt_id),
+  foreign key (choice_id) references Choice(id),
   foreign key (ability_score_bonus) references APIReference(idx),
   foreign key (breath_dc) references DifficultyClass(id), 
   foreign key (breath_damage) references ArrayDamageItem(array_id),
@@ -192,7 +192,7 @@ create table if not exists ArrayChoiceItem (
   array_idx number ,
 
   primary key (array_id,array_idx),
-  foreign key (id) references Choice(opt_id)
+  foreign key (id) references Choice(id)
 );
 
 
@@ -229,14 +229,14 @@ create table if not exists Background (
   url text,
 
 
-  foreign key (language_options) references Choice(opt_id),
+  foreign key (language_options) references Choice(id),
   foreign key (starting_proficiencies) references ArrayAPIReferenceItem(array_id),
   foreign key (starting_equipment) references ArrayStartingEquipmentItem(array_id),
   foreign key (starting_equipment_options) references ArrayChoice(array_id),
-  foreign key (personality_traits) references Choice(opt_id),
-  foreign key (ideals) references Choice(opt_id),
-  foreign key (bonds) references Choice(opt_id),
-  foreign key (flaws) references Choice(opt_id)
+  foreign key (personality_traits) references Choice(id),
+  foreign key (ideals) references Choice(id),
+  foreign key (bonds) references Choice(id),
+  foreign key (flaws) references Choice(id)
 );
 
 -- tabelle di Condition.ts
@@ -361,7 +361,7 @@ create table if not exists MultiClassing (
   proficiency_choices number,
 
   foreign key (prerequisites) references ArrayMultiClassingPrereqItem(array_id), 
-  foreign key (prerequisite_options) references Choice(opt_id),
+  foreign key (prerequisite_options) references Choice(id),
   foreign key (proficiencies) references ArrayAPIReferenceItem(array_id),
   foreign key (proficiency_choices) references ArrayChoiceItem(array_id)
 );
@@ -494,7 +494,7 @@ create table if not exists Feat (
   prerequisite_options number,
   url text ,
 
-  foreign key (prerequisite_options) references Choice(opt_id)
+  foreign key (prerequisite_options) references Choice(id)
 );
 
 -- tabelle di MagicItems.ts
@@ -548,11 +548,11 @@ create table if not exists Species (
   url text,
 
   foreign key (ability_bonuses) references ArrayAbilityBonusItem(array_id),
-  foreign key (ability_bonus_options) references Choice(opt_id),
+  foreign key (ability_bonus_options) references Choice(id),
   foreign key (starting_proficiencies) references ArrayAPIReferenceItem(array_id),
-  foreign key (starting_proficiency_options) references Choice(opt_id),
+  foreign key (starting_proficiency_options) references Choice(id),
   foreign key (languages) references ArrayAPIReferenceItem(array_id),
-  foreign key (language_options) references Choice(opt_id),
+  foreign key (language_options) references Choice(id),
   foreign key (traits) references ArrayAPIReferenceItem(array_id),
   foreign key (subspecies) references ArrayAPIReferenceItem(array_id)
 );
@@ -654,8 +654,8 @@ create table if not exists TraitSpecific (
 
   foreign key (damage_type) references APIReference(idx),
   foreign key (breath_weapon) references BreathWeapon(id),
-  foreign key (spell_options) references Choice(opt_id),
-  foreign key (subtrait_options) references Choice(opt_id)
+  foreign key (spell_options) references Choice(id),
+  foreign key (subtrait_options) references Choice(id)
 );
 
 create table if not exists Trait (
@@ -674,9 +674,9 @@ create table if not exists Trait (
 
   foreign key (species) references ArrayAPIReferenceItem(array_id),
   foreign key (subspecies) references ArrayAPIReferenceItem(array_id),
-  foreign key (proficiency_choices) references Choice(opt_id),
+  foreign key (proficiency_choices) references Choice(id),
   foreign key (proficiencies) references ArrayAPIReferenceItem(array_id),
-  foreign key (language_options) references Choice(opt_id),
+  foreign key (language_options) references Choice(id),
   foreign key (parent) references APIReference(idx),
   foreign key (trait_specific) references TraitSpecific(id)
 );

@@ -3,5 +3,5 @@ import controller from '../controllers/character.management.controller.js';
 
 export const characterManagementRouter = express.Router();
 
-characterManagementRouter.post("/class-selection", controller.displayClasses);
+characterManagementRouter.post("/class-display", controller.displayClasses);
 // characterManagementRouter

@@ -91,6 +91,7 @@ Database.load(DatabasePaths.SCHEMAS);
 tables.forEach(table => loadTable(table));
 
 
+
 app.listen(PORT, () => () => {
   console.log(`Server in ascolto su http://localhost:${PORT}`);
 });

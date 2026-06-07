@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-// TODO QUANDO SI DEVE TESTARE QUALCOSA, SETTARE IL PROPRIO IPv4 (da cmd => ipconfig => guarda verso la fine)
 
 @Injectable({
   providedIn: 'root',

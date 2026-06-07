@@ -14,6 +14,7 @@ import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.com
 import { Router } from '@angular/router';
 import { TitleComponent } from "src/app/components/title/title.component";
 import { LabelComponent } from "src/app/components/label/label.component";
+import { CharacterManagementService } from 'src/app/services/character.management.service';
 
 @Component({
   selector: 'app-class-selection',
@@ -42,20 +43,32 @@ export class ClassSelectionPage implements OnInit {
 
   //da cambiare quando avremo un db come si deve
   accordions: Accordion[] = [
-    
-    
-    
-    { value: 'barbaro accordion', title: 'Barbaro', content: 'Al barbaro piace stare mezzo nudo e piacchiare la gente forte e essere arrabbiato e essere pelato e ascoltare sludge', button: this.b1},
-    { value: 'mago accordion', title: 'Mago', content: 'Il mago è un secchione che tira magie e puo\' (quasi) letteralemente piegare la realtà alla sua volontà una volta arrivato ad un determinato livello', button: this.b1},
-    { value: 'ranger accordion', title: 'Ranger', content: 'è scarso, non sceglierlo :[', button: this.b1},
+    // { value: 'barbaro accordion', title: 'Barbaro', content: 'Al barbaro piace stare mezzo nudo e piacchiare la gente forte e essere arrabbiato e essere pelato e ascoltare sludge', button: this.b1},
+    // { value: 'mago accordion', title: 'Mago', content: 'Il mago è un secchione che tira magie e puo\' (quasi) letteralemente piegare la realtà alla sua volontà una volta arrivato ad un determinato livello', button: this.b1},
+    // { value: 'ranger accordion', title: 'Ranger', content: 'è scarso, non sceglierlo :[', button: this.b1},
   ];
 
-
-  
-
-  constructor(public popoverController: PopoverController, private router: Router) { }
-
-  ngOnInit() {
+  constructor(public popoverController: PopoverController, private router: Router, private classDisplayer: CharacterManagementService) {
+    this.classDisplayer
+    .displayClasses()
+    .subscribe({
+      next: (value: any) => {
+        this.accordions = value.classes.map(function (item: any): Accordion {
+          return {
+            value: item.name + " accordion",
+            title: item.name,
+            content: item.proficiencies.map(JSON.stringify).join("\n")
+          };
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
+
+
+
+  ngOnInit() {}
 
 }

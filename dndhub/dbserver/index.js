@@ -46,7 +46,6 @@ function loadTable(name) {
   const db = Database.INSTANCE;
 
   db.exec(query, err => { if(err) console.log(err); else console.log("lodaded '", name, "' table"); });
-
 }
 
 

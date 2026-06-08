@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
+import { environment } from 'src/environments/environment';
 
 export const routes: Routes = [
   {
@@ -9,7 +10,7 @@ export const routes: Routes = [
   { path: 'radio-button', component: RadioButtonComponent },
   {
     path: '',
-    redirectTo: 'landing-page',
+    redirectTo: environment.defaultRoute,
     pathMatch: 'full',
   },
   {

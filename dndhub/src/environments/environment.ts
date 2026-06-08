@@ -6,7 +6,8 @@ const PORT = 10000;
 
 export const environment = {
   production: false,
-  api_url: `http://localhost:${PORT}`
+  api_url: `http://localhost:${PORT}`,
+  defaultRoute: "profile",
 };
 
 /*

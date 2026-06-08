@@ -1,3 +1,7 @@
+// * {
+//     border: 1px solid green;
+// }
+
 .informationContainer {
     width: 70vw;
     margin-right: 8vw;
@@ -10,8 +14,12 @@
     display: flex;
     align-items: center;
     max-width: 25vmin;
-    max-height: 25vmin;
+    max-height: 30vmin;
     border-radius: 100%;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+    justify-self: center;
     overflow: hidden;
 }
 
@@ -35,37 +43,37 @@
     box-shadow: 4px 4px 4px rgba(85, 85, 85, 0.342);
 }
 
-.goBack {
-    width: 100%;
-}
 
 .buttonContainer {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
 }
 
-.buttonContainer,
-.goBack {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+.btn {
+    justify-self: center;
+    padding: 5px;
+    width: 100%;
 }
 
 .gridContainer {
     margin-top: 3vh;
 }
 
-ion-grid {
+
+.entry-container {
     height: 100%;
-}
-
-.passwordContainer {
+    width: 90%;
+    justify-self: center;
     display: flex;
-    flex-direction: center;
-    text-align: center;
+    flex-direction: column;
+    row-gap: 2.5%;
 }
 
-.passwordButton {
-    align-self: center;
-    height: 50%;
-    width: 40%;
+
+.ion-padding {
+    display: flex;  
 }
+

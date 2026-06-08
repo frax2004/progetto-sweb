@@ -20,4 +20,11 @@ export class CharacterManagementService {
       )
     );
   }
+
+  displaySpecificLevel(className: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/level-display-specific`,
+      {className: className}
+    );
+  }
 }

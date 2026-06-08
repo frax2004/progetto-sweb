@@ -42,6 +42,8 @@ export class ClassSelectionPage implements OnInit {
   }
 
   classesArray = [];
+  static lvlsArray = [];
+  classesNames = ['Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter', 'Monk', 'Paladin', 'Ranger', 'Rogue', 'Sorcerer', 'Warlock', 'Wizard'];
 
   //da cambiare quando avremo un db come si deve
   accordions: Accordion[] = [
@@ -164,7 +166,99 @@ export class ClassSelectionPage implements OnInit {
     return retValue;
   }
 
+  static assignlevelsToClass(className: string) {
+    let classLvls = [];
+    let lowercaseName = className.toLowerCase();
+    for (let i=0; i<ClassSelectionPage.lvlsArray.length; i++) {
+      if (ClassSelectionPage.lvlsArray[i].idx == lowercaseName) {
+        return ClassSelectionPage.lvlsArray[i].content;
+      }
+    }
+
+    return 'C\'è stato qualche errore';
+  }
+
+
+
+  // {
+//   name: 'ranger',
+//   features: [
+//     { idx: 'favored-enemy-2-types', name: 'Favored Enemy (2 types)' },
+//     {
+//       idx: 'natural-explorer-2-terrain-types',
+//       name: 'Natural Explorer (2 terrain types)'
+//     }
+//   ],
+//   class_specific: {
+//     creating_spell_slots: [],
+//     action_surges: undefined,
+//     arcane_recovery_levels: undefined,
+//     aura_range: undefined,
+//     bardic_inspiration_die: undefined,
+//     brutal_critical_dice: undefined,
+//     channel_divinity_charges: undefined,
+//     destroy_undead_cr: undefined,
+//     extra_attacks: undefined,
+//     favored_enemies: 2,
+//     favored_terrain: 2,
+//     indomitable_uses: undefined,
+//     invocations_known: undefined,
+//     ki_points: undefined,
+//     magical_secrets_max_5: undefined,
+//     magical_secrets_max_7: undefined,
+//     magical_secrets_max_9: undefined,
+//     martial_arts: { dice_count: undefined, dice_value: undefined },
+//     metamagic_known: undefined,
+//     mystic_arcanum_level_6: undefined,
+//     mystic_arcanum_level_7: undefined,
+//     mystic_arcanum_level_8: undefined,
+//     mystic_arcanum_level_9: undefined,
+//     rage_count: undefined,
+//     rage_damage_bonus: undefined,
+//     sneak_attack: { dice_count: undefined, dice_value: undefined },
+//     song_of_rest_die: undefined,
+//     sorcery_points: undefined,
+//     unarmored_movement: undefined,
+//     wild_shape: { fly: undefined, max_cr: undefined, swim: undefined }
+//   },
+//   idx: 'ranger-6',
+//   level: 6,
+//   ability_score_bonuses: 1,
+//   prof_bonus: 3,
+//   cantrips_known: undefined,
+//   spell_slots_level_1: 4,
+//   spell_slots_level_2: 2,
+//   spell_slots_level_3: 0,
+//   spell_slots_level_4: 0,
+//   spell_slots_level_5: 0,
+//   spell_slots_level_6: undefined,
+//   spell_slots_level_7: undefined,
+//   spell_slots_level_8: undefined,
+//   spell_slots_level_9: undefined,
+//   spells_known: 4,
+//   additional_magical_secrets_max_lvl: undefined,
+//   aura_range: undefined
+// }
+
+  
+
   constructor(public popoverController: PopoverController, private router: Router, private classDisplayer: CharacterManagementService) {
+    for (const name of this.classesNames) {
+      this.classDisplayer
+      .displaySpecificLevel(name)
+      .subscribe({
+        next: (value: any) => {
+          console.log('sono nel subscribe --> ', name);
+          ClassSelectionPage.lvlsArray.push({
+            idx: value.levels[0].name,
+            content: value.levels,
+          });
+        },
+        error: (err: any) => console.log(err)
+      })
+    }
+
+
     this.classDisplayer
     .displayClasses()
     .subscribe({
@@ -181,13 +275,14 @@ export class ClassSelectionPage implements OnInit {
               { value: "saving_throws accordion",  title: "Tiri salvezza", content: ClassSelectionPage.displaySavingThrows(item.name,item.saving_throws)},
               { value: "proficiency_choices accordion",  title: "Competenze a scelta", content: ClassSelectionPage.displayProficiencyChoices(item.name, item.proficiency_choices)},
               { value: "multiclassing accordion",  title: "Opzioni di multiclasse", content: ClassSelectionPage.displayMulticlassing(item.name,item.multiclassing)},
-              //livelli da mettere qui, per ora provo senza
               { value: "starting_equipment accordion",  title: "Equipaggiamento di partenza", content: ClassSelectionPage.displayStartingEquipment(item.name,item.starting_equipment)},
               { value: "starting_equipment_options accordion",  title: "Equipaggiamento di partenza a scelta", content: ClassSelectionPage.displayStartigEquipmentOptions(item.name,item.starting_equipment_options)},
               { value: "spellcasting accordion",  title: "Caratteristiche da incantatore", content: JSON.stringify(item.spellcasting)},
               { value: "spell accordion",  title: "Lista possibili incantesimi", content: ClassSelectionPage.displaySpells(item.name,item.spells)},
               { value: "subclasses accordion",  title: "Sottoclassi possibili", content: ClassSelectionPage.displaySubclasses(item.name,item.subclasses)},
-            ]
+              //{ value: "levels accordion",  title: "Livelli possibili", content: JSON.stringify(item.levels)},
+            ],
+            levels: ClassSelectionPage.assignlevelsToClass(item.name),
           };
         });
       },

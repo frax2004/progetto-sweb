@@ -47,7 +47,7 @@
           <!-- div relativo al contenuto -->
           <div class="ionPadding" slot="content">
             <app-label>{{class.desc}}</app-label>
-            <ion-accordion-group [value]="class.value + 'group accordion'" class="innerAccordions" [multiple]="true" expand="inset">
+            <ion-accordion-group [value]="class.value + 'group accordion'" class="innerAccordions" [multiple]="true">
             @for(accordion of class.content; track accordion) {
               @if(accordion.content !== undefined && accordion.content !== null && accordion.content !== [] && accordion.lenght !== 0) {
                 <ion-accordion [value]="accordion.value">
@@ -60,7 +60,172 @@
                 </ion-accordion>
               }
             }
+                <ion-accordion value="levels accordion">
+                  <ion-item id="accHeader" slot="header" color="light">
+                    <app-label [fontSize]="'3.5cqmin'">Progressione livelli personaggio</app-label>
+                  </ion-item>
+                  <div class="ionPaddin innerContent" slot="content">
+                    <!-- qua ci vanno i sotto-accordion -->
+                    <ion-accordion-group [value]="class.value + 'levels accordion group'" class="innerAccordions" [multiple]="true">
+                    @for(level of class.levels; track level) {
+                      <ion-accordion [value]="level.idx + ' level + accordion'">
+                        <ion-item id="accHeader" slot="header" color="light">
+                          <app-label [fontSize]="'3.5cqmin'">Livello {{level.level}}</app-label>
+                        </ion-item>
+                        <div class="ionPaddin innerContent" slot="content">
+                          <app-label>A questo livello {{class.title}} ha accesso alle seguenti abilità:</app-label>
+                          @if(level.features.length > 0) {
+                            <br>
+                            @for(feature of level.features; track feature) {
+                              <app-label>- {{feature.name}}</app-label>
+                            }
+                          }
+                          <!-- ora una serie di if per le abilità opzionali -->
+                          <!-- TODO creating spell slots fallo alla fine -->
+                          @if(level.class_specific.action_surges !== undefined) {
+                            <app-label>- {{level.class_specific.action_surges}} action surges per riposo lungo</app-label>
+                          }
+                          @if(level.class_specific.arcane_recovery_levels !== undefined) {
+                            <app-label>- {{level.class_specific.arcane_recovery_levels}} livelli di arcane recovery per riposo lungo</app-label>
+                          }
+                          @if(level.class_specific.aura_range !== undefined) {
+                            <app-label>- {{level.class_specific.aura_range}} di aura range </app-label>
+                          }
+                          @if(level.class_specific.bardic_inspiration_die !== undefined) {
+                            <app-label>- {{level.class_specific.bardic_inspiration_die}} dadi di ispirazione bardica per riposo breve</app-label>
+                          }
+                          @if(level.class_specific.brutal_critical_dice !== undefined) {
+                            <app-label>- {{level.class_specific.brutal_critical_dice}} dadi addizionali di critico brutale</app-label>
+                          }
+                          @if(level.class_specific.channel_divinity_charges !== undefined) {
+                            <app-label>- {{level.class_specific.channel_divinity_charges}} cariche di incanalare divinità per riposo lungo</app-label>
+                          }
+                          @if(level.class_specific.destroy_undead_cr !== undefined) {
+                            <app-label>- CR dei non morti affetti dall'abilità distruggere non morti: {{level.class_specific.destroy_undead_cr}}</app-label>
+                          }
+                          @if(level.class_specific.extra_attacks !== undefined) {
+                            <app-label>- {{level.class_specific.extra_attacks}} attacchi extra</app-label>
+                          }
+                          @if(level.class_specific.favored_enemies !== undefined) {
+                            <app-label>- {{level.class_specific.favored_enemies}} nemici favoriti</app-label>
+                          }
+                          @if(level.class_specific.favored_terrain !== undefined) {
+                            <app-label>- {{level.class_specific.favored_terrain}} terreni favoriti</app-label>
+                          }
+                          @if(level.class_specific.indomitable_uses !== undefined) {
+                            <app-label>- {{level.class_specific.indomitable_uses}} utilizzi di indomito</app-label>
+                          }
+                          @if(level.class_specific.invocations_known !== undefined) {
+                            <app-label>- {{level.class_specific.invocations_known}} invocazioni conosciute</app-label>
+                          }
+                          @if(level.class_specific.ki_points !== undefined) {
+                            <app-label>- {{level.class_specific.ki_points}} punti ki</app-label>
+                          }
+                          @if(level.class_specific.magical_secrets_max_5 !== undefined) {
+                            <app-label>- {{level.class_specific.magical_secrets_max_5}} magical secrets max 5</app-label>
+                          }
+                          @if(level.class_specific.magical_secrets_max_7 !== undefined) {
+                            <app-label>- {{level.class_specific.magical_secrets_max_7}} magical secrets max 7</app-label>
+                          }
+                          @if(level.class_specific.magical_secrets_max_9 !== undefined) {
+                            <app-label>- {{level.class_specific.magical_secrets_max_9}} magical secrets max 9</app-label>
+                          }
+                          @if(level.class_specific.martial_arts.dice_count !== undefined && level.class_specific.martial_arts.dice_value !== undefined) {
+                            <app-label>- {{level.class_specific.martial_arts.dice_count}}d{{level.class_specific.martial_arts.dice_value}} arti marziali</app-label>
+                          }
+                          @if(level.class_specific.metamagic_known !== undefined) {
+                            <app-label>- {{level.class_specific.metamagic_known}} opzioni di metamagia conosciute</app-label>
+                          }
+                          @if(level.class_specific.mystic_arcanum_level_6 !== undefined) {
+                            <app-label>- {{level.class_specific.mystic_arcanum_level_6}} mystic arcanum livello 6</app-label>
+                          }
+                          @if(level.class_specific.mystic_arcanum_level_7 !== undefined) {
+                            <app-label>- {{level.class_specific.mystic_arcanum_level_6}} mystic arcanum livello 7</app-label>
+                          }
+                          @if(level.class_specific.mystic_arcanum_level_8 !== undefined) {
+                            <app-label>- {{level.class_specific.mystic_arcanum_level_8}} mystic arcanum livello 8</app-label>
+                          }
+                          @if(level.class_specific.mystic_arcanum_level_9 !== undefined) {
+                            <app-label>- {{level.class_specific.mystic_arcanum_level_9}} mystic arcanum livello 9</app-label>
+                          }
+                          @if(level.class_specific.rage_count !== undefined) {
+                            <app-label>- {{level.class_specific.rage_count}} numero di ire per riposo lungo</app-label>
+                          }
+                          @if(level.class_specific.rage_damage_bonus !== undefined) {
+                            <app-label>- {{level.class_specific.rage_damage_bonus}} danni bonus da ira</app-label>
+                          }
+                          @if(level.class_specific.sneak_attack.dice_count !== undefined && level.class_specific.sneak_attack.dice_value !== undefined) {
+                            <app-label>- {{level.class_specific.sneak_attack.dice_count}}d{{level.class_specific.sneak_attack.dice_value}} danni aggiuntivi da attacco furtivo</app-label>
+                          }
+                          @if(level.class_specific.song_of_rest_die !== undefined) {
+                            <app-label>- {{level.class_specific.song_of_rest_die}} dado di canzone di riposo</app-label>
+                          }
+                          @if(level.class_specific.sorcery_points !== undefined) {
+                            <app-label>- {{level.class_specific.sorcery_points}} punti stregoneria</app-label>
+                          }
+                          @if(level.class_specific.unarmored_movement !== undefined) {
+                            <app-label>- {{level.class_specific.unarmored_movement}} piedi addizionali di movimento senza armatura</app-label>
+                          }
+                          @if(level.class_specific.wild_shape.fly === true) {
+                            <app-label>- Puoi utilizzare forme selvagge con velocità di volo</app-label>
+                          }
+                          @if(level.class_specific.wild_shape.max_cr !== undefined) {
+                            <app-label>- CR massimo delle proprie forme selvagge: {{level.class_specific.wild_shape.max_cr}}</app-label>
+                          }
+                          @if(level.class_specific.wild_shape.swim === true) {
+                            <app-label>- Puoi usare forme selvagge con velocità di nuoto</app-label>
+                          }
+                          <br>
+                          <app-label>ASI ottenuti fino a questo livello {{level.ability_score_bonuses}}</app-label>
+                          <br>
+                          <app-label>Bonus competenza: {{level.prof_bonus}}</app-label>
+                          <br>
+                          @if(level.cantrips_known !== null && level.cantrips_known !== undefined) {
+                            <app-label>Numero trucchetti conosciuti: {{level.cantrips_known}}</app-label>
+                          }
+                          @if(level.spell_slots_level_1 !== null && level.spell_slots_level_1 !== undefined) {
+                            <app-label>Slot livello 1: {{level.spell_slots_level_1}}</app-label>
+                          }
+                          @if(level.spell_slots_level_2 !== null && level.spell_slots_level_2 !== undefined) {
+                            <app-label>Slot livello 2: {{level.spell_slots_level_2}}</app-label>
+                          }
+                          @if(level.spell_slots_level_3 !== null && level.spell_slots_level_3 !== undefined) {
+                            <app-label>Slot livello 3: {{level.spell_slots_level_3}}</app-label>
+                          }
+                          @if(level.spell_slots_level_4 !== null && level.spell_slots_level_4 !== undefined) {
+                            <app-label>Slot livello 4: {{level.spell_slots_level_4}}</app-label>
+                          }
+                          @if(level.spell_slots_level_5 !== null && level.spell_slots_level_5 !== undefined) {
+                            <app-label>Slot livello 5: {{level.spell_slots_level_5}}</app-label>
+                          }
+                          @if(level.spell_slots_level_6 !== null && level.spell_slots_level_6 !== undefined) {
+                            <app-label>Slot livello 5: {{level.spell_slots_level_5}}</app-label>
+                          }
+                          @if(level.spell_slots_level_7 !== null && level.spell_slots_level_7 !== undefined) {
+                            <app-label>Slot livello 1: {{level.spell_slots_level_7}}</app-label>
+                          }
+                          @if(level.spell_slots_level_8 !== null && level.spell_slots_level_8 !== undefined) {
+                            <app-label>Slot livello 8: {{level.spell_slots_level_8}}</app-label>
+                          }
+                          @if(level.spell_slots_level_9 !== null && level.spell_slots_level_9 !== undefined) {
+                            <app-label>Slot livello 9: {{level.spell_slots_level_9}}</app-label>
+                          }
+                          <br>
+                          @if(level.spells_known !== null && level.spells_known !== undefined) {
+                            <app-label>Incantesimi conosciuti: {{level.spells_known}}</app-label>
+                          }
+                        </div>
+                      </ion-accordion>
+                    } 
+                    </ion-accordion-group>
+                  </div>
+                </ion-accordion>
             </ion-accordion-group>
+            <app-button
+            [button]="{text: 'Scegli questa classe', expand: ''}"
+            [margin]="false"
+            >
+            </app-button>
           </div>
         </ion-accordion>
       }

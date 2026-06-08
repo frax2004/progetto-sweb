@@ -250,8 +250,8 @@ export class DatabaseQueries {
   
   static async unwrapArrayCreatingSpellSlotItem(slotItem) {
     return {
-      sorcery_point_cost: slotItem.sorcery_point_cost,
-      spell_slot_level: slotItem.spell_slot_level
+      sorcery_point_cost: slotItem.sorcery_point_cost === null ? undefined : slotItem.sorcery_point_cost,
+      spell_slot_level: slotItem.spell_slot_level === null ? undefined : slotItem.spell_slot_level
     };
   }
   
@@ -260,44 +260,44 @@ export class DatabaseQueries {
   
     return {
       creating_spell_slots: await DatabaseQueries.map(await creating_spell_slots, DatabaseQueries.unwrapArrayCreatingSpellSlotItem),
-      action_surges: specific.action_surges,
-      arcane_recovery_levels: specific.arcane_recovery_levels,
-      aura_range: specific.aura_range,
-      bardic_inspiration_die: specific.bardic_inspiration_die,
-      brutal_critical_dice: specific.brutal_critical_dice,
-      channel_divinity_charges: specific.channel_divinity_charges,
-      destroy_undead_cr: specific.destroy_undead_cr,
-      extra_attacks: specific.extra_attacks,
-      favored_enemies: specific.favored_enemies,
-      favored_terrain: specific.favored_terrain,
-      indomitable_uses: specific.indomitable_uses,
-      invocations_known: specific.invocations_known,
-      ki_points: specific.ki_points,
-      magical_secrets_max_5: specific.magical_secrets_max_5,
-      magical_secrets_max_7: specific.magical_secrets_max_7,
-      magical_secrets_max_9: specific.magical_secrets_max_9,
+      action_surges: specific.action_surges === null ? undefined : specific.action_surges,
+      arcane_recovery_levels: specific.arcane_recovery_levels === null ? undefined : specific.arcane_recovery_levels,
+      aura_range: specific.aura_range === null ? undefined : specific.aura_range,
+      bardic_inspiration_die: specific.bardic_inspiration_die === null ? undefined : specific.bardic_inspiration_die,
+      brutal_critical_dice: specific.brutal_critical_dice === null ? undefined : specific.brutal_critical_dice,
+      channel_divinity_charges: specific.channel_divinity_charges === null ? undefined : specific.channel_divinity_charges,
+      destroy_undead_cr: specific.destroy_undead_cr === null ? undefined : specific.destroy_undead_cr,
+      extra_attacks: specific.extra_attacks === null ? undefined : specific.extra_attacks,
+      favored_enemies: specific.favored_enemies === null ? undefined : specific.favored_enemies,
+      favored_terrain: specific.favored_terrain === null ? undefined : specific.favored_terrain,
+      indomitable_uses: specific.indomitable_uses === null ? undefined : specific.indomitable_uses,
+      invocations_known: specific.invocations_known === null ? undefined : specific.invocations_known,
+      ki_points: specific.ki_points === null ? undefined : specific.ki_points,
+      magical_secrets_max_5: specific.magical_secrets_max_5 === null ? undefined : specific.magical_secrets_max_5,
+      magical_secrets_max_7: specific.magical_secrets_max_7 === null ? undefined : specific.magical_secrets_max_7,
+      magical_secrets_max_9: specific.magical_secrets_max_9 === null ? undefined : specific.magical_secrets_max_9,
       martial_arts: {
-        dice_count: specific.martial_arts_dice_count,
-        dice_value: specific.martial_arts_dice_value,
+        dice_count: specific.martial_arts_dice_count === null ? undefined : specific.martial_arts_dice_count,
+        dice_value: specific.martial_arts_dice_value === null ? undefined : specific.martial_arts_dice_value,
       },
-      metamagic_known: specific.metamagic_known,
-      mystic_arcanum_level_6: specific.mystic_arcanum_level_6,
-      mystic_arcanum_level_7: specific.mystic_arcanum_level_7,
-      mystic_arcanum_level_8: specific.mystic_arcanum_level_8,
-      mystic_arcanum_level_9: specific.mystic_arcanum_level_9,
-      rage_count: specific.rage_count,
-      rage_damage_bonus: specific.rage_damage_bonus,
+      metamagic_known: specific.metamagic_known === null ? undefined : specific.metamagic_known,
+      mystic_arcanum_level_6: specific.mystic_arcanum_level_6 === null ? undefined : specific.mystic_arcanum_level_6,
+      mystic_arcanum_level_7: specific.mystic_arcanum_level_7 === null ? undefined : specific.mystic_arcanum_level_7,
+      mystic_arcanum_level_8: specific.mystic_arcanum_level_8 === null ? undefined : specific.mystic_arcanum_level_8,
+      mystic_arcanum_level_9: specific.mystic_arcanum_level_9 === null ? undefined : specific.mystic_arcanum_level_9,
+      rage_count: specific.rage_count === null ? undefined : specific.rage_count,
+      rage_damage_bonus: specific.rage_damage_bonus === null ? undefined : specific.rage_damage_bonus,
       sneak_attack: {
-        dice_count: specific.sneak_attack_dice_count, 
-        dice_value: specific.sneak_attack_dice_value,
+        dice_count: specific.sneak_attack_dice_count=== null ? undefined : specific.sneak_attack_dice_count, 
+        dice_value: specific.sneak_attack_dice_value=== null ? undefined : specific.sneak_attack_dice_value,
       },
-      song_of_rest_die: specific.song_of_rest_die,
-      sorcery_points: specific.sorcery_points,
-      unarmored_movement: specific.unarmored_movement,
+      song_of_rest_die: specific.song_of_rest_die === null ? undefined : specific.song_of_rest_die,
+      sorcery_points: specific.sorcery_points === null ? undefined : specific.sorcery_points,
+      unarmored_movement: specific.unarmored_movement === null ? undefined : specific.unarmored_movement,
       wild_shape: {
-        fly: specific.wild_shape_fly,
-        max_cr: specific.wild_shape_max_cr,
-        swim: specific.wild_shape_swim,
+        fly: specific.wild_shape_fly === null ? undefined : specific.wild_shape_fly,
+        max_cr: specific.wild_shape_max_cr === null ? undefined : specific.wild_shape_max_cr,
+        swim: specific.wild_shape_swim === null ? undefined : specific.wild_shape_swim,
       }
     }
   }

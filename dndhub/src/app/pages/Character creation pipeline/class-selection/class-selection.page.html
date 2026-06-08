@@ -29,7 +29,7 @@
   <div class="classSelectionFrame">
     <ion-accordion-group value="fatherAccordion" [multiple]="false" expand="inset">
       @for (class of classesArray; track class) {
-        <ion-accordion [value]="class.value">
+        <ion-accordion class="classAccordion" [value]="class.value">
           <ion-item id="accHeader" slot="header" color="light">
             <!-- togliere commento se prima o poi vogliamo una immagine nell'accordion -->
             @if (class.imageURL !== undefined) {
@@ -47,10 +47,10 @@
           <!-- div relativo al contenuto -->
           <div class="ionPadding" slot="content">
             <app-label>{{class.desc}}</app-label>
-            <ion-accordion-group [value]="class.value + 'group accordion'" class="innerAccordions" [multiple]="true">
+            <ion-accordion-group [value]="class.value + 'group accordion'" class="innerAccordionGroup" [multiple]="true">
             @for(accordion of class.content; track accordion) {
               @if(accordion.content !== undefined && accordion.content !== null && accordion.content !== [] && accordion.lenght !== 0) {
-                <ion-accordion [value]="accordion.value">
+                <ion-accordion class="innerAccordion" [value]="accordion.value">
                   <ion-item id="accHeader" slot="header" color="light">
                     <app-label [fontSize]="'3.5cqmin'">{{accordion.title}}</app-label>
                   </ion-item>
@@ -60,7 +60,7 @@
                 </ion-accordion>
               }
             }
-                <ion-accordion value="levels accordion">
+                <ion-accordion class="innerAccordion" value="levels accordion">
                   <ion-item id="accHeader" slot="header" color="light">
                     <app-label [fontSize]="'3.5cqmin'">Progressione livelli personaggio</app-label>
                   </ion-item>
@@ -222,8 +222,9 @@
                 </ion-accordion>
             </ion-accordion-group>
             <app-button
+            class="classSelectionButton"
             [button]="{text: 'Scegli questa classe', expand: ''}"
-            [margin]="false"
+            [margin]="true"
             >
             </app-button>
           </div>

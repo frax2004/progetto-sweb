@@ -12,6 +12,7 @@
 .nextPage {
     display: grid;
     justify-content: end;
+    margin-right: 10vw;
 }
 
 .levelSelectionFrame {
@@ -64,8 +65,10 @@
 }
 
 .classSelectionButton {
+    width: 30vw;
     display: grid;
-    justify-items: self-end;
+    justify-items: end;
+    justify-content: end;
     padding-top: 20px;
     padding-bottom: 5px;
 }
@@ -120,4 +123,8 @@ app-label {
     border:2px solid rgba(228, 13, 13, 0.4);
     border-radius: 10px;
     transition: all 500ms ease-in;
+}
+
+.goBack {
+    width: 30vmin;
 }

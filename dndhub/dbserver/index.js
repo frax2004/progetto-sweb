@@ -43,6 +43,7 @@ function loadTable(name) {
     return `INSERT OR IGNORE INTO ${name} (${keys}) VALUES (${values})`;
   })
   .join("; ");
+}
 
 // per impostare la formattazione a 2 spazi di indentazione
 app.set('json spaces', 2);

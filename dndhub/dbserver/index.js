@@ -48,7 +48,7 @@ function loadTable(name) {
 
   db.exec(query, err => { 
     if(err) console.log(err); 
-    // else console.log("lodaded '", name, "' table"); 
+    else console.log("lodaded '", name, "' table"); 
   });
 }
 

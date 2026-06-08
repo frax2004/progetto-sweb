@@ -28,4 +28,7 @@ export class UserUtilitiesService {
     );
   }
 
+  setCurrentPersonalArea(area: 'player' | 'dm' | 'generic'): Observable<any>  {
+    throw Error("funzione UserUtilitiesService.setCurrentPersonalArea() non ancora implementata (fallo)");
+  }
 }

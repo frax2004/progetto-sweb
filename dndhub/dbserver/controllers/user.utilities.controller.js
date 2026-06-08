@@ -1,5 +1,5 @@
 import { UserInstance } from "../global.context.js";
-import { DatabaseQueries } from "../database.queries.js";
+import { DatabaseQueries } from "../database.queries.ts";
 import { Database } from "../database.js";
 
 let canSend = true;

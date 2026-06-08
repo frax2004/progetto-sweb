@@ -1,4 +1,4 @@
-import { DatabaseQueries } from "../database.queries.js";
+import { DatabaseQueries } from "../database.queries.ts";
 
 
 let canSend = true;

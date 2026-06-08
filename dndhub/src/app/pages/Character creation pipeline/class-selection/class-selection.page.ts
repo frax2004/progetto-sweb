@@ -51,13 +51,14 @@ export class ClassSelectionPage implements OnInit {
   ];
 
   // le funzioni display devono essere static altrimenti non possono essere accedute all'interno del costruttore
-  static displayProficiencies(className,proficiencies) {
+  static displayProficiencies(className, proficiencies) {
     let retValue = '';
     for(const prof of proficiencies) {
       if (!prof.name.includes('Saving Throw')) {
         retValue = retValue + '\n- ' + prof.name;
       }
     }
+
     return className + ' ha compentenza in\n' + retValue;
   }
 
@@ -119,8 +120,9 @@ export class ClassSelectionPage implements OnInit {
     //return choiceValue;
   }
 
-  static displayStartingEquipment(className,startingEquipment) {
-    let retValue = className + ' dispone del seguente equipaggiamento di partenza:\n'
+  static displayStartingEquipment(className, startingEquipment) {
+    let retValue = className + ' dispone del seguente equipaggiamento di partenza:\n';
+
     for (const el of startingEquipment) {
       retValue = retValue + '\n- ' + el.equipment?.name + ' x' + el.quantity;
     }

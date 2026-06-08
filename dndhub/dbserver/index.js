@@ -6,6 +6,7 @@ import { DatabasePaths } from './database.paths.js';
 import { authRouter } from './routes/auth.routes.js';
 import { userUtilitiesRouter } from './routes/user.utilities.routes.js';
 import { characterManagementRouter } from './routes/character.management.routes.js';
+import { campagnaRouter } from './routes/campagna.routes.js';
 
 
 const app = express();
@@ -22,6 +23,30 @@ app.use("/api/character-management", characterManagementRouter)
 // per impostare la formattazione a 2 spazi di indentazione
 app.set('json spaces', 2);
 
+
+
+function loadTable(name) {
+  const text = fs.readFileSync(
+    DatabasePaths.DATA_DIR + name + ".json", 
+    'utf8'
+  );
+
+  const ObjToString = (x) => {
+    return "'" + x.toString().split(/['"]/).join("") + "'";
+  };
+
+  const query = JSON
+  .parse(text)
+  .map(obj => {""
+    const keys = Object.keys(obj).join(", ");
+    const values = Object.values(obj).map(ObjToString).join(", ");
+    return `INSERT OR IGNORE INTO ${name} (${keys}) VALUES (${values})`;
+  })
+  .join("; ");
+
+// per impostare la formattazione a 2 spazi di indentazione
+app.set('json spaces', 2);
+app.use('/api/campagna', campagnaRouter);
 
 
 function loadTable(name) {
@@ -106,6 +131,6 @@ tables.forEach(table => loadTable(table));
 
 
 
-app.listen(PORT, () => () => {
+app.listen(PORT, () => {
   console.log(`Server in ascolto su http://localhost:${PORT}`);
 });

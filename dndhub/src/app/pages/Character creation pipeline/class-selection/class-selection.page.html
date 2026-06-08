@@ -49,14 +49,12 @@
             <app-label>{{class.desc}}</app-label>
             <ion-accordion-group [value]="class.value + 'group accordion'" class="innerAccordions" [multiple]="true" expand="inset">
             @for(accordion of class.content; track accordion) {
-              @if(accordion.content !== undefined && accordion.content !== null && accordion.content !== []) {
+              @if(accordion.content !== undefined && accordion.content !== null && accordion.content !== [] && accordion.lenght !== 0) {
                 <ion-accordion [value]="accordion.value">
                   <ion-item id="accHeader" slot="header" color="light">
                     <app-label [fontSize]="'3.5cqmin'">{{accordion.title}}</app-label>
                   </ion-item>
-                  <div id="gianni"
-                  class="ionPaddin innerContent" slot="content">
-
+                  <div class="ionPaddin innerContent" slot="content">
                     <app-label>{{accordion.content}}</app-label>
                   </div>
                 </ion-accordion>

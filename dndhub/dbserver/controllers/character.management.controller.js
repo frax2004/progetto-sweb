@@ -1,6 +1,5 @@
-import { features } from "node:process";
 import { Database } from "../database.js";
-import { DatabaseQueries } from "../database.queries.js";
+import { DatabaseQueries } from "../database.queries.ts";
 
 
 let canSend = true;

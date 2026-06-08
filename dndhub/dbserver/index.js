@@ -6,6 +6,7 @@ import { DatabasePaths } from './database.paths.js';
 import { authRouter } from './routes/auth.routes.js';
 import { userUtilitiesRouter } from './routes/user.utilities.routes.js';
 import { characterManagementRouter } from './routes/character.management.routes.js';
+import { campagnaRouter } from './routes/campagna.routes.js';
 
 
 const app = express();
@@ -18,10 +19,10 @@ app.use("/api/auth", authRouter);
 // probabilmente ci andrà un middleware di autenticazione
 app.use("/api/user-utilities", userUtilitiesRouter);
 app.use("/api/character-management", characterManagementRouter)
+app.use('/api/campagna', campagnaRouter);
 
 // per impostare la formattazione a 2 spazi di indentazione
 app.set('json spaces', 2);
-
 
 
 function loadTable(name) {
@@ -45,10 +46,10 @@ function loadTable(name) {
 
   const db = Database.INSTANCE;
 
-  db.exec(query, err => { if(err) console.log(err); 
-    //else 
-    //  console.log("lodaded '", name, "' table"); 
-    });
+  db.exec(query, err => { 
+    if(err) console.log(err); 
+    else console.log("lodaded '", name, "' table"); 
+  });
 }
 
 
@@ -109,6 +110,6 @@ tables.forEach(table => loadTable(table));
 
 
 
-app.listen(PORT, () => () => {
+app.listen(PORT, () => {
   console.log(`Server in ascolto su http://localhost:${PORT}`);
 });

@@ -16,8 +16,19 @@ export class UserUtilitiesService {
       {}
     ).pipe(
       tap(
-        res => sessionStorage.setItem('isLogged ', res.isLogged)
+        res => sessionStorage.setItem('isLogged', res.isLogged)
       )
     );
+  }
+
+  getUserInfo(): Observable<any> {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/user-utilities/getUserInfo`,
+      {}
+    );
+  }
+
+  setCurrentPersonalArea(area: 'player' | 'dm' | 'generic'): Observable<any>  {
+    throw Error("funzione UserUtilitiesService.setCurrentPersonalArea() non ancora implementata (fallo)");
   }
 }

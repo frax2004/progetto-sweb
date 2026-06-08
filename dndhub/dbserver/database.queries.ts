@@ -1,6 +1,500 @@
 import { Database } from "./database.js";
 
 
+export namespace dnd {
+  
+  export interface APIReference {
+    index: string;
+    name: string;
+    note?: string;
+  }
+
+  export interface Choice {
+    desc: string;
+    choose: number;
+    text: string;
+    from: OptionSet;
+  }
+
+  export interface DifficultyClass {
+    dc_type: APIReference;
+    dc_value: number;
+    success_type: string;
+  }
+
+  export interface Damage {
+    type: APIReference;
+    dice: string;
+    dc: DifficultyClass;
+  }
+
+  export interface OptionSet {
+    equipment_category: APIReference;
+    options: Option[]
+  }
+
+  export interface OptionPrerequisite {
+    type: string;
+    proficiency: APIReference;
+  }
+
+  export interface Option {
+    reference_item: APIReference;
+    ability_score_bonus: APIReference;
+    counted_item: APIReference;
+    prerequisites: OptionPrerequisite[];
+    damage_type: APIReference;
+    multiple_items: Option[];
+    choice: Choice
+    ability_score_prerequisite: APIReference;
+    string: string;
+    bonus: number;
+    action: {
+      name: string;
+      count: number;
+      type: string;
+      desc?: string;
+    }
+    counted_reference_count: number;
+    damage: {
+      dice: string;
+      type: string;
+      notes: string;
+    }
+    money: {
+      count: number;
+      unit: string;
+    }
+    multiple_desc: string;
+    minimium_score_prerequisite: number;
+    size: string;
+  }
+
+  export interface DamageType {
+    index: string;
+    name: string;
+    description: string;
+  }
+
+  export interface AbilityScore {
+    index: string;
+    name: string
+    full_name: string;
+    description: string;
+    skills: APIReference[];
+  }
+
+  export interface StartingEquipment {
+    equipment: APIReference;
+    quantity: number;
+  }
+
+  export interface Cost {
+    quantity: number;
+    unit: string;
+  }
+
+  export interface BackgroundFeature {
+    name: string;
+    desc: string[];
+  }
+
+  export interface Background {
+    index: string;
+    name: string;
+    starting_proficiencies: APIReference[];
+    language_options: Choice;
+    starting_equipment: StartingEquipment[];
+    starting_equipment_options: Choice[];
+    starting_gold: Cost;
+    feature: BackgroundFeature;
+    personality_traits: Choice;
+    ideals: Choice;
+    bonds: Choice;
+    flaws: Choice;
+  }
+
+
+  export interface SpellcastingInfo {
+    name: string;
+    desc: string[];
+  }
+
+  export interface SpellCasting {
+    level: number;
+    ability: APIReference;
+    info: SpellcastingInfo[];
+  }
+
+  export interface MultiClassingPrereq {
+    ability_score: APIReference;
+    minimum_score: number;
+  }
+
+
+  export interface MultiClassing {
+    prerequisites: MultiClassingPrereq[];
+    prerequisite_options: Choice;
+    proficiencies: APIReference[];
+    proficiency_choices: Choice[];
+  }
+
+  export interface Class {
+    name: string;
+    hit_die: number;
+    levels: Level[];
+    multiclassing: MultiClassing;
+    proficiencies: APIReference[];
+    proficiency_choices: Choice[];
+    saving_throws: APIReference[];
+    starting_equipment: StartingEquipment[];
+    starting_equipment_options: Choice[];
+    subclasses: APIReference[];
+    spellcasting: SpellCasting;
+    spells: Spell[];
+  }
+
+  export interface Condition {
+    index: string;
+    name: string;
+    description: string;
+  }
+
+  export interface EquipmentCategory {
+    index: string;
+    name: string;
+    equipment: APIReference[];
+  }
+
+  export interface ArmorClass {
+    base: number;
+    dex_bonus: boolean;
+    max_bonus: number;
+  }
+
+  export interface _Range {
+    normal: number;
+    long: number;
+  }
+
+  export interface ThrowRange {
+    normal: number;
+    long: number;
+  }
+
+  export interface Content {
+    item: APIReference;
+    quantity: number;
+  }
+
+  export interface Utilize {
+    name: string;
+    dc: DifficultyClass;
+  }
+
+  export interface Equipment {
+    name: string;
+    equipment_categories: APIReference[];
+    cost: Cost;
+    description: string;
+    weight: number;
+    ammunition: APIReference;
+    armor_class: ArmorClass;
+    contents: Content[];
+    craft: APIReference[];
+    damage: Damage;
+    doff_time: string;
+    don_time: string;
+    image: string;
+    mastery: APIReference;
+    notes: string[];
+    properties: APIReference[];
+    quantity: number;
+    storage: APIReference[];
+    range: _Range;
+    stealth_disadvantage: boolean;
+    str_minimum: number;
+    throw_range: ThrowRange;
+    two_handed_damage: Damage;
+    utilize: Utilize[];
+  }
+
+  export interface FeatPrerequisites {
+    minimum_level: number;
+    feature_named: string;
+  }
+
+  export interface Feat {
+    index: string;
+    name: string;
+    description: string;
+    type: string;
+    repeatable: string;
+    prerequisites: FeatPrerequisites;
+    prerequisite_options: Choice;
+  }
+
+  export interface Language {
+    index: string;
+    name: string;
+    is_rare: boolean;
+    note: string;
+  }
+
+  export interface MagicItem {
+    name: string;
+    index: string;
+    image: string;
+    equipment_category: APIReference;
+    variant: boolean;
+    variants: APIReference[];
+    attunement: boolean;
+    rarity: {
+      name: string;
+    };
+    desc: string;
+    'limited-to': string;
+  }
+
+  export interface MagicSchool {
+    index: string;
+    name: string;
+    description: string;
+  }
+
+  export interface Proficiency {
+    index: string;
+    name: string;
+    type: string;
+    backgrounds: APIReference[];
+    classes: APIReference[];
+    reference: APIReference;
+  }
+
+  export interface Skill {
+    index: string;
+    name: string;
+    description: string;
+    ability_score: APIReference;
+  }
+
+  export interface AbilityBonus {
+    ability_score: APIReference;
+    bonus: number;
+  }
+
+  export interface Species {
+    index: string;
+    name: string;
+    speed: number;
+    ability_bonuses: AbilityBonus[];
+    ability_bonus_options: Choice;
+    alignment: string;
+    age: string;
+    size: string;
+    size_description: string;
+    starting_proficiencies: APIReference[];
+    starting_proficiency_options: Choice;
+    languages: APIReference[];
+    language_desc: string;
+    language_options: Choice;
+    traits: APIReference[];
+    subraces: APIReference[];
+  }
+
+  export interface SubclassSpellPrerequisite {
+    index: string;
+    type: string;
+    name: string;
+  }
+
+  export interface SubclassSpell {
+    prerequisites: SubclassSpellPrerequisite[];
+    spell: APIReference;
+  }
+
+  export interface Subclass {
+    index: string;
+    name: string;
+    class: APIReference;
+    subclass_flavor: string;
+    desc: string[];
+    subclass_levels: string;
+    spells: SubclassSpell[];
+  }
+
+  export interface Subrace {
+    index: string;
+    name: string;
+    race: APIReference;
+    desc: string;
+    ability_bonuses: AbilityBonus[];
+    racial_traits: APIReference[];
+  }
+
+  export interface Spell {
+    name: string;
+    level: number;
+    magic_school: string;
+    classes: string[];
+    action_type: string;
+    concentration: boolean;
+    ritual: boolean;
+    range: string;
+    components: string[];
+    material: string;
+    duration: string;
+    description: string;
+    cantrip_upgrade: string;
+  }
+
+  export interface AreaOfEffect {
+    size: number;
+    type: string;
+  }
+
+  export interface BreathWeaponUsage {
+    type: string;
+    times: number;
+  }
+
+  export interface BreathWeaponDamage {
+    damage_type: APIReference;
+    damage_at_character_level: {
+      "1": string;
+      "6": string;
+      "11": string;
+      "16": string;
+    }
+  }
+
+  export interface BreathWeapon {
+    name: string;
+    desc: string;
+    area_of_effect: AreaOfEffect;
+    usage: BreathWeaponUsage;
+    dc: DifficultyClass;
+    damage: BreathWeaponDamage[];
+  }
+
+  export interface TraitSpecific {
+    damage_type: APIReference;
+    breath_weapon: BreathWeapon;
+    spell_options: Choice;
+    subtrait_options: Choice;
+  }
+
+  export interface Trait {
+    index: string;
+    name: string;
+    desc: string[];
+    races: APIReference[];
+    subraces: APIReference[];
+    proficiencies: APIReference[];
+    proficiency_choices: Choice;
+    language_options: Choice;
+    parent: APIReference;
+    trait_specific: TraitSpecific;
+  }
+
+  export interface WeaponProperty {
+    index: string;
+    description: string;
+    name: string;
+  }
+
+  export interface CreatingSpellSlot {
+    sorcery_point_cost: number;
+    spell_slot_level: number;
+  }
+
+  export interface ClassSpecific {
+    action_surges: number;
+    arcane_recovery_levels: number;
+    aura_range: number;
+    bardic_inspiration_die: number;
+    brutal_critical_dice: number;
+    channel_divinity_charges: number;
+    creating_spell_slots: CreatingSpellSlot[]; 
+    destroy_undead_cr: number;
+    extra_attacks: number;
+    favored_enemies: number;
+    favored_terrain: number;
+    indomitable_uses: number;
+    invocations_known: number;
+    ki_points: number;
+    magical_secrets_max_5: number;
+    magical_secrets_max_7: number;
+    magical_secrets_max_9: number;
+    martial_arts: {
+      dice_count: number;
+      dice_value: number;
+    };
+    metamagic_known: number;
+    mystic_arcanum_level_6: number;
+    mystic_arcanum_level_7: number;
+    mystic_arcanum_level_8: number;
+    mystic_arcanum_level_9: number;
+    rage_count: number;
+    rage_damage_bonus: number;
+    sneak_attack: {
+      dice_count: number;
+      dice_value: number;
+    };
+    song_of_rest_die: number;
+    sorcery_points: number;
+    unarmored_movement: number;
+    wild_shape: {
+      fly: boolean;
+      max_cr: number;
+      swim: boolean;
+    }
+  }
+
+  export interface LevelSpellcasting {
+    cantrips_known: number;
+    spell_slots_level_1: number;
+    spell_slots_level_2: number;
+    spell_slots_level_3: number;
+    spell_slots_level_4: number;
+    spell_slots_level_5: number;
+    spell_slots_level_6: number;
+    spell_slots_level_7: number;
+    spell_slots_level_8: number;
+    spell_slots_level_9: number;
+    spells_known: number;
+  }
+
+  export interface SubclassSpecific {
+    additionale_magical_secrets_max_lvl: number;
+    aura_range: number;
+  }
+
+  export interface Level {
+    features: APIReference[];
+    character_class: APIReference;
+    class_specific: ClassSpecific;
+    subclass: APIReference;
+    index: string;
+    level: number;
+    ability_score_bonuses: number;
+    prof_bonus: number;
+    cantrips_known: number;
+    spell_slots_level_1: number;
+    spell_slots_level_2: number;
+    spell_slots_level_3: number;
+    spell_slots_level_4: number;
+    spell_slots_level_5: number;
+    spell_slots_level_6: number;
+    spell_slots_level_7: number;
+    spell_slots_level_8: number;
+    spell_slots_level_9: number;
+    spells_known: number;
+    additional_magical_secrets_max_lvl: number;
+    aura_range: number;
+  }
+};
+
 export class DatabaseQueries {
   static async map(array, mapper) {
     let result = [];
@@ -10,19 +504,19 @@ export class DatabaseQueries {
     return result;
   }
 
-  static async unwrapAbilityScore(score) {
+  static async unwrapAbilityScore(score): Promise<dnd.AbilityScore> {
     let skills = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${score.skills}`);
-    
+
     return {
-      idx: score.idx,
+      index: score.idx,
       name: score.name,
       full_name: score.full_name,
       description: score.description,
-      skills: await DatabaseQueries.map(await skills, DatabaseQueries.unwrapArrayAbilityBonusItem),
+      skills: await DatabaseQueries.map(await skills, DatabaseQueries.unwrapArrayAPIReferenceItem),
     };
   }
 
-  static async unwrapBackground(bg) {
+  static async unwrapBackground(bg): Promise<dnd.Background> {
     let starting_proficiencies = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${bg.starting_proficiencies}`);
     let language_options = Database.queryAll(`SELECT * FROM Choice WHERE id = ${bg.language_options}`);
     let starting_equipment = Database.queryAll(`SELECT * FROM ArrayStartingEquipmentItem WHERE array_id = ${bg.starting_equipment}`);
@@ -33,10 +527,12 @@ export class DatabaseQueries {
     let flaws = Database.queryAll(`SELECT * FROM Choice WHERE id = ${bg.flaws}`);
 
     return {
-      idx: bg.idx,
+      index: bg.idx,
       name: bg.name, 
-      starting_gold_quantity: bg.starting_gold_quantity, 
-      starting_gold_unit: bg.starting_gold_unit, 
+      starting_gold: {
+        quantity: bg.starting_gold_quantity, 
+        unit: bg.starting_gold_unit, 
+      },
       feature: {
         name: bg.feature_name,
         desc: bg.feature_desc,
@@ -52,7 +548,7 @@ export class DatabaseQueries {
     };
   }
 
-  static async unwrapArrayAbilityBonusItem(item) {
+  static async unwrapArrayAbilityBonusItem(item): Promise<dnd.AbilityBonus> {
     let ref = Database.queryAll(`SELECT * FROM APIReference WHERE idx = ${item.ability_score}`);
     return {
       ability_score: (await DatabaseQueries.map(await ref, DatabaseQueries.unwrapAPIReference))[0],
@@ -60,7 +556,7 @@ export class DatabaseQueries {
     };
   }
 
-  static async unwrapSpecies(species) {
+  static async unwrapSpecies(species): Promise<dnd.Species> {
     let ability_bonuses = Database.queryAll(`SELECT * FROM ArrayAbilityBonusItem WHERE array_id = ${species.ability_bonuses}`);
     let ability_bonus_options = Database.queryAll(`SELECT * FROM Choice WHERE id = ${species.ability_bonus_options}`);
     let starting_proficiencies = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${species.starting_proficiencies}`);
@@ -71,7 +567,7 @@ export class DatabaseQueries {
     let subspecies = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${species.subspecies}`);
 
     return {
-      idx: species.idx,
+      index: species.idx,
       name: species.name,
       speed: species.speed,
       alignment: species.alignment,
@@ -86,19 +582,18 @@ export class DatabaseQueries {
       languages: await DatabaseQueries.map(await languages, DatabaseQueries.unwrapArrayAPIReferenceItem),
       language_options: (await DatabaseQueries.map(await language_options, DatabaseQueries.unwrapChoice))[0],
       traits: await DatabaseQueries.map(await traits, DatabaseQueries.unwrapArrayAPIReferenceItem),
-      subspecies: await DatabaseQueries.map(await subspecies, DatabaseQueries.unwrapArrayAPIReferenceItem),
+      subraces: await DatabaseQueries.map(await subspecies, DatabaseQueries.unwrapArrayAPIReferenceItem),
     };
   }
 
-  static async unwrapAPIReference(ref) {
+  static async unwrapAPIReference(ref): Promise<dnd.APIReference> {
     return {
-      idx: ref.idx,
+      index: ref.idx,
       name: ref.name
     };
   }
   
-  
-  static async unwrapMultiClassingPrereq(prereq) {
+  static async unwrapMultiClassingPrereq(prereq): Promise<dnd.MultiClassingPrereq> {
     let ability_scores = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${prereq.ability_score}'`);
 
     return {
@@ -106,22 +601,21 @@ export class DatabaseQueries {
       minimum_score: prereq.minimum_score
     };
   }
-  
-  
-  static async unwrapArrayMultiClassingPrereqItem(prereq) {
+
+  static async unwrapArrayMultiClassingPrereqItem(prereq): Promise<dnd.MultiClassingPrereq> {
     let items = Database.queryAll(`SELECT * FROM MultiClassingPrereq WHERE id = ${prereq.item}`);
     return (await DatabaseQueries.map(await items, DatabaseQueries.unwrapMultiClassingPrereq))[0];
   }
   
-  static async unwrapArrayPrerequisiteItem(prereq) {
+  static async unwrapArrayPrerequisiteItem(prereq): Promise<dnd.OptionPrerequisite> {
     let item = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${prereq.item}'`);
     return {
-      prereq_item: (await DatabaseQueries.map(await item, DatabaseQueries.unwrapAPIReference))[0],
-      prereq_string: prereq.string
+      proficiency: (await DatabaseQueries.map(await item, DatabaseQueries.unwrapAPIReference))[0],
+      type: prereq.string
     };
   }
   
-  static async unwrapOption(option) {
+  static async unwrapOption(option): Promise<dnd.Option> {
     let reference_item = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${option.reference_item}'`);
     let ability_score_bonus = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${option.ability_score_bonus}'`);
     let counted_item = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${option.counted_item}'`);
@@ -164,43 +658,43 @@ export class DatabaseQueries {
     };
   }
   
-  static async unwrapArrayOptionItem(optionItem) {
+  static async unwrapArrayOptionItem(optionItem): Promise<dnd.Option> {
     let items = Database.queryAll(`SELECT * FROM Option WHERE id = ${optionItem.item_id}`);
     return (await DatabaseQueries.map(await items, DatabaseQueries.unwrapOption))[0];
   }
   
-  static async unwrapOptionSet(opt_set) {
+  static async unwrapOptionSet(opt_set): Promise<dnd.OptionSet> {
     let options_array = Database.queryAll(`SELECT * FROM ArrayOptionItem WHERE array_id = ${opt_set.options_array}`);
     let equipment_category = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${opt_set.equipment_category}'`);
   
     return {
       equipment_category: (await DatabaseQueries.map(await equipment_category, DatabaseQueries.unwrapAPIReference))[0],
-      options_array: await DatabaseQueries.map(await options_array, DatabaseQueries.unwrapArrayOptionItem)
+      options: await DatabaseQueries.map(await options_array, DatabaseQueries.unwrapArrayOptionItem)
     };
   }
   
-  static async unwrapChoice(choice) {
+  static async unwrapChoice(choice): Promise<dnd.Choice> {
     let option_set = Database.queryAll(`SELECT * FROM OptionSet WHERE id = ${choice.id}`);
   
     return {
-      option_set: (await DatabaseQueries.map(await option_set, DatabaseQueries.unwrapOptionSet))[0],
+      from: (await DatabaseQueries.map(await option_set, DatabaseQueries.unwrapOptionSet))[0],
       desc: choice.desc,
       choose: choice.choose,
       text: choice.text
     };
   }
   
-  static async unwrapArrayAPIReferenceItem(ref) {
+  static async unwrapArrayAPIReferenceItem(ref): Promise<dnd.APIReference> {
     let item = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${ref.item}'`);
     return (await DatabaseQueries.map(await item, DatabaseQueries.unwrapAPIReference))[0];
   }
   
-  static async unwrapArrayChoiceItem(choiceItem) {
+  static async unwrapArrayChoiceItem(choiceItem): Promise<dnd.Choice> {
     let id = Database.queryAll(`SELECT * FROM Choice WHERE id = ${choiceItem.id}`);
     return (await DatabaseQueries.map(await id, DatabaseQueries.unwrapChoice))[0];
   }
   
-  static async unwrapMultiClassing(multiclassing) {
+  static async unwrapMultiClassing(multiclassing): Promise<dnd.MultiClassing> {
     let prerequisites = Database.queryAll(`SELECT * FROM ArrayMultiClassingPrereqItem where array_id = ${multiclassing.prerequisites}`);
     let prerequisite_options = Database.queryAll(`SELECT * FROM Choice WHERE id = ${multiclassing.prerequisite_options}`);
     let proficiencies = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${multiclassing.proficiencies}`);
@@ -214,7 +708,7 @@ export class DatabaseQueries {
     };
   }
   
-  static async unwrapArrayStartingEquipmentItem(equipItem) {
+  static async unwrapArrayStartingEquipmentItem(equipItem): Promise<dnd.StartingEquipment> {
     let equipment = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${equipItem.equipment}'`);
   
     return {
@@ -225,19 +719,19 @@ export class DatabaseQueries {
   
   // TODO TRY CATCH E VIRGOLETTE E ARRAY FLATTEN
   
-  static async unwrapSpellcastingInfo(info) {
+  static async unwrapSpellcastingInfo(info): Promise<dnd.SpellcastingInfo> {
     return {
       name: info.name,
       desc: info.desc
     };
   }
   
-  static async unwrapArraySpellcastingInfoItem(infoItem) {
+  static async unwrapArraySpellcastingInfoItem(infoItem): Promise<dnd.SpellcastingInfo> {
     let item = Database.queryAll(`SELECT * FROM SpellcastingInfo WHERE name = '${infoItem.item}'`);
     return (await DatabaseQueries.map(await item, DatabaseQueries.unwrapSpellcastingInfo))[0];
   }
   
-  static async unwrapSpellcasting(casting) {
+  static async unwrapSpellcasting(casting): Promise<dnd.SpellCasting> {
     let spellcasting_ability = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${casting.spellcasting_ability}'`);
     let info = Database.queryAll(`SELECT * FROM ArraySpellcastingInfoItem WHERE array_id = ${casting.info}`);
   
@@ -248,14 +742,14 @@ export class DatabaseQueries {
     };
   }
   
-  static async unwrapArrayCreatingSpellSlotItem(slotItem) {
+  static async unwrapArrayCreatingSpellSlotItem(slotItem): Promise<dnd.CreatingSpellSlot> {
     return {
       sorcery_point_cost: slotItem.sorcery_point_cost === null ? undefined : slotItem.sorcery_point_cost,
       spell_slot_level: slotItem.spell_slot_level === null ? undefined : slotItem.spell_slot_level
     };
   }
   
-  static async unwrapClassSpecific(specific) {
+  static async unwrapClassSpecific(specific): Promise<dnd.ClassSpecific> {
     let creating_spell_slots = Database.queryAll(`SELECT * FROM ArrayCreatingSpellSlotItem WHERE array_id = ${specific.creating_spell_slots}`);
   
     return {
@@ -303,7 +797,7 @@ export class DatabaseQueries {
   }
   
   
-  static async unwrapLevel(level) {
+  static async unwrapLevel(level): Promise<dnd.Level> {
     let features = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${level.features}`);
     let character_class = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${level.character_class}'`);
     let class_specific = Database.queryAll(`SELECT * FROM ClassSpecific WHERE id = ${level.class_specific}`);
@@ -314,7 +808,7 @@ export class DatabaseQueries {
       character_class: (await DatabaseQueries.map(await character_class, DatabaseQueries.unwrapAPIReference))[0],
       class_specific: (await DatabaseQueries.map(await class_specific, DatabaseQueries.unwrapClassSpecific))[0],
       subclass: (await DatabaseQueries.map(await subclass, DatabaseQueries.unwrapAPIReference))[0],
-      idx: level.idx,
+      index: level.idx,
       level: level.level,
       ability_score_bonuses: level.ability_score_bonuses,
       prof_bonus: level.prof_bonus,
@@ -334,19 +828,19 @@ export class DatabaseQueries {
     };
   }
   
-  static async unwrapMagicSchool(school) {
+  static async unwrapMagicSchool(school): Promise<dnd.MagicSchool> {
     return {
-      idx: school.idx,
+      index: school.idx,
       name: school.name,
       description: school.description,
     };
   }
   
-  static async unwrapSpell(spell) {
+  static async unwrapSpell(spell): Promise<dnd.Spell> {
     let magicSchool = Database.queryAll(`SELECT * FROM MagicSchool WHERE idx = '${spell.school}'`);
   
     return {
-      magicSchool: (await DatabaseQueries.map(await magicSchool, DatabaseQueries.unwrapMagicSchool))[0],
+      magic_school: (await DatabaseQueries.map(await magicSchool, DatabaseQueries.unwrapMagicSchool))[0],
       classes: spell.classes.split("$$$"),
       name: spell.name,
       level: spell.level,
@@ -361,9 +855,99 @@ export class DatabaseQueries {
       cantrip_upgrade: spell.cantripUpgrade
     }
   }
+
+  static async unwrapArrayContentItem(content): Promise<dnd.Content> {
+    let item = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${content.item}'`);
+
+    return {
+      item: (await DatabaseQueries.map(await item, DatabaseQueries.unwrapAPIReference))[0],
+      quantity: content.quantity
+    };
+  }
+
+  static async unwrapDifficultyClass(dc): Promise<dnd.DifficultyClass> {
+    let dc_type = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${dc.dc_type}'`);
+
+    return {
+      dc_type: (await DatabaseQueries.map(await dc_type, DatabaseQueries.unwrapAPIReference))[0],
+      dc_value: dc.dc_value,
+      success_type: dc.success_type,
+    };
+  }
+
+  static async unwrapArrayUtilizeItem(utilize): Promise<dnd.Utilize> {
+    let dc = Database.queryAll(`SELECT * FROM DifficultyClass WHERE id = ${utilize.dc}`);
+
+    return {
+      name: utilize.name,
+      dc: (await DatabaseQueries.map(await dc, DatabaseQueries.unwrapDifficultyClass))[0]
+    };
+  }
+
+  static async unwrapEquipment(equip): Promise<dnd.Equipment> {
+    let equipment_categories = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${equip.equipment_categories}`);
+    let ammunition = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${equip.ammunition}'`);
+    let countens = Database.queryAll(`SELECT * FROM ArrayContentItem WHERE array_id = ${equip.contents}`);
+    let craft = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${equip.craft}`);
+    let damage_type = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${equip.damage_type}'`);
+    let damage_dc = Database.queryAll(`SELECT * FROM DifficultyClass WHERE id = ${equip.damage_dc}`);
+    let mastery = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${equip.mastery}'`);
+    let storage = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${equip.storage}`);
+    let two_handed_dc = Database.queryAll(`SELECT * FROM DifficultyClass WHERE id = ${equip.two_handed_dc}`);
+    let utilize = Database.queryAll(`SELECT * FROM ArrayUtilizeItem WHERE array_id = ${equip.utilize}`);
+    let properties = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem where array_id = ${equip.properties}`);
+    
+    return {
+      properties: await DatabaseQueries.map(await properties, DatabaseQueries.unwrapArrayAPIReferenceItem),
+      equipment_categories: await DatabaseQueries.map(await equipment_categories, DatabaseQueries.unwrapArrayAPIReferenceItem),
+      ammunition: (await DatabaseQueries.map(await ammunition, DatabaseQueries.unwrapAPIReference))[0],
+      contents: await DatabaseQueries.map(await countens, DatabaseQueries.unwrapArrayContentItem),
+      craft: await DatabaseQueries.map(await craft, DatabaseQueries.unwrapArrayAPIReferenceItem),
+      damage: {
+        type: (await DatabaseQueries.map(await damage_type, DatabaseQueries.unwrapAPIReference))[0],
+        dc: (await DatabaseQueries.map(await damage_dc, DatabaseQueries.unwrapDifficultyClass))[0],
+        dice: equip.damage_dice
+      },
+      mastery: (await DatabaseQueries.map(await mastery, DatabaseQueries.unwrapAPIReference))[0],
+      storage: await DatabaseQueries.map(await storage, DatabaseQueries.unwrapArrayAPIReferenceItem),
+      two_handed_damage: {
+        type: equip.two_handed_damage_type,
+        dice: equip.two_handed_damage_dice,
+        dc: (await DatabaseQueries.map(await two_handed_dc, DatabaseQueries.unwrapDifficultyClass))[0],
+      },
+      utilize: await DatabaseQueries.map(await utilize, DatabaseQueries.unwrapArrayUtilizeItem),
+      name: equip.name,
+      cost: {
+        quantity: equip.cost_quantity,
+        unit: equip.cost_unit
+      },
+      description: equip.description,
+      weight: equip.weight,
+      armor_class: {
+        base: equip.armor_class_base,
+        dex_bonus: equip.armor_class_dex_bonus,
+        max_bonus: equip.armor_class_max_bonus
+      },
+      doff_time: equip.doff_time,
+      don_time: equip.don_time,
+      image: equip.image,
+      notes: equip.notes.split("$$$"),
+      quantity: equip.quantity,
+      range: {
+        long: equip.range_long,
+        normal: equip.range_normal
+      },
+      stealth_disadvantage: equip.stealth_disadvantage,
+      str_minimum: equip.str_minimum,
+      throw_range: {
+        normal: equip.throw_range.normal,
+        long: equip.throw_range.long,
+      },
+    };
+  }
   
   
-  static async unwrapClass(classRow) {
+  static async unwrapClass(classRow): Promise<dnd.Class> {
     let multiclassing = Database.queryAll(`SELECT * FROM MultiClassing WHERE id = ${classRow.multi_classing}`);
     let proficiencies = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${classRow.proficiencies}`);
     let proficiency_choices = Database.queryAll(`SELECT * FROM ArrayChoiceItem WHERE array_id = ${classRow.proficiency_choices}`);
@@ -407,3 +991,4 @@ export class DatabaseQueries {
     return new Promise(executor);
   }
 }
+

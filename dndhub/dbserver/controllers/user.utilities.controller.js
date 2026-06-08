@@ -1,5 +1,6 @@
 import { UserInstance } from "../global.context.js";
-
+import { DatabaseQueries } from "../database.queries.js";
+import { Database } from "../database.js";
 
 let canSend = true;
 function sendResponse(obj, res) {
@@ -41,6 +42,35 @@ function isLogged(req, res) {
   }
 }
 
+export function getUserInfo(req, res) {
+  canSend = true;
+
+  const email = UserInstance.USER.email;
+
+  DatabaseQueries.retrieve(
+    `SELECT * FROM Account WHERE email = '${email}'`, 
+    x => x
+  ).catch(err => {
+    sendResponse({
+      status_code: 401,
+      success: false,
+      message: `Non è stato possibile ottenere le credenziali dell'utente registrato come ${email}`
+    }, res)
+  }).then(row => {
+    console.log(JSON.stringify(row));
+    sendResponse({
+      success: true,
+      status_code: 200,
+      message: "Credenziali ottenute con successo",
+      email: row.email,
+      password: row.password,
+      username: row.username
+    }, res);
+  });
+
+}
+
 export default {
   isLogged,
+  getUserInfo,
 }

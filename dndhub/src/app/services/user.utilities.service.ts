@@ -16,8 +16,16 @@ export class UserUtilitiesService {
       {}
     ).pipe(
       tap(
-        res => sessionStorage.setItem('isLogged ', res.isLogged)
+        res => sessionStorage.setItem('isLogged', res.isLogged)
       )
     );
   }
+
+  getUserInfo(): Observable<any> {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/user-utilities/getUserInfo`,
+      {}
+    );
+  }
+
 }

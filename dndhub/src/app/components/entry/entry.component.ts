@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { IonInput, IonItem } from "@ionic/angular/standalone";
 
 @Component({
@@ -14,7 +14,13 @@ export class EntryComponent  implements OnInit {
   @Input() placeholder: String = "Scrivi qui";
   @Input() disabled: Boolean = false;
 
+  @ViewChild("input") entry!: ElementRef;
+
   constructor() { }
+
+  set value(val: string) {
+    this.entry.nativeElement.value = val;
+  }
 
   ngOnInit() {}
 

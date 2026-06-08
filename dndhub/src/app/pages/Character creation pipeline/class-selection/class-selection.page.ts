@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 import { TitleComponent } from "src/app/components/title/title.component";
 import { LabelComponent } from "src/app/components/label/label.component";
 import { CharacterManagementService } from 'src/app/services/character.management.service';
+import { dnd } from 'dbserver/database.queries';
 
 @Component({
   selector: 'app-class-selection',
@@ -87,7 +88,7 @@ export class ClassSelectionPage implements OnInit {
     return className + ' puo\' scegliere tra le seguenti competenze\n' + retValue;
   }
 
-  static displayMulticlassing(className,multiclassing) {
+  static displayMulticlassing(className, multiclassing: dnd.MultiClassing) {
     let profValue = '';
     let prereqValue = '';
     let choiceValue = '';
@@ -110,7 +111,7 @@ export class ClassSelectionPage implements OnInit {
     }
 
     for (const itemChoice of multiclassing.proficiency_choices) {
-      for (const set of itemChoice.option_set?.options_array) {
+      for (const set of itemChoice.from?.options) {
         choiceValue = choiceValue + '\n- ' + set.reference_item?.name;
       }
     }

@@ -36,12 +36,25 @@
     margin: 0 auto;
 }
 
+.outerAccordionGroup {
+    width: 100%;
+}
+
+.classTitle {
+    font-family: Copperplate, Copperplate Gothic Light, fantasy;
+    font-size: 5vmin;
+    font-weight: 570;
+}
+
 .classAccordion.accordion-collapsing,
 .classAccordion.accordion-collapsed {
   width: calc(100% - 32px);
   box-shadow: 0 4px 12px rgba(132, 132, 50, 0.20);
-
+  transition: all 800ms;
   
+  div {
+    transition: all 800ms;
+  }
 
   margin: 0px auto;
 }
@@ -50,7 +63,12 @@
 .classAccordion.accordion-expanded {
     margin: 16px auto;
 
+    transition: all 600ms;
     box-shadow: 0 8px 8px rgba(212, 33, 33, 0.4);
+
+    div {
+        transition: all 600ms;
+    }
 
 }
 
@@ -65,12 +83,11 @@
 }
 
 .classSelectionButton {
-    width: 30vw;
+    width: 30%;
     display: grid;
     justify-items: end;
     justify-content: end;
-    padding-top: 20px;
-    padding-bottom: 5px;
+    margin-left: 68%;
 }
 
 .yellowBorderBottom {
@@ -94,6 +111,11 @@
     transition: all 500ms ease-in;
 }
 
+ion-thumbnail {
+    background-color: rgb(215, 240, 136);
+    border-radius: 50%;
+    border: 2px solid rgb(0, 0, 0);
+}
 
 .innerAccordionGroup {
     margin-top: 25px;
@@ -127,4 +149,14 @@ app-label {
 
 .goBack {
     width: 30vmin;
+}
+
+div[slot="content"] {
+    overflow: hidden;
+}
+
+.initialDescContainer {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-right: 10px;
 }

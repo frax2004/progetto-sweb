@@ -50,7 +50,7 @@
             <ion-accordion-group [value]="class.value + 'group accordion'" class="innerAccordionGroup" [multiple]="true">
             @for(accordion of class.content; track accordion) {
               @if(accordion.content !== undefined && accordion.content !== null && accordion.content !== [] && accordion.lenght !== 0) {
-                <ion-accordion class="innerAccordion" [value]="accordion.value">
+                <ion-accordion class="innerAccordion redBorderBottom" [value]="accordion.value">
                   <ion-item id="accHeader" slot="header" color="light">
                     <app-label [fontSize]="'3.5cqmin'">{{accordion.title}}</app-label>
                   </ion-item>
@@ -66,9 +66,9 @@
                   </ion-item>
                   <div class="ionPaddin innerContent" slot="content">
                     <!-- qua ci vanno i sotto-accordion -->
-                    <ion-accordion-group [value]="class.value + 'levels accordion group'" class="innerAccordions" [multiple]="true">
+                    <ion-accordion-group [value]="class.value + 'levels accordion group'" class="levelAccordionGroup" [multiple]="false">
                     @for(level of class.levels; track level) {
-                      <ion-accordion [value]="level.idx + ' level + accordion'">
+                      <ion-accordion class="yellowBorderBottom levelAccordion" [value]="level.idx + ' level + accordion'">
                         <ion-item id="accHeader" slot="header" color="light">
                           <app-label [fontSize]="'3.5cqmin'">Livello {{level.level}}</app-label>
                         </ion-item>

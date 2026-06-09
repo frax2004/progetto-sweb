@@ -437,7 +437,7 @@ export namespace models {
     starting_proficiencies?: number;
     starting_proficiency_options?: number;
     languages?: number;
-    languages_desc!: string;
+    language_desc!: string;
     language_options?: number;
     url!: string;
     size!: string;

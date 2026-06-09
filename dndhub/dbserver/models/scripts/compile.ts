@@ -1779,7 +1779,7 @@ const allFiles = fs
           data.APIReference.equals,
           data.APIReference.transform
         ),
-        languages_desc: x.languages_desc,
+        language_desc: x.language_desc,
         language_options: getOrInsertId(
           data.option_sets,
           x.language_options?.from

@@ -1669,7 +1669,7 @@ const allFiles = fs
                 starting_proficiencies: getOrInsertArrayId(data.ArrayAPIReference, x.starting_proficiencies, data.APIReference.equals, data.APIReference.transform),
                 starting_proficiency_options: getOrInsertId(data.option_sets, x.starting_proficiency_options?.from),
                 languages: getOrInsertArrayId(data.ArrayAPIReference, x.languages, data.APIReference.equals, data.APIReference.transform),
-                languages_desc: x.languages_desc,
+                language_desc: x.language_desc,
                 language_options: getOrInsertId(data.option_sets, x.language_options?.from),
                 url: x.url,
                 size: x.size,

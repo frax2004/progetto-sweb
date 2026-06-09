@@ -23,18 +23,25 @@ export class ProfilePage implements OnInit, AfterViewInit {
   @ViewChild("email") emailField: EntryComponent;
   @ViewChild("password") passwordField: EntryComponent;
 
+  private isEditEnabled: boolean = false;
+
   entryHandle = signal<EntryComponent | null>(null);
 
   public goBack = () => Navigate.toPath(this.router, 'landing-page')();
   public enableAccountEdit = () => {
+    this.isEditEnabled = true;
     this.emailField.disabled = false;
     this.passwordField.disabled = false;
     this.usernameField.disabled = false;
   }
   public save = () => {
+    if(!this.isEditEnabled) return;
+
+    this.isEditEnabled = false;
     this.emailField.disabled = true;
     this.passwordField.disabled = true;
     this.usernameField.disabled = true;
+    
   }
 
   public placeholder = () => alert('Not Implemented Function');

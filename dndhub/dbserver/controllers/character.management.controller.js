@@ -103,29 +103,71 @@ export function displayClasses(req, res) {
   canSend = true;
 }
 
+async function unwrapSubspecies(subspecies) {
+  try {
+    let ability_bonuses = Database.queryAll(`SELECT * FROM ArrayAbilityBonusItem WHERE array_id = ${subspecies.ability_bonuses}`);
+    let racial_traits = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${subspecies.racial_traits}`);
+  } 
+  catch (err) {
+    sendResponse({
+      status_code: 404,
+      message: 'Non è stato possibile caricare le speci dal database',
+      success: false,
+    }, res);
+    return;
+  }
+
+  return {
+    name: subspecies.name,
+    species: subspecies.species,
+    desc: subspecies.desc,
+    ability_bonuses: await DatabaseQueries.map(await ability_bonuses, DatabaseQueries.unwrapArrayAbilityBonusItem),
+    racial_traits: await DatabaseQueries.map(await racial_traits, DatabaseQueries.unwrapArrayAPIReferenceItem)
+  };
+}
+
+async function unwrapSpeciesSpecific(species) {
+  let subspeciesReturn = undefined;
+  try{
+    let subspecies = Database.queryOne(`SELECT * FROM Subspecies WHERE species = '${species.idx}'`);
+    let ability_bonuses = Database.queryAll(`SELECT * FROM ArrayAbilityBonusItem WHERE array_id = ${species.ability_bonuses}`);
+    let ability_bonus_options = Database.queryAll(`SELECT * FROM Choice WHERE id = ${species.ability_bonus_options}`);
+    let languages = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${species.languages}`);
+    
+    subspeciesReturn = await unwrapSubspecies(await subspecies);
+  }
+  catch (err) {
+    sendResponse({
+      status_code: 404,
+      message: 'Non è stato possibile caricare le sottospeci dal database',
+      success: false,
+    }, res);
+    return;
+  }
+
+
+}
+
 function displaySpecies(req,res) {
   canSend = true;
 
-  DatabaseQueries.retrieve("SELECT * FROM Species", DatabaseQueries.unwrapSpecies)
-  .catch(err => {
+  try{
+    let speciesArray = [];
+    const species = Database.queryAll(`SELECT * FROM Species`);
+  
+    for (const sp of species) {
+
+    }
+  }
+  catch (err) {
+    console.log(err);
     sendResponse({
-        status_code: 404,
-        message: 'Non è stato possibile caricare le speci dal database',
-        success: false,
-      }, 
-      res
-    );
-  }).then(species => {
-    console.log(species);
-    sendResponse({
-        species: species,
-        status_code: 200,
-        success: true,
-        message: 'Speci caricate con successo'
-      },
-      res
-    );
-  });
+      status_code: 404,
+      message: 'Non è stato possibile caricare le speci dal database',
+      success: false,
+    }, res);
+    return;
+  }
 }
 
 export default {

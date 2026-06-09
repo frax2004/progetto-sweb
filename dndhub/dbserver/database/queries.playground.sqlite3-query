@@ -1,3 +1,5 @@
 -- database: ./dndhub.db
 
 
+
+delete from Account where email = 'a.b@gmail.com';

@@ -12,7 +12,7 @@ import { ButtonContext } from 'src/app/components/button/ButtonContext';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginPagePage } from '../login-page/login-page.page';
-import { Navigate, Popups } from 'src/app/core/core';
+import { Alerts, Navigate, Popups } from 'src/app/core/core';
 
 @Component({
   selector: 'app-signin-page',
@@ -44,7 +44,7 @@ export class SigninPagePage implements OnInit {
           Navigate.toPath(this.router, 'landing-page')();
         },
         error: (err) => {
-          Popups.ofSimpleText(this.popover, err.message)(event);
+          Alerts.error(err.error);
           // alert(err.message);
         }
       })

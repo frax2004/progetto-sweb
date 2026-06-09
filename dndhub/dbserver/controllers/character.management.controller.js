@@ -103,7 +103,33 @@ export function displayClasses(req, res) {
   canSend = true;
 }
 
+function displaySpecies(req,res) {
+  canSend = true;
+
+  DatabaseQueries.retrieve("SELECT * FROM Species", DatabaseQueries.unwrapSpecies)
+  .catch(err => {
+    sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare le speci dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then(species => {
+    console.log(species);
+    sendResponse({
+        species: species,
+        status_code: 200,
+        success: true,
+        message: 'Speci caricate con successo'
+      },
+      res
+    );
+  });
+}
+
 export default {
   displayClasses,
   displayLevelByNameAndLevel,
+  displaySpecies,
 }

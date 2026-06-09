@@ -27,4 +27,11 @@ export class CharacterManagementService {
       {className: className}
     );
   }
+
+  displaySpecies() {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/species-display`,
+      {}
+    );
+  }
 }

@@ -10,6 +10,7 @@ import { Navigate, Popups } from 'src/app/core/core';
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { Router } from '@angular/router';
 import { TitleComponent } from "src/app/components/title/title.component";
+import { CharacterManagementService } from 'src/app/services/character.management.service';
 
 @Component({
   selector: 'app-species-selection',
@@ -42,8 +43,22 @@ export class SpeciesSelectionPage implements OnInit {
     { value: 'halfling accordion', title: 'Halfling', content: 'Gli halfling sono praticamente gli hobbit pero\' Wotc non aveva i soldi per pagare il nome hobbit', button: this.b1},
   ];
 
+  speciesArray = [];
 
-  constructor(public popoverController: PopoverController, private router: Router ) { }
+  constructor(public popoverController: PopoverController, private router: Router, private speciesSelector: CharacterManagementService ) {
+    this.speciesSelector
+    .displaySpecies()
+    .subscribe({
+      next: (value: any) =>{
+        this.speciesArray = value.species.map(function (item: any){
+          return {
+            
+          }
+        });
+      },
+      error: (err) => console.log(err)
+    })
+  }
 
   ngOnInit() {
   }

@@ -104,18 +104,9 @@ export function displayClasses(req, res) {
 }
 
 async function unwrapSubspecies(subspecies) {
-  try {
-    let ability_bonuses = Database.queryAll(`SELECT * FROM ArrayAbilityBonusItem WHERE array_id = ${subspecies.ability_bonuses}`);
-    let racial_traits = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${subspecies.racial_traits}`);
-  } 
-  catch (err) {
-    sendResponse({
-      status_code: 404,
-      message: 'Non è stato possibile caricare le speci dal database',
-      success: false,
-    }, res);
-    return;
-  }
+  if (subspecies===undefined) return;
+  let ability_bonuses = Database.queryAll(`SELECT * FROM ArrayAbilityBonusItem WHERE array_id = ${subspecies.ability_bonuses}`);
+  let racial_traits = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${subspecies.racial_traits}`);
 
   return {
     name: subspecies.name,
@@ -127,36 +118,47 @@ async function unwrapSubspecies(subspecies) {
 }
 
 async function unwrapSpeciesSpecific(species) {
-  let subspeciesReturn = undefined;
-  try{
-    let subspecies = Database.queryOne(`SELECT * FROM Subspecies WHERE species = '${species.idx}'`);
-    let ability_bonuses = Database.queryAll(`SELECT * FROM ArrayAbilityBonusItem WHERE array_id = ${species.ability_bonuses}`);
-    let ability_bonus_options = Database.queryAll(`SELECT * FROM Choice WHERE id = ${species.ability_bonus_options}`);
-    let languages = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${species.languages}`);
-    
-    subspeciesReturn = await unwrapSubspecies(await subspecies);
+  let subspecies = await Database.queryAll(`SELECT * FROM Subspecies WHERE species = '${species.idx}'`);
+  let specArray = [];
+  for(const spec of subspecies) {
+    specArray.push(await unwrapSubspecies(spec));
   }
-  catch (err) {
-    sendResponse({
-      status_code: 404,
-      message: 'Non è stato possibile caricare le sottospeci dal database',
-      success: false,
-    }, res);
-    return;
-  }
+  let ability_bonuses = Database.queryAll(`SELECT * FROM ArrayAbilityBonusItem WHERE array_id = ${species.ability_bonuses}`);
+  let ability_bonus_options = Database.queryAll(`SELECT * FROM Choice WHERE id = ${species.ability_bonus_options}`);
+  let languages = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${species.languages}`);
+  let language_options = Database.queryAll(`SELECT * FROM Choice WHERE id = ${species.language_options}`);
+  let traits = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${species.traits}`);
 
-
+  return {
+    name: species.name,
+    speed: species.speed,
+    alignment: species.alignment,
+    age: species.age,
+    size: species.size,
+    size_description: species.size_description,
+    language_desc: species.language_desc,
+    ability_bonuses: await DatabaseQueries.map(await ability_bonuses, DatabaseQueries.unwrapArrayAbilityBonusItem),
+    ability_bonus_options: (await DatabaseQueries.map(await ability_bonus_options, DatabaseQueries.unwrapChoice))[0],
+    languages: await DatabaseQueries.map(await languages, DatabaseQueries.unwrapArrayAPIReferenceItem),
+    language_options: (await DatabaseQueries.map(await language_options, DatabaseQueries.unwrapChoice))[0],
+    traits: await DatabaseQueries.map(await traits, DatabaseQueries.unwrapArrayAPIReferenceItem),
+    subspecies: specArray.length === 0 ? undefined : specArray,  
+  };
 }
 
-function displaySpecies(req,res) {
+async function displaySpecies(req,res) {
   canSend = true;
 
+  
+  let speciesArray = [];
   try{
-    let speciesArray = [];
-    const species = Database.queryAll(`SELECT * FROM Species`);
+    const species = await Database.queryAll(`SELECT * FROM Species`);
   
     for (const sp of species) {
-
+      //console.log(sp);
+      speciesArray.push(await unwrapSpeciesSpecific(sp));
+      // da levare è solo per debug
+      // console.log(speciesArray[speciesArray.length-1]);
     }
   }
   catch (err) {
@@ -168,6 +170,14 @@ function displaySpecies(req,res) {
     }, res);
     return;
   }
+
+  //arrivo qui se non ci sono stati problemi
+  sendResponse({
+    status_code: 200,
+    message: 'Speci caricate con successo',
+    success: true,
+    species: speciesArray,
+  }, res);
 }
 
 export default {

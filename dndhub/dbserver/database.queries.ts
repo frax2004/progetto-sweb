@@ -549,7 +549,7 @@ export class DatabaseQueries {
   }
 
   static async unwrapArrayAbilityBonusItem(item): Promise<dnd.AbilityBonus> {
-    let ref = Database.queryAll(`SELECT * FROM APIReference WHERE idx = ${item.ability_score}`);
+    let ref = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${item.ability_score}'`);
     return {
       ability_score: (await DatabaseQueries.map(await ref, DatabaseQueries.unwrapAPIReference))[0],
       bonus: item.bonus

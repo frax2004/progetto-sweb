@@ -4,9 +4,12 @@
 
 const PORT = 10000;
 
+const POLAREZZA_IP_ADDRESS = "192.168.137.1";
+const IP_ADDRESS = POLAREZZA_IP_ADDRESS;
+
 export const environment = {
   production: false,
-  api_url: `http://localhost:${PORT}`,
+  api_url: `http://${IP_ADDRESS}:${PORT}`,
   defaultRoute: "profile",
 };
 

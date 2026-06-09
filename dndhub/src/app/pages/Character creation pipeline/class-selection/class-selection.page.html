@@ -27,7 +27,7 @@
    se mi piace, farò una componente di questo particolare tipo di accordion -->
 
   <div class="classSelectionFrame">
-    <ion-accordion-group value="fatherAccordion" [multiple]="false" expand="inset">
+    <ion-accordion-group class="outerAccordionGroup" value="fatherAccordion" [multiple]="false" expand="inset" animated="true">
       @for (class of classesArray; track class) {
         <ion-accordion class="classAccordion" [value]="class.value">
           <ion-item id="accHeader" slot="header" color="light">
@@ -42,15 +42,19 @@
                 <img alt="placeholder img" [src]="'Card.defaultImageURL()'">
               </ion-thumbnail>
             }
-            <app-label [fontSize]="'3.5cqmin'">{{ class.title }} - Dado Vita d{{class.hit_die}}</app-label>
+            <ion-label class="classTitle">{{ class.title }}</ion-label>
           </ion-item>
           <!-- div relativo al contenuto -->
           <div class="ionPadding" slot="content">
-            <app-label>{{class.desc}}</app-label>
+            <div class="initialDescContainer">
+              <app-label>Hit Die: d{{class.hit_die}}</app-label>
+              <br>
+              <app-label>{{class.desc}}</app-label>
+            </div>
             <ion-accordion-group [value]="class.value + 'group accordion'" class="innerAccordionGroup" [multiple]="true">
             @for(accordion of class.content; track accordion) {
               @if(accordion.content !== undefined && accordion.content !== null && accordion.content !== [] && accordion.lenght !== 0) {
-                <ion-accordion class="innerAccordion" [value]="accordion.value">
+                <ion-accordion class="innerAccordion redBorderBottom" [value]="accordion.value">
                   <ion-item id="accHeader" slot="header" color="light">
                     <app-label [fontSize]="'3.5cqmin'">{{accordion.title}}</app-label>
                   </ion-item>
@@ -66,9 +70,9 @@
                   </ion-item>
                   <div class="ionPaddin innerContent" slot="content">
                     <!-- qua ci vanno i sotto-accordion -->
-                    <ion-accordion-group [value]="class.value + 'levels accordion group'" class="innerAccordions" [multiple]="true">
+                    <ion-accordion-group [value]="class.value + 'levels accordion group'" class="levelAccordionGroup" [multiple]="false">
                     @for(level of class.levels; track level) {
-                      <ion-accordion [value]="level.idx + ' level + accordion'">
+                      <ion-accordion class="yellowBorderBottom levelAccordion" [value]="level.idx + ' level + accordion'">
                         <ion-item id="accHeader" slot="header" color="light">
                           <app-label [fontSize]="'3.5cqmin'">Livello {{level.level}}</app-label>
                         </ion-item>
@@ -221,12 +225,12 @@
                   </div>
                 </ion-accordion>
             </ion-accordion-group>
-            <app-button
+            <ion-button
             class="classSelectionButton"
-            [button]="{text: 'Scegli questa classe', expand: ''}"
-            [margin]="true"
+            (click) = "class.choiceButton.context($event)"
             >
-            </app-button>
+            {{class.choiceButton.button.text}}
+            </ion-button>
           </div>
         </ion-accordion>
       }
@@ -244,7 +248,8 @@
     <ion-label class="levelSelectionLabel">
         Scegli un livello per il personaggio (1-20):
     </ion-label>
-    <app-drag-entry
+    <app-drag-entry 
+    #levelEntry
     [min] = 1
     [max] = 20
     [sensitivity] = 1
@@ -257,4 +262,11 @@
     [context] = "buttonCallbacks['nextPage']"
     ></app-button>
   </div>
+  <ion-alert
+  [isOpen]="nextPageAlertOpen"
+  header="Error"
+  message="Class not chosen or level unset"
+  [buttons]="['Close']"
+  (didDismiss)="setOpen(false)"
+  ></ion-alert>
 </ion-content>

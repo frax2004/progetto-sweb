@@ -1795,7 +1795,7 @@ const allFiles = fs
         ),
         subspecies: getOrInsertArrayId(
           data.ArrayAPIReference,
-          x.subspecies,
+          x.subraces,
           data.APIReference.equals,
           data.APIReference.transform
         ),

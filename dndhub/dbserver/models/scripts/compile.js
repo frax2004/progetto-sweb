@@ -1675,7 +1675,7 @@ const allFiles = fs
                 size: x.size,
                 size_description: x.size_description,
                 traits: getOrInsertArrayId(data.ArrayAPIReference, x.traits, data.APIReference.equals, data.APIReference.transform),
-                subspecies: getOrInsertArrayId(data.ArrayAPIReference, x.subspecies, data.APIReference.equals, data.APIReference.transform),
+                subspecies: getOrInsertArrayId(data.ArrayAPIReference, x.subraces, data.APIReference.equals, data.APIReference.transform),
             };
         },
         inputs: ["5e-SRD-Species.json"],

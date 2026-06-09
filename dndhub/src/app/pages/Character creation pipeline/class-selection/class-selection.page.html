@@ -225,12 +225,12 @@
                   </div>
                 </ion-accordion>
             </ion-accordion-group>
-            <app-button
+            <ion-button
             class="classSelectionButton"
-            [button]="{text: 'Scegli questa classe', expand: ''}"
-            [margin]="true"
+            (click) = "class.choiceButton.context($event)"
             >
-            </app-button>
+            {{class.choiceButton.button.text}}
+            </ion-button>
           </div>
         </ion-accordion>
       }
@@ -248,7 +248,8 @@
     <ion-label class="levelSelectionLabel">
         Scegli un livello per il personaggio (1-20):
     </ion-label>
-    <app-drag-entry
+    <app-drag-entry 
+    #levelEntry
     [min] = 1
     [max] = 20
     [sensitivity] = 1
@@ -261,4 +262,11 @@
     [context] = "buttonCallbacks['nextPage']"
     ></app-button>
   </div>
+  <ion-alert
+  [isOpen]="nextPageAlertOpen"
+  header="Error"
+  message="Class not chosen or level unset"
+  [buttons]="['Close']"
+  (didDismiss)="setOpen(false)"
+  ></ion-alert>
 </ion-content>

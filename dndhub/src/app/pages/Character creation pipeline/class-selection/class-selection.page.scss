@@ -1,5 +1,5 @@
 .classSelectionFrame {
-    width: 70vw;
+    width: 90vw;
     justify-content: center;
     justify-self: center;
     justify-items: center;
@@ -83,11 +83,14 @@
 }
 
 .classSelectionButton {
+    font-weight: 545;
+    --background: yellow;
+    margin: 25px;
     width: 30%;
     display: grid;
     justify-items: end;
     justify-content: end;
-    margin-left: 68%;
+    margin-left: 65%;
 }
 
 .yellowBorderBottom {

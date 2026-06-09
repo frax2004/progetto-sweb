@@ -1,7 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, viewChild, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonGrid, IonLabel, PopoverController, IonCol, IonRow, IonFooter, IonAccordionGroup, IonAccordion, IonThumbnail } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonGrid, IonLabel, PopoverController, IonCol, IonRow, IonFooter, IonAccordionGroup, IonAccordion, IonThumbnail, IonButton, IonAlert } from '@ionic/angular/standalone';
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { Accordion } from 'src/app/components/accordion/Accordion';
 import { TextAreaComponent } from "src/app/components/text-area/text-area.component";
@@ -16,32 +16,43 @@ import { TitleComponent } from "src/app/components/title/title.component";
 import { LabelComponent } from "src/app/components/label/label.component";
 import { CharacterManagementService } from 'src/app/services/character.management.service';
 import { dnd } from 'dbserver/database.queries';
+import { AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-class-selection',
   templateUrl: './class-selection.page.html',
   styleUrls: ['./class-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, AccordionComponent, IonLabel, TextAreaComponent, IonCol, ButtonComponent, IonRow, IonFooter, DragEntryComponent, TitleComponent, LabelComponent, IonAccordionGroup, IonAccordion, IonThumbnail]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, AccordionComponent, IonLabel, TextAreaComponent, IonCol, ButtonComponent, IonRow, IonFooter, DragEntryComponent, TitleComponent, LabelComponent, IonAccordionGroup, IonAccordion, IonThumbnail, IonButton, IonAlert]
 })
-export class ClassSelectionPage implements OnInit {
-  b1_button: Button = { text: 'clicca qui', expand: ''};
-  b1_context: ButtonContext = { onClick: Popups.ofSimpleText(this.popoverController, "Hai scelto questa classe")};
-  b1: ButtonComponent = {
-    button: this.b1_button, context: this.b1_context,
-    // questa riga sotto l'ha aggiunta automaticamente l'estensione, non so perché
-    ngOnInit: function (): void {
-      throw new Error('Function not implemented.');
+export class ClassSelectionPage implements OnInit, AfterViewInit {
+
+  nextPageAlertOpen = false;
+
+  setOpen(isOpen: boolean) {
+    this.nextPageAlertOpen = isOpen;
+  }
+
+  nextPage = () => {
+    // alert(this instanceof ClassSelectionPage);
+    const validLevel: boolean = this.levelEntry.value>0;
+    const validClass: boolean = ClassSelectionPage.selectedClass !== undefined;
+    if (validLevel && validClass) {
+      //set degli elementi per la prossima pagina qui
+      this.router.navigate(['/species-selection']);
     }
+    else this.setOpen(true);
   }
 
   b2_context: ButtonContext = { onClick: Popups.ofSimpleText(this.popoverController, "Andiamo les go les go milano")};
 
   buttonCallbacks = {
     // manca la pagina precedente a cui linkare il primo bottone
-    nextPage: { onClick: Navigate.toPath(this.router,'species-selection')}
+    nextPage: { onClick: this.nextPage}
   }
 
+
+  @ViewChild('levelEntry') private levelEntry: DragEntryComponent; 
   classesArray = [];
   static lvlsArray = [];
   classesNames = ['Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter', 'Monk', 'Paladin', 'Ranger', 'Rogue', 'Sorcerer', 'Warlock', 'Wizard'];
@@ -95,7 +106,82 @@ export class ClassSelectionPage implements OnInit {
                       \nThe closest a Wizard is likely to come to an ordinary life is working as a sage or lecturer. Other Wizards sell their services as advisers, serve in military forces, or pursue lives of crime or domination.
                       \nBut the lure of knowledge calls even the most unadventurous Wizards from the safety of their libraries and laboratories and into crumbling ruins and lost cities. Most Wizards believe that their counterparts in ancient civilizations knew secrets of magic that have been lost to the ages, and discovering those secrets could unlock the path to a power greater than any magic available in the present age.`},  
   };
-  
+  static selectedClass: string;
+
+  static classesButtons = {
+    'Barbarian': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        ClassSelectionPage.selectedClass = 'Barbarian';
+      }
+    },
+    'Bard': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        ClassSelectionPage.selectedClass = 'Bard';
+      }
+    }, 
+    'Cleric': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        ClassSelectionPage.selectedClass = 'Cleric';
+      }
+    }, 
+    'Druid': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        ClassSelectionPage.selectedClass = 'Druid';
+      }
+    }, 
+    'Fighter': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        ClassSelectionPage.selectedClass = 'Fighter';
+      }
+    }, 
+    'Monk': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        ClassSelectionPage.selectedClass = 'Monk';
+      }
+    }, 
+    'Paladin': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        ClassSelectionPage.selectedClass = 'Paladin';
+      }
+    }, 
+    'Ranger': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        ClassSelectionPage.selectedClass = 'Ranger';
+      }
+    }, 
+    'Rogue': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        ClassSelectionPage.selectedClass = 'Rogue';
+      }
+    }, 
+    'Sorcerer': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        ClassSelectionPage.selectedClass = 'Sorcerer';
+      }
+    }, 
+    'Warlock': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        ClassSelectionPage.selectedClass = 'Warlock';
+      }
+    }, 
+    'Wizard': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        ClassSelectionPage.selectedClass = 'Wizard';
+      }
+    }
+  }
 
   // le funzioni display devono essere static altrimenti non possono essere accedute all'interno del costruttore
   static displayProficiencies(className, proficiencies) {
@@ -177,21 +263,129 @@ export class ClassSelectionPage implements OnInit {
     return startingEquipment.length === 0 ? undefined : retValue;
   }
 
-  static displayStartigEquipmentOptions(className,equipOpt) {
+  static displayStartigEquipmentOptions(className: string,equipOpt: dnd.Choice[]) {
     let retValue = className + ' dispone delle seguenti opzioni di scelta di equipaggiamento:\n'
-    
+    let app: dnd.OptionSet;
+    let app1: dnd.Option[];
     for (const opt of equipOpt) {
-        //for (const item of opt.option_set?.options_array) {
-          retValue = retValue + '\n- ' + opt.option_set?.desc + ' - Choose: ' + opt.option_set?.choose;
-        //}
+      if (opt.choose !== null && opt.desc !== null) {
+        retValue = retValue + '\n- ' + opt.desc + ' - Choose: ' + opt.choose;
+      }
+      // for (const item of opt.from.options){
+      //   if (item.choice?.desc !== undefined && item.choice?.choose !==undefined) {
+      //     retValue = retValue + '\n- ' + item.choice.desc + ' - Choose: ' + item.choice.choose;
+      //   }
+      // }
     }
     
     // ci perdo le speranze, non capisco come flattarlo
-    return JSON.stringify(equipOpt);
-    //return retValue;
+    //return JSON.stringify(equipOpt);
+    return retValue;
   }
 
-  //c'è qualche problema con spellcasting
+  //Spellcasting funziona male quindi mi sto prendendo qualche libertà per scriverla di sana pianta
+  static displaySpellcasting(className: string) {
+    if (className === 'Wizard') {
+      return `Spellcasting ability: INT
+              \nSpell save DC = 8 + your proficiency bonus + your Intelligence modifier.
+              \nSpell attack modifier = your proficiency bonus + your Intelligence modifier.
+              
+              \nCantrips known and spell slots at each level are specified in the respective level info.
+
+              \nYou prepare the list of wizard spells that are available for you to cast. To do so, choose a number of wizard spells from your spellbook equal to your Intelligence modifier + your wizard level (minimum of one spell). The spells must be of a level for which you have spell slots.
+              \nYou can change your list of prepared spells when you finish a long rest. Preparing a new list of wizard spells requires time spent studying your spellbook and memorizing the incantations and gestures you must make to cast the spell: at least 1 minute per spell level for each spell on your list.
+              
+              \nAs a Wizard you can cast a wizard spell as a ritual if that spell has the ritual tag and you have the spell in your spellbook. You don't need to have the spell prepared.
+              \nFurthermore, You can use an arcane focus as a spellcasting focus for your wizard spells.
+              `;
+    }
+    else if (className === 'Bard') {
+      return `Spellcasting ability: Charisma (CHA).
+              \nSpell save DC = 8 + your proficiency bonus + your Charisma modifier.
+              \nSpell attack modifier = your proficiency bonus + your Charisma modifier.
+
+              \nCantrips you know, spell slots and how many spells you know at each level are specified in the respective level info.
+              \nAdditionally, when you gain a level in this class, you can choose one of the bard spells you know and replace it with another spell from the bard spell list, which also must be of a level for which you have spell slots.
+
+              \nAs a Bard you can cast any bard spell you know as a ritual if that spell has the ritual tag.
+              \nFurthermore, you can use a musical instrument as spellcasting focus for your bard spells
+              `;
+    }
+    else if (className === 'Cleric') {
+      return `Spellcasting ability: Wisdom (WIS)
+              \nSpell save DC = 8 + your proficiency bonus + your Wisdom modifier.
+              \nSpell attack modifier = your proficiency bonus + your Wisdom modifier.
+              
+              \nCantrips known and spell slots at each level are specified in the respective level info.
+
+              \nYou prepare the list of cleric spells that are available for you to cast, choosing from the cleric spell list. When you do so, choose a number of cleric spells equal to your Wisdom modifier + your cleric level (minimum of one spell). The spells must be of a level for which you have spell slots.
+              \nYou can change your list of prepared spells when you finish a long rest. Preparing a new list of cleric spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.
+
+              \nAs a Cleric You can cast a cleric spell as a ritual if that spell has the ritual tag and you have the spell prepared.
+              \nFurthermore, You can use a holy symbol as a spellcasting focus for your cleric spells.
+              `;
+    }
+    else if (className === 'Druid') {
+      return `Spellcasting ability: Wisdom (WIS)
+              \nSpell save DC = 8 + your proficiency bonus + your Wisdom modifier.
+              \nSpell attack modifier = your proficiency bonus + your Wisdom modifier.
+              
+              \nCantrips known and spell slots at each level are specified in the respective level info.
+
+              \nYou prepare the list of druid spells that are available for you to cast, choosing from the druid spell list. When you do so, choose a number of druid spells equal to your Wisdom modifier + your druid level (minimum of one spell). The spells must be of a level for which you have spell slots.
+              \nYou can also change your list of prepared spells when you finish a long rest. Preparing a new list of druid spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.
+
+              \nAs a Druid You can cast a druid spell as a ritual if that spell has the ritual tag and you have the spell prepared.
+              \nFurthermore, You can use a druidic focus as a spellcasting focus for your druid spells.
+              `;
+    }
+    else if (className === 'Ranger') {
+      return `Spellcasting ability: Wisdom (WIS)
+              \nSpell save DC = 8 + your proficiency bonus + your Wisdom modifier.
+              \nSpell attack modifier = your proficiency bonus + your Wisdom modifier.
+              
+              \nSpell slots and spells known at each level are specified in the respective level info.
+              \nAdditionally, when you gain a level in this class, you can choose one of the ranger spells you know and replace it with another spell from the ranger spell list, which also must be of a level for which you have spell slots.
+              `;
+    }
+    else if (className === 'Paladin') {
+      return `Spellcasting ability: Charisma (CHA)
+              \nSpell save DC = 8 + your proficiency bonus + your Charisma modifier.
+              \nSpell attack modifier = your proficiency bonus + your Charisma modifier.
+              
+              \nSpell slots at each level are specified in the respective level info.
+              
+              \nYou prepare the list of paladin spells that are available for you to cast, choosing from the paladin spell list. When you do so, choose a number of paladin spells equal to your Charisma modifier + half your paladin level, rounded down (minimum of one spell). The spells must be of a level for which you have spell slots.
+              \nYou can change your list of prepared spells when you finish a long rest. Preparing a new list of paladin spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.
+
+              \nFurthermore, You can use a holy symbol as a spellcasting focus for your cleric spells.
+              `;
+    }
+    else if (className === 'Sorcerer') {
+      return `Spellcasting ability: Charisma (CHA).
+              \nSpell save DC = 8 + your proficiency bonus + your Charisma modifier.
+              \nSpell attack modifier = your proficiency bonus + your Charisma modifier.
+
+              \nCantrips you know, spell slots and how many spells you know at each level are specified in the respective level info.
+              \nAdditionally, when you gain a level in this class, you can choose one of the sorcerer spells you know and replace it with another spell from the sorcerer spell list, which also must be of a level for which you have spell slots.
+              
+              \nFurthermore, You can use an arcane focus as a spellcasting focus for your sorcerer spells.
+              `;
+    }
+    else if (className === 'Warlock') {
+      return `Spellcasting ability: Charisma (CHA).
+              \nSpell save DC = 8 + your proficiency bonus + your Charisma modifier.
+              \nSpell attack modifier = your proficiency bonus + your Charisma modifier.
+
+              \nCantrips you know, spell slots and how many spells you know at each level are specified in the respective level info.
+              \nAdditionally, when you gain a level in this class, you can choose one of the warlock spells you know and replace it with another spell from the warlock spell list, which also must be of a level for which you have spell slots.
+
+              \nFurthermore, You can use an arcane focus as a spellcasting focus for your warlock spells.
+              `;
+    }
+
+    return undefined;
+  }
 
   static displaySpells(className,spells) {
     let retValue = 'Lista incantesimi semplificata di ' + className + ':\n';
@@ -200,7 +394,7 @@ export class ClassSelectionPage implements OnInit {
       retValue = retValue + '\n- ' + item.name + '  - Level: ' + item.level;
     }
 
-    return retValue;
+    return retValue === 'Lista incantesimi semplificata di ' + className + ':\n' ? undefined : retValue;
   } 
 
   static displaySubclasses(className,subclasses) {
@@ -225,71 +419,10 @@ export class ClassSelectionPage implements OnInit {
     return 'C\'è stato qualche errore';
   }
 
-
-
-  // {
-//   name: 'ranger',
-//   features: [
-//     { idx: 'favored-enemy-2-types', name: 'Favored Enemy (2 types)' },
-//     {
-//       idx: 'natural-explorer-2-terrain-types',
-//       name: 'Natural Explorer (2 terrain types)'
-//     }
-//   ],
-//   class_specific: {
-//     creating_spell_slots: [],
-//     action_surges: undefined,
-//     arcane_recovery_levels: undefined,
-//     aura_range: undefined,
-//     bardic_inspiration_die: undefined,
-//     brutal_critical_dice: undefined,
-//     channel_divinity_charges: undefined,
-//     destroy_undead_cr: undefined,
-//     extra_attacks: undefined,
-//     favored_enemies: 2,
-//     favored_terrain: 2,
-//     indomitable_uses: undefined,
-//     invocations_known: undefined,
-//     ki_points: undefined,
-//     magical_secrets_max_5: undefined,
-//     magical_secrets_max_7: undefined,
-//     magical_secrets_max_9: undefined,
-//     martial_arts: { dice_count: undefined, dice_value: undefined },
-//     metamagic_known: undefined,
-//     mystic_arcanum_level_6: undefined,
-//     mystic_arcanum_level_7: undefined,
-//     mystic_arcanum_level_8: undefined,
-//     mystic_arcanum_level_9: undefined,
-//     rage_count: undefined,
-//     rage_damage_bonus: undefined,
-//     sneak_attack: { dice_count: undefined, dice_value: undefined },
-//     song_of_rest_die: undefined,
-//     sorcery_points: undefined,
-//     unarmored_movement: undefined,
-//     wild_shape: { fly: undefined, max_cr: undefined, swim: undefined }
-//   },
-//   idx: 'ranger-6',
-//   level: 6,
-//   ability_score_bonuses: 1,
-//   prof_bonus: 3,
-//   cantrips_known: undefined,
-//   spell_slots_level_1: 4,
-//   spell_slots_level_2: 2,
-//   spell_slots_level_3: 0,
-//   spell_slots_level_4: 0,
-//   spell_slots_level_5: 0,
-//   spell_slots_level_6: undefined,
-//   spell_slots_level_7: undefined,
-//   spell_slots_level_8: undefined,
-//   spell_slots_level_9: undefined,
-//   spells_known: 4,
-//   additional_magical_secrets_max_lvl: undefined,
-//   aura_range: undefined
-// }
-
-  
-
   constructor(public popoverController: PopoverController, private router: Router, private classDisplayer: CharacterManagementService) {
+    ClassSelectionPage.selectedClass = undefined;
+    
+    
     for (const name of this.classesNames) {
       this.classDisplayer
       .displaySpecificLevel(name)
@@ -315,6 +448,7 @@ export class ClassSelectionPage implements OnInit {
             imageURL: "../assets/icon/classes_icons/" + item.name.toLowerCase() + ".svg",
             desc: ClassSelectionPage.classesDescriptions[item.name].text,
             value: item.name + " accordion",
+            choiceButton: ClassSelectionPage.classesButtons[item.name],
             title: item.name,
             hit_die: item.hit_die, 
             content: [
@@ -324,7 +458,7 @@ export class ClassSelectionPage implements OnInit {
               { value: "multiclassing accordion",  title: "Opzioni di multiclasse", content: ClassSelectionPage.displayMulticlassing(item.name,item.multiclassing)},
               { value: "starting_equipment accordion",  title: "Equipaggiamento di partenza", content: ClassSelectionPage.displayStartingEquipment(item.name,item.starting_equipment)},
               { value: "starting_equipment_options accordion",  title: "Equipaggiamento di partenza a scelta", content: ClassSelectionPage.displayStartigEquipmentOptions(item.name,item.starting_equipment_options)},
-              { value: "spellcasting accordion",  title: "Caratteristiche da incantatore", content: JSON.stringify(item.spellcasting)},
+              { value: "spellcasting accordion",  title: "Caratteristiche da incantatore", content: ClassSelectionPage.displaySpellcasting(item.name)},
               { value: "spell accordion",  title: "Lista possibili incantesimi", content: ClassSelectionPage.displaySpells(item.name,item.spells)},
               { value: "subclasses accordion",  title: "Sottoclassi possibili", content: ClassSelectionPage.displaySubclasses(item.name,item.subclasses)},
               //{ value: "levels accordion",  title: "Livelli possibili", content: JSON.stringify(item.levels)},
@@ -339,9 +473,9 @@ export class ClassSelectionPage implements OnInit {
     });
   }
 
-  // [{"idx":"light-armor","name":"Light Armor"},
-  
-
   ngOnInit() {}
 
+  ngAfterViewInit() {}
+
+  
 }

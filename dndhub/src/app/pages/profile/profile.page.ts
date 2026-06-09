@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, effect, ElementRef, inject, OnInit, QueryList, signal, viewChild, ViewChild, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle,IonInput ,IonToolbar, IonCol, PopoverController, IonLabel, IonList, IonItem, IonGrid, IonRow, IonButton, IonThumbnail, IonSplitPane, IonMenu } from '@ionic/angular/standalone';
@@ -19,55 +19,54 @@ import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
 })
 export class ProfilePage implements OnInit, AfterViewInit {
 
-  @ViewChild("username") usernameField!: EntryComponent;
-  @ViewChild("email") emailField!: EntryComponent;
-  @ViewChild("password") passwordField!: EntryComponent;
+  @ViewChild("username") usernameField: EntryComponent;
+  @ViewChild("email") emailField: EntryComponent;
+  @ViewChild("password") passwordField: EntryComponent;
 
-  censor: boolean = true;
-  buttonCallbacks = {
-    placeholder: { onClick: Popups.ofSimpleText(this.popoverController,'Funzione non ancora implementata')},
-    uncensor: { onClick: () => {
-        if (this.censor===true) this.censor=false;
-        else this.censor=true;
-      }
-    },
-    goBack: {
-      onClick: () => {
-        Navigate.toPath(this.router, 'landing-page')();
-      }
-    },
-    enableAccountEdit: {
-      onClick: () => {
-        this.emailField.disabled = false;
-        this.passwordField.disabled = false;
-        this.usernameField.disabled = false;
-      }
-    },
-    save: {
-      onClick: () => {
-        this.emailField.disabled = true;
-        this.passwordField.disabled = true;
-        this.usernameField.disabled = true;
-      }
-    }
+  private isEditEnabled: boolean = false;
+
+  entryHandle = signal<EntryComponent | null>(null);
+
+  public goBack = () => Navigate.toPath(this.router, 'landing-page')();
+  public enableAccountEdit = () => {
+    this.isEditEnabled = true;
+    this.emailField.disabled = false;
+    this.passwordField.disabled = false;
+    this.usernameField.disabled = false;
+  }
+  public save = () => {
+    if(!this.isEditEnabled) return;
+
+    this.isEditEnabled = false;
+    this.emailField.disabled = true;
+    this.passwordField.disabled = true;
+    this.usernameField.disabled = true;
+    
+  }
+
+  public placeholder = () => alert('Not Implemented Function');
+
+  public buttons = {
+    placeholder: { onClick: this.placeholder },
+    goBack: { onClick: this.goBack },
+    enableAccountEdit: { onClick: this.enableAccountEdit },
+    save: { onClick: this.save }
   };
 
   constructor(private userService: UserUtilitiesService, public popoverController: PopoverController, private router: Router) {}
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     this.userService
     .getUserInfo()
     .subscribe({
-      next: (value) => {
-        console.log(JSON.stringify(value));
-        this.usernameField.value = value.username;
-        this.emailField.value = value.email;
-        this.passwordField.value = value.password;
+      next: value => {
+        this.usernameField.entry.value = value.username;
+        this.emailField.entry.value = value.email;
+        this.passwordField.entry.value = value.password;
       },
       error: err => alert(JSON.stringify(err))
     });
   }
-  
-  ngOnInit() {}
 
+  ngOnInit() {}
 }

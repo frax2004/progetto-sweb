@@ -418,7 +418,7 @@ export var models;
         starting_proficiencies;
         starting_proficiency_options;
         languages;
-        languages_desc;
+        language_desc;
         language_options;
         url;
         size;

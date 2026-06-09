@@ -56,15 +56,16 @@ export function getUserInfo(req, res) {
       success: false,
       message: `Non è stato possibile ottenere le credenziali dell'utente registrato come ${email}`
     }, res)
-  }).then(row => {
-    console.log(JSON.stringify(row));
+  }).then(rows => {
+    const credentials = rows[0];
+
     sendResponse({
       success: true,
       status_code: 200,
       message: "Credenziali ottenute con successo",
-      email: row.email,
-      password: row.password,
-      username: row.username
+      email: credentials.email,
+      password: credentials.password,
+      username: credentials.username
     }, res);
   });
 

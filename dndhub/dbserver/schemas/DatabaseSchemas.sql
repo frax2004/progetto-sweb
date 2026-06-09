@@ -541,7 +541,7 @@ create table if not exists Species (
   starting_proficiencies number, -- foreign key
   starting_proficiency_options number, -- foreign key
   languages number, -- foreign key
-  languages_desc text,
+  language_desc text,
   language_options number, -- foreign key
   traits number, -- foreign key
   subspecies number, -- subraces nella versione 2014, foreign key

@@ -17,22 +17,22 @@
           <app-button class="btn" 
             [margin]="false"
             [button]="{text: 'Torna indietro', expand: 'false'}"
-            [context] = "buttonCallbacks['goBack']"
+            [context] = "buttons.goBack"
             ></app-button>
           <app-button class="btn"
             [margin]="false"
             [button] = "{ text: 'Modifica account', expand: ''}"
-            [context] = "buttonCallbacks['enableAccountEdit']"
+            [context] = "buttons.enableAccountEdit"
           ></app-button>
           <app-button class="btn"
             [margin]="false"
             [button] = "{ text: 'Elimina account', expand: ''}"
-            [context] = "buttonCallbacks['placeholder']"
+            [context] = "buttons.placeholder"
           ></app-button>
           <app-button class="btn"
             [margin]="false"
             [button] = "{ text: 'Effettua l\'uscita', expand: ''}"
-            [context] = "buttonCallbacks['placeholder']"
+            [context] = "buttons.placeholder"
           ></app-button>
         </div>
 
@@ -44,20 +44,20 @@
         <div class="entry-container">
           <app-entry #username
             placeholder="Nome utente"
-            [disabled]="false"
+            [disabled]="true"
           ></app-entry>
           <app-entry #email
             placeholder="Indirizzo email"
-            [disabled]="false"
+            [disabled]="true"
           ></app-entry>
           <app-entry #password
             placeholder="Password"
-            [disabled]="false"
+            [disabled]="true"
           ></app-entry>
-            <app-button class="save-button"
-              [margin]="false"
-              [button] = "{ text: 'Salva', expand: ''}"
-              [context] = "buttonCallbacks['save']"
+          <app-button class="save-button"
+            [margin]="false"
+            [button] = "{ text: 'Salva', expand: ''}"
+            [context] = "buttons.save"
           ></app-button>
         </div>
       </ion-content>
@@ -83,7 +83,7 @@
               <app-button
               [margin]="false"
               [button] = "{ text: 'Torna indietro', expand: ''}"
-              [context] = "buttonCallbacks['placeholder']"
+              [context] = "buttons.placeholder"
               ></app-button>
             </div>
 
@@ -98,7 +98,7 @@
               <app-button
               [margin]="false"
               [button] = "{ text: 'Modifica account', expand: ''}"
-              [context] = "buttonCallbacks['placeholder']"
+              [context] = "buttons.placeholder"
               ></app-button>
             </div>
 
@@ -106,7 +106,7 @@
               <app-button
               [margin]="false"
               [button] = "{ text: 'Elimina account', expand: ''}"
-              [context] = "buttonCallbacks['placeholder']"
+              [context] = "buttons.placeholder"
               ></app-button>
             </div>
 
@@ -115,7 +115,7 @@
               <app-button
               [margin]="false"
               [button] = "{ text: 'Log out', expand: ''}"
-              [context] = "buttonCallbacks['placeholder']"
+              [context] = "buttons.placeholder"
               ></app-button>
             </div>
           </div>

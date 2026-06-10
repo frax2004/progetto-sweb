@@ -180,8 +180,33 @@ async function displaySpecies(req,res) {
   }, res);
 }
 
+async function displayBackgrounds(req,res) {
+  canSend=true;
+
+  DatabaseQueries.retrieve("SELECT * FROM Background", DatabaseQueries.unwrapBackground)
+  .catch(err => {
+    sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare i background dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then(bgs => {
+    sendResponse({
+        backgrounds: bgs,
+        status_code: 200,
+        success: true,
+        message: 'backgrounds caricati con successo'
+      },
+      res
+    );
+  });
+}
+
 export default {
   displayClasses,
   displayLevelByNameAndLevel,
   displaySpecies,
+  displayBackgrounds,
 }

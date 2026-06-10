@@ -37,15 +37,6 @@ create table if not exists AreaOfEffect (
   or type='cone') 
 );
 
-create table if not exists Choice (
-  desc text,
-  choose number ,
-  type text,
-  id number  primary key,
-
-  foreign key (id) references OptionSet(id)
-);
-
 
 create table if not exists ArrayDamageItem (
   array_id number ,
@@ -59,15 +50,7 @@ create table if not exists ArrayDamageItem (
   primary key(array_id,array_idx)
 );
 
--- OptionArray miItem serve per multiple
-create table if not exists ArrayOptionItem (
-  item_id number ,
-  array_idx number ,
-  array_id number ,
 
-  primary key (array_id, array_idx),
-  foreign key (item_id) references Option(id)
-);
 
 create table if not exists ArrayPrerequisiteItem (
   array_idx number ,
@@ -125,7 +108,7 @@ create table if not exists Option (
   size text,
 
   foreign key (reference_item) references APIReference(idx),
-  foreign key (choice_id) references Choice(id),
+  -- foreign key (choice_id) references Choice(id), 
   foreign key (ability_score_bonus) references APIReference(idx),
   foreign key (breath_dc) references DifficultyClass(id), 
   foreign key (breath_damage) references ArrayDamageItem(array_id),
@@ -133,8 +116,18 @@ create table if not exists Option (
   foreign key (prerequisites) references ArrayPrerequisiteItem(array_id),
   foreign key (damage_type) references APIReference(idx),
   foreign key (alignments) references ArrayAPIReferenceItem(array_id),
-  foreign key (multiple_items) references ArrayOptionItem(array_id),
+  -- foreign key (multiple_items) references ArrayOptionItem(array_id),
   foreign key (ability_score_prerequisite) references APIReference(idx)
+);
+
+-- OptionArray miItem serve per multiple
+create table if not exists ArrayOptionItem (
+  item_id number ,
+  array_idx number ,
+  array_id number ,
+
+  primary key (array_id, array_idx),
+  foreign key (item_id) references Option(id)
 );
 
 create table if not exists OptionSet (
@@ -149,6 +142,17 @@ create table if not exists OptionSet (
 
   foreign key (equipment_category) references APIReference(idx),
   foreign key (options_array) references ArrayOptionItem(array_id)
+);
+
+
+
+create table if not exists Choice (
+  desc text,
+  choose number ,
+  type text,
+  id number  primary key,
+
+  foreign key (id) references OptionSet(id)
 );
 
 -- tabelle di DamageType.ts
@@ -829,14 +833,42 @@ create table if not exists UtenteGenerico (
   foreign key (account) references Account(email) on update cascade on delete cascade
 );
 
-create table if not exists ArrayFeatItem (
-  item text not null,
-  idx_personaggio text not null,
-  array_idx number not null,
+create table if not exists Personaggio (
+  utente_giocatore text not null,
+  nome text not null,
+  -- primary key creata da interpolazione
+  -- utente_giocatore + nome
+  idx_personaggio text not null primary key,
+  classe text not null,
+  sottoclasse text,
+  specie text not null,
+  sottospecie text,
+  background text not null,
+  livello text not null,
+  -- i talenti sono salvati su un array come foreign keys
+  -- stessa cosa vale per equipaggiamenti, incantesimi e lingue parlate
+  -- e anche per statistiche
 
-  primary key (idx_personaggio,array_idx),
-  foreign key (idx_personaggio) references Personaggio(idx_personaggio) on update cascade on delete cascade,
-  foreign key (item) references Feat(idx)
+ -- tranne che non li salviamo come ArrayAPIReference?
+
+  -- in teoria la proprietà è array di 
+  -- stringhe, lascio come semplice stringa?
+  abilita_extra text,
+  descrizione_personaggio text,
+
+  foreign key (classe) references Class(idx),
+  -- foreign key (idx_personaggio) references ArrayFeatItem(idx_personaggio),
+  -- foreign key (idx_personaggio) references ArraySpellItem(idx_personaggio),
+  -- foreign key (idx_personaggio) references ArrayEquipmentItem(idx_personaggio),
+  -- foreign key (idx_personaggio) references ArrayLanguageItem(idx_personaggio),
+  -- foreign key (idx_personaggio) references ArrayStatsItem(idx_personaggio),
+  -- foreign key (idx_personaggio) references ArrayCampagnaPersonaggiItem(idx_personaggio) on update cascade on delete cascade,
+  foreign key (utente_giocatore) references UtenteGiocatore(utente_giocatore) on update cascade on delete cascade,
+  foreign key (sottoclasse) references Subclass(idx),
+  foreign key (specie) references Species(idx),
+  foreign key (sottospecie) references Subspecies(idx),
+  foreign key (background) references Background(idx),
+  foreign key (livello) references Level(idx)
 );
 
 create table if not exists ArraySpellItem (
@@ -880,62 +912,15 @@ create table if not exists ArrayStatsItem (
   foreign key (stat_idx) references AbilityScore(idx)
 );
 
-create table if not exists Personaggio (
-  utente_giocatore text not null,
-  nome text not null,
-  -- primary key creata da interpolazione
-  -- utente_giocatore + nome
-  idx_personaggio text not null primary key,
-  campagna text, -- un personaggio una sola campagna altrimenti problemi di modifica pg
-  classe text not null,
-  sottoclasse text,
-  specie text not null,
-  sottospecie text,
-  background text not null,
-  livello text not null,
-  -- i talenti sono salvati su un array come foreign keys
-  -- stessa cosa vale per equipaggiamenti, incantesimi e lingue parlate
-  -- e anche per statistiche
 
- -- tranne che non li salviamo come ArrayAPIReference?
-
-  -- in teoria la proprietà è array di 
-  -- stringhe, lascio come semplice stringa?
-  abilita_extra text,
-  descrizione_personaggio text,
-
-  foreign key (classe) references Class(idx),
-  foreign key (campagna) references Campagna(idx_campagna),
-  foreign key (idx_personaggio) references ArrayFeatItem(idx_personaggio),
-  foreign key (idx_personaggio) references ArraySpellItem(idx_personaggio),
-  foreign key (idx_personaggio) references ArrayEquipmentItem(idx_personaggio),
-  foreign key (idx_personaggio) references ArrayLanguageItem(idx_personaggio),
-  foreign key (idx_personaggio) references ArrayStatsItem(idx_personaggio),
-  foreign key (utente_giocatore) references UtenteGiocatore(utente_giocatore) on update cascade on delete cascade,
-  foreign key (sottoclasse) references Subclass(idx),
-  foreign key (specie) references Species(idx),
-  foreign key (sottospecie) references Subspecies(idx),
-  foreign key (background) references Background(idx),
-  foreign key (livello) references Level(idx)
-);
-
-create table if not exists ArrayPostItem (
-  idx_campagna text not null,
-  timestamp text not null,
-  contenuto text not null,
-
-  primary key (idx_campagna,timestamp),
-  foreign key (idx_campagna) references Personaggio(idx_campagna) on update cascade on delete cascade,
-  foreign key (idx_campagna) references Campagna(idx_campagna)
-);
-
-create table if not exists ArrayCampagnaPersonaggiItem (
-  idx_campagna text not null,
+create table if not exists ArrayFeatItem (
+  item text not null,
   idx_personaggio text not null,
+  array_idx number not null,
 
-  primary key (idx_campagna,idx_personaggio),
+  primary key (idx_personaggio,array_idx),
   foreign key (idx_personaggio) references Personaggio(idx_personaggio) on update cascade on delete cascade,
-  foreign key (idx_campagna) references Campagna(idx_campagna) on update cascade on delete cascade
+  foreign key (item) references Feat(idx)
 );
 
 create table if not exists Campagna (
@@ -953,17 +938,36 @@ create table if not exists Campagna (
   -- comunque personaggi sono anch'essi acceduti come foreign key
 
   foreign key (utente_dungeon_master) references UtenteGenerico(utente_dungeon_master) on update cascade on delete cascade
+  -- foreign key (idx_campagna) references ArrayCampagnaPersonaggiItem(idx_campagna) on update cascade on delete cascade
 );
 
-create table if not exists ArrayIdxPersonaggioItem (
-  utente_giocatore text not null,
+create table if not exists ArrayCampagnaPersonaggiItem (
+  idx_campagna text not null,
   idx_personaggio text not null,
 
-  primary key (utente_giocatore,idx_personaggio),
-  foreign key (utente_giocatore) references UtenteGiocatore(utente_giocatore) on update cascade on delete cascade,
+  primary key (idx_campagna,idx_personaggio)
   foreign key (idx_personaggio) references Personaggio(idx_personaggio) on update cascade on delete cascade,
-  foreign key (idx_personaggio) references ArrayCampagnaPersonaggiItem(idx_personaggio)
+  foreign key (idx_campagna) references Campagna(idx_campagna) on update cascade on delete cascade
 );
+
+create table if not exists ArrayPostItem (
+  idx_campagna text not null,
+  time_stamp timestamp not null,
+  contenuto text not null,
+
+  primary key (idx_campagna,time_stamp),
+  foreign key (idx_campagna) references Campagna(idx_campagna) on update cascade on delete cascade 
+);
+
+-- create table if not exists ArrayIdxPersonaggioItem (
+--   utente_giocatore text not null,
+--   idx_personaggio text not null,
+
+--   primary key (utente_giocatore,idx_personaggio),
+--   foreign key (utente_giocatore) references UtenteGiocatore(utente_giocatore) on update cascade on delete cascade,
+--   foreign key (idx_personaggio) references Personaggio(idx_personaggio) on update cascade on delete cascade,
+--   foreign key (idx_personaggio) references ArrayCampagnaPersonaggiItem(idx_personaggio)
+-- );
 
 -- create table if not exists UtenteGiocatore (
 --   utente_giocatore text not null primary key,
@@ -976,14 +980,14 @@ create table if not exists ArrayIdxPersonaggioItem (
 --   foreign key (utente_giocatore) references ArrayIdxPersonaggioItem(utente_giocatore)
 -- );
 
-create table if not exists ArrayIdxCampagnaItem (
-  utente_dungeon_master text not null,
-  idx_campagna text not null,
+-- create table if not exists ArrayIdxCampagnaItem (
+--   utente_dungeon_master text not null,
+--   idx_campagna text not null,
 
-  primary key (utente_dungeon_master,idx_campagna),
-  foreign key (utente_dungeon_master) references UtenteGenerico(utente_dungeon_master) on update cascade on delete cascade,
-  foreign key (idx_campagna) references Campagna(idx_campagna) on update cascade on delete cascade
-);
+--   primary key (utente_dungeon_master,idx_campagna),
+--   foreign key (utente_dungeon_master) references UtenteGenerico(utente_dungeon_master) on update cascade on delete cascade,
+--   foreign key (idx_campagna) references Campagna(idx_campagna) on update cascade on delete cascade
+-- );
 
 -- create table if not exists UtenteDungeonMaster (
 --   utente_dungeon_master text not null primary key,
@@ -994,3 +998,4 @@ create table if not exists ArrayIdxCampagnaItem (
 --   foreign key (utente_generico) references UtenteGenerico(account),
 --   foreign key (utente_dungeon_master) references ArrayIdxCampagnaItem(utente_dungeon_master)
 -- );
+

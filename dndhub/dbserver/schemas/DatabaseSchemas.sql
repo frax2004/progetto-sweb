@@ -180,13 +180,13 @@ create table if not exists AbilityScore (
 -- tabelle di Alignments
 -- in teoria inutili ma copiata comunque perché piccola
 
-create table if not exists Alignment (
-  idx text  primary key,
-  name text ,
-  abbreviation text ,
-  description text ,
-  url text 
-);
+-- create table if not exists Alignment (
+--   idx text  primary key,
+--   name text ,
+--   abbreviation text ,
+--   description text ,
+--   url text 
+-- );
 
 -- tabelle di Backgrounds.ts
 

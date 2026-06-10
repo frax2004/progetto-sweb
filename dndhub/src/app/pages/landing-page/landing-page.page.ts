@@ -35,9 +35,9 @@ export class LandingPagePage implements OnInit {
     return this.router.navigate(['landing-page']);
   }
 
-  isLogged: boolean;
+  isLogged: boolean = false;
 
-  constructor(public router: Router, private userUtilities: UserUtilitiesService) { 
+  constructor(private router: Router, private userUtilities: UserUtilitiesService) { 
     userUtilities.isLogged()
     .subscribe({
       next: (value) => {

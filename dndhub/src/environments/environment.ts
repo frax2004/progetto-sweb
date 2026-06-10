@@ -4,8 +4,8 @@
 
 const PORT = 10000;
 
-// const POLAREZZA_IP_ADDRESS = '192.168.137.1';
-const POLAREZZA_IP_ADDRESS = 'localhost';
+const POLAREZZA_IP_ADDRESS = '192.168.137.1';
+// const POLAREZZA_IP_ADDRESS = 'localhost';
 const IP_ADDRESS = POLAREZZA_IP_ADDRESS;
 
 export const environment = {

@@ -42,6 +42,22 @@ function isLogged(req, res) {
   }
 }
 
+export function setUserInfo(req, res) {
+  canSend = true;
+  
+  const oldEmail = UserInstance.USER.email;
+
+  const email = req.body.email;
+  const password = req.body.password;
+  const username = req.body.username;
+
+  // Database
+  // .execOne(`UPDATE Account SET email = '${email}', password = '${password}', username = ${username} WHERE email = '${oldEmail}'`)
+  // .catch();
+
+
+}
+
 export function getUserInfo(req, res) {
   canSend = true;
 
@@ -74,4 +90,5 @@ export function getUserInfo(req, res) {
 export default {
   isLogged,
   getUserInfo,
+  setUserInfo,
 }

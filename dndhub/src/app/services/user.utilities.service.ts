@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable, Subscription, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 
@@ -21,11 +21,18 @@ export class UserUtilitiesService {
     );
   }
 
-  getUserInfo(): Observable<any> {
+  setUserInfo(email: string, password: string, username: string, success: (x) => void, fail: (err) => void): Subscription {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/user-utilities/setUserInfo`,
+      { email: email, password: password, username: username }
+    ).subscribe({next: success, error: fail});
+  }
+
+  getUserInfo(success: (x) => void, fail: (err) => void): Subscription {
     return this.httpclient.post<any>(
       `${environment.api_url}/api/user-utilities/getUserInfo`,
       {}
-    );
+    ).subscribe({next: success, error: fail});
   }
 
   setCurrentPersonalArea(area: 'player' | 'dm' | 'generic'): Observable<any>  {

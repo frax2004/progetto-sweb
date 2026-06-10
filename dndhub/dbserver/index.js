@@ -54,12 +54,11 @@ function loadTable(name) {
 
 
 const tables = [
-  "AbilityScore",
   "APIReference",
-  "AreaOfEffect",
   "ArrayAbilityBonusItem",
   "ArrayApiReferenceItem",
   "ArrayBreathWeaponDamageItem",
+  "Choice",
   "ArrayChoiceItem",
   "ArrayContentItem",
   "ArrayCreatingSpellSlotItem",
@@ -72,9 +71,10 @@ const tables = [
   "ArraySubclassSpellItem",
   "ArraySubclassSpellPrerequisiteItem",
   "ArrayUtilizeItem",
+  "AbilityScore",
+  "AreaOfEffect",
   "Background",
   "BreathWeapon",
-  "Choice",
   "Class",
   "ClassSpecific",
   "Condition",
@@ -105,7 +105,7 @@ const tables = [
   "WeaponProperty",
 ];
 
-Database.load(DatabasePaths.SCHEMAS);
+await Database.load(DatabasePaths.SCHEMAS);
 tables.forEach(table => loadTable(table));
 
 

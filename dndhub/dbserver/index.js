@@ -25,9 +25,9 @@ app.use('/api/campagna', campagnaRouter);
 app.set('json spaces', 2);
 
 
-async function loadTable(name) {
+async function loadTable(name, base_dir) {
   const text = fs.readFileSync(
-    DatabasePaths.DATA_DIR + name + ".json", 
+    base_dir + name + ".json", 
     'utf8'
   );
 
@@ -120,10 +120,23 @@ const tables = [
   "Level",
 ];
 
+const new_tables = [
+  "Account",
+  "Amministratore",
+  "UtenteGenerico",
+  "Personaggio",
+  "Campagna",
+  "ArrayCampagnaPersonaggiItem",
+];
+
 await Database.load(DatabasePaths.SCHEMAS);
 
 for(const table of tables) {
-  await loadTable(table);
+  await loadTable(table, DatabasePaths.DATA_DIR);
+}
+
+for(const table of new_tables) {
+  await loadTable(table, DatabasePaths.MOCK_DATA_DIR);
 }
 
 // await Database.execOne(

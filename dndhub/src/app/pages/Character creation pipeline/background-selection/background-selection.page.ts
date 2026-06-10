@@ -13,6 +13,7 @@ import { TitleComponent } from "src/app/components/title/title.component";
 import { CharacterManagementService } from 'src/app/services/character.management.service';
 import { LabelComponent } from "src/app/components/label/label.component";
 import { dnd } from 'dbserver/database.queries';
+import { CharacterInstance } from '../CharacterInformation';
 
 @Component({
   selector: 'app-background-selection',
@@ -38,7 +39,9 @@ export class BackgroundSelectionPage implements OnInit {
 
   nextPage = () => {
     if (BackgroundSelectionPage.selectedBackground !== undefined) {
-      this.router.navigate(['/equipment-selection']);
+      CharacterInstance.selectedBackground = BackgroundSelectionPage.selectedBackground;
+      alert(CharacterInstance.selectedBackground);
+      //this.router.navigate(['/equipment-selection']);
     }
     else this.setOpenAlert(true);
   }

@@ -25,7 +25,7 @@ app.use('/api/campagna', campagnaRouter);
 app.set('json spaces', 2);
 
 
-function loadTable(name) {
+async function loadTable(name) {
   const text = fs.readFileSync(
     DatabasePaths.DATA_DIR + name + ".json", 
     'utf8'
@@ -35,80 +35,107 @@ function loadTable(name) {
     return "'" + x.toString().split(/['"]/).join("") + "'";
   };
 
-  const query = JSON
+
+  const queries = JSON
   .parse(text)
   .map(obj => {""
     const keys = Object.keys(obj).join(", ");
     const values = Object.values(obj).map(ObjToString).join(", ");
     return `INSERT OR IGNORE INTO ${name} (${keys}) VALUES (${values})`;
-  })
-  .join("; ");
-
-  const db = Database.INSTANCE;
-
-  db.exec(query, err => { 
-    if(err) console.log(err); 
-    else console.log("lodaded '", name, "' table"); 
   });
+
+  for(const query of queries) {
+    await Database.execOne(query);
+  }
+
+  console.log("Lodaded ", name, " table");
+
+  // const query = JSON
+  // .parse(text)
+  // .map(obj => {""
+  //   const keys = Object.keys(obj).join(", ");
+  //   const values = Object.values(obj).map(ObjToString).join(", ");
+  //   return `INSERT OR IGNORE INTO ${name} (${keys}) VALUES (${values})`;
+  // })
+  // .join("; ");
+
+  // const db = Database.INSTANCE;
+
+  // db.exec(query, err => { 
+  //   if(err) console.log(err); 
+  //   else console.log("lodaded '", name, "' table"); 
+  // });
 }
 
 
 const tables = [
   "APIReference",
-  "ArrayAbilityBonusItem",
-  "ArrayApiReferenceItem",
-  "ArrayBreathWeaponDamageItem",
-  "Choice",
-  "ArrayChoiceItem",
-  "ArrayContentItem",
-  "ArrayCreatingSpellSlotItem",
-  "ArrayDamageItem",
-  "ArrayMultiClassingPrereqItem",
-  "ArrayOptionItem",
-  "ArrayPrerequisiteItem",
-  "ArraySpellcastingInfoItem",
-  "ArrayStartingEquipmentItem",
-  "ArraySubclassSpellItem",
-  "ArraySubclassSpellPrerequisiteItem",
-  "ArrayUtilizeItem",
-  "AbilityScore",
-  "AreaOfEffect",
-  "Background",
-  "BreathWeapon",
-  "Class",
-  "ClassSpecific",
-  "Condition",
-  "DamageType",
+  "ArrayAPIReferenceItem",
   "DifficultyClass",
-  "Equipment",
-  "EquipmentCategory",
-  "Feat",
-  "Language",
-  "Level",
-  "MagicItem",
-  "MagicSchool",
-  "MultiClassing",
-  "MultiClassingPrereq",
+  "AreaOfEffect",
+  "ArrayDamageItem",
+  "ArrayPrerequisiteItem",
   "Option",
+  "ArrayOptionItem",
   "OptionSet",
+  "Choice",
+  "DamageType",
+  "AbilityScore",
+  "ArrayChoiceItem",
+  "ArrayStartingEquipmentItem",
+  "Background",
+  "Condition",
+  "EquipmentCategory",
+  "Language",
+  "MagicSchool",
   "Proficiency",
   "Skill",
-  "Species",
-  "Spell",
-  "Spellcasting",
   "SpellcastingInfo",
-  "Subclass",
+  "ArraySpellcastingInfoItem",
+  "Spellcasting",
+  "MultiClassingPrereq",
+  "ArrayMultiClassingPrereqItem",
+  "MultiClassing",
+  "Class",
+  "ArrayContentItem",
+  "ArrayUtilizeItem",
+  "Equipment",
+  "Feat",
+  "MagicItem",
+  "ArrayAbilityBonusItem",
+  "Species",
   "SubclassSpellPrereq",
+  "ArraySubclassSpellPrerequisiteItem",
+  "ArraySubclassSpellItem",
+  "Subclass",
   "Subspecies",
-  "Trait",
+  "ArrayBreathWeaponDamageItem",
+  "BreathWeapon",
   "TraitSpecific",
+  "Trait",
   "WeaponProperty",
+  "Spell",
+  "ArrayCreatingSpellSlotItem",
+  "ClassSpecific",
+  "Level",
 ];
 
 await Database.load(DatabasePaths.SCHEMAS);
-tables.forEach(table => loadTable(table));
 
+for(const table of tables) {
+  await loadTable(table);
+}
 
+await Database.execOne(
+  'PRAGMA foreign_keys = ON;', 
+  (pragmaErr) => {
+    if (pragmaErr) {
+      console.error("Errore attivazione chiavi esterne:", pragmaErr.message);
+    } else {
+      console.log("Chiavi esterne (CASCADE) attivate con successo!");
+    }
+  }
+);
 
 app.listen(PORT, () => {
   console.log(`Server in ascolto su http://localhost:${PORT}`);

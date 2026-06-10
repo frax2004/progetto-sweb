@@ -2165,7 +2165,7 @@ function printArray(array: any[], output: string): void {
 }
 
 
-printArray(data.ArrayAPIReference, 'ArrayApiReferenceItem.json');
+printArray(data.ArrayAPIReference, 'ArrayAPIReferenceItem.json');
 printArray(data.ArrayPrerequisite, 'ArrayPrerequisiteItem.json');
 printArray(data.ArrayOption, 'ArrayOptionItem.json');
 printArray(data.ArrayDamage, 'ArrayDamageItem.json');

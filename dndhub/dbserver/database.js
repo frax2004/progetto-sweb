@@ -54,20 +54,11 @@ export class Database {
   static async load(schemaPath) {
     const schema = fs.readFileSync(schemaPath, 'utf8');
 
-    await Database.execOne(
-      'PRAGMA foreign_keys = ON;', 
-      (pragmaErr) => {
-        if (pragmaErr) {
-          console.error("Errore attivazione chiavi esterne:", pragmaErr.message);
-        } else {
-          console.log("Chiavi esterne (CASCADE) attivate con successo!");
-        }
-      }
-    );
     
     await Database.execAll(schema, (err) => {
       if(err) console.log(err.message);
     });
+
   }
 
 }

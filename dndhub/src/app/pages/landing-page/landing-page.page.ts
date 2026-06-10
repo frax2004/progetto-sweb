@@ -11,14 +11,14 @@ import { UnorderedListElementComponent } from "src/app/components/unordered-list
 import { Navigate } from 'src/app/core/core';
 import { Router } from '@angular/router';
 import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
-
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.page.html',
   styleUrls: ['./landing-page.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonLabel, IonItem, CarouselComponent, IonFooter, CardComponent, IonGrid, IonRow, IonCol, AccordionComponent, IonAccordion, IonAccordionGroup, IonThumbnail, LabelComponent, IonList, UnorderedListElementComponent]
+  imports: [IonContent, IonHeader, RouterLink ,IonTitle, IonToolbar, CommonModule, FormsModule, IonLabel, IonItem, CarouselComponent, IonFooter, CardComponent, IonGrid, IonRow, IonCol, AccordionComponent, IonAccordion, IonAccordionGroup, IonThumbnail, LabelComponent, IonList, UnorderedListElementComponent]
 })
 export class LandingPagePage implements OnInit {
   cards: Card[] = [
@@ -37,7 +37,7 @@ export class LandingPagePage implements OnInit {
 
   isLogged: boolean;
 
-  constructor(private router: Router, private userUtilities: UserUtilitiesService) { 
+  constructor(public router: Router, private userUtilities: UserUtilitiesService) { 
     userUtilities.isLogged()
     .subscribe({
       next: (value) => {

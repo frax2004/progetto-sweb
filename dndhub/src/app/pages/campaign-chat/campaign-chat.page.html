@@ -1,51 +1,49 @@
 <ion-content>
-
-  <div class="contentContainer"> 
+  <div class="imgbackground"></div>
+  <div class="contentContainer">
     <div class="buttonsAndDetails">
-      <app-button
-      [button] ="{text: 'Torna indietro', expand: ''}"
-      [context] = "buttonCallbacks['placeholder']"
-      ></app-button>
-
+      <div class="buttonPost">
+        <app-button [button]="{text: 'Torna indietro', expand: ''}"
+          [context]="buttonCallbacks['placeholder']"></app-button>
+      </div>
       <div class="details">
         <div class="campaignName">
           <ion-label>{{ campaignName }}</ion-label>
         </div>
 
         <div class="players">
-          <ion-label>Giocatori</ion-label>
+          <ion-label class="titoloGiocatori">Giocatori</ion-label>
           @for (player of players; track player) {
-            <div class="playerNames">  
-              <ion-label>{{player.name}}</ion-label>
-              <ion-label>{{player.character}}</ion-label>
-            </div>
+          <div class="playerNames">
+            <ion-label>{{player.name}}</ion-label>
+            <ion-label>{{player.character}}</ion-label>
+          </div>
           }
         </div>
       </div>
 
       <!-- bottone nuovo post (idealmente) va a piè di pagina, sempre in sovrimpressione -->
-      <app-button
-      [button] ="{text: 'Nuovo post', expand: ''}"
-      [context] = "buttonCallbacks['placeholder']"
-      ></app-button>
+      <div class="buttonPost">
+        <app-button [button]="{text: 'Nuovo post', expand: ''}" [context]="buttonCallbacks['placeholder']"></app-button>
+      </div>
     </div>
 
     <div class="postContainer">
       @for (post of posts; track post) {
-        <div class="postBox">
-        
-          <ion-item class="postContent">
-            <ion-label>{{ post.text }}</ion-label>
-          </ion-item>
-          <div class="postLowerInformation">
-            <ion-label>{{ campaignName }}</ion-label>
-            <div class="imgFrame">
-              <img src="post.senderImgURL" alt="'placeholderImg'">
-            </div>
-            <ion-label>{{ post.timestamp }}</ion-label>
-          </div>
-        
+      <div class="postBox">
+
+        <div class="postContent">
+          <ion-label>{{ post.text }}</ion-label>
         </div>
+        <div class="postLowerInformation">
+          <ion-label>{{ campaignName }}</ion-label>
+          <div class="imgFrame">
+            <img src="post.senderImgURL" alt="'placeholderImg'">
+          </div>
+          <ion-label>{{ post.timestamp }}</ion-label>
+        </div>
+
+      </div>
       }
     </div>
 

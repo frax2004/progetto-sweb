@@ -4,10 +4,9 @@ ion-accordion {
 
     margin: 0 auto;
 
-    .ion-accordion-toggle-icon {
-        //non capisco come cambiare i colori
-        --color: var(--ion-color-red);
-    }
+ion-accordion .ion-padding {
+    background-color: #f5f5f5;
+}
 }
 
 ion-accordion.accordion-collapsing,
@@ -21,7 +20,6 @@ ion-accordion.accordion-collapsed {
 ion-accordion.accordion-expanding,
 ion-accordion.accordion-expanded {
     margin: 16px auto;
-
     box-shadow: 0 8px 8px rgba(55, 37, 147, 0.4);
 
 }

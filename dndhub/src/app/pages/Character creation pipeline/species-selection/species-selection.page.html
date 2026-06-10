@@ -102,9 +102,9 @@
             </ion-accordion-group>
             <ion-button
             class="speciesSelectionButton"
-            (click) = "placeholderAlert($event)"
+            (click) = "species.choiceButton.context($event)"
             >
-            placeholder
+            {{species.choiceButton.button.text}}
             </ion-button>
           </div>
         </ion-accordion>
@@ -120,4 +120,11 @@
     [context] = "buttonCallbacks['nextPage']"
     ></app-button>
   </div>
+  <ion-alert
+  [isOpen]="nextPageAlertOpen"
+  header="Error"
+  message="Species not chosen"
+  [buttons]="['Close']"
+  (didDismiss)="setOpenAlert(false)"
+  ></ion-alert>
 </ion-content>

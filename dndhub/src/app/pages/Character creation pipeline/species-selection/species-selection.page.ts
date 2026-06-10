@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, PopoverController, IonItem, IonFooter, IonButton, IonAccordionGroup, IonAccordion, IonLabel, IonThumbnail } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, PopoverController, IonItem, IonFooter, IonButton, IonAccordionGroup, IonAccordion, IonLabel, IonThumbnail, IonAlert } from '@ionic/angular/standalone';
 import { Accordion } from 'src/app/components/accordion/Accordion';
 import { Button } from 'src/app/components/button/Button';
 import { ButtonComponent } from 'src/app/components/button/button.component';
@@ -19,7 +19,7 @@ import { dnd } from 'dbserver/database.queries';
   templateUrl: './species-selection.page.html',
   styleUrls: ['./species-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, AccordionComponent, IonFooter, ButtonComponent, TitleComponent, LabelComponent, IonButton, IonAccordionGroup, IonAccordion, IonLabel, IonThumbnail]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, AccordionComponent, IonFooter, ButtonComponent, TitleComponent, LabelComponent, IonButton, IonAccordionGroup, IonAccordion, IonLabel, IonThumbnail, IonAlert]
 })
 export class SpeciesSelectionPage implements OnInit {
   b1_button: Button = { text: 'clicca qui', expand: ''};
@@ -34,14 +34,93 @@ export class SpeciesSelectionPage implements OnInit {
 
   b2_context: ButtonContext = { onClick: Popups.ofSimpleText(this.popoverController, "Andiamo les go les go milano")};
 
+  nextPageAlertOpen: boolean = false;
+
+  nextPage = () => {
+    if (SpeciesSelectionPage.selectedSpecies !== undefined) {
+      this.router.navigate(['/background-selection']);
+    }
+    else this.setOpenAlert(true);
+  }
+
+
+
+  setOpenAlert(isOpen: boolean) {
+    this.nextPageAlertOpen = isOpen;
+  } 
+
+
   buttonCallbacks = {
-    nextPage: { onClick: Navigate.toPath(this.router,'background-selection')},
+    nextPage: { onClick: this.nextPage },
     previousPage: { onClick: Navigate.toPath(this.router,'class-selection')},
   } 
 
   placeholderAlert(event: Event) {alert('Ancora da implementare');}
 
   speciesArray = [];
+  static selectedSpecies: string = undefined;
+
+  static speciesButton = {
+    'Dwarf': {
+      button: { text: 'Select this species', expand: ''},
+      context: (event: Event) => {
+        SpeciesSelectionPage.selectedSpecies = 'Dwarf';
+      }
+    },
+    'Elf': {
+      button: { text: 'Select this species', expand: ''},
+      context: (event: Event) => {
+        SpeciesSelectionPage.selectedSpecies = 'Elf';
+      }
+    },
+    'Halfling': {
+      button: { text: 'Select this species', expand: ''},
+      context: (event: Event) => {
+        SpeciesSelectionPage.selectedSpecies = 'Halfling';
+      }
+    },
+    'Human': {
+      button: { text: 'Select this species', expand: ''},
+      context: (event: Event) => {
+        SpeciesSelectionPage.selectedSpecies = 'Human';
+      }
+    },
+    'Dragonborn': {
+      button: { text: 'Select this species', expand: ''},
+      context: (event: Event) => {
+        SpeciesSelectionPage.selectedSpecies = 'Dragonborn';
+      }
+    },
+    'Half-Elf': {
+      button: { text: 'Select this species', expand: ''},
+      context: (event: Event) => {
+        SpeciesSelectionPage.selectedSpecies = 'Half-elf';
+        alert('Classe selezionata: Half-Elf');
+      }
+    },
+    'Half-Orc': {
+      button: { text: 'Select this species', expand: ''},
+      context: (event: Event) => {
+        SpeciesSelectionPage.selectedSpecies = 'Half-orc';
+        alert('Classe selezionata: Half-Orc');
+      }
+    },
+    'Gnome': {
+      button: { text: 'Select this species', expand: ''},
+      context: (event: Event) => {
+        SpeciesSelectionPage.selectedSpecies = 'Gnome';
+      }
+    },
+    'Tiefling': {
+      button: { text: 'Select this species', expand: ''},
+      context: (event: Event) => {
+        SpeciesSelectionPage.selectedSpecies = 'Tiefling';
+      }
+    },
+  }
+
+  
+
 
   static displayAbilityBonuses(specName: string,abBonuses: dnd.AbilityBonus[]) {
     let retValue = specName + ' gives the following bonuses to Ability Scores:\n';
@@ -104,6 +183,7 @@ export class SpeciesSelectionPage implements OnInit {
       next: (value: any) =>{
         this.speciesArray = value.species.map(function (item: any){
           return {
+            choiceButton: SpeciesSelectionPage.speciesButton[item.name],
             imageURL: "../assets/icon/d20.svg",
             value: item.name + ' accordion',
             name: item.name,

@@ -2,8 +2,16 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const PORT = 10000;
+
+// const POLAREZZA_IP_ADDRESS = '192.168.137.1';
+const POLAREZZA_IP_ADDRESS = 'localhost';
+const IP_ADDRESS = POLAREZZA_IP_ADDRESS;
+
 export const environment = {
-  production: false
+  production: false,
+  api_url: `http://${IP_ADDRESS}:${PORT}`,
+  defaultRoute: "profile",
 };
 
 /*

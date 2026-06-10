@@ -9,9 +9,9 @@ export namespace models {
   }
     
   export enum SuccessType {
-    none,
-    half,
-    other,
+    'none',
+    'half',
+    'other',
   }
 
   export class DifficultyClass {
@@ -23,11 +23,11 @@ export namespace models {
   }
 
   export enum AreaOfEffectType {
-    sphere,
-    cube,
-    cylinder,
-    line,
-    cone,
+    'sphere',
+    'cube',
+    'cylinder',
+    'line',
+    'cone',
   }
 
   export class AreaOfEffect {
@@ -40,7 +40,7 @@ export namespace models {
     desc?: string;
     choose!: number;
     type?: string;
-    opt_id?: number;
+    id?: number;
   }
 
   export class ArrayDamageItem {
@@ -48,13 +48,13 @@ export namespace models {
     damage_type!: string;
     damage_dice!: string;
     dc?: number;
-    idx?: number;
+    array_idx?: number;
   }
 
   // OptionArray mi serve per multiple
   export class ArrayOptionItem {
     item_id?: number;
-    idx?: number;
+    array_idx?: number;
     array_id?: number;
   }
 
@@ -111,12 +111,6 @@ export namespace models {
     size?: string;
   }
 
-  export class ArrayOfOptionsAndStringItem {
-    opt_id?: number;
-    string!: string;
-    idx?: number;
-    array_id?: number;
-  }
 
   export class OptionSet {
     id?: number;
@@ -171,13 +165,13 @@ export namespace models {
   export class ArrayAPIReferenceItem {
     array_id?: number;
     item!: string;
-    idx?: number;
+    array_idx?: number;
   }
 
   export class ArrayChoiceItem {
     array_id?: number;
     id?: number;
-    idx?: number;
+    array_idx?: number;
   }
 
   export class Background {
@@ -349,7 +343,7 @@ export namespace models {
 
   export class ArrayUtilizeItem {
     array_id?: number;
-    idx?: number;
+    array_idx?: number;
     item!: string;
     dc?: number;
   };
@@ -443,7 +437,7 @@ export namespace models {
     starting_proficiencies?: number;
     starting_proficiency_options?: number;
     languages?: number;
-    languages_desc!: string;
+    language_desc!: string;
     language_options?: number;
     url!: string;
     size!: string;
@@ -555,9 +549,9 @@ export namespace models {
   }
 
   export enum Components {
-    v,
-    s,
-    m,
+    'v',
+    's',
+    'm',
   }
 
   export class ArrayComponentsItem {    
@@ -661,4 +655,108 @@ export namespace models {
     password!: string;
     username!: string;
   }
+
+  export class Amministratore {
+    account!: string;
+  }
+
+  export class UtenteGenerico {
+    account!: string;
+    utente_giocatore!: string;
+    utente_dungeon_master!: string;
+  }
+
+  export class ArrayFeatItem {
+    item!: string;
+    idx_personaggio!: string;
+    array_idx!: number;
+  }
+
+  export class ArraySpellItem {
+    item!: string;
+    idx_personaggio!: string;
+    array_idx!: number;
+  }
+
+  export class ArrayEquipmentItem {
+    item!: string;
+    idx_personaggio!: string;
+    array_idx!: number;
+  }
+
+  export class ArrayLanguageItem {
+    item!: string;
+    idx_personaggio!: string;
+    array_idx!: number;
+  }
+
+  export class ArrayStatsItem {
+    stat_idx!: string;
+    stat_value!: number;
+    idx_personaggio!: string;
+    array_idx!: number;
+  }
+
+  export class Personaggio {
+    utente_giocatore!: string;
+    nome!: string;
+    // primary key creata da interpolazione
+    // utente_giocatore + nome
+    idx_personaggio!: string;
+    campagna?: string; // un personaggio una sola campagna altrimenti problemi di modifica pg
+    classe!: string;
+    sottoclasse?: string;
+    specie!: string;
+    sottospecie?: string;
+    background!: string;
+    livello!: string;
+    // i talenti sono salvati su un array come foreign keys
+    // stessa cosa vale per equipaggiamenti, incantesimi e lingue parlate
+    // e anche per statistiche
+
+  // tranne che non li salviamo come ArrayAPIReference?
+
+    // in teoria la proprietà è array di 
+    // stringhe, lascio come semplice stringa?
+    abilita_extra?: string;
+    descrizione_personaggio?: string;
+  }
+
+  export class ArrayPostItem {
+    idx_campagna!: string;
+    timestamp!: string;
+    contenuto!: string;
+  }
+
+  export class ArrayCampagnaPersonaggiItem {
+    idx_campagna!: string;
+    idx_personaggio!: string;
+  }
+
+  export class Campagna {
+    utente_dungeon_master!: string;
+    nome!: string;
+    // primary key creata da interpolazione
+    // utente_dungeon_master + nome
+    idx_campagna!: string;
+    banner?: string;
+    descrizione?: string;
+    // i post vengono acceduti tramite foreign key
+    // non so cosa fare con i personaggi
+    // avrebbe più senso avere un array di giocatori?
+
+    // comunque personaggi sono anch'essi acceduti come foreign key
+  }
+
+  export class ArrayIdxPersonaggioItem {
+    utente_giocatore!: string;
+    idx_personaggio!: string;
+  }
+
+  export class ArrayIdxCampagnaItem {
+    utente_dungeon_master!: string;
+    idx_campagna!: string;
+  }
+
+ 
 }

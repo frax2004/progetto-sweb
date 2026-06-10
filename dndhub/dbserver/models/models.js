@@ -40,7 +40,7 @@ export var models;
         desc;
         choose;
         type;
-        opt_id;
+        id;
     }
     models.Choice = Choice;
     class ArrayDamageItem {
@@ -48,13 +48,13 @@ export var models;
         damage_type;
         damage_dice;
         dc;
-        idx;
+        array_idx;
     }
     models.ArrayDamageItem = ArrayDamageItem;
     // OptionArray mi serve per multiple
     class ArrayOptionItem {
         item_id;
-        idx;
+        array_idx;
         array_id;
     }
     models.ArrayOptionItem = ArrayOptionItem;
@@ -111,13 +111,6 @@ export var models;
         size;
     }
     models.Option = Option;
-    class ArrayOfOptionsAndStringItem {
-        opt_id;
-        string;
-        idx;
-        array_id;
-    }
-    models.ArrayOfOptionsAndStringItem = ArrayOfOptionsAndStringItem;
     class OptionSet {
         id;
         option_set_type;
@@ -167,13 +160,13 @@ export var models;
     class ArrayAPIReferenceItem {
         array_id;
         item;
-        idx;
+        array_idx;
     }
     models.ArrayAPIReferenceItem = ArrayAPIReferenceItem;
     class ArrayChoiceItem {
         array_id;
         id;
-        idx;
+        array_idx;
     }
     models.ArrayChoiceItem = ArrayChoiceItem;
     class Background {
@@ -333,7 +326,7 @@ export var models;
     models.Utilize = Utilize;
     class ArrayUtilizeItem {
         array_id;
-        idx;
+        array_idx;
         item;
         dc;
     }
@@ -425,7 +418,7 @@ export var models;
         starting_proficiencies;
         starting_proficiency_options;
         languages;
-        languages_desc;
+        language_desc;
         language_options;
         url;
         size;
@@ -640,4 +633,99 @@ export var models;
         username;
     }
     models.Account = Account;
+    class Amministratore {
+        account;
+    }
+    models.Amministratore = Amministratore;
+    class UtenteGenerico {
+        account;
+        utente_giocatore;
+        utente_dungeon_master;
+    }
+    models.UtenteGenerico = UtenteGenerico;
+    class ArrayFeatItem {
+        item;
+        idx_personaggio;
+        array_idx;
+    }
+    models.ArrayFeatItem = ArrayFeatItem;
+    class ArraySpellItem {
+        item;
+        idx_personaggio;
+        array_idx;
+    }
+    models.ArraySpellItem = ArraySpellItem;
+    class ArrayEquipmentItem {
+        item;
+        idx_personaggio;
+        array_idx;
+    }
+    models.ArrayEquipmentItem = ArrayEquipmentItem;
+    class ArrayLanguageItem {
+        item;
+        idx_personaggio;
+        array_idx;
+    }
+    models.ArrayLanguageItem = ArrayLanguageItem;
+    class ArrayStatsItem {
+        stat_idx;
+        stat_value;
+        idx_personaggio;
+        array_idx;
+    }
+    models.ArrayStatsItem = ArrayStatsItem;
+    class Personaggio {
+        utente_giocatore;
+        nome;
+        // primary key creata da interpolazione
+        // utente_giocatore + nome
+        idx_personaggio;
+        campagna; // un personaggio una sola campagna altrimenti problemi di modifica pg
+        classe;
+        sottoclasse;
+        specie;
+        sottospecie;
+        background;
+        livello;
+        // i talenti sono salvati su un array come foreign keys
+        // stessa cosa vale per equipaggiamenti, incantesimi e lingue parlate
+        // e anche per statistiche
+        // tranne che non li salviamo come ArrayAPIReference?
+        // in teoria la proprietà è array di 
+        // stringhe, lascio come semplice stringa?
+        abilita_extra;
+        descrizione_personaggio;
+    }
+    models.Personaggio = Personaggio;
+    class ArrayPostItem {
+        idx_campagna;
+        timestamp;
+        contenuto;
+    }
+    models.ArrayPostItem = ArrayPostItem;
+    class ArrayCampagnaPersonaggiItem {
+        idx_campagna;
+        idx_personaggio;
+    }
+    models.ArrayCampagnaPersonaggiItem = ArrayCampagnaPersonaggiItem;
+    class Campagna {
+        utente_dungeon_master;
+        nome;
+        // primary key creata da interpolazione
+        // utente_dungeon_master + nome
+        idx_campagna;
+        banner;
+        descrizione;
+    }
+    models.Campagna = Campagna;
+    class ArrayIdxPersonaggioItem {
+        utente_giocatore;
+        idx_personaggio;
+    }
+    models.ArrayIdxPersonaggioItem = ArrayIdxPersonaggioItem;
+    class ArrayIdxCampagnaItem {
+        utente_dungeon_master;
+        idx_campagna;
+    }
+    models.ArrayIdxCampagnaItem = ArrayIdxCampagnaItem;
 })(models || (models = {}));

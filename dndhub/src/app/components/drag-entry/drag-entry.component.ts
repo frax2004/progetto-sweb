@@ -30,6 +30,14 @@ export class DragEntryComponent implements OnInit {
     // });
   }
 
+  public get value(): number {
+    return this.getValue();
+  }
+
+  public set value(item: number) {
+    this.setValue(item);
+  }
+
   private getValue(): number {
     return this.previousInput === "" ? 0 : parseFloat(this.previousInput);
   }

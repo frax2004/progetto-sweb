@@ -13,6 +13,45 @@ export class Database {
     return Database.__DB__;
   }
 
+
+  static queryOne(query) {
+    return new Promise((resolve, reject) => {
+      Database.INSTANCE.get(query, (err, row) => {
+        if(err !== null) reject(err);
+        else resolve(row);
+      });
+    });
+  }
+
+  static queryAll(query) {
+    return new Promise((resolve, reject) => {
+      Database.INSTANCE.all(query, (err, rows) => {
+        if(err !== null) reject(err);
+        else resolve(rows);
+      });
+    });
+  }
+
+  static execOne(query) {
+    return new Promise((resolve, reject) => {
+      Database.INSTANCE.run(query, err => {
+        if(err !== null) {
+          reject(err);
+        } else resolve(err);
+      });
+    });
+  }
+
+  static execAll(query) {
+    return new Promise((resolve, reject) => {
+      Database.INSTANCE.exec(query, err => {
+        if(err !== null) {
+          reject(err);
+        } else resolve(err);
+      });
+    });
+  }
+
   static load(schemaPath) {
     const schema = fs.readFileSync(schemaPath, 'utf8');
 

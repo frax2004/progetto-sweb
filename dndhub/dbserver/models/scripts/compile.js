@@ -95,11 +95,23 @@ var data;
         static transform(x, array_id, array_idx) {
             return {
                 array_id: array_id,
-                idx: array_idx,
+                array_idx: array_idx,
                 item: x.index
             };
         }
     }
+    __decorate([
+        required(),
+        __metadata("design:type", String)
+    ], APIReference.prototype, "index", void 0);
+    __decorate([
+        required(),
+        __metadata("design:type", String)
+    ], APIReference.prototype, "name", void 0);
+    __decorate([
+        required(),
+        __metadata("design:type", String)
+    ], APIReference.prototype, "url", void 0);
     data.APIReference = APIReference;
     class Choice {
         desc = "";
@@ -112,7 +124,7 @@ var data;
         static transform(x, array_id, array_idx) {
             return {
                 array_id: array_id,
-                idx: array_idx,
+                array_idx: array_idx,
                 id: getOrInsertId(data.option_sets, x.from)
             };
         }
@@ -137,7 +149,7 @@ var data;
                 damage_type: x.damage_type?.index,
                 damage_dice: x.damage_dice,
                 dc: getOrInsertId(data.difficulty_classes, x.dc),
-                idx: array_idx
+                array_idx: array_idx
             };
         }
     }
@@ -273,8 +285,8 @@ var data;
         static transform(x, array_id, array_idx) {
             return {
                 item_id: getOrInsertId(data.options, x),
-                idx: array_idx,
-                array_id: array_idx
+                array_idx: array_idx,
+                array_id: array_id
             };
             //   let res = new models.Option();
             //   res.option_type = x.option_type;
@@ -626,7 +638,7 @@ var data;
         static transform(x, array_id, array_idx) {
             return {
                 array_id: array_id,
-                idx: array_idx,
+                array_idx: array_idx,
                 item: x.name,
                 dc: getOrInsertId(data.difficulty_classes, x.dc)
             };
@@ -1174,7 +1186,7 @@ const allFiles = fs
                 choose: x.choose,
                 desc: x.desc,
                 type: x.type,
-                opt_id: getOrInsertId(data.option_sets, x.from)
+                id: getOrInsertId(data.option_sets, x.from)
             };
         },
         inputs: allFiles,
@@ -1657,13 +1669,13 @@ const allFiles = fs
                 starting_proficiencies: getOrInsertArrayId(data.ArrayAPIReference, x.starting_proficiencies, data.APIReference.equals, data.APIReference.transform),
                 starting_proficiency_options: getOrInsertId(data.option_sets, x.starting_proficiency_options?.from),
                 languages: getOrInsertArrayId(data.ArrayAPIReference, x.languages, data.APIReference.equals, data.APIReference.transform),
-                languages_desc: x.languages_desc,
+                language_desc: x.language_desc,
                 language_options: getOrInsertId(data.option_sets, x.language_options?.from),
                 url: x.url,
                 size: x.size,
                 size_description: x.size_description,
                 traits: getOrInsertArrayId(data.ArrayAPIReference, x.traits, data.APIReference.equals, data.APIReference.transform),
-                subspecies: getOrInsertArrayId(data.ArrayAPIReference, x.subspecies, data.APIReference.equals, data.APIReference.transform),
+                subspecies: getOrInsertArrayId(data.ArrayAPIReference, x.subraces, data.APIReference.equals, data.APIReference.transform),
             };
         },
         inputs: ["5e-SRD-Species.json"],

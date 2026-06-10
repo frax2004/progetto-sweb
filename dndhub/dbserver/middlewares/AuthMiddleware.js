@@ -1,3 +1,4 @@
+const { JWT_SECRET } = require('dbserver/global.context');
 const jwt = require('jsonwebtoken');
 
 const verifyToken = (req, res, next) => {
@@ -13,7 +14,7 @@ const verifyToken = (req, res, next) => {
   }
 
   try {
-    const verified = jwt.verify(token, config.jwtSecret);
+    const verified = jwt.verify(token, JWT_SECRET);
     req.user = verified;
     next();
   } catch(error) {

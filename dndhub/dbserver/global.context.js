@@ -5,6 +5,7 @@ export class UserInstance {
   generic_token = "";
   player_token = "";
   dm_token = "";
+  current_token = undefined;
   static __USER__ = null;
 
   constructor(genericToken, playerToken, dmToken) {
@@ -51,6 +52,14 @@ export class UserInstance {
 
   static getPlayerId(email) {
     return `(giocatore): ${email}`;
+  }
+
+  get current() {
+    return this.current_token;
+  }
+
+  set current(token) {
+    this.current_token = token;
   }
 
   static getDmId(email) {

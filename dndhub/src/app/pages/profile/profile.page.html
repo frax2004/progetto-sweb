@@ -1,16 +1,81 @@
 <ion-content>
+  <ion-split-pane when="xs" contentId="main">
+    <ion-menu contentId="main">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Profilo Personale</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div class="outerImgFrame">
+          <div class="imgFrame">
+            <img src="https://static.wikia.nocookie.net/dragonball/images/9/91/SSJ4_20.jpg/revision/latest/scale-to-width-down/985?cb=20240630012825" alt="'imgPlaceholder'">
+          </div>
+        </div>
+        
+        <div class="buttonContainer">
+          <app-button class="btn" 
+            [margin]="false"
+            [button]="{text: 'Torna indietro', expand: 'false'}"
+            [context] = "buttons.goBack"
+            ></app-button>
+          <app-button class="btn"
+            [margin]="false"
+            [button] = "{ text: 'Modifica account', expand: ''}"
+            [context] = "buttons.enableAccountEdit"
+          ></app-button>
+          <app-button class="btn"
+            [margin]="false"
+            [button] = "{ text: 'Elimina account', expand: ''}"
+            [context] = "buttons.placeholder"
+          ></app-button>
+          <app-button class="btn"
+            [margin]="false"
+            [button] = "{ text: 'Effettua l\'uscita', expand: ''}"
+            [context] = "buttons.placeholder"
+          ></app-button>
+        </div>
+
+      </ion-content>
+    </ion-menu>
+
+    <div class="ion-page" id="main">
+      <ion-content class="ion-padding"> 
+        <div class="entry-container">
+          <app-entry #username
+            placeholder="Nome utente"
+            [disabled]="true"
+          ></app-entry>
+          <app-entry #email
+            placeholder="Indirizzo email"
+            [disabled]="true"
+          ></app-entry>
+          <app-entry #password
+            placeholder="Password"
+            [disabled]="true"
+          ></app-entry>
+          <app-button class="save-button"
+            [margin]="false"
+            [button] = "{ text: 'Salva', expand: ''}"
+            [context] = "buttons.save"
+          ></app-button>
+        </div>
+      </ion-content>
+    </div>
+  </ion-split-pane>
+</ion-content>
+
+<!-- <ion-content>
   <app-title
   [title] = "'Profilo personale'"
   ></app-title>
 
-  <!-- sto riscrivendo questa pagina daccapo perché fa schifo -->
 
   <div class="gridContainer"> 
     <ion-grid>
 
-      <!-- metto tutto sulla stessa riga -->
       <ion-row>
-        <!-- colonna con i bottoni -->
+
         <ion-col>
 
           <div class="imgAndOptions">
@@ -18,7 +83,7 @@
               <app-button
               [margin]="false"
               [button] = "{ text: 'Torna indietro', expand: ''}"
-              [context] = "buttonCallbacks['placeholder']"
+              [context] = "buttons.placeholder"
               ></app-button>
             </div>
 
@@ -33,7 +98,7 @@
               <app-button
               [margin]="false"
               [button] = "{ text: 'Modifica account', expand: ''}"
-              [context] = "buttonCallbacks['placeholder']"
+              [context] = "buttons.placeholder"
               ></app-button>
             </div>
 
@@ -41,7 +106,7 @@
               <app-button
               [margin]="false"
               [button] = "{ text: 'Elimina account', expand: ''}"
-              [context] = "buttonCallbacks['placeholder']"
+              [context] = "buttons.placeholder"
               ></app-button>
             </div>
 
@@ -50,14 +115,13 @@
               <app-button
               [margin]="false"
               [button] = "{ text: 'Log out', expand: ''}"
-              [context] = "buttonCallbacks['placeholder']"
+              [context] = "buttons.placeholder"
               ></app-button>
             </div>
           </div>
 
         </ion-col>
 
-        <!-- colonna informazioni -->
         <ion-col>
 
           <ion-row>
@@ -107,4 +171,4 @@
 
     </ion-grid>
   </div>
-</ion-content>
+</ion-content> -->

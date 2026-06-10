@@ -1,3 +1,5 @@
+
+
 import { Database } from "../database.js";
 import { UserInstance, generateToken } from "../global.context.js";
 import { AuthResponses } from "./auth.controller.responses.js";

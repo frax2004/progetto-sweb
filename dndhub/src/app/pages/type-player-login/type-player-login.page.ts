@@ -39,8 +39,8 @@ export class TypePlayerLoginPage implements OnInit {
 // }
 
   VaiLandingPage() {
-  this.router.navigate(['/landing-page']);
-}
+    this.router.navigate(['/landing-page']);
+  }
 
 
 }

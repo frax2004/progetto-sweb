@@ -1,11 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
-const POLLARA_IP_ADDRESS = "192.168.1.36";
-const GIOVANNI_IP_ADDRESS = "192.168.1.9";
-const CURRENT_IP_ADDRESS = GIOVANNI_IP_ADDRESS;
-const FRONTEND_PORT = 10000;
 
 @Injectable({
   providedIn: 'root',
@@ -15,12 +12,23 @@ export class UserUtilitiesService {
 
   isLogged(): Observable<any> {
     return this.httpclient.post<any>(
-      `http://${CURRENT_IP_ADDRESS}:${FRONTEND_PORT}/api/user-utilities/isLogged`,
+      `${environment.api_url}/api/user-utilities/isLogged`,
       {}
     ).pipe(
       tap(
-        res => sessionStorage.setItem('isLogged ', res.isLogged)
+        res => sessionStorage.setItem('isLogged', res.isLogged)
       )
     );
+  }
+
+  getUserInfo(): Observable<any> {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/user-utilities/getUserInfo`,
+      {}
+    );
+  }
+
+  setCurrentPersonalArea(area: 'player' | 'dm' | 'generic'): Observable<any>  {
+    throw Error("funzione UserUtilitiesService.setCurrentPersonalArea() non ancora implementata (fallo)");
   }
 }

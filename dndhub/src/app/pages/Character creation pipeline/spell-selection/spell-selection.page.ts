@@ -29,7 +29,17 @@ export class SpellSelectionPage implements OnInit {
           return {
             name: item.name,
             level: item.level,
-            
+            cantrips_known: item.cantrips_known,
+            spell_slots_level_1: item.spell_slots_level_1,
+            spell_slots_level_2: item.spell_slots_level_2,
+            spell_slots_level_3: item.spell_slots_level_3,
+            spell_slots_level_4: item.spell_slots_level_4,
+            spell_slots_level_5: item.spell_slots_level_5,
+            spell_slots_level_6: item.spell_slots_level_6,
+            spell_slots_level_7: item.spell_slots_level_7,
+            spell_slots_level_8: item.spell_slots_level_8,
+            spell_slots_level_9: item.spell_slots_level_9,
+            spells_known: item.spells_known,
           }
         });
       },

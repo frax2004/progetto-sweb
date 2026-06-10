@@ -12,10 +12,53 @@
 
   <!-- Sezione iniziale per la scelta dei background -->
   <div class="backgroundSelectionFrame">
-    <app-accordion
-      [accordions] = "accordions"
-      [allowMultipleEnabled] = "true"
-    ></app-accordion>
+    <ion-accordion-group class="outerAccordionGroup" value="fatherAccordion" [multiple]="false" expand="inset" animated="true">
+      @for (bg of backgroundsArray; track bg) {
+        <ion-accordion class="bgAccordion" [value]="bg.value">
+          <ion-item id="accHeader" slot="header" color="light">
+            <!-- togliere commento se prima o poi vogliamo una immagine nell'accordion -->
+            @if (bg.imageURL !== undefined) {
+              <ion-thumbnail slot="start">
+                <img id="accImg" alt="placeholder img" [src]="bg.imageURL">
+              </ion-thumbnail>
+            }
+            @else {
+              <ion-thumbnail slot="start">
+                <img alt="placeholder img" [src]="'Card.defaultImageURL()'">
+              </ion-thumbnail>
+            }
+            <ion-label class="bgName">{{ bg.name }}</ion-label>
+          </ion-item>
+          <!-- div relativo al contenuto -->
+          <div class="ionPadding" slot="content">
+            <div class="initialDescContainer">
+              <app-label>{{bg.desc}}</app-label>
+            </div>
+            <ion-accordion-group [value]="bg.value + 'group accordion'" class="innerAccordionGroup" [multiple]="true">
+            @for(accordion of bg.content; track accordion) {
+              @if(accordion.content !== undefined && accordion.content !== null && accordion.content !== [] && accordion.lenght !== 0) {
+                <ion-accordion class="innerAccordion redBorderBottom" [value]="accordion.value">
+                  <ion-item id="accHeader" slot="header" color="light">
+                    <app-label [fontSize]="'3.5cqmin'">{{accordion.title}}</app-label>
+                  </ion-item>
+                  <div class="ionPaddin innerContent" slot="content">
+                    <app-label>{{accordion.content}}</app-label>
+                  </div>
+                </ion-accordion>
+              }
+            }  
+            </ion-accordion-group>
+            <ion-button
+            class="backgroundSelectionButton"
+            (click) = "bg.btnCtx($event)"
+            >
+            Select this background
+            </ion-button>
+          </div>
+        </ion-accordion>
+      }
+
+    </ion-accordion-group>
   </div>
 
   <!-- footer con bottone per andare alla prossima pagina -->
@@ -25,4 +68,11 @@
       [context] = "buttonCallbacks['nextPage']"
       ></app-button>
   </div>
+  <ion-alert
+  [isOpen]="nextPageAlertOpen"
+  header="Error"
+  message="Background not chosen"
+  [buttons]="['Close']"
+  (didDismiss)="setOpenAlert(false)"
+  ></ion-alert>
 </ion-content>

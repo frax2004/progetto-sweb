@@ -27,12 +27,12 @@
           <app-button class="btn"
             [margin]="false"
             [button] = "{ text: 'Elimina account', expand: ''}"
-            [context] = "buttons.placeholder"
+            [context] = "buttons.deleteAccount"
           ></app-button>
           <app-button class="btn"
             [margin]="false"
             [button] = "{ text: 'Effettua l\'uscita', expand: ''}"
-            [context] = "buttons.placeholder"
+            [context] = "buttons.logOut"
           ></app-button>
         </div>
 
@@ -54,7 +54,7 @@
             placeholder="Password"
             [disabled]="true"
           ></app-entry>
-          <app-button class="save-button"
+          <app-button class="save-button" id="save-alert"
             [margin]="false"
             [button] = "{ text: 'Salva', expand: ''}"
             [context] = "buttons.save"

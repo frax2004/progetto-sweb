@@ -11,4 +11,8 @@ export class DatabasePaths {
   static get DATA_DIR() {
     return "./models/data/";
   }
+
+  static get MOCK_DATA_DIR() {
+    return "./models/mock-data/";
+  }
 }

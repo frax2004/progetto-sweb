@@ -1967,7 +1967,7 @@ const allFiles = fs
 function printArray(array, output) {
     fs.writeFileSync(RUNTIME_OUTPUT_DIR + output, JSON.stringify(array.flatMap(x => x)), 'utf8');
 }
-printArray(data.ArrayAPIReference, 'ArrayApiReferenceItem.json');
+printArray(data.ArrayAPIReference, 'ArrayAPIReferenceItem.json');
 printArray(data.ArrayPrerequisite, 'ArrayPrerequisiteItem.json');
 printArray(data.ArrayOption, 'ArrayOptionItem.json');
 printArray(data.ArrayDamage, 'ArrayDamageItem.json');

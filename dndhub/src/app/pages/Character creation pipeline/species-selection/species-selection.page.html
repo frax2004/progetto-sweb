@@ -31,7 +31,7 @@
           <!-- div relativo al contenuto -->
           <div class="ionPadding" slot="content">
             <div class="initialDescContainer">
-              <app-label>placeholder</app-label>
+              <app-label>{{species.desc}}</app-label>
             </div>
             <ion-accordion-group [value]="species.value + 'group accordion'" class="innerAccordionGroup" [multiple]="true">
             @for(accordion of species.content; track accordion) {

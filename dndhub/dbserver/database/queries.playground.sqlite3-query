@@ -1,3 +1,18 @@
 -- database: ./dndhub.db
 
 
+
+
+
+select idx_personaggio 
+from ArrayCampagnaPersonaggiItem 
+where idx_campagna = "The-Frozen-Frontier @ (dungeon_master): gianluca.barbieri75@hotmail.com";
+
+
+select utente_generico 
+from Personaggio 
+where idx_personaggio = "lou @ (giocatore): giammarco.evangelisti89@unipa.net";
+
+
+-- delete from Account
+-- where email = "giammarco.evangelisti89@unipa.net"

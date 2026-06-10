@@ -13,7 +13,6 @@ export class Database {
     return Database.__DB__;
   }
 
-
   static queryOne(query) {
     return new Promise((resolve, reject) => {
       Database.INSTANCE.get(query, (err, row) => {
@@ -52,12 +51,14 @@ export class Database {
     });
   }
 
-  static load(schemaPath) {
+  static async load(schemaPath) {
     const schema = fs.readFileSync(schemaPath, 'utf8');
 
-    Database.INSTANCE.exec(schema, (err) => {
-      if (err) console.log(err.message);
+    
+    await Database.execAll(schema, (err) => {
+      if(err) console.log(err.message);
     });
+
   }
 
 }

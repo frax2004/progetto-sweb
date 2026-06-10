@@ -1,8 +1,14 @@
 import express from 'express';
-import controller from '../controllers/user.utilities.controller.js';
-import middleware from '../middlewares/UserMiddleware.js';
+import user_controller from '../controllers/user.utilities.controller.js';
+import user_middleware from '../middlewares/user.utilities.middleware.js';
 
 export const userUtilitiesRouter = express.Router();
 
-userUtilitiesRouter.post("/isLogged", controller.isLogged);
-userUtilitiesRouter.post("/getUserInfo", middleware.isLogged, controller.getUserInfo);
+userUtilitiesRouter.post("/isLogged", user_controller.isLogged);
+userUtilitiesRouter.post("/getUserInfo", user_middleware.isLogged, user_controller.getUserInfo);
+userUtilitiesRouter.post(
+  '/setUserInfo', 
+  user_middleware.isLogged, 
+  user_middleware.validateInfo, 
+  user_controller.setUserInfo
+);

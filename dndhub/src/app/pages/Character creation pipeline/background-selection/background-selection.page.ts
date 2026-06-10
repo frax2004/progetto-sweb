@@ -130,6 +130,8 @@ export class BackgroundSelectionPage implements OnInit {
   }
 
   constructor(public popoverController: PopoverController, private router: Router, private bgsDisplayer: CharacterManagementService) {
+    BackgroundSelectionPage.selectedBackground = undefined;
+    
     this.bgsDisplayer
     .displayBackgrounds()
     .subscribe({

@@ -84,7 +84,11 @@ export const routes: Routes = [
   {
     path: 'type-player-login',
     loadComponent: () => import('./pages/type-player-login/type-player-login.page').then( m => m.TypePlayerLoginPage)
+  },  {
+    path: 'spell-selection',
+    loadComponent: () => import('./pages/Character creation pipeline/spell-selection/spell-selection.page').then( m => m.SpellSelectionPage)
   },
+
 
 
 

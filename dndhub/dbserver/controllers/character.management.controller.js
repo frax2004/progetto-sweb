@@ -77,6 +77,37 @@ async function displayLevelByNameAndLevel(req, res) {
   
 }
 
+async function displayLevelRowByClassAndLevel(req,res) {
+  const className = req.body.className.toLowerCase();
+  const level = req.body.level;
+
+  let levelRow = undefined;
+
+  try {
+    let levelInfo = Database.queryAll(`SELECT * FROM Level WHERE (character_class = '${className}' AND level = ${level} AND subclass is null)`);
+  
+    levelRow = await unwrapLevelSpecific(await levelInfo);
+  }
+  catch (err) {
+    console.log(err);
+    sendResponse({
+      status_code: 404,
+      message: 'Non è stato possibile caricare i livelli dal database',
+      success: false,
+    }, res);
+  }
+
+  // arrivo qui se non ci sono stati problemi
+  sendResponse({
+      level: levelRow,
+      status_code: 200,
+      success: true,
+      message: 'Livelli caricati con successo'
+    },
+    res
+  );
+}
+
 export function displayClasses(req, res) {
   canSend=true;
 
@@ -209,4 +240,5 @@ export default {
   displayLevelByNameAndLevel,
   displaySpecies,
   displayBackgrounds,
+  displayLevelRowByClassAndLevel,
 }

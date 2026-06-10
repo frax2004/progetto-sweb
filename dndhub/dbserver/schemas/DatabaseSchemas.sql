@@ -180,13 +180,13 @@ create table if not exists AbilityScore (
 -- tabelle di Alignments
 -- in teoria inutili ma copiata comunque perché piccola
 
-create table if not exists Alignment (
-  idx text  primary key,
-  name text ,
-  abbreviation text ,
-  description text ,
-  url text 
-);
+-- create table if not exists Alignment (
+--   idx text  primary key,
+--   name text ,
+--   abbreviation text ,
+--   description text ,
+--   url text 
+-- );
 
 -- tabelle di Backgrounds.ts
 
@@ -372,8 +372,8 @@ create table if not exists MultiClassing (
 );
 
 create table if not exists Class (
-  idx text ,
-  name text  primary key,
+  idx text primary key,
+  name text ,
   hit_die number ,
   class_levels text ,
   multi_classing number,
@@ -834,7 +834,7 @@ create table if not exists UtenteGenerico (
 );
 
 create table if not exists Personaggio (
-  utente_giocatore text not null,
+  utente_generico text not null,
   nome text not null,
   -- primary key creata da interpolazione
   -- utente_giocatore + nome
@@ -863,7 +863,7 @@ create table if not exists Personaggio (
   -- foreign key (idx_personaggio) references ArrayLanguageItem(idx_personaggio),
   -- foreign key (idx_personaggio) references ArrayStatsItem(idx_personaggio),
   -- foreign key (idx_personaggio) references ArrayCampagnaPersonaggiItem(idx_personaggio) on update cascade on delete cascade,
-  foreign key (utente_giocatore) references UtenteGiocatore(utente_giocatore) on update cascade on delete cascade,
+  foreign key (utente_generico) references Account(email) on update cascade on delete cascade,
   foreign key (sottoclasse) references Subclass(idx),
   foreign key (specie) references Species(idx),
   foreign key (sottospecie) references Subspecies(idx),
@@ -924,7 +924,7 @@ create table if not exists ArrayFeatItem (
 );
 
 create table if not exists Campagna (
-  utente_dungeon_master text not null,
+  utente_generico text not null,
   nome text not null,
   -- primary key creata da interpolazione
   -- utente_dungeon_master + nome
@@ -937,7 +937,7 @@ create table if not exists Campagna (
 
   -- comunque personaggi sono anch'essi acceduti come foreign key
 
-  foreign key (utente_dungeon_master) references UtenteGenerico(utente_dungeon_master) on update cascade on delete cascade
+  foreign key (utente_generico) references Account(email) on update cascade on delete cascade
   -- foreign key (idx_campagna) references ArrayCampagnaPersonaggiItem(idx_campagna) on update cascade on delete cascade
 );
 

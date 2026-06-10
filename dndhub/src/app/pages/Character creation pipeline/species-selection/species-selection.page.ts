@@ -13,6 +13,7 @@ import { TitleComponent } from "src/app/components/title/title.component";
 import { CharacterManagementService } from 'src/app/services/character.management.service';
 import { LabelComponent } from "src/app/components/label/label.component";
 import { dnd } from 'dbserver/database.queries';
+import { CharacterInstance } from '../CharacterInformation';
 
 @Component({
   selector: 'app-species-selection',
@@ -38,6 +39,7 @@ export class SpeciesSelectionPage implements OnInit {
 
   nextPage = () => {
     if (SpeciesSelectionPage.selectedSpecies !== undefined) {
+      CharacterInstance.selectedSpecies = SpeciesSelectionPage.selectedSpecies;
       this.router.navigate(['/background-selection']);
     }
     else this.setOpenAlert(true);

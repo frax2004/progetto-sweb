@@ -59,155 +59,115 @@
 
   <!-- adesso tre grid diverse in base alla flag attiva -->
   @if (manualSelection===true) {
-    <ion-item  class="gridContainer manualHPgrid"> 
-      <ion-grid>
-
-        <!-- riga con i nomi delle stats -->
-        <ion-row>
-
-          <!-- selettore FORZA -->
-          <div class="firstCol">
-            <ion-col>
-                <app-label>Forza</app-label>
-            </ion-col>
-          </div>
-
-          <!-- selettore forza -->
-          <div class="secondCol">
-            <ion-col>
-              <app-drag-entry
+    <div class="manualStatsListContainer">
+      <ul class="manualStatsList">
+        
+        <!-- selettore FORZA -->
+        <div class="statSelectionFrame">
+          <div class="dragEntryBlock">
+            <app-label>Strength</app-label>
+            <app-drag-entry
+              #strenghtDragEntry
               id="strenghtDragEntry"
               [sensitivity] = 1
               [max] = 20
               [min] = 1
               ></app-drag-entry>
-            </ion-col>
           </div>
-
-
-        </ion-row>
-
-        <!-- riga con number entry -->
-        <ion-row>
-
-          <!-- selettore DESTREZZA -->
-          <div class="firstCol">
-            <ion-col>
-                <app-label>Destrezza</app-label>
-            </ion-col>
+          <div class="modifierContainer">
+            <app-label>Strength modifier: {{statModifierDict[strenghtDragEntry.value]}}</app-label>
           </div>
+        </div>
 
-          <!-- selettore destrezza -->
-          <div class="secondCol">
-            <ion-col>
-              <app-drag-entry
+        <!-- selettore DEXTERITY -->
+        <div class="statSelectionFrame">
+          <div class="dragEntryBlock">
+            <app-label>Dexterity</app-label>
+            <app-drag-entry
+              #dexterityDragEntry
               id="dexterityDragEntry"
               [sensitivity] = 1
               [max] = 20
               [min] = 1
               ></app-drag-entry>
-            </ion-col>
           </div>
-        </ion-row>
-
-        <ion-row>
-
-          <!-- selettore COSTITUZIONE -->
-          <div class="firstCol">
-            <ion-col>
-              <div>
-                <app-label>Costituzione</app-label>
-              </div>
-            </ion-col>
+          <div class="modifierContainer">
+            <app-label>Dexterity modifier: {{statModifierDict[dexterityDragEntry.value]}}</app-label>
           </div>
+        </div>
 
-          <!-- selettore costituzione -->
-          <div class="secondCol">
-            <ion-col>
-              <app-drag-entry
+        <!-- selettore CONSTITUTION -->
+        <div class="statSelectionFrame">
+          <div class="dragEntryBlock">
+            <app-label>Constitution</app-label>
+            <app-drag-entry
+              #constitutionDragEntry
               id="constitutionDragEntry"
               [sensitivity] = 1
               [max] = 20
               [min] = 1
               ></app-drag-entry>
-            </ion-col>
           </div>
-        </ion-row>
-
-          
-        <ion-row>
-
-          <!-- selettore INTELLIGENZA -->
-          <div class="firstCol">
-            <ion-col>
-                <app-label>Intelligenza</app-label>
-            </ion-col>
+          <div class="modifierContainer">
+            <app-label>Constitution modifier: {{statModifierDict[constitutionDragEntry.value]}}</app-label>
           </div>
+        </div>
 
-          <!-- selettore intelligenza -->
-          <div class="secondCol">
-            <ion-col>
-              <app-drag-entry
+        <!-- selettore INTELLIGENCE -->
+        <div class="statSelectionFrame">
+          <div class="dragEntryBlock">
+            <app-label>Intelligence</app-label>
+            <app-drag-entry
+              #intelligenceDragEntry
               id="intelligenceDragEntry"
               [sensitivity] = 1
               [max] = 20
               [min] = 1
               ></app-drag-entry>
-            </ion-col>
           </div>
-
-        </ion-row>
-
-        <ion-row>
-
-          <!-- selettore SAGGEZZA -->
-          <div class="firstCol">
-            <ion-col>
-                <app-label>Saggezza</app-label>
-            </ion-col>
+          <div class="modifierContainer">
+            <app-label>Intelligence modifier: {{statModifierDict[intelligenceDragEntry.value]}}</app-label>
           </div>
+        </div>
 
-          <!-- selettore saggezza -->
-          <div class="secondCol">
-            <ion-col>
-              <app-drag-entry
+
+        <!-- selettore WISDOM -->
+        <div class="statSelectionFrame">
+          <div class="dragEntryBlock">
+            <app-label>Wisdom</app-label>
+            <app-drag-entry
+              #wisdomDragEntry
               id="wisdomDragEntry"
               [sensitivity] = 1
               [max] = 20
               [min] = 1
               ></app-drag-entry>
-            </ion-col>
           </div>
-
-        </ion-row>
-
-
-        <ion-row>
-
-          <!-- selettore CARISMA -->
-          <div class="firstCol">
-            <ion-col>
-                <app-label>Carisma</app-label>
-            </ion-col>
+          <div class="modifierContainer">
+            <app-label>Wisdom modifier: {{statModifierDict[wisdomDragEntry.value]}}</app-label>
           </div>
+        </div>
 
-          <!-- selettore carisma -->
-          <div class="secondCol">
-            <ion-col>
-              <app-drag-entry
+        <!-- selettore CHARISMA -->
+        <div class="statSelectionFrame">
+          <div class="dragEntryBlock">
+            <app-label>Charisma</app-label>
+            <app-drag-entry
+              #charismaDragEntry
               id="charismaDragEntry"
               [sensitivity] = 1
               [max] = 20
               [min] = 1
               ></app-drag-entry>
-            </ion-col>
           </div>
+          <div class="modifierContainer">
+            <app-label>Charisma modifier: {{statModifierDict[charismaDragEntry.value]}}</app-label>
+          </div>
+        </div>
 
-        </ion-row>
 
-
-      </ion-grid>
-    </ion-item>
+      </ul>
+    </div>
   }
 
   @if (stdArray===true) {

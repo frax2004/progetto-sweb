@@ -17,6 +17,7 @@ import { LabelComponent } from "src/app/components/label/label.component";
 import { CharacterManagementService } from 'src/app/services/character.management.service';
 import { dnd } from 'dbserver/database.queries';
 import { AfterViewInit } from '@angular/core';
+import { CharacterInstance } from '../CharacterInformation';
 
 @Component({
   selector: 'app-class-selection',
@@ -38,7 +39,8 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     const validLevel: boolean = this.levelEntry.value>0;
     const validClass: boolean = ClassSelectionPage.selectedClass !== undefined;
     if (validLevel && validClass) {
-      //set degli elementi per la prossima pagina qui
+      CharacterInstance.selectedClass = ClassSelectionPage.selectedClass;
+      CharacterInstance.selectedLevel = this.levelEntry.value;
       this.router.navigate(['/species-selection']);
     }
     else this.setOpen(true);

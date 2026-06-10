@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonRow, IonCol, IonGrid, IonLabel, IonInput, PopoverController } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonRow, IonCol, IonGrid, IonLabel, IonInput, PopoverController, IonList } from '@ionic/angular/standalone';
 import { ScrollBarComponent } from "src/app/components/scrollbar/scrollbar.component";
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { EntryComponent } from "src/app/components/entry/entry.component";
@@ -10,13 +10,14 @@ import { ButtonComponent } from "src/app/components/button/button.component";
 import { Popups } from 'src/app/core/core';
 import { TitleComponent } from "src/app/components/title/title.component";
 import { LabelComponent } from "src/app/components/label/label.component";
+import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
 
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.page.html',
   styleUrls: ['./overview.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ScrollBarComponent, IonItem, IonRow, IonCol, IonGrid, IonLabel, AccordionComponent, IonInput, EntryComponent, TextAreaComponent, ButtonComponent, TitleComponent, LabelComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ScrollBarComponent, IonItem, IonRow, IonCol, IonGrid, IonLabel, AccordionComponent, IonInput, EntryComponent, TextAreaComponent, ButtonComponent, TitleComponent, LabelComponent, IonList, UnorderedListElementComponent]
 })
 export class OverviewPage implements OnInit {
   averageHP: boolean = true;

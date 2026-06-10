@@ -17,6 +17,7 @@ import { LabelComponent } from "src/app/components/label/label.component";
 import { CharacterManagementService } from 'src/app/services/character.management.service';
 import { dnd } from 'dbserver/database.queries';
 import { AfterViewInit } from '@angular/core';
+import { CharacterInstance } from '../CharacterInformation';
 
 @Component({
   selector: 'app-class-selection',
@@ -38,7 +39,8 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     const validLevel: boolean = this.levelEntry.value>0;
     const validClass: boolean = ClassSelectionPage.selectedClass !== undefined;
     if (validLevel && validClass) {
-      //set degli elementi per la prossima pagina qui
+      CharacterInstance.selectedClass = ClassSelectionPage.selectedClass;
+      CharacterInstance.selectedLevel = this.levelEntry.value;
       this.router.navigate(['/species-selection']);
     }
     else this.setOpen(true);
@@ -291,6 +293,9 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
               \nSpell attack modifier = your proficiency bonus + your Intelligence modifier.
               
               \nCantrips known and spell slots at each level are specified in the respective level info.
+
+              \nAt 1st level, you have a spellbook containing six 1st- level wizard spells of your choice. Your spellbook is the repository of the wizard spells you know, except your cantrips, which are fixed in your mind.
+              \nEach time you gain a level as a wizard, you can add two wizard spells for free to your spellbook
 
               \nYou prepare the list of wizard spells that are available for you to cast. To do so, choose a number of wizard spells from your spellbook equal to your Intelligence modifier + your wizard level (minimum of one spell). The spells must be of a level for which you have spell slots.
               \nYou can change your list of prepared spells when you finish a long rest. Preparing a new list of wizard spells requires time spent studying your spellbook and memorizing the incantations and gestures you must make to cast the spell: at least 1 minute per spell level for each spell on your list.

@@ -60,3 +60,41 @@ ion-grid {
 #randomLabel {
     padding-left: 15px;
 }
+
+.statSelectionFrame {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 2.5vh 0px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: 1px red solid;
+}
+
+.manualStatsList {
+    padding: 0;
+    list-style-type: none;
+    border-radius: 20px;
+}
+
+.dragEntryBlock {
+    border: 5px green solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    justify-items: center;
+    align-self: center;
+    align-content: center;
+}
+
+.manualStatsListContainer {
+    padding-top: 0.2vh;
+    padding-bottom: 0.2vh;
+    background-color: rgba(70, 70, 69, 0.8);
+    width: 70vw;
+    border-radius: 20px;
+    // per centrarlo
+    margin: 4vmin auto;
+}

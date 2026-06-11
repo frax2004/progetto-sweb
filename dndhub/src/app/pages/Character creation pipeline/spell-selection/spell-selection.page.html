@@ -2,4 +2,49 @@
   <app-title
   [title] = "'Scegli gli incantesimi'"
   ></app-title>
+
+  <!-- <ion-label>lung: {{levelRow?.length}}</ion-label> -->
+  
+  <!-- divido tra trucchetti e incantesimi non solo per una questione visiva
+   ma anche perchè i trucchetti conosciuti non hanno nulla a che fare 
+   con l'ammontare di incantesimi conosciuti -->
+  <div class="listContainerFrame">
+    <ion-list class="spellsList">
+      @for(spellArray of displayableSpells; track spellArray) {
+        @if(spellArray.length !== 0) {
+          @if(spellArray[0].level === 0){
+            <div class="spellDisplayFrame">
+              <h1>Cantrips</h1>
+              @for(spell of spellArray; track spell) {
+                <div class="spellChoiceFrame">
+                  <div class="labelContainer" (click)="displayCantripDescription(spell)($event)">
+                    <ion-label>{{spell.name}} - {{spell.level}}</ion-label>
+                  </div>
+
+                </div>
+              }
+            </div>
+          }
+          @else {
+            <div class="spellDisplayFrame">
+              <h1>Spells of level {{spellArray[0].level}}</h1>
+              @for(spell of spellArray; track spell) {
+                <div class="spellChoiceFrame">
+                  <div class="labelContainer" (click)="displaySpellDescription(spell)($event)">
+                    <ion-label>{{spell.name}} - {{spell.level}}</ion-label>
+                  </div>
+
+                </div>
+              }
+            </div>
+          }
+
+          <br>
+          <ion-label>divisorio placeholder</ion-label>
+          <br>
+        }
+      }
+    </ion-list>
+  </div>
+
 </ion-content>

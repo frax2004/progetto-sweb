@@ -23,8 +23,7 @@ import {
   IonButton, 
   IonThumbnail, 
   IonSplitPane, 
-  IonMenu, 
-  AlertController 
+  IonMenu,
 } from '@ionic/angular/standalone';
 import { 
   Alerts, 
@@ -37,6 +36,7 @@ import { LabelComponent } from "src/app/components/label/label.component";
 import { EntryComponent } from 'src/app/components/entry/entry.component';
 import { Router } from '@angular/router';
 import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 
@@ -131,9 +131,20 @@ export class ProfilePage implements OnInit, AfterViewInit {
 
   private deleteAccount() {
     Alerts.notImplemetedError(ProfilePage.prototype.deleteAccount);
-  } 
-  private logOut() {
-    Alerts.notImplemetedError(ProfilePage.prototype.logOut);
+  }
+
+  private logOut = () => {
+    const success = async (res: any) => {
+      await this.router.navigate(['/landing-page']);
+
+      Alerts.good(res.message);
+    };
+
+    const fail = res => {
+      Alerts.error(res.error);
+    };
+
+    this.authService.logout(success, fail);
   }
 
   public buttons = {
@@ -144,7 +155,12 @@ export class ProfilePage implements OnInit, AfterViewInit {
     save: { onClick: this.save },
   };
 
-  constructor(private alertController: AlertController, private userService: UserUtilitiesService, public popoverController: PopoverController, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private userService: UserUtilitiesService, 
+    public popoverController: PopoverController, 
+    private router: Router
+  ) {}
 
   ngAfterViewInit() {
     this.userService.getUserInfo(

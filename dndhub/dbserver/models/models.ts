@@ -574,6 +574,9 @@ export namespace models {
     duration!: string;
     description!: string;
     cantripUpgrade?: string;
+    higherLevelSlot?: string;
+    castingTrigger?: string;
+    castingTime?: string;
   }
 
   export class ArrayCreatingSpellSlotsItem {    

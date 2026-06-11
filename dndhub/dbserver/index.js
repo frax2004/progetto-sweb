@@ -16,7 +16,6 @@ const PORT = 10000;
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRouter);
-// probabilmente ci andrà un middleware di autenticazione
 app.use("/api/user-utilities", userUtilitiesRouter);
 app.use("/api/character-management", characterManagementRouter)
 app.use('/api/campagna', campagnaRouter);

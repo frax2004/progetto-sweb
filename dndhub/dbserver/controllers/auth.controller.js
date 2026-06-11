@@ -15,6 +15,20 @@ function sendResponse(obj, res) {
   } else throw new Error("Chiamata a sendResponse() gia effettuata");
 }
 
+export function logout(req, res) {
+  canSend = true;
+
+  UserInstance.USER = undefined;
+
+  sendResponse({
+      status_code: 200,
+      message: "Logout effettuato con successo.",
+      success: true,
+    },
+    res,
+  )
+}
+
 function login(req, res) {
   canSend = true;
 
@@ -108,4 +122,5 @@ function register(req, res) {
 export default {
   login,
   register,
+  logout,
 }

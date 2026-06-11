@@ -346,6 +346,9 @@ export namespace dnd {
     duration: string;
     description: string;
     cantrip_upgrade: string;
+    higher_level_slot: string;
+    casting_trigger: string;
+    casting_time: string;
   }
 
   export interface AreaOfEffect {
@@ -852,7 +855,10 @@ export class DatabaseQueries {
       duration: spell.duration,
       description: spell.description,
       components: spell.components.split("$$$"),
-      cantrip_upgrade: spell.cantripUpgrade
+      cantrip_upgrade: spell.cantripUpgrade,
+      higher_level_slot: spell.higherLevelSlot,
+      casting_trigger: spell.castingTrigger,
+      casting_time: spell.castingTime,
     }
   }
 

@@ -551,6 +551,9 @@ export var models;
         duration;
         description;
         cantripUpgrade;
+        higherLevelSlot;
+        castingTrigger;
+        castingTime;
     }
     models.Spell = Spell;
     class ArrayCreatingSpellSlotsItem {

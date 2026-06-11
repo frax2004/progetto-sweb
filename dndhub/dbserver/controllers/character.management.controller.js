@@ -86,7 +86,10 @@ async function displayLevelRowByClassAndLevel(req,res) {
   try {
     let levelInfo = Database.queryAll(`SELECT * FROM Level WHERE (character_class = '${className}' AND level = ${level} AND subclass is null)`);
   
-    levelRow = await unwrapLevelSpecific(await levelInfo);
+    // console.log(await levelInfo);
+
+    levelRow = await unwrapLevelSpecific((await levelInfo)[0]);
+    console.log(levelRow);
   }
   catch (err) {
     console.log(err);
@@ -235,10 +238,38 @@ async function displayBackgrounds(req,res) {
   });
 }
 
+async function displaySpellsByClass(req,res) {
+  canSend=true;
+
+  const className = req.body.className.toLowerCase();
+
+  DatabaseQueries.retrieve(`SELECT * FROM Spell WHERE classes LIKE '%${className}%'`, DatabaseQueries.unwrapSpell)
+  .catch(err => {
+    sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare gli incantesimi dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then(spells => {
+    // console.log(JSON.stringify(spells));
+    sendResponse({
+        spells: spells,
+        status_code: 200,
+        success: true,
+        message: 'Incantesimi caricate con successo'
+      },
+      res
+    );
+  });
+}
+
 export default {
   displayClasses,
   displayLevelByNameAndLevel,
   displaySpecies,
   displayBackgrounds,
   displayLevelRowByClassAndLevel,
+  displaySpellsByClass,
 }

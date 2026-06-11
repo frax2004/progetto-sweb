@@ -45,24 +45,89 @@ function isLogged(req, res) {
   }
 }
 
-export function setUserInfo(req, res) {
+
+export async function setUserInfo(req, res) {
   canSend = true;
   
   const oldEmail = UserInstance.USER.email;
   const email = req.body.email;
   const password = req.body.password;
   const username = req.body.username;
-
-  const fail = err => sendResponse({
-      success: false,
-      status_code: 401,
-      message: err.message
-    },
-    res
-  );
+  const playerId = UserInstance.getPlayerId(email);
+  const dmId = UserInstance.getDmId(email);
   
-  const success = () => {
-    console.log("Campaigns updated");
+  const updateCampaign = campaign => {
+    const name = campaign.split('@')[0];
+    return `${name} @ ${dmId}`;
+  };
+
+  const updateCharacter = character => {
+    const name = character.split('@')[0];
+    return `${name} @ ${playerId}`;
+  };
+
+  const charactersQueries = (await Database.queryAll(`
+    SELECT idx_personaggio
+    FROM Personaggio
+    WHERE utente_generico = '${oldEmail}'
+  `))
+  .map(x => x.idx_personaggio)
+  .map(oldCharacter => {
+    const newCharacter = updateCharacter(oldCharacter);
+    return `
+    UPDATE Personaggio
+    SET idx_personaggio = '${newCharacter}'
+    WHERE idx_personaggio = '${oldCharacter}'
+    `
+  })
+  .join(';\n');
+
+  const campaignsQueries = (await Database.queryAll(`
+    SELECT idx_campagna
+    FROM Campagna
+    WHERE utente_generico = '${oldEmail}'
+  `))
+  .map(x => x.idx_campagna)
+  .map(oldCampaign => {
+    const newCampaign = updateCampaign(oldCampaign);
+    return `
+    UPDATE Campagna
+    SET idx_campagna = '${newCampaign}'
+    WHERE idx_campagna = '${oldCampaign}'
+    `
+  })
+  .join(';\n');
+
+
+  const query = `
+    BEGIN TRANSACTION;
+    
+    UPDATE Account 
+    SET email = '${email}', password = '${password}', username = '${username}' 
+    WHERE email = '${oldEmail}';
+    
+    UPDATE UtenteGenerico
+    SET utente_giocatore = '${playerId}',
+        utente_dungeon_master = '${dmId}'
+    WHERE account = '${email}';
+
+    ${charactersQueries};
+
+    ${campaignsQueries};
+
+    COMMIT;
+  `;
+
+  console.log(query);
+  
+  try {
+    await Database.execAll(query);
+
+    const generic_token = generateToken({email: email});
+    const player_token = generateToken({id: playerId});
+    const dm_token = generateToken({id: dmId});
+
+    UserInstance.USER = new UserInstance(generic_token, player_token, dm_token);
 
     sendResponse({
         message: "Credenziali modificate con successo",
@@ -71,120 +136,22 @@ export function setUserInfo(req, res) {
       },
       res
     );
+  } catch(err) {
+    try {
+      await Database.execOne('ROLLBACK;');
+    } finally {
+      sendResponse({
+          success: false,
+          status_code: 401,
+          message: err.message
+        },
+        res
+      );
+    }
   }
-
-  const updateCampaigns = async () => {
-    console.log("Characters updated");
-
-    const query = `
-    SELECT idx_campagna
-    FROM Campagna
-    WHERE utente_generico = '${email}'
-    `;
-    console.log(`Executing ${query}`);
-
-    const updateCampaign = campaign => {
-      const name = campaign.split('@')[0];
-      return `${name} @ ${UserInstance.USER.dm_id}`;
-    };
-
-    const oldCampaigns = await Database.queryAll(query);
-
-    const queries = oldCampaigns
-    .map(x => x.idx_campagna)
-    .map(oldCampaign => {
-      const newCampaign = updateCampaign(oldCampaign);
-      return `
-      UPDATE Campagna
-      SET idx_campagna = '${newCampaign}'
-      WHERE idx_campagna = '${oldCampaign}'
-      `
-    })
-    .join(';\n');
-    console.log(`Executing ${queries}`);
-    
-    Database
-    .execAll(queries)
-    .catch(fail)
-    .then(success);
-  };
-
-  const updateCharacters = async () => {
-    console.log("Generic user updated");
-
-    const query = `
-      SELECT idx_personaggio
-      FROM Personaggio
-      WHERE utente_generico = '${email}'
-    `;
-    console.log(`Executing ${query}`);
-
-
-    const updateCharacter = character => {
-      const name = character.split('@')[0];
-      return `${name} @ ${UserInstance.USER.player_id}`;
-    };
-
-    const oldCharacters = await Database.queryAll(query);
-
-    const queries = oldCharacters
-    .map(x => x.idx_personaggio)
-    .map(oldCharacter => {
-      const newCharacter = updateCharacter(oldCharacter);
-      return `
-      UPDATE Personaggio
-      SET idx_personaggio = '${newCharacter}'
-      WHERE idx_personaggio = '${oldCharacter}'
-      `
-    })
-    .join(';\n');
-    console.log(`Executing ${queries}`);
-
-    Database
-    .execAll(queries)
-    .catch(fail)
-    .then(updateCampaigns);
-  };
-  
-  const updateGenericUser = () => {
-    const query = `
-    UPDATE UtenteGenerico
-    SET utente_giocatore = '${UserInstance.USER.player_id}',
-    utente_dungeon_master = '${UserInstance.USER.dm_id}'
-    WHERE account = '${UserInstance.USER.email}'
-    `;
-    console.log(`Executing ${query}`);
-    
-    Database
-    .execAll(query)
-    .catch(fail)
-    .then(updateCharacters);
-  };
-  
-  const updateUser = _ => {
-    const playerId = UserInstance.getPlayerId(email);
-    const dmId = UserInstance.getDmId(email);
-    const generic_token = generateToken({email: email});
-    const player_token = generateToken({id: playerId});
-    const dm_token = generateToken({id: dmId});
-
-    UserInstance.USER = new UserInstance(generic_token, player_token, dm_token);
-    console.log("Account updated");
-    updateGenericUser();
-  }
-
-  const query = `
-    UPDATE Account 
-    SET email = '${email}', password = '${password}', username = '${username}' 
-    WHERE email = '${oldEmail}'
-  `;
-  console.log(`Executing ${query}`);
-
-  Database
-  .execAll(query)
-  .catch(fail)
-  .then(updateUser);
 }
+
+
 
 export function getUserInfo(req, res) {
   canSend = true;

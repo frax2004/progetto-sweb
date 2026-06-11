@@ -68,7 +68,6 @@ function register(req, res) {
 
   const db = Database.INSTANCE;
 
-
   const signin_callback = (err) => {
     if (err) {
       sendResponse(AuthResponses.USER_SIGNIN_FAILURE, res);

@@ -10,5 +10,6 @@ userUtilitiesRouter.post(
   '/setUserInfo', 
   user_middleware.isLogged, 
   user_middleware.validateInfo, 
+  user_middleware.canChangeEmail,
   user_controller.setUserInfo
 );

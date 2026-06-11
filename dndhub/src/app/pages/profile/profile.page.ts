@@ -1,8 +1,34 @@
-import { AfterViewInit, Component, effect, ElementRef, inject, OnInit, QueryList, signal, viewChild, ViewChild, ViewChildren } from '@angular/core';
+import { 
+  AfterViewInit, 
+  Component, 
+  OnInit, 
+  ViewChild 
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonAlert, IonContent, IonHeader, IonTitle,IonInput ,IonToolbar, IonCol, PopoverController, IonLabel, IonList, IonItem, IonGrid, IonRow, IonButton, IonThumbnail, IonSplitPane, IonMenu, AlertController } from '@ionic/angular/standalone';
-import { Alerts, Navigate, Popups } from 'src/app/core/core';
+import { 
+  IonAlert, 
+  IonContent, 
+  IonHeader, 
+  IonTitle,
+  IonInput ,
+  IonToolbar, 
+  IonCol, 
+  PopoverController, 
+  IonLabel, 
+  IonList, 
+  IonItem, 
+  IonGrid, 
+  IonRow, 
+  IonButton, 
+  IonThumbnail, 
+  IonSplitPane, 
+  IonMenu,
+} from '@ionic/angular/standalone';
+import { 
+  Alerts, 
+  Navigate 
+} from 'src/app/core/core';
 import { ButtonComponent } from "src/app/components/button/button.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
 import { TitleComponent } from "src/app/components/title/title.component";
@@ -10,6 +36,7 @@ import { LabelComponent } from "src/app/components/label/label.component";
 import { EntryComponent } from 'src/app/components/entry/entry.component';
 import { Router } from '@angular/router';
 import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 
@@ -17,7 +44,31 @@ import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
-  imports: [IonAlert, EntryComponent, IonSplitPane, IonMenu, IonContent, IonHeader, IonTitle, IonInput, IonToolbar, CommonModule, FormsModule, IonCol, ButtonComponent, IonLabel, IonList, UnorderedListElementComponent, IonItem, TitleComponent, LabelComponent, IonGrid, IonRow, IonButton, IonThumbnail],
+  imports: [
+    IonAlert, 
+    EntryComponent, 
+    IonSplitPane, 
+    IonMenu, 
+    IonContent, 
+    IonHeader, 
+    IonTitle, 
+    IonInput, 
+    IonToolbar, 
+    CommonModule, 
+    FormsModule, 
+    IonCol, 
+    ButtonComponent, 
+    IonLabel, 
+    IonList, 
+    UnorderedListElementComponent, 
+    IonItem, 
+    TitleComponent, 
+    LabelComponent, 
+    IonGrid, 
+    IonRow, 
+    IonButton, 
+    IonThumbnail
+  ],
 })
 export class ProfilePage implements OnInit, AfterViewInit {
 
@@ -80,9 +131,20 @@ export class ProfilePage implements OnInit, AfterViewInit {
 
   private deleteAccount() {
     Alerts.notImplemetedError(ProfilePage.prototype.deleteAccount);
-  } 
-  private logOut() {
-    Alerts.notImplemetedError(ProfilePage.prototype.logOut);
+  }
+
+  private logOut = () => {
+    const success = async (res: any) => {
+      await this.router.navigate(['/landing-page']);
+
+      Alerts.good(res.message);
+    };
+
+    const fail = res => {
+      Alerts.error(res.error);
+    };
+
+    this.authService.logout(success, fail);
   }
 
   public buttons = {
@@ -93,7 +155,12 @@ export class ProfilePage implements OnInit, AfterViewInit {
     save: { onClick: this.save },
   };
 
-  constructor(private alertController: AlertController, private userService: UserUtilitiesService, public popoverController: PopoverController, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private userService: UserUtilitiesService, 
+    public popoverController: PopoverController, 
+    private router: Router
+  ) {}
 
   ngAfterViewInit() {
     this.userService.getUserInfo(

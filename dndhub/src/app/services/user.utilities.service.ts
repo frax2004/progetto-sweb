@@ -21,14 +21,14 @@ export class UserUtilitiesService {
     );
   }
 
-  setUserInfo(email: string, password: string, username: string, success: (x) => void, fail: (err) => void): Subscription {
+  setUserInfo(email: string, password: string, username: string, success: (x: any) => void, fail: (err: any) => void): Subscription {
     return this.httpclient.post<any>(
       `${environment.api_url}/api/user-utilities/setUserInfo`,
       { email: email, password: password, username: username }
     ).subscribe({next: success, error: fail});
   }
 
-  getUserInfo(success: (x) => void, fail: (err) => void): Subscription {
+  getUserInfo(success: (x: any) => void, fail: (err: any) => void): Subscription {
     return this.httpclient.post<any>(
       `${environment.api_url}/api/user-utilities/getUserInfo`,
       {}

@@ -16,7 +16,6 @@ const PORT = 10000;
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRouter);
-// probabilmente ci andrà un middleware di autenticazione
 app.use("/api/user-utilities", userUtilitiesRouter);
 app.use("/api/character-management", characterManagementRouter)
 app.use('/api/campagna', campagnaRouter);
@@ -131,24 +130,24 @@ const new_tables = [
 
 await Database.load(DatabasePaths.SCHEMAS);
 
-for(const table of tables) {
-  await loadTable(table, DatabasePaths.DATA_DIR);
-}
+// for(const table of tables) {
+//   await loadTable(table, DatabasePaths.DATA_DIR);
+// }
 
-for(const table of new_tables) {
-  await loadTable(table, DatabasePaths.MOCK_DATA_DIR);
-}
+// for(const table of new_tables) {
+//   await loadTable(table, DatabasePaths.MOCK_DATA_DIR);
+// }
 
-// await Database.execOne(
-//   'PRAGMA foreign_keys = ON;', 
-//   (pragmaErr) => {
-//     if (pragmaErr) {
-//       console.error("Errore attivazione chiavi esterne:", pragmaErr.message);
-//     } else {
-//       console.log("Chiavi esterne (CASCADE) attivate con successo!");
-//     }
-//   }
-// );
+await Database.execOne(
+  'PRAGMA foreign_keys = ON;', 
+  (pragmaErr) => {
+    if (pragmaErr) {
+      console.error("Errore attivazione chiavi esterne:", pragmaErr.message);
+    } else {
+      console.log("Chiavi esterne (CASCADE) attivate con successo!");
+    }
+  }
+);
 
 app.listen(PORT, () => {
   console.log(`Server in ascolto su http://localhost:${PORT}`);

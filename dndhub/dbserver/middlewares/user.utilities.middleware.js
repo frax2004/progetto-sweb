@@ -1,7 +1,7 @@
 import { AuthValidators } from "../controllers/auth.controllers.validators.js";
 import { UserInstance } from "../global.context.js";
 import { AuthResponses } from "../controllers/auth.controller.responses.js";
-
+import { Database } from "../database.js";
 
 let canSend = true;
 function sendResponse(obj, res) {
@@ -26,6 +26,34 @@ export function validateInfo(req, res, next) {
 
 }
 
+export function canChangeEmail(req, res, next) {
+
+  const oldEmail = UserInstance.USER.email;
+  const email = req.body.email;
+
+  Database.queryOne(`SELECT email FROM Account WHERE email = '${email}'`)
+  .then(row => {
+    const ok = oldEmail === email || row === undefined;
+    if(ok) next();
+    else sendResponse({
+        status_code: 401,
+        message: `L'indirizzo email ${email} risulta già registrato`,
+        success: false
+      },
+      res
+    );
+  })
+  .catch(
+    err => sendResponse({
+        status_code: 401,
+        message: err.message,
+        success: false
+      },
+      res
+    )
+  );
+}
+
 export function isLogged(req, res, next) {
   if(UserInstance.USER !== undefined && UserInstance.USER !== null) {
     next();
@@ -41,4 +69,5 @@ export function isLogged(req, res, next) {
 export default {
   validateInfo,
   isLogged,
+  canChangeEmail,
 }

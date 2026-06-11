@@ -37,6 +37,7 @@ import { EntryComponent } from 'src/app/components/entry/entry.component';
 import { Router } from '@angular/router';
 import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { State } from 'src/app/core/state';
 
 
 
@@ -135,6 +136,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
 
   private logOut = () => {
     const success = async (res: any) => {
+      State.isLogged.set(false);
       await this.router.navigate(['/landing-page']);
 
       Alerts.good(res.message);

@@ -1,17 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonItem, IonFooter, IonGrid, IonRow, IonCol, IonAccordion, IonAccordionGroup, IonThumbnail, IonList } from '@ionic/angular/standalone';
+import { 
+  IonContent, 
+  IonHeader, 
+  IonTitle, 
+  IonToolbar, 
+  IonLabel, 
+  IonItem, 
+  IonFooter, 
+  IonGrid, 
+  IonRow, 
+  IonCol, 
+  IonAccordion, 
+  IonAccordionGroup, 
+  IonThumbnail, 
+  IonList 
+} from '@ionic/angular/standalone';
 import { Card } from 'src/app/components/card/Card';
 import { CarouselComponent } from "src/app/components/carousel/carousel.component";
 import { CardComponent } from "src/app/components/card/card.component";
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { LabelComponent } from "src/app/components/label/label.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
-import { Navigate } from 'src/app/core/core';
 import { Router } from '@angular/router';
 import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
 import { RouterLink } from '@angular/router';
+import { State } from 'src/app/core/state';
 
 @Component({
   selector: 'app-landing-page',
@@ -35,32 +50,33 @@ export class LandingPagePage implements OnInit {
     return this.router.navigate(['landing-page']);
   }
 
-  isLogged: boolean = false;
+  isLogged = State.isLogged;
 
   constructor(private router: Router, private userUtilities: UserUtilitiesService) { 
-    userUtilities.isLogged()
-    .subscribe({
-      next: (value) => {
-        this.isLogged = value.isLogged;
-        console.log(this.isLogged);
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
+    // userUtilities
+    // .isLogged()
+    // .subscribe({
+    //   next: (value) => {
+    //     this.isLogged = value.isLogged;
+    //     console.log(this.isLogged);
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //   }
+    // })
   }
 
   ngOnInit() {
-    this.userUtilities.isLogged()
-    .subscribe({
-      next: (value) => {
-        this.isLogged = value.isLogged;
-        console.log(this.isLogged);
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
+    // this.userUtilities.isLogged()
+    // .subscribe({
+    //   next: (value) => {
+    //     this.isLogged = value.isLogged;
+    //     console.log(this.isLogged);
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //   }
+    // })
   }
 
 }

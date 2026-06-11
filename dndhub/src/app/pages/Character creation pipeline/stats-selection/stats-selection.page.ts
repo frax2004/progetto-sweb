@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonGrid, IonRow, IonCol, IonLabel } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonGrid, IonRow, IonCol, IonLabel, IonList } from '@ionic/angular/standalone';
 import { RadioButtonComponent } from "src/app/components/radio-button/radio-button.component";
 import { ButtonComponent } from "src/app/components/button/button.component";
 import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.component";
@@ -11,18 +11,28 @@ import { Navigate } from 'src/app/core/core';
 import { CheckboxComponent } from 'src/app/components/checkbox/checkbox.component';
 import { TitleComponent } from "src/app/components/title/title.component";
 import { LabelComponent } from "src/app/components/label/label.component";
+import { StatModifierString } from '../CharacterInformation';
+
 @Component({
   selector: 'app-stats-selection',
   templateUrl: './stats-selection.page.html',
   styleUrls: ['./stats-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, IonRow, RadioButtonComponent, IonCol, IonLabel, ButtonComponent, CheckboxComponent, DragEntryComponent, TitleComponent, LabelComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, IonRow, RadioButtonComponent, IonCol, IonLabel, ButtonComponent, CheckboxComponent, DragEntryComponent, TitleComponent, LabelComponent, IonList]
 })
 export class StatsSelectionPage implements OnInit {
   manualSelection: Boolean = true;
   stdArray: Boolean = false;
   randomSelection: Boolean = false;
-
+  
+  @ViewChild('strenghtDragEntry') private strenghtDragEntry: DragEntryComponent; 
+  @ViewChild('dexterityDragEntry') private dexterityDragEntry: DragEntryComponent; 
+  @ViewChild('constitutionDragEntry') private constitutionDragEntry: DragEntryComponent; 
+  @ViewChild('intelligenceDragEntry') private intelligenceDragEntry: DragEntryComponent; 
+  @ViewChild('wisdomDragEntry') private wisdomDragEntry: DragEntryComponent; 
+  @ViewChild('charismaDragEntry') private charismaDragEntry: DragEntryComponent; 
+  statModifierDict = StatModifierString;
+  
   // da fare mi raccomando
   buttonCallbacks = {
     manual: { onClick: () => {

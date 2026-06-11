@@ -1,50 +1,122 @@
 .contentContainer {
-    display: flex;
-    flex-direction: row;
-}
-
-.buttons {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 20% 78%;
+    gap: 2%;
 }
 
 .postContent {
     width: 95%;
     height: 65%;
+    padding: 8px;
+}
+
+.imgbackground {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: url('/assets/icon/Campaign-chat.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.2;
+  z-index:0;
 }
 
 .postContainer {
     display: flex;
     flex-direction: column;
+    gap: 12px;
     width: 100%;
 }
 
 .imgFrame {
-    max-width: 10%;
-    max-height: 10%;
+    width: 40px;
+    height: 40px;
+    border: 1px solid gold;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
-.buttons {
-    display: flex;
-    flex-direction: column;
+.imgFrame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
+
+
 
 .postBox {
     display: flex;
     flex-direction: column;
-    height: 40vh;
+    margin: 8px 0;
+    padding: 12px;
+    border: 1px solid gold;
+    border-radius: 12px;
+    background-color: rgb(0, 0, 0);
+    color: gold;
+    min-height: 150px;
+    height: auto;
 }
 
 .postLowerInformation {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    border-top: 1px solid gold;
+    padding-top: 8px;
+    margin-top: 8px;
+    font-size: clamp(0.9rem, 2vw, 1.3rem);
 }
 
-* {
-    border: 1px green solid;
-}
 
 .playerNames {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    margin: 2px;
+}
+
+.players{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    border:1px solid gold;
+    border-radius: 12px;
+    margin:4px;
+    height:auto;
+    width: auto;
+}
+
+.campaignName{
+    font-size: clamp(0.9rem, 3vw, 1.8rem);
+    min-height: 3rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    border:1px solid gold;
+    border-radius: 12px;
+    background-color: rgb(123, 15, 15);
+    margin:4px;
+    font-weight: bold;
+    color:gold;
+}
+
+.buttonPost {
+    flex: 1; 
+    display: flex;
+    justify-content: center; 
+}
+
+.titoloGiocatori{
+    font-size: clamp(0.8rem, 2.5vw,1.4rem);
+    border-bottom: 1px solid gold;
+    margin-bottom: 4px;
+    font-weight: 600;
+    
 }

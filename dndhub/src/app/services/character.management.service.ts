@@ -41,4 +41,11 @@ export class CharacterManagementService {
       {}
     );
   }
+  
+  displayLevelRowByClassAndLevel(level: number, className: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/level-display-by-class-and-level`,
+      {level: level, className: className}
+    );
+  }
 }

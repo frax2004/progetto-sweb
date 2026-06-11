@@ -1,144 +1,136 @@
 <ion-content>
-  <div class="accordionDiv">
-    <ion-accordion-group>
-        <ion-accordion class="optsAccordion"value="first">
+  <div class="backgroundimage"></div>
+  <div class="gridTitolo">
+    <div class="accordionDiv">
+      <ion-accordion-group>
+        <ion-accordion class="optsAccordion">
           <div slot="header" class="accImgFrame">
-            <img id="optImg" alt="placeholderImg" src="./assets/icon/menu-expand.svg">
+            <img class="optImg" alt="placeholderImg" src="\assets\icon\Menu-dato.dndhub.SVG">
           </div>
-          <div class="ion-padding" slot="content" class="accContent">
-              @if(!isLogged) {
-                <div class="linkContainer">
-                  <!-- gli href sono da rivedere: sintatticamente incorretti -->
-                  <a href="/login-page">
-                    Login
-                  </a>
-                </div>
-                <div class="linkContainer bottomLinkContainer">
-                  <a href="/signin-page">
-                    Registrati
-                  </a>
-                </div>
-              }
-              @else {
-                <div class="linkContainer">
-                  <a href="/type-player-login">
-                    Accedi alle aree personali
-                  </a>
-                </div>
-                <div class="linkContainer bottomLinkContainer">
-                  <a href="/profile">
-                    Profilo personale
-                  </a>
-                </div>
-              }
+          <div class="ion-padding accContent" slot="content">
+            @if(!isLogged) {
+            <div class="linkContainer">
+              <a href="/login-page">
+                Login
+              </a>
+            </div>
+            <div class="linkContainer bottomLinkContainer">
+              <a href="/signin-page">
+                Registrati
+              </a>
+            </div>
+            }
+            @else {
+            <div class="linkContainer">
+              <a routerLink="/type-player-login">
+                Accedi alle aree personali
+              </a>
+            </div>
+            <div class="linkContainer bottomLinkContainer">
+              <a routerLink="/profile">
+                Profilo personale
+              </a>
+            </div>
+            }
           </div>
         </ion-accordion>
-      
-    </ion-accordion-group>    
-  </div>
+
+      </ion-accordion-group>
+    </div>
 
 
-  
 
-  <div id="pageTitle">
-    <div>
-      <ion-title id="title">DnDHUB</ion-title>
+
+    <div class="pageTitle">
+      <ion-title class="title">DnDhub</ion-title>
     </div>
   </div>
-  
+
   <!-- ricordarsi che OGNI pagina deve essere dentro tag ion-content -->
-  
+
   <!-- prima sezione dedicata solamente ala carousel con le card  -->
-  
-  <ion-item id="carousel-block">
+
+  <section id="carousel-block">
     <div id="carousel-content">
       <div id="carousel-title">
         <div id="carousel-label">Personaggi creati recentemente</div>
       </div>
       <app-carousel [cards]="cards"></app-carousel>
     </div>
-  </ion-item>
-  
-  <!-- seconda sezione con svariate card con informazioni varie -->
-  
-  <ion-item class="galleryBlock">
-    <ion-grid>
-      <ion-row>
-        <app-card
-        [card]= "{ title: 'Galleria 1', subtitle: 'Sottotitolo 1', content: 'Mi piacciono molto i gattini :]', imageURL: 'https://magazine.arcaplanet.it/wp-content/uploads/2022/06/blog-consigli-benessere-gattini-appena-nati.png'}"
-        ></app-card>
-      </ion-row>
-      <ion-row>
-        <app-card
-        [card]= "{ title: 'Galleria 2', subtitle: 'Sottotitolo 2', content: 'UNA TARTARUGA!!!!!', imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO7UMalsSQZGTzND5et3nJ9wsuOIAiPqExzQ&s'}"
-        ></app-card>
-      </ion-row>
-      <ion-row>
-        <app-card
-        [card]= "{ title: 'Galleria 3', subtitle: 'Sottotitolo 3', content: 'Questo puo essere il tuo pg cattivissimo!!!', imageURL: 'https://static.wikitide.net/criticalrolewiki/3/34/Gruumsh_-_Kent_Davis.jpg'}"
-        ></app-card>
-      </ion-row>
-    </ion-grid>
-  </ion-item>
-  
+  </section>
+
+
+  <div class="gallerySection">
+    <div class="galleryRow">
+      <div class="immagine campagna"></div>
+      <div class="descrizione">
+        <h3>Campagne</h3>
+        <p>Boh fai la tua campagna Freezer</p>
+      </div>
+    </div>
+
+    <div class="galleryRow">
+      <div class="immagine personaggio"></div>
+      <div class="descrizione">
+        <h3>Personaggi</h3>
+        <p>Puoi creare qui i tuoi personaggi e anche, gestirli tramite la nostra pagine riservata!
+        </p>
+      </div>
+    </div>
+
+    <div class="galleryRow">
+      <div class="immagine campagna1"></div>
+      <div class="descrizione">
+        <h3>Gestione</h3>
+        <p>Gestisci le tue campagne O BROLY LO FARÀ AL POSTO TUO</p>
+      </div>
+    </div>
+  </div>
+
   <!-- footer che conterrà informazioni utili a sito o contatti e simili -->
-  
+
   <ion-footer class="informationBlock">
     <ion-grid>
       <ion-row>
-        
+
         <ion-col>
-          <ion-item>
-            <ion-grid>
-              <ion-row>
-                <ion-label class="footerTitle">Informazioni</ion-label>
-              </ion-row>
-              <ion-row>
-                <ion-label class="footerInformation">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                  ùModi laboriosam in dignissimos mollitia. 
-                  Aliquam eveniet ipsa eaque laboriosam, quisquam cupiditate cum quas, 
-                  ratione repudiandae sequi provident exercitationem aperiam, omnis totam.
-                </ion-label>
-              </ion-row>
-            </ion-grid>
-          </ion-item>
+          <ion-grid>
+            <ion-row class="informazioniTitoli">
+              <ion-label class="footerTitle">Informazioni</ion-label>
+            </ion-row>
+            <ion-row class="tabellabordi">
+              <ion-label class="footerInformation">Ehm boh questo no idea
+                Turles LR teq?!?!?!?
+              </ion-label>
+            </ion-row>
+          </ion-grid>
         </ion-col>
-        
-        
+
+
         <ion-col>
-          <ion-item>
-            <ion-grid>
-              <ion-row>
-                <ion-label class="footerTitle">Contattaci</ion-label>
-              </ion-row>
-              <ion-row>
-                <ion-label class="footerInformation">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                  ùModi laboriosam in dignissimos mollitia. 
-                  Aliquam eveniet ipsa eaque laboriosam, quisquam cupiditate cum quas, 
-                  ratione repudiandae sequi provident exercitationem aperiam, omnis totam.
-                </ion-label>
-              </ion-row>
-            </ion-grid>
-          </ion-item>
+          <ion-grid>
+            <ion-row class="informazioniTitoli">
+              <ion-label class="footerTitle">Contattaci</ion-label>
+            </ion-row>
+            <ion-row class="tabellabordi">
+              <ion-label class="footerInformation">contattaci all'email DnDhub@gmail.com!
+              </ion-label>
+            </ion-row>
+          </ion-grid>
         </ion-col>
-        
+
         <ion-col>
-          <ion-item>
-            <ion-grid>
-              <ion-row>
-                <ion-label class="footerTitle">Crediti</ion-label>
-              </ion-row>
-              <ion-row>
-                <ion-label class="footerInformation">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                  ùModi laboriosam in dignissimos mollitia. 
-                  Aliquam eveniet ipsa eaque laboriosam, quisquam cupiditate cum quas, 
-                  ratione repudiandae sequi provident exercitationem aperiam, omnis totam.
-                </ion-label>
-              </ion-row>
-            </ion-grid>
-          </ion-item>
+          <ion-grid>
+            <ion-row class="informazioniTitoli">
+              <ion-label class="footerTitle">Crediti</ion-label>
+            </ion-row>
+            <ion-row class="tabellabordi">
+              <ion-label class="footerInformation">Victor, Mimmo, Lightside2005.
+              </ion-label>
+            </ion-row>
+          </ion-grid>
         </ion-col>
-        
+
       </ion-row>
     </ion-grid>
   </ion-footer>

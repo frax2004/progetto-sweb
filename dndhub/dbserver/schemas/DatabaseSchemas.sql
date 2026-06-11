@@ -712,6 +712,9 @@ create table if not exists Spell (
   duration text ,
   description text ,
   cantripUpgrade text,
+  higherLevelSlot text,
+  castingTrigger text,
+  castingTime text,
 
   foreign key (school) references MagicSchool(idx)
 );

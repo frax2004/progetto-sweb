@@ -927,6 +927,9 @@ var data;
         duration = "";
         description = "";
         cantripUpgrade = "";
+        higherLevelSlot = "";
+        castingTrigger = "";
+        castingTime = "";
     }
     data.Spell = Spell;
     class AreaOfEffect {
@@ -1760,6 +1763,9 @@ const allFiles = fs
                 duration: x.duration,
                 description: x.description,
                 cantripUpgrade: x.cantripUpgrade,
+                higherLevelSlot: x.higherLevelSlot,
+                castingTrigger: x.castingTrigger,
+                castingTime: x.castingTime,
             };
         },
         inputs: ["5e-SRD-Spells.json"],

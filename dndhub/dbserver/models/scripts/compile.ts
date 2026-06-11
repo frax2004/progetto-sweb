@@ -843,6 +843,9 @@ namespace data {
     duration: string = "";
     description: string = "";
     cantripUpgrade: string = "";
+    higherLevelSlot: string = "";
+    castingTrigger: string = "";
+    castingTime: string = "";
   }
 
   export class AreaOfEffect {
@@ -1902,7 +1905,10 @@ const allFiles = fs
         material: x.material,
         duration: x.duration,
         description: x.description,
-        cantripUpgrade: x.cantripUpgrade,
+        cantripUpgrade: x.cantripUpgrade,  
+        higherLevelSlot: x.higherLevelSlot,
+        castingTrigger: x.castingTrigger,
+        castingTime: x.castingTime,
       };
     },
     inputs: ["5e-SRD-Spells.json"],

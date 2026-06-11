@@ -45,10 +45,7 @@ export class SigninPagePage implements OnInit {
           State.isLogged.set(true);
           Navigate.toPath(this.router, 'landing-page')();
         },
-        error: (err) => {
-          Alerts.error(err.error);
-          // alert(err.message);
-        }
+        error: err => Alerts.error(err.error)
       })
     }
 

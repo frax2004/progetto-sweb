@@ -130,8 +130,35 @@ export class ProfilePage implements OnInit, AfterViewInit {
 
   }
 
-  private deleteAccount() {
-    Alerts.notImplemetedError(ProfilePage.prototype.deleteAccount);
+  private deleteAccount = async () => {
+    const success = async (res: any) => {
+      State.isLogged.set(false);
+      await this.router.navigate(['/landing-page']);
+
+      Alerts.good(res.message);
+    };
+
+    const fail = res => Alerts.error(res.error);
+
+    Alerts.show({
+      header: "Attenzione!",
+      subHeader: "Azione irreversibile",
+      message: "Sicuro di voler eliminare l'account?",
+      cssClass: 'delete-account-alert',
+      buttons: [
+        {
+          text: 'Cancella',
+          role: 'cancel',
+          handler: () => {}
+        },
+        {
+          text: 'Procedi',
+          role: 'confirm',
+          handler: () => this.authService.deleteAccount(success, fail)
+        }
+      ]
+    });
+
   }
 
   private logOut = () => {
@@ -142,9 +169,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
       Alerts.good(res.message);
     };
 
-    const fail = res => {
-      Alerts.error(res.error);
-    };
+    const fail = res => Alerts.error(res.error);
 
     this.authService.logout(success, fail);
   }

@@ -12,7 +12,7 @@ import { ButtonContext } from 'src/app/components/button/ButtonContext';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { PopoverController } from '@ionic/angular/standalone';
-import { Navigate, Popups } from 'src/app/core/core';
+import { Alerts, Navigate, Popups } from 'src/app/core/core';
 import { State } from 'src/app/core/state';
 
 @Component({
@@ -73,10 +73,7 @@ export class LoginPagePage implements OnInit {
         State.isLogged.set(true);
         Navigate.toPath(this.router, 'landing-page')();
       },
-      error: (err) => {
-        console.log(err);
-        Popups.ofSimpleText(this.popoverController, err.message)(event);
-      }
+      error: err => Alerts.error(err.error)
     })
   }
 

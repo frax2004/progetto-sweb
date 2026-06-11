@@ -26,14 +26,14 @@ export function validateInfo(req, res, next) {
 
 }
 
-export function canChangeEmail(req, res, next) {
 
+export async function canChangeEmail(req, res, next) {
   const oldEmail = UserInstance.USER.email;
   const email = req.body.email;
 
-  Database.queryOne(`SELECT email FROM Account WHERE email = '${email}'`)
-  .then(row => {
-    const ok = oldEmail === email || row === undefined;
+  try {
+    const account = await Database.queryOne(`SELECT email FROM Account WHERE email = '${email}'`);
+    const ok = oldEmail === email || account === undefined;
     if(ok) next();
     else sendResponse({
         status_code: 401,
@@ -42,28 +42,35 @@ export function canChangeEmail(req, res, next) {
       },
       res
     );
-  })
-  .catch(
-    err => sendResponse({
+  } catch(err) {
+    sendResponse({
         status_code: 401,
         message: err.message,
         success: false
       },
       res
-    )
-  );
+    );
+  }
+
 }
 
 export function isLogged(req, res, next) {
-  if(UserInstance.USER !== undefined && UserInstance.USER !== null) {
-    next();
-  } else {
-    res.status(401).json({
-      status_code: 401,
-      success: false,
-      message: "L'utente non è attualmente autenticato",
-    });
-  }
+  canSend = true;
+
+  const ok = UserInstance.USER !== undefined 
+    && UserInstance.USER !== null
+    && req.body.email === UserInstance.USER.email;
+  
+    if(ok) {
+      next();
+    } else {
+      sendResponse({
+          status_code: 401,
+          success: false,
+          message: "L'utente non è attualmente autenticato",
+        }
+      );
+    }
 }
 
 export default {

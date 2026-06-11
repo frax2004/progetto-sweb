@@ -1,7 +1,7 @@
 import { PopoverController } from "@ionic/angular/standalone";
 import { PopUpComponent } from "../components/pop-up/pop-up.component";
 import { Router } from "@angular/router";
-import { alertController } from '@ionic/core';
+import { alertController, AlertOptions } from '@ionic/core';
 
 
 export namespace Popups {
@@ -28,7 +28,7 @@ export namespace Navigate {
 }
 
 export namespace Alerts {
-  export async function show(options) {
+  export async function show(options: AlertOptions) {
     return (await alertController.create(options)).present();
   }
 

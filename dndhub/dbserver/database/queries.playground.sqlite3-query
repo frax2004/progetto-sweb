@@ -1,2 +1,6 @@
 -- database: ./dndhub.db
 
+
+delete from Account
+where email = "virginia.ricci4@gmail.eu";
+

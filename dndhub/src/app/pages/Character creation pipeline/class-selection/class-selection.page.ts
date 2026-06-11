@@ -266,8 +266,6 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
 
   static displayStartigEquipmentOptions(className: string,equipOpt: dnd.Choice[]) {
     let retValue = className + ' dispone delle seguenti opzioni di scelta di equipaggiamento:\n'
-    let app: dnd.OptionSet;
-    let app1: dnd.Option[];
     for (const opt of equipOpt) {
       if (opt.choose !== null && opt.desc !== null) {
         retValue = retValue + '\n- ' + opt.desc + ' - Choose: ' + opt.choose;

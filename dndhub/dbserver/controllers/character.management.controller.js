@@ -265,6 +265,33 @@ async function displaySpellsByClass(req,res) {
   });
 }
 
+async function displayClassByName(req,res) {
+  canSend = true;
+
+  const class_idx = req.body.className.toLowerCase();
+
+  DatabaseQueries.retrieve(`SELECT * FROM Class WHERE idx = '${class_idx}'`,DatabaseQueries.unwrapClass)
+  .catch(err => {
+  sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare le classi dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then(classes => {
+    sendResponse({
+        classes: classes,
+        status_code: 200,
+        success: true,
+        message: 'Classi caricate con successo'
+      },
+      res
+    );
+  });
+}
+
+
 export default {
   displayClasses,
   displayLevelByNameAndLevel,
@@ -272,4 +299,5 @@ export default {
   displayBackgrounds,
   displayLevelRowByClassAndLevel,
   displaySpellsByClass,
+  displayClassByName,
 }

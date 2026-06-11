@@ -55,4 +55,11 @@ export class CharacterManagementService {
       {className: className}
     );
   }
+
+  displayClassByName(className: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/class-display-by-name`,
+      {className: className}
+    );
+  }
 }

@@ -81,20 +81,18 @@ function register(req, res) {
           sendResponse(AuthResponses.USER_SIGNIN_FAILURE, res);
         } else {
           const generic_token = generateToken({email: email});
-          const player_token = generateToken({utente_giocatore: playerId});
-          const dm_token = generateToken({utente_giocatore: dmId});
-    
+          const player_token = generateToken({id: playerId});
+          const dm_token = generateToken({id: dmId});
+
           UserInstance.USER = new UserInstance(generic_token, player_token, dm_token);
-          console.log(JSON.stringify(UserInstance.USER)); // TODO: da togliere probabilmente
-    
           sendResponse(AuthResponses.signinResponse(generic_token, player_token, dm_token), res);
         }
       };
-      
+
       db.run(AuthQueries.insertGenericUser(email, playerId, dmId), insert_user_callback);
     }
   };
-  
+
   const is_signedin_callback = (err, row) => {
     if (row === undefined) {
       db.run(AuthQueries.signIn(email, password, username), signin_callback);

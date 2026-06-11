@@ -36,12 +36,10 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
 
   nextPage = () => {
     // alert(this instanceof ClassSelectionPage);
-    const validLevel: boolean = this.levelEntry.value>0;
-    const validClass: boolean = ClassSelectionPage.selectedClass !== undefined;
-    if (validLevel && validClass) {
-      CharacterInstance.selectedClass = ClassSelectionPage.selectedClass;
-      CharacterInstance.selectedLevel = this.levelEntry.value;
-      this.router.navigate(['/species-selection']);
+    CharacterInstance.selectedLevel = this.levelEntry.value;
+    const validClass: boolean = CharacterInstance.selectedClass !== undefined;
+    if (CharacterInstance.selectedLevel>0 && validClass) {
+      this.router.navigate(['/spell-selection']);
     }
     else this.setOpen(true);
   }
@@ -54,7 +52,8 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
   }
 
 
-  @ViewChild('levelEntry') private levelEntry: DragEntryComponent; 
+  @ViewChild('levelEntry') private levelEntry: DragEntryComponent;
+   
   classesArray = [];
   static lvlsArray = [];
   classesNames = ['Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter', 'Monk', 'Paladin', 'Ranger', 'Rogue', 'Sorcerer', 'Warlock', 'Wizard'];
@@ -114,61 +113,61 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     'Barbarian': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        ClassSelectionPage.selectedClass = 'Barbarian';
+        CharacterInstance.selectedClass = 'Barbarian';
       }
     },
     'Bard': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        ClassSelectionPage.selectedClass = 'Bard';
+        CharacterInstance.selectedClass = 'Bard';
       }
     }, 
     'Cleric': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        ClassSelectionPage.selectedClass = 'Cleric';
+        CharacterInstance.selectedClass = 'Cleric';
       }
     }, 
     'Druid': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        ClassSelectionPage.selectedClass = 'Druid';
+        CharacterInstance.selectedClass = 'Druid';
       }
     }, 
     'Fighter': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        ClassSelectionPage.selectedClass = 'Fighter';
+        CharacterInstance.selectedClass = 'Fighter';
       }
     }, 
     'Monk': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        ClassSelectionPage.selectedClass = 'Monk';
+        CharacterInstance.selectedClass = 'Monk';
       }
     }, 
     'Paladin': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        ClassSelectionPage.selectedClass = 'Paladin';
+        CharacterInstance.selectedClass = 'Paladin';
       }
     }, 
     'Ranger': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        ClassSelectionPage.selectedClass = 'Ranger';
+        CharacterInstance.selectedClass = 'Ranger';
       }
     }, 
     'Rogue': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        ClassSelectionPage.selectedClass = 'Rogue';
+        CharacterInstance.selectedClass = 'Rogue';
       }
     }, 
     'Sorcerer': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        ClassSelectionPage.selectedClass = 'Sorcerer';
+        CharacterInstance.selectedClass = 'Sorcerer';
       }
     }, 
     'Warlock': {
@@ -180,7 +179,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     'Wizard': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        ClassSelectionPage.selectedClass = 'Wizard';
+        CharacterInstance.selectedClass = 'Wizard';
       }
     }
   }

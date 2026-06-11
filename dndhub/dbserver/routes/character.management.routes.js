@@ -8,4 +8,5 @@ characterManagementRouter.post("/level-display-specific", controller.displayLeve
 characterManagementRouter.post("/species-display", controller.displaySpecies);
 characterManagementRouter.post("/background-display", controller.displayBackgrounds);
 characterManagementRouter.post("/level-display-by-class-and-level", controller.displayLevelRowByClassAndLevel);
+characterManagementRouter.post("/spell-display-by-class", controller.displaySpellsByClass);
 // characterManagementRouter

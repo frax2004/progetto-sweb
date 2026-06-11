@@ -66,20 +66,32 @@ export async function setUserInfo(req, res) {
     return `${name} @ ${playerId}`;
   };
 
+  const toCharacterUpdateQuery = oldCharacter => {
+    const newCharacter = updateCharacter(oldCharacter);
+    return `
+    UPDATE Personaggio
+    SET idx_personaggio = '${newCharacter}'
+    WHERE idx_personaggio = '${oldCharacter}'
+    `;
+  };
+
+  const toCampaignUpdateQuery = oldCampaign => {
+    const newCampaign = updateCampaign(oldCampaign);
+    return `
+    UPDATE Campagna
+    SET idx_campagna = '${newCampaign}'
+    WHERE idx_campagna = '${oldCampaign}'
+    `;
+  };
+
+
   const charactersQueries = (await Database.queryAll(`
     SELECT idx_personaggio
     FROM Personaggio
     WHERE utente_generico = '${oldEmail}'
   `))
   .map(x => x.idx_personaggio)
-  .map(oldCharacter => {
-    const newCharacter = updateCharacter(oldCharacter);
-    return `
-    UPDATE Personaggio
-    SET idx_personaggio = '${newCharacter}'
-    WHERE idx_personaggio = '${oldCharacter}'
-    `
-  })
+  .map(toCharacterUpdateQuery)
   .join(';\n');
 
   const campaignsQueries = (await Database.queryAll(`
@@ -88,14 +100,7 @@ export async function setUserInfo(req, res) {
     WHERE utente_generico = '${oldEmail}'
   `))
   .map(x => x.idx_campagna)
-  .map(oldCampaign => {
-    const newCampaign = updateCampaign(oldCampaign);
-    return `
-    UPDATE Campagna
-    SET idx_campagna = '${newCampaign}'
-    WHERE idx_campagna = '${oldCampaign}'
-    `
-  })
+  .map(toCampaignUpdateQuery)
   .join(';\n');
 
 
@@ -118,8 +123,7 @@ export async function setUserInfo(req, res) {
     COMMIT;
   `;
 
-  console.log(query);
-  
+
   try {
     await Database.execAll(query);
 

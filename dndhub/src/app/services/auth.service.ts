@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 
@@ -27,10 +27,15 @@ export class AuthService {
       `${environment.api_url}/api/auth/login`,
       { email: email, password: password }
     );
-    // .pipe(
-    //   tap(
-    //     res => sessionStorage.setItem("jwtToken", res.token)
-    //   )
-    // );
+  }
+
+  logout(success: (_: any) => void, fail: (err: any) => void): Subscription {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/auth/logout`,
+      {}
+    ).subscribe({
+      next: success,
+      error: fail
+    });
   }
 }

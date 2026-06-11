@@ -1751,7 +1751,7 @@ const allFiles = fs
                 level: x.level,
                 school: x.school,
                 classes: x.classes?.join("$$$"),
-                actionType: x.action_type,
+                actionType: x.actionType,
                 concentration: x.concentration,
                 ritual: x.ritual,
                 range: x.range,

@@ -13,6 +13,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginPagePage } from '../login-page/login-page.page';
 import { Alerts, Navigate, Popups } from 'src/app/core/core';
+import { State } from 'src/app/core/state';
 
 @Component({
   selector: 'app-signin-page',
@@ -41,6 +42,7 @@ export class SigninPagePage implements OnInit {
         this.formGroup.get('username')?.value || ''
       ).subscribe({
         next: (value) => {
+          State.isLogged.set(true);
           Navigate.toPath(this.router, 'landing-page')();
         },
         error: (err) => {

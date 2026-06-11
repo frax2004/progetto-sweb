@@ -139,16 +139,16 @@ for(const table of new_tables) {
   await loadTable(table, DatabasePaths.MOCK_DATA_DIR);
 }
 
-// await Database.execOne(
-//   'PRAGMA foreign_keys = ON;', 
-//   (pragmaErr) => {
-//     if (pragmaErr) {
-//       console.error("Errore attivazione chiavi esterne:", pragmaErr.message);
-//     } else {
-//       console.log("Chiavi esterne (CASCADE) attivate con successo!");
-//     }
-//   }
-// );
+await Database.execOne(
+  'PRAGMA foreign_keys = ON;', 
+  (pragmaErr) => {
+    if (pragmaErr) {
+      console.error("Errore attivazione chiavi esterne:", pragmaErr.message);
+    } else {
+      console.log("Chiavi esterne (CASCADE) attivate con successo!");
+    }
+  }
+);
 
 app.listen(PORT, () => {
   console.log(`Server in ascolto su http://localhost:${PORT}`);

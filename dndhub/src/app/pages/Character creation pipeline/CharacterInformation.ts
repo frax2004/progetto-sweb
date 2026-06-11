@@ -80,6 +80,8 @@ export class CharacterInstance {
     'wisdom': { value: 0, modifier: StatModifierNumber[0]},
     'charisma': { value: 0, modifier: StatModifierNumber[0]},
   }
+  private static chosen_spells = undefined;
+  private static chosen_cantrips = undefined;
 
 
   constructor() {}
@@ -90,8 +92,28 @@ export class CharacterInstance {
     this.selected_background = undefined;
   }
 
-  static getStatistic(statName) {
-    return this._statistics[statName];
+  static get chosenSpells() {
+    return this.chosen_spells;
+  }
+
+  static set chosenSpells(spells) {
+    this.chosen_spells = spells;
+  }
+
+  static get chosenCantrips() {
+    return this.chosen_cantrips;
+  }
+
+  static set chosenCantrips(cantrips) {
+    this.chosen_cantrips = cantrips;
+  }
+
+  static getStatisticValue(statName) {
+    return this._statistics[statName].value;
+  }
+
+  static getStatisticModifier(statName) {
+    return this._statistics[statName].modifier;
   }
 
   static get statistics() {

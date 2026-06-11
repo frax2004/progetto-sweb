@@ -1,21 +1,22 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonLabel as IonLabel } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonLabel as IonLabel, IonCheckbox } from '@ionic/angular/standalone';
 import { TitleComponent } from "src/app/components/title/title.component";
 import { CharacterManagementService } from 'src/app/services/character.management.service';
 import { CharacterInstance } from '../CharacterInformation';
 import { LabelComponent } from "src/app/components/label/label.component";
 import { dnd } from 'dbserver/database.queries';
-import { Popups } from 'src/app/core/core';
+import { Alerts, Popups } from 'src/app/core/core';
 import { PopoverController } from '@ionic/angular/standalone';
+import { ButtonComponent } from "src/app/components/button/button.component";
 
 @Component({
   selector: 'app-spell-selection',
   templateUrl: './spell-selection.page.html',
   styleUrls: ['./spell-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, TitleComponent, LabelComponent, IonList, IonLabel]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, TitleComponent, LabelComponent, IonList, IonLabel, IonCheckbox, ButtonComponent]
 })
 export class SpellSelectionPage implements OnInit {
   levelRow;
@@ -23,7 +24,35 @@ export class SpellSelectionPage implements OnInit {
   displayableSpells;
   maxLevel: number;
   spellLevels = ['0','1','2','3','4','5','6','7','8','9'];
+  cantripsToChoose;
+  spellsToChoose;
+  // due di questi array mi servono per gli oggetti incantesimi, gli altri due per controlli
+  chosenCantrips = [];
+  chosenSpells = [];
+  checkedCantrips = [];
+  checkedSpells = [];
 
+  
+  nextPage = () => {
+    if(this.cantripsToChoose !==0 ) {
+      Alerts.personalizedMessage('You still have ' + this.cantripsToChoose + ' cantrips to choose', 'Not enough cantrips!');
+    }
+    else if (this.spellsToChoose !==0) {
+      Alerts.personalizedMessage('You still have ' + this.spellsToChoose + ' spells to choose', 'Not enough spells!');
+    }
+    else {
+      CharacterInstance.chosenCantrips = this.chosenCantrips;
+      CharacterInstance.chosenSpells = this.chosenSpells
+      alert('Trucchetti: ' + CharacterInstance.chosenCantrips + '\n\nIncantesimi: ' + CharacterInstance.chosenSpells + '\n\nci sarebbe da fare un navigate alla pagina di overview');
+      //
+    }
+  }
+  
+  buttonCallbacks = {
+    nextPage: { onClick: this.nextPage},
+  };
+
+  
   static calcMaxSpellSlotLevel(levelRow: dnd.Level): number {
     if (levelRow.spell_slots_level_9 !== 0) return 9;
     if (levelRow.spell_slots_level_8 !== 0) return 8;
@@ -98,13 +127,61 @@ export class SpellSelectionPage implements OnInit {
   }
 
   displaySpellDescription(spell) {
-    const desc = `Casting Time: ${spell.action_type}\nRange: ${spell.range}\nComponents: ${spell.components}\nMaterial: ${spell.material}\nDuration: ${spell.duration}\nConcentration: ${spell.concentration}\nRitual: ${spell.ritual}\n\n${spell.description}`;
+    const desc = `Action Type: ${spell.action_type}\nCasting Time: ${spell.casting_time}\nCasting Trigger: ${spell.casting_trigger}\nRange: ${spell.range}\nComponents: ${spell.components}\nMaterial: ${spell.material}\nDuration: ${spell.duration}\nConcentration: ${spell.concentration}\nRitual: ${spell.ritual}\n\n${spell.description}\n\nAt Higher Levels: ${spell.higher_level_slot}`;
     return Popups.ofSimpleText(this.popoverController,desc);
   }
 
   displayCantripDescription(spell) {
-    const desc = `Casting Time: ${spell.action_type}\nRange: ${spell.range}\nComponents: ${spell.components}\nMaterial: ${spell.material}\nDuration: ${spell.duration}\nConcentration: ${spell.concentration}\nRitual: ${spell.ritual}\n\n${spell.description}\n\nCantrip Upgrade: ${spell.cantrip_upgrade}`;
+    const desc = `Casting Time: ${spell.action_type}\nCasting Time: ${spell.casting_time}\nCasting Trigger: ${spell.casting_trigger}\nRange: ${spell.range}\nComponents: ${spell.components}\nMaterial: ${spell.material}\nDuration: ${spell.duration}\nConcentration: ${spell.concentration}\nRitual: ${spell.ritual}\n\n${spell.description}\n\nCantrip Upgrade: ${spell.cantrip_upgrade}`;
     return Popups.ofSimpleText(this.popoverController,desc);
+  }
+
+  static getSpellsToChoose(className: string,level: number,spells_known: number | null) {
+    if (spells_known !== null) return spells_known;
+    else {
+      className = className.toLowerCase();
+      if (className === 'cleric' || className === 'druid') return (level + CharacterInstance.getStatisticModifier('wisdom')) > 1 ? level + CharacterInstance.getStatisticModifier('wisdom').modifier : 1;
+      if (className === 'paladin') return (Math.floor(level/2) + CharacterInstance.getStatisticModifier('charisma')) > 1 ? Math.floor(level/2) + CharacterInstance.getStatisticModifier('charisma') : 1;
+      if (className === 'wizard') return (level + CharacterInstance.getStatisticModifier('intelligence')) > 1 ? level + CharacterInstance.getStatisticModifier('intelligence') : 1;
+    }
+  }
+
+  addCantrip(cantrip,boxValue) {
+    if (this.checkedCantrips.includes(boxValue)) {
+      this.checkedCantrips.splice(this.checkedCantrips.indexOf(boxValue),1);
+      this.cantripsToChoose++;
+    }
+    else {
+      if (this.cantripsToChoose === 0) {
+        Alerts.personalizedMessage(this.checkedCantrips + '\n\nYou can\'t choose any more cantrips, uncheck a cantrip to choose a new one', 'Too many cantrips');
+        const box = document.getElementById(`#${boxValue}`) as HTMLInputElement;
+        box.checked = false;
+      }
+      else {
+        this.checkedCantrips.push(boxValue);
+        this.chosenCantrips.push(cantrip);
+        this.cantripsToChoose--;
+      }
+    }
+  }
+
+  addSpell(spell,boxValue) {
+    if (this.checkedSpells.includes(boxValue)) {
+      this.checkedSpells.splice(this.checkedSpells.indexOf(boxValue),1);
+      this.spellsToChoose++;
+    }
+    else {
+      if (this.spellsToChoose === 0) {
+        Alerts.personalizedMessage(this.checkedSpells + '\n\nYou can\'t choose any more spells, uncheck a spell to choose a new one', 'Too many spells!');
+        const box = document.getElementById(`#${boxValue}`) as HTMLInputElement;
+        box.checked = false;
+      }
+      else {
+        this.checkedSpells.push(boxValue);
+        this.chosenSpells.push(spell);
+        this.spellsToChoose--;
+      }
+    }
   }
 
   constructor(private levelRowDisplayer: CharacterManagementService, public popoverController: PopoverController) {
@@ -150,11 +227,16 @@ export class SpellSelectionPage implements OnInit {
                   description: item.description,
                   components: item.components,
                   cantrip_upgrade: item.cantrip_upgrade,
+                  higher_level_slot: item.higher_level_slot,
+                  casting_trigger: item.casting_trigger,
+                  casting_time: item.casting_time,
                   magic_school: { value: 'magic_school value', title: 'Magic School', content: item.magic_school},
                 };
               });
               this.maxLevel = SpellSelectionPage.calcMaxSpellSlotLevel(this.levelRow);
               this.displayableSpells = SpellSelectionPage.getDisplayableSpells(this.spells,this.maxLevel);
+              this.cantripsToChoose = this.levelRow.cantrips_known;
+              this.spellsToChoose = SpellSelectionPage.getSpellsToChoose(this.levelRow.name,this.levelRow.level,this.levelRow.spells_known);
             },
             error: (err) => alert(err)
           });

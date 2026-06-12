@@ -12,6 +12,7 @@ import { TitleComponent } from "src/app/components/title/title.component";
 import { LabelComponent } from "src/app/components/label/label.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
 import { Router } from '@angular/router';
+import { CharacterInstance } from '../CharacterInformation';
 
 @Component({
   selector: 'app-overview',
@@ -31,6 +32,14 @@ export class OverviewPage implements OnInit {
   :
   'I punti ferita del personaggio saranno: ' + this.calcAverageHP(this.lvl,this.HPdice) + ' - ' + (this.constitutionMod * (-1)) + ' = ' + (this.calcAverageHP(this.lvl,this.HPdice) + this.constitutionMod);
 
+  previousPage = () => {
+    // const className = CharacterInstance.chosenClass.toLowerClass();
+    const className: string = 'wizard';
+    const validateSpellSelection = (className!==undefined) && (className === 'bard' || className === 'cleric' || className === 'druid' || className === 'paladin' || className === 'ranger' || className === 'sorcerer' || className === 'warlock' || className === 'wizard');
+    if (validateSpellSelection) this.router.navigate(['spell-selection']);
+    else this.router.navigate(['stats-selection']);
+  }
+
   buttonCallbacks = {
     avHP: { onClick: () => {
         this.averageHP = true;
@@ -43,7 +52,7 @@ export class OverviewPage implements OnInit {
       }
     },
     completeChar: { onClick: Popups.ofSimpleText(this.popoverController,'Pagina non ancora implementata')},
-    previousPage: { onClick: Navigate.toPath(this.router,'spell-selection')}
+    previousPage: { onClick: this.previousPage}
   };
 
   accordions = [

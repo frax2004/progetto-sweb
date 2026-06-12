@@ -104,7 +104,6 @@ export class OptionSelectionPage implements OnInit {
       //        validateBGlanguages = ${validateBGlanguages} 
       //        validateBGoptEquipment = ${validateBGoptEquipment}`);
     }
-    
   }
 
   buttonCallbacks = {

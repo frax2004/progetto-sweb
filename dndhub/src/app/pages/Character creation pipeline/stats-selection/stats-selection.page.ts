@@ -6,12 +6,12 @@ import { RadioButtonComponent } from "src/app/components/radio-button/radio-butt
 import { ButtonComponent } from "src/app/components/button/button.component";
 import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.component";
 import { Router } from '@angular/router';
-import { Navigate } from 'src/app/core/core';
+import { Alerts, Navigate } from 'src/app/core/core';
 
 import { CheckboxComponent } from 'src/app/components/checkbox/checkbox.component';
 import { TitleComponent } from "src/app/components/title/title.component";
 import { LabelComponent } from "src/app/components/label/label.component";
-import { StatModifierString } from '../CharacterInformation';
+import { CharacterInstance, StatModifierString } from '../CharacterInformation';
 
 @Component({
   selector: 'app-stats-selection',
@@ -34,11 +34,40 @@ export class StatsSelectionPage implements OnInit {
   statModifierDict = StatModifierString;
   
   nextPage = () => {
-    //da sistemare 
-    this.router.navigate(['/spell-selection']);
+    const className = CharacterInstance.chosenClass.toLowerClass();
+    const validateStrength = this.strenghtDragEntry.value >0;
+    const validateDexterity = this.dexterityDragEntry.value >0;
+    const validateConstitution = this.constitutionDragEntry.value >0;
+    const validateIntelligence = this.intelligenceDragEntry.value >0;
+    const validateWisdom = this.wisdomDragEntry.value >0;
+    const validateCharisma = this.charismaDragEntry.value >0;
+    const validateSpellSelection = (className!==undefined) && (className === 'bard' || className === 'cleric' || className === 'druid' || className === 'paladin' || className === 'ranger' || className === 'sorcerer' || className === 'warlock' || className === 'wizard');
+    if (
+      validateStrength &&
+      validateDexterity &&
+      validateConstitution &&
+      validateIntelligence &&
+      validateWisdom &&
+      validateCharisma
+    ) {
+      CharacterInstance.setStatistics('strength',this.strenghtDragEntry.value);
+      CharacterInstance.setStatistics('dexterity',this.dexterityDragEntry.value);
+      CharacterInstance.setStatistics('constitution',this.constitutionDragEntry.value);
+      CharacterInstance.setStatistics('intelligence',this.intelligenceDragEntry.value);
+      CharacterInstance.setStatistics('wisdom',this.wisdomDragEntry.value);
+      CharacterInstance.setStatistics('charisma',this.charismaDragEntry.value);
+      if (validateSpellSelection) {
+        this.router.navigate(['/spell-selection']);
+      }
+      else this.router.navigate(['/overview']);
+    }
+    else {
+      Alerts.personalizedMessage('There is still at least one statistic set to 0. Set your statistics to progress.','Unset statistic')
+    }
   }
 
   // da fare mi raccomando
+  //da levare parte randomica e array standard
   buttonCallbacks = {
     manual: { onClick: () => {
       this.manualSelection=true;

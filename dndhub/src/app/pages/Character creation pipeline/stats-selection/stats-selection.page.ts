@@ -33,6 +33,11 @@ export class StatsSelectionPage implements OnInit {
   @ViewChild('charismaDragEntry') private charismaDragEntry: DragEntryComponent; 
   statModifierDict = StatModifierString;
   
+  nextPage = () => {
+    //da sistemare 
+    this.router.navigate(['/spell-selection']);
+  }
+
   // da fare mi raccomando
   buttonCallbacks = {
     manual: { onClick: () => {
@@ -55,8 +60,8 @@ export class StatsSelectionPage implements OnInit {
       this.randomSelection=true;
       } 
     },
-    previousPage: { onClick: Navigate.toPath(this.router,'equipment-selection')},
-    nextPage: { onClick: Navigate.toPath(this.router,'overview')},
+    previousPage: { onClick: Navigate.toPath(this.router,'option-selection')},
+    nextPage: { onClick: this.nextPage},
   };
 
 

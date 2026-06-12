@@ -7,9 +7,10 @@ import { CharacterManagementService } from 'src/app/services/character.managemen
 import { CharacterInstance } from '../CharacterInformation';
 import { LabelComponent } from "src/app/components/label/label.component";
 import { dnd } from 'dbserver/database.queries';
-import { Alerts, Popups } from 'src/app/core/core';
+import { Alerts, Navigate, Popups } from 'src/app/core/core';
 import { PopoverController } from '@ionic/angular/standalone';
 import { ButtonComponent } from "src/app/components/button/button.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-spell-selection',
@@ -45,10 +46,12 @@ export class SpellSelectionPage implements OnInit {
       CharacterInstance.chosenSpells = this.chosenSpells
       alert('Trucchetti: ' + CharacterInstance.chosenCantrips + '\n\nIncantesimi: ' + CharacterInstance.chosenSpells + '\n\nci sarebbe da fare un navigate alla pagina di overview');
       //
+      this.router.navigate(['/overview']);
     }
   }
   
   buttonCallbacks = {
+    previousPage: { onClick: Navigate.toPath(this.router,'spell-selection')},
     nextPage: { onClick: this.nextPage},
   };
 
@@ -184,7 +187,7 @@ export class SpellSelectionPage implements OnInit {
     }
   }
 
-  constructor(private levelRowDisplayer: CharacterManagementService, public popoverController: PopoverController) {
+  constructor(private router: Router, private levelRowDisplayer: CharacterManagementService, public popoverController: PopoverController) {
     //metto degli or ai fini del testing, da levare quando finiremo col sito
     this.levelRowDisplayer
     .displayLevelRowByClassAndLevel(

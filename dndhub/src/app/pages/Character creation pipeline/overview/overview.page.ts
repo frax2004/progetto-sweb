@@ -7,10 +7,11 @@ import { AccordionComponent } from "src/app/components/accordion/accordion.compo
 import { EntryComponent } from "src/app/components/entry/entry.component";
 import { TextAreaComponent } from "src/app/components/text-area/text-area.component";
 import { ButtonComponent } from "src/app/components/button/button.component";
-import { Popups } from 'src/app/core/core';
+import { Navigate, Popups } from 'src/app/core/core';
 import { TitleComponent } from "src/app/components/title/title.component";
 import { LabelComponent } from "src/app/components/label/label.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-overview',
@@ -41,7 +42,8 @@ export class OverviewPage implements OnInit {
         this.manualHP = true;
       }
     },
-    completeChar: { onClick: Popups.ofSimpleText(this.popoverController,'Pagina non ancora implementata')}
+    completeChar: { onClick: Popups.ofSimpleText(this.popoverController,'Pagina non ancora implementata')},
+    previousPage: { onClick: Navigate.toPath(this.router,'spell-selection')}
   };
 
   accordions = [
@@ -64,7 +66,7 @@ export class OverviewPage implements OnInit {
     return Math.ceil((HPdice/2 + 0.5)*lvl);
   }
 
-  constructor(public popoverController: PopoverController) { }
+  constructor(private router: Router, public popoverController: PopoverController) { }
 
   ngOnInit() {
   }

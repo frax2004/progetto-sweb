@@ -57,9 +57,9 @@ export async function canChangeEmail(req, res, next) {
 export function isLogged(req, res, next) {
   canSend = true;
 
+
   const ok = UserInstance.USER !== undefined 
-    && UserInstance.USER !== null
-    && req.body.email === UserInstance.USER.email;
+  && UserInstance.USER !== null;
   
     if(ok) {
       next();
@@ -68,7 +68,8 @@ export function isLogged(req, res, next) {
           status_code: 401,
           success: false,
           message: "L'utente non è attualmente autenticato",
-        }
+        },
+        res
       );
     }
 }

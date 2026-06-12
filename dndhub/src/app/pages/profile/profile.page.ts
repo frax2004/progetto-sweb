@@ -196,7 +196,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
         this.emailField.entry.value = value.email;
         this.passwordField.entry.value = value.password;
       }, 
-      Alerts.error
+      res => Alerts.error(res.error)
     );
   }
 

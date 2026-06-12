@@ -3,7 +3,6 @@
 import { Database } from "../database.js";
 import { UserInstance, generateToken } from "../global.context.js";
 import { AuthResponses } from "./auth.controller.responses.js";
-import { AuthValidators } from "./auth.controllers.validators.js";
 import { AuthQueries } from "./auth.queries.js";
 
 

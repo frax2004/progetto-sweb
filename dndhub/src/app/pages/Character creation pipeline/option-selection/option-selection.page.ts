@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
 })
 export class OptionSelectionPage implements OnInit {
   simpleWeapons = ['club','dagger','greatclub','handaxe','javelin','light hammer','mace','quarterstaff','sickle','spear','dart','light crossbow','shortbow','sling'];
+  simpleMeleeWeapons = ['club','dagger','greatclub','handaxe','javelin','light hammer','mace','quarterstaff','sickle','spear'];
   musicalInstruments = ['Bagpipes','Drum','Dulcimer','Flute','Lyre','Horn','Pan flute','Shawm','Viol'];
   classChoices;
   speciesChoices;

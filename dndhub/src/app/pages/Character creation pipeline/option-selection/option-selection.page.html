@@ -5,6 +5,7 @@
 
   <app-button
   [button]="{ text: 'Go back', expand: ''}"
+  [context]="buttonCallbacks['previousPage']"
   >
   </app-button>
 
@@ -55,6 +56,19 @@
                   @if(equip.includes('any simple weapon')) {
                     <app-label>or {{equip}}:</app-label>
                     @for(weapon of simpleWeapons; track weapon) {
+                      <div class="equipmentChoice genericChoiceContainer">
+                        <div class="labelBox">
+                          <app-label>{{weapon}}</app-label>
+                        </div>
+                        <div class="checkboxContainer">
+                          <input type="checkbox" [value]="weapon" [id]="weapon" (click)="addOptionalEquipment(weapon,opt.index, weapon)">
+                        </div>
+                      </div>
+                    }
+                  }
+                  @else if (equip.includes('any simple melee weapon')) {
+                    <app-label>or {{equip}}:</app-label>
+                    @for(weapon of simpleMeleeWeapons; track weapon) {
                       <div class="equipmentChoice genericChoiceContainer">
                         <div class="labelBox">
                           <app-label>{{weapon}}</app-label>
@@ -215,5 +229,10 @@
       </div>
     </ion-list>
   </div>
+
+  <app-button
+  [button]="{ text: 'Next page', expand: ''}"
+  [context]="buttonCallbacks['nextPage']"
+  ></app-button>
 
 </ion-content>

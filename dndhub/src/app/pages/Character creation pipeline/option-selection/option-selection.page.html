@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<ion-content>
   <app-title
   [title] = "'Selezione delle proprietà opzionali'"
   ></app-title>
@@ -12,17 +12,87 @@
           <h1>Class choices</h1>
         </div>
         @for(option of classContent; track option) {
+          @if(option.content !== undefined) {
             @if(option.title === 'Proficiency choices') {
               <h3>{{option.title}}</h3>
                 @for(opt of option.content; track opt) {
-                  <app-label>{{opt.reference_item.name}}</app-label>
+                  @if(opt.name.includes('Skill:')) {
+                    <!-- scelta di competenze in abilità dalla classe -->
+                    <div class="genericChoiceContainer" [id]="option.value + ' skill class choice'">
+                      <div class="labelBox">
+                        <app-label>{{opt.name}}</app-label>
+                      </div>
+                      <div class="checkboxContainer">
+                        <input type="checkbox" [value]="opt.name" [id]="opt.name">
+                      </div>
+                    </div>
+                  }
+                  @else {
+                    <!-- scelta di competenze addizionali dalla classe -->
+                    <div class="genericChoiceContainer" [id]="option.value + ' other class choice'">
+                      <div class="labelBox">
+                        <app-label>{{opt.name}}</app-label>
+                      </div>
+                      <div class="checkboxContainer">
+                        <input type="checkbox" [value]="opt.name" [id]="opt.name">
+                      </div>
+                    </div>
+                  }
                 }
             }
             
-            
-            <h3>{{option.title}}</h3>
-            <app-label>{{option.content}}</app-label>
-          
+            @if(option.title === 'Starting equipment options') {
+              <h3>{{option.title}}</h3>
+              @for(opt of option.content; track opt) {
+                <app-label>Choose {{opt.quantity}} of the following:</app-label>
+                @for(equip of opt.choose; track equip) {
+                  @if(!equip.includes('any simple weapon')) {
+                    <div class="equipmentChoice genericChoiceContainer">
+                      <div class="labelBox">
+                        <app-label>{{equip}}</app-label>
+                      </div>
+                      <div class="checkboxContainer">
+                        <input type="checkbox" [value]="opt.name" [id]="opt.name">
+                      </div>
+                    </div>
+                  }
+                  @else {
+                    <app-label>{{equip}}:</app-label>
+                    @for(weapon of simpleWeapons; track weapon) {
+                      <div class="equipmentChoice genericChoiceContainer">
+                        <div class="labelBox">
+                          <app-label>{{weapon}}</app-label>
+                        </div>
+                        <div class="checkboxContainer">
+                          <input type="checkbox" [value]="opt.name" [id]="opt.name">
+                        </div>
+                      </div>
+                    }
+                  }
+                }
+                <br>
+                <app-label>---- Divisorio placeholder ----</app-label>
+                <br>
+              }
+            }
+
+            @if(option.title === 'Subclasses') {
+              <h3>{{option.title}}</h3>
+              <app-label>Choose 1 of the following:</app-label>
+              @for(subclass of option.content; track subclass) {
+                <div class="genericChoiceContainer" [id]="option.value + ' other class choice'">
+                  <div class="labelBox">
+                    <app-label>{{subclass.name}}</app-label>
+                  </div>
+                  <div class="checkboxContainer">
+                    <input type="checkbox" [value]="subclass.name" [id]="subclass.name">
+                  </div>
+                </div>
+              }
+            }
+            <!-- <h3>{{option.title}}</h3>
+            <app-label>{{option.content}}</app-label> -->
+          } 
         }
       </div>
 

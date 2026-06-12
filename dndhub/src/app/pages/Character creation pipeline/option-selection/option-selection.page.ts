@@ -16,10 +16,13 @@ import { dnd } from 'dbserver/database.queries';
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, TitleComponent, LabelComponent, IonLabel, IonList]
 })
 export class OptionSelectionPage implements OnInit {
+  simpleWeapons = ['club','dagger','greatclub','handaxe','javelin','light hammer','mace','quarterstaff','sickle','spear','dart','light crossbow','shortbow','sling'];
+  musicalInstruments = ['Bagpipes','Drum','Dulcimer','Flute','Lyre','Horn','Pan flute','Shawm','Viol'];
   classChoices;
   speciesChoices;
   backgroundChoices;
   classContent;
+  c: dnd.APIReference
 
   getFromOptions(choice) {
     return choice.from.options;
@@ -28,7 +31,24 @@ export class OptionSelectionPage implements OnInit {
   static displayClassProficiencyChoices(choices: dnd.Choice[]) {
     let retArray = [];
     for (const choice of choices) {
-      retArray.push(choice.from.options);
+      for (const opt of choice.from.options) {
+        retArray.push(opt.reference_item);
+      }
+    }
+
+    return retArray;
+  }
+
+  static displayStartingEquipmentOptions(choices: dnd.Choice[]) {
+    if (choices === undefined) return undefined;
+
+    let retArray = [];
+    for (const choice of choices) {
+      const arrEl = {
+        choose: choice.desc.split(/\([abcd]\)/).filter(el => el !== '' && el !== ' ' && el !== null),
+        quantity: choice.choose,
+      }
+      retArray.push(arrEl);
     }
 
     return retArray;
@@ -49,8 +69,8 @@ export class OptionSelectionPage implements OnInit {
             // value.classes[0].proficiency_choices || 'placeholder'
             content: [
               { value: value.classes[0].name + ' proficiency_choices value', title: 'Proficiency choices', content: OptionSelectionPage.displayClassProficiencyChoices(value.classes[0].proficiency_choices)},
-              { value: value.classes[0].name + ' starting_equipment_options value', title: 'Starting equipment options', content: JSON.stringify(value.classes[0].starting_equipment_options) || 'placeholder'},
-              { value: value.classes[0].name + ' subclasses value', title: 'Subclasses', content: JSON.stringify(value.classes[0].subclasses) || 'placeholder'},
+              { value: value.classes[0].name + ' starting_equipment_options value', title: 'Starting equipment options', content: OptionSelectionPage.displayStartingEquipmentOptions(value.classes[0].starting_equipment_options)},
+              { value: value.classes[0].name + ' subclasses value', title: 'Subclasses', content: value.classes[0].subclasses},
             ],
           };
         this.classContent = this.classChoices.content;

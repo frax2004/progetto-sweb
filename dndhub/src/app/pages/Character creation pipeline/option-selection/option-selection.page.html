@@ -148,7 +148,7 @@
                     <app-label>{{abName}}</app-label>
                   </div>
                   <div class="checkboxContainer">
-                    <input type="checkbox" [value]="abName" [id]="abName" (click)="addAbilityBonus(abName,abName)">
+                    <input type="checkbox" [value]="abName" [id]="abName" (click)="addAbilityBonus(abName,option.content.bonus,abName)">
                   </div>
                 </div>
               }

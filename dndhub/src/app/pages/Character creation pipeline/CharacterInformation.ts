@@ -83,7 +83,14 @@ export class CharacterInstance {
   private static chosen_spells = undefined;
   private static chosen_cantrips = undefined;
   private static chosen_languages = undefined;
-
+  private static chosen_regular_proficiencies = undefined;
+  private static chosen_extra_proficiencies = undefined;
+  private static optional_equipment = undefined;
+  private static chosen_subclass = undefined;
+  private static chosen_ability_bonuses = undefined;
+  private static chosen_subspecies = undefined;
+  private static chosen_background_languages = undefined;
+  private static chosen_background_equipment = undefined;
 
   constructor() {}
   
@@ -91,6 +98,70 @@ export class CharacterInstance {
     this.chosen_class = undefined;
     this.chosen_species = undefined;
     this.chosen_background = undefined;
+  }
+
+  static get chosenBackgroundEquipment() {
+    return this.chosen_background_equipment;
+  }
+
+  static set chosenBackgroundEquipment(backgroundEquipment) {
+    this.chosen_background_equipment = backgroundEquipment;
+  }
+
+  static get chosenBackgroundLanguages() {
+    return this.chosen_background_languages;
+  }
+
+  static set chosenBackgroundLanguages(backgroundLanguages) {
+    this.chosen_background_languages = backgroundLanguages;
+  }
+
+  static get chosenSubspecies() {
+    return this.chosen_subspecies;
+  }
+
+  static set chosenSubspecies(subspecies) {
+    this.chosen_subspecies = subspecies;
+  }
+
+  static get chosenAbilityBonuses() {
+    return this.chosen_ability_bonuses;
+  }
+
+  static set chosenAbilityBonuses(abilityBonuses) {
+    this.chosen_ability_bonuses = abilityBonuses;
+  }
+
+  static get chosenSubclass() {
+    return this.chosen_subclass;
+  }
+
+  static set chosenSubclass(subclass) {
+    this.chosen_subclass = subclass;
+  }
+
+  static get chosenOptionalEquipment() {
+    return this.optional_equipment;
+  }
+
+  static set chosenOptionalEquipment(optEquip) {
+    this.optional_equipment = optEquip;
+  }
+
+  static get chosenExtraProficiencies() {
+    return this.chosen_extra_proficiencies;
+  }
+
+  static set chosenExtraProficiencies(extraProf) {
+    this.chosen_extra_proficiencies = extraProf;
+  }
+
+  static get chosenRegularProficiencies() {
+    return this.chosen_regular_proficiencies;
+  }
+
+  static set chosenRegularProficiencies(regularProf) {
+    this.chosen_regular_proficiencies = regularProf;
   }
 
   static get chosenLanguages() {
@@ -169,5 +240,3 @@ export class CharacterInstance {
   // non credo mi serva un set o get totale
 
 }
-
-

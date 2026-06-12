@@ -41,7 +41,8 @@ export class OptionSelectionPage implements OnInit {
   //
   optEquip = [];
   //
-  charLevel = CharacterInstance.chosenLevel;
+  // charLevel settato a 3 per testing, levare non appena non serve più
+  charLevel = CharacterInstance.chosenLevel = 3;
   chosenSubclass: string | undefined = undefined;
   //
   abBonusToChoose: number | undefined;
@@ -50,6 +51,7 @@ export class OptionSelectionPage implements OnInit {
   languagestoChoose: number | undefined;
   chosenLanguages = [];
   //
+  hasSubspecies: boolean;
   chosenSubspecies: string | undefined = undefined;
   //
   BACKGROUNDlanguagesToChoose: number | undefined;
@@ -58,8 +60,51 @@ export class OptionSelectionPage implements OnInit {
   BACKGROUNDoptEquip = [];
 
   nextPage = () => {
-    //da sistemare con controlli vari
-    this.router.navigate(['/stats-selection']);
+    //controlli per andare avanti
+    const validateRegularProf: boolean = this.regularProfToChoose===0;
+    const validateExtraProf: boolean = this.extraProfToChoose===0;
+    const validateOptEquipment: boolean = this.optEquip.length === this.classContent[1].content.length;
+    const validateSubclass: boolean = (this.charLevel>=3 && this.chosenSubclass!==undefined) || (this.charLevel<3 && this.chosenSubclass===undefined);
+    const validateAbilityBonuses: boolean = this.abBonusToChoose===0;
+    const validateLanguages: boolean = this.languagestoChoose===0;
+    const validateSubspecies: boolean = (this.hasSubspecies===true && this.chosenSubspecies!==undefined) || (!this.hasSubspecies===false && this.chosenSubspecies===undefined);
+    const validateBGlanguages: boolean = this.BACKGROUNDlanguagesToChoose===0;
+    const validateBGoptEquipment: boolean = this.BACKGROUNDoptEquip.length === this.backgroundContent[1].content.length;
+    
+    if (
+      validateRegularProf &&
+      validateExtraProf &&
+      validateOptEquipment &&
+      validateSubclass &&
+      validateAbilityBonuses &&
+      validateLanguages &&
+      validateSubspecies &&
+      validateBGlanguages &&
+      validateBGoptEquipment
+    ) {
+      CharacterInstance.chosenRegularProficiencies = this.regularProfArray;
+      CharacterInstance.chosenExtraProficiencies = this.extraProfArray;
+      CharacterInstance.chosenOptionalEquipment = this.optEquip;
+      CharacterInstance.chosenSubclass = this.chosenSubclass;
+      CharacterInstance.chosenAbilityBonuses = this.chosenAbBonus;
+      CharacterInstance.chosenSubspecies = this.chosenSubspecies;
+      CharacterInstance.chosenBackgroundLanguages = this.BACKGROUNDchosenLanguages;
+      CharacterInstance.chosenBackgroundEquipment = this.BACKGROUNDoptEquip;
+      this.router.navigate(['stats-selection']);
+    }
+    else {
+      Alerts.personalizedMessage('There are still abilities to be chosen.','Not done!');
+      // alert(`validateRegularProf = ${validateRegularProf}
+      //        validateExtraProf = ${validateExtraProf}
+      //        validateOptEquipment = ${validateOptEquipment}
+      //        validateSubclass = ${validateSubclass}
+      //        validateAbilityBonuses = ${validateAbilityBonuses}
+      //        validateLanguages = ${validateLanguages}
+      //        validateSubspecies = ${validateSubspecies}
+      //        validateBGlanguages = ${validateBGlanguages} 
+      //        validateBGoptEquipment = ${validateBGoptEquipment}`);
+    }
+    
   }
 
   buttonCallbacks = {
@@ -70,12 +115,6 @@ export class OptionSelectionPage implements OnInit {
  
 
   addRegularProficiency(profName: string, boxID: string) {
-    profName = profName === 'Strength (STR)' ? 'strength' :
-               profName === 'Dexterity (DEX)' ? 'dexterity' :
-               profName === 'Constitution (CON)'? 'constitution' :
-               profName === 'Wisdom (WIS)' ? 'wisdom' :
-               profName === 'Intelligence (INT)' ? 'intelligence' :
-               profName === 'Charisma (CHA)' ? 'charisma' : profName;
     if (this.regularProfArray.includes(profName)) {
       this.regularProfArray.splice(this.regularProfArray.indexOf(profName),1);
       this.regularProfToChoose++;
@@ -94,12 +133,6 @@ export class OptionSelectionPage implements OnInit {
   }
 
   addExtraProficiency(profName: string, boxID: string) {
-    profName = profName === 'Strength (STR)' ? 'strength' :
-               profName === 'Dexterity (DEX)' ? 'dexterity' :
-               profName === 'Constitution (CON)'? 'constitution' :
-               profName === 'Wisdom (WIS)' ? 'wisdom' :
-               profName === 'Intelligence (INT)' ? 'intelligence' :
-               profName === 'Charisma (CHA)' ? 'charisma' : profName;
     if (this.extraProfArray.includes(profName)) {
       this.extraProfArray.splice(this.extraProfArray.indexOf(profName),1);
       this.extraProfToChoose++;
@@ -190,24 +223,41 @@ export class OptionSelectionPage implements OnInit {
     }
   }
 
-  addAbilityBonus(abilityName: string, boxID: string) {
+  containsAbilityBonus(abilityName: string) {
+    for(const abBonus of this.chosenAbBonus) {
+      if (abBonus.abilityName === abilityName) return true;
+    }
+
+    return false;
+  }
+
+  addAbilityBonus(abilityName: string, bonus: number, boxID: string) {
+    abilityName = abilityName === 'Strength (STR)' ? 'strength' :
+                  abilityName === 'Dexterity (DEX)' ? 'dexterity' :
+                  abilityName === 'Constitution (CON)'? 'constitution' :
+                  abilityName === 'Wisdom (WIS)' ? 'wisdom' :
+                  abilityName === 'Intelligence (INT)' ? 'intelligence' :
+                  abilityName === 'Charisma (CHA)' ? 'charisma' : abilityName;
     if (this.abBonusToChoose === undefined) {
       Alerts.personalizedMessage('L\'utente non dovrebbe essere in grado di selezionare un bonus alle proprie statistiche, la sua specie non glielo permette','Errore con la scelta deli bonus');
       const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
       box.checked = false;
     }
-    if (this.chosenAbBonus.includes(abilityName)) {
+    if (this.containsAbilityBonus(abilityName)) {
       this.chosenAbBonus.splice(this.chosenAbBonus.indexOf(abilityName),1);
       this.abBonusToChoose++;
     }
     else {
       if (this.abBonusToChoose===0) {
-        Alerts.personalizedMessage('\n\nYou can\'t choose any more bonuses from this group, uncheck a box from this group to choose a new one', 'Too many bonuses');
+        Alerts.personalizedMessage(this.chosenAbBonus[0].abilityName + this.chosenAbBonus[1].abilityName + ' \n\nYou can\'t choose any more bonuses from this group, uncheck a box from this group to choose a new one', 'Too many bonuses');
         const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
         box.checked = false;
       }
       else {
-        this.chosenAbBonus.push(abilityName);
+        this.chosenAbBonus.push({
+          abilityName: abilityName,
+          bonus: bonus,
+        });
         this.abBonusToChoose--;
       }
     }
@@ -403,13 +453,14 @@ export class OptionSelectionPage implements OnInit {
                 { value: value.species[0].name + ' ability_bonus_options', title: 'Ability bonus options', content: OptionSelectionPage.displayAbilityBonusOptions(value.species[0].ability_bonus_options)},
                 //{ value: value.species[0].name + ' starting_proficiency_options', title: 'Starting proficiency options', content: JSON.stringify(value.species[0].starting_proficiency_options) || undefined},
                 { value: value.species[0].name + ' languages_options', title: 'Language options', content: OptionSelectionPage.displayLanguageOptions(value.species[0].language_options)},
-                { value: value.species[0].name + ' subspecies_options', title: 'Subspecies', content: value.species[0].subraces === null ? undefined : value.species[0].subraces},
+                { value: value.species[0].name + ' subspecies_options', title: 'Subspecies', content: value.species[0].subraces === null  ? undefined : value.species[0].subraces === undefined ? undefined : value.species[0].subraces},
               ],
             };
             this.speciesName = this.speciesChoices.name;
             this.speciesContent = this.speciesChoices.content;
-            this.abBonusToChoose = value.species[0].ability_bonus_options?.choose === undefined ? undefined : value.species[0].ability_bonus_options.choose;
-            this.languagestoChoose = value.species[0].language_options?.choose === undefined ? undefined : value.species[0].language_options.choose;
+            this.hasSubspecies = (value.species[0].subraces !== null && value.species[0].subraces !== undefined);
+            this.abBonusToChoose = value.species[0].ability_bonus_options?.choose === undefined ? 0 : value.species[0].ability_bonus_options.choose;
+            this.languagestoChoose = value.species[0].language_options?.choose === undefined ? 0 : value.species[0].language_options.choose;
             this.choicesDiplayer
             .displayBackgroundByName(
               CharacterInstance.chosenBackground || 'acolyte'
@@ -426,7 +477,7 @@ export class OptionSelectionPage implements OnInit {
                 };
                 this.backgroundName = this.backgroundChoices.name;
                 this.backgroundContent = this.backgroundChoices.content;
-                this.BACKGROUNDlanguagesToChoose = OptionSelectionPage.displayLanguageOptions(value.background[0].language_options,true).choose === undefined ? undefined : OptionSelectionPage.displayLanguageOptions(value.background[0].language_options,true).choose; 
+                this.BACKGROUNDlanguagesToChoose = OptionSelectionPage.displayLanguageOptions(value.background[0].language_options,true).choose === undefined ? 0 : OptionSelectionPage.displayLanguageOptions(value.background[0].language_options,true).choose; 
               },
               error: (err) => alert(err)
             });

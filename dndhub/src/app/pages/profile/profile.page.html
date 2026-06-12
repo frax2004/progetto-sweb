@@ -43,29 +43,107 @@
       </ion-content>
     </ion-menu>
 
-    <div class="dashboard", id="main">
-      <div id="info-pane">
-        <app-entry #username
-          placeholder="Nome utente"
-          [disabled]="true"
-        ></app-entry>
-        <div class="padding"></div>
-        <app-entry #email
-          placeholder="Indirizzo email"
-          [disabled]="true"
-        ></app-entry>
-        <div class="padding"></div>
-        <app-entry #password
-          placeholder="Password"
-          [disabled]="true"
-        ></app-entry>
-        <div class="padding"></div>
-        <app-button class="save-button" id="save-alert"
-          [margin]="false"
-          [button] = "{ text: 'Salva', expand: ''}"
-          [context] = "buttons.save"
-        ></app-button>
-      </div>
+    <div id="main">
+      @if(isAdmin()) {
+        
+        <ion-tabs (ionTabsDidChange)="onTabChange($event.tab)">
+          
+          <ion-tab tab="credentials">
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>Credenziali</ion-title>
+              </ion-toolbar>
+            </ion-header>
+
+            <div class="dashboard">
+              <div id="info-pane">
+                <app-entry #username
+                  placeholder="Nome utente"
+                  [value]="usernameField()"
+                  [disabled]="!editMode()"
+                ></app-entry>
+                <div class="padding"></div>
+                <app-entry #email
+                  placeholder="Indirizzo email"
+                  [value]="emailField()"
+                  [disabled]="!editMode()"
+                ></app-entry>
+                <div class="padding"></div>
+                <app-entry #password
+                  placeholder="Password"
+                  [value]="passwordField()"
+                  [disabled]="!editMode()"
+                ></app-entry>
+                <div class="padding"></div>
+                <app-button class="save-button" id="save-alert"
+                  [margin]="false"
+                  [button] = "{ text: 'Salva', expand: ''}"
+                  [context] = "buttons.save"
+                ></app-button>
+              </div>
+            </div>
+          </ion-tab>
+          
+          <ion-tab tab="reports">
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>Sengalazioni</ion-title>
+              </ion-toolbar>
+            </ion-header>
+            
+            <div class="reports-content">
+              
+              @for(report of reports(); track report) {
+                <app-report-card
+                [sender] = "report.sender"
+                [when] = "report.when"
+                [reason] = "report.reason"
+                [description] = "report.description"
+                ></app-report-card>
+              }
+
+              <app-button
+              [button]="{text: 'Carica altre segnalazioni', expand: 'false'}"
+              [context]="{ onClick: moreReports }"
+              ></app-button>
+            </div>
+          </ion-tab>
+
+          <ion-tab-bar slot="bottom">
+            <ion-tab-button tab="credentials">Profilo</ion-tab-button>
+            <ion-tab-button tab="reports">Sengalazioni</ion-tab-button>
+          </ion-tab-bar>
+    
+        </ion-tabs>
+      } @else {
+        <div class="dashboard">
+          <div id="info-pane">
+            <app-entry #username
+              placeholder="Nome utente"
+              [value]="usernameField()"
+              [disabled]="!editMode()"
+            ></app-entry>
+            <div class="padding"></div>
+            <app-entry #email
+              placeholder="Indirizzo email"
+              [value]="emailField()"
+              [disabled]="!editMode()"
+            ></app-entry>
+            <div class="padding"></div>
+            <app-entry #password
+              placeholder="Password"
+              [value]="passwordField()"
+              [disabled]="!editMode()"
+            ></app-entry>
+            <div class="padding"></div>
+            <app-button class="save-button" id="save-alert"
+              [margin]="false"
+              [button] = "{ text: 'Salva', expand: ''}"
+              [context] = "buttons.save"
+            ></app-button>
+          </div>
+        </div>
+      }
     </div>
 
   </ion-split-pane>

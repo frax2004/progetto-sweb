@@ -2,6 +2,7 @@ import {
   AfterViewInit, 
   Component, 
   OnInit, 
+  signal, 
   ViewChild 
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -24,6 +25,10 @@ import {
   IonThumbnail, 
   IonSplitPane, 
   IonMenu,
+  IonTab,
+  IonTabs,
+  IonTabBar,
+  IonTabButton,
 } from '@ionic/angular/standalone';
 import { 
   Alerts, 
@@ -38,6 +43,9 @@ import { Router } from '@angular/router';
 import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { State } from 'src/app/core/state';
+import { ReportCardComponent } from 'src/app/components/report-card/report-card.component';
+import { ReportRequest } from 'src/app/components/report-card/report';
+import { ReportsService } from 'src/app/services/reports.service';
 
 
 
@@ -47,6 +55,10 @@ import { State } from 'src/app/core/state';
   styleUrls: ['./profile.page.scss'],
   imports: [
     IonAlert, 
+    IonTabs,
+    IonTab,
+    IonTabBar,
+    IonTabButton,
     EntryComponent, 
     IonSplitPane, 
     IonMenu, 
@@ -68,14 +80,16 @@ import { State } from 'src/app/core/state';
     IonGrid, 
     IonRow, 
     IonButton, 
-    IonThumbnail
+    IonThumbnail,
+    ReportCardComponent
   ],
 })
 export class ProfilePage implements OnInit, AfterViewInit {
 
-  @ViewChild("username") usernameField: EntryComponent;
-  @ViewChild("email") emailField: EntryComponent;
-  @ViewChild("password") passwordField: EntryComponent;
+  usernameField = signal<string>("");
+  emailField = signal<string>("");
+  passwordField = signal<string>("");
+  editMode = signal<boolean>(false);
 
   private currentEdit: {
     email: string;
@@ -84,48 +98,47 @@ export class ProfilePage implements OnInit, AfterViewInit {
   } | undefined = undefined;
 
   public isAdmin = State.User.isAdmin;
+  public reports = signal<ReportRequest[]>([]);
+
+  public static REPORT_LOADING_THRESHOLD = 16;
 
   public goBack = () => Navigate.toPath(this.router, 'landing-page')();
 
   public enableAccountEdit = () => {
     this.currentEdit = {
-      email: this.emailField.entry.value.toString(),
-      password: this.passwordField.entry.value.toString(),
-      username: this.usernameField.entry.value.toString(),
+      email: this.emailField(),
+      password: this.passwordField(),
+      username: this.usernameField(),
     };
-    this.emailField.disabled = false;
-    this.passwordField.disabled = false;
-    this.usernameField.disabled = false;
+    this.editMode.set(true);
   }
 
   public save = () => {
     if(this.currentEdit === undefined) return;
     
-    const noChanges = this.currentEdit.email === this.emailField.entry.value.toString()
-    && this.currentEdit.password === this.passwordField.entry.value.toString()
-    &&  this.currentEdit.username === this.usernameField.entry.value.toString();
+    const noChanges = this.currentEdit.email === this.emailField()
+    && this.currentEdit.password === this.passwordField()
+    &&  this.currentEdit.username === this.usernameField();
     
     const success = _ => {
       this.currentEdit = undefined;
-      this.emailField.disabled = true;
-      this.passwordField.disabled = true;
-      this.usernameField.disabled = true;
+      this.editMode.set(false);
       Alerts.good("Le informazioni sono state salvate con successo");
     };
 
     const fail = res => {
-      this.emailField.entry.value = this.currentEdit.email;
-      this.passwordField.entry.value = this.currentEdit.password;
-      this.usernameField.entry.value = this.currentEdit.username;
+      this.emailField.set(this.currentEdit.email);
+      this.passwordField.set(this.currentEdit.password);
+      this.usernameField.set(this.currentEdit.username);
       Alerts.error(res.error);
     };
 
     if(noChanges) return success({});
 
     this.userService.setUserInfo(
-      this.emailField.entry.value.toString(), 
-      this.passwordField.entry.value.toString(),
-      this.usernameField.entry.value.toString(),
+      this.emailField(), 
+      this.passwordField(),
+      this.usernameField(),
       success,
       fail
     );
@@ -164,6 +177,35 @@ export class ProfilePage implements OnInit, AfterViewInit {
 
   }
 
+  public moreReports = () => {
+    const toReport = (report: any): ReportRequest => {
+      return {
+        sender: report.account,
+        when: report.quando,
+        reason: report.tipo,
+        description: report.contenuto
+      };
+    };
+  
+    const success = res => {
+      this.reports.set(this.reports().concat(res.reports.map(toReport)));
+    };
+  
+    this.reportsService.loadReports(
+      ProfilePage.REPORT_LOADING_THRESHOLD,
+      this.reports().length,
+      success,
+      Alerts.error
+    );
+  }
+
+  public onTabChange(tab: string) {
+    if(tab === 'reports') {
+      this.reports.set([]);
+      this.moreReports();
+    }
+  }
+
   private logOut = () => {
     const success = async (res: any) => {
       State.User.isLogged.set(false);
@@ -187,6 +229,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
   };
 
   constructor(
+    private reportsService: ReportsService,
     private authService: AuthService,
     private userService: UserUtilitiesService, 
     public popoverController: PopoverController, 
@@ -196,11 +239,11 @@ export class ProfilePage implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.userService.getUserInfo(
       value => {
+        console.log(JSON.stringify(value)); // TODO Da togliere (debug)
         State.User.isAdmin.set(value.isAdmin);
-        console.log(JSON.stringify(value));
-        this.usernameField.entry.value = value.username;
-        this.emailField.entry.value = value.email;
-        this.passwordField.entry.value = value.password;
+        this.usernameField.set(value.username);
+        this.emailField.set(value.email);
+        this.passwordField.set(value.password);
       }, 
       res => Alerts.error(res.error)
     );

@@ -79,3 +79,14 @@
   }
 }
 
+
+.reports-content {
+
+  background: rgb(157, 73, 73);
+  height: 100%;
+  padding: 5%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5%;
+}

@@ -962,6 +962,17 @@ create table if not exists ArrayPostItem (
   foreign key (idx_campagna) references Campagna(idx_campagna) on update cascade on delete cascade 
 );
 
+create table if not exists Segnalazione (
+  tipo text check (tipo in ('inappropriate', 'explicit', 'offensive', 'cheat', 'other')),
+  quando timestamp not null default CURRENT_TIMESTAMP,
+  account text not null,
+  tipo_contenuto text check (tipo_contenuto in ('username', 'post', 'image', 'content')),
+  contenuto text,
+
+  primary key (account, quando),
+  foreign key (account) references Account(email) on update cascade on delete cascade
+);
+
 -- create table if not exists ArrayIdxPersonaggioItem (
 --   utente_giocatore text not null,
 --   idx_personaggio text not null,

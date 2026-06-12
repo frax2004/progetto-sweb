@@ -41,7 +41,7 @@ export class BackgroundSelectionPage implements OnInit {
     if (BackgroundSelectionPage.selectedBackground !== undefined) {
       CharacterInstance.chosenBackground = BackgroundSelectionPage.selectedBackground;
       //alert(CharacterInstance.selectedBackground);
-      this.router.navigate(['/equipment-selection']);
+      this.router.navigate(['/option-selection']);
     }
     else this.setOpenAlert(true);
   }

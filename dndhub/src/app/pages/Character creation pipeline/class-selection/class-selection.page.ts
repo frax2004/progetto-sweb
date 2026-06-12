@@ -39,7 +39,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     CharacterInstance.chosenLevel = this.levelEntry.value;
     const validClass: boolean = CharacterInstance.chosenClass !== undefined;
     if (CharacterInstance.chosenLevel>0 && validClass) {
-      this.router.navigate(['/spell-selection']);
+      this.router.navigate(['/species-selection']);
     }
     else this.setOpen(true);
   }

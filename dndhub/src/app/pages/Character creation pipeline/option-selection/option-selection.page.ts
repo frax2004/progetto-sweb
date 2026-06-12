@@ -9,6 +9,7 @@ import { CharacterInstance } from '../CharacterInformation';
 import { dnd } from 'dbserver/database.queries';
 import { Alerts, Navigate } from 'src/app/core/core';
 import { ButtonComponent } from "src/app/components/button/button.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-option-selection',

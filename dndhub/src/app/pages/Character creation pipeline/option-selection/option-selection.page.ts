@@ -7,6 +7,7 @@ import { CharacterManagementService } from 'src/app/services/character.managemen
 import { LabelComponent } from "src/app/components/label/label.component";
 import { CharacterInstance } from '../CharacterInformation';
 import { dnd } from 'dbserver/database.queries';
+import { Alerts } from 'src/app/core/core';
 
 @Component({
   selector: 'app-option-selection',
@@ -21,31 +22,174 @@ export class OptionSelectionPage implements OnInit {
   classChoices;
   speciesChoices;
   backgroundChoices;
+  // attributi di utility
   classContent;
-  c: dnd.APIReference
+  speciesContent;
+  backgroundContent;
+  className;
+  speciesName;
+  backgroundName;
+  //
+  regularProfToChoose: number;
+  regularProfArray = [];
+  //
+  extraProfToChoose: number | undefined;
+  extraProfArray = [];
+  //
+  optEquip = [];
+  //
+  charLevel = CharacterInstance.chosenLevel;
+  chosenSubclass: string | undefined = undefined;
+
+
+  addRegularProficiency(profName: string, boxID: string) {
+    if (this.regularProfArray.includes(profName)) {
+      this.regularProfArray.splice(this.regularProfArray.indexOf(profName),1);
+      this.regularProfToChoose++;
+    }
+    else {
+      if (this.regularProfToChoose === 0) {
+        Alerts.personalizedMessage(this.regularProfArray + '\n\nYou can\'t choose any more proficiencies from this group, uncheck a box from this group to choose a new one', 'Too many proficiencies');
+        const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
+        box.checked = false;
+      }
+      else {
+        this.regularProfArray.push(profName);
+        this.regularProfToChoose--;
+      }
+    }
+  }
+
+  addExtraProficiency(profName: string, boxID: string) {
+    if (this.extraProfArray.includes(profName)) {
+      this.extraProfArray.splice(this.extraProfArray.indexOf(profName),1);
+      this.extraProfToChoose++;
+    }
+    else {
+      if (this.extraProfToChoose===0) {
+        Alerts.personalizedMessage(this.extraProfArray + '\n\nYou can\'t choose any more proficiencies from this group, uncheck a box from this group to choose a new one', 'Too many proficiencies');
+        const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
+        box.checked = false;
+      }
+      else {
+        this.extraProfArray.push(profName);
+        this.extraProfToChoose--;
+      }
+    }
+  }
+
+  addOptionalEquipment(equipName: string, index: number, boxID: string) {
+    this.classContent[1].content[index].leftToChoose
+    if (this.optEquip.includes(equipName)) {
+      this.optEquip.splice(this.optEquip.indexOf(equipName),1);
+      this.classContent[1].content[index].leftToChoose++;
+    }
+    else {
+      if(this.classContent[1].content[index].leftToChoose===0) {
+        Alerts.personalizedMessage(this.optEquip + '\n\nYou can\'t choose any more pieces of equipment from this group, uncheck a box from this group to choose a new one', 'Too many pieces of equipment');
+        const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
+        box.checked = false;
+      }
+      else {
+        this.optEquip.push(equipName);
+        this.classContent[1].content[index].leftToChoose--;
+      }
+    }
+  }
 
   getFromOptions(choice) {
     return choice.from.options;
   }
 
   static displayClassProficiencyChoices(choices: dnd.Choice[]) {
-    let retArray = [];
+    let regularProfArray = [];
+    let extraProfArray = [];
     for (const choice of choices) {
       for (const opt of choice.from.options) {
-        retArray.push(opt.reference_item);
+        if (opt.reference_item.name.includes('Skill:')) {
+          regularProfArray.push(opt.reference_item.name);
+        }
+        else extraProfArray.push(opt.reference_item.name)
       }
     }
 
-    return retArray;
+    return {
+      quantity: choices[0].choose,
+      regularProficiencies: regularProfArray,
+      extraProficiencies: extraProfArray,
+    };
   }
 
   static displayStartingEquipmentOptions(choices: dnd.Choice[]) {
     if (choices === undefined) return undefined;
 
     let retArray = [];
+    let indexGenerator = 0;
+    for (const choice of choices) {
+      let arrEl = {
+        choose: choice.desc.replace(/\\n/, '').replace(/a /, '').replace(/ or/, '').replace(/an /, '').replace(/, or/, '').replace(/, /, '')
+        .replace(/a longsword,/, 'longsword')
+        .split(/\([abcd]\)/).filter(el => el !== '' && el !== ' ' && el !== null).map(el => el),
+        quantity: choice.choose,
+        leftToChoose: choice.choose,
+        index: indexGenerator,
+      };
+      indexGenerator++;
+      retArray.push(arrEl);
+    }
+
+    return retArray;
+  }
+
+  static displayAbilityBonusOptions(choice: dnd.Choice) {
+    let retArray = [];
+    for (const opt of choice.from.options) {
+      const abName = opt.ability_score_bonus.name === 'STR' ? 'Strength (STR)' :
+                     opt.ability_score_bonus.name === 'DEX' ? 'Dexterity (DEX)' :
+                     opt.ability_score_bonus.name === 'CON' ? 'Constitution (CON)' :
+                     opt.ability_score_bonus.name === 'WIS' ? 'Wisdom (WIS)' :
+                     opt.ability_score_bonus.name === 'INT' ? 'Intelligence (INT)' : 'Charisma (CHA)';
+      retArray.push(abName);
+    }
+
+    return {
+      bonus: choice.from.options[0].bonus,
+      choose: choice.choose,
+      abilities: retArray,
+    };
+  }
+
+  static displayLanguageOptions(choice: dnd.Choice, allLanguages?: boolean) {
+    if(allLanguages !== undefined && allLanguages === true) {
+      let allLanguages= ['Common','Common Sign Language','Draconic','Dwarvish','Elvish','Giant','Gnomish','Goblin','Halfling','Orc','Abyssal','Celestial','Deep Speech','Druidic','Infernal','Primordial','Sylvan','Thieves Cant','Undercommon'];
+      if(CharacterInstance.chosenLanguages !== undefined) {
+        for(const lang of CharacterInstance.chosenLanguages) {
+          if(allLanguages.includes(lang)) allLanguages.splice(allLanguages.indexOf(lang),1);
+        }
+      }
+      return {
+        choose: choice.choose,
+        languages: allLanguages,
+      }
+    }
+    let retArray = [];
+    for(const opt of choice.from.options) {
+      retArray.push(opt.reference_item.name);
+    }
+
+    return {
+      choose: choice.choose,
+      languages: retArray,
+    };
+  }
+
+  static displayStartingEquipmentFromBg(choices: dnd.Choice[]) {
+    if (choices === undefined) return undefined;
+
+    let retArray = [];
     for (const choice of choices) {
       const arrEl = {
-        choose: choice.desc.split(/\([abcd]\)/).filter(el => el !== '' && el !== ' ' && el !== null),
+        choose: choice.from.equipment_category.name,
         quantity: choice.choose,
       }
       retArray.push(arrEl);
@@ -58,7 +202,7 @@ export class OptionSelectionPage implements OnInit {
     this.choicesDiplayer
     .displayClassByName(
       // scritto così per testing, da levare || quando finiremo coi test
-      CharacterInstance.selectedClass || 'bard'
+      CharacterInstance.chosenClass || 'bard'
     )
     .subscribe({
       next: (value: any) => {
@@ -73,10 +217,13 @@ export class OptionSelectionPage implements OnInit {
               { value: value.classes[0].name + ' subclasses value', title: 'Subclasses', content: value.classes[0].subclasses},
             ],
           };
+        this.className = this.classChoices.name;
         this.classContent = this.classChoices.content;
+        this.regularProfToChoose = value.classes[0].proficiency_choices[0].choose;
+        this.extraProfToChoose = OptionSelectionPage.displayClassProficiencyChoices(value.classes[0].proficiency_choices).extraProficiencies.length === 0 ? 0 : this.regularProfToChoose;
         this.choicesDiplayer
         .displaySpeciesByName(
-          CharacterInstance.selectedSpecies || 'elf'
+          CharacterInstance.chosenSpecies || 'half-elf'
         )
         .subscribe({
           next: (value: any) => {
@@ -84,15 +231,17 @@ export class OptionSelectionPage implements OnInit {
               name: value.species[0].name,
               value: value.species[0].name + ' value',
               content: [
-                { value: value.species[0].name + ' ability_bonus_options', title: 'Ability bonus options', content: JSON.stringify(value.species[0].ability_bonus_options) || 'placeholder'},
-                { value: value.species[0].name + ' starting_proficiency_options', title: 'Starting proficiency options', content: JSON.stringify(value.species[0].starting_proficiency_options) || 'placeholder'},
-                { value: value.species[0].name + ' languages_options', title: 'Languages options', content: JSON.stringify(value.species[0].languages_options) || 'placeholder'},
-                { value: value.species[0].name + ' subspecies_options', title: 'Subspecies', content: JSON.stringify(value.species[0].subraces) || 'placeholder'},
+                { value: value.species[0].name + ' ability_bonus_options', title: 'Ability bonus options', content: OptionSelectionPage.displayAbilityBonusOptions(value.species[0].ability_bonus_options)},
+                { value: value.species[0].name + ' starting_proficiency_options', title: 'Starting proficiency options', content: JSON.stringify(value.species[0].starting_proficiency_options) || undefined},
+                { value: value.species[0].name + ' languages_options', title: 'Language options', content: OptionSelectionPage.displayLanguageOptions(value.species[0].language_options)},
+                { value: value.species[0].name + ' subspecies_options', title: 'Subspecies', content: value.species[0].subraces === null ? undefined : value.species[0].subraces},
               ],
             };
+            this.speciesName = this.speciesChoices.name;
+            this.speciesContent = this.speciesChoices.content;
             this.choicesDiplayer
             .displayBackgroundByName(
-              CharacterInstance.selectedBackground || 'acolyte'
+              CharacterInstance.chosenBackground || 'acolyte'
             )
             .subscribe({
               next: (value: any) => {
@@ -100,10 +249,12 @@ export class OptionSelectionPage implements OnInit {
                   name: value.background[0].name,
                   value: value.background[0].name + ' value',
                   content: [
-                    { value: value.background[0].name + ' language_options', title: 'Language options', content: JSON.stringify(value.background[0].language_options) || 'placeholder'},
-                    { value: value.background[0].name + ' starting_equipment_options', title: 'Starting equipment options', content: JSON.stringify(value.background[0].starting_equipment_options) || 'placeholder'},
+                    { value: value.background[0].name + ' language_options', title: 'Language options', content: OptionSelectionPage.displayLanguageOptions(value.background[0].language_options,true)},
+                    { value: value.background[0].name + ' starting_equipment_options', title: 'Starting equipment options', content: OptionSelectionPage.displayStartingEquipmentFromBg(value.background[0].starting_equipment_options)},
                   ]
-                }
+                };
+                this.backgroundName = this.backgroundChoices.name;
+                this.backgroundContent = this.backgroundChoices.content;
               },
               error: (err) => alert(err)
             });

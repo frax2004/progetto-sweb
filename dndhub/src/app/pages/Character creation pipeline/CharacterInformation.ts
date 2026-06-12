@@ -68,10 +68,10 @@ export const StatModifierString = {
 
 
 export class CharacterInstance {
-  private static selected_class = undefined;
-  private static selected_species = undefined;
-  private static selected_background = undefined;
-  private static selected_level = undefined;
+  private static chosen_class = undefined;
+  private static chosen_species = undefined;
+  private static chosen_background = undefined;
+  private static chosen_level = undefined;
   private static _statistics = {
     'strength': { value: 0, modifier: StatModifierNumber[0]},
     'dexterity': { value: 0, modifier: StatModifierNumber[0]},
@@ -82,14 +82,23 @@ export class CharacterInstance {
   }
   private static chosen_spells = undefined;
   private static chosen_cantrips = undefined;
+  private static chosen_languages = undefined;
 
 
   constructor() {}
   
   static unsetAll() {
-    this.selected_class = undefined;
-    this.selected_species = undefined;
-    this.selected_background = undefined;
+    this.chosen_class = undefined;
+    this.chosen_species = undefined;
+    this.chosen_background = undefined;
+  }
+
+  static get chosenLanguages() {
+    return this.chosen_languages;
+  }
+
+  static set chosenLanguages(languages) {
+    this.chosen_languages = languages;
   }
 
   static get chosenSpells() {
@@ -125,36 +134,36 @@ export class CharacterInstance {
     this._statistics[statName].modifier = StatModifierNumber[statValue]; 
   }
 
-  static get selectedClass() {
-    return this.selected_class;
+  static get chosenClass() {
+    return this.chosen_class;
   }
 
-  static set selectedClass(className) {
-    this.selected_class = className;
+  static set chosenClass(className) {
+    this.chosen_class = className;
   }
 
-  static get selectedSpecies() {
-    return this.selected_species;
+  static get chosenSpecies() {
+    return this.chosen_species;
   }
 
-  static set selectedSpecies(specName) {
-    this.selected_species = specName;
+  static set chosenSpecies(specName) {
+    this.chosen_species = specName;
   }
 
-  static get selectedBackground() {
-    return this.selected_background;
+  static get chosenBackground() {
+    return this.chosen_background;
   }
 
-  static set selectedBackground(bgName) {
-    this.selected_background = bgName;
+  static set chosenBackground(bgName) {
+    this.chosen_background = bgName;
   }
 
-  static get selectedLevel() {
-    return this.selected_level;
+  static get chosenLevel() {
+    return this.chosen_level;
   }
 
-  static set selectedLevel(lvl) {
-    this.selected_level = lvl;
+  static set chosenLevel(lvl) {
+    this.chosen_level = lvl;
   }
 
   // non credo mi serva un set o get totale

@@ -100,8 +100,8 @@ export class SpellSelectionPage implements OnInit {
     return new Promise((resolve,reject) =>{
       levelRowDisplayer
       .displayLevelRowByClassAndLevel(
-        CharacterInstance.selectedLevel || 20,
-        CharacterInstance.selectedClass || 'Wizard'
+        CharacterInstance.chosenLevel || 20,
+        CharacterInstance.chosenClass || 'Wizard'
       )
       .subscribe({
         next: (value: any) => {
@@ -188,8 +188,8 @@ export class SpellSelectionPage implements OnInit {
     //metto degli or ai fini del testing, da levare quando finiremo col sito
     this.levelRowDisplayer
     .displayLevelRowByClassAndLevel(
-      CharacterInstance.selectedLevel || 20,
-      CharacterInstance.selectedClass || 'Wizard'
+      CharacterInstance.chosenLevel || 20,
+      CharacterInstance.chosenClass || 'Wizard'
     )
     .subscribe({
       next: (value: any) => {
@@ -210,7 +210,7 @@ export class SpellSelectionPage implements OnInit {
           };
           this.levelRowDisplayer
           .displaySpellsByClass(
-            CharacterInstance.selectedClass || 'Wizard'
+            CharacterInstance.chosenClass || 'Wizard'
           )
           .subscribe({
             next: (value: any) => {

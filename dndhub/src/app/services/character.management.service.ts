@@ -62,4 +62,18 @@ export class CharacterManagementService {
       {className: className}
     );
   }
+
+  displaySpeciesByName(speciesName: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/species-display-by-name`,
+      {speciesName: speciesName}
+    );
+  }
+
+  displayBackgroundByName(bgName: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/background-display-by-name`,
+      {bgName: bgName}
+    );
+  }
 }

@@ -4,7 +4,54 @@
   ></app-title>
 
 
+  <div class="listContainerFrame">
+    <ion-list class="optionList">
+      <!-- scelte opzionali classe -->
+      <div class="choiceBlock">
+        <div class="paragraphStartContainer">
+          <h1>Class choices</h1>
+        </div>
+        @for(option of classContent; track option) {
+            @if(option.title === 'Proficiency choices') {
+              <h3>{{option.title}}</h3>
+                @for(opt of option.content; track opt) {
+                  <app-label>{{opt.reference_item.name}}</app-label>
+                }
+            }
+            
+            
+            <h3>{{option.title}}</h3>
+            <app-label>{{option.content}}</app-label>
+          
+        }
+      </div>
 
-  
+      <!-- scelte opzionali specie -->
+      <!-- <div class="choiceBlock">
+        <div class="paragraphStartContainer">
+          <h1>Species choices</h1>
+        </div>
+        @for(option of speciesChoices.content; track option) {
+          <div class="genericChoice">
+            <h3>{{option.title}}</h3>
+            <app-label>{{option.content}}</app-label>
+          </div>
+        }
+      </div> -->
+
+      <!-- scelte opzionali background -->
+      <!-- <div class="choiceBlock">
+        <div class="paragraphStartContainer">
+          <h1>Background choices</h1>
+        </div>
+        @for(option of backgroundChoices.content; track option) {
+          <div class="genericChoice">
+            <h3>{{option.title}}</h3>
+            <app-label>{{option.content}}</app-label>
+          </div>
+        }
+      </div> -->
+    </ion-list>
+  </div>
 
 </ion-content>

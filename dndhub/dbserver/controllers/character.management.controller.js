@@ -270,7 +270,7 @@ async function displayClassByName(req,res) {
 
   const class_idx = req.body.className.toLowerCase();
 
-  DatabaseQueries.retrieve(`SELECT * FROM Class WHERE idx = '${class_idx}'`,DatabaseQueries.unwrapClass)
+  DatabaseQueries.retrieve(`SELECT * FROM Class WHERE idx = '${class_idx}'`, DatabaseQueries.unwrapClass)
   .catch(err => {
   sendResponse({
         status_code: 404,
@@ -291,6 +291,58 @@ async function displayClassByName(req,res) {
   });
 }
 
+async function displaySpeciesByName(req,res) {
+  canSend = true;
+
+  const species_idx = req.body.speciesName.toLowerCase();
+
+  DatabaseQueries.retrieve(`SELECT * FROM Species WHERE idx = '${species_idx}'`, DatabaseQueries.unwrapSpecies)
+  .catch(err => {
+  sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare le speci dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then(species => {
+    sendResponse({
+        species: species,
+        status_code: 200,
+        success: true,
+        message: 'Specie caricata con successo'
+      },
+      res
+    );
+  });
+}
+
+async function displayBackgroundByName(req,res) {
+  canSend = true;
+
+  const bg_idx = req.body.bgName.toLowerCase();
+
+  DatabaseQueries.retrieve(`SELECT * FROM Background WHERE idx = '${bg_idx}'`, DatabaseQueries.unwrapBackground)
+  .catch(err => {
+  sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare il background dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then(bg => {
+    sendResponse({
+        background: bg,
+        status_code: 200,
+        success: true,
+        message: 'Background ottenuto con successo'
+      },
+      res
+    );
+  });
+}
+
 
 export default {
   displayClasses,
@@ -300,4 +352,6 @@ export default {
   displayLevelRowByClassAndLevel,
   displaySpellsByClass,
   displayClassByName,
+  displayBackgroundByName,
+  displaySpeciesByName,
 }

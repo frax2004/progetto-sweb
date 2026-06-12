@@ -7,14 +7,15 @@ import { CharacterManagementService } from 'src/app/services/character.managemen
 import { LabelComponent } from "src/app/components/label/label.component";
 import { CharacterInstance } from '../CharacterInformation';
 import { dnd } from 'dbserver/database.queries';
-import { Alerts } from 'src/app/core/core';
+import { Alerts, Navigate } from 'src/app/core/core';
+import { ButtonComponent } from "src/app/components/button/button.component";
 
 @Component({
   selector: 'app-option-selection',
   templateUrl: './option-selection.page.html',
   styleUrls: ['./option-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, TitleComponent, LabelComponent, IonLabel, IonList]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, TitleComponent, LabelComponent, IonLabel, IonList, ButtonComponent]
 })
 export class OptionSelectionPage implements OnInit {
   simpleWeapons = ['club','dagger','greatclub','handaxe','javelin','light hammer','mace','quarterstaff','sickle','spear','dart','light crossbow','shortbow','sling'];
@@ -54,7 +55,25 @@ export class OptionSelectionPage implements OnInit {
   //
   BACKGROUNDoptEquip = [];
 
+  nextPage = () => {
+    //da sistemare con controlli vari
+    this.router.navigate(['/stats-selection']);
+  }
+
+  buttonCallbacks = {
+    previousPage: { onClick: Navigate.toPath(this.router,'background-selection')},
+    nextPage: { onClick: this.nextPage},
+  };
+
+ 
+
   addRegularProficiency(profName: string, boxID: string) {
+    profName = profName === 'Strength (STR)' ? 'strength' :
+               profName === 'Dexterity (DEX)' ? 'dexterity' :
+               profName === 'Constitution (CON)'? 'constitution' :
+               profName === 'Wisdom (WIS)' ? 'wisdom' :
+               profName === 'Intelligence (INT)' ? 'intelligence' :
+               profName === 'Charisma (CHA)' ? 'charisma' : profName;
     if (this.regularProfArray.includes(profName)) {
       this.regularProfArray.splice(this.regularProfArray.indexOf(profName),1);
       this.regularProfToChoose++;
@@ -73,6 +92,12 @@ export class OptionSelectionPage implements OnInit {
   }
 
   addExtraProficiency(profName: string, boxID: string) {
+    profName = profName === 'Strength (STR)' ? 'strength' :
+               profName === 'Dexterity (DEX)' ? 'dexterity' :
+               profName === 'Constitution (CON)'? 'constitution' :
+               profName === 'Wisdom (WIS)' ? 'wisdom' :
+               profName === 'Intelligence (INT)' ? 'intelligence' :
+               profName === 'Charisma (CHA)' ? 'charisma' : profName;
     if (this.extraProfArray.includes(profName)) {
       this.extraProfArray.splice(this.extraProfArray.indexOf(profName),1);
       this.extraProfToChoose++;
@@ -340,7 +365,7 @@ export class OptionSelectionPage implements OnInit {
     return retArray;
   }
 
-  constructor(private choicesDiplayer: CharacterManagementService) {
+  constructor(private router: Router, private choicesDiplayer: CharacterManagementService) {
     this.choicesDiplayer
     .displayClassByName(
       // scritto così per testing, da levare || quando finiremo coi test

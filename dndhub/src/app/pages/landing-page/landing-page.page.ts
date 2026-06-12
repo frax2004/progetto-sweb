@@ -50,7 +50,7 @@ export class LandingPagePage implements OnInit {
     return this.router.navigate(['landing-page']);
   }
 
-  isLogged = State.isLogged;
+  isLogged = State.User.isLogged;
 
   constructor(private router: Router, private userUtilities: UserUtilitiesService) { 
     // userUtilities

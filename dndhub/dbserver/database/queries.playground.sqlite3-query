@@ -2,3 +2,4 @@
 
 
 
+select * from Amministratore where account = 'francesco.marzano@gmail.com';

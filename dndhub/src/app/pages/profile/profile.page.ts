@@ -83,6 +83,8 @@ export class ProfilePage implements OnInit, AfterViewInit {
     username: string;
   } | undefined = undefined;
 
+  public isAdmin = State.User.isAdmin;
+
   public goBack = () => Navigate.toPath(this.router, 'landing-page')();
 
   public enableAccountEdit = () => {
@@ -132,7 +134,8 @@ export class ProfilePage implements OnInit, AfterViewInit {
 
   private deleteAccount = async () => {
     const success = async (res: any) => {
-      State.isLogged.set(false);
+      State.User.isLogged.set(false);
+      State.User.isAdmin.set(false);
       await this.router.navigate(['/landing-page']);
 
       Alerts.good(res.message);
@@ -163,7 +166,8 @@ export class ProfilePage implements OnInit, AfterViewInit {
 
   private logOut = () => {
     const success = async (res: any) => {
-      State.isLogged.set(false);
+      State.User.isLogged.set(false);
+      State.User.isAdmin.set(false);
       await this.router.navigate(['/landing-page']);
 
       Alerts.good(res.message);
@@ -192,6 +196,8 @@ export class ProfilePage implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.userService.getUserInfo(
       value => {
+        State.User.isAdmin.set(value.isAdmin);
+        console.log(JSON.stringify(value));
         this.usernameField.entry.value = value.username;
         this.emailField.entry.value = value.email;
         this.passwordField.entry.value = value.password;

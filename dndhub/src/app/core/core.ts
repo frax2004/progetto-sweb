@@ -44,7 +44,8 @@ export namespace Alerts {
     return Alerts.show({
       header: `Error : ${err.status_code}`,
       message: err.message,
-      buttons: ['Got it!']
+      buttons: ['Got it!'],
+      cssClass: 'default-alert'
     });
   }
 
@@ -52,7 +53,8 @@ export namespace Alerts {
     return Alerts.show({
       header: 'Error',
       message: msg,
-      buttons: ['Got it!']
+      buttons: ['Got it!'],
+      cssClass: 'default-alert'
     });
   }
 
@@ -74,7 +76,8 @@ export namespace Alerts {
     return Alerts.show({
       header: 'Ottimo!',
       message: msg,
-      buttons: [possible_responses[Math.round(Math.random()*(possible_responses.length-1))]]
+      buttons: [possible_responses[Math.round(Math.random()*(possible_responses.length-1))]],
+      cssClass: 'default-alert'
     });
   }
 }

@@ -124,32 +124,35 @@ export async function setUserInfo(req, res) {
 
 
 
-export function getUserInfo(req, res) {
+export async function getUserInfo(req, res) {
   canSend = true;
 
   const email = UserInstance.USER.email;
 
-  DatabaseQueries.retrieve(
-    `SELECT * FROM Account WHERE email = '${email}'`, 
-    x => x
-  ).catch(err => {
-    sendResponse({
-      status_code: 401,
-      success: false,
-      message: `Non è stato possibile ottenere le credenziali dell'utente registrato come ${email}`
-    }, res)
-  }).then(rows => {
-    const credentials = rows[0];
+  try {
+    const credentials = await Database.queryOne(`SELECT * FROM Account WHERE email = '${email}'`);
+    const isAdmin = (await Database.queryOne(`SELECT * FROM Amministratore WHERE account = '${email}'`)) !== undefined;
 
     sendResponse({
-      success: true,
-      status_code: 200,
-      message: "Credenziali ottenute con successo",
-      email: credentials.email,
-      password: credentials.password,
-      username: credentials.username
-    }, res);
-  });
+        success: true,
+        status_code: 200,
+        message: "Credenziali ottenute con successo",
+        email: credentials.email,
+        password: credentials.password,
+        username: credentials.username,
+        isAdmin: isAdmin,
+      }, 
+      res
+    );
+  } catch(err) {
+    sendResponse({
+        status_code: 401,
+        success: false,
+        message: `Non è stato possibile ottenere le credenziali dell'utente registrato come ${email}`
+      }, 
+      res
+    );
+  }
 
 }
 

@@ -38,6 +38,8 @@
 
 
 ion-alert.delete-account-alert {
+  --background: rgb(55, 55, 55);
+
   .alert-button-group {
     button.alert-button {
       color: white;
@@ -48,4 +50,8 @@ ion-alert.delete-account-alert {
       color: white;
     }
   }
+}
+
+ion-alert.default-alert {
+  --background: rgb(55, 55, 55);
 }

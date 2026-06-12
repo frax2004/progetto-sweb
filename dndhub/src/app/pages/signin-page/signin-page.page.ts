@@ -42,7 +42,7 @@ export class SigninPagePage implements OnInit {
         this.formGroup.get('username')?.value || ''
       ).subscribe({
         next: (value) => {
-          State.isLogged.set(true);
+          State.User.isLogged.set(true);
           Navigate.toPath(this.router, 'landing-page')();
         },
         error: err => Alerts.error(err.error)

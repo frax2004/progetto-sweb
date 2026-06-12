@@ -100,7 +100,7 @@
                     <app-label>{{subclass.name}}</app-label>
                   </div>
                   <div class="checkboxContainer">
-                    <input type="checkbox" [value]="subclass.name" [id]="subclass.name">
+                    <input type="checkbox" [value]="subclass.name" [id]="subclass.name" (click)="addSubclass(subclass.name,subclass.name)">
                   </div>
                 </div>
               }
@@ -130,7 +130,7 @@
                     <app-label>{{abName}}</app-label>
                   </div>
                   <div class="checkboxContainer">
-                    <input type="checkbox" [value]="abName" [id]="abName">
+                    <input type="checkbox" [value]="abName" [id]="abName" (click)="addAbilityBonus(abName,abName)">
                   </div>
                 </div>
               }
@@ -145,7 +145,7 @@
                     <app-label>{{langName}}</app-label>
                   </div>
                   <div class="checkboxContainer">
-                    <input type="checkbox" [value]="langName" [id]="langName">
+                    <input type="checkbox" [value]="langName" [id]="langName" (click)="addLanguage(langName,langName)">
                   </div>
                 </div>
               }
@@ -161,7 +161,7 @@
                     <app-label>{{subspecies.name}}</app-label>
                   </div>
                   <div class="checkboxContainer">
-                    <input type="checkbox" [value]="subspecies.name" [id]="subspecies.name">
+                    <input type="checkbox" [value]="subspecies.name" [id]="subspecies.name" (click)="addSubspecies( subspecies.name,subspecies.name)">
                   </div>
                 </div>
               }
@@ -186,7 +186,7 @@
                     <app-label>{{langName}}</app-label>
                   </div>
                   <div class="checkboxContainer">
-                    <input type="checkbox" [value]="langName" [id]="langName">
+                    <input type="checkbox" [value]="langName" [id]="langName" (click)="addBACKGROUNDlanguage(langName,langName)">
                   </div>
                 </div>
               }
@@ -201,7 +201,7 @@
                   <app-label>{{equip.choose}}</app-label>
                 </div>
                 <div class="checkboxContainer">
-                  <input type="checkbox" [value]="equip.choose" [id]="equip.choose">
+                  <input type="checkbox" [value]="equip.choose" [id]="equip.choose" (click)="addOptionalEquipmentFromBackground(equip.choose, equip.index, equip.choose)">
                 </div>
               </div>
             }

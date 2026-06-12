@@ -40,7 +40,19 @@ export class OptionSelectionPage implements OnInit {
   //
   charLevel = CharacterInstance.chosenLevel;
   chosenSubclass: string | undefined = undefined;
-
+  //
+  abBonusToChoose: number | undefined;
+  chosenAbBonus = [];
+  //
+  languagestoChoose: number | undefined;
+  chosenLanguages = [];
+  //
+  chosenSubspecies: string | undefined = undefined;
+  //
+  BACKGROUNDlanguagesToChoose: number | undefined;
+  BACKGROUNDchosenLanguages = [];
+  //
+  BACKGROUNDoptEquip = [];
 
   addRegularProficiency(profName: string, boxID: string) {
     if (this.regularProfArray.includes(profName)) {
@@ -49,7 +61,7 @@ export class OptionSelectionPage implements OnInit {
     }
     else {
       if (this.regularProfToChoose === 0) {
-        Alerts.personalizedMessage(this.regularProfArray + '\n\nYou can\'t choose any more proficiencies from this group, uncheck a box from this group to choose a new one', 'Too many proficiencies');
+        Alerts.personalizedMessage('You can\'t choose any more proficiencies from this group, uncheck a box from this group to choose a new one', 'Too many proficiencies');
         const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
         box.checked = false;
       }
@@ -67,7 +79,7 @@ export class OptionSelectionPage implements OnInit {
     }
     else {
       if (this.extraProfToChoose===0) {
-        Alerts.personalizedMessage(this.extraProfArray + '\n\nYou can\'t choose any more proficiencies from this group, uncheck a box from this group to choose a new one', 'Too many proficiencies');
+        Alerts.personalizedMessage('You can\'t choose any more proficiencies from this group, uncheck a box from this group to choose a new one', 'Too many proficiencies');
         const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
         box.checked = false;
       }
@@ -79,14 +91,13 @@ export class OptionSelectionPage implements OnInit {
   }
 
   addOptionalEquipment(equipName: string, index: number, boxID: string) {
-    this.classContent[1].content[index].leftToChoose
     if (this.optEquip.includes(equipName)) {
       this.optEquip.splice(this.optEquip.indexOf(equipName),1);
       this.classContent[1].content[index].leftToChoose++;
     }
     else {
       if(this.classContent[1].content[index].leftToChoose===0) {
-        Alerts.personalizedMessage(this.optEquip + '\n\nYou can\'t choose any more pieces of equipment from this group, uncheck a box from this group to choose a new one', 'Too many pieces of equipment');
+        Alerts.personalizedMessage('\n\nYou can\'t choose any more pieces of equipment from this group, uncheck a box from this group to choose a new one', 'Too many pieces of equipment');
         const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
         box.checked = false;
       }
@@ -97,11 +108,136 @@ export class OptionSelectionPage implements OnInit {
     }
   }
 
+  addOptionalEquipmentFromBackground(equipName: string, index: number, boxID: string) {
+    if (this.BACKGROUNDoptEquip.includes(equipName)) {
+      this.BACKGROUNDoptEquip.splice(this.optEquip.indexOf(equipName),1);
+      this.backgroundContent[1].content[index].leftToChoose++;
+    }
+    else {
+      if(this.backgroundContent[1].content[index].leftToChoose===0) {
+        Alerts.personalizedMessage('\n\nYou can\'t choose any more pieces of equipment from this group, uncheck a box from this group to choose a new one', 'Too many pieces of equipment');
+        const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
+        box.checked = false;
+      }
+      else {
+        this.BACKGROUNDoptEquip.push(equipName);
+        this.backgroundContent[1].content[index].leftToChoose--;
+      }
+    }
+  }
+
+  addSubclass(subName: string, boxID: string) {
+    if(this.charLevel<3) {
+      Alerts.personalizedMessage('L\'utente non dovrebbe essere in grado di selezionare una sottoclasse dato che il suo livello è inferiore al tre','Errore con la scelta sottoclasse');
+      const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
+      box.checked = false;
+    }
+    if (this.chosenSubclass === subName) {
+      this.chosenSubclass = undefined
+    }
+    else {
+      if(this.chosenSubclass === undefined) {
+        this.chosenSubclass = subName;
+      }
+      else {
+        Alerts.personalizedMessage('A subclass has already been selected, please uncheck the selected subclass to choose a new one', 'Subclass already selected');
+        const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
+        box.checked = false;
+      }
+    }
+  }
+
+  addSubspecies(subName: string, boxID: string) {
+    if (this.chosenSubspecies === subName) {
+      this.chosenSubspecies = undefined
+    }
+    else {
+      if(this.chosenSubspecies === undefined) {
+        this.chosenSubspecies = subName;
+      }
+      else {
+        Alerts.personalizedMessage('A subspecies has already been selected, please uncheck the selected subspecies to choose a new one', 'Subspecies already selected');
+        const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
+        box.checked = false;
+      }
+    }
+  }
+
+  addAbilityBonus(abilityName: string, boxID: string) {
+    if (this.abBonusToChoose === undefined) {
+      Alerts.personalizedMessage('L\'utente non dovrebbe essere in grado di selezionare un bonus alle proprie statistiche, la sua specie non glielo permette','Errore con la scelta deli bonus');
+      const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
+      box.checked = false;
+    }
+    if (this.chosenAbBonus.includes(abilityName)) {
+      this.chosenAbBonus.splice(this.chosenAbBonus.indexOf(abilityName),1);
+      this.abBonusToChoose++;
+    }
+    else {
+      if (this.abBonusToChoose===0) {
+        Alerts.personalizedMessage('\n\nYou can\'t choose any more bonuses from this group, uncheck a box from this group to choose a new one', 'Too many bonuses');
+        const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
+        box.checked = false;
+      }
+      else {
+        this.chosenAbBonus.push(abilityName);
+        this.abBonusToChoose--;
+      }
+    }
+  }
+
+  addLanguage(langName: string, boxID: string) {
+    if (this.languagestoChoose === undefined) {
+      Alerts.personalizedMessage('L\'utente non dovrebbe essere in grado di selezionare delle lingue addizionali, la sua specie non glielo permette','Errore con la scelta delle lingue');
+      const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
+      box.checked = false;
+    }
+    if (this.chosenLanguages.includes(langName)) {
+      this.chosenLanguages.splice(this.chosenLanguages.indexOf(langName),1);
+      this.languagestoChoose++;
+    }
+    else {
+      if (this.languagestoChoose===0) {
+        Alerts.personalizedMessage('You can\'t choose any more languages from this group, uncheck a box from this group to choose a new one', 'Too many languages');
+        const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
+        box.checked = false;
+      }
+      else {
+        this.chosenLanguages.push(langName);
+        this.languagestoChoose--;
+      }
+    }
+  }
+
+  addBACKGROUNDlanguage(langName: string, boxID: string) {
+    if (this.BACKGROUNDlanguagesToChoose === undefined) {
+      Alerts.personalizedMessage('L\'utente non dovrebbe essere in grado di selezionare delle lingue addizionali, il suo background non glielo permette','Errore con la scelta delle lingue');
+      const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
+      box.checked = false;
+    }
+    if (this.BACKGROUNDchosenLanguages.includes(langName)) {
+      this.BACKGROUNDchosenLanguages.splice(this.BACKGROUNDchosenLanguages.indexOf(langName),1);
+      this.BACKGROUNDlanguagesToChoose++;
+    }
+    else {
+      if (this.BACKGROUNDlanguagesToChoose===0) {
+        Alerts.personalizedMessage('You can\'t choose any more languages from this group, uncheck a box from this group to choose a new one', 'Too many languages');
+        const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
+        box.checked = false;
+      }
+      else {
+        this.BACKGROUNDchosenLanguages.push(langName);
+        this.BACKGROUNDlanguagesToChoose--;
+      }
+    }
+  }
+
   getFromOptions(choice) {
     return choice.from.options;
   }
 
   static displayClassProficiencyChoices(choices: dnd.Choice[]) {
+    if (choices === undefined || choices === null) return undefined;
     let regularProfArray = [];
     let extraProfArray = [];
     for (const choice of choices) {
@@ -142,6 +278,7 @@ export class OptionSelectionPage implements OnInit {
   }
 
   static displayAbilityBonusOptions(choice: dnd.Choice) {
+    if (choice === undefined || choice === null) return undefined;
     let retArray = [];
     for (const opt of choice.from.options) {
       const abName = opt.ability_score_bonus.name === 'STR' ? 'Strength (STR)' :
@@ -160,6 +297,7 @@ export class OptionSelectionPage implements OnInit {
   }
 
   static displayLanguageOptions(choice: dnd.Choice, allLanguages?: boolean) {
+    if (choice === undefined || choice === null) return undefined;
     if(allLanguages !== undefined && allLanguages === true) {
       let allLanguages= ['Common','Common Sign Language','Draconic','Dwarvish','Elvish','Giant','Gnomish','Goblin','Halfling','Orc','Abyssal','Celestial','Deep Speech','Druidic','Infernal','Primordial','Sylvan','Thieves Cant','Undercommon'];
       if(CharacterInstance.chosenLanguages !== undefined) {
@@ -187,11 +325,15 @@ export class OptionSelectionPage implements OnInit {
     if (choices === undefined) return undefined;
 
     let retArray = [];
+    let indexGenerator = 0;
     for (const choice of choices) {
       const arrEl = {
         choose: choice.from.equipment_category.name,
         quantity: choice.choose,
+        leftToChoose: choice.choose,
+        index: indexGenerator,
       }
+      indexGenerator++;
       retArray.push(arrEl);
     }
 
@@ -232,13 +374,15 @@ export class OptionSelectionPage implements OnInit {
               value: value.species[0].name + ' value',
               content: [
                 { value: value.species[0].name + ' ability_bonus_options', title: 'Ability bonus options', content: OptionSelectionPage.displayAbilityBonusOptions(value.species[0].ability_bonus_options)},
-                { value: value.species[0].name + ' starting_proficiency_options', title: 'Starting proficiency options', content: JSON.stringify(value.species[0].starting_proficiency_options) || undefined},
+                //{ value: value.species[0].name + ' starting_proficiency_options', title: 'Starting proficiency options', content: JSON.stringify(value.species[0].starting_proficiency_options) || undefined},
                 { value: value.species[0].name + ' languages_options', title: 'Language options', content: OptionSelectionPage.displayLanguageOptions(value.species[0].language_options)},
                 { value: value.species[0].name + ' subspecies_options', title: 'Subspecies', content: value.species[0].subraces === null ? undefined : value.species[0].subraces},
               ],
             };
             this.speciesName = this.speciesChoices.name;
             this.speciesContent = this.speciesChoices.content;
+            this.abBonusToChoose = value.species[0].ability_bonus_options?.choose === undefined ? undefined : value.species[0].ability_bonus_options.choose;
+            this.languagestoChoose = value.species[0].language_options?.choose === undefined ? undefined : value.species[0].language_options.choose;
             this.choicesDiplayer
             .displayBackgroundByName(
               CharacterInstance.chosenBackground || 'acolyte'
@@ -255,6 +399,7 @@ export class OptionSelectionPage implements OnInit {
                 };
                 this.backgroundName = this.backgroundChoices.name;
                 this.backgroundContent = this.backgroundChoices.content;
+                this.BACKGROUNDlanguagesToChoose = OptionSelectionPage.displayLanguageOptions(value.background[0].language_options,true).choose === undefined ? undefined : OptionSelectionPage.displayLanguageOptions(value.background[0].language_options,true).choose; 
               },
               error: (err) => alert(err)
             });

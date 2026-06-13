@@ -91,6 +91,7 @@ export class CharacterInstance {
   private static chosen_subspecies = undefined;
   private static chosen_background_languages = undefined;
   private static chosen_background_equipment = undefined;
+  private static chosen_asi = undefined;
 
   constructor() {}
   
@@ -98,6 +99,14 @@ export class CharacterInstance {
     this.chosen_class = undefined;
     this.chosen_species = undefined;
     this.chosen_background = undefined;
+  }
+
+  static get chosenASI() {
+    return this.chosen_asi;
+  }
+
+  static set chosenASI(numberOfASI) {
+    this.chosen_asi = numberOfASI;
   }
 
   static get chosenBackgroundEquipment() {

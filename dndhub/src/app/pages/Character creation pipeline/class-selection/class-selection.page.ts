@@ -39,6 +39,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     CharacterInstance.chosenLevel = this.levelEntry.value;
     const validClass: boolean = CharacterInstance.chosenClass !== undefined;
     if (CharacterInstance.chosenLevel>0 && validClass) {
+      CharacterInstance.chosenASI = this.getNumberOfASI();
       this.router.navigate(['/species-selection']);
     }
     else this.setOpen(true);
@@ -53,7 +54,23 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
 
 
   @ViewChild('levelEntry') private levelEntry: DragEntryComponent;
-   
+ 
+  c: dnd.Level;
+  d: dnd.ClassSpecific;
+
+  getNumberOfASI() {
+    if (this.levelEntry.value === 0 || CharacterInstance.chosenClass === undefined) return 0;
+    const className = CharacterInstance.chosenClass.toLowerCase();
+    for(const level of ClassSelectionPage.lvlsArray) {
+      if (level.idx===className) {
+        return level.content[this.levelEntry.value-1].ability_score_bonuses;
+      }
+    }
+
+    return 0;
+  }
+
+
   classesArray = [];
   static lvlsArray = [];
   classesNames = ['Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter', 'Monk', 'Paladin', 'Ranger', 'Rogue', 'Sorcerer', 'Warlock', 'Wizard'];

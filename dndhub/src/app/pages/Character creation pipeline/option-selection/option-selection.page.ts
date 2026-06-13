@@ -118,7 +118,7 @@ export class OptionSelectionPage implements OnInit {
     const validateBGlanguages: boolean = this.BACKGROUNDlanguagesToChoose===0;
     const validateBGoptEquipment: boolean = this.BACKGROUNDoptEquip.length === this.backgroundContent[1].content.length;
     const validateASI: boolean = this.statsToChoose() === 0;
-    const className = CharacterInstance.chosenClass.toLowerClass();
+    const className = CharacterInstance.chosenClass.toLowerClass() ;
     const validateSpellSelection = (className!==undefined) && (className === 'bard' || className === 'cleric' || className === 'druid' || className === 'paladin' || className === 'ranger' || className === 'sorcerer' || className === 'warlock' || className === 'wizard');
     if (
       validateRegularProf &&
@@ -507,7 +507,6 @@ export class OptionSelectionPage implements OnInit {
           };
         this.className = this.classChoices.name;
         this.classContent = this.classChoices.content;
-        console.log(JSON.stringify(value.classes[0].starting_equipment_options,null,2));
         this.regularProfToChoose = value.classes[0].proficiency_choices[0].choose;
         this.extraProfToChoose = OptionSelectionPage.displayClassProficiencyChoices(value.classes[0].proficiency_choices).extraProficiencies.length === 0 ? 0 : this.regularProfToChoose;
         this.choicesDiplayer

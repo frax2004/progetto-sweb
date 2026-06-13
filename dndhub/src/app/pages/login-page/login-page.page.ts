@@ -13,6 +13,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { PopoverController } from '@ionic/angular/standalone';
 import { Navigate, Popups } from 'src/app/core/core';
+import { State } from 'src/app/core/state';
 
 @Component({
   selector: 'app-login-page',
@@ -69,6 +70,7 @@ export class LoginPagePage implements OnInit {
       this.formGroup.get('password')?.value || ''
     ).subscribe({
       next: (value) => {
+        State.isLogged.set(true);
         Navigate.toPath(this.router, 'landing-page')();
       },
       error: (err) => {

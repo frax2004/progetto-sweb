@@ -14,10 +14,12 @@ export async function loadReports(req, res) {
 
   const quantity = req.body.quantity;
   const offset = req.body.offset;
+  const queryFilter = req.body.queryFilter;
 
   const query = `
   SELECT *
   FROM Segnalazione
+  ${queryFilter}
   ORDER BY quando ASC
   LIMIT ${quantity}
   OFFSET ${offset}
@@ -25,7 +27,6 @@ export async function loadReports(req, res) {
 
   try {
     const reports = await Database.queryAll(query);
-
     sendResponse({
         message: "Carimento delle segnalazioni effettuato con successo",
         status_code: 200,
@@ -45,6 +46,39 @@ export async function loadReports(req, res) {
   }
 }
 
+export async function closeReport(req, res) {
+  canSend = true;
+
+  const account = req.body.account;
+  const when = req.body.when;
+
+  const query = `
+  DELETE 
+  FROM Segnalazione
+  WHERE account = '${account}' AND quando = '${when}'
+  `;
+
+  try {
+    await Database.execOne(query);
+    sendResponse({
+        message: 'Segnalazione chiusa con successo!',
+        status_code: 200,
+        success: true
+      },
+      res
+    );
+  } catch(err) {
+    sendResponse({
+        status_code: 401,
+        success: false,
+        message: err.message
+      },
+      res
+    );
+  }
+}
+
 export default {
   loadReports,
+  closeReport,
 }

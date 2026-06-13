@@ -57,8 +57,35 @@ export async function isAdmin(req, res, next) {
   }
 } 
 
+export async function isValidReport(req, res, next) {
+  canSend = true;
+
+  const account = req.body.account;
+  const when = req.body.when;
+
+  const query = `
+  SELECT * 
+  FROM Segnalazione
+  WHERE account = '${account}' AND quando = '${when}'
+  `;
+
+  try {
+    const ok = (await Database.queryOne(query)) !== undefined;
+    if(ok) next();
+  } catch(err) {
+    sendResponse({
+        status_code: 401,
+        success: false,
+        message: err.message
+      },
+      res
+    );
+  }
+}
+
 
 export default {
   isLogged,
   isAdmin,
+  isValidReport,
 }

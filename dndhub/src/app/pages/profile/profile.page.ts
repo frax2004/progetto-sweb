@@ -46,6 +46,8 @@ import { State } from 'src/app/core/state';
 import { ReportCardComponent } from 'src/app/components/report-card/report-card.component';
 import { ReportRequest } from 'src/app/components/report-card/report';
 import { ReportsService } from 'src/app/services/reports.service';
+import { CurrentEdit } from './current.edit';
+import { ButtonContext } from 'src/app/components/button/ButtonContext';
 
 
 
@@ -86,21 +88,25 @@ import { ReportsService } from 'src/app/services/reports.service';
 })
 export class ProfilePage implements OnInit, AfterViewInit {
 
-  usernameField = signal<string>("");
-  emailField = signal<string>("");
-  passwordField = signal<string>("");
-  editMode = signal<boolean>(false);
-
-  private currentEdit: {
-    email: string;
-    password: string;
-    username: string;
-  } | undefined = undefined;
-
+  
+  private currentEdit?: CurrentEdit = undefined;
   public isAdmin = State.User.isAdmin;
   public reports = signal<ReportRequest[]>([]);
-
+  public usernameField = signal<string>("");
+  public emailField = signal<string>("");
+  public passwordField = signal<string>("");
+  public editMode = signal<boolean>(false);
+  public reportsFilter = signal<string>("");
   public static REPORT_LOADING_THRESHOLD = 16;
+
+  constructor(
+    private reportsService: ReportsService,
+    private authService: AuthService,
+    private userService: UserUtilitiesService, 
+    public popoverController: PopoverController, 
+    private router: Router
+  ) {}
+
 
   public goBack = () => Navigate.toPath(this.router, 'landing-page')();
 
@@ -113,9 +119,12 @@ export class ProfilePage implements OnInit, AfterViewInit {
     this.editMode.set(true);
   }
 
+  public setUsernameField = value => this.usernameField.set(value);
+  public setPasswordField = value => this.passwordField.set(value);
+  public setEmailField = value => this.emailField.set(value);
+
   public save = () => {
     if(this.currentEdit === undefined) return;
-    
     const noChanges = this.currentEdit.email === this.emailField()
     && this.currentEdit.password === this.passwordField()
     &&  this.currentEdit.username === this.usernameField();
@@ -145,7 +154,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
 
   }
 
-  private deleteAccount = async () => {
+  public deleteAccount = async () => {
     const success = async (res: any) => {
       State.User.isLogged.set(false);
       State.User.isAdmin.set(false);
@@ -177,16 +186,43 @@ export class ProfilePage implements OnInit, AfterViewInit {
 
   }
 
-  public moreReports = () => {
+  public setReportsFilter = value => {
+    this.reportsFilter.set(value !== '' ? `WHERE account LIKE '%${value}%'` : '');
+    this.reports.set([]);
+    this.moreReports({});
+  }
+
+
+  public reportCloser = (report: ReportRequest) => {
+    const success = (_: any) => {
+      this.reports.update((reports: ReportRequest[]) => {
+        reports.splice(reports.indexOf(report, 0), 1);
+        return reports;
+      });
+      Alerts.good("Segnalazione chiusa con successo");
+    };
+
+    return (_: any) => this.reportsService.closeReport(
+      report.sender, 
+      report.when, 
+      success,
+      Alerts.error
+    );
+  }
+
+  public moreReports = (e) => {
     const toReport = (report: any): ReportRequest => {
-      return {
+      const obj = {
         sender: report.account,
         when: report.quando,
         reason: report.tipo,
-        description: report.contenuto
+        description: report.contenuto,
+        onClose: (e: any) => {}
       };
+      obj.onClose = this.reportCloser(obj);
+      return obj;
     };
-  
+
     const success = res => {
       this.reports.set(this.reports().concat(res.reports.map(toReport)));
     };
@@ -194,19 +230,21 @@ export class ProfilePage implements OnInit, AfterViewInit {
     this.reportsService.loadReports(
       ProfilePage.REPORT_LOADING_THRESHOLD,
       this.reports().length,
+      this.reportsFilter(),
       success,
       Alerts.error
     );
   }
 
+
   public onTabChange(tab: string) {
     if(tab === 'reports') {
       this.reports.set([]);
-      this.moreReports();
+      this.moreReports(this.reportsFilter());
     }
   }
 
-  private logOut = () => {
+  public logOut = () => {
     const success = async (res: any) => {
       State.User.isLogged.set(false);
       State.User.isAdmin.set(false);
@@ -219,22 +257,6 @@ export class ProfilePage implements OnInit, AfterViewInit {
 
     this.authService.logout(success, fail);
   }
-
-  public buttons = {
-    deleteAccount: { onClick: this.deleteAccount },
-    logOut: { onClick: this.logOut },
-    goBack: { onClick: this.goBack },
-    enableAccountEdit: { onClick: this.enableAccountEdit },
-    save: { onClick: this.save },
-  };
-
-  constructor(
-    private reportsService: ReportsService,
-    private authService: AuthService,
-    private userService: UserUtilitiesService, 
-    public popoverController: PopoverController, 
-    private router: Router
-  ) {}
 
   ngAfterViewInit() {
     this.userService.getUserInfo(

@@ -5,4 +5,5 @@ export interface ReportRequest {
   when: string;
   reason: string;
   description: string;
+  onClose: (e: Event) => void;
 }

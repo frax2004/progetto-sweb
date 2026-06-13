@@ -10,3 +10,11 @@ reportsRouter.post(
   reports_middleware.isAdmin,
   reports_controller.loadReports
 )
+
+reportsRouter.post(
+  '/close_report',
+  reports_middleware.isLogged,
+  reports_middleware.isAdmin,
+  reports_middleware.isValidReport,
+  reports_controller.closeReport
+)

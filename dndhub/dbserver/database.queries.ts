@@ -627,7 +627,7 @@ export class DatabaseQueries {
     let multiple_items = Database.queryAll(`SELECT * FROM ArrayOptionItem WHERE array_id = ${option.multiple_items}`);
     let choice = Database.queryAll(`SELECT * FROM Choice WHERE id = ${option.choice_id}`);
     let ability_score_prerequisite = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${option.ability_score_prerequisite}'`);
-  
+
     return {
       reference_item: (await DatabaseQueries.map(await reference_item, DatabaseQueries.unwrapAPIReference))[0],
       ability_score_bonus: (await DatabaseQueries.map(await ability_score_bonus, DatabaseQueries.unwrapAPIReference))[0],

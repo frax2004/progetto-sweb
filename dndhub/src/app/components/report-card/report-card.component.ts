@@ -14,6 +14,7 @@ export class ReportCardComponent  implements OnInit {
   @Input() when: string = "0000-00-00 00:00:00";
   @Input() reason: string = "Unknown";
   @Input() description: string = "Unknown";
+  @Input() onClose: (e: Event) => void;
 
   constructor() { }
 

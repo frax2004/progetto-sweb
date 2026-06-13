@@ -19,6 +19,7 @@
   </div>
 
   <app-button
-  [button]="{text: 'Chiudi segnalazione', expand: 'false'}"
+  [button]="{ text: 'Chiudi segnalazione', expand: 'false' }"
+  [context]="{ onClick: onClose }"
   ></app-button>
 </div>

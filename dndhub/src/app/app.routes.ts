@@ -88,6 +88,10 @@ export const routes: Routes = [
     path: 'spell-selection',
     loadComponent: () => import('./pages/Character creation pipeline/spell-selection/spell-selection.page').then( m => m.SpellSelectionPage)
   },
+  {
+    path: 'option-selection',
+    loadComponent: () => import('./pages/Character creation pipeline/option-selection/option-selection.page').then( m => m.OptionSelectionPage)
+  },
 
 
 

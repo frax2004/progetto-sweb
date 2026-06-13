@@ -36,10 +36,11 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
 
   nextPage = () => {
     // alert(this instanceof ClassSelectionPage);
-    CharacterInstance.selectedLevel = this.levelEntry.value;
-    const validClass: boolean = CharacterInstance.selectedClass !== undefined;
-    if (CharacterInstance.selectedLevel>0 && validClass) {
-      this.router.navigate(['/spell-selection']);
+    CharacterInstance.chosenLevel = this.levelEntry.value;
+    const validClass: boolean = CharacterInstance.chosenClass !== undefined;
+    if (CharacterInstance.chosenLevel>0 && validClass) {
+      CharacterInstance.chosenASI = this.getNumberOfASI();
+      this.router.navigate(['/species-selection']);
     }
     else this.setOpen(true);
   }
@@ -53,7 +54,23 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
 
 
   @ViewChild('levelEntry') private levelEntry: DragEntryComponent;
-   
+ 
+  c: dnd.Level;
+  d: dnd.ClassSpecific;
+
+  getNumberOfASI() {
+    if (this.levelEntry.value === 0 || CharacterInstance.chosenClass === undefined) return 0;
+    const className = CharacterInstance.chosenClass.toLowerCase();
+    for(const level of ClassSelectionPage.lvlsArray) {
+      if (level.idx===className) {
+        return level.content[this.levelEntry.value-1].ability_score_bonuses;
+      }
+    }
+
+    return 0;
+  }
+
+
   classesArray = [];
   static lvlsArray = [];
   classesNames = ['Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter', 'Monk', 'Paladin', 'Ranger', 'Rogue', 'Sorcerer', 'Warlock', 'Wizard'];
@@ -113,73 +130,73 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     'Barbarian': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        CharacterInstance.selectedClass = 'Barbarian';
+        CharacterInstance.chosenClass = 'Barbarian';
       }
     },
     'Bard': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        CharacterInstance.selectedClass = 'Bard';
+        CharacterInstance.chosenClass = 'Bard';
       }
     }, 
     'Cleric': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        CharacterInstance.selectedClass = 'Cleric';
+        CharacterInstance.chosenClass = 'Cleric';
       }
     }, 
     'Druid': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        CharacterInstance.selectedClass = 'Druid';
+        CharacterInstance.chosenClass = 'Druid';
       }
     }, 
     'Fighter': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        CharacterInstance.selectedClass = 'Fighter';
+        CharacterInstance.chosenClass = 'Fighter';
       }
     }, 
     'Monk': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        CharacterInstance.selectedClass = 'Monk';
+        CharacterInstance.chosenClass = 'Monk';
       }
     }, 
     'Paladin': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        CharacterInstance.selectedClass = 'Paladin';
+        CharacterInstance.chosenClass = 'Paladin';
       }
     }, 
     'Ranger': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        CharacterInstance.selectedClass = 'Ranger';
+        CharacterInstance.chosenClass = 'Ranger';
       }
     }, 
     'Rogue': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        CharacterInstance.selectedClass = 'Rogue';
+        CharacterInstance.chosenClass = 'Rogue';
       }
     }, 
     'Sorcerer': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        CharacterInstance.selectedClass = 'Sorcerer';
+        CharacterInstance.chosenClass = 'Sorcerer';
       }
     }, 
     'Warlock': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        ClassSelectionPage.selectedClass = 'Warlock';
+        CharacterInstance.chosenClass = 'Warlock';
       }
     }, 
     'Wizard': {
       button: { text: 'Select this class', expand: ''},
       context: (event: Event) => {
-        CharacterInstance.selectedClass = 'Wizard';
+        CharacterInstance.chosenClass = 'Wizard';
       }
     }
   }
@@ -266,8 +283,6 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
 
   static displayStartigEquipmentOptions(className: string,equipOpt: dnd.Choice[]) {
     let retValue = className + ' dispone delle seguenti opzioni di scelta di equipaggiamento:\n'
-    let app: dnd.OptionSet;
-    let app1: dnd.Option[];
     for (const opt of equipOpt) {
       if (opt.choose !== null && opt.desc !== null) {
         retValue = retValue + '\n- ' + opt.desc + ' - Choose: ' + opt.choose;

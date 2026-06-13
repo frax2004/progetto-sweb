@@ -39,7 +39,7 @@ export class SpeciesSelectionPage implements OnInit {
 
   nextPage = () => {
     if (SpeciesSelectionPage.selectedSpecies !== undefined) {
-      CharacterInstance.selectedSpecies = SpeciesSelectionPage.selectedSpecies;
+      CharacterInstance.chosenSpecies = SpeciesSelectionPage.selectedSpecies;
       this.router.navigate(['/background-selection']);
     }
     else this.setOpenAlert(true);

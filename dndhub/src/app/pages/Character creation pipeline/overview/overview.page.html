@@ -3,23 +3,32 @@
   [title] = "'Overview'"
   ></app-title>
 
+  <app-button
+  [button]="{ text: 'Go back', expand: ''}"
+  [context]="buttonCallbacks['previousPage']"
+  ></app-button>
+
 <!-- la pagina sarà divisa in due metà  (1/3 + 2/3) per larghezza -->
   
     <div class="upperDetails">
       <div class="upperDetailsContainer">
-        <app-label>Velocità totale</app-label>
+        <app-label>Level: {{showLevel}}</app-label>
+      </div>
+
+      <div class="upperDetailsContainer">
+        <app-label>Speed: placeholder, da prendere con query</app-label>
       </div>
       
       <div class="upperDetailsContainer">
-        <app-label>Taglia</app-label>
+        <app-label>Size: placeholder, da prendere con query</app-label>
       </div>
       
       <div class="upperDetailsContainer">
-        <app-label>Background</app-label>
+        <app-label>Background: {{showBackground}}</app-label>
       </div>
       
       <div class="upperDetailsContainer">
-        <app-label>CA</app-label>
+        <app-label>Armor Class: </app-label>
       </div>
     </div>
 

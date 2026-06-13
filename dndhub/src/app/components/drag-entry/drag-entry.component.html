@@ -8,6 +8,7 @@
     (mousedown)="onMouseDown($event)" 
     (mousemove)="onMouseMove($event)"
     (mouseup)="onMouseUp()"
+    [disabled]="disabled"
   >
   <div class="entry-arrow" (click)="changeValue(1)">></div>
 </div>

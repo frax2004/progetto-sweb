@@ -32,6 +32,14 @@ export namespace Alerts {
     return (await alertController.create(options)).present();
   }
 
+  export function personalizedMessage(message: string, header: string) {
+    return Alerts.show({
+      header: header,
+      message: message,
+      buttons: ['OK'],
+    });
+  }
+
   export function notImplemetedError(func?: Function | undefined) {
     return Alerts.show({
       header: 'Error',

@@ -1,3 +1,15 @@
 .listContainerFrame {
     white-space: pre-wrap;
 }
+
+.spellChoiceFrame {
+    border-bottom: 1px gray solid;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.genericCheckbox {
+    margin-left: 2.5vw;
+}

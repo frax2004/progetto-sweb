@@ -22,7 +22,9 @@ import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.com
 export class OptionSelectionPage implements OnInit {
   simpleWeapons = ['club','dagger','greatclub','handaxe','javelin','light hammer','mace','quarterstaff','sickle','spear','dart','light crossbow','shortbow','sling'];
   simpleMeleeWeapons = ['club','dagger','greatclub','handaxe','javelin','light hammer','mace','quarterstaff','sickle','spear'];
+  martilWeapons = ['battleaxe','flail','glaive','greataxe','greatsword','halberd','lance','longsword','maul','morningstar','pike','rapier','scimitar','trident','war pick','warhammer','whip','blowgun','hand-crossbow','heavy-crossbow','longbow','net'];
   musicalInstruments = ['Bagpipes','Drum','Dulcimer','Flute','Lyre','Horn','Pan flute','Shawm','Viol'];
+  //
   classChoices;
   speciesChoices;
   backgroundChoices;
@@ -402,7 +404,7 @@ export class OptionSelectionPage implements OnInit {
     for (const choice of choices) {
       let arrEl = {
         choose: choice.desc.replace(/\\n/, '').replace(/a /, '').replace(/ or/, '').replace(/an /, '').replace(/, or/, '').replace(/, /, '')
-        .replace(/a longsword,/, 'longsword')
+        .replace(/a longsword,/, 'longsword').replace(/armorlongbow/, 'armor, longbow')
         .split(/\([abcd]\)/).filter(el => el !== '' && el !== ' ' && el !== null).map(el => el),
         quantity: choice.choose,
         leftToChoose: choice.choose,
@@ -488,7 +490,7 @@ export class OptionSelectionPage implements OnInit {
     this.choicesDiplayer
     .displayClassByName(
       // scritto così per testing, da levare || quando finiremo coi test
-      CharacterInstance.chosenClass || 'bard'
+      CharacterInstance.chosenClass || 'fighter'
     )
     .subscribe({
       next: (value: any) => {
@@ -505,6 +507,7 @@ export class OptionSelectionPage implements OnInit {
           };
         this.className = this.classChoices.name;
         this.classContent = this.classChoices.content;
+        console.log(JSON.stringify(value.classes[0].starting_equipment_options,null,2));
         this.regularProfToChoose = value.classes[0].proficiency_choices[0].choose;
         this.extraProfToChoose = OptionSelectionPage.displayClassProficiencyChoices(value.classes[0].proficiency_choices).extraProficiencies.length === 0 ? 0 : this.regularProfToChoose;
         this.choicesDiplayer

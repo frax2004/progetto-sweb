@@ -13,6 +13,7 @@ import { LabelComponent } from "src/app/components/label/label.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
 import { Router } from '@angular/router';
 import { CharacterInstance } from '../CharacterInformation';
+import { CharacterManagementService } from 'src/app/services/character.management.service';
 
 @Component({
   selector: 'app-overview',
@@ -22,6 +23,11 @@ import { CharacterInstance } from '../CharacterInformation';
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ScrollBarComponent, IonItem, IonRow, IonCol, IonGrid, IonLabel, AccordionComponent, IonInput, EntryComponent, TextAreaComponent, ButtonComponent, TitleComponent, LabelComponent, IonList, UnorderedListElementComponent]
 })
 export class OverviewPage implements OnInit {
+  showLevel: number;
+  showBackground: string;
+  classDetails;
+  allEquipmentArray = [];
+  //
   averageHP: boolean = true;
   manualHP: boolean = false;
   constitutionMod: number = +3;
@@ -74,7 +80,32 @@ export class OverviewPage implements OnInit {
     return Math.ceil((HPdice/2 + 0.5)*lvl);
   }
 
-  constructor(private router: Router, public popoverController: PopoverController) { }
+  static getAllEquipment(classEquipment) {
+    
+  }
+
+  constructor(private router: Router, public popoverController: PopoverController, private characterManagement: CharacterManagementService) { 
+    this.showLevel = CharacterInstance.chosenLevel;
+    this.showBackground = CharacterInstance.chosenBackground;
+  
+    
+    this.characterManagement
+    .displayClassByName(
+      CharacterInstance.chosenClass || 'fighter'
+    )
+    .subscribe({
+      next: (value: any) => {
+        this.classDetails = {
+          name: value.classes.name,
+          hit_die: value.classes.hit_die,
+          proficiencies: value.classes.proficiencies,
+          saving_throws: value.classes.saving_throws,
+          starting_equipment: value.classes.starting_equipment
+        };
+      },
+      error: (err) => alert(err)
+    })
+  }
 
   ngOnInit() {
   }

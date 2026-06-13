@@ -109,6 +109,7 @@
               }
             }
 
+
             @if(option.title === 'Subclasses') {
               <h3>{{option.title}}</h3>
               <app-label>Choose 1 of the following:</app-label>
@@ -126,6 +127,100 @@
           } 
         }
       </div>
+
+      <!-- scelte opzionali ASI (Ability Score Increment)-->
+      @if(maxStats > 0) {
+        <div class="choiceBlock">
+          <div class="paragraphStartContainer">
+            <h1>Ability Score Increment Choices</h1>
+            <br>
+            <h3>You have {{statsToChoose()}} ability score increments to choose</h3>
+            <div class="statisticsChoice">
+
+              <!-- number entry STRENGTH -->
+              <div class="statSelection">
+                <app-label>STRENGTH</app-label>
+                <app-drag-entry
+                id="strengthDragEntry"
+                [min]="0"
+                [max]="maxStats - dexMax() - conMax() - intMax() - wisMax() - chaMax()"
+                [sensitivity]="1"
+                [disabled]="true"
+                [onDidValueChange]="addStatStr"
+                >
+                </app-drag-entry>
+              </div>
+
+              <div class="statSelection">
+                <app-label>DEXTERITY</app-label>
+                <app-drag-entry
+                id="dexterityDragEntry"
+                [min]="0"
+                [max]="maxStats - strMax() - conMax() - intMax() - wisMax() - chaMax()"
+                [sensitivity]="1"
+                [disabled]="true"
+                [onDidValueChange]="addStatDex"
+                >
+                </app-drag-entry>
+              </div>
+
+              <div class="statSelection">
+                <app-label>CONSTITUTION</app-label>
+                <app-drag-entry
+                id="constitutionDragEntry"
+                [min]="0"
+                [max]="maxStats - dexMax() - strMax() - intMax() - wisMax() - chaMax()"
+                [sensitivity]="1"
+                [disabled]="true"
+                [onDidValueChange]="addStatCon"
+                >
+                </app-drag-entry>
+              </div>
+
+              <div class="statSelection">
+                <app-label>INTELLIGENCE</app-label>
+                <app-drag-entry
+                id="intelligenceDragEntry"
+                [min]="0"
+                [max]="maxStats - dexMax() - conMax() - strMax() - wisMax() - chaMax()"
+                [sensitivity]="1"
+                [disabled]="true"
+                [onDidValueChange]="addStatInt"
+                >
+                </app-drag-entry>
+              </div>
+
+              <div class="statSelection">
+                <app-label>WISDOM</app-label>
+                <app-drag-entry
+                id="wisdomDragEntry"
+                [min]="0"
+                [max]="maxStats - dexMax() - conMax() - intMax() - strMax() - chaMax()"
+                [sensitivity]="1"
+                [disabled]="true"
+                [onDidValueChange]="addStatWis"
+                >
+                </app-drag-entry>
+              </div>
+
+              <div class="statSelection">
+                <app-label>CHARISMA</app-label>
+                <app-drag-entry
+                id="charismaDragEntry"
+                [min]="0"
+                [max]="maxStats - dexMax() - conMax() - intMax() - wisMax() - strMax()"
+                [sensitivity]="1"
+                [disabled]="true"
+                [onDidValueChange]="addStatCha"
+                >
+                </app-drag-entry>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      }
+      
 
       <!-- scelte opzionali specie -->
       <div class="choiceBlock">

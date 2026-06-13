@@ -51,7 +51,7 @@ export class SpellSelectionPage implements OnInit {
   }
   
   buttonCallbacks = {
-    previousPage: { onClick: Navigate.toPath(this.router,'stats-selection')},
+    previousPage: { onClick: Navigate.toPath(this.router,'option-selection')},
     nextPage: { onClick: this.nextPage},
   };
 

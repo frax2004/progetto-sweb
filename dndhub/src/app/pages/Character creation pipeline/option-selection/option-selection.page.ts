@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonList } from '@ionic/angular/standalone';
@@ -10,13 +10,14 @@ import { dnd } from 'dbserver/database.queries';
 import { Alerts, Navigate } from 'src/app/core/core';
 import { ButtonComponent } from "src/app/components/button/button.component";
 import { Router } from '@angular/router';
+import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.component";
 
 @Component({
   selector: 'app-option-selection',
   templateUrl: './option-selection.page.html',
   styleUrls: ['./option-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, TitleComponent, LabelComponent, IonLabel, IonList, ButtonComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, TitleComponent, LabelComponent, IonLabel, IonList, ButtonComponent, DragEntryComponent]
 })
 export class OptionSelectionPage implements OnInit {
   simpleWeapons = ['club','dagger','greatclub','handaxe','javelin','light hammer','mace','quarterstaff','sickle','spear','dart','light crossbow','shortbow','sling'];
@@ -32,6 +33,21 @@ export class OptionSelectionPage implements OnInit {
   className;
   speciesName;
   backgroundName;
+  //
+  statsToChoose = signal<number>(0);
+  strMax = signal<number>(0);
+  dexMax = signal<number>(0);
+  conMax = signal<number>(0);
+  intMax = signal<number>(0);
+  wisMax = signal<number>(0);
+  chaMax = signal<number>(0);
+  maxStats: number;
+  // @ViewChild('strengthDragEntry') private strengthDragEntry: DragEntryComponent; 
+  // @ViewChild('dexterityDragEntry') private dexterityDragEntry: DragEntryComponent; 
+  // @ViewChild('constitutionDragEntry') private constitutionDragEntry: DragEntryComponent; 
+  // @ViewChild('intelligenceDragEntry') private intelligenceDragEntry: DragEntryComponent; 
+  // @ViewChild('wisdomDragEntry') private wisdomDragEntry: DragEntryComponent; 
+  // @ViewChild('charismaDragEntry') private charismaDragEntry: DragEntryComponent; 
   //
   regularProfToChoose: number;
   regularProfArray = [];
@@ -59,6 +75,35 @@ export class OptionSelectionPage implements OnInit {
   //
   BACKGROUNDoptEquip = [];
 
+  addStatStr = (amount: number) => {
+    this.statsToChoose.set(this.statsToChoose() - amount);
+    this.strMax.set(this.strMax() + amount);
+  }
+
+  addStatDex = (amount: number) => {
+    this.statsToChoose.set(this.statsToChoose() - amount);
+    this.dexMax.set(this.dexMax() + amount);
+  }
+
+  addStatCon = (amount: number) => {
+    this.statsToChoose.set(this.statsToChoose() - amount);
+    this.conMax.set(this.conMax() + amount);
+  }
+
+  addStatInt = (amount: number) => {
+    this.statsToChoose.set(this.statsToChoose() - amount);
+    this.intMax.set(this.intMax() + amount);
+  }
+
+  addStatWis = (amount: number) => {
+    this.statsToChoose.set(this.statsToChoose() - amount);
+    this.wisMax.set(this.wisMax() + amount);
+  }
+  addStatCha = (amount: number) => {
+    this.statsToChoose.set(this.statsToChoose() - amount);
+    this.chaMax.set(this.chaMax() + amount);
+  }
+
   nextPage = () => {
     //controlli per andare avanti
     const validateRegularProf: boolean = this.regularProfToChoose===0;
@@ -70,7 +115,9 @@ export class OptionSelectionPage implements OnInit {
     const validateSubspecies: boolean = (this.hasSubspecies===true && this.chosenSubspecies!==undefined) || (!this.hasSubspecies===false && this.chosenSubspecies===undefined);
     const validateBGlanguages: boolean = this.BACKGROUNDlanguagesToChoose===0;
     const validateBGoptEquipment: boolean = this.BACKGROUNDoptEquip.length === this.backgroundContent[1].content.length;
-    
+    const validateASI: boolean = this.statsToChoose() === 0;
+    const className = CharacterInstance.chosenClass.toLowerClass();
+    const validateSpellSelection = (className!==undefined) && (className === 'bard' || className === 'cleric' || className === 'druid' || className === 'paladin' || className === 'ranger' || className === 'sorcerer' || className === 'warlock' || className === 'wizard');
     if (
       validateRegularProf &&
       validateExtraProf &&
@@ -80,7 +127,8 @@ export class OptionSelectionPage implements OnInit {
       validateLanguages &&
       validateSubspecies &&
       validateBGlanguages &&
-      validateBGoptEquipment
+      validateBGoptEquipment &&
+      validateASI
     ) {
       CharacterInstance.chosenRegularProficiencies = this.regularProfArray;
       CharacterInstance.chosenExtraProficiencies = this.extraProfArray;
@@ -90,7 +138,21 @@ export class OptionSelectionPage implements OnInit {
       CharacterInstance.chosenSubspecies = this.chosenSubspecies;
       CharacterInstance.chosenBackgroundLanguages = this.BACKGROUNDchosenLanguages;
       CharacterInstance.chosenBackgroundEquipment = this.BACKGROUNDoptEquip;
-      this.router.navigate(['stats-selection']);
+      // setto le statistiche
+      // forza
+      CharacterInstance.setStatistics('strength',CharacterInstance.getStatisticValue('strength') + this.strMax());
+      // destrezza
+      CharacterInstance.setStatistics('dexterity',CharacterInstance.getStatisticValue('dexterity') + this.dexMax());
+      //costituzione
+      CharacterInstance.setStatistics('constitution',CharacterInstance.getStatisticValue('constitution') + this.conMax());
+      // intelligenza
+      CharacterInstance.setStatistics('intelligence',CharacterInstance.getStatisticValue('intelligence') + this.intMax());
+      // saggezza
+      CharacterInstance.setStatistics('wisdom',CharacterInstance.getStatisticValue('wisdom') + this.wisMax());
+      // carisma
+      CharacterInstance.setStatistics('charisma',CharacterInstance.getStatisticValue('charisma') + this.chaMax());
+      if (validateSpellSelection) this.router.navigate(['spell-selection']);
+      else this.router.navigate(['overview']);
     }
     else {
       Alerts.personalizedMessage('There are still abilities to be chosen.','Not done!');
@@ -107,7 +169,7 @@ export class OptionSelectionPage implements OnInit {
   }
 
   buttonCallbacks = {
-    previousPage: { onClick: Navigate.toPath(this.router,'background-selection')},
+    previousPage: { onClick: Navigate.toPath(this.router,'stats-selection')},
     nextPage: { onClick: this.nextPage},
   };
 
@@ -417,6 +479,12 @@ export class OptionSelectionPage implements OnInit {
   }
 
   constructor(private router: Router, private choicesDiplayer: CharacterManagementService) {
+    //inizializzo stats too choose
+    // this.statsToChoose = CharacterInstance.chosenASI * 2;
+    //da levare, è così solo per i test
+    this.statsToChoose.set(6);
+    this.maxStats = this.statsToChoose()
+
     this.choicesDiplayer
     .displayClassByName(
       // scritto così per testing, da levare || quando finiremo coi test

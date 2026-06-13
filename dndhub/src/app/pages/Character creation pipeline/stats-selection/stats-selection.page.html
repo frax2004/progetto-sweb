@@ -67,15 +67,15 @@
           <div class="dragEntryBlock">
             <app-label>Strength</app-label>
             <app-drag-entry
-              #strenghtDragEntry
-              id="strenghtDragEntry"
+              #strengthDragEntry
+              id="strengthDragEntry"
               [sensitivity] = 1
               [max] = 20
               [min] = 1
               ></app-drag-entry>
           </div>
           <div class="modifierContainer">
-            <app-label>Strength modifier: {{statModifierDict[strenghtDragEntry.value]}}</app-label>
+            <app-label>Strength modifier: {{statModifierDict[strengthDragEntry.value]}}</app-label>
           </div>
         </div>
 
@@ -172,17 +172,43 @@
 
   @if (stdArray===true) {
     <ion-item class="gridContainer">
-      <app-radio-button
-      [radios] = "radios"
-      [groupValue] = "'radioGroup'"
-      ></app-radio-button>
+      <ion-list>
+        <ion-radio-group value="groupRadio">
+          @for(radio of arrayStandards; track radio) {
+            <div class="stdArrayContainer">
+              <div class="statDisplayContainer">
+                @for(statistics of radio; track statistics) {
+                  <app-label>{{statistics.stat}}: {{statistics.value}}</app-label>
+                }
+              </div>
+              <div class="radioContainer">
+                <ion-radio (click)="stdArraySetStats(radio)">
+                </ion-radio>
+              </div>
+            </div>
+          }
+          
+          
+        </ion-radio-group>
+      </ion-list>
     </ion-item>
   }
 
   @if (randomSelection===true) {
-    <ion-item class="gridContainer">
-      <app-label id="randomLabel">Le statistiche rollate sono: {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}}</app-label>
-    </ion-item>
+    <!-- <app-label>The randomized stats are as follows</app-label> -->
+    <!-- <br> -->
+    <div class="randomListContainer">
+      <ion-list class="randomList">
+        <div class="statDisplayRandom">
+          <app-label>Strength: {{currStats.strength}}</app-label>
+          <app-label>Dexterity: {{currStats.dexterity}}</app-label>
+          <app-label>Constitution: {{currStats.constitution}}</app-label>
+          <app-label>Intelligence: {{currStats.intelligence}}</app-label>
+          <app-label>Wisdom: {{currStats.wisdom}}</app-label>
+          <app-label>Charisma: {{currStats.charisma}}</app-label>
+        </div>
+      </ion-list>
+    </div>
   }
 <!-- 
   <div>

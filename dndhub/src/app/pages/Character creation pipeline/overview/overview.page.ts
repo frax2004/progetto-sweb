@@ -36,7 +36,7 @@ export class OverviewPage implements OnInit {
     const className = CharacterInstance.chosenClass.toLowerClass();
     const validateSpellSelection = (className!==undefined) && (className === 'bard' || className === 'cleric' || className === 'druid' || className === 'paladin' || className === 'ranger' || className === 'sorcerer' || className === 'warlock' || className === 'wizard');
     if (validateSpellSelection) this.router.navigate(['spell-selection']);
-    else this.router.navigate(['stats-selection']);
+    else this.router.navigate(['option-selection']);
   }
 
   buttonCallbacks = {

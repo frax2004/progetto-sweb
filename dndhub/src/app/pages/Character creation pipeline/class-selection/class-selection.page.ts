@@ -39,7 +39,13 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     CharacterInstance.chosenLevel = this.levelEntry.value;
     const validClass: boolean = CharacterInstance.chosenClass !== undefined;
     if (CharacterInstance.chosenLevel>0 && validClass) {
-      CharacterInstance.baseEquipment = 
+      for (const _class of this.classesArray) {
+        if (CharacterInstance.chosenClass === _class.title) {
+          CharacterInstance.baseEquipment = _class.base_equipment;
+          CharacterInstance.baseProficiencies = _class.base_proficiencies;
+          CharacterInstance.baseSavingThrows = _class.base_saving_throws;
+        }
+      }
       CharacterInstance.chosenASI = this.getNumberOfASI();
       this.router.navigate(['/species-selection']);
     }

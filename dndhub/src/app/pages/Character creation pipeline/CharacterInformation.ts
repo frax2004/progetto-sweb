@@ -72,6 +72,9 @@ export class CharacterInstance {
   private static chosen_species = undefined;
   private static chosen_background = undefined;
   private static chosen_level = undefined;
+  private static base_equipment = undefined;
+  private static base_proficiencies = undefined;
+  private static base_saving_throws = undefined;
   private static _statistics = {
     'strength': { value: 0, modifier: StatModifierNumber[0]},
     'dexterity': { value: 0, modifier: StatModifierNumber[0]},
@@ -99,6 +102,30 @@ export class CharacterInstance {
     this.chosen_class = undefined;
     this.chosen_species = undefined;
     this.chosen_background = undefined;
+  }
+
+  static set baseSavingThrows(savingThrows) {
+    this.base_saving_throws = savingThrows;
+  }
+
+  static get baseSavingThrows() {
+    return this.base_saving_throws;
+  }
+
+  static set baseProficiencies(proficiencies) {
+    this.base_proficiencies = proficiencies;
+  }
+
+  static get baseProficiencies() {
+    return this.base_proficiencies;
+  }
+
+  static set baseEquipment(equipment) {
+    this.base_equipment = equipment;
+  }
+
+  static get baseEquipment() {
+    return this.base_equipment;
   }
 
   static get chosenASI() {

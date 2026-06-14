@@ -39,6 +39,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     CharacterInstance.chosenLevel = this.levelEntry.value;
     const validClass: boolean = CharacterInstance.chosenClass !== undefined;
     if (CharacterInstance.chosenLevel>0 && validClass) {
+      CharacterInstance.baseEquipment = 
       CharacterInstance.chosenASI = this.getNumberOfASI();
       this.router.navigate(['/species-selection']);
     }
@@ -68,6 +69,46 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     }
 
     return 0;
+  }
+
+  static generateBaseEquipment(startingEquipment: dnd.StartingEquipment[]) {
+    let retArray = [];
+    for (const el of startingEquipment) {
+      let retEl = {
+        index: el.equipment.index,
+        name: el.equipment.name,
+        quantity: el.quantity
+      };
+      retArray.push(retEl);
+    }
+
+    return retArray;
+  }
+
+  static generateBaseProficiencies(proficiencies: dnd.APIReference[]) {
+    let retArray = [];
+    for (const el of proficiencies) {
+      if(!el.name.includes('Saving Throw')) {
+        retArray.push({
+          index: el.index,
+          name: el.name
+        });
+      }
+    }
+
+    return retArray;
+  }
+
+  static generateBaseSavingThrows(savingThrows: dnd.APIReference[]) {
+    let retArray = [];
+    for (const el of savingThrows) {
+      retArray.push({
+        index: el.index,
+        name: el.name,
+      })
+    }
+
+    return retArray;
   }
 
 
@@ -201,6 +242,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     }
   }
 
+
   // le funzioni display devono essere static altrimenti non possono essere accedute all'interno del costruttore
   static displayProficiencies(className, proficiencies) {
     let retValue = '';
@@ -271,7 +313,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     //return choiceValue;
   }
 
-  static displayStartingEquipment(className, startingEquipment) {
+  static displayStartingEquipment(className, startingEquipment: dnd.StartingEquipment[]) {
     let retValue = className + ' dispone del seguente equipaggiamento di partenza:\n';
 
     for (const el of startingEquipment) {
@@ -473,6 +515,9 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
             choiceButton: ClassSelectionPage.classesButtons[item.name],
             title: item.name,
             hit_die: item.hit_die, 
+            base_equipment: ClassSelectionPage.generateBaseEquipment(item.starting_equipment),
+            base_proficiencies: ClassSelectionPage.generateBaseProficiencies(item.proficiencies),
+            base_saving_throws: ClassSelectionPage.generateBaseSavingThrows(item.saving_throws),
             content: [
               { value: "proficiencies accordion",  title: "Competenze", content: ClassSelectionPage.displayProficiencies(item.name,item.proficiencies)},
               { value: "saving_throws accordion",  title: "Tiri salvezza", content: ClassSelectionPage.displaySavingThrows(item.name,item.saving_throws)},

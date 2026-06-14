@@ -80,7 +80,7 @@ export class OverviewPage implements OnInit {
     return Math.ceil((HPdice/2 + 0.5)*lvl);
   }
 
-  static getAllEquipment(classEquipment) {
+  static pushAllEquipment(classEquipment) {
     
   }
 

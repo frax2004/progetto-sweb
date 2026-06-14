@@ -230,7 +230,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     // forse abbiamo flattato un po' troppa roba...
     let retValue = '';
     for (const el of choices) {
-         retValue = retValue + '\n- ' + el.desc;
+      if (el.desc !== undefined && el.desc !== null) retValue = retValue + '\n- ' + el.desc;
     }
 
     return className + ' puo\' scegliere tra le seguenti competenze\n' + retValue;
@@ -284,7 +284,10 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
   static displayStartigEquipmentOptions(className: string,equipOpt: dnd.Choice[]) {
     let retValue = className + ' dispone delle seguenti opzioni di scelta di equipaggiamento:\n'
     for (const opt of equipOpt) {
-      if (opt.choose !== null && opt.desc !== null) {
+      if (
+        opt.choose !== null && 
+        opt.desc !== null 
+      ) {
         retValue = retValue + '\n- ' + opt.desc + ' - Choose: ' + opt.choose;
       }
       // for (const item of opt.from.options){

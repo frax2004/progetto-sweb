@@ -22,7 +22,8 @@ import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.com
 export class OptionSelectionPage implements OnInit {
   simpleWeapons = ['club','dagger','greatclub','handaxe','javelin','light hammer','mace','quarterstaff','sickle','spear','dart','light crossbow','shortbow','sling'];
   simpleMeleeWeapons = ['club','dagger','greatclub','handaxe','javelin','light hammer','mace','quarterstaff','sickle','spear'];
-  martilWeapons = ['battleaxe','flail','glaive','greataxe','greatsword','halberd','lance','longsword','maul','morningstar','pike','rapier','scimitar','trident','war pick','warhammer','whip','blowgun','hand-crossbow','heavy-crossbow','longbow','net'];
+  martialWeapons = ['battleaxe','flail','glaive','greataxe','greatsword','halberd','lance','longsword','maul','morningstar','pike','rapier','scimitar','trident','war pick','warhammer','whip','blowgun','hand-crossbow','heavy-crossbow','longbow','net'];
+  martialMeleeWeapons = ['battleaxe','flail','glaive','greataxe','greatsword','halberd','lance','longsword','maul','morningstar','pike','rapier','scimitar','trident','war pick','warhammer','whip'];
   musicalInstruments = ['Bagpipes','Drum','Dulcimer','Flute','Lyre','Horn','Pan flute','Shawm','Viol'];
   //
   classChoices;
@@ -114,11 +115,11 @@ export class OptionSelectionPage implements OnInit {
     const validateSubclass: boolean = (this.charLevel>=3 && this.chosenSubclass!==undefined) || (this.charLevel<3 && this.chosenSubclass===undefined);
     const validateAbilityBonuses: boolean = this.abBonusToChoose===0;
     const validateLanguages: boolean = this.languagestoChoose===0;
-    const validateSubspecies: boolean = (this.hasSubspecies===true && this.chosenSubspecies!==undefined) || (!this.hasSubspecies===false && this.chosenSubspecies===undefined);
+    const validateSubspecies: boolean = (this.hasSubspecies===true && this.chosenSubspecies!==undefined) || (this.hasSubspecies===false && this.chosenSubspecies===undefined);
     const validateBGlanguages: boolean = this.BACKGROUNDlanguagesToChoose===0;
     const validateBGoptEquipment: boolean = this.BACKGROUNDoptEquip.length === this.backgroundContent[1].content.length;
     const validateASI: boolean = this.statsToChoose() === 0;
-    const className = CharacterInstance.chosenClass.toLowerClass() ;
+    const className /*= CharacterInstance.chosenClass.toLowerClass() */  = undefined;
     const validateSpellSelection = (className!==undefined) && (className === 'bard' || className === 'cleric' || className === 'druid' || className === 'paladin' || className === 'ranger' || className === 'sorcerer' || className === 'warlock' || className === 'wizard');
     if (
       validateRegularProf &&
@@ -382,10 +383,12 @@ export class OptionSelectionPage implements OnInit {
     let extraProfArray = [];
     for (const choice of choices) {
       for (const opt of choice.from.options) {
-        if (opt.reference_item.name.includes('Skill:')) {
-          regularProfArray.push(opt.reference_item.name);
+        if (opt.reference_item?.name !== undefined) {
+          if (opt.reference_item?.name.includes('Skill:')) {
+            regularProfArray.push(opt.reference_item.name);
+          }
+          else extraProfArray.push(opt.reference_item?.name)
         }
-        else extraProfArray.push(opt.reference_item.name)
       }
     }
 
@@ -402,16 +405,24 @@ export class OptionSelectionPage implements OnInit {
     let retArray = [];
     let indexGenerator = 0;
     for (const choice of choices) {
-      let arrEl = {
-        choose: choice.desc.replace(/\\n/, '').replace(/a /, '').replace(/ or/, '').replace(/an /, '').replace(/, or/, '').replace(/, /, '')
-        .replace(/a longsword,/, 'longsword').replace(/armorlongbow/, 'armor, longbow')
-        .split(/\([abcd]\)/).filter(el => el !== '' && el !== ' ' && el !== null).map(el => el),
-        quantity: choice.choose,
-        leftToChoose: choice.choose,
-        index: indexGenerator,
-      };
-      indexGenerator++;
-      retArray.push(arrEl);
+      if (choice.desc?.replace !== undefined) {
+        let arrEl = {
+          choose: choice.desc?.replace(/\\n/, '')
+          .replace(/a /, '')
+          .replace(/ or/, '')
+          .replace(/an /, '')
+          .replace(/, or/, '')
+          .replace(/, /, '')
+          .replace(',','')
+          .replace(/a longsword,/, 'longsword').replace(/armorlongbow/, 'armor, longbow')
+          .split(/\([abcd]\)/).filter(el => el !== '' && el !== ' ' && el !== null).map(el => el),
+          quantity: choice.choose,
+          leftToChoose: choice.choose,
+          index: indexGenerator,
+        };
+        indexGenerator++;
+        retArray.push(arrEl);
+      }
     }
 
     return retArray;
@@ -511,7 +522,7 @@ export class OptionSelectionPage implements OnInit {
         this.extraProfToChoose = OptionSelectionPage.displayClassProficiencyChoices(value.classes[0].proficiency_choices).extraProficiencies.length === 0 ? 0 : this.regularProfToChoose;
         this.choicesDiplayer
         .displaySpeciesByName(
-          CharacterInstance.chosenSpecies || 'half-elf'
+          CharacterInstance.chosenSpecies || 'human'
         )
         .subscribe({
           next: (value: any) => {
@@ -527,7 +538,7 @@ export class OptionSelectionPage implements OnInit {
             };
             this.speciesName = this.speciesChoices.name;
             this.speciesContent = this.speciesChoices.content;
-            this.hasSubspecies = (value.species[0].subraces !== null && value.species[0].subraces !== undefined);
+            this.hasSubspecies = (value.species[0].subraces.length > 0);
             this.abBonusToChoose = value.species[0].ability_bonus_options?.choose === undefined ? 0 : value.species[0].ability_bonus_options.choose;
             this.languagestoChoose = value.species[0].language_options?.choose === undefined ? 0 : value.species[0].language_options.choose;
             this.choicesDiplayer

@@ -39,8 +39,12 @@ export class BackgroundSelectionPage implements OnInit {
 
   nextPage = () => {
     if (BackgroundSelectionPage.selectedBackground !== undefined) {
+      for (const background of this.backgroundsArray) {
+        if (background.name.toLowerCase() === BackgroundSelectionPage.selectedBackground.toLowerCase()){
+          
+        }
+      }
       CharacterInstance.chosenBackground = BackgroundSelectionPage.selectedBackground;
-      //alert(CharacterInstance.selectedBackground);
       this.router.navigate(['/stats-selection']);
     }
     else this.setOpenAlert(true);
@@ -59,12 +63,6 @@ export class BackgroundSelectionPage implements OnInit {
     'Acolyte': 'You have spent your life in the service of a temple to a specific god or pantheon of gods. You act as an intermediary between the realm of the holy and the mortal world, performing sacred rites and offering sacrifices in order to conduct worshipers into the presence of the divine. You are not necessarily a cleric—performing sacred rites is not the same thing as channeling divine power.',
   };
   backgroundsArray = [];
-
-  // accordions: Accordion[] = [
-  //   { value: 'saggio accordion', title: 'Saggio', content: 'Il backgorund del saggio riguarda tutti i personaggi che hanno studiato assai prima di partire in avventura', button: this.b1},
-  //   { value: 'viandante accordion', title: 'Viandante', content: 'Letteralemente il background dei senzatetto', button: this.b1},
-  //   { value: 'marinaio accordion', title: 'Marinaio', content: 'Aaaaargh! Sono un pirata! AAAAAAAAAAAAAAAaargh!', button: this.b1},
-  // ];
 
   static selectedBackground: string = undefined;
   placeholderAlert(event: Event) {alert('Non ancora implementato');}
@@ -103,6 +101,20 @@ export class BackgroundSelectionPage implements OnInit {
   'Thieves Cant',
   'Undercommon',
   ]
+
+  static generateBaseEquipment(startingEquipment: dnd.StartingEquipment[]) {
+    let retArray = [];
+    for (const el of startingEquipment) {
+      let retEl = {
+        index: el.equipment.index,
+        name: el.equipment.name,
+        quantity: el.quantity
+      };
+      retArray.push(retEl);
+    }
+
+    return retArray;
+  }
 
   static displayLanguages(bgName, languages: dnd.Choice) {
     let retValue = bgName + ' can choose ' + languages.choose + ' languages among the following:\n';
@@ -148,6 +160,7 @@ export class BackgroundSelectionPage implements OnInit {
             btnCtx: (event: Event) => BackgroundSelectionPage.selectedBackground = item.name,
             starting_gold: item.starting_gold,
             feature: item.feature,
+            equipment: BackgroundSelectionPage.generateBaseEquipment(item.starting_equipment),
             content: [
               { value: "starting_gold accordion",  title: "Starting Gold", content: item.name + ` has ` + item.starting_gold.quantity + ` ` + item.starting_gold.unit},
               { value: "feature accordion",  title: "Feature: " + item.feature.name, content: item.feature.desc},

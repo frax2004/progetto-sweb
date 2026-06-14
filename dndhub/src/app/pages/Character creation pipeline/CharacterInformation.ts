@@ -72,9 +72,14 @@ export class CharacterInstance {
   private static chosen_species = undefined;
   private static chosen_background = undefined;
   private static chosen_level = undefined;
+  private static level_specifics = undefined;
   private static base_equipment = undefined;
   private static base_proficiencies = undefined;
   private static base_saving_throws = undefined;
+  private static species_ab_bonus = undefined;
+  private static species_languages = undefined;
+  private static species_traits = undefined;
+  private static background_
   private static _statistics = {
     'strength': { value: 0, modifier: StatModifierNumber[0]},
     'dexterity': { value: 0, modifier: StatModifierNumber[0]},
@@ -102,6 +107,38 @@ export class CharacterInstance {
     this.chosen_class = undefined;
     this.chosen_species = undefined;
     this.chosen_background = undefined;
+  }
+
+  static set levelSpecifics(levelspecifics) {
+    this.level_specifics = levelspecifics;
+  }
+
+  static get levelSpecifics() {
+    return this.level_specifics;
+  }
+
+  static set speciesTraits(traits) {
+    this.species_traits = traits;
+  }
+
+  static get speciesTraits() {
+    return this.species_traits;
+  }
+
+  static set speciesLanguages(languages) {
+    this.species_languages = languages;
+  }
+
+  static get speciesLanguages() {
+    return this.species_languages;
+  }
+
+  static set speciesAbilityBonus(abBonus) {
+    this.species_ab_bonus = abBonus;
+  }
+
+  static get speciesAbilityBonus() {
+    return this.species_ab_bonus;
   }
 
   static set baseSavingThrows(savingThrows) {

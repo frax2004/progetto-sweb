@@ -46,6 +46,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
           CharacterInstance.baseSavingThrows = _class.base_saving_throws;
         }
       }
+      CharacterInstance.levelSpecifics = this.getLevelSpecifics();
       CharacterInstance.chosenASI = this.getNumberOfASI();
       this.router.navigate(['/species-selection']);
     }
@@ -75,6 +76,40 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     }
 
     return 0;
+  }
+
+  getLevelSpecifics() {
+    if (this.levelEntry.value === 0 || CharacterInstance.chosenClass === undefined) return undefined;
+    const className = CharacterInstance.chosenClass.toLowerCase();
+    let featArray = [];
+    for(const level of ClassSelectionPage.lvlsArray) {
+      if (level.idx===className) {
+        for(let i=0; i<this.levelEntry.value; i++) {
+          for(const feat of level.content[i].features) {
+            if (feat.name !== 'Ability Score Improvement') featArray.push(feat.index);
+          }
+        }
+        return {
+          feats: featArray,
+          class_specific: level.content[this.levelEntry.value-1].class_specific,
+          proficiency_bonus: level.content[this.levelEntry.value-1].prof_bonus,
+          cantrips_known: level.content[this.levelEntry.value-1].cantrips_known,
+          spell_slots_level_1 : level.content[this.levelEntry.value-1].spell_slots_level_1,
+          spell_slots_level_2 : level.content[this.levelEntry.value-1].spell_slots_level_2,
+          spell_slots_level_3 : level.content[this.levelEntry.value-1].spell_slots_level_3,
+          spell_slots_level_4 : level.content[this.levelEntry.value-1].spell_slots_level_4,
+          spell_slots_level_5 : level.content[this.levelEntry.value-1].spell_slots_level_5,
+          spell_slots_level_6 : level.content[this.levelEntry.value-1].spell_slots_level_6,
+          spell_slots_level_7 : level.content[this.levelEntry.value-1].spell_slots_level_7,
+          spell_slots_level_8 : level.content[this.levelEntry.value-1].spell_slots_level_8,
+          spell_slots_level_9 : level.content[this.levelEntry.value-1].spell_slots_level_9,
+          spells_known: level.content[this.levelEntry.value-1].spells_known,
+          aura_range: level.content[this.levelEntry.value-1].aura_range,
+        };        
+      }
+    }
+
+    return undefined;
   }
 
   static generateBaseEquipment(startingEquipment: dnd.StartingEquipment[]) {

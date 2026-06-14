@@ -39,6 +39,13 @@ export class SpeciesSelectionPage implements OnInit {
 
   nextPage = () => {
     if (SpeciesSelectionPage.selectedSpecies !== undefined) {
+      for(const species of this.speciesArray) {
+        if (species.name === SpeciesSelectionPage.selectedSpecies) {
+          CharacterInstance.speciesAbilityBonus = species.species_ability_bonuses;
+          CharacterInstance.speciesLanguages = species.species_languages;
+          CharacterInstance.speciesTraits = species.species_traits;
+        }
+      }
       CharacterInstance.chosenSpecies = SpeciesSelectionPage.selectedSpecies;
       this.router.navigate(['/background-selection']);
     }
@@ -134,6 +141,41 @@ export class SpeciesSelectionPage implements OnInit {
   }
 
 
+  static generateSpeciesAbilityBonuses(abBonuses: dnd.AbilityBonus[]) {
+    let abilityBonuses = {
+      'strength': 0,
+      'dexterity' : 0,
+      'constitution' : 0,
+      'wisdom' : 0,
+      'intelligence' : 0,
+      'charisma' : 0
+    };
+
+    for (const ab of abBonuses) {
+      const abScoreName = ab.ability_score?.name === 'STR' ? 'strength' :
+                          ab.ability_score?.name === 'DEX' ? 'dexterity' :
+                          ab.ability_score?.name === 'CON' ? 'constitution' :
+                          ab.ability_score?.name === 'WIS' ? 'wisdom' :
+                          ab.ability_score?.name === 'INT' ? 'intelligence' : 'charisma';
+      abilityBonuses[abScoreName] = abilityBonuses[abScoreName] + ab.bonus;
+    }
+
+    return abilityBonuses;
+  }
+
+  static generateTraits(traits: dnd.APIReference[]) {
+    let retArray = [];
+
+    for (const trait of traits) {
+      retArray.push({
+        index: trait.index,
+        name: trait.name
+      });
+    }
+
+    return retArray;
+  }
+
   static displayAbilityBonuses(specName: string,abBonuses: dnd.AbilityBonus[]) {
     let retValue = specName + ' gives the following bonuses to Ability Scores:\n';
 
@@ -206,6 +248,9 @@ export class SpeciesSelectionPage implements OnInit {
             size: item.size,
             size_description: item.size_description,
             language_desc: item.language_desc,
+            species_ability_bonuses: SpeciesSelectionPage.generateSpeciesAbilityBonuses(item.ability_bonuses),
+            species_languages: item.languages,
+            species_traits: SpeciesSelectionPage.generateTraits(item.traits),
             content: [
               { value: "ability_bonuses accordion",  title: "Ability Bonus", content: SpeciesSelectionPage.displayAbilityBonuses(item.name,item.ability_bonuses)},
               { value: "ability_bonus_options accordion",  title: "Ability Bonus Options", content: SpeciesSelectionPage.displayAbilityBonusOptions(item.name)},

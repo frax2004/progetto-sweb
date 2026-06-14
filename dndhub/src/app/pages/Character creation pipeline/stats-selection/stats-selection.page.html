@@ -1,26 +1,24 @@
 <ion-content>
-  <app-title class="titolo"
-  [title] = "'Scegli le statistiche'" 
+  <app-title
+  [title] = "'Scegli le statistiche'"
   ></app-title>
-  <div class="imgbackground"></div>
+  
   <!-- tre bottoni, uno accanto all'altro che permettono di modificare il metodo di selezione statistiche -->
-  <!-- il titolo mi siddia cambiarlo sinceramente quindi lo lascio così però secondo me dovremmo fare una sorta di
-  titolo col logo DnDhub in quasi tutte le pagine e sceglierne uno comune -->
+
   <div class="goBack">
     <app-button
-    class="buttonPersonalizzato"
-    [button] = "{ text: 'Torna indietro', expand: '',color:'gold'}"
+    [button] = "{ text: 'Torna indietro', expand: ''}"
     [context] = "buttonCallbacks['previousPage']"
     ></app-button>
     <!-- manca il context -->
   </div>
 
-  <!-- <div class="gridContainer buttonGrid">
+  <ion-item class="gridContainer buttonGrid">
     <ion-grid>
-      <ion-row> -->
+      <ion-row>
 
         <!-- bottono selezione manuale -->
-        <!-- <ion-col>
+        <ion-col>
           <div class="HPchoiceButtonContainer">
             <app-button
             class = "HPchoiceButton"
@@ -29,10 +27,10 @@
             [context] = "buttonCallbacks['manual']"
             ></app-button>
           </div>
-        </ion-col> -->
+        </ion-col>
 
         <!-- bottone selezione array standard -->
-        <!-- <ion-col>
+        <ion-col>
           <div class="HPchoiceButtonContainer">
             <app-button
             [margin] = "false"
@@ -41,10 +39,10 @@
             [context] = "buttonCallbacks['stdArr']"
             ></app-button>
           </div>
-        </ion-col> -->
+        </ion-col>
 
         <!-- bottone selezione casuale (4d6 drop one) -->
-        <!-- <ion-col>
+        <ion-col>
           <div class="HPchoiceButtonContainer">
             <app-button
             [margin] = "false"
@@ -57,17 +55,17 @@
 
       </ion-row>
     </ion-grid>
-  </div> -->
+  </ion-item>
 
   <!-- adesso tre grid diverse in base alla flag attiva -->
-  <!-- @if (manualSelection===true) { -->
+  @if (manualSelection===true) {
     <div class="manualStatsListContainer">
       <ul class="manualStatsList">
         
         <!-- selettore FORZA -->
         <div class="statSelectionFrame">
           <div class="dragEntryBlock">
-            <app-label class="str">Strength</app-label>
+            <app-label>Strength</app-label>
             <app-drag-entry
               #strengthDragEntry
               id="strengthDragEntry"
@@ -84,7 +82,7 @@
         <!-- selettore DEXTERITY -->
         <div class="statSelectionFrame">
           <div class="dragEntryBlock">
-            <app-label class="dex">Dexterity</app-label>
+            <app-label>Dexterity</app-label>
             <app-drag-entry
               #dexterityDragEntry
               id="dexterityDragEntry"
@@ -94,14 +92,14 @@
               ></app-drag-entry>
           </div>
           <div class="modifierContainer">
-            <app-label class="dex">Dexterity modifier: {{statModifierDict[dexterityDragEntry.value]}}</app-label>
+            <app-label>Dexterity modifier: {{statModifierDict[dexterityDragEntry.value]}}</app-label>
           </div>
         </div>
 
         <!-- selettore CONSTITUTION -->
         <div class="statSelectionFrame">
           <div class="dragEntryBlock">
-            <app-label class="constitution">Constitution</app-label>
+            <app-label>Constitution</app-label>
             <app-drag-entry
               #constitutionDragEntry
               id="constitutionDragEntry"
@@ -111,14 +109,14 @@
               ></app-drag-entry>
           </div>
           <div class="modifierContainer">
-            <app-label class="constitution">Constitution modifier: {{statModifierDict[constitutionDragEntry.value]}}</app-label>
+            <app-label>Constitution modifier: {{statModifierDict[constitutionDragEntry.value]}}</app-label>
           </div>
         </div>
 
         <!-- selettore INTELLIGENCE -->
         <div class="statSelectionFrame">
           <div class="dragEntryBlock">
-            <app-label class="intelligence">Intelligence</app-label>
+            <app-label>Intelligence</app-label>
             <app-drag-entry
               #intelligenceDragEntry
               id="intelligenceDragEntry"
@@ -128,7 +126,7 @@
               ></app-drag-entry>
           </div>
           <div class="modifierContainer">
-            <app-label class="intelligence">Intelligence modifier: {{statModifierDict[intelligenceDragEntry.value]}}</app-label>
+            <app-label>Intelligence modifier: {{statModifierDict[intelligenceDragEntry.value]}}</app-label>
           </div>
         </div>
 
@@ -136,7 +134,7 @@
         <!-- selettore WISDOM -->
         <div class="statSelectionFrame">
           <div class="dragEntryBlock">
-            <app-label class="wisdom">Wisdom</app-label>
+            <app-label>Wisdom</app-label>
             <app-drag-entry
               #wisdomDragEntry
               id="wisdomDragEntry"
@@ -146,14 +144,14 @@
               ></app-drag-entry>
           </div>
           <div class="modifierContainer">
-            <app-label class="wisdom">Wisdom modifier: {{statModifierDict[wisdomDragEntry.value]}}</app-label>
+            <app-label>Wisdom modifier: {{statModifierDict[wisdomDragEntry.value]}}</app-label>
           </div>
         </div>
 
         <!-- selettore CHARISMA -->
         <div class="statSelectionFrame">
           <div class="dragEntryBlock">
-            <app-label class="charisma">Charisma</app-label>
+            <app-label>Charisma</app-label>
             <app-drag-entry
               #charismaDragEntry
               id="charismaDragEntry"
@@ -163,16 +161,16 @@
               ></app-drag-entry>
           </div>
           <div class="modifierContainer">
-            <app-label class="charisma">Charisma modifier: {{statModifierDict[charismaDragEntry.value]}}</app-label>
+            <app-label>Charisma modifier: {{statModifierDict[charismaDragEntry.value]}}</app-label>
           </div>
         </div>
 
 
       </ul>
     </div>
-  <!-- } -->
+  }
 
-  <!-- @if (stdArray===true) {
+  @if (stdArray===true) {
     <ion-item class="gridContainer">
       <ion-list>
         <ion-radio-group value="groupRadio">
@@ -194,7 +192,7 @@
         </ion-radio-group>
       </ion-list>
     </ion-item>
-  } -->
+  }
 
   @if (randomSelection===true) {
     <!-- <app-label>The randomized stats are as follows</app-label> -->
@@ -234,9 +232,8 @@
 erano state selezionate però boh poi ditemi voi -->
 
   <div class="nextPage">
-    <app-button 
-    class="buttonPersonalizzato"
-    [button] = "{ text: 'Prossima pagina', expand: '', color:'gold'}"
+    <app-button
+    [button] = "{ text: 'Prossima pagina', expand: ''}"
     [context] = "buttonCallbacks['nextPage']"
     ></app-button>
   </div>

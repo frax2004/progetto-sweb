@@ -1,43 +1,61 @@
-
-
-.imgbackground {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-//  background-image: url('/assets/icon/Stats-selection-icon/Gattocarino-sfondoStats.jpg');
-  background-image: url('/assets/icon/Stats-selection-icon/GattoCarino-sfondoStats2.jpg');
-// non so quale usare
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.20;
-  z-index: 0;
+.firstCol , .secondCol{
+    display: grid;
+    justify-content: center;
+    width: 100%;
 }
 
-.goBack{
-    display: flex;
-    align-items: flex-start;
-    width: 50%;
+.firstCol{
+    margin-bottom: 10px;
+    border-top: 3px solid rgb(196, 28, 28);
+    border-radius: 20px;
+}
+
+.secondCol{
+    margin-top: 5px;
+    border-bottom: 3px solid rgb(196, 28, 28);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .nextPage {
     display: grid;
     justify-content: end;
-    margin-right: 3%;
+}
+
+.gridContainer {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    width: 90vw;
+    margin: 0 auto;
+    border-radius: 18px;
+}
+
+.buttonGrid {
+    margin-bottom: 10px;
+}
+
+.HPchoiceButtonContainer {
+    display: grid;
+    justify-content: center;
+    width: 100%;
 }
 
 
+.HPchoiceButton {
+    width: 100%;
+}
 
-// ion-grid {
-//     padding: 0;
-//     border: 0;
-//     width: 100%;
-//     height: 100%;
-//     flex: 1;
-// } non cambia nulla sta roba però la lascio 
+.manualHPgrid {
+    margin: 0 auto;
+}
+
+ion-grid {
+    padding: 0;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+}
 
 #randomLabel {
     padding-left: 15px;
@@ -48,11 +66,9 @@
     flex-direction: row;
     justify-content: space-around;
     margin: 2.5vh 0px;
-    border: 2px solid gold;
-    border-radius: 32px;
-    transform: scale(1.10);
-    height: 70px;
-    // height: fit-content;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: 1px red solid;
 }
 
 .manualStatsList {
@@ -62,7 +78,7 @@
 }
 
 .dragEntryBlock {
-    // border: 4px rgb(248, 174, 0) solid;
+    border: 5px green solid;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -73,48 +89,14 @@
     align-content: center;
 }
 
-.wisdom{
-    color:gold;
-    font-weight: 500;
-}
-
-.charisma{
-    color:purple;
-    font-weight: 500;
-}
-
-.str{
-    color:red;
-    font-weight: 500;
-}
-
-.intelligence{
-    color:blue;
-    font-weight: 500;
-}
-
-.constitution{
-    color: #cd7f32;
-    font-weight: 500;
-}
-
-.dex{
-    color: #3cb371;
-    font-weight: 500;
-}
-
 .manualStatsListContainer {
-    padding-top: clamp(0.5rem, 2vw, 0.8rem);
-    padding-bottom: clamp(0.5rem, 2vw, 0.8rem);
-    background-color: rgba(0, 0, 0, 0.8);
-    width: 100%;
+    padding-top: 0.2vh;
+    padding-bottom: 0.2vh;
+    background-color: rgba(70, 70, 69, 0.8);
+    width: 70vw;
     border-radius: 20px;
     // per centrarlo
-    display: flex;
-    flex-direction: column;
-    padding-right: 20%;
-    padding-left: 20%;
-
+    margin: 4vmin auto;
 }
 
 .stdArrayContainer {
@@ -131,61 +113,3 @@
 .radioContainer {
     margin-left: 20px;
 }
-@media (hover: hover) and (pointer: fine) {
-
-    .statSelectionFrame {
-        transition: transform 300ms ease-in-out;
-    }
-
-    .statSelectionFrame:hover {
-        transform: scale(1.20);
-        background-color: black;
-    }
-
-}
-
-// .firstCol , .secondCol{
-//     display: grid;
-//     justify-content: center;
-//     width: 100%;
-// }
-
-// .firstCol{
-//     margin-bottom: 10px;
-//     border-top: 3px solid rgb(196, 28, 28);
-//     border-radius: 20px;
-// }
-
-// .secondCol{
-//     margin-top: 5px;
-//     border-bottom: 3px solid rgb(196, 28, 28);
-//     border-bottom-left-radius: 20px;
-//     border-bottom-right-radius: 20px;
-// }
-
-// .gridContainer {
-//     --padding-start: 0;
-//     --inner-padding-end: 0;
-//     width: 90vw;
-//     margin: 0 auto;
-//     border-radius: 18px;
-// }
-
-// .buttonGrid {
-//     margin-bottom: 10px;
-// }
-
-// .HPchoiceButtonContainer {
-//     display: grid;
-//     justify-content: center;
-//     width: 100%;
-// }
-
-
-// .HPchoiceButton {
-//     width: 100%;
-// }
-
-// .manualHPgrid {
-//     margin: 0 auto;
-// }

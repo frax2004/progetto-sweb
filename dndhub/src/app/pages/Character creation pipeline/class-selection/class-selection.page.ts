@@ -60,7 +60,6 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
 
   getNumberOfASI() {
     if (this.levelEntry.value === 0 || CharacterInstance.chosenClass === undefined) return 0;
-    const className = CharacterInstance.chosenClass.toLowerCase();
     for(const level of ClassSelectionPage.lvlsArray) {
       if (level.idx===className) {
         return level.content[this.levelEntry.value-1].ability_score_bonuses;
@@ -75,10 +74,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
   static lvlsArray = [];
   classesNames = ['Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter', 'Monk', 'Paladin', 'Ranger', 'Rogue', 'Sorcerer', 'Warlock', 'Wizard'];
   static classesDescriptions = {
-    'Barbarian' : { text: `Barbarians are mighty warriors who are powered by primal forces of the multiverse that manifest as a Rage. More than a mere emotion—and not limited to anger—this Rage is an incarnation of a predator's ferocity, a storm's fury, and a sea's turmoil.
-                    \nSome Barbarians personify their Rage as a fierce spirit or revered forebear. Others see it as a connection to the pain and anguish of the world, as an impersonal tangle of wild magic, or as an expression of their own deepest self. 
-                    \nFor every Barbarian, their Rage is a power that fuels not just battle prowess, but also uncanny reflexes and heightened senses.
-                    \nBarbarians often serve as protectors and leaders in their communities. They charge headlong into danger so those under their protection don't have to. Their courage in the face of danger makes Barbarians perfectly suited for adventure.`},
+    'Barbarian' : { text: `Barbarians are mighty warriors who are powered by primal forces of the multiverse that manifest as a Rage. More than a mere emotion—and not limited to anger—this Rage is an incarnation of a predator's ferocity, a storm's fury, and a sea's turmoil. `},
     
     'Bard': {text: `Invoking magic through music, dance, and verse, Bards are expert at inspiring others, soothing hurts, disheartening foes, and creating illusions. Bards believe the multiverse was spoken into existence and that remnants of its Words of Creation still resound and glimmer on every plane of existence. Bardic magic attempts to harness those words, which transcend any language.
                     \nAnything can inspire a new song or tale, so Bards are fascinated by almost everything. They become masters of many things, including performing music, working magic, and making jests.

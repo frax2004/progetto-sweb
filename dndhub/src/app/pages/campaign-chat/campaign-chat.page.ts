@@ -5,6 +5,7 @@ import { IonContent, IonHeader, IonInput, IonTitle, IonTextarea, IonToolbar, Pop
 import { ButtonComponent } from "src/app/components/button/button.component";
 import { Popups } from 'src/app/core/core';
 import { timestamp } from 'rxjs';
+import { PostService } from 'src/app/services/posts';
 
 @Component({
   selector: 'app-campaign-chat',
@@ -29,35 +30,59 @@ export class CampaignChatPage implements OnInit {
     { name: 'Gorillicrya', character: 'Tiefling barbaro lvl 999' },
   ]
 
-  constructor(public popoverController: PopoverController) { }
+  constructor(public popoverController: PopoverController, private postService: PostService) { }
 
-  ngOnInit() {
-  }
 
   posts = [];
   postText = '';
+  idx_campagna: string = 'GiuseppeFINALEEEEEEEEEEEEE'; // per ora lasciate questo
+
+  ngOnInit() {
+    this.loadPosts();
+  }
+
+  loadPosts() {
+    this.postService.getPosts(this.idx_campagna)
+      .subscribe({
+        next: (res: any) => {
+          this.posts = res.data;
+        },
+        error: (err) => {
+          console.log('Errore caricamento post:', err);
+        }
+      });
+  }
 
   publica_post = () => {
     if (!this.postText?.trim()) {
-      console.log('prima scrivi qualcosa dentro il post');
-      console.log(this.posts)
-      return
+      console.log('Scrivi qualcosa prima di pubblicare');
+      return;
     }
-    else{
-      this.posts.push({
-      text: this.postText,
-      timestamp: new Date().toLocaleString(),
-    });
-    }
-    this.postText = '';
-    console.log(this.posts);
-  }
-  buttonContextPost = {
-    newPost: {
-      onClick: (event) => {
-        this.publica_post();
-      }
-    }
+
+    const body = {
+      contenuto: this.postText,
+      time_stamp: new Date().toISOString()
+    };
+
+    this.postService.createPost(this.idx_campagna, body)
+      .subscribe({
+        next: (res: any) => {
+          console.log('Post salvato:', res);
+          this.posts.push({
+            text: body.contenuto,
+            timestamp: body.time_stamp
+          });
+          this.postText = '';
+        },
+        error: (err) => {
+          console.log('Errore salvataggio post:', err);
+        }
+      });
   };
 
+  buttonContextPost = {
+    newPost: {
+      onClick: () => this.publica_post()
+    }
+  };
 }

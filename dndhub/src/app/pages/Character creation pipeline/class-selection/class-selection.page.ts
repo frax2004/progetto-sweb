@@ -60,6 +60,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
 
   getNumberOfASI() {
     if (this.levelEntry.value === 0 || CharacterInstance.chosenClass === undefined) return 0;
+    const className = CharacterInstance.chosenClass.toLowerCase();
     for(const level of ClassSelectionPage.lvlsArray) {
       if (level.idx===className) {
         return level.content[this.levelEntry.value-1].ability_score_bonuses;

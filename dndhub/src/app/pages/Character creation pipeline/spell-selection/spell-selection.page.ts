@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonLabel as IonLabel, IonCheckbox } from '@ionic/angular/standalone';
 import { TitleComponent } from "src/app/components/title/title.component";
 import { CharacterManagementService } from 'src/app/services/character.management.service';
-import { CharacterInstance } from '../CharacterInformation';
+import { CharacterInstance, StatModifierNumber } from '../CharacterInformation';
 import { LabelComponent } from "src/app/components/label/label.component";
 import { dnd } from 'dbserver/database.queries';
 import { Alerts, Navigate, Popups } from 'src/app/core/core';
@@ -143,9 +143,31 @@ export class SpellSelectionPage implements OnInit {
     if (spells_known !== null) return spells_known;
     else {
       className = className.toLowerCase();
-      if (className === 'cleric' || className === 'druid') return (level + CharacterInstance.getStatisticModifier('wisdom')) > 1 ? level + CharacterInstance.getStatisticModifier('wisdom').modifier : 1;
-      if (className === 'paladin') return (Math.floor(level/2) + CharacterInstance.getStatisticModifier('charisma')) > 1 ? Math.floor(level/2) + CharacterInstance.getStatisticModifier('charisma') : 1;
-      if (className === 'wizard') return (level + CharacterInstance.getStatisticModifier('intelligence')) > 1 ? level + CharacterInstance.getStatisticModifier('intelligence') : 1;
+      if (className === 'cleric' || className === 'druid') {
+        const newValue = CharacterInstance.getStatisticValue('wisdom') + 
+        CharacterInstance.speciesAbilityBonus['wisdom'] + 
+        CharacterInstance.chosenSpeciesAbilityBonuses['wisdom'] + 
+        CharacterInstance.chosenAbilityScoreIncrements['wisdom'];
+        return (level + StatModifierNumber[newValue]) > 1 ? level + StatModifierNumber[newValue] : 1;
+      }
+      if (className === 'paladin') {
+        const newValue = CharacterInstance.getStatisticValue('charisma') + 
+        CharacterInstance.speciesAbilityBonus['charisma'] +
+        CharacterInstance.chosenSpeciesAbilityBonuses['charisma'] +
+        CharacterInstance.chosenAbilityScoreIncrements['charisma'];
+        return (level + StatModifierNumber[newValue]) > 1 ? level + StatModifierNumber[newValue] : 1;
+      }
+      if (className === 'wizard') {
+        const newValue = CharacterInstance.getStatisticValue('intelligence') +
+        CharacterInstance.speciesAbilityBonus['intelligence'] +
+        CharacterInstance.chosenSpeciesAbilityBonuses['intelligence'] +
+        CharacterInstance.chosenAbilityScoreIncrements['intelligence'];
+        alert(newValue);
+        alert(level)
+        alert(StatModifierNumber[newValue])
+        alert(level + StatModifierNumber[newValue])
+        return (level + StatModifierNumber[newValue]) > 1 ? level + StatModifierNumber[newValue] : 1;
+      }
     }
   }
 
@@ -240,6 +262,7 @@ export class SpellSelectionPage implements OnInit {
               this.displayableSpells = SpellSelectionPage.getDisplayableSpells(this.spells,this.maxLevel);
               this.cantripsToChoose = this.levelRow.cantrips_known;
               this.spellsToChoose = SpellSelectionPage.getSpellsToChoose(this.levelRow.name,this.levelRow.level,this.levelRow.spells_known);
+              alert(this.spellsToChoose)
             },
             error: (err) => alert(err)
           });

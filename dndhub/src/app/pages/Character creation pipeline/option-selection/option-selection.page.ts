@@ -61,7 +61,7 @@ export class OptionSelectionPage implements OnInit {
   optEquip = [];
   //
   // charLevel settato a 3 per testing, levare non appena non serve più
-  charLevel = CharacterInstance.chosenLevel = 3;
+  charLevel = CharacterInstance.chosenLevel;
   chosenSubclass: string | undefined = undefined;
   //
   abBonusToChoose: number | undefined;
@@ -119,7 +119,7 @@ export class OptionSelectionPage implements OnInit {
     const validateBGlanguages: boolean = this.BACKGROUNDlanguagesToChoose===0;
     const validateBGoptEquipment: boolean = this.BACKGROUNDoptEquip.length === this.backgroundContent[1].content.length;
     const validateASI: boolean = this.statsToChoose() === 0;
-    const className /*= CharacterInstance.chosenClass.toLowerClass() */  = undefined;
+    const className = CharacterInstance.chosenClass.toLowerCase();
     const validateSpellSelection = (className!==undefined) && (className === 'bard' || className === 'cleric' || className === 'druid' || className === 'paladin' || className === 'ranger' || className === 'sorcerer' || className === 'warlock' || className === 'wizard');
     if (
       validateRegularProf &&
@@ -137,23 +137,29 @@ export class OptionSelectionPage implements OnInit {
       CharacterInstance.chosenExtraProficiencies = this.extraProfArray;
       CharacterInstance.chosenOptionalEquipment = this.optEquip;
       CharacterInstance.chosenSubclass = this.chosenSubclass;
-      CharacterInstance.chosenAbilityBonuses = this.chosenAbBonus;
+      CharacterInstance.chosenSpeciesAbilityBonuses = {
+        'strength' : 0,
+        'dexterity' : 0,
+        'constitution' : 0,
+        'intelligence' : 0,
+        'wisdom' : 0,
+        'charisma' : 0,
+      };
+      this.chosenAbBonus.forEach(el => CharacterInstance.chosenAbilityScoreIncrements[el.statName] = el.bonus);
       CharacterInstance.chosenSubspecies = this.chosenSubspecies;
       CharacterInstance.chosenBackgroundLanguages = this.BACKGROUNDchosenLanguages;
       CharacterInstance.chosenBackgroundEquipment = this.BACKGROUNDoptEquip;
+
+
       // setto le statistiche
-      // forza
-      CharacterInstance.setStatistics('strength',CharacterInstance.getStatisticValue('strength') + this.strMax());
-      // destrezza
-      CharacterInstance.setStatistics('dexterity',CharacterInstance.getStatisticValue('dexterity') + this.dexMax());
-      //costituzione
-      CharacterInstance.setStatistics('constitution',CharacterInstance.getStatisticValue('constitution') + this.conMax());
-      // intelligenza
-      CharacterInstance.setStatistics('intelligence',CharacterInstance.getStatisticValue('intelligence') + this.intMax());
-      // saggezza
-      CharacterInstance.setStatistics('wisdom',CharacterInstance.getStatisticValue('wisdom') + this.wisMax());
-      // carisma
-      CharacterInstance.setStatistics('charisma',CharacterInstance.getStatisticValue('charisma') + this.chaMax());
+      CharacterInstance.chosenAbilityScoreIncrements = {
+        'strength' : this.strMax(),
+        'dexterity' : this.dexMax(),
+        'constitution' : this.conMax(),
+        'intelligence' : this.intMax(),
+        'wisdom' : this.wisMax(),
+        'charisma' : this.chaMax(),
+      };
       if (validateSpellSelection) this.router.navigate(['spell-selection']);
       else this.router.navigate(['overview']);
     }
@@ -319,7 +325,7 @@ export class OptionSelectionPage implements OnInit {
       }
       else {
         this.chosenAbBonus.push({
-          abilityName: abilityName,
+          statName: abilityName,
           bonus: bonus,
         });
         this.abBonusToChoose--;
@@ -451,8 +457,8 @@ export class OptionSelectionPage implements OnInit {
     if (choice === undefined || choice === null) return undefined;
     if(allLanguages !== undefined && allLanguages === true) {
       let allLanguages= ['Common','Common Sign Language','Draconic','Dwarvish','Elvish','Giant','Gnomish','Goblin','Halfling','Orc','Abyssal','Celestial','Deep Speech','Druidic','Infernal','Primordial','Sylvan','Thieves Cant','Undercommon'];
-      if(CharacterInstance.chosenLanguages !== undefined) {
-        for(const lang of CharacterInstance.chosenLanguages) {
+      if(CharacterInstance.speciesLanguages !== undefined) {
+        for(const lang of CharacterInstance.speciesLanguages) {
           if(allLanguages.includes(lang)) allLanguages.splice(allLanguages.indexOf(lang),1);
         }
       }

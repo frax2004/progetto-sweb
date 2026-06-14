@@ -25,6 +25,17 @@ import { CharacterManagementService } from 'src/app/services/character.managemen
 export class OverviewPage implements OnInit {
   showLevel: number;
   showBackground: string;
+  showClass: string;
+  showSpecies: string;
+  showSubspecies: string;
+  finalStatistics: [
+    { statName: 'strength', value: 0},
+    { statName: 'dexterity', value: 0},
+    { statName: 'constitution', value: 0},
+    { statName: 'intelligence', value: 0},
+    { statName: 'wisdom', value: 0},
+    { statName: 'charisma', value: 0},
+  ];
   classDetails;
   allEquipmentArray = [];
   //
@@ -80,14 +91,34 @@ export class OverviewPage implements OnInit {
     return Math.ceil((HPdice/2 + 0.5)*lvl);
   }
 
-  static pushAllEquipment(classEquipment) {
-    
+  static getFinalStatistic(statName) {
+    return CharacterInstance.getStatisticValue(statName) +
+           CharacterInstance.speciesAbilityBonus[statName] +
+           CharacterInstance.chosenSpeciesAbilityBonuses[statName] +
+           CharacterInstance.chosenAbilityScoreIncrements[statName];
+  }
+
+  static generateAllEquipment() {
+    //da finire
+    CharacterInstance.backgroundEquipment.array.forEach(element => console.log(element));
+    console.log('\n-----------\n');
+    CharacterInstance.baseEquipment.array.forEach(element => console.log(element));
+    console.log('\n-----------\n');
+    CharacterInstance.chosenOptionalEquipment.array.forEach(element => console.log(element));
+    console.log('\n-----------\n');
+    CharacterInstance.chosenBackgroundEquipment.array.forEach(element => console.log(element));
   }
 
   constructor(private router: Router, public popoverController: PopoverController, private characterManagement: CharacterManagementService) { 
     this.showLevel = CharacterInstance.chosenLevel;
     this.showBackground = CharacterInstance.chosenBackground;
-  
+    this.showClass = CharacterInstance.chosenClass;
+    this.showSpecies = CharacterInstance.chosenSpecies;
+    this.showSubspecies = CharacterInstance.chosenSubspecies;
+    for(let i=0; i<this.finalStatistics.length; i++) {
+      this.finalStatistics[i].value = OverviewPage.getFinalStatistic(this.finalStatistics[i].statName);
+    }
+
     
     this.characterManagement
     .displayClassByName(

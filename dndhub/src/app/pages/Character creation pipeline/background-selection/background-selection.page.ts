@@ -41,7 +41,9 @@ export class BackgroundSelectionPage implements OnInit {
     if (BackgroundSelectionPage.selectedBackground !== undefined) {
       for (const background of this.backgroundsArray) {
         if (background.name.toLowerCase() === BackgroundSelectionPage.selectedBackground.toLowerCase()){
-          
+          CharacterInstance.backgroundEquipment = background.equipment;
+          CharacterInstance.backgroundFeature = background.feature;
+          CharacterInstance.backgroundStartingGold = background.starting_gold;
         }
       }
       CharacterInstance.chosenBackground = BackgroundSelectionPage.selectedBackground;

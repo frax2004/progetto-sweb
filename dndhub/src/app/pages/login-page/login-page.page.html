@@ -1,55 +1,45 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title class="Logo">DnDhub</ion-title>
-    <ion-title class="Titolo">Accedi o Registrati</ion-title>
+    <ion-title class="logo">DnDhub</ion-title>
+    <ion-title class="title">Accedi</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="login-content">
+<ion-content [fullscreen]="true" class="signin-content">
 
   <div class="background"></div>
 
-  <div class="content">
-
+  <div class="form">
     <ion-text class="subtitle">
-      Inserisci le tue credenziali per accedere o registrarti.
+      Inserisci le tue credenziali per accedere.
     </ion-text>
 
-    <form [formGroup]="formGroup" (ngSubmit)="doLogin($event)">
-      <ion-item lines="full">
-        <ion-input 
-        formControlName="email"
-        id="emailArea" 
-        type="text" 
-        placeholder="Email"></ion-input>
-      </ion-item>
-
-      <ion-item lines="full">
-        <ion-input
-        formControlName="password" 
-        id="passwordArea" 
-        type="password" 
-        placeholder="Password">
-        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-        </ion-input>
-      </ion-item>
-
-      <div class="button-wrapper">
-          <!-- /* [button]="loginButton" -->
-          <!-- [context]="buttonCallbacks['authLogin']" */ -->
-        <app-button 
-          [button]="loginButton"
-        ></app-button>
-      </div>
-    </form>
+    <div class="entry-group">
+      <app-entry #email class="entry"
+        placeholder="Inserisci l'indirizzo email"
+        fill="outline"
+        label="Email"
+        labelPlacement="floating"
+      ></app-entry>
+      <app-entry #password class="entry"
+        placeholder="Inserisci la password"
+        fill="outline"
+        label="Password"
+        labelPlacement="floating"
+      ></app-entry>
+      <app-button
+      [button]="{text: 'Accedi', expand: 'false'}"
+      [context]="{onClick: doLogin}"
+      ></app-button>
+    </div>
 
     <div class="link-wrapper">
       <ion-text>
         Non hai un account?
       </ion-text>
 
-      <a routerLink="/signin-page" class="signup-link">
-        Registrati subito
+      <a routerLink="/signin-page" class="signin-page-link">
+        Registrati ora!
       </a> 
     </div>
 

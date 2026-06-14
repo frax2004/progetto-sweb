@@ -4,8 +4,12 @@ import user_middleware from '../middlewares/user.utilities.middleware.js';
 
 export const userUtilitiesRouter = express.Router();
 
-userUtilitiesRouter.post("/isLogged", user_controller.isLogged);
-userUtilitiesRouter.post("/getUserInfo", user_middleware.isLogged, user_controller.getUserInfo);
+userUtilitiesRouter.post(
+  "/getUserInfo", 
+  user_middleware.isLogged, 
+  user_controller.getUserInfo
+);
+
 userUtilitiesRouter.post(
   '/setUserInfo', 
   user_middleware.isLogged, 

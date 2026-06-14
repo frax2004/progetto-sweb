@@ -38,4 +38,14 @@ export class AuthService {
       error: fail
     });
   }
+
+  deleteAccount(success: (_: any) => void, fail: (err: any) => void): Subscription {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/auth/delete_account`,
+      {}
+    ).subscribe({
+      next: success,
+      error: fail
+    });
+  }
 }

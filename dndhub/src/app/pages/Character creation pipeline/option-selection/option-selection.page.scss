@@ -1,0 +1,119 @@
+.listContainerFrame {
+    width: 80vw;
+    border-top: 4px #FFD700 solid;
+    border-bottom: 4px #FFD700 solid;
+    background-color: #ff868630;
+    border-radius: 50px;
+    margin: 0px auto;
+}
+
+.choiceBlock {
+    border: 2px #FFD700 solid;
+    border-radius: 20px;
+    width: 90%;
+    margin: 0px auto;
+    padding-top: 1vh;
+    padding-bottom: 3vh;
+    margin-bottom: 2vh;
+    background-color: rgba(27, 27, 27, 0.85);
+    box-shadow: 4px 4px 8px 0px rgb(55, 52, 52);
+}
+
+h1 {
+    font-family: Copperplate, Copperplate Gothic Light, fantasy;
+    font-weight: 570;
+    color: rgb(67, 163, 67);
+}
+
+h3 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgba(39, 125, 200, 0.805);
+    font-weight: 300;
+}
+
+.choiceTitleLabel {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.bottomDivider {
+    border: 1px #FFD700 dashed;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    width: 90%;
+}
+
+
+.choiceBlock>* {
+    margin-left: 3%;
+}
+
+.optionList {
+    background-color: transparent;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.genericChoiceContainer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2vh;
+}
+
+.checkboxContainer {
+    margin-left: 3vw;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+}
+
+.checkboxContainer:hover {
+    box-shadow: 4px 4px 4px 4px rgb(42, 41, 41);
+    transition: box-shadow 300ms;
+}
+
+.genericCheckbox {
+    width: 100%;
+    height: 100%;
+    accent-color: #FFD700;
+    transition: all 300ms;
+}
+
+.genericCheckbox:hover {
+    width: 125%;
+    height: 125%;
+    transition: all 300ms;
+}
+
+.goBackButtonContainer {
+    width: min(20vw,200px);
+}
+
+.goBackButton {
+    --background: red;
+}
+
+.statSelection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 4vh;
+    margin-bottom: 3vh;
+}
+
+.statSelection>app-label {
+    font-family: Copperplate, Copperplate Gothic Light, fantasy;
+    margin-left: 3%;
+}
+
+.statSelection>app-drag-entry {
+    margin-right: 20%;
+}
+
+.nextPageButtonContainer {
+    width: min(20vw,200px);
+    display: grid;
+    align-self: self-end;
+    justify-self: end;
+    margin-right: 7%;
+}

@@ -1,16 +1,29 @@
-.Titolo {
+.title {
   font-size: clamp(1.8rem, 3vw, 3rem);
   font-weight: bold;
-  color: red;
+  color: rgb(220, 68, 68);
   text-align: center;
 }
 
-.Logo {
+.logo {
   text-align: center;
   font-size: clamp(3rem, 6vw, 5rem);
   font-family: 'Papyrus', fantasy;
   margin-bottom: 10px;
 }
+
+.entry-group {
+  background: rgba(132, 132, 132, 0.263);
+  border: 2px solid rgba(193, 193, 193, 0.761);
+  border-radius: 20px;
+  padding: 5cqmin;
+  backdrop-filter: blur(.5rem);
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5cqmin;
+}
+
+
 
 ion-toolbar {
   --background: transparent;
@@ -32,7 +45,7 @@ ion-content {
   margin-bottom: 25px;
 }
 
-.content {
+.form {
   position: relative;
   z-index: 1;
 
@@ -45,20 +58,11 @@ ion-content {
   flex-direction: column;
   justify-content: center;
   gap: 16px;
-}
-
-ion-item {
-  width: 100%;
-  border-radius: 10px;
-}
-
-ion-input {
-  width: 100%;
-  font-size: 1.2rem;
-  text-align: center;
+  overflow: hidden;
 }
 
 .background {
+  box-sizing: border-box;
   position: absolute;
   inset: 0;
 
@@ -67,14 +71,10 @@ ion-input {
   background-position: center;
   background-repeat: no-repeat;
 
-  opacity: 0.25;
+  opacity: 0.5;
   filter: blur(1px);
 
   z-index: 0;
-}
-
-.button-wrapper {
-  margin-top: 10px;
 }
 
 .link-wrapper {
@@ -93,6 +93,6 @@ ion-input {
   cursor: pointer;
 }
 
-.signup-link:hover {
+.login-page-link:hover {
   text-decoration: underline;
 }

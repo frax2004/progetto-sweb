@@ -9,4 +9,7 @@ characterManagementRouter.post("/species-display", controller.displaySpecies);
 characterManagementRouter.post("/background-display", controller.displayBackgrounds);
 characterManagementRouter.post("/level-display-by-class-and-level", controller.displayLevelRowByClassAndLevel);
 characterManagementRouter.post("/spell-display-by-class", controller.displaySpellsByClass);
+characterManagementRouter.post("/class-display-by-name", controller.displayClassByName);
+characterManagementRouter.post("/species-display-by-name", controller.displaySpeciesByName);
+characterManagementRouter.post("/background-display-by-name", controller.displayBackgroundByName);
 // characterManagementRouter

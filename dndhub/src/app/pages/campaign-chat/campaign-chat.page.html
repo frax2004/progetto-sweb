@@ -3,7 +3,7 @@
   <div class="contentContainer">
     <div class="buttonsAndDetails">
       <div class="buttonPost">
-        <app-button [button]="{text: 'indietro', expand: '', color: 'red'}"
+        <app-button [button]="{text: 'Torna indietro', expand: ''}"
           [context]="buttonCallbacks['placeholder']"></app-button>
       </div>
       <div class="details">
@@ -23,34 +23,17 @@
       </div>
 
       <!-- bottone nuovo post (idealmente) va a piè di pagina, sempre in sovrimpressione -->
-
+      <div class="buttonPost">
+        <app-button [button]="{text: 'Nuovo post', expand: ''}" [context]="buttonCallbacks['placeholder']"></app-button>
+      </div>
     </div>
 
-
-
     <div class="postContainer">
-      <div class="postBox1">
-
-        <div class="CreaContent">
-          <ion-label class="titoloPost">Pubblica il tuo nuovo post</ion-label>
-        </div>
-        <ion-textarea class="TextAreaDesign" [(ngModel)]="postText" placeholder="scrivi qua" auto-grow="true">
-        </ion-textarea>
-
-        <div class="postLowerInformation1">
-          <ion-label>{{campaignName}}</ion-label>
-          <div>
-            <app-button [button]="{text: 'publica', expand: '', color: 'gold'}"
-              [context]="buttonContextPost['newPost']"></app-button>
-          </div>
-        </div>
-
-      </div>
       @for (post of posts; track post) {
       <div class="postBox">
 
         <div class="postContent">
-          <p class="postVisualizzati">{{ post.text }}</p>
+          <ion-label>{{ post.text }}</ion-label>
         </div>
         <div class="postLowerInformation">
           <ion-label>{{ campaignName }}</ion-label>
@@ -64,6 +47,6 @@
       }
     </div>
 
-
   </div>
+
 </ion-content>

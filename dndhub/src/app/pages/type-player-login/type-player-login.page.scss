@@ -41,7 +41,7 @@ ion-content {
 
   width: 100vw;
   height: 100vh;
-   background-image: url('/assets/icon/type-player-icon/sfondo-dndhub2.jpeg');
+   background-image: url('/assets/icon/sfondo-dndhub2.jpeg');
 
   background-size: cover;
   background-position: center;
@@ -74,22 +74,22 @@ ion-content {
 
 .dm{
     transition: all 500ms;
-    background-image: url('/assets/icon/type-player-icon/sfondo-dndhub-loginplayer.jpeg');
+    background-image: url('/assets/icon/sfondo-dndhub-loginplayer.jpeg');
 }
 
 .dm:hover{
     transition: all 500ms;
-    background-image: url('/assets/icon/type-player-icon/sfondo-DM-hover.jpeg');
+    background-image: url('/assets/icon/sfondo-DM-hover.jpeg');
 }
 
 .player{
     transition: all 500ms;
-    background-image: url('/assets/icon/type-player-icon/Sfondo-Player-1.jpeg');
+    background-image: url('/assets/icon/Sfondo-Player-1.jpeg');
 }
 
 .player:hover{
     transition: all 500ms;
-    background-image: url('/assets/icon/type-player-icon/Sfondo-Player-2.jpeg');
+    background-image: url('/assets/icon/Sfondo-Player-2.jpeg');
 }
 
 .portal-content{

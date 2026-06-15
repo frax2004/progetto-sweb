@@ -926,6 +926,15 @@ create table if not exists ArrayFeatItem (
   foreign key (item) references Feat(idx)
 );
 
+create table if not exists ArrayProficienciesItem (
+  proficiency text not null,
+  idx_personaggio text not null,
+  array_idx number not null,
+
+  primary key (idx_personaggio,array_idx),
+  foreign key (idx_personaggio) references Personaggio(idx_personaggio) on update cascade on delete cascade
+);
+
 create table if not exists Campagna (
   utente_generico text not null,
   nome text not null,
@@ -960,6 +969,17 @@ create table if not exists ArrayPostItem (
 
   primary key (idx_campagna,time_stamp),
   foreign key (idx_campagna) references Campagna(idx_campagna) on update cascade on delete cascade 
+);
+
+create table if not exists Segnalazione (
+  tipo text check (tipo in ('inappropriate', 'explicit', 'offensive', 'cheat', 'other')),
+  quando timestamp not null default CURRENT_TIMESTAMP,
+  account text not null,
+  tipo_contenuto text check (tipo_contenuto in ('username', 'post', 'image', 'content')),
+  contenuto text,
+
+  primary key (account, quando),
+  foreign key (account) references Account(email) on update cascade on delete cascade
 );
 
 -- create table if not exists ArrayIdxPersonaggioItem (

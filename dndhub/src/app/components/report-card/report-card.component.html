@@ -1,0 +1,25 @@
+<div class="report-card">
+  <div class="fields">
+    <div class="field">
+      <div class="title">Da:</div> 
+      <div class="value">{{sender}}</div>
+    </div>
+    <div class="field">
+      <div class="title">In data:</div>
+      <div class="value">{{when}}</div>
+    </div>
+    <div class="field">
+      <div class="title">Motivo:</div>
+      <div class="value">{{reason}}</div>
+    </div>
+    <div class="field">
+      <div class="title">Descrizione:</div>
+      <div class="value">{{description}}</div>
+    </div>
+  </div>
+
+  <app-button
+  [button]="{ text: 'Chiudi segnalazione', expand: 'false' }"
+  [context]="{ onClick: onClose }"
+  ></app-button>
+</div>

@@ -1,7 +1,7 @@
 import { PopoverController } from "@ionic/angular/standalone";
 import { PopUpComponent } from "../components/pop-up/pop-up.component";
 import { Router } from "@angular/router";
-import { alertController } from '@ionic/core';
+import { alertController, AlertOptions } from '@ionic/core';
 
 
 export namespace Popups {
@@ -28,8 +28,16 @@ export namespace Navigate {
 }
 
 export namespace Alerts {
-  export async function show(options) {
+  export async function show(options: AlertOptions) {
     return (await alertController.create(options)).present();
+  }
+
+  export function personalizedMessage(message: string, header: string) {
+    return Alerts.show({
+      header: header,
+      message: message,
+      buttons: ['OK'],
+    });
   }
 
   export function notImplemetedError(func?: Function | undefined) {
@@ -44,7 +52,8 @@ export namespace Alerts {
     return Alerts.show({
       header: `Error : ${err.status_code}`,
       message: err.message,
-      buttons: ['Got it!']
+      buttons: ['Got it!'],
+      cssClass: 'default-alert'
     });
   }
 
@@ -52,7 +61,8 @@ export namespace Alerts {
     return Alerts.show({
       header: 'Error',
       message: msg,
-      buttons: ['Got it!']
+      buttons: ['Got it!'],
+      cssClass: 'default-alert'
     });
   }
 
@@ -74,7 +84,8 @@ export namespace Alerts {
     return Alerts.show({
       header: 'Ottimo!',
       message: msg,
-      buttons: [possible_responses[Math.round(Math.random()*(possible_responses.length-1))]]
+      buttons: [possible_responses[Math.round(Math.random()*(possible_responses.length-1))]],
+      cssClass: 'default-alert'
     });
   }
 }

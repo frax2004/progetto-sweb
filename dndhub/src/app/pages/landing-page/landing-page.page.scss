@@ -113,13 +113,13 @@ a:hover {
 }
 
 .campagna{
-  background-image: url('/assets/icon/Landing-page-icon/Campagna-creazione-idea.jpg');
+  background-image: url('/assets/Campagna-creazione-idea.jpg');
 }
 .campagna1{
-  background-image: url('/assets/icon/Landing-page-icon/Broly-Gestirà-la-campagna.jpg');
+  background-image: url('/assets/Broly-Gestirà-la-campagna.jpg');
 }
 .personaggio{
-  background-image: url('/assets/icon/Landing-page-icon/Nanami-piango.jpg');
+  background-image: url('/assets/Nanami-piango.jpg');
 }
 
 
@@ -149,7 +149,7 @@ a:hover {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  background-image: url('/assets/icon/Landing-page-icon/Idea-sfondo-landingpage1.jpg');
+  background-image: url('/assets/Idea-sfondo-landingpage1.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -219,13 +219,10 @@ color:gold
 }
 
  @media (hover: hover) {
-  .galleryRow{
-    transition: 250ms ease-in-out;
-  }
   .galleryRow:hover {
+    transition: 350ms;
     transform: scale(1.05);
     border-color: gold;
-    background-color: black;
   }
   .linkContainer:hover{
   transform: scale(1.05);

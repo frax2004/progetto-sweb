@@ -1,174 +1,181 @@
 <ion-content>
   <ion-split-pane when="xs" contentId="main">
-    <ion-menu contentId="main">
-      <ion-header>
+    <ion-menu contentId="main" id="menu">
+      <ion-header id="menu-title">
         <ion-toolbar>
           <ion-title>Profilo Personale</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-content class="ion-padding">
-        <div class="outerImgFrame">
-          <div class="imgFrame">
-            <img src="https://static.wikia.nocookie.net/dragonball/images/9/91/SSJ4_20.jpg/revision/latest/scale-to-width-down/985?cb=20240630012825" alt="'imgPlaceholder'">
-          </div>
+
+      <ion-content id="content">
+        <div id="profile-image">
+          <img src="https://static.wikia.nocookie.net/dragonball/images/9/91/SSJ4_20.jpg/revision/latest/scale-to-width-down/985?cb=20240630012825" alt="'imgPlaceholder'">
         </div>
-        
-        <div class="buttonContainer">
-          <app-button class="btn" 
+
+        <div id="buttons">
+          <app-button class="button" 
             [margin]="false"
             [button]="{text: 'Torna indietro', expand: 'false'}"
-            [context] = "buttons.goBack"
+            [context] = "{ onClick: goBack }"
             ></app-button>
-          <app-button class="btn"
+          <app-button class="button"
             [margin]="false"
             [button] = "{ text: 'Modifica account', expand: ''}"
-            [context] = "buttons.enableAccountEdit"
+            [context] = "{ onClick: enableAccountEdit }"
           ></app-button>
-          <app-button class="btn"
+          <app-button class="button"
             [margin]="false"
             [button] = "{ text: 'Elimina account', expand: ''}"
-            [context] = "buttons.deleteAccount"
+            [context] = "{ onClick: deleteAccount }"
           ></app-button>
-          <app-button class="btn"
+          <app-button class="button"
             [margin]="false"
             [button] = "{ text: 'Effettua l\'uscita', expand: ''}"
-            [context] = "buttons.logOut"
+            [context] = "{ onClick: logOut }"
           ></app-button>
         </div>
 
+        @if(isAdmin()) {
+          <div class="admin-info">
+            <div class="info">Sei un amministratore</div>
+          </div>
+        }
       </ion-content>
     </ion-menu>
 
-    <div class="ion-page" id="main">
-      <ion-content class="ion-padding"> 
-        <div class="entry-container">
-          <app-entry #username
-            placeholder="Nome utente"
-            [disabled]="true"
-          ></app-entry>
-          <app-entry #email
-            placeholder="Indirizzo email"
-            [disabled]="true"
-          ></app-entry>
-          <app-entry #password
-            placeholder="Password"
-            [disabled]="true"
-          ></app-entry>
-          <app-button class="save-button" id="save-alert"
-            [margin]="false"
-            [button] = "{ text: 'Salva', expand: ''}"
-            [context] = "buttons.save"
-          ></app-button>
-        </div>
-      </ion-content>
-    </div>
-  </ion-split-pane>
-</ion-content>
+    <div id="main">
+      @if(isAdmin()) {
+        
+        <ion-tabs (ionTabsDidChange)="onTabChange($event.tab)">
+          
+          <ion-tab tab="credentials">
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>Credenziali</ion-title>
+              </ion-toolbar>
+            </ion-header>
 
-<!-- <ion-content>
-  <app-title
-  [title] = "'Profilo personale'"
-  ></app-title>
+            <div class="dashboard">
+              <div id="info-pane">
+                <app-entry
+                  [onValueChanged]="setUsernameField"
+                  placeholder="Inserisci il nome utente"
+                  fill="outline"
+                  label="Nome utente"
+                  labelPlacement="floating"
+                  [value]="usernameField()"
+                  [disabled]="!editMode()"
+                ></app-entry>
+                <div class="padding"></div>
+                <app-entry
+                  [onValueChanged]="setEmailField"
+                  placeholder="Inserisci l'indirizzo email"
+                  fill="outline"
+                  label="Email"
+                  labelPlacement="floating"
+                  [value]="emailField()"
+                  [disabled]="!editMode()"
+                ></app-entry>
+                <div class="padding"></div>
+                <app-entry
+                  [onValueChanged]="setPasswordField"
+                  placeholder="Inserisci la password"
+                  fill="outline"
+                  label="Password"
+                  labelPlacement="floating"
+                  [value]="passwordField()"
+                  [disabled]="!editMode()"
+                ></app-entry>
+                <div class="padding"></div>
 
-
-  <div class="gridContainer"> 
-    <ion-grid>
-
-      <ion-row>
-
-        <ion-col>
-
-          <div class="imgAndOptions">
-            <div class="goBack">
-              <app-button
-              [margin]="false"
-              [button] = "{ text: 'Torna indietro', expand: ''}"
-              [context] = "buttons.placeholder"
-              ></app-button>
-            </div>
-
-
-            <div class="outerImgFrame">
-              <div class="imgFrame">
-                <img src="https://static.wikia.nocookie.net/dragonball/images/9/91/SSJ4_20.jpg/revision/latest/scale-to-width-down/985?cb=20240630012825" alt="'imgPlaceholder'">
+                <app-button class="save-button" id="save-alert"
+                  [margin]="false"
+                  [button] = "{ text: 'Salva', expand: ''}"
+                  [context] = "{ onClick: save }"
+                ></app-button>
               </div>
             </div>
-
-            <div class="buttonContainer">
-              <app-button
-              [margin]="false"
-              [button] = "{ text: 'Modifica account', expand: ''}"
-              [context] = "buttons.placeholder"
-              ></app-button>
-            </div>
-
-            <div class="buttonContainer">
-              <app-button
-              [margin]="false"
-              [button] = "{ text: 'Elimina account', expand: ''}"
-              [context] = "buttons.placeholder"
-              ></app-button>
-            </div>
-
+          </ion-tab>
+          
+          <ion-tab tab="reports">
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>Sengalazioni</ion-title>
+              </ion-toolbar>
+            </ion-header>
             
-            <div class="buttonContainer">
+            <div class="reports-content">
+
+              <app-entry
+              placeholder="Cerca"
+              [onValueChanged]="setReportsFilter"
+              ></app-entry>
+              
+              @for(report of reports(); track report) {
+                <app-report-card
+                [sender] = "report.sender"
+                [when] = "report.when"
+                [reason] = "report.reason"
+                [description] = "report.description"
+                [onClose] = "report.onClose"
+                ></app-report-card>
+              }
+
               <app-button
-              [margin]="false"
-              [button] = "{ text: 'Log out', expand: ''}"
-              [context] = "buttons.placeholder"
+              [button]="{text: 'Carica altre segnalazioni', expand: 'false'}"
+              [context]="{ onClick: moreReports }"
               ></app-button>
             </div>
+          </ion-tab>
+
+          <ion-tab-bar slot="bottom">
+            <ion-tab-button tab="credentials">Profilo</ion-tab-button>
+            <ion-tab-button tab="reports">Sengalazioni</ion-tab-button>
+          </ion-tab-bar>
+    
+        </ion-tabs>
+      } @else {
+        <div class="dashboard">
+          <div id="info-pane">
+            <app-entry
+              [onValueChanged]="setUsernameField"
+              placeholder="Inserisci il nome utente"
+              fill="outline"
+              label="Nome utente"
+              labelPlacement="floating"
+              [value]="usernameField()"
+              [disabled]="!editMode()"
+            ></app-entry>
+            <div class="padding"></div>
+            <app-entry
+              [onValueChanged]="setEmailField"
+              placeholder="Inserisci l'indirizzo email"
+              fill="outline"
+              label="Email"
+              labelPlacement="floating"
+              [value]="emailField()"
+              [disabled]="!editMode()"
+            ></app-entry>
+            <div class="padding"></div>
+            <app-entry
+              [onValueChanged]="setPasswordField"
+              placeholder="Inserisci la password"
+              fill="outline"
+              label="Password"
+              labelPlacement="floating"
+              [value]="passwordField()"
+              [disabled]="!editMode()"
+            ></app-entry>
+            <div class="padding"></div>
+            <app-button class="save-button" id="save-alert"
+              [margin]="false"
+              [button] = "{ text: 'Salva', expand: ''}"
+              [context] = "{ onClick: save }"
+            ></app-button>
           </div>
+        </div>
+      }
+    </div>
 
-        </ion-col>
-
-        <ion-col>
-
-          <ion-row>
-            <div class="informationContainer">
-              <ion-col>
-                <ion-row>
-                  <ion-col>
-                  <app-label class="informationBox" >Personaggi creati: 4</app-label>
-                  </ion-col>
-
-                  <ion-col>
-                  <app-label class="informationBox">Username: gianni</app-label>
-                  </ion-col>
-                </ion-row>
-              </ion-col>
-
-              <ion-col>
-                <ion-row>
-                  <ion-col>
-                  <app-label class="informationBox">Campagne create: 6</app-label>
-                  </ion-col>
-
-                  <ion-col>
-                  <app-label class="informationBox">Email: gianni@chiocciola.gmail.it</app-label>
-                  </ion-col>
-                </ion-row>
-              </ion-col>
-
-              <ion-col>
-                <ion-row>
-                  <ion-col>
-                  <app-label class="informationBox">Campagne a cui si partecipa: 8</app-label>
-                  </ion-col>
-
-                  <ion-col>
-                  <div class="informationBox passwordContainer">
-                      <ion-input type="password" placeholder="Password"></ion-input>
-                  </div>
-                  </ion-col>
-                </ion-row>
-              </ion-col>
-
-            </div>
-          </ion-row>
-        </ion-col>
-      </ion-row>
-
-    </ion-grid>
-  </div>
-</ion-content> -->
+  </ion-split-pane>
+</ion-content>

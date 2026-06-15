@@ -3,23 +3,32 @@
   [title] = "'Overview'"
   ></app-title>
 
+  <app-button
+  [button]="{ text: 'Go back', expand: ''}"
+  [context]="buttonCallbacks['previousPage']"
+  ></app-button>
+
 <!-- la pagina sarà divisa in due metà  (1/3 + 2/3) per larghezza -->
   
     <div class="upperDetails">
       <div class="upperDetailsContainer">
-        <app-label>Velocità totale</app-label>
+        <app-label>Level: {{showLevel}}</app-label>
+      </div>
+
+      <div class="upperDetailsContainer">
+        <app-label>Speed: placeholder, da prendere con query</app-label>
       </div>
       
       <div class="upperDetailsContainer">
-        <app-label>Taglia</app-label>
+        <app-label>Size: placeholder, da prendere con query</app-label>
       </div>
       
       <div class="upperDetailsContainer">
-        <app-label>Background</app-label>
+        <app-label>Background: {{showBackground}}</app-label>
       </div>
       
       <div class="upperDetailsContainer">
-        <app-label>CA</app-label>
+        <app-label>Armor Class: </app-label>
       </div>
     </div>
 
@@ -27,44 +36,50 @@
   <div class="overviewContainer">
     <ion-list>
       <!-- classe -->
-      <ion-item>
-        <app-label>Class: </app-label>
-      </ion-item>
+      <div>
+        <app-label>Class: {{showClass}}</app-label>
+      </div>
 
       <!-- specie -->
-      <ion-item>
-        <app-label>Species + subspecies (se c'è): </app-label>
-      </ion-item>
+      <div>
+        <app-label>Species: {{showSpecies}}</app-label>
+        @if(showSubspecies !== undefined) {
+          <app-label>Subspecies: {{showSubspecies}}</app-label>
+        }
+      </div>
 
       <!-- talenti -->
-      <ion-item>
+      <div>
         <app-label>Feats: </app-label>
-      </ion-item>
+      </div>
 
       <!-- equip -->
-      <ion-item>
+      <div>
         <app-label>Equipment: </app-label>
-      </ion-item>
+      </div>
 
       <!-- Incantesimi -->
-      <ion-item>
+      <div>
         <app-label>Spells: </app-label>
-      </ion-item>
+      </div>
 
       <!-- Lingue -->
-      <ion-item>
+      <div>
         <app-label>Languages: </app-label>
-      </ion-item>
+      </div>
 
       <!-- equip -->
-      <ion-item>
+      <div>
         <app-label>Statistics: </app-label>
-      </ion-item>
+        @for (stat of finalStatistics; track stat) {
+          <app-label>{{stat.statName}}: {{stat.value}}</app-label>
+        }
+      </div>
 
       <!-- competenze -->
-      <ion-item>
+      <div>
         <app-label>Proficiencies: </app-label>
-      </ion-item>
+      </div>
 
       <app-label>Volevo cambiare la pagina, strutturandola più come una lista piuttosto che l'ennesimo elenco di accordion</app-label>
 
@@ -85,7 +100,7 @@
   </div>
 
   <!-- quale preferite tra i due tipi di text area? -->
-  <ion-item class="finalChoicesContainer">
+  <div class="finalChoicesContainer">
     <div class="finalChoices">
       <div class="nameChoice">
         <app-text-area
@@ -134,7 +149,7 @@
 
     
 
-  </ion-item>
+  </div>
 
   <div class="finalButton">
     <app-button

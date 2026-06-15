@@ -3,13 +3,19 @@
   [title] = "'Scegli gli incantesimi'"
   ></app-title>
 
-  <!-- <ion-label>lung: {{levelRow?.length}}</ion-label> -->
+  <app-button
+  [button]="{ text: 'Go back', expand: ''}"
+  [context]="buttonCallbacks['previousPage']"
+  ></app-button>
   
   <!-- divido tra trucchetti e incantesimi non solo per una questione visiva
    ma anche perchè i trucchetti conosciuti non hanno nulla a che fare 
    con l'ammontare di incantesimi conosciuti -->
   <div class="listContainerFrame">
     <ion-list class="spellsList">
+      <ion-label>Cantrips to choose: {{cantripsToChoose}}</ion-label>
+      <br>
+      <ion-label>Spells to choose: {{spellsToChoose}}</ion-label>
       @for(spellArray of displayableSpells; track spellArray) {
         @if(spellArray.length !== 0) {
           @if(spellArray[0].level === 0){
@@ -20,7 +26,9 @@
                   <div class="labelContainer" (click)="displayCantripDescription(spell)($event)">
                     <ion-label>{{spell.name}} - {{spell.level}}</ion-label>
                   </div>
-
+                  <div class="checkboxFrame">
+                    <input type="checkbox" [value]="spell.name" [id]="spell.name" (click)="addCantrip(spell,spell.name)"  class="cantripCheckbox genericCheckbox">
+                  </div>
                 </div>
               }
             </div>
@@ -33,7 +41,9 @@
                   <div class="labelContainer" (click)="displaySpellDescription(spell)($event)">
                     <ion-label>{{spell.name}} - {{spell.level}}</ion-label>
                   </div>
-
+                  <div class="checkboxFrame">
+                    <input type="checkbox" [value]="spell.name" [id]="spell.name" (click)="addSpell(spell,spell.name)"  class="spellCheckbox genericCheckbox">
+                  </div>
                 </div>
               }
             </div>
@@ -46,5 +56,11 @@
       }
     </ion-list>
   </div>
+
+  <app-button
+  [button]="{ text: 'Next page', expand: ''}"
+  [context]="buttonCallbacks['nextPage']"
+  >
+  </app-button>
 
 </ion-content>

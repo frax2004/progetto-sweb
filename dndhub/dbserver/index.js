@@ -7,6 +7,7 @@ import { authRouter } from './routes/auth.routes.js';
 import { userUtilitiesRouter } from './routes/user.utilities.routes.js';
 import { characterManagementRouter } from './routes/character.management.routes.js';
 import { campagnaRouter } from './routes/campagna.routes.js';
+import { reportsRouter } from './routes/reports.routes.js';
 
 
 const app = express();
@@ -19,6 +20,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/user-utilities", userUtilitiesRouter);
 app.use("/api/character-management", characterManagementRouter)
 app.use('/api/campagna', campagnaRouter);
+app.use('/api/reports', reportsRouter);
 
 // per impostare la formattazione a 2 spazi di indentazione
 app.set('json spaces', 2);
@@ -126,17 +128,18 @@ const new_tables = [
   "Personaggio",
   "Campagna",
   "ArrayCampagnaPersonaggiItem",
+  "Segnalazione",
 ];
 
 await Database.load(DatabasePaths.SCHEMAS);
 
-// for(const table of tables) {
-//   await loadTable(table, DatabasePaths.DATA_DIR);
-// }
+for(const table of tables) {
+  await loadTable(table, DatabasePaths.DATA_DIR);
+}
 
-// for(const table of new_tables) {
-//   await loadTable(table, DatabasePaths.MOCK_DATA_DIR);
-// }
+for(const table of new_tables) {
+  await loadTable(table, DatabasePaths.MOCK_DATA_DIR);
+}
 
 await Database.execOne(
   'PRAGMA foreign_keys = ON;', 

@@ -1,2 +1,16 @@
 -- database: ./dndhub.db
 
+
+
+
+select * 
+from Account
+where email in (
+  select * from Amministratore
+);
+
+select *
+from Segnalazione
+order by quando asc
+limit 16
+offset 500;

@@ -17,8 +17,11 @@ DOMAINS = DOMAINS.split(' ')
 
 NUMBERS = [n for n in range(1, 100)]
 
-USERNAMES = 'bambolina56 cammellodolce1 evaristro23 Hackerman PetrarcaAvevaRagione Shaggy99 Khsora MutandePazze TheRealMarzaa Tumblurr CiccioGamer89 AuraJacket IlMaestro MicheleFiglioDiGiacomo Cornuto77 IlCollega Topolino'
-USERNAMES = USERNAMES.split(' ')
+US1 = 'attore cammello cavolfiore ballerina cacciatore drago elefante camomilla lassativo cestino calcolatrice giardiniere orsacchiotto peluche calciatore armadio pirata sgasicchiatore quadro'.split(' ')
+US2 = 'gentile annoiato sbuffone vanitoso allegro sporco bagnato pulito pieno futile indispensabile motorizzato automatizzato smerdacessi'.split(' ')
+
+USERNAMES = 'bambolina56 cammello1 evaristro23 Hackerman PetrarcaAvevaRagione Shaggy99 Khsora MutandePazze TheRealMarzaa Tumblurr CiccioGamer89 AuraJacket IlMaestro MicheleFiglioDiGiacomo Cornuto77 IlCollega Topolino'
+USERNAMES = USERNAMES.split(' ') + [f'{u}.{v}{random.randint(1, 99)}' for u in US1 for v in US2]
 
 CLASSES = 'barbarian bard cleric druid fighter monk paladin ranger rogue sorcerer warlock wizard'
 CLASSES = CLASSES.split(' ')
@@ -33,6 +36,26 @@ BACKGROUNDS = ['acolyte']
 
 SPECIES = 'dwarf elf halfling human dragonborn gnome half-elf half-orc tiefling'
 SPECIES = SPECIES.split(' ')
+
+years = list(range(2020, 2027))
+months = list(range(13))
+days = list(range(1, 29))
+hours = list(range(0, 24))
+mins = list(range(0, 60))
+secs = list(range(0, 60))
+
+
+alphabet = 'a b c d e f g h i j k l m n o p q r s t u v w x y z'.split()
+capital_alphabet = 'a b c d e f g h i j k l m n o p q r s t u v w x y z'.upper().split()
+numbers = '0 1 2 3 4 5 6 7 8 9'.split()
+
+def gen_password():
+  chars = random.choices(alphabet, k = 4) + random.choices(capital_alphabet, k = 4) + random.choices(numbers, k = 4)
+  random.shuffle(chars)
+  return ''.join(chars)
+
+PASSWORDS = list(gen_password() for _ in range(10000))
+
 
 
 CAMPAIGNS_DESCRIPTIONS = [
@@ -113,11 +136,12 @@ def compile_generic_users(accounts):
 
   return objects
 
-def compile_admins(accounts):
+def compile_admins(accounts, density = 1):
+  density = 0 if density < 0 else 1 if density > 1 else density
   objects = [
     {
       'account': account['email'],
-    } for account in accounts
+    } for account in random.choices(accounts, k = round(density*len(accounts)))
   ]
 
   with open(RUNTIME_OUT_DIR + 'Amministratore.json', 'w+') as file:
@@ -238,8 +262,8 @@ def compile_accounts():
         ],
       },
       'password' : {
-        'fmt': 'Password123',
-        'args': []
+        'fmt': '{}',
+        'args': [PASSWORDS]
       },
       'username': {
         'fmt': '{}',
@@ -252,9 +276,61 @@ def compile_accounts():
 
   return compile(ACCOUNT_TABLE, max_count=512)
 
+def compile_reports(accounts):
+  REPORT_TYPES = ['inappropriate', 'explicit', 'offensive', 'cheat', 'other']
+  EMAILS = list(account['email'] for account in accounts)
+  CONTENT_TYPES = ['username', 'post', 'image', 'content']
+  REPORT_CONTENTS = [
+    'genitalemaschile',
+    'cretino',
+    'nword',
+    'rword',
+    'fword',
+    'Questo giocatore ha offeso la mia intera dinastia',
+    'Contenuti espliciti mostrati in chat'
+  ]
+
+
+  REPORT_TABLE = {
+    'name': 'Segnalazione',
+    'primary': ['account', 'quando'],
+    'rules': {
+      'tipo': {
+        'fmt': '{}',
+        'args': [REPORT_TYPES]
+      },
+      'quando': {
+        'fmt': '{:04}-{:02}-{:02} {:02}:{:02}:{:02}',
+        'args': [
+          years,
+          months,
+          days,
+          hours,
+          mins,
+          secs
+        ]
+      },
+      'account': {
+        'fmt': '{}',
+        'args': [EMAILS]
+      },
+      'tipo_contenuto': {
+        'fmt': '{}',
+        'args': [CONTENT_TYPES]
+      },
+      'contenuto': {
+        'fmt': '{}',
+        'args': [REPORT_CONTENTS]
+      }
+    }
+  }
+
+  return compile(REPORT_TABLE, max_count=512)
+
 accounts = compile_accounts()
 generic_users = compile_generic_users(accounts)
-admins = compile_admins(accounts)
+admins = compile_admins(accounts, .1)
 characters = compile_characters(accounts)
 campaigns = compile_campaigns(accounts)
 char_camp_relationship = compile_char_camp_relationship(characters, campaigns)
+reports = compile_reports(accounts)

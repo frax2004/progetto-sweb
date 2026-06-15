@@ -1,14 +1,36 @@
 import express from 'express';
-import authController from '../controllers/auth.controller.js';
-import user_middleware from '../middlewares/user.utilities.middleware.js';
+
+import auth_controller from '../controllers/auth.controller.js';
+import auth_middleware from '../middlewares/auth.middleware.js';
 
 export const authRouter = express.Router();
 
-authRouter.post("/login", authController.login);
-authRouter.post("/register", authController.register);
-authRouter.post("/logout", 
-  user_middleware.isLogged,
-  authController.logout
+authRouter.post(
+  "/login", 
+  auth_middleware.validateEmail,
+  auth_middleware.validatePassword,
+  auth_middleware.isSignedIn,
+  auth_middleware.checkPassword,
+  auth_controller.login
 );
 
-// curl -X POST http://localhost:10000/api/auth/login -H "Content-Type: application/json" -d '{"email":"castoromalefico99@outlook.it","password":"castoromaleficodelmale99"}'
+authRouter.post(
+  "/register", 
+  auth_middleware.validateEmail,
+  auth_middleware.validatePassword,
+  auth_middleware.validateUsername,
+  auth_middleware.isSigninAvailable,
+  auth_controller.register
+);
+
+authRouter.post(
+  "/logout", 
+  auth_middleware.isLogged,
+  auth_controller.logout
+);
+
+authRouter.post(
+  "/delete_account",
+  auth_middleware.isLogged,
+  auth_controller.deleteAccount
+);

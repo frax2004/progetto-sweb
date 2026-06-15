@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, HostListener, signal } from '@angular/core';
 import { IonItem } from '@ionic/angular/standalone';
 
 @Component({
@@ -13,8 +13,10 @@ export class DragEntryComponent implements OnInit {
   @Input() sensitivity: number = 0.05;
   @Input() min: number | null = null;
   @Input() max: number | null = null;
+  @Input() onDidValueChange?: (x: number) => void | undefined = undefined;
+  @Input() disabled: boolean = false;
   @ViewChild("entry") private entry!: ElementRef<HTMLInputElement>;
-
+  
   private previousInput: string = "0";
   private isDragging: boolean = false;
   private isMouseDown: boolean = false;
@@ -46,6 +48,7 @@ export class DragEntryComponent implements OnInit {
     const clamp = (min: number, val: number, max: number) => Math.max(min, Math.min(max, val));
     const clamped = clamp(this.min ?? -Infinity, val, this.max ?? Infinity);
     const rounded = Math.round(clamped * 1000) / 1000;
+    if (this.onDidValueChange !== undefined) this.onDidValueChange(rounded - this.getValue());
     this.entry.nativeElement.value = this.previousInput = rounded.toString();
   }
 

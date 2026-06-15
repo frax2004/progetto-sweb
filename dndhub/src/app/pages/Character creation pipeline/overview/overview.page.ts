@@ -7,10 +7,13 @@ import { AccordionComponent } from "src/app/components/accordion/accordion.compo
 import { EntryComponent } from "src/app/components/entry/entry.component";
 import { TextAreaComponent } from "src/app/components/text-area/text-area.component";
 import { ButtonComponent } from "src/app/components/button/button.component";
-import { Popups } from 'src/app/core/core';
+import { Navigate, Popups } from 'src/app/core/core';
 import { TitleComponent } from "src/app/components/title/title.component";
 import { LabelComponent } from "src/app/components/label/label.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
+import { Router } from '@angular/router';
+import { CharacterInstance } from '../CharacterInformation';
+import { CharacterManagementService } from 'src/app/services/character.management.service';
 
 @Component({
   selector: 'app-overview',
@@ -20,6 +23,22 @@ import { UnorderedListElementComponent } from "src/app/components/unordered-list
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ScrollBarComponent, IonItem, IonRow, IonCol, IonGrid, IonLabel, AccordionComponent, IonInput, EntryComponent, TextAreaComponent, ButtonComponent, TitleComponent, LabelComponent, IonList, UnorderedListElementComponent]
 })
 export class OverviewPage implements OnInit {
+  showLevel: number;
+  showBackground: string;
+  showClass: string;
+  showSpecies: string;
+  showSubspecies: string;
+  finalStatistics: [
+    { statName: 'strength', value: 0},
+    { statName: 'dexterity', value: 0},
+    { statName: 'constitution', value: 0},
+    { statName: 'intelligence', value: 0},
+    { statName: 'wisdom', value: 0},
+    { statName: 'charisma', value: 0},
+  ];
+  classDetails;
+  allEquipmentArray = [];
+  //
   averageHP: boolean = true;
   manualHP: boolean = false;
   constitutionMod: number = +3;
@@ -29,6 +48,13 @@ export class OverviewPage implements OnInit {
   'I punti ferita del personaggio saranno: ' + this.calcAverageHP(this.lvl,this.HPdice) + ' + ' + this.constitutionMod + ' = ' + (this.calcAverageHP(this.lvl,this.HPdice) + this.constitutionMod)
   :
   'I punti ferita del personaggio saranno: ' + this.calcAverageHP(this.lvl,this.HPdice) + ' - ' + (this.constitutionMod * (-1)) + ' = ' + (this.calcAverageHP(this.lvl,this.HPdice) + this.constitutionMod);
+
+  previousPage = () => {
+    const className = CharacterInstance.chosenClass.toLowerClass();
+    const validateSpellSelection = (className!==undefined) && (className === 'bard' || className === 'cleric' || className === 'druid' || className === 'paladin' || className === 'ranger' || className === 'sorcerer' || className === 'warlock' || className === 'wizard');
+    if (validateSpellSelection) this.router.navigate(['spell-selection']);
+    else this.router.navigate(['option-selection']);
+  }
 
   buttonCallbacks = {
     avHP: { onClick: () => {
@@ -41,7 +67,8 @@ export class OverviewPage implements OnInit {
         this.manualHP = true;
       }
     },
-    completeChar: { onClick: Popups.ofSimpleText(this.popoverController,'Pagina non ancora implementata')}
+    completeChar: { onClick: Popups.ofSimpleText(this.popoverController,'Pagina non ancora implementata')},
+    previousPage: { onClick: this.previousPage}
   };
 
   accordions = [
@@ -64,7 +91,52 @@ export class OverviewPage implements OnInit {
     return Math.ceil((HPdice/2 + 0.5)*lvl);
   }
 
-  constructor(public popoverController: PopoverController) { }
+  static getFinalStatistic(statName) {
+    return CharacterInstance.getStatisticValue(statName) +
+           CharacterInstance.speciesAbilityBonus[statName] +
+           CharacterInstance.chosenSpeciesAbilityBonuses[statName] +
+           CharacterInstance.chosenAbilityScoreIncrements[statName];
+  }
+
+  static generateAllEquipment() {
+    //da finire
+    CharacterInstance.backgroundEquipment.array.forEach(element => console.log(element));
+    console.log('\n-----------\n');
+    CharacterInstance.baseEquipment.array.forEach(element => console.log(element));
+    console.log('\n-----------\n');
+    CharacterInstance.chosenOptionalEquipment.array.forEach(element => console.log(element));
+    console.log('\n-----------\n');
+    CharacterInstance.chosenBackgroundEquipment.array.forEach(element => console.log(element));
+  }
+
+  constructor(private router: Router, public popoverController: PopoverController, private characterManagement: CharacterManagementService) { 
+    this.showLevel = CharacterInstance.chosenLevel;
+    this.showBackground = CharacterInstance.chosenBackground;
+    this.showClass = CharacterInstance.chosenClass;
+    this.showSpecies = CharacterInstance.chosenSpecies;
+    this.showSubspecies = CharacterInstance.chosenSubspecies;
+    for(let i=0; i<this.finalStatistics.length; i++) {
+      this.finalStatistics[i].value = OverviewPage.getFinalStatistic(this.finalStatistics[i].statName);
+    }
+
+    
+    this.characterManagement
+    .displayClassByName(
+      CharacterInstance.chosenClass || 'fighter'
+    )
+    .subscribe({
+      next: (value: any) => {
+        this.classDetails = {
+          name: value.classes.name,
+          hit_die: value.classes.hit_die,
+          proficiencies: value.classes.proficiencies,
+          saving_throws: value.classes.saving_throws,
+          starting_equipment: value.classes.starting_equipment
+        };
+      },
+      error: (err) => alert(err)
+    })
+  }
 
   ngOnInit() {
   }

@@ -92,6 +92,14 @@ export const routes: Routes = [
     path: 'option-selection',
     loadComponent: () => import('./pages/Character creation pipeline/option-selection/option-selection.page').then( m => m.OptionSelectionPage)
   },
+  {
+    path: 'character-creation-info',
+    loadComponent: () => import('./pages/character-creation-info/character-creation-info.page').then( m => m.CharacterCreationInfoPage)
+  },
+  {
+    path: 'campaign-creation-info',
+    loadComponent: () => import('./pages/campaign-creation-info/campaign-creation-info.page').then( m => m.CampaignCreationInfoPage)
+  },
 
 
 

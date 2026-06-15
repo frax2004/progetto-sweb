@@ -38,7 +38,7 @@ export class CampaignChatPage implements OnInit {
   idx_campagna: string = 'GiuseppeFINALEEEEEEEEEEEEE'; // per ora lasciate questo
 
   ngOnInit() {
-    this.loadPosts();
+    this.loadPosts(); // quando la pagina viene caricata prende subito i post se presenti
   }
 
   loadPosts() {
@@ -68,21 +68,20 @@ export class CampaignChatPage implements OnInit {
       .subscribe({
         next: (res: any) => {
           console.log('Post salvato:', res);
-          this.posts.push({
-            text: body.contenuto,
-            timestamp: body.time_stamp
-          });
+
           this.postText = '';
-        },
+
+          this.loadPosts();
+      },
         error: (err) => {
           console.log('Errore salvataggio post:', err);
         }
       });
-  };
+};
 
-  buttonContextPost = {
-    newPost: {
-      onClick: () => this.publica_post()
-    }
-  };
+buttonContextPost = {
+  newPost: {
+    onClick: () => this.publica_post()
+  }
+};
 }

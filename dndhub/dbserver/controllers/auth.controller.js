@@ -63,7 +63,6 @@ function login(req, res) {
       db.get(AuthQueries.getGenericUser(email), generic_user_callback);
     } else sendResponse(AuthResponses.INCORRECT_PASSWORD, res);
   };
-
   db.get(AuthQueries.isSignedIn(email), login_callback);
 }
 

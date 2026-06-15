@@ -700,6 +700,12 @@ export namespace models {
     array_idx!: number;
   }
 
+  export class ArrayProficienciesItem {
+    proficiency!: string;
+    idx_personaggio!: string;
+    array_idx!: number;
+  }
+
   export class Personaggio {
     utente_giocatore!: string;
     nome!: string;

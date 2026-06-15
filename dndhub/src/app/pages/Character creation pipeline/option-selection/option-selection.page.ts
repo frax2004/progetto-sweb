@@ -22,7 +22,8 @@ import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.com
 export class OptionSelectionPage implements OnInit {
   simpleWeapons = ['club','dagger','greatclub','handaxe','javelin','light hammer','mace','quarterstaff','sickle','spear','dart','light crossbow','shortbow','sling'];
   simpleMeleeWeapons = ['club','dagger','greatclub','handaxe','javelin','light hammer','mace','quarterstaff','sickle','spear'];
-  martilWeapons = ['battleaxe','flail','glaive','greataxe','greatsword','halberd','lance','longsword','maul','morningstar','pike','rapier','scimitar','trident','war pick','warhammer','whip','blowgun','hand-crossbow','heavy-crossbow','longbow','net'];
+  martialWeapons = ['battleaxe','flail','glaive','greataxe','greatsword','halberd','lance','longsword','maul','morningstar','pike','rapier','scimitar','trident','war pick','warhammer','whip','blowgun','hand-crossbow','heavy-crossbow','longbow','net'];
+  martialMeleeWeapons = ['battleaxe','flail','glaive','greataxe','greatsword','halberd','lance','longsword','maul','morningstar','pike','rapier','scimitar','trident','war pick','warhammer','whip'];
   musicalInstruments = ['Bagpipes','Drum','Dulcimer','Flute','Lyre','Horn','Pan flute','Shawm','Viol'];
   //
   classChoices;
@@ -60,7 +61,7 @@ export class OptionSelectionPage implements OnInit {
   optEquip = [];
   //
   // charLevel settato a 3 per testing, levare non appena non serve più
-  charLevel = CharacterInstance.chosenLevel = 3;
+  charLevel = CharacterInstance.chosenLevel;
   chosenSubclass: string | undefined = undefined;
   //
   abBonusToChoose: number | undefined;
@@ -114,11 +115,11 @@ export class OptionSelectionPage implements OnInit {
     const validateSubclass: boolean = (this.charLevel>=3 && this.chosenSubclass!==undefined) || (this.charLevel<3 && this.chosenSubclass===undefined);
     const validateAbilityBonuses: boolean = this.abBonusToChoose===0;
     const validateLanguages: boolean = this.languagestoChoose===0;
-    const validateSubspecies: boolean = (this.hasSubspecies===true && this.chosenSubspecies!==undefined) || (!this.hasSubspecies===false && this.chosenSubspecies===undefined);
+    const validateSubspecies: boolean = (this.hasSubspecies===true && this.chosenSubspecies!==undefined) || (this.hasSubspecies===false && this.chosenSubspecies===undefined);
     const validateBGlanguages: boolean = this.BACKGROUNDlanguagesToChoose===0;
     const validateBGoptEquipment: boolean = this.BACKGROUNDoptEquip.length === this.backgroundContent[1].content.length;
     const validateASI: boolean = this.statsToChoose() === 0;
-    const className = CharacterInstance.chosenClass.toLowerClass();
+    const className = CharacterInstance.chosenClass.toLowerCase();
     const validateSpellSelection = (className!==undefined) && (className === 'bard' || className === 'cleric' || className === 'druid' || className === 'paladin' || className === 'ranger' || className === 'sorcerer' || className === 'warlock' || className === 'wizard');
     if (
       validateRegularProf &&
@@ -136,23 +137,29 @@ export class OptionSelectionPage implements OnInit {
       CharacterInstance.chosenExtraProficiencies = this.extraProfArray;
       CharacterInstance.chosenOptionalEquipment = this.optEquip;
       CharacterInstance.chosenSubclass = this.chosenSubclass;
-      CharacterInstance.chosenAbilityBonuses = this.chosenAbBonus;
+      CharacterInstance.chosenSpeciesAbilityBonuses = {
+        'strength' : 0,
+        'dexterity' : 0,
+        'constitution' : 0,
+        'intelligence' : 0,
+        'wisdom' : 0,
+        'charisma' : 0,
+      };
+      this.chosenAbBonus.forEach(el => CharacterInstance.chosenAbilityScoreIncrements[el.statName] = el.bonus);
       CharacterInstance.chosenSubspecies = this.chosenSubspecies;
       CharacterInstance.chosenBackgroundLanguages = this.BACKGROUNDchosenLanguages;
       CharacterInstance.chosenBackgroundEquipment = this.BACKGROUNDoptEquip;
+
+
       // setto le statistiche
-      // forza
-      CharacterInstance.setStatistics('strength',CharacterInstance.getStatisticValue('strength') + this.strMax());
-      // destrezza
-      CharacterInstance.setStatistics('dexterity',CharacterInstance.getStatisticValue('dexterity') + this.dexMax());
-      //costituzione
-      CharacterInstance.setStatistics('constitution',CharacterInstance.getStatisticValue('constitution') + this.conMax());
-      // intelligenza
-      CharacterInstance.setStatistics('intelligence',CharacterInstance.getStatisticValue('intelligence') + this.intMax());
-      // saggezza
-      CharacterInstance.setStatistics('wisdom',CharacterInstance.getStatisticValue('wisdom') + this.wisMax());
-      // carisma
-      CharacterInstance.setStatistics('charisma',CharacterInstance.getStatisticValue('charisma') + this.chaMax());
+      CharacterInstance.chosenAbilityScoreIncrements = {
+        'strength' : this.strMax(),
+        'dexterity' : this.dexMax(),
+        'constitution' : this.conMax(),
+        'intelligence' : this.intMax(),
+        'wisdom' : this.wisMax(),
+        'charisma' : this.chaMax(),
+      };
       if (validateSpellSelection) this.router.navigate(['spell-selection']);
       else this.router.navigate(['overview']);
     }
@@ -318,7 +325,7 @@ export class OptionSelectionPage implements OnInit {
       }
       else {
         this.chosenAbBonus.push({
-          abilityName: abilityName,
+          statName: abilityName,
           bonus: bonus,
         });
         this.abBonusToChoose--;
@@ -382,10 +389,12 @@ export class OptionSelectionPage implements OnInit {
     let extraProfArray = [];
     for (const choice of choices) {
       for (const opt of choice.from.options) {
-        if (opt.reference_item.name.includes('Skill:')) {
-          regularProfArray.push(opt.reference_item.name);
+        if (opt.reference_item?.name !== undefined) {
+          if (opt.reference_item?.name.includes('Skill:')) {
+            regularProfArray.push(opt.reference_item.name);
+          }
+          else extraProfArray.push(opt.reference_item?.name)
         }
-        else extraProfArray.push(opt.reference_item.name)
       }
     }
 
@@ -402,16 +411,24 @@ export class OptionSelectionPage implements OnInit {
     let retArray = [];
     let indexGenerator = 0;
     for (const choice of choices) {
-      let arrEl = {
-        choose: choice.desc.replace(/\\n/, '').replace(/a /, '').replace(/ or/, '').replace(/an /, '').replace(/, or/, '').replace(/, /, '')
-        .replace(/a longsword,/, 'longsword').replace(/armorlongbow/, 'armor, longbow')
-        .split(/\([abcd]\)/).filter(el => el !== '' && el !== ' ' && el !== null).map(el => el),
-        quantity: choice.choose,
-        leftToChoose: choice.choose,
-        index: indexGenerator,
-      };
-      indexGenerator++;
-      retArray.push(arrEl);
+      if (choice.desc?.replace !== undefined) {
+        let arrEl = {
+          choose: choice.desc?.replace(/\\n/, '')
+          .replace(/a /, '')
+          .replace(/ or/, '')
+          .replace(/an /, '')
+          .replace(/, or/, '')
+          .replace(/, /, '')
+          .replace(',','')
+          .replace(/a longsword,/, 'longsword').replace(/armorlongbow/, 'armor, longbow')
+          .split(/\([abcd]\)/).filter(el => el !== '' && el !== ' ' && el !== null).map(el => el),
+          quantity: choice.choose,
+          leftToChoose: choice.choose,
+          index: indexGenerator,
+        };
+        indexGenerator++;
+        retArray.push(arrEl);
+      }
     }
 
     return retArray;
@@ -440,8 +457,8 @@ export class OptionSelectionPage implements OnInit {
     if (choice === undefined || choice === null) return undefined;
     if(allLanguages !== undefined && allLanguages === true) {
       let allLanguages= ['Common','Common Sign Language','Draconic','Dwarvish','Elvish','Giant','Gnomish','Goblin','Halfling','Orc','Abyssal','Celestial','Deep Speech','Druidic','Infernal','Primordial','Sylvan','Thieves Cant','Undercommon'];
-      if(CharacterInstance.chosenLanguages !== undefined) {
-        for(const lang of CharacterInstance.chosenLanguages) {
+      if(CharacterInstance.speciesLanguages !== undefined) {
+        for(const lang of CharacterInstance.speciesLanguages) {
           if(allLanguages.includes(lang)) allLanguages.splice(allLanguages.indexOf(lang),1);
         }
       }
@@ -507,12 +524,11 @@ export class OptionSelectionPage implements OnInit {
           };
         this.className = this.classChoices.name;
         this.classContent = this.classChoices.content;
-        console.log(JSON.stringify(value.classes[0].starting_equipment_options,null,2));
         this.regularProfToChoose = value.classes[0].proficiency_choices[0].choose;
         this.extraProfToChoose = OptionSelectionPage.displayClassProficiencyChoices(value.classes[0].proficiency_choices).extraProficiencies.length === 0 ? 0 : this.regularProfToChoose;
         this.choicesDiplayer
         .displaySpeciesByName(
-          CharacterInstance.chosenSpecies || 'half-elf'
+          CharacterInstance.chosenSpecies || 'human'
         )
         .subscribe({
           next: (value: any) => {
@@ -528,7 +544,7 @@ export class OptionSelectionPage implements OnInit {
             };
             this.speciesName = this.speciesChoices.name;
             this.speciesContent = this.speciesChoices.content;
-            this.hasSubspecies = (value.species[0].subraces !== null && value.species[0].subraces !== undefined);
+            this.hasSubspecies = (value.species[0].subraces.length > 0);
             this.abBonusToChoose = value.species[0].ability_bonus_options?.choose === undefined ? 0 : value.species[0].ability_bonus_options.choose;
             this.languagestoChoose = value.species[0].language_options?.choose === undefined ? 0 : value.species[0].language_options.choose;
             this.choicesDiplayer

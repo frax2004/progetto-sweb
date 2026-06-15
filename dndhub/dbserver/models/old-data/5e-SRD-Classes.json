@@ -167,7 +167,7 @@
         }
       },
       {
-        "desc": "(a) two handaxes or (b) any simple weapon",
+        "desc": "(a) a handaxe or (b) any simple weapon",
         "choose": 1,
         "type": "equipment",
         "from": {
@@ -1112,7 +1112,7 @@
     ],
     "starting_equipment_options": [
       {
-        "desc": "(a) a mace or (b) a warhammer (if proficient)",
+        "desc": "(a) a mace or (b) a warhammer",
         "choose": 1,
         "type": "equipment",
         "from": {
@@ -1150,7 +1150,7 @@
         }
       },
       {
-        "desc": "(a) scale mail, (b) leather armor, or (c) chain mail (if proficient)",
+        "desc": "(a) scale mail, (b) leather armor, or (c) chain mail",
         "choose": 1,
         "type": "equipment",
         "from": {
@@ -1197,7 +1197,7 @@
         }
       },
       {
-        "desc": "(a) a light crossbow and 20 bolts or (b) any simple weapon",
+        "desc": "(a) a light crossbow or (b) any simple weapon",
         "choose": 1,
         "type": "equipment",
         "from": {
@@ -1861,7 +1861,7 @@
     "starting_equipment": [],
     "starting_equipment_options": [
       {
-        "desc": "(a) chain mail or (b) leather armor, longbow, and 20 arrows",
+        "desc": "(a) chain mail or (b) leather armor",
         "choose": 1,
         "type": "equipment",
         "from": {
@@ -1912,7 +1912,7 @@
         }
       },
       {
-        "desc": "(a) a martial weapon and a shield or (b) two martial weapons",
+        "desc": "(a) a martial weapon and a shield",
         "choose": 1,
         "type": "equipment",
         "from": {
@@ -1968,7 +1968,7 @@
         }
       },
       {
-        "desc": "(a) a light crossbow and 20 bolts or (b) two handaxes",
+        "desc": "(a) a light crossbow or (b) a handaxe",
         "choose": 1,
         "type": "equipment",
         "from": {
@@ -2168,7 +2168,6 @@
         }
       },
       {
-        "desc": "Choose one type of artisan’s tools or one musical instrument",
         "type": "proficiencies",
         "choose": 1,
         "from": {
@@ -2707,7 +2706,7 @@
     ],
     "starting_equipment_options": [
       {
-        "desc": "(a) a martial weapon and a shield or (b) two martial weapons",
+        "desc": "(a) a martial weapon and a shield",
         "choose": 1,
         "type": "equipment",
         "from": {
@@ -2763,7 +2762,7 @@
         }
       },
       {
-        "desc": "(a) five javelins or (b) any simple melee weapon",
+        "desc": "(a) any simple melee weapon",
         "choose": 1,
         "type": "equipment",
         "from": {
@@ -3107,7 +3106,7 @@
         }
       },
       {
-        "desc": "(a) two shortswords or (b) two simple melee weapons",
+        "desc": "(a) a shortsword or (b) any simple melee weapon",
         "choose": 1,
         "type": "equipment",
         "from": {
@@ -3555,7 +3554,7 @@
         }
       },
       {
-        "desc": "(a) a shortbow and quiver of 20 arrows or (b) a shortsword",
+        "desc": "(a) a shortbow or (b) a shortsword",
         "choose": 1,
         "type": "equipment",
         "from": {
@@ -3892,7 +3891,7 @@
     ],
     "starting_equipment_options": [
       {
-        "desc": "(a) a light crossbow and 20 bolts or (b) any simple weapon",
+        "desc": "(a) a light crossbow or (b) any simple weapon",
         "choose": 1,
         "type": "equipment",
         "from": {
@@ -4199,7 +4198,7 @@
     ],
     "starting_equipment_options": [
       {
-        "desc": "(a) a light crossbow and 20 bolts or (b) any simple weapon",
+        "desc": "(a) a light crossbow or (b) any simple weapon",
         "choose": 1,
         "type": "equipment",
         "from": {

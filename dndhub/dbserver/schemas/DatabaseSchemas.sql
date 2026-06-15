@@ -926,6 +926,15 @@ create table if not exists ArrayFeatItem (
   foreign key (item) references Feat(idx)
 );
 
+create table if not exists ArrayProficienciesItem (
+  proficiency text not null,
+  idx_personaggio text not null,
+  array_idx number not null,
+
+  primary key (idx_personaggio,array_idx),
+  foreign key (idx_personaggio) references Personaggio(idx_personaggio) on update cascade on delete cascade
+);
+
 create table if not exists Campagna (
   utente_generico text not null,
   nome text not null,

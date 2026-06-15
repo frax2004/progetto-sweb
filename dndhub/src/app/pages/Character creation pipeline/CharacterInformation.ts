@@ -72,6 +72,16 @@ export class CharacterInstance {
   private static chosen_species = undefined;
   private static chosen_background = undefined;
   private static chosen_level = undefined;
+  private static level_specifics = undefined;
+  private static base_equipment = undefined;
+  private static base_proficiencies = undefined;
+  private static base_saving_throws = undefined;
+  private static species_ab_bonus = undefined;
+  private static species_languages = undefined;
+  private static species_traits = undefined;
+  private static background_starting_gold = undefined;
+  private static background_feature = undefined;
+  private static background_equipment = undefined;
   private static _statistics = {
     'strength': { value: 0, modifier: StatModifierNumber[0]},
     'dexterity': { value: 0, modifier: StatModifierNumber[0]},
@@ -85,13 +95,16 @@ export class CharacterInstance {
   private static chosen_languages = undefined;
   private static chosen_regular_proficiencies = undefined;
   private static chosen_extra_proficiencies = undefined;
+  //ricorda che optional_equipment non ha quantity all'interno ma solo nome, quantity è sempre 1
   private static optional_equipment = undefined;
   private static chosen_subclass = undefined;
-  private static chosen_ability_bonuses = undefined;
+  private static chosen_species_ability_bonuses = undefined;
   private static chosen_subspecies = undefined;
   private static chosen_background_languages = undefined;
+  //ricorda che chosen_background_equipment non ha quantity all'interno ma solo nome, quantity è sempre 1
   private static chosen_background_equipment = undefined;
   private static chosen_asi = undefined;
+  private static chosen_ability_score_increments = undefined;
 
   constructor() {}
   
@@ -99,6 +112,94 @@ export class CharacterInstance {
     this.chosen_class = undefined;
     this.chosen_species = undefined;
     this.chosen_background = undefined;
+  }
+
+  static set chosenAbilityScoreIncrements(abilityScoreIncrements) {
+    this.chosen_ability_score_increments = abilityScoreIncrements;
+  }
+
+  static get chosenAbilityScoreIncrements() {
+    return this.chosen_ability_score_increments;
+  }
+
+  static set backgroundEquipment(equipment) {
+    this.background_equipment = equipment;
+  }
+
+  static get backgroundEquipment() {
+    return this.background_equipment;
+  }
+
+  static set backgroundFeature(feature) {
+    this.background_feature = feature;
+  }
+
+  static get backgroundFeature() {
+    return this.background_feature;
+  }
+
+  static set backgroundStartingGold(startingGold) {
+    this.background_starting_gold = startingGold;
+  }
+
+  static get backgroundStartingGold() {
+    return this.background_starting_gold;
+  }
+
+  static set levelSpecifics(levelspecifics) {
+    this.level_specifics = levelspecifics;
+  }
+
+  static get levelSpecifics() {
+    return this.level_specifics;
+  }
+
+  static set speciesTraits(traits) {
+    this.species_traits = traits;
+  }
+
+  static get speciesTraits() {
+    return this.species_traits;
+  }
+
+  static set speciesLanguages(languages) {
+    this.species_languages = languages;
+  }
+
+  static get speciesLanguages() {
+    return this.species_languages;
+  }
+
+  static set speciesAbilityBonus(abBonus) {
+    this.species_ab_bonus = abBonus;
+  }
+
+  static get speciesAbilityBonus() {
+    return this.species_ab_bonus;
+  }
+
+  static set baseSavingThrows(savingThrows) {
+    this.base_saving_throws = savingThrows;
+  }
+
+  static get baseSavingThrows() {
+    return this.base_saving_throws;
+  }
+
+  static set baseProficiencies(proficiencies) {
+    this.base_proficiencies = proficiencies;
+  }
+
+  static get baseProficiencies() {
+    return this.base_proficiencies;
+  }
+
+  static set baseEquipment(equipment) {
+    this.base_equipment = equipment;
+  }
+
+  static get baseEquipment() {
+    return this.base_equipment;
   }
 
   static get chosenASI() {
@@ -133,12 +234,12 @@ export class CharacterInstance {
     this.chosen_subspecies = subspecies;
   }
 
-  static get chosenAbilityBonuses() {
-    return this.chosen_ability_bonuses;
+  static get chosenSpeciesAbilityBonuses() {
+    return this.chosen_species_ability_bonuses;
   }
 
-  static set chosenAbilityBonuses(abilityBonuses) {
-    this.chosen_ability_bonuses = abilityBonuses;
+  static set chosenSpeciesAbilityBonuses(abilityBonuses) {
+    this.chosen_species_ability_bonuses = abilityBonuses;
   }
 
   static get chosenSubclass() {

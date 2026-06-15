@@ -1,11 +1,16 @@
-
 .card-image {
   width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  object-position: center;
+  height: 50%;
+
+  img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    aspect-ratio: 1/1;
+  }
 }
 
 ion-card {
+  margin: 0px;
   height: 100%;
 }

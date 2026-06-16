@@ -16,19 +16,15 @@
       </div>
 
       <div class="upperDetailsContainer">
-        <app-label>Speed: placeholder, da prendere con query</app-label>
+        <app-label>Speed: {{showSpeed}}</app-label>
       </div>
       
       <div class="upperDetailsContainer">
-        <app-label>Size: placeholder, da prendere con query</app-label>
+        <app-label>Size: {{showSize}}</app-label>
       </div>
       
       <div class="upperDetailsContainer">
         <app-label>Background: {{showBackground}}</app-label>
-      </div>
-      
-      <div class="upperDetailsContainer">
-        <app-label>Armor Class: </app-label>
       </div>
     </div>
 
@@ -38,6 +34,9 @@
       <!-- classe -->
       <div>
         <app-label>Class: {{showClass}}</app-label>
+        @if(showSubclass !== undefined) {
+          <app-label>Subclass: {{showSubclass}}</app-label>
+        }
       </div>
 
       <!-- specie -->
@@ -48,70 +47,35 @@
         }
       </div>
 
-      <!-- talenti -->
-      <div>
-        <app-label>Feats: </app-label>
-      </div>
-
-      <!-- equip -->
-      <div>
-        <app-label>Equipment: </app-label>
-      </div>
-
-      <!-- Incantesimi -->
-      <div>
-        <app-label>Spells: </app-label>
-      </div>
-
-      <!-- Lingue -->
-      <div>
-        <app-label>Languages: </app-label>
-      </div>
-
-      <!-- equip -->
+      <!-- stats -->
       <div>
         <app-label>Statistics: </app-label>
         @for (stat of finalStatistics; track stat) {
           <app-label>{{stat.statName}}: {{stat.value}}</app-label>
         }
       </div>
-
-      <!-- competenze -->
-      <div>
-        <app-label>Proficiencies: </app-label>
-      </div>
-
-      <app-label>Volevo cambiare la pagina, strutturandola più come una lista piuttosto che l'ennesimo elenco di accordion</app-label>
-
     </ion-list>
-  </div>
-  
-  
-  
-  
-  
-  
-  
-    <div class="accordions">
-    <app-accordion
-    [accordions] = "accordions"
-    [allowMultipleEnabled] = "true"
-    ></app-accordion>
   </div>
 
   <!-- quale preferite tra i due tipi di text area? -->
   <div class="finalChoicesContainer">
     <div class="finalChoices">
       <div class="nameChoice">
-        <app-text-area
-        [fill] = "'solid'"
-        [label]="'Inserisci nome del personaggio: '"></app-text-area>
+        <ion-textarea
+        class = "genericTextArea"
+        label = "Insert the character's name"
+        fill = "outline"
+        labelPlacement="floating"
+        ></ion-textarea>
       </div>
 
       <div class="imgChoice">
-        <app-text-area
-        [fill] = "''" 
-        [label]="'(opzionale) Inserisci URL immagine del personaggio: '"></app-text-area>
+        <ion-textarea
+        class = "genericTextArea"
+        label = "(optional) Insert URL image for the character"
+        fill = "outline"
+        labelPlacement="floating"
+        ></ion-textarea>
       </div>
 
       <div class="HPchoice">

@@ -40,7 +40,9 @@ export class SpeciesSelectionPage implements OnInit {
   nextPage = () => {
     if (SpeciesSelectionPage.selectedSpecies !== undefined) {
       for(const species of this.speciesArray) {
-        if (species.name === SpeciesSelectionPage.selectedSpecies) {
+        if (species.name.toLowerCase() === SpeciesSelectionPage.selectedSpecies.toLowerCase()) {
+          CharacterInstance.speciesSize = species.size;
+          CharacterInstance.speciesSpeed = species.speed;
           CharacterInstance.speciesAbilityBonus = species.species_ability_bonuses;
           CharacterInstance.speciesLanguages = species.species_languages;
           CharacterInstance.speciesTraits = species.species_traits;
@@ -104,14 +106,12 @@ export class SpeciesSelectionPage implements OnInit {
       button: { text: 'Select this species', expand: ''},
       context: (event: Event) => {
         SpeciesSelectionPage.selectedSpecies = 'Half-elf';
-        alert('Classe selezionata: Half-Elf');
       }
     },
     'Half-Orc': {
       button: { text: 'Select this species', expand: ''},
       context: (event: Event) => {
         SpeciesSelectionPage.selectedSpecies = 'Half-orc';
-        alert('Classe selezionata: Half-Orc');
       }
     },
     'Gnome': {

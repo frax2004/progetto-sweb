@@ -1,11 +1,9 @@
-<ion-card>
-  <div class="card-image">
-    <img src={{card.imageURL}} />
-  </div>
+<div class="card">
+  <div class="card-image" [style.background-image]="'url(' + card.imageURL + ')'"></div>
   <ion-card-header>
     <ion-card-title>{{card.title}}</ion-card-title>
     <ion-card-subtitle>{{card.subtitle}}</ion-card-subtitle>
   </ion-card-header>
 
   <ion-card-content> {{card.content}} </ion-card-content>
-</ion-card>
+</div>

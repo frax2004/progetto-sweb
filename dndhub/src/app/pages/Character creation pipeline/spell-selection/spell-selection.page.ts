@@ -44,7 +44,6 @@ export class SpellSelectionPage implements OnInit {
     else {
       CharacterInstance.chosenCantrips = this.chosenCantrips;
       CharacterInstance.chosenSpells = this.chosenSpells
-      alert('Trucchetti: ' + CharacterInstance.chosenCantrips + '\n\nIncantesimi: ' + CharacterInstance.chosenSpells + '\n\nci sarebbe da fare un navigate alla pagina di overview');
       //
       this.router.navigate(['/overview']);
     }
@@ -162,10 +161,6 @@ export class SpellSelectionPage implements OnInit {
         CharacterInstance.speciesAbilityBonus['intelligence'] +
         CharacterInstance.chosenSpeciesAbilityBonuses['intelligence'] +
         CharacterInstance.chosenAbilityScoreIncrements['intelligence'];
-        alert(newValue);
-        alert(level)
-        alert(StatModifierNumber[newValue])
-        alert(level + StatModifierNumber[newValue])
         return (level + StatModifierNumber[newValue]) > 1 ? level + StatModifierNumber[newValue] : 1;
       }
     }
@@ -262,7 +257,6 @@ export class SpellSelectionPage implements OnInit {
               this.displayableSpells = SpellSelectionPage.getDisplayableSpells(this.spells,this.maxLevel);
               this.cantripsToChoose = this.levelRow.cantrips_known;
               this.spellsToChoose = SpellSelectionPage.getSpellsToChoose(this.levelRow.name,this.levelRow.level,this.levelRow.spells_known);
-              alert(this.spellsToChoose)
             },
             error: (err) => alert(err)
           });

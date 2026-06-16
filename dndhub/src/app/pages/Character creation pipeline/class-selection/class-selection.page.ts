@@ -44,6 +44,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
           CharacterInstance.baseEquipment = _class.base_equipment;
           CharacterInstance.baseProficiencies = _class.base_proficiencies;
           CharacterInstance.baseSavingThrows = _class.base_saving_throws;
+          CharacterInstance.hitDie = _class.hit_die;
         }
       }
       CharacterInstance.levelSpecifics = this.getLevelSpecifics();
@@ -62,9 +63,6 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
 
 
   @ViewChild('levelEntry') private levelEntry: DragEntryComponent;
- 
-  c: dnd.Level;
-  d: dnd.ClassSpecific;
 
   getNumberOfASI() {
     if (this.levelEntry.value === 0 || CharacterInstance.chosenClass === undefined) return 0;

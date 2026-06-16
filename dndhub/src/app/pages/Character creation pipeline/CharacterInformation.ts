@@ -76,6 +76,7 @@ export class CharacterInstance {
   private static base_equipment = undefined;
   private static base_proficiencies = undefined;
   private static base_saving_throws = undefined;
+  private static hp_die = undefined;
   private static species_ab_bonus = undefined;
   private static species_languages = undefined;
   private static species_traits = undefined;
@@ -114,6 +115,14 @@ export class CharacterInstance {
     this.chosen_class = undefined;
     this.chosen_species = undefined;
     this.chosen_background = undefined;
+  }
+
+  static set hitDie(dice) {
+    this.hp_die = dice;
+  }  
+
+  static get hitDie() {
+    return this.hp_die;
   }
 
   static set speciesSize(size) {

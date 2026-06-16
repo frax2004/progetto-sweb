@@ -12,15 +12,16 @@ import { TitleComponent } from "src/app/components/title/title.component";
 import { LabelComponent } from "src/app/components/label/label.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
 import { Router } from '@angular/router';
-import { CharacterInstance } from '../CharacterInformation';
+import { CharacterInstance, StatModifierNumber } from '../CharacterInformation';
 import { CharacterManagementService } from 'src/app/services/character.management.service';
+import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.component";
 
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.page.html',
   styleUrls: ['./overview.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ScrollBarComponent, IonItem, IonRow, IonCol, IonGrid, IonLabel, AccordionComponent, IonInput, EntryComponent, TextAreaComponent, ButtonComponent, TitleComponent, LabelComponent, IonList, UnorderedListElementComponent, IonTextarea]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ScrollBarComponent, IonItem, IonRow, IonCol, IonGrid, IonLabel, AccordionComponent, IonInput, EntryComponent, TextAreaComponent, ButtonComponent, TitleComponent, LabelComponent, IonList, UnorderedListElementComponent, IonTextarea, DragEntryComponent]
 })
 export class OverviewPage implements OnInit {
   showLevel: number;
@@ -48,9 +49,9 @@ export class OverviewPage implements OnInit {
   lvl: number = 7;
   HPdice: number = 8;
   avHPlabel: String = this.constitutionMod>0 ? 
-  'I punti ferita del personaggio saranno: ' + this.calcAverageHP(this.lvl,this.HPdice) + ' + ' + this.constitutionMod + ' = ' + (this.calcAverageHP(this.lvl,this.HPdice) + this.constitutionMod)
+  'I punti ferita del personaggio saranno: ' + this.calcAverageHP() + ' + ' + (StatModifierNumber[this.finalStatistics['constitution']] * CharacterInstance.chosenLevel) + ' = ' + (this.calcAverageHP() + (StatModifierNumber[this.finalStatistics['constitution']] * CharacterInstance.chosenLevel))
   :
-  'I punti ferita del personaggio saranno: ' + this.calcAverageHP(this.lvl,this.HPdice) + ' - ' + (this.constitutionMod * (-1)) + ' = ' + (this.calcAverageHP(this.lvl,this.HPdice) + this.constitutionMod);
+  'I punti ferita del personaggio saranno: ' + this.calcAverageHP() + ' - ' + ((StatModifierNumber[this.finalStatistics['constitution']] * CharacterInstance.chosenLevel) * (-1)) + ' = ' + (this.calcAverageHP() + (StatModifierNumber[this.finalStatistics['constitution']] * CharacterInstance.chosenLevel));
 
   previousPage = () => {
     const className = CharacterInstance.chosenClass.toLowerClass();
@@ -86,12 +87,20 @@ export class OverviewPage implements OnInit {
     // mi dimentico qualcosa?
   ];
 
-  HPrange(lvl: number, HPdice: number) {
-    return '(' + lvl.toString() + '-' + (HPdice*lvl).toString() + ')'; 
+  minHP() {
+    return CharacterInstance.hitDie + (CharacterInstance.chosenLevel - 1) + (StatModifierNumber[this.finalStatistics['constitution']] * CharacterInstance.chosenLevel);
   }
 
-  calcAverageHP(lvl: number, HPdice: number) {
-    return Math.ceil((HPdice/2 + 0.5)*lvl);
+  maxHP() {
+    return CharacterInstance.hitDie + ((CharacterInstance.chosenLevel - 1) * CharacterInstance.hitDie) + (StatModifierNumber[this.finalStatistics['constitution']] * CharacterInstance.chosenLevel);
+  }
+
+  HPrange() {
+    return '(' + this.minHP() + '-' + this.maxHP() + ')'; 
+  }
+
+  calcAverageHP() {
+    return Math.ceil((CharacterInstance.hitDie/2 + 0.5)*CharacterInstance.chosenLevel);
   }
 
   static getFinalStatistic(statName) {

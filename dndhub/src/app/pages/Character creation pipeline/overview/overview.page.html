@@ -3,10 +3,12 @@
   [title] = "'Overview'"
   ></app-title>
 
-  <app-button
-  [button]="{ text: 'Go back', expand: ''}"
-  [context]="buttonCallbacks['previousPage']"
-  ></app-button>
+  <div class="previousPageButton">
+    <app-button
+    [button]="{ text: 'Go back', expand: ''}"
+    [context]="buttonCallbacks['previousPage']"
+    ></app-button>
+  </div>
 
 <!-- la pagina sarà divisa in due metà  (1/3 + 2/3) per larghezza -->
   
@@ -30,29 +32,67 @@
 
   
   <div class="overviewContainer">
-    <ion-list>
+    <ion-list class="infoList">
       <!-- classe -->
-      <div>
-        <app-label>Class: {{showClass}}</app-label>
-        @if(showSubclass !== undefined) {
-          <app-label>Subclass: {{showSubclass}}</app-label>
-        }
+      <div class="genericInfoContainer classDiv">
+        <div class="infoTitle">
+          <app-label >Class</app-label>
+        </div>
+        <div class="infoFrame">
+          <!-- {{showClass}} -->
+          <app-label>placeholder</app-label>
+        </div>
       </div>
+
+      
+      @if(showSubclass !== undefined) {
+        <div class="genericInfoContainer">
+          <div class="infoTitle">
+            <app-label>Subclass</app-label>
+          </div>
+          <div class="infoFrame">
+            <!-- {{showSubclass}} -->
+            <app-label>placeholder</app-label>
+          </div>
+        </div>
+      }
 
       <!-- specie -->
-      <div>
-        <app-label>Species: {{showSpecies}}</app-label>
-        @if(showSubspecies !== undefined) {
-          <app-label>Subspecies: {{showSubspecies}}</app-label>
-        }
+      <div class="genericInfoContainer">
+        <div class="infoTitle">
+          <app-label>Species</app-label>
+        </div>
+        <div class="infoFrame">
+          <!-- {{showSpecies}} -->
+          <app-label>placeholder</app-label>
+        </div>
       </div>
 
+
+      @if(showSubspecies !== undefined) {
+        <div class="genericInfoContainer">
+          <div class="infoTitle">
+            <app-label>Subspecies</app-label>
+          </div>
+          <div class="infoFrame">
+            <!-- {{showSubspecies}} -->
+            <app-label>placeholder</app-label>
+          </div>
+        </div>
+      }
+
       <!-- stats -->
-      <div>
-        <app-label>Statistics: </app-label>
-        @for (stat of finalStatistics; track stat) {
-          <app-label>{{stat.statName}}: {{stat.value}}</app-label>
-        }
+      <div class="genericInfoContainer">
+        <div class="infoTitle">
+          <app-label>Statistics: </app-label>
+        </div>
+        <div class="infoFrame statGrid">
+          @for (stat of finalStatistics; track stat) {
+            <div class="statFrame">
+              <app-label>{{stat.statName}}: {{stat.value}}</app-label>
+            </div>
+          }
+        </div>
       </div>
     </ion-list>
   </div>
@@ -78,6 +118,7 @@
         ></ion-textarea>
       </div>
 
+      <div class="HPframe">
       <div class="HPchoice">
         <app-label class="HPlabel">Seleziona metodo di calcolo HP</app-label>
         <div class="HPbuttons">
@@ -99,15 +140,24 @@
       <div class="showHP">
           
           @if(averageHP===true) {
-                <app-label>{{avHPlabel}}</app-label>
+            <div>
+              <app-label>{{avHPlabel}}</app-label>
+            </div>
           }
 
           @if(manualHP===true) {
-              <app-label>Inserire HP in range {{HPrange(lvl,HPdice)}}:</app-label>
+            <div class="dragEntryFrame">
+              <app-label>Inserire HP in range {{HPrange()}}:</app-label>
 
-              <app-label>Placeholder number entry</app-label>
+              <app-drag-entry
+              [sensitivity]="1"
+              [min]="minHP()"
+              [max]="maxHP()"
+              ></app-drag-entry>
+            </div>
           }
 
+      </div>
       </div>
     </div>
 

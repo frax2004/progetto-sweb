@@ -5,6 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, PopoverController, IonItem
 import { ButtonComponent } from "src/app/components/button/button.component";
 import { Popups } from 'src/app/core/core';
 import { timestamp } from 'rxjs';
+import { PostsService } from 'src/app/services/PostsService';
 
 @Component({
   selector: 'app-campaign-chat',
@@ -19,6 +20,8 @@ export class CampaignChatPage implements OnInit {
   };
 
   campaignName: string = 'Nome campagna';
+  idx_campagna: string = '';
+  postText: string = '';
 
   posts = [
     {text: 'Testo esemplificativo di un post', senderImgURL: 'https://upload.wikimedia.org/wikipedia/commons/5/57/Tokay_Gecko.jpg', timestamp: '09.37'},
@@ -33,9 +36,53 @@ export class CampaignChatPage implements OnInit {
     { name: 'Gorillicrya', character: 'Tiefling barbaro lvl 999'},
   ]
 
-  constructor(public popoverController: PopoverController) { }
+  constructor(public popoverController: PopoverController, private PostService:PostsService) { }
 
   ngOnInit() {
+    this.loadPosts(); // quando la pagina viene caricata prende subito i post se presenti
   }
 
+  loadPosts() {
+    this.PostService.getPosts(this.idx_campagna)
+      .subscribe({
+        next: (res: any) => {
+          this.posts = res.data;
+        },
+        error: (err) => {
+          console.log('Errore caricamento post:', err);
+        }
+      });
+  }
+
+  publica_post = () => {
+    if (!this.postText?.trim()) {
+      console.log('Scrivi qualcosa prima di pubblicare');
+      return;
+    }
+
+    const body = {
+      contenuto: this.postText,
+      time_stamp: new Date().toISOString()
+    };
+
+    this.PostService.createPost(this.idx_campagna, body)
+      .subscribe({
+        next: (res: any) => { 
+          console.log('Post salvato:', res);
+
+          this.postText = '';
+
+          this.loadPosts();
+      },
+        error: (err) => {
+          console.log('Errore salvataggio post:', err);
+        }
+      });
+};
+//devo ancora fare il buttom per cancellare i post ma questo poi ci penso perché mi siddia e devo cambiare l'ui
+buttonContextPost = {
+  newPost: {
+    onClick: () => this.publica_post()
+  }
+};
 }

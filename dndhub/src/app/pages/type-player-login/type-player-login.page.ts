@@ -38,8 +38,8 @@ export class TypePlayerLoginPage implements OnInit {
 //   }
 // }
 
-  VaiLandingPage() {
-    this.router.navigate(['/landing-page']);
+  goto(route: string) {
+    this.router.navigate([route]);
   }
 
 

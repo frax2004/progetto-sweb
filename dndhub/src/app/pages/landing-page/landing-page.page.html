@@ -1,62 +1,48 @@
 <ion-content>
   <div class="backgroundimage"></div>
-  <div class="gridTitolo">
-    <div class="accordionDiv">
-      <ion-accordion-group>
-        <ion-accordion class="optsAccordion">
-          <div slot="header" class="accImgFrame">
-            <img class="optImg" alt="placeholderImg" src="\assets\icon\Menu-dato.dndhub.SVG">
+  <div class="accordionDiv">
+    <ion-accordion-group>
+      <ion-accordion class="optsAccordion">
+        <div slot="header" class="accImgFrame">
+          <img class="optImg" alt="placeholderImg" src="\assets\icon\Menu-dato.dndhub.SVG">
+        </div>
+        <div class="ion-padding accContent" slot="content">
+          @if(!isLogged()) {
+          <div class="linkContainer">
+            <a href="/login-page">
+              Login
+            </a>
           </div>
-          <div class="ion-padding accContent" slot="content">
-            @if(!isLogged()) {
-            <div class="linkContainer">
-              <a href="/login-page">
-                Login
-              </a>
-            </div>
-            <div class="linkContainer bottomLinkContainer">
-              <a href="/signin-page">
-                Registrati
-              </a>
-            </div>
-            }
-            @else {
-            <div class="linkContainer">
-              <a routerLink="/type-player-login">
-                Accedi alle aree personali
-              </a>
-            </div>
-            <div class="linkContainer bottomLinkContainer">
-              <a routerLink="/profile">
-                Profilo personale
-              </a>
-            </div>
-            }
+          <div class="linkContainer bottomLinkContainer">
+            <a href="/signin-page">
+              Registrati
+            </a>
           </div>
-        </ion-accordion>
-
-      </ion-accordion-group>
-    </div>
-
-
-
-
-    <div class="pageTitle">
-      <ion-title class="title">DnDhub</ion-title>
-    </div>
+          }
+          @else {
+          <div class="linkContainer">
+            <a routerLink="/type-player-login">
+              Accedi alle aree personali
+            </a>
+          </div>
+          <div class="linkContainer bottomLinkContainer">
+            <a routerLink="/profile">
+              Profilo personale
+            </a>
+          </div>
+          }
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
   </div>
 
-  <!-- ricordarsi che OGNI pagina deve essere dentro tag ion-content -->
-
-  <!-- prima sezione dedicata solamente ala carousel con le card  -->
+  <div class="gridTitolo">
+    <ion-title class="title">DnDhub</ion-title>
+  </div>
 
   <section id="carousel-block">
-    <div id="carousel-content">
-      <div id="carousel-title">
-        <div id="carousel-label">Personaggi creati recentemente</div>
-      </div>
-      <app-carousel [cards]="cards"></app-carousel>
-    </div>
+    <div id="carousel-label">Personaggi creati recentemente</div>
+    <app-carousel class="carousel" [cards]="cards"></app-carousel>
   </section>
 
 
@@ -87,51 +73,31 @@
     </div>
   </div>
 
-  <!-- footer che conterrà informazioni utili a sito o contatti e simili -->
 
-  <ion-footer class="informationBlock">
-    <ion-grid>
-      <ion-row>
-
-        <ion-col>
-          <ion-grid>
-            <ion-row class="informazioniTitoli">
-              <ion-label class="footerTitle">Informazioni</ion-label>
-            </ion-row>
-            <ion-row class="tabellabordi">
-              <ion-label class="footerInformation">Ehm boh questo no idea
-                Turles LR teq?!?!?!?
-              </ion-label>
-            </ion-row>
-          </ion-grid>
-        </ion-col>
-
-
-        <ion-col>
-          <ion-grid>
-            <ion-row class="informazioniTitoli">
-              <ion-label class="footerTitle">Contattaci</ion-label>
-            </ion-row>
-            <ion-row class="tabellabordi">
-              <ion-label class="footerInformation">contattaci all'email DnDhub@gmail.com!
-              </ion-label>
-            </ion-row>
-          </ion-grid>
-        </ion-col>
-
-        <ion-col>
-          <ion-grid>
-            <ion-row class="informazioniTitoli">
-              <ion-label class="footerTitle">Crediti</ion-label>
-            </ion-row>
-            <ion-row class="tabellabordi">
-              <ion-label class="footerInformation">Victor, Mimmo, Lightside2005.
-              </ion-label>
-            </ion-row>
-          </ion-grid>
-        </ion-col>
-
-      </ion-row>
-    </ion-grid>
+  <ion-footer>
+    <div class="info-panel-feedback">
+      <div class="info-panel">
+        <div class="info-panel-title">Lascia un feedback</div>
+        <div class="info-panel-content">
+          <ion-input #feedback_title
+          placeholder="Titolo"
+          ></ion-input>
+          <ion-textarea #feedback_content
+          placeholder="Descrizione"
+          rows="7"
+          ></ion-textarea>
+          <app-button
+          [button]="{text: 'Invia feedback', expand: 'false'}"
+          [context]="{onClick: sendFeedback}"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+    <div class="info-panel-contacts">
+      <div class="info-panel">
+        <div class="info-panel-title">Contattaci</div>
+        <div class="info-panel-content"></div>
+      </div>
+    </div>
   </ion-footer>
 </ion-content>

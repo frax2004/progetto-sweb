@@ -840,6 +840,7 @@ create table if not exists Personaggio (
   utente_generico text not null,
   nome text not null,
   punti_vita number,
+  bonus_competenza number,
   -- primary key creata da interpolazione
   -- utente_giocatore + nome
   idx_personaggio text not null primary key,
@@ -923,6 +924,7 @@ create table if not exists ArrayLanguageItem (
 create table if not exists ArrayStatsItem (
   stat_idx text not null,
   stat_value number not null,
+  stat_modifier number not null,
   idx_personaggio text not null,
   array_idx number not null,
 

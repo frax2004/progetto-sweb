@@ -64,8 +64,6 @@ export class OverviewPage implements OnInit {
 
 
   completeChar = () => {
-    alert(this.characterName);
-    alert(this.imgURL);
     if (this.averageHP === true) {
       this.chosenHP = this.calcAverageHP();
     }
@@ -79,7 +77,37 @@ export class OverviewPage implements OnInit {
       }
     }
 
-
+    this.characterManagement
+    .insertCharacter(
+      this.characterName,
+      this.chosenHP,
+      this.imgURL,
+      CharacterInstance.chosenClass,
+      CharacterInstance.chosenSubclass,
+      CharacterInstance.chosenSpecies,
+      CharacterInstance.chosenSubspecies,
+      CharacterInstance.chosenBackground,
+      CharacterInstance.chosenLevel,
+      CharacterInstance.levelSpecifics,
+      this.allEquipmentArray,
+      this.allProficienciesArray,
+      this.allLanguagesArray,
+      CharacterInstance.speciesTraits,
+      CharacterInstance.speciesSpeed,
+      CharacterInstance.speciesSize,
+      CharacterInstance.backgroundStartingGold,
+      CharacterInstance.backgroundFeature,
+      this.finalStatistics,
+      CharacterInstance.spellsKnown,
+      CharacterInstance.cantripsKnown,
+      CharacterInstance.chosenSpells,
+      CharacterInstance.chosenCantrips
+    ).subscribe({
+      next: (value: any) => {
+        Alerts.personalizedMessage('GOOOOOOODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOQOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO','PERSONAGGIO CARICATO!');
+      },
+      error: (err) => Alerts.error(err)
+    });
   }
 
   buttonCallbacks = {
@@ -201,15 +229,15 @@ export class OverviewPage implements OnInit {
     let langArray = [];
 
     for (const language of CharacterInstance.speciesLanguages) {
-      langArray.push(language);
+      langArray.push(language.index);
     }
 
     for (const language of CharacterInstance.chosenLanguages) {
-      langArray.push(language);
+      langArray.push(language.index);
     }
 
     for (const language of CharacterInstance.chosenBackgroundLanguages) {
-      langArray.push(language);
+      langArray.push(language.index);
     }
 
     return langArray;

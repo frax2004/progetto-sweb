@@ -147,6 +147,7 @@ export class OptionSelectionPage implements OnInit {
       };
       this.chosenAbBonus.forEach(el => CharacterInstance.chosenAbilityScoreIncrements[el.statName] = el.bonus);
       CharacterInstance.chosenSubspecies = this.chosenSubspecies;
+      CharacterInstance.chosenLanguages = this.chosenLanguages;
       CharacterInstance.chosenBackgroundLanguages = this.BACKGROUNDchosenLanguages;
       CharacterInstance.chosenBackgroundEquipment = this.BACKGROUNDoptEquip;
 

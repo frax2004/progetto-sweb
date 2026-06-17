@@ -696,6 +696,7 @@ export namespace models {
   export class ArrayStatsItem {
     stat_idx!: string;
     stat_value!: number;
+    stat_modifier!: number;
     idx_personaggio!: string;
     array_idx!: number;
   }
@@ -710,6 +711,7 @@ export namespace models {
     utente_giocatore!: string;
     nome!: string;
     punti_vita?: number;
+    bonus_competenza?: number;
     // primary key creata da interpolazione
     // utente_giocatore + nome
     idx_personaggio!: string;

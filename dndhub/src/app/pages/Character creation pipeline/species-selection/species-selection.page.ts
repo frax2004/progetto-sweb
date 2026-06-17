@@ -167,10 +167,7 @@ export class SpeciesSelectionPage implements OnInit {
     let retArray = [];
 
     for (const trait of traits) {
-      retArray.push({
-        index: trait.index,
-        name: trait.name
-      });
+      retArray.push(trait.index);
     }
 
     return retArray;

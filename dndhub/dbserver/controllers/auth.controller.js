@@ -35,16 +35,26 @@ export async function login(req, res) {
 
   const query = `
   SELECT * 
-  FROM Account
-  WHERE email = '${email}'
+  FROM UtenteGenerico
+  WHERE account = '${email}'
   `;
 
   try {
     const account = await Database.queryOne(query);
-
+    
     const generic_token = generateToken({ email: email });
     const player_token = generateToken({ id: account.utente_giocatore });
     const dm_token = generateToken({ id: account.utente_dungeon_master });
+
+    const x = {
+      generic_token: generic_token,
+      player_token: player_token,
+      dm_token: dm_token,
+      email: email,
+      player_id: account.utente_giocatore,
+      dm_id: account.utente_dungeon_master
+    };
+
   
     UserInstance.USER = new UserInstance(generic_token, player_token, dm_token);
     sendResponse(AuthResponses.loginResponse(generic_token, player_token, dm_token), res);

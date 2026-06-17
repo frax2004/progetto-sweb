@@ -19,7 +19,7 @@ app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/user-utilities", userUtilitiesRouter);
 app.use("/api/character-management", characterManagementRouter)
-app.use('/api/campagna', campagnaRouter);
+app.use('/api/campaign', campagnaRouter);
 app.use('/api/reports', reportsRouter);
 
 // per impostare la formattazione a 2 spazi di indentazione

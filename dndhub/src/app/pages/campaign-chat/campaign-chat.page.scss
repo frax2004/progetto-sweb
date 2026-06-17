@@ -2,12 +2,15 @@
     display: grid;
     grid-template-columns: 20% 78%;
     gap: 2%;
+    height: 100vh;
 }
 
 .postContent {
     width: 95%;
     height: 65%;
     padding: 8px;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .imgbackground {
@@ -21,7 +24,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.2;
+  opacity: 0.25;
   z-index:0;
 }
 
@@ -30,6 +33,8 @@
     flex-direction: column;
     gap: 12px;
     width: 100%;
+    padding-right: 12px;
+    padding-top: 8px
 }
 
 .imgFrame {
@@ -55,11 +60,39 @@
     padding: 12px;
     border: 1px solid gold;
     border-radius: 12px;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0, 0.331);
+    backdrop-filter: blur(1em);
     color: gold;
     min-height: 150px;
+    max-height: 300px;
     height: auto;
+    font-size: clamp(0.8rem, 2vw, 1.2rem);
+    overflow-y: auto;
 }
+
+.scrollbar{
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.postBox1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 8px 0;
+    padding: 12px;
+    border: 5px solid rgb(255, 170, 0);
+    border-radius: 24px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    min-height: 150px;
+    max-height: 300px;
+    height: auto;
+    overflow-y: auto;
+    background-color: rgb(0, 0, 0, 0.331);
+    backdrop-filter: blur(1em);
+}
+
 
 .postLowerInformation {
     display: flex;
@@ -71,12 +104,30 @@
     font-size: clamp(0.9rem, 2vw, 1.3rem);
 }
 
+.postLowerInformation1 {
+    display: flex;
+    justify-content: space-between;
+    font-size: clamp(0.9rem, 2vw, 1.3rem);
+    align-items: center;        
+    padding-top: 12px;
+}
+
 
 .playerNames {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 2px;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 12px;
+    margin: 6px 0;
+    border-radius: 10px;
+    border-bottom: 1px dashed gold;
+    min-height: 60px;
+    justify-content: space-between;
+}
+
+.playerNames:last-child
+{
+    border-bottom: 0px;
 }
 
 .players{
@@ -88,35 +139,98 @@
     border-radius: 12px;
     margin:4px;
     height:auto;
-    width: auto;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.331);
+    backdrop-filter: blur(3em);
 }
 
-.campaignName{
+.campaignName {
     font-size: clamp(0.9rem, 3vw, 1.8rem);
     min-height: 3rem;
-    height: auto;
     display: flex;
     flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    border:1px solid gold;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid gold;
     border-radius: 12px;
     background-color: rgb(123, 15, 15);
-    margin:4px;
+    width: 100%;
     font-weight: bold;
-    color:gold;
-}
-
-.buttonPost {
-    flex: 1; 
-    display: flex;
-    justify-content: center; 
+    color: gold;
+    margin: 4px;
 }
 
 .titoloGiocatori{
-    font-size: clamp(0.8rem, 2.5vw,1.4rem);
+    font-size: clamp(1.1rem, 2.5vw,1.4rem);
     border-bottom: 1px solid gold;
     margin-bottom: 4px;
     font-weight: 600;
     
+}
+
+.buttonsAndDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-around;
+    gap: 16px;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+    margin-left: 16px;
+}
+
+
+.TextAreaDesign{
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    border-bottom: 1px solid yellow;
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+@media (max-width: 768px){
+.TextAreaDesign{
+    max-height: 200px;
+}
+
+.postBox1{
+    max-height: 200px;
+}
+    .contentContainer {
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+        top: 0px;
+        margin-left: 0px;
+    }
+
+    .playerNames {
+        flex-wrap: wrap;
+        word-break: break-word;
+    }
+
+    .buttonsAndDetails {
+        position: static;
+        width: 100%;
+        margin: auto;
+    }
+
+    .details {
+        width: 100%;
+    }
+
+    .campaignName {
+        width: 100%;
+    }
+
+    .players {
+        width: 100%;
+    }
+
+    .postContainer {
+        width: 100%;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
 }

@@ -1,21 +1,3 @@
-// .firstCol , .secondCol{
-//     display: grid;
-//     justify-content: center;
-//     width: 100%;
-// }
-
-// .firstCol{
-//     margin-bottom: 10px;
-//     border-top: 3px solid rgb(196, 28, 28);
-//     border-radius: 20px;
-// }
-
-// .secondCol{
-//     margin-top: 5px;
-//     border-bottom: 3px solid rgb(196, 28, 28);
-//     border-bottom-left-radius: 20px;
-//     border-bottom-right-radius: 20px;
-// }
  .gridContainer {
      --padding-start: 0;
      --inner-padding-end: 0;
@@ -139,7 +121,8 @@ ion-grid {
 .manualStatsListContainer {
     padding-top: 0.2vh;
     padding-bottom: 0.2vh;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.331);
+    backdrop-filter: blur(3em);
     width: 70vw;
     border-radius: 20px;
     border-right: 1px #FFD700 solid;
@@ -190,7 +173,8 @@ ion-grid {
     height: fit-content;
     display: flex;
     justify-content: space-around;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.331);
+    backdrop-filter: blur(3em);
     padding-top: 0.8rem;
 }
 
@@ -205,6 +189,7 @@ ion-grid {
     font-weight: 500;
     display: flex;
     flex-direction: column;
+
 }
 
 .randomListContainer{
@@ -217,6 +202,8 @@ ion-grid {
     background-color: black;
     margin-top: 4%;
     margin-bottom: 4%;
+    background-color: rgba(0, 0, 0, 0.331);
+    backdrop-filter: blur(3em);
 
 }
 

@@ -93,7 +93,6 @@ export class CharacterInstance {
     'wisdom': { value: 0, modifier: StatModifierNumber[0]},
     'charisma': { value: 0, modifier: StatModifierNumber[0]},
   }
-  private static spells_known = undefined;
   private static chosen_spells = undefined;
   private static chosen_cantrips = undefined;
   private static chosen_languages = undefined;
@@ -116,14 +115,6 @@ export class CharacterInstance {
     this.chosen_class = undefined;
     this.chosen_species = undefined;
     this.chosen_background = undefined;
-  }
-
-  static set spellsKnown(numOfSpells) {
-    this.spells_known = numOfSpells;
-  } 
-
-  static get spellsKnown() {
-    return this.spells_known;
   }
 
   static set hitDie(dice) {

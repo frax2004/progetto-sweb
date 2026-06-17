@@ -1,4 +1,3 @@
-import { UserInstance } from "dbserver/global.context.js";
 import { Database } from "../database.js";
 import { DatabaseQueries } from "../database.queries.ts";
 
@@ -8,6 +7,8 @@ function sendResponse(obj, res) {
   if(canSend) {
     res.status(obj.status_code).json(obj);
     canSend = false;
+    canSend=true;
+    //TODO da togliere = true
   } else throw new Error("Chiamata a sendResponse() gia effettuata");
 }
 
@@ -342,40 +343,6 @@ async function displayBackgroundByName(req,res) {
   });
 }
 
-async function insertCharacter(req,res) {
-  canSend = true;
-
-  const name = req.body.name;
-  const healthPoints = req.body.healthPoints;
-  const imgURL = req.body.imgURL;
-  const characterClass = req.body.characterClass;
-  const subclass = req.body.subclass;
-  const species = req.body.species;
-  const subspecies = req.body.subspecies;
-  const background = req.body.background;
-  const level = req.body.level;
-  const levelSpecifics = req.body.levelSpecifics;
-  const equipment = req.body.equipment;
-  const proficiencies = req.body.proficiencies;
-  const languages = req.body.languages;
-  const speciesTraits = req.body.speciesTraits;
-  const speed = req.body.speed;
-  const size = req.body.size;
-  const startingGold = req.body.startingGold;
-  const backgroundFeature = req.body.backgroundFeature;
-  const statistics = req.body.statistics;
-  const spellsKnown = req.body.spellsKnown;
-  const spells = req.body.spells;
-  const cantrips = req.body.cantrips;
-
-  const idx_personaggio = `${name} @ ${UserInstance.USER.player_id}`;
-
-  //log di testing, da levare dopo
-  console.log('idx_personaggio: ' + idx_personaggio);
-
-  //da finire, prima scrivo il middleware
-}
-
 
 export default {
   displayClasses,
@@ -387,5 +354,4 @@ export default {
   displayClassByName,
   displayBackgroundByName,
   displaySpeciesByName,
-  insertCharacter,
 }

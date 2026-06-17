@@ -40,7 +40,7 @@
         </div>
         <div class="infoFrame">
           <!-- {{showClass}} -->
-          <app-label>{{showClass}}</app-label>
+          <app-label>placeholder</app-label>
         </div>
       </div>
 
@@ -52,7 +52,7 @@
           </div>
           <div class="infoFrame">
             <!-- {{showSubclass}} -->
-            <app-label>{{showSubclass}}</app-label>
+            <app-label>placeholder</app-label>
           </div>
         </div>
       }
@@ -64,7 +64,7 @@
         </div>
         <div class="infoFrame">
           <!-- {{showSpecies}} -->
-          <app-label>{{showSpecies}}</app-label>
+          <app-label>placeholder</app-label>
         </div>
       </div>
 
@@ -76,7 +76,7 @@
           </div>
           <div class="infoFrame">
             <!-- {{showSubspecies}} -->
-            <app-label>{{showSubspecies}}</app-label>
+            <app-label>placeholder</app-label>
           </div>
         </div>
       }
@@ -104,8 +104,6 @@
         <ion-textarea
         class = "genericTextArea"
         label = "Insert the character's name"
-        placeholder="Character's name"
-        [(ngModel)] = "characterName"
         fill = "outline"
         labelPlacement="floating"
         ></ion-textarea>
@@ -115,8 +113,6 @@
         <ion-textarea
         class = "genericTextArea"
         label = "(optional) Insert URL image for the character"
-        placeholder="Image URL"
-        [(ngModel)] = "imgURL"
         fill = "outline"
         labelPlacement="floating"
         ></ion-textarea>
@@ -145,7 +141,7 @@
           
           @if(averageHP===true) {
             <div>
-              <app-label>I punti ferita del personaggio, selezionando la media, saranno {{calcAverageHP()}}</app-label>
+              <app-label>{{avHPlabel}}</app-label>
             </div>
           }
 
@@ -154,7 +150,6 @@
               <app-label>Inserire HP in range {{HPrange()}}:</app-label>
 
               <app-drag-entry
-              #hpEntry
               [sensitivity]="1"
               [min]="minHP()"
               [max]="maxHP()"

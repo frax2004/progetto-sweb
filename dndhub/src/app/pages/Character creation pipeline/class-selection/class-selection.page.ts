@@ -141,15 +141,9 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
   static generateBaseSavingThrows(savingThrows: dnd.APIReference[]) {
     let retArray = [];
     for (const el of savingThrows) {
-      const full_name = el.index === 'str' ? 'strength' :
-                        el.index === 'dex' ? 'dexterity' :
-                        el.index === 'con' ? 'constitution' :
-                        el.index === 'int' ? 'intelligence' :
-                        el.index === 'wis' ? 'wisdom' : 'charisma';
       retArray.push({
         index: el.index,
         name: el.name,
-        fullName: 'saving throw: ' + full_name,
       })
     }
 

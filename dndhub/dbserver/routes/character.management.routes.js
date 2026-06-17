@@ -12,5 +12,4 @@ characterManagementRouter.post("/spell-display-by-class", controller.displaySpel
 characterManagementRouter.post("/class-display-by-name", controller.displayClassByName);
 characterManagementRouter.post("/species-display-by-name", controller.displaySpeciesByName);
 characterManagementRouter.post("/background-display-by-name", controller.displayBackgroundByName);
-characterManagementRouter.post("/insert-character")
 // characterManagementRouter

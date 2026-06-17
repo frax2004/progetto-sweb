@@ -198,7 +198,6 @@ export class SpellSelectionPage implements OnInit {
       }
       else {
         this.checkedSpells.push(boxValue);
-        // ricorda che questi incantesimi hanno un sacco di attributi (vedi sotto), sono di tipo dnd.Spell
         this.chosenSpells.push(spell);
         this.spellsToChoose--;
       }
@@ -258,7 +257,6 @@ export class SpellSelectionPage implements OnInit {
               this.displayableSpells = SpellSelectionPage.getDisplayableSpells(this.spells,this.maxLevel);
               this.cantripsToChoose = this.levelRow.cantrips_known;
               this.spellsToChoose = SpellSelectionPage.getSpellsToChoose(this.levelRow.name,this.levelRow.level,this.levelRow.spells_known);
-              CharacterInstance.spellsKnown = this.spellsToChoose;
             },
             error: (err) => alert(err)
           });

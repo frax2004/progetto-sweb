@@ -402,6 +402,8 @@ async function insertCharacter(req,res) {
       slot_livello_7,
       slot_livello_8,
       slot_livello_9,
+      velocita,
+      taglia,
       imgURL
     )
     VALUES (
@@ -426,6 +428,8 @@ async function insertCharacter(req,res) {
       ${levelSpecifics.spell_slots_level_7},
       ${levelSpecifics.spell_slots_level_8},
       ${levelSpecifics.spell_slots_level_9},
+      ${speed},
+      '${size}',
       '${imgURL}'
       );
       

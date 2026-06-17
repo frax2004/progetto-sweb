@@ -93,6 +93,7 @@ export class CharacterInstance {
     'wisdom': { value: 0, modifier: StatModifierNumber[0]},
     'charisma': { value: 0, modifier: StatModifierNumber[0]},
   }
+  private static cantrips_known = undefined;
   private static spells_known = undefined;
   private static chosen_spells = undefined;
   private static chosen_cantrips = undefined;
@@ -116,6 +117,14 @@ export class CharacterInstance {
     this.chosen_class = undefined;
     this.chosen_species = undefined;
     this.chosen_background = undefined;
+  }
+
+  static set cantripsKnown(numOfCantrips) {
+    this.cantrips_known = numOfCantrips;
+  }
+
+  static get cantripsKnown() {
+    return this.cantrips_known;
   }
 
   static set spellsKnown(numOfSpells) {

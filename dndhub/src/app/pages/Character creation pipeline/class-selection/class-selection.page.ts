@@ -101,7 +101,6 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
           spell_slots_level_7 : level.content[this.levelEntry.value-1].spell_slots_level_7,
           spell_slots_level_8 : level.content[this.levelEntry.value-1].spell_slots_level_8,
           spell_slots_level_9 : level.content[this.levelEntry.value-1].spell_slots_level_9,
-          spells_known: level.content[this.levelEntry.value-1].spells_known,
           aura_range: level.content[this.levelEntry.value-1].aura_range,
         };        
       }

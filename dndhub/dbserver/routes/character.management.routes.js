@@ -1,5 +1,7 @@
 import express from 'express';
 import controller from '../controllers/character.management.controller.js';
+import authMiddleware from '../middlewares/auth.middleware.js';
+import characterMiddleware from '../middlewares/character.middleware.js' 
 
 export const characterManagementRouter = express.Router();
 
@@ -12,5 +14,9 @@ characterManagementRouter.post("/spell-display-by-class", controller.displaySpel
 characterManagementRouter.post("/class-display-by-name", controller.displayClassByName);
 characterManagementRouter.post("/species-display-by-name", controller.displaySpeciesByName);
 characterManagementRouter.post("/background-display-by-name", controller.displayBackgroundByName);
-characterManagementRouter.post("/insert-character")
+characterManagementRouter.post("/insert-character",
+    authMiddleware.isLogged,
+    characterMiddleware.validateCharacter,
+    controller.insertCharacter
+);
 // characterManagementRouter

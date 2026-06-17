@@ -849,6 +849,20 @@ create table if not exists Personaggio (
   sottospecie text,
   background text not null,
   livello text not null,
+  quantita_oro number,
+  numero_incantesimi number,
+  numero_trucchetti number,
+  slot_livello_1 number,
+  slot_livello_2 number,
+  slot_livello_3 number,
+  slot_livello_4 number,
+  slot_livello_5 number,
+  slot_livello_6 number,
+  slot_livello_7 number,
+  slot_livello_8 number,
+  slot_livello_9 number,
+  velocita number,
+  taglia text,
   -- i talenti sono salvati su un array come foreign keys
   -- stessa cosa vale per equipaggiamenti, incantesimi e lingue parlate
   -- e anche per statistiche

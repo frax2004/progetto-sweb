@@ -1,4 +1,4 @@
-import { UserInstance } from "dbserver/global.context.js";
+import { UserInstance } from "../global.context.js";
 import { Database } from "../database.js";
 import { DatabaseQueries } from "../database.queries.ts";
 
@@ -365,15 +365,79 @@ async function insertCharacter(req,res) {
   const backgroundFeature = req.body.backgroundFeature;
   const statistics = req.body.statistics;
   const spellsKnown = req.body.spellsKnown;
+  const cantripsKnown = req.body.cantripsKnown;
   const spells = req.body.spells;
   const cantrips = req.body.cantrips;
 
   const idx_personaggio = `${name} @ ${UserInstance.USER.player_id}`;
+  const utente_generico = UserInstance.USER.email;
 
   //log di testing, da levare dopo
   console.log('idx_personaggio: ' + idx_personaggio);
 
-  //da finire, prima scrivo il middleware
+  try {
+    const insertCharQuery = `
+    BEGIN TRANSACTION;
+    
+    INSERT OR IGNORE INTO Personaggio (
+      utente_generico,
+      nome,
+      punti_vita,
+      idx_personaggio,
+      classe,
+      sottoclasse,
+      specie,
+      sottospecie,
+      background,
+      livello,
+      quantita_oro,
+      numero_incantesimi,
+      numero_trucchetti,
+      slot_livello_1,
+      slot_livello_2,
+      slot_livello_3,
+      slot_livello_4,
+      slot_livello_5,
+      slot_livello_6,
+      slot_livello_7,
+      slot_livello_8,
+      slot_livello_9,
+      imgURL
+    )
+    VALUES (
+      '${utente_generico}',
+      ${healthPoints},
+      '${idx_personaggio}',
+      '${characterClass}',
+      '${subclass}',
+      '${species}',
+      '${subspecies}',
+      '${background}',
+      '${level}',
+      ${startingGold.quantity}
+      ${spellsKnown},
+      ${cantripsKnown},
+      ${levelSpecifics.spell_slots_level_1},
+      ${levelSpecifics.spell_slots_level_2},
+      ${levelSpecifics.spell_slots_level_3},
+      ${levelSpecifics.spell_slots_level_4},
+      ${levelSpecifics.spell_slots_level_5},
+      ${levelSpecifics.spell_slots_level_6},
+      ${levelSpecifics.spell_slots_level_7},
+      ${levelSpecifics.spell_slots_level_8},
+      ${levelSpecifics.spell_slots_level_9},
+      '${imgURL}'
+      );
+      
+      
+      COMMIT;
+    `;
+
+    Database.execOne(insertCharQuery);
+  } 
+  catch (err) {
+
+  }
 }
 
 

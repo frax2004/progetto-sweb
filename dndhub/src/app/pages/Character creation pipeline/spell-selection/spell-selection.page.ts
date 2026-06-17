@@ -258,6 +258,7 @@ export class SpellSelectionPage implements OnInit {
               this.displayableSpells = SpellSelectionPage.getDisplayableSpells(this.spells,this.maxLevel);
               this.cantripsToChoose = this.levelRow.cantrips_known;
               this.spellsToChoose = SpellSelectionPage.getSpellsToChoose(this.levelRow.name,this.levelRow.level,this.levelRow.spells_known);
+              CharacterInstance.cantripsKnown = this.levelRow.cantrips_known;
               CharacterInstance.spellsKnown = this.spellsToChoose;
             },
             error: (err) => alert(err)

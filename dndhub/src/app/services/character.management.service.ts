@@ -98,6 +98,7 @@ export class CharacterManagementService {
     backgroundFeature: any,
     statistics: any,
     spellsKnown: number | undefined,
+    cantripsKnown: number | undefined,
     spells: any[] | undefined,
     cantrips: any[] | undefined,
   ) {
@@ -125,6 +126,7 @@ export class CharacterManagementService {
         backgroundFeature: backgroundFeature,
         statistics: statistics,
         spellsKnown: spellsKnown,
+        cantripsKnown: cantripsKnown,
         spells: spells,
         cantrips: cantrips,
       }

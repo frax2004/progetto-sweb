@@ -208,7 +208,7 @@ export class SpellSelectionPage implements OnInit {
     //metto degli or ai fini del testing, da levare quando finiremo col sito
     this.levelRowDisplayer
     .displayLevelRowByClassAndLevel(
-      CharacterInstance.chosenLevel || 20,
+      CharacterInstance.chosenLevel || 5,
       CharacterInstance.chosenClass || 'Wizard'
     )
     .subscribe({

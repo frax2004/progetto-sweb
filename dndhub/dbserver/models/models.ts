@@ -709,6 +709,7 @@ export namespace models {
   export class Personaggio {
     utente_giocatore!: string;
     nome!: string;
+    punti_vita?: number;
     // primary key creata da interpolazione
     // utente_giocatore + nome
     idx_personaggio!: string;
@@ -729,6 +730,7 @@ export namespace models {
     // stringhe, lascio come semplice stringa?
     abilita_extra?: string;
     descrizione_personaggio?: string;
+    imgURL?: string;
   }
 
   export class ArrayPostItem {

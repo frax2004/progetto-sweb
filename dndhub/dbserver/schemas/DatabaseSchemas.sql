@@ -839,6 +839,7 @@ create table if not exists UtenteGenerico (
 create table if not exists Personaggio (
   utente_generico text not null,
   nome text not null,
+  punti_vita number,
   -- primary key creata da interpolazione
   -- utente_giocatore + nome
   idx_personaggio text not null primary key,
@@ -858,6 +859,7 @@ create table if not exists Personaggio (
   -- stringhe, lascio come semplice stringa?
   abilita_extra text,
   descrizione_personaggio text,
+  imgURL text,
 
   foreign key (classe) references Class(idx),
   -- foreign key (idx_personaggio) references ArrayFeatItem(idx_personaggio),

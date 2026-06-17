@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonRow, IonCol, IonGrid, IonLabel, IonInput, PopoverController, IonList } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonRow, IonCol, IonGrid, IonLabel, IonInput, PopoverController, IonList, IonTextarea } from '@ionic/angular/standalone';
 import { ScrollBarComponent } from "src/app/components/scrollbar/scrollbar.component";
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { EntryComponent } from "src/app/components/entry/entry.component";
@@ -12,15 +12,16 @@ import { TitleComponent } from "src/app/components/title/title.component";
 import { LabelComponent } from "src/app/components/label/label.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
 import { Router } from '@angular/router';
-import { CharacterInstance } from '../CharacterInformation';
+import { CharacterInstance, StatModifierNumber } from '../CharacterInformation';
 import { CharacterManagementService } from 'src/app/services/character.management.service';
+import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.component";
 
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.page.html',
   styleUrls: ['./overview.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ScrollBarComponent, IonItem, IonRow, IonCol, IonGrid, IonLabel, AccordionComponent, IonInput, EntryComponent, TextAreaComponent, ButtonComponent, TitleComponent, LabelComponent, IonList, UnorderedListElementComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ScrollBarComponent, IonItem, IonRow, IonCol, IonGrid, IonLabel, AccordionComponent, IonInput, EntryComponent, TextAreaComponent, ButtonComponent, TitleComponent, LabelComponent, IonList, UnorderedListElementComponent, IonTextarea, DragEntryComponent]
 })
 export class OverviewPage implements OnInit {
   showLevel: number;
@@ -28,7 +29,10 @@ export class OverviewPage implements OnInit {
   showClass: string;
   showSpecies: string;
   showSubspecies: string;
-  finalStatistics: [
+  showSubclass: string;
+  showSize: string;
+  showSpeed: string;
+  finalStatistics = [
     { statName: 'strength', value: 0},
     { statName: 'dexterity', value: 0},
     { statName: 'constitution', value: 0},
@@ -45,9 +49,9 @@ export class OverviewPage implements OnInit {
   lvl: number = 7;
   HPdice: number = 8;
   avHPlabel: String = this.constitutionMod>0 ? 
-  'I punti ferita del personaggio saranno: ' + this.calcAverageHP(this.lvl,this.HPdice) + ' + ' + this.constitutionMod + ' = ' + (this.calcAverageHP(this.lvl,this.HPdice) + this.constitutionMod)
+  'I punti ferita del personaggio saranno: ' + this.calcAverageHP() + ' + ' + (StatModifierNumber[this.finalStatistics['constitution']] * CharacterInstance.chosenLevel) + ' = ' + (this.calcAverageHP() + (StatModifierNumber[this.finalStatistics['constitution']] * CharacterInstance.chosenLevel))
   :
-  'I punti ferita del personaggio saranno: ' + this.calcAverageHP(this.lvl,this.HPdice) + ' - ' + (this.constitutionMod * (-1)) + ' = ' + (this.calcAverageHP(this.lvl,this.HPdice) + this.constitutionMod);
+  'I punti ferita del personaggio saranno: ' + this.calcAverageHP() + ' - ' + ((StatModifierNumber[this.finalStatistics['constitution']] * CharacterInstance.chosenLevel) * (-1)) + ' = ' + (this.calcAverageHP() + (StatModifierNumber[this.finalStatistics['constitution']] * CharacterInstance.chosenLevel));
 
   previousPage = () => {
     const className = CharacterInstance.chosenClass.toLowerClass();
@@ -83,15 +87,24 @@ export class OverviewPage implements OnInit {
     // mi dimentico qualcosa?
   ];
 
-  HPrange(lvl: number, HPdice: number) {
-    return '(' + lvl.toString() + '-' + (HPdice*lvl).toString() + ')'; 
+  minHP() {
+    return CharacterInstance.hitDie + (CharacterInstance.chosenLevel - 1) + (StatModifierNumber[this.finalStatistics['constitution']] * CharacterInstance.chosenLevel);
   }
 
-  calcAverageHP(lvl: number, HPdice: number) {
-    return Math.ceil((HPdice/2 + 0.5)*lvl);
+  maxHP() {
+    return CharacterInstance.hitDie + ((CharacterInstance.chosenLevel - 1) * CharacterInstance.hitDie) + (StatModifierNumber[this.finalStatistics['constitution']] * CharacterInstance.chosenLevel);
+  }
+
+  HPrange() {
+    return '(' + this.minHP() + '-' + this.maxHP() + ')'; 
+  }
+
+  calcAverageHP() {
+    return Math.ceil((CharacterInstance.hitDie/2 + 0.5)*CharacterInstance.chosenLevel);
   }
 
   static getFinalStatistic(statName) {
+    if(CharacterInstance.speciesAbilityBonus === undefined) return 0;
     return CharacterInstance.getStatisticValue(statName) +
            CharacterInstance.speciesAbilityBonus[statName] +
            CharacterInstance.chosenSpeciesAbilityBonuses[statName] +
@@ -115,8 +128,12 @@ export class OverviewPage implements OnInit {
     this.showClass = CharacterInstance.chosenClass;
     this.showSpecies = CharacterInstance.chosenSpecies;
     this.showSubspecies = CharacterInstance.chosenSubspecies;
+    this.showSubclass = CharacterInstance.chosenSubclass;
+    this.showSpeed = CharacterInstance.speciesSpeed;
+    this.showSize = CharacterInstance.speciesSize;
     for(let i=0; i<this.finalStatistics.length; i++) {
       this.finalStatistics[i].value = OverviewPage.getFinalStatistic(this.finalStatistics[i].statName);
+      this.finalStatistics[i].value = this.finalStatistics[i].value > 20 ? 20 : this.finalStatistics[i].value;
     }
 
     

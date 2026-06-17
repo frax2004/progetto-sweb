@@ -76,9 +76,12 @@ export class CharacterInstance {
   private static base_equipment = undefined;
   private static base_proficiencies = undefined;
   private static base_saving_throws = undefined;
+  private static hp_die = undefined;
   private static species_ab_bonus = undefined;
   private static species_languages = undefined;
   private static species_traits = undefined;
+  private static species_speed = undefined;
+  private static species_size = undefined;
   private static background_starting_gold = undefined;
   private static background_feature = undefined;
   private static background_equipment = undefined;
@@ -112,6 +115,30 @@ export class CharacterInstance {
     this.chosen_class = undefined;
     this.chosen_species = undefined;
     this.chosen_background = undefined;
+  }
+
+  static set hitDie(dice) {
+    this.hp_die = dice;
+  }  
+
+  static get hitDie() {
+    return this.hp_die;
+  }
+
+  static set speciesSize(size) {
+    this.species_size = size;
+  }
+
+  static get speciesSize() {
+    return this.species_size;
+  }
+
+  static set speciesSpeed(speed) {
+    this.species_speed = speed;
+  }
+
+  static get speciesSpeed() {
+    return this.species_speed;
   }
 
   static set chosenAbilityScoreIncrements(abilityScoreIncrements) {

@@ -145,12 +145,11 @@ export class OptionSelectionPage implements OnInit {
         'wisdom' : 0,
         'charisma' : 0,
       };
-      this.chosenAbBonus.forEach(el => CharacterInstance.chosenAbilityScoreIncrements[el.statName] = el.bonus);
+      this.chosenAbBonus.forEach(el => CharacterInstance.setSpeciesAbilityBonusStatistic(el.statName,el.bonus));
       CharacterInstance.chosenSubspecies = this.chosenSubspecies;
       CharacterInstance.chosenLanguages = this.chosenLanguages;
       CharacterInstance.chosenBackgroundLanguages = this.BACKGROUNDchosenLanguages;
       CharacterInstance.chosenBackgroundEquipment = this.BACKGROUNDoptEquip;
-
 
       // setto le statistiche
       CharacterInstance.chosenAbilityScoreIncrements = {
@@ -500,9 +499,9 @@ export class OptionSelectionPage implements OnInit {
 
   constructor(private router: Router, private choicesDiplayer: CharacterManagementService) {
     //inizializzo stats too choose
-    // this.statsToChoose = CharacterInstance.chosenASI * 2;
+    this.statsToChoose.set(CharacterInstance.chosenASI * 2);
     //da levare, è così solo per i test
-    this.statsToChoose.set(6);
+    // this.statsToChoose.set(6);
     this.maxStats = this.statsToChoose()
 
     this.choicesDiplayer

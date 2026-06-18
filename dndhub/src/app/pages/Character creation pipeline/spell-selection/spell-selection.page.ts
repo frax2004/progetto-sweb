@@ -56,14 +56,14 @@ export class SpellSelectionPage implements OnInit {
 
   
   static calcMaxSpellSlotLevel(levelRow: dnd.Level): number {
-    if (levelRow.spell_slots_level_9 !== 0) return 9;
-    if (levelRow.spell_slots_level_8 !== 0) return 8;
-    if (levelRow.spell_slots_level_7 !== 0) return 7;
-    if (levelRow.spell_slots_level_6 !== 0) return 6;
-    if (levelRow.spell_slots_level_5 !== 0) return 5;
-    if (levelRow.spell_slots_level_4 !== 0) return 4;
-    if (levelRow.spell_slots_level_3 !== 0) return 3;
-    if (levelRow.spell_slots_level_2 !== 0) return 2;
+    if (levelRow.spell_slots_level_9 !== 0 && levelRow.spell_slots_level_9 !== undefined && levelRow.spell_slots_level_9 !== null) return 9;
+    if (levelRow.spell_slots_level_8 !== 0 && levelRow.spell_slots_level_8 !== undefined && levelRow.spell_slots_level_8 !== null) return 8;
+    if (levelRow.spell_slots_level_7 !== 0 && levelRow.spell_slots_level_7 !== undefined && levelRow.spell_slots_level_7 !== null) return 7;
+    if (levelRow.spell_slots_level_6 !== 0 && levelRow.spell_slots_level_6 !== undefined && levelRow.spell_slots_level_6 !== null) return 6;
+    if (levelRow.spell_slots_level_5 !== 0 && levelRow.spell_slots_level_5 !== undefined && levelRow.spell_slots_level_5 !== null) return 5;
+    if (levelRow.spell_slots_level_4 !== 0 && levelRow.spell_slots_level_4 !== undefined && levelRow.spell_slots_level_4 !== null) return 4;
+    if (levelRow.spell_slots_level_3 !== 0 && levelRow.spell_slots_level_3 !== undefined && levelRow.spell_slots_level_3 !== null) return 3;
+    if (levelRow.spell_slots_level_2 !== 0 && levelRow.spell_slots_level_2 !== undefined && levelRow.spell_slots_level_2 !== null) return 2;
 
     return 1;
   }
@@ -143,24 +143,27 @@ export class SpellSelectionPage implements OnInit {
     else {
       className = className.toLowerCase();
       if (className === 'cleric' || className === 'druid') {
-        const newValue = CharacterInstance.getStatisticValue('wisdom') + 
+        let newValue = CharacterInstance.getStatisticValue('wisdom') + 
         CharacterInstance.speciesAbilityBonus['wisdom'] + 
         CharacterInstance.chosenSpeciesAbilityBonuses['wisdom'] + 
         CharacterInstance.chosenAbilityScoreIncrements['wisdom'];
+        newValue = newValue > 20 ? 20 : newValue;
         return (level + StatModifierNumber[newValue]) > 1 ? level + StatModifierNumber[newValue] : 1;
       }
       if (className === 'paladin') {
-        const newValue = CharacterInstance.getStatisticValue('charisma') + 
+        let newValue = CharacterInstance.getStatisticValue('charisma') + 
         CharacterInstance.speciesAbilityBonus['charisma'] +
         CharacterInstance.chosenSpeciesAbilityBonuses['charisma'] +
         CharacterInstance.chosenAbilityScoreIncrements['charisma'];
-        return (level + StatModifierNumber[newValue]) > 1 ? level + StatModifierNumber[newValue] : 1;
+        newValue = newValue > 20 ? 20 : newValue;
+        return (Math.floor(level/2) + StatModifierNumber[newValue]) > 1 ? Math.floor(level/2) + StatModifierNumber[newValue] : 1;
       }
       if (className === 'wizard') {
-        const newValue = CharacterInstance.getStatisticValue('intelligence') +
+        let newValue = CharacterInstance.getStatisticValue('intelligence') +
         CharacterInstance.speciesAbilityBonus['intelligence'] +
         CharacterInstance.chosenSpeciesAbilityBonuses['intelligence'] +
         CharacterInstance.chosenAbilityScoreIncrements['intelligence'];
+        newValue = newValue > 20 ? 20 : newValue;
         return (level + StatModifierNumber[newValue]) > 1 ? level + StatModifierNumber[newValue] : 1;
       }
     }
@@ -209,8 +212,8 @@ export class SpellSelectionPage implements OnInit {
     //metto degli or ai fini del testing, da levare quando finiremo col sito
     this.levelRowDisplayer
     .displayLevelRowByClassAndLevel(
-      CharacterInstance.chosenLevel || 20,
-      CharacterInstance.chosenClass || 'Wizard'
+      CharacterInstance.chosenLevel || 5,
+      CharacterInstance.chosenClass || 'Paladin'
     )
     .subscribe({
       next: (value: any) => {
@@ -231,7 +234,7 @@ export class SpellSelectionPage implements OnInit {
           };
           this.levelRowDisplayer
           .displaySpellsByClass(
-            CharacterInstance.chosenClass || 'Wizard'
+            CharacterInstance.chosenClass || 'Paladin'
           )
           .subscribe({
             next: (value: any) => {
@@ -256,7 +259,7 @@ export class SpellSelectionPage implements OnInit {
               });
               this.maxLevel = SpellSelectionPage.calcMaxSpellSlotLevel(this.levelRow);
               this.displayableSpells = SpellSelectionPage.getDisplayableSpells(this.spells,this.maxLevel);
-              this.cantripsToChoose = this.levelRow.cantrips_known;
+              this.cantripsToChoose = this.levelRow.cantrips_known === null ? 0 : this.levelRow.cantrips_known === undefined ? 0 : this.levelRow.cantrips_known;
               this.spellsToChoose = SpellSelectionPage.getSpellsToChoose(this.levelRow.name,this.levelRow.level,this.levelRow.spells_known);
               CharacterInstance.cantripsKnown = this.levelRow.cantrips_known;
               CharacterInstance.spellsKnown = this.spellsToChoose;

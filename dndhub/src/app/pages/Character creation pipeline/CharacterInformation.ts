@@ -103,7 +103,15 @@ export class CharacterInstance {
   //ricorda che optional_equipment non ha quantity all'interno ma solo nome, quantity è sempre 1
   private static optional_equipment = undefined;
   private static chosen_subclass = undefined;
-  private static chosen_species_ability_bonuses = undefined;
+  private static chosen_species_ability_bonuses = 
+  {
+    'strength' : 0,
+    'dexterity' : 0,
+    'constitution' : 0,
+    'intelligence' : 0,
+    'wisdom' : 0,
+    'charisma' : 0,
+  };
   private static chosen_subspecies = undefined;
   private static chosen_background_languages = undefined;
   //ricorda che chosen_background_equipment non ha quantity all'interno ma solo nome, quantity è sempre 1
@@ -213,6 +221,10 @@ export class CharacterInstance {
 
   static get speciesLanguages() {
     return this.species_languages;
+  }
+
+  static setSpeciesAbilityBonusStatistic(statName,statValue) {
+    this.species_ab_bonus[statName] = statValue;
   }
 
   static set speciesAbilityBonus(abBonus) {

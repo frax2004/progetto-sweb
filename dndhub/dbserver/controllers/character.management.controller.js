@@ -342,19 +342,21 @@ function insertSpells(idx_personaggio,spells,cantrips,res) {
 
   if (spells === undefined || spells === null) return '';
 
-  let finalSpellsQuery = spells.map((spell,array_idx) => `INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+  let array_idx = 0;
+
+  let finalSpellsQuery = spells.map((spell) => `INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
         '${spell.name}',
         '${idx_personaggio}',
-        ${array_idx}
+        ${array_idx++}
       );`
     );
 
   if (cantrips === undefined || cantrips === null) return finalSpellsQuery.join('\n');
     
-  let finalCantripsQuery = cantrips.map((cantrips,array_idx) => `INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-          '${spell.name}',
+  let finalCantripsQuery = cantrips.map((cantrip) => `INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+          '${cantrip.name}',
           '${idx_personaggio}',
-          ${array_idx}
+          ${array_idx++}
         );`
   );
 
@@ -544,26 +546,26 @@ async function insertCharacter(req,res) {
       '${backgroundFeature.name}',
       ${imgURL !== undefined ? `'${imgURL}'` : null}
       );
-
+      
+      
+      ${insertSpells(idx_personaggio,spells,cantrips,res)};
+  
+      ${insertEquipment(idx_personaggio,equipment,res)};
+  
+      ${insertLanguage(idx_personaggio,languages,res)};
+  
+      ${insertStats(idx_personaggio,statistics,res)};
+      
+      ${insertProficiencies(idx_personaggio,proficiencies,res)};
+  
+      ${insertFeats(idx_personaggio,speciesTraits,res)};
+  
+      ${insertFeats(idx_personaggio,levelSpecifics.feats,res)};
       
       COMMIT;
       `;
       
       fs.writeFileSync('queryTest.sql',insertCharQuery,'utf-8');
-      
-      // ${insertSpells(idx_personaggio,spells,cantrips,res)};
-  
-      // ${insertEquipment(idx_personaggio,equipment,res)};
-  
-      // ${insertLanguage(idx_personaggio,languages,res)};
-  
-      // ${insertStats(idx_personaggio,statistics,res)};
-      
-      // ${insertProficiencies(idx_personaggio,proficiencies,res)};
-  
-      // ${insertFeats(idx_personaggio,speciesTraits,res)};
-  
-      // ${insertFeats(idx_personaggio,levelSpecifics.feats,res)};
       await Database.execAll(insertCharQuery);
       
     sendResponse({

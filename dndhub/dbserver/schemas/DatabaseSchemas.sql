@@ -906,8 +906,7 @@ create table if not exists ArrayEquipmentItem (
   array_idx number not null,
 
   primary key (idx_personaggio,array_idx),
-  foreign key (idx_personaggio) references Personaggio(idx_personaggio) on update cascade on delete cascade,
-  foreign key (item) references Equipment(idx)
+  foreign key (idx_personaggio) references Personaggio(idx_personaggio) on update cascade on delete cascade
 );
 
 create table if not exists ArrayLanguageItem (

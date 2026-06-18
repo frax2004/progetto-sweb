@@ -182,10 +182,20 @@ export class OverviewPage implements OnInit {
 
     //questi ultimi due array sono salvati in maniera diversa
     for(const equip of CharacterInstance?.chosenOptionalEquipment) {
-      equipArray.push({
-        idx: equip.toLowerCase().trim(),
-        quantity: 1,
-      });
+      if (equip.includes('+')) {
+        for (const subEquip of equip.split('+')) {
+          equipArray.push({
+            idx: subEquip.toLowerCase().trim(),
+            quantity: 1,
+          });    
+        }
+      }
+      else {
+        equipArray.push({
+          idx: equip.toLowerCase().trim(),
+          quantity: 1,
+        });
+      }
     }
 
     for(const equip of CharacterInstance?.chosenBackgroundEquipment) {

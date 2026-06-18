@@ -23,24 +23,17 @@ import { CharacterInstance } from '../CharacterInformation';
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, AccordionComponent, IonFooter, ButtonComponent, TitleComponent, LabelComponent, IonButton, IonAccordionGroup, IonAccordion, IonLabel, IonThumbnail, IonAlert]
 })
 export class SpeciesSelectionPage implements OnInit {
-  b1_button: Button = { text: 'clicca qui', expand: ''};
-    b1_context: ButtonContext = { onClick: Popups.ofSimpleText(this.popoverController, "Hai scelto questa specie")};
-    b1: ButtonComponent = {
-      button: this.b1_button, context: this.b1_context,
-      // questa riga sotto l'ha aggiunta automaticamente l'estensione, non so perché
-      ngOnInit: function (): void {
-        throw new Error('Function not implemented.');
-      }
-    }
 
-  b2_context: ButtonContext = { onClick: Popups.ofSimpleText(this.popoverController, "Andiamo les go les go milano")};
-
+  showClass: string;
+  showLevel: number;
+  speciesArray = [];
+  selectedSpecies: string;
   nextPageAlertOpen: boolean = false;
 
   nextPage = () => {
-    if (SpeciesSelectionPage.selectedSpecies !== undefined) {
+    if (this.selectedSpecies !== undefined) {
       for(const species of this.speciesArray) {
-        if (species.name.toLowerCase() === SpeciesSelectionPage.selectedSpecies.toLowerCase()) {
+        if (species.name.toLowerCase() === this.selectedSpecies.toLowerCase()) {
           CharacterInstance.speciesSize = species.size;
           CharacterInstance.speciesSpeed = species.speed;
           CharacterInstance.speciesAbilityBonus = species.species_ability_bonuses;
@@ -48,7 +41,7 @@ export class SpeciesSelectionPage implements OnInit {
           CharacterInstance.speciesTraits = species.species_traits;
         }
       }
-      CharacterInstance.chosenSpecies = SpeciesSelectionPage.selectedSpecies;
+      CharacterInstance.chosenSpecies = this.selectedSpecies;
       this.router.navigate(['/background-selection']);
     }
     else this.setOpenAlert(true);
@@ -66,67 +59,6 @@ export class SpeciesSelectionPage implements OnInit {
     previousPage: { onClick: Navigate.toPath(this.router,'class-selection')},
   } 
 
-  placeholderAlert(event: Event) {alert('Ancora da implementare');}
-
-  speciesArray = [];
-  static selectedSpecies: string = undefined;
-
-  static speciesButton = {
-    'Dwarf': {
-      button: { text: 'Select this species', expand: ''},
-      context: (event: Event) => {
-        SpeciesSelectionPage.selectedSpecies = 'Dwarf';
-      }
-    },
-    'Elf': {
-      button: { text: 'Select this species', expand: ''},
-      context: (event: Event) => {
-        SpeciesSelectionPage.selectedSpecies = 'Elf';
-      }
-    },
-    'Halfling': {
-      button: { text: 'Select this species', expand: ''},
-      context: (event: Event) => {
-        SpeciesSelectionPage.selectedSpecies = 'Halfling';
-      }
-    },
-    'Human': {
-      button: { text: 'Select this species', expand: ''},
-      context: (event: Event) => {
-        SpeciesSelectionPage.selectedSpecies = 'Human';
-      }
-    },
-    'Dragonborn': {
-      button: { text: 'Select this species', expand: ''},
-      context: (event: Event) => {
-        SpeciesSelectionPage.selectedSpecies = 'Dragonborn';
-      }
-    },
-    'Half-Elf': {
-      button: { text: 'Select this species', expand: ''},
-      context: (event: Event) => {
-        SpeciesSelectionPage.selectedSpecies = 'Half-elf';
-      }
-    },
-    'Half-Orc': {
-      button: { text: 'Select this species', expand: ''},
-      context: (event: Event) => {
-        SpeciesSelectionPage.selectedSpecies = 'Half-orc';
-      }
-    },
-    'Gnome': {
-      button: { text: 'Select this species', expand: ''},
-      context: (event: Event) => {
-        SpeciesSelectionPage.selectedSpecies = 'Gnome';
-      }
-    },
-    'Tiefling': {
-      button: { text: 'Select this species', expand: ''},
-      context: (event: Event) => {
-        SpeciesSelectionPage.selectedSpecies = 'Tiefling';
-      }
-    },
-  }
 
   static speciesDescription = {
     'Dwarf': `Kingdoms rich in ancient grandeur, halls carved into the roots of mountains, the echoing of picks and hammers in deep mines and blazing forges, a commitment to clan and tradition, and a burning hatred of goblins and orcs—these common threads unite all dwarves.`,
@@ -228,6 +160,67 @@ export class SpeciesSelectionPage implements OnInit {
   }
 
   constructor(public popoverController: PopoverController, private router: Router, private speciesSelector: CharacterManagementService ) {
+    this.showClass = CharacterInstance.chosenClass;
+    this.showLevel = CharacterInstance.chosenLevel;
+
+
+    const speciesButton = {
+      'Dwarf': {
+        button: { text: 'Select this species', expand: ''},
+        context: (event: Event) => {
+          this.selectedSpecies = 'Dwarf';
+        }
+      },
+      'Elf': {
+        button: { text: 'Select this species', expand: ''},
+        context: (event: Event) => {
+          this.selectedSpecies = 'Elf';
+        }
+      },
+      'Halfling': {
+        button: { text: 'Select this species', expand: ''},
+        context: (event: Event) => {
+          this.selectedSpecies = 'Halfling';
+        }
+      },
+      'Human': {
+        button: { text: 'Select this species', expand: ''},
+        context: (event: Event) => {
+          this.selectedSpecies = 'Human';
+        }
+      },
+      'Dragonborn': {
+        button: { text: 'Select this species', expand: ''},
+        context: (event: Event) => {
+          this.selectedSpecies = 'Dragonborn';
+        }
+      },
+      'Half-Elf': {
+        button: { text: 'Select this species', expand: ''},
+        context: (event: Event) => {
+          this.selectedSpecies = 'Half-elf';
+        }
+      },
+      'Half-Orc': {
+        button: { text: 'Select this species', expand: ''},
+        context: (event: Event) => {
+          this.selectedSpecies = 'Half-orc';
+        }
+      },
+      'Gnome': {
+        button: { text: 'Select this species', expand: ''},
+        context: (event: Event) => {
+          this.selectedSpecies = 'Gnome';
+        }
+      },
+      'Tiefling': {
+        button: { text: 'Select this species', expand: ''},
+        context: (event: Event) => {
+          this.selectedSpecies = 'Tiefling';
+        }
+      },
+    }
+
     this.speciesSelector
     .displaySpecies()
     .subscribe({
@@ -235,7 +228,7 @@ export class SpeciesSelectionPage implements OnInit {
         this.speciesArray = value.species.map(function (item: any){
           return {
             desc: SpeciesSelectionPage.speciesDescription[item.name],
-            choiceButton: SpeciesSelectionPage.speciesButton[item.name],
+            choiceButton: speciesButton[item.name],
             imageURL: "../assets/icon/d20.svg",
             value: item.name + ' accordion',
             name: item.name,

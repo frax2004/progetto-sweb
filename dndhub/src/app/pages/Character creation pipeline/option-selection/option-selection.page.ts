@@ -61,7 +61,7 @@ export class OptionSelectionPage implements OnInit {
   optEquip = [];
   //
   // charLevel settato a 3 per testing, levare non appena non serve più
-  charLevel = CharacterInstance.chosenLevel;
+  charLevel = CharacterInstance.chosenLevel = 2;
   chosenSubclass: string | undefined = undefined;
   //
   abBonusToChoose: number | undefined;
@@ -119,7 +119,7 @@ export class OptionSelectionPage implements OnInit {
     const validateBGlanguages: boolean = this.BACKGROUNDlanguagesToChoose===0;
     const validateBGoptEquipment: boolean = this.BACKGROUNDoptEquip.length === this.backgroundContent[1].content.length;
     const validateASI: boolean = this.statsToChoose() === 0;
-    const className = CharacterInstance.chosenClass.toLowerCase();
+    const className: string  = 'fighter';//CharacterInstance.chosenClass.toLowerCase();
     const validateSpellSelection = (className!==undefined) && (className === 'bard' || className === 'cleric' || className === 'druid' || className === 'paladin' || className === 'ranger' || className === 'sorcerer' || className === 'warlock' || className === 'wizard');
     if (
       validateRegularProf &&
@@ -173,7 +173,8 @@ export class OptionSelectionPage implements OnInit {
       //        validateLanguages = ${validateLanguages}
       //        validateSubspecies = ${validateSubspecies}
       //        validateBGlanguages = ${validateBGlanguages} 
-      //        validateBGoptEquipment = ${validateBGoptEquipment}`);
+      //        validateBGoptEquipment = ${validateBGoptEquipment}
+      //        validateASI = ${validateASI}`);
     }
   }
 
@@ -459,7 +460,7 @@ export class OptionSelectionPage implements OnInit {
       let allLanguages= ['Common','Common Sign Language','Draconic','Dwarvish','Elvish','Giant','Gnomish','Goblin','Halfling','Orc','Abyssal','Celestial','Deep Speech','Druidic','Infernal','Primordial','Sylvan','Thieves Cant','Undercommon'];
       if(CharacterInstance.speciesLanguages !== undefined) {
         for(const lang of CharacterInstance.speciesLanguages) {
-          if(allLanguages.includes(lang)) allLanguages.splice(allLanguages.indexOf(lang),1);
+          if(allLanguages.includes(lang.name)) allLanguages.splice(allLanguages.indexOf(lang.name),1);
         }
       }
       return {
@@ -507,7 +508,7 @@ export class OptionSelectionPage implements OnInit {
     this.choicesDiplayer
     .displayClassByName(
       // scritto così per testing, da levare || quando finiremo coi test
-      CharacterInstance.chosenClass || 'fighter'
+      CharacterInstance.chosenClass
     )
     .subscribe({
       next: (value: any) => {
@@ -528,7 +529,7 @@ export class OptionSelectionPage implements OnInit {
         this.extraProfToChoose = OptionSelectionPage.displayClassProficiencyChoices(value.classes[0].proficiency_choices).extraProficiencies.length === 0 ? 0 : this.regularProfToChoose;
         this.choicesDiplayer
         .displaySpeciesByName(
-          CharacterInstance.chosenSpecies || 'human'
+          CharacterInstance.chosenSpecies
         )
         .subscribe({
           next: (value: any) => {
@@ -549,7 +550,7 @@ export class OptionSelectionPage implements OnInit {
             this.languagestoChoose = value.species[0].language_options?.choose === undefined ? 0 : value.species[0].language_options.choose;
             this.choicesDiplayer
             .displayBackgroundByName(
-              CharacterInstance.chosenBackground || 'acolyte'
+              CharacterInstance.chosenBackground
             )
             .subscribe({
               next: (value: any) => {

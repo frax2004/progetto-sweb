@@ -56,7 +56,7 @@ export class OverviewPage implements OnInit {
   chosenHP: number = 0;
 
   previousPage = () => {
-    const className = CharacterInstance.chosenClass.toLowerClass();
+    const className = CharacterInstance.chosenClass.toLowerCase();
     const validateSpellSelection = (className!==undefined) && (className === 'bard' || className === 'cleric' || className === 'druid' || className === 'paladin' || className === 'ranger' || className === 'sorcerer' || className === 'warlock' || className === 'wizard');
     if (validateSpellSelection) this.router.navigate(['spell-selection']);
     else this.router.navigate(['option-selection']);

@@ -150,7 +150,7 @@
             }
 
 
-            @if(option.title === 'Subclasses') {
+            @if(option.title === 'Subclasses' && charLevel >= 3) {
               <h3>{{option.title}}</h3>
               <app-label class="choiceTitleLabel">Choose 1 of the following:</app-label>
               @for(subclass of option.content; track subclass) {

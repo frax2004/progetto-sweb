@@ -30,6 +30,7 @@ import { rejects } from 'assert';
 })
 export class ClassSelectionPage implements OnInit, AfterViewInit {
 
+  chosenClass: string;
   nextPageAlertOpen = false;
 
   setOpen(isOpen: boolean) {
@@ -39,7 +40,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
   nextPage = () => {
     // alert(this instanceof ClassSelectionPage);
     CharacterInstance.chosenLevel = this.levelEntry.value;
-    const validClass: boolean = CharacterInstance.chosenClass !== undefined;
+    const validClass: boolean = this.chosenClass !== undefined;
     if (CharacterInstance.chosenLevel>0 && validClass) {
       for (const _class of this.classesArray) {
         if (CharacterInstance.chosenClass === _class.title) {
@@ -49,6 +50,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
           CharacterInstance.hitDie = _class.hit_die;
         }
       }
+      CharacterInstance.chosenClass = this.chosenClass;
       CharacterInstance.levelSpecifics = this.getLevelSpecifics();
       CharacterInstance.chosenASI = this.getNumberOfASI();
       this.router.navigate(['/species-selection']);
@@ -214,82 +216,8 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
                       \nThe closest a Wizard is likely to come to an ordinary life is working as a sage or lecturer. Other Wizards sell their services as advisers, serve in military forces, or pursue lives of crime or domination.
                       \nBut the lure of knowledge calls even the most unadventurous Wizards from the safety of their libraries and laboratories and into crumbling ruins and lost cities. Most Wizards believe that their counterparts in ancient civilizations knew secrets of magic that have been lost to the ages, and discovering those secrets could unlock the path to a power greater than any magic available in the present age.`},  
   };
-  static selectedClass: string;
 
-  static classesButtons = {
-    'Barbarian': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Barbarian';
-      }
-    },
-    'Bard': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Bard';
-      }
-    }, 
-    'Cleric': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Cleric';
-      }
-    }, 
-    'Druid': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Druid';
-      }
-    }, 
-    'Fighter': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Fighter';
-      }
-    }, 
-    'Monk': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Monk';
-      }
-    }, 
-    'Paladin': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Paladin';
-      }
-    }, 
-    'Ranger': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Ranger';
-      }
-    }, 
-    'Rogue': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Rogue';
-      }
-    }, 
-    'Sorcerer': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Sorcerer';
-      }
-    }, 
-    'Warlock': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Warlock';
-      }
-    }, 
-    'Wizard': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Wizard';
-      }
-    }
-  }
+  
 
 
   // le funzioni display devono essere static altrimenti non possono essere accedute all'interno del costruttore
@@ -552,7 +480,6 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
 
 
   retrieveAllClassLevels = async () => {
-    ClassSelectionPage.selectedClass = undefined;
 
     for (const name of this.classesNames) {
       try {
@@ -561,6 +488,81 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
       catch (err) {Alerts.error(err);}
     }
 
+    // this.chosenClass = '';
+    const classesButtons = {
+    'Barbarian': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Barbarian';
+      }
+    },
+    'Bard': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Bard';
+      }
+    }, 
+    'Cleric': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Cleric';
+      }
+    }, 
+    'Druid': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Druid';
+      }
+    }, 
+    'Fighter': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Fighter';
+      }
+    }, 
+    'Monk': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Monk';
+      }
+    }, 
+    'Paladin': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Paladin';
+      }
+    }, 
+    'Ranger': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Ranger';
+      }
+    }, 
+    'Rogue': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Rogue';
+      }
+    }, 
+    'Sorcerer': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Sorcerer';
+      }
+    }, 
+    'Warlock': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Warlock';
+      }
+    }, 
+    'Wizard': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Wizard';
+      }
+    }
+  }
 
     this.classDisplayer
     .displayClasses()
@@ -571,7 +573,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
             imageURL: "../assets/icon/classes_icons/" + item.name.toLowerCase() + ".svg",
             desc: ClassSelectionPage.classesDescriptions[item.name].text,
             value: item.name + " accordion",
-            choiceButton: ClassSelectionPage.classesButtons[item.name],
+            choiceButton: classesButtons[item.name],
             title: item.name,
             hit_die: item.hit_die, 
             base_equipment: ClassSelectionPage.generateBaseEquipment(item.starting_equipment),

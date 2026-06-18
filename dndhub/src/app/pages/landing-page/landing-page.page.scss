@@ -221,6 +221,7 @@ a:hover {
     transform: scale(1.05);
     border-color: gold;
     cursor: pointer;
+    backdrop-filter: blur(2em);
   }
   .linkContainer:hover {
     transform: scale(1.05);

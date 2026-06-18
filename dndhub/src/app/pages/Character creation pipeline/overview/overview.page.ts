@@ -111,8 +111,7 @@ export class OverviewPage implements OnInit {
         Alerts.personalizedMessage('GOOOOOOODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOQOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO','PERSONAGGIO CARICATO!');
       },
       error: (err) => {
-        Alerts.message(JSON.stringify(err,null,2));
-        console.log(JSON.stringify(err,null,2));
+        Alerts.message(err.error.message);
       }
     });
   }

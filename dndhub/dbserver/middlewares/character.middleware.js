@@ -1,4 +1,5 @@
-
+import { DatabaseQueries } from "../database.queries.ts";
+import { UserInstance } from "../global.context.js";
 
 let canSend = true;
 function sendResponse(obj, res) {
@@ -127,6 +128,27 @@ export function validateCharacter(req,res,next) {
     else next();
 }
 
+async function doesCharacterAlreadyExist(req,res,next) {
+    canSend = true;
+
+    const name = req.body.name;
+    const idx_personaggio = `${name} @ ${UserInstance?.USER?.player_id ?? 'gianluca.ferri44@edu.ru'}`;
+
+    const character = await DatabaseQueries.retrieve(`SELECT * FROM Personaggio WHERE idx_personaggio = '${idx_personaggio}'`, (el => el));
+
+    console.log('personaggio: ' , JSON.stringify(character[0],null,2));
+
+    if (character[0] === null || character[0] === undefined) next();
+    else {
+        sendResponse({
+            status_code: 400,
+            success: false,
+            message: 'You already have a character with this name'
+        }, res);
+    }
+} 
+
 export default {
     validateCharacter,
+    doesCharacterAlreadyExist,
 }

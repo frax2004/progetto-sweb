@@ -90,7 +90,7 @@
                           <app-label>{{weapon}} + shield</app-label>
                         </div>
                         <div class="checkboxContainer">
-                          <input class="genericCheckbox" type="checkbox" [value]="weapon" [id]="weapon + 'shield'" (click)="addOptionalEquipment(weapon + 'shield',opt.index, weapon + 'shield')">
+                          <input class="genericCheckbox" type="checkbox" [value]="weapon" [id]="weapon + 'shield'" (click)="addOptionalEquipment(weapon + '+shield',opt.index, weapon + '+shield')">
                         </div>
                       </div>
                     }

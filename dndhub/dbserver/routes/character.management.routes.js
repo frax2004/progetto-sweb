@@ -17,6 +17,7 @@ characterManagementRouter.post("/background-display-by-name", controller.display
 characterManagementRouter.post("/insert-character",
     // authMiddleware.isLogged,
     characterMiddleware.validateCharacter,
+    characterMiddleware.doesCharacterAlreadyExist,
     controller.insertCharacter
 );
 // characterManagementRouter

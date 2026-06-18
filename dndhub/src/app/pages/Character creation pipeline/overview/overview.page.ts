@@ -77,6 +77,10 @@ export class OverviewPage implements OnInit {
       }
     }
 
+    for (const stat of this.finalStatistics) {
+      CharacterInstance.setStatistics(stat.statName,stat.value);
+    }
+
     this.characterManagement
     .insertCharacter(
       this.characterName,
@@ -97,7 +101,7 @@ export class OverviewPage implements OnInit {
       CharacterInstance.speciesSize,
       CharacterInstance.backgroundStartingGold,
       CharacterInstance.backgroundFeature,
-      this.finalStatistics,
+      CharacterInstance.statistics,
       CharacterInstance.spellsKnown,
       CharacterInstance.cantripsKnown,
       CharacterInstance.chosenSpells,
@@ -106,7 +110,10 @@ export class OverviewPage implements OnInit {
       next: (value: any) => {
         Alerts.personalizedMessage('GOOOOOOODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOQOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO','PERSONAGGIO CARICATO!');
       },
-      error: (err) => Alerts.error(err)
+      error: (err) => {
+        Alerts.message(JSON.stringify(err,null,2));
+        console.log(JSON.stringify(err,null,2));
+      }
     });
   }
 
@@ -154,21 +161,21 @@ export class OverviewPage implements OnInit {
     //da finire
     for(const equip of CharacterInstance.backgroundEquipment) {
       equipArray.push({
-        idx: equip.index,
+        idx: equip.index.trim(),
         quantity: equip.quantity,
       });
     }
 
     for(const equip of CharacterInstance.baseEquipment) {
       equipArray.push({
-        idx: equip.index,
+        idx: equip.index.trim(),
         quantity: equip.quantity,
       });
     }
 
     for(const equip of CharacterInstance.backgroundEquipment) {
       equipArray.push({
-        idx: equip.index,
+        idx: equip.index.trim(),
         quantity: equip.quantity,
       });
     }
@@ -176,14 +183,14 @@ export class OverviewPage implements OnInit {
     //questi ultimi due array sono salvati in maniera diversa
     for(const equip of CharacterInstance?.chosenOptionalEquipment) {
       equipArray.push({
-        idx: equip.toLowerCase(),
+        idx: equip.toLowerCase().trim(),
         quantity: 1,
       });
     }
 
     for(const equip of CharacterInstance?.chosenBackgroundEquipment) {
       equipArray.push({
-        idx: equip.toLowerCase(),
+        idx: equip.toLowerCase().trim(),
         quantity: 1,
       });
     }
@@ -196,28 +203,28 @@ export class OverviewPage implements OnInit {
 
     for(const prof of CharacterInstance.baseProficiencies) {
       profArray.push({
-        idx: prof.index,
+        idx: prof.index.trim(),
         name: prof.name,
       });
     }
 
     for(const prof of CharacterInstance.baseSavingThrows) {
       profArray.push({
-        idx: prof.index,
+        idx: prof.index.trim(),
         name: prof.fullName,
       });
     }
 
     for(const prof of CharacterInstance.chosenRegularProficiencies) {
       profArray.push({
-        idx: prof.toLowerCase(),
+        idx: prof.toLowerCase().trim(),
         name: prof,
       });
     }
 
     for(const prof of CharacterInstance.chosenExtraProficiencies) {
       profArray.push({
-        idx: prof.toLowerCase(),
+        idx: prof.toLowerCase().trim(),
         name: prof,
       });
     }
@@ -229,15 +236,15 @@ export class OverviewPage implements OnInit {
     let langArray = [];
 
     for (const language of CharacterInstance.speciesLanguages) {
-      langArray.push(language.index);
+      langArray.push(language.index.trim());
     }
 
     for (const language of CharacterInstance.chosenLanguages) {
-      langArray.push(language.index);
+      langArray.push(language.toLowerCase().trim());
     }
 
     for (const language of CharacterInstance.chosenBackgroundLanguages) {
-      langArray.push(language.index);
+      langArray.push(language.toLowerCase().trim());
     }
 
     return langArray;

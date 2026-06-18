@@ -130,6 +130,9 @@ export class CharacterManagementService {
         spells: spells,
         cantrips: cantrips,
       }
+    )
+    .pipe(
+      tap(res => sessionStorage.setItem("Risposta:  ", JSON.stringify(res,null,2)))
     );
   }
 }

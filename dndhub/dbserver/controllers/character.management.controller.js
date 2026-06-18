@@ -1,6 +1,8 @@
 import { UserInstance } from "../global.context.js";
 import { Database } from "../database.js";
 import { DatabaseQueries } from "../database.queries.ts";
+import fs from 'fs';
+import { freemem } from "os";
 
 
 let canSend = true;
@@ -8,7 +10,6 @@ function sendResponse(obj, res) {
   if(canSend) {
     res.status(obj.status_code).json(obj);
     canSend = false;
-    canSend = true;
   } else throw new Error("Chiamata a sendResponse() gia effettuata");
 }
 
@@ -41,6 +42,7 @@ async function unwrapLevelSpecific(levelRow) {
 }
 
 async function displayLevelByNameAndLevel(req, res) {
+  canSend = true;
   // lower case fatto in caso eventuale di errori
   const className = req.body.className.toLowerCase();
   // non voglio sottoclassi quindi subclass is null in query
@@ -55,6 +57,15 @@ async function displayLevelByNameAndLevel(req, res) {
       lvlsArray.push(await unwrapLevelSpecific((await levelInfo)[0]));
       //console.log(lvlsArray[level-1]);
     } 
+
+    sendResponse({
+        levels: lvlsArray,
+        status_code: 200,
+        success: true,
+        message: 'Livelli caricati con successo'
+      },
+      res
+    );
   }
   catch(err) {
     console.log(err);
@@ -64,20 +75,10 @@ async function displayLevelByNameAndLevel(req, res) {
       success: false,
     }, res);
   }
-
-  // arrivo qui se non ci sono stati problemi
-  sendResponse({
-      levels: lvlsArray,
-      status_code: 200,
-      success: true,
-      message: 'Livelli caricati con successo'
-    },
-    res
-  );
-  
 }
 
 async function displayLevelRowByClassAndLevel(req,res) {
+  canSend = true;
   const className = req.body.className.toLowerCase();
   const level = req.body.level;
 
@@ -89,7 +90,15 @@ async function displayLevelRowByClassAndLevel(req,res) {
     // console.log(await levelInfo);
 
     levelRow = await unwrapLevelSpecific((await levelInfo)[0]);
-    console.log(levelRow);
+  
+    sendResponse({
+        level: levelRow,
+        status_code: 200,
+        success: true,
+        message: 'Livelli caricati con successo'
+      },
+      res
+    );
   }
   catch (err) {
     console.log(err);
@@ -99,16 +108,6 @@ async function displayLevelRowByClassAndLevel(req,res) {
       success: false,
     }, res);
   }
-
-  // arrivo qui se non ci sono stati problemi
-  sendResponse({
-      level: levelRow,
-      status_code: 200,
-      success: true,
-      message: 'Livelli caricati con successo'
-    },
-    res
-  );
 }
 
 export function displayClasses(req, res) {
@@ -133,8 +132,6 @@ export function displayClasses(req, res) {
       res
     );
   });
-
-  canSend = true;
 }
 
 async function unwrapSubspecies(subspecies) {
@@ -194,6 +191,12 @@ async function displaySpecies(req,res) {
       // da levare è solo per debug
       // console.log(speciesArray[speciesArray.length-1]);
     }
+    sendResponse({
+      status_code: 200,
+      message: 'Speci caricate con successo',
+      success: true,
+      species: speciesArray,
+    }, res);
   }
   catch (err) {
     console.log(err);
@@ -202,19 +205,10 @@ async function displaySpecies(req,res) {
       message: 'Non è stato possibile caricare le speci dal database',
       success: false,
     }, res);
-    return;
   }
-
-  //arrivo qui se non ci sono stati problemi
-  sendResponse({
-    status_code: 200,
-    message: 'Speci caricate con successo',
-    success: true,
-    species: speciesArray,
-  }, res);
 }
 
-async function displayBackgrounds(req,res) {
+function displayBackgrounds(req,res) {
   canSend=true;
 
   DatabaseQueries.retrieve("SELECT * FROM Background", DatabaseQueries.unwrapBackground)
@@ -238,7 +232,7 @@ async function displayBackgrounds(req,res) {
   });
 }
 
-async function displaySpellsByClass(req,res) {
+function displaySpellsByClass(req,res) {
   canSend=true;
 
   const className = req.body.className.toLowerCase();
@@ -265,7 +259,7 @@ async function displaySpellsByClass(req,res) {
   });
 }
 
-async function displayClassByName(req,res) {
+function displayClassByName(req,res) {
   canSend = true;
 
   const class_idx = req.body.className.toLowerCase();
@@ -291,7 +285,7 @@ async function displayClassByName(req,res) {
   });
 }
 
-async function displaySpeciesByName(req,res) {
+function displaySpeciesByName(req,res) {
   canSend = true;
 
   const species_idx = req.body.speciesName.toLowerCase();
@@ -317,7 +311,7 @@ async function displaySpeciesByName(req,res) {
   });
 }
 
-async function displayBackgroundByName(req,res) {
+function displayBackgroundByName(req,res) {
   canSend = true;
 
   const bg_idx = req.body.bgName.toLowerCase();
@@ -343,111 +337,60 @@ async function displayBackgroundByName(req,res) {
   });
 }
 
-async function insertSpells(idx_personaggio,spells,cantrips,res) {
+function insertSpells(idx_personaggio,spells,cantrips,res) {
   //funzione di appoggio per insertCharacter
-  let array_idx = 0;
-  for (const spell of spells) {
-    try {
-      const query = `INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+
+  if (spells === undefined || spells === null) return '';
+
+  let finalSpellsQuery = spells.map((spell,array_idx) => `INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
         '${spell.name}',
         '${idx_personaggio}',
         ${array_idx}
-      )`;
+      );`
+    );
 
-      array_idx++;
-      Database.execOne(query);
-    }
-    catch (err) {
-      sendResponse({
-        status_code: 400,
-        message: 'Errore nell\'inserimento degli incantesimi',
-        success: false,
-        err: err,
-      }, res);
-      return;
-    }
-  }
-
-  if (cantrips !== undefined) {
-    for (const spell of cantrips) {
-      try {
-        const query = `INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+  if (cantrips === undefined || cantrips === null) return finalSpellsQuery.join('\n');
+    
+  let finalCantripsQuery = cantrips.map((cantrips,array_idx) => `INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
           '${spell.name}',
           '${idx_personaggio}',
           ${array_idx}
-        )`;
+        );`
+  );
 
-        array_idx++;
-        Database.execOne(query);
-      }
-      catch (err) {
-        sendResponse({
-          status_code: 400,
-          message: 'Errore nell\'inserimento degi trucchetti',
-          success: false,
-          err: err,
-        }, res);
-        return;
-      }
-    }
-  }
+
+  return `${finalSpellsQuery.join('\n')}
+          ${finalCantripsQuery.join('\n')}`;
 }
 
-async function insertEquipment(idx_personaggio,equipment,res) {
+function insertEquipment(idx_personaggio,equipment,res) {
   //funzione di appoggio per insertCharacter
-  let array_idx = 0;
 
-  for (const equip of equipment) {
-    try {
-      const query = `INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
+  let finalQuery = equipment.map((equip,array_idx) => `INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         '${equip.idx}',
         '${idx_personaggio}',
         ${array_idx}
-      )`;
+      );`
+    );
 
-      array_idx++;
-      Database.execOne(query);
-    }
-    catch (err) {
-      sendResponse({
-        status_code: 400,
-        message: 'Errore nell\'inserimento dell\'equipaggiamento',
-        succes: false,
-        err: err,
-      }, res);
-      return;
-    }
-  }
+
+  return finalQuery.join('\n');
 }
 
-async function insertLanguage(idx_personaggio,languages,res) {
+function insertLanguage(idx_personaggio,languages,res) {
   //funzione di appoggio per insertCharacter
-  let array_idx = 0;
 
-  for (const lang of languages) {
-    try {
-      const query = `INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
+  let finalQuery = languages.map((lang,array_idx) => `INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
         '${lang}',
         '${idx_personaggio}',
         ${array_idx}
-      )`;
+      );`
+    );
 
-      array_idx++;
-      Database.execOne(query);
-    }
-    catch (err) {
-      sendResponse({
-        status_code: 400,
-        message: 'Errore nell\'inserimento delle lingue',
-        succes: false,
-        err: err,
-      }, res);
-      return;
-    }
-  }
+  return finalQuery.join('\n');
 }
 
-async function insertStats(idx_personaggio,statistics,res) {
+function insertStats(idx_personaggio,statistics,res) {
   //funzione di appoggio per insertCharacter
   const statsName = ['strength',
   'dexterity',
@@ -456,88 +399,53 @@ async function insertStats(idx_personaggio,statistics,res) {
   'wisdom',
   'charisma' ];
 
-  let array_idx = 0;
-  for (const stat of statsName) {
+  let finalQuery = statsName.map((stat,array_idx) => {
     const statIdx = stat === 'strength' ? 'str' :
                     stat === 'dexterity' ? 'dex' :
                     stat === 'constitution' ? 'con' :
                     stat === 'intelligence' ? 'int' :
                     stat === 'wisdom' ? 'wis' : 'cha';
-
-    try {
-      const query = `INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
+    return `INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         '${statIdx}',
         ${statistics[stat].value},
         ${statistics[stat].modifier},
         '${idx_personaggio}',
-        ${array_idx},
-      )`;
+        ${array_idx}
+      );`;
+  });
   
-      array_idx++;
-      Database.execOne(query);
-    }
-    catch (err) {
-      sendResponse({
-        status_code: 400,
-        message: 'Errore nell\'inserimento delle statistiche',
-        succes: false,
-        err: err,
-      }, res);
-      return;
-    }
-  }
+
+  return finalQuery.join('\n');
 }
 
-async function insertFeats(idx_personaggio,feats,res) {
-  let array_idx = 0;
+function insertFeats(idx_personaggio,feats,res) {
+  //funzione di appoggio per insertCharacter
 
-  for (const feat of feats) {
-    try {
-      const query = `INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+  if (feats === undefined || feats === null) return '';
+
+  let finalQuery = feats.map((feat,array_idx) => `INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
         '${feat}',
         '${idx_personaggio}',
         ${array_idx}
-      )`;
+      );`
+  );
 
-      array_idx++
-      Database.execOne(query);
-    }
-    catch (err) {
-      sendResponse({
-        status_code: 400,
-        message: 'Errore nell\'inserimento dei talenti',
-        succes: false,
-        err: err,
-      }, res);
-      return;
-    }
-  }
+
+  return finalQuery.join('\n');
 }
 
-async function insertProficiencies(idx_personaggio,proficiencies,res) {
-  let array_idx = 0;
+function insertProficiencies(idx_personaggio,proficiencies,res) {
+  //funzione di appoggio per insertCharacter
 
-  for (const prof of proficiencies) {
-    try {
-      const query = `INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        '${prof.name}',
+  let finalQuery = proficiencies.map((prof,array_idx) => `INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
+        '${prof.name.toLowerCase()}',
         '${idx_personaggio}',
         ${array_idx}
-      )`;
+      );`
+    );
 
-      array_idx++;
-      Database.execOne(query);
-    }
-    catch (err) {
-      sendResponse({
-        status_code: 400,
-        message: 'Errore nell\'inserimento delle competenze',
-        succes: false,
-        err: err,
-      }, res);
-      return;
-    }
-  }
+
+  return finalQuery.join('\n');
 }
 
 async function insertCharacter(req,res) {
@@ -567,14 +475,17 @@ async function insertCharacter(req,res) {
   const spells = req.body.spells;
   const cantrips = req.body.cantrips;
 
-  const idx_personaggio = `${name} @ ${UserInstance.USER.player_id}`;
-  const utente_generico = UserInstance.USER.email;
+  const idx_personaggio = `${name} @ ${UserInstance?.USER?.player_id ?? 'gianluca.ferri44@edu.ru'}`;
+  const utente_generico = UserInstance?.USER?.email ?? 'gianluca.ferri44@edu.ru';
 
   //log di testing, da levare dopo
   console.log('idx_personaggio: ' + idx_personaggio);
 
   try {
     const insertCharQuery = `
+    BEGIN TRANSACTION;
+
+
     INSERT OR IGNORE INTO Personaggio (
       utente_generico,
       nome,
@@ -610,105 +521,73 @@ async function insertCharacter(req,res) {
       ${healthPoints},
       ${levelSpecifics.proficiency_bonus},
       '${idx_personaggio}',
-      '${characterClass}',
-      '${subclass}',
-      '${species}',
-      '${subspecies}',
-      '${background}',
-      '${level}',
-      ${startingGold.quantity}
-      ${spellsKnown},
-      ${cantripsKnown},
-      ${levelSpecifics.spell_slots_level_1},
-      ${levelSpecifics.spell_slots_level_2},
-      ${levelSpecifics.spell_slots_level_3},
-      ${levelSpecifics.spell_slots_level_4},
-      ${levelSpecifics.spell_slots_level_5},
-      ${levelSpecifics.spell_slots_level_6},
-      ${levelSpecifics.spell_slots_level_7},
-      ${levelSpecifics.spell_slots_level_8},
-      ${levelSpecifics.spell_slots_level_9},
+      '${characterClass.toLowerCase()}',
+      ${subclass !== undefined ? `'${subclass.toLowerCase()}'` : null},
+      '${species.toLowerCase()}',
+      ${subspecies !== undefined ? `'${subspecies.toLowerCase()}'` : null},
+      '${background.toLowerCase()}',
+      ${level},
+      ${startingGold.quantity},
+      ${spellsKnown !== undefined ? spellsKnown : null},
+      ${cantripsKnown !== undefined ? cantripsKnown : null},
+      ${levelSpecifics.spell_slots_level_1 !== undefined ? levelSpecifics.spell_slots_level_1 : null},
+      ${levelSpecifics.spell_slots_level_2 !== undefined ? levelSpecifics.spell_slots_level_2 : null},
+      ${levelSpecifics.spell_slots_level_3 !== undefined ? levelSpecifics.spell_slots_level_3 : null},
+      ${levelSpecifics.spell_slots_level_4 !== undefined ? levelSpecifics.spell_slots_level_4 : null},
+      ${levelSpecifics.spell_slots_level_5 !== undefined ? levelSpecifics.spell_slots_level_5 : null},
+      ${levelSpecifics.spell_slots_level_6 !== undefined ? levelSpecifics.spell_slots_level_6 : null},
+      ${levelSpecifics.spell_slots_level_7 !== undefined ? levelSpecifics.spell_slots_level_7 : null},
+      ${levelSpecifics.spell_slots_level_8 !== undefined ? levelSpecifics.spell_slots_level_8 : null},
+      ${levelSpecifics.spell_slots_level_9 !== undefined ? levelSpecifics.spell_slots_level_9 : null},
       ${speed},
       '${size}',
       '${backgroundFeature.name}',
-      '${imgURL}'
-      )
-    `;
+      ${imgURL !== undefined ? `'${imgURL}'` : null}
+      );
 
-    Database.execOne(insertCharQuery);
+      
+      COMMIT;
+      `;
+      
+      fs.writeFileSync('queryTest.sql',insertCharQuery,'utf-8');
+      
+      // ${insertSpells(idx_personaggio,spells,cantrips,res)};
+  
+      // ${insertEquipment(idx_personaggio,equipment,res)};
+  
+      // ${insertLanguage(idx_personaggio,languages,res)};
+  
+      // ${insertStats(idx_personaggio,statistics,res)};
+      
+      // ${insertProficiencies(idx_personaggio,proficiencies,res)};
+  
+      // ${insertFeats(idx_personaggio,speciesTraits,res)};
+  
+      // ${insertFeats(idx_personaggio,levelSpecifics.feats,res)};
+      await Database.execAll(insertCharQuery);
+      
+    sendResponse({
+      status_code: 200,
+      message: 'Personaggio caricato!',
+      success: true,
+    }, res);
   } 
   catch (err) {
-    sendResponse({
-      status_code: 400,
-      message: 'Errore nell\'inserimento dei dati personaggio',
-      success: false,
-      err: err,
-    }, res);
-    return;
-  }
-
-  try {
-    insertSpells(idx_personaggio,spells,cantrips,res);
-  }
-  catch (err) {
-    //send response fatta nella funzione stessa
-    return;
-  }
-
-  try {
-    insertEquipment(idx_personaggio,equipment,res);
-  }
-  catch (err) {
-    //send response fatta nella funzione stessa
-    return;
-  }
-
-  try {
-    insertLanguage(idx_personaggio,languages,res);
-  }
-  catch (err) {
-    //send response fatta nella funzione stessa
-    return;
-  }
-
-  try {
-    insertStats(idx_personaggio,statistics,res);
-  }
-  catch (err) {
-    //send response fatta nella funzione stessa
-    return;
+    console.log('Errore nel catch di character.management.controller.insertCharacter():\n ' , err);
+    try {
+      await Database.execOne('ROLLBACK;');
+    }
+    finally {
+      sendResponse({
+        status_code: 400,
+        message: 'Errore nell\'inserimento dei dati personaggio',
+        success: false,
+        err: err,
+      }, res);
+    }
   }
 
   
-  try {
-    insertProficiencies(idx_personaggio,proficiencies,res);
-  }
-  catch (err) {
-    //send response fatta nella funzione stessa
-    return;
-  }
-
-  try {
-    insertFeats(idx_personaggio,speciesTraits,res);
-  }
-  catch (err) {
-    //send response fatta nella funzione stessa
-    return;
-  }
-
-  try {
-    insertFeats(idx_personaggio,levelSpecifics.feats,res);
-  }
-  catch (err) {
-    //send response fatta nella funzione stessa
-    return;
-  }
-
-  sendResponse({
-    status_code: 200,
-    message: 'Personaggio caricato!',
-    success: true,
-  }, res);
 }
 
 

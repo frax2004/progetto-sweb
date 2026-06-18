@@ -887,8 +887,7 @@ create table if not exists Personaggio (
   foreign key (sottoclasse) references Subclass(idx),
   foreign key (specie) references Species(idx),
   foreign key (sottospecie) references Subspecies(idx),
-  foreign key (background) references Background(idx),
-  foreign key (livello) references Level(idx)
+  foreign key (background) references Background(idx)
 );
 
 create table if not exists ArraySpellItem (
@@ -940,8 +939,7 @@ create table if not exists ArrayFeatItem (
   array_idx number not null,
 
   primary key (idx_personaggio,array_idx),
-  foreign key (idx_personaggio) references Personaggio(idx_personaggio) on update cascade on delete cascade,
-  foreign key (item) references Feat(idx)
+  foreign key (idx_personaggio) references Personaggio(idx_personaggio) on update cascade on delete cascade
 );
 
 create table if not exists ArrayProficienciesItem (

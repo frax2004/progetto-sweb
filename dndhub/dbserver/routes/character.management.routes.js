@@ -15,7 +15,7 @@ characterManagementRouter.post("/class-display-by-name", controller.displayClass
 characterManagementRouter.post("/species-display-by-name", controller.displaySpeciesByName);
 characterManagementRouter.post("/background-display-by-name", controller.displayBackgroundByName);
 characterManagementRouter.post("/insert-character",
-    authMiddleware.isLogged,
+    // authMiddleware.isLogged,
     characterMiddleware.validateCharacter,
     controller.insertCharacter
 );

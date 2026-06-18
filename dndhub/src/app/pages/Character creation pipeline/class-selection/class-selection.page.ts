@@ -9,7 +9,7 @@ import { ButtonComponent } from 'src/app/components/button/button.component';
 import { expand } from 'rxjs';
 import { Button } from 'src/app/components/button/Button';
 import { ButtonContext } from 'src/app/components/button/ButtonContext';
-import { Navigate, Popups } from 'src/app/core/core';
+import { Alerts, Navigate, Popups } from 'src/app/core/core';
 import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.component";
 import { Router } from '@angular/router';
 import { TitleComponent } from "src/app/components/title/title.component";
@@ -18,6 +18,8 @@ import { CharacterManagementService } from 'src/app/services/character.managemen
 import { dnd } from 'dbserver/database.queries';
 import { AfterViewInit } from '@angular/core';
 import { CharacterInstance } from '../CharacterInformation';
+import { resolve } from 'dns';
+import { rejects } from 'assert';
 
 @Component({
   selector: 'app-class-selection',
@@ -527,11 +529,8 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     return 'C\'è stato qualche errore';
   }
 
-  constructor(public popoverController: PopoverController, private router: Router, private classDisplayer: CharacterManagementService) {
-    ClassSelectionPage.selectedClass = undefined;
-    
-    
-    for (const name of this.classesNames) {
+  generateClassLevels = (name) => {
+    return new Promise<any>((resolve: (x: void) => void,reject: (x:any) => void) => {
       this.classDisplayer
       .displaySpecificLevel(name)
       .subscribe({
@@ -541,9 +540,22 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
             idx: value.levels[0].name,
             content: value.levels,
           });
+          resolve();
         },
-        error: (err: any) => console.log(err)
-      })
+        error: (err: any) => reject(err)
+      });
+    });   
+  }
+
+
+  retrieveAllClassLevels = async () => {
+    ClassSelectionPage.selectedClass = undefined;
+
+    for (const name of this.classesNames) {
+      try {
+        await this.generateClassLevels(name);
+      }
+      catch (err) {Alerts.error(err);}
     }
 
 
@@ -582,6 +594,10 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
         console.log(err);
       }
     });
+  }
+
+  constructor(public popoverController: PopoverController, private router: Router, private classDisplayer: CharacterManagementService) {
+    this.retrieveAllClassLevels();
   }
 
   ngOnInit() {}

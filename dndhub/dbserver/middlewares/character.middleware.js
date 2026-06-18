@@ -132,7 +132,7 @@ async function doesCharacterAlreadyExist(req,res,next) {
     canSend = true;
 
     const name = req.body.name;
-    const idx_personaggio = `${name} @ ${UserInstance?.USER?.player_id ?? 'gianluca.ferri44@edu.ru'}`;
+    const idx_personaggio = `${name} @ ${UserInstance?.USER?.player_id}`;
 
     const character = await DatabaseQueries.retrieve(`SELECT * FROM Personaggio WHERE idx_personaggio = '${idx_personaggio}'`, (el => el));
 

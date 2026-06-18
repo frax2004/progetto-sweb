@@ -56,11 +56,14 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     else this.setOpen(true);
   }
 
-  b2_context: ButtonContext = { onClick: Popups.ofSimpleText(this.popoverController, "Andiamo les go les go milano")};
 
   buttonCallbacks = {
     // manca la pagina precedente a cui linkare il primo bottone
-    nextPage: { onClick: this.nextPage}
+    nextPage: { onClick: this.nextPage},
+    previousPage: {onClick: () => {
+      CharacterInstance.unsetAll();
+      Navigate.toPath(this.router,'character-creation-info')();
+    }}
   }
 
 

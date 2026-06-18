@@ -477,8 +477,8 @@ async function insertCharacter(req,res) {
   const spells = req.body.spells;
   const cantrips = req.body.cantrips;
 
-  const idx_personaggio = `${name} @ ${UserInstance?.USER?.player_id ?? 'gianluca.ferri44@edu.ru'}`;
-  const utente_generico = UserInstance?.USER?.email ?? 'gianluca.ferri44@edu.ru';
+  const idx_personaggio = `${name} @ ${UserInstance.USER.player_id}`;
+  const utente_generico = UserInstance.USER.email;
 
   //log di testing, da levare dopo
   console.log('idx_personaggio: ' + idx_personaggio);

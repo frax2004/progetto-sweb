@@ -3,6 +3,8 @@
   [title] = "'Scegli gli incantesimi'"
   ></app-title>
 
+  <div class="imgbackground"></div>
+
   <app-button
   [button]="{ text: 'Go back', expand: ''}"
   [context]="buttonCallbacks['previousPage']"
@@ -12,10 +14,12 @@
    ma anche perchè i trucchetti conosciuti non hanno nulla a che fare 
    con l'ammontare di incantesimi conosciuti -->
   <div class="listContainerFrame">
-    <ion-list class="spellsList">
-      <ion-label>Cantrips to choose: {{cantripsToChoose}}</ion-label>
+    <div class="spellsList">
+      <div class="sottotitolo">
+      <ion-label class="cantripsAndSpells">Cantrips to choose: {{cantripsToChoose}}</ion-label>
       <br>
-      <ion-label>Spells to choose: {{spellsToChoose}}</ion-label>
+      <ion-label class="cantripsAndSpells">Spells to choose: {{spellsToChoose}}</ion-label>
+      </div>
       @for(spellArray of displayableSpells; track spellArray) {
         @if(spellArray.length !== 0) {
           @if(spellArray[0].level === 0){
@@ -51,7 +55,7 @@
 
         }
       }
-    </ion-list>
+    </div>
   </div>
 
   <app-button

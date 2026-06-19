@@ -180,6 +180,8 @@ export class CharacterInstance {
     return this.cantrips_known;
   }
 
+  // commento prova
+
   static set spellsKnown(numOfSpells) {
     this.spells_known = numOfSpells;
   } 

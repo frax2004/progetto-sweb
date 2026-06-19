@@ -173,11 +173,16 @@ ion-title {
 }
 
 @media (max-width: 900px) {
+    .grid {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
   .ColonnaTabella {
     font-size: 11px;
     padding: 4px;
   }
-}   
+}
+ 
 ion-row {
   min-width: 900px;
 }

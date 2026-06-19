@@ -1,0 +1,143 @@
+.upperDetails {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 5vh;
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(255, 98, 98, 0.331);
+    height: 6vh;
+}
+
+//commento prova
+.previousPageButton {
+    width: min(20vw,200px);
+    margin-left: 3vw;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+.infoList {
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
+
+.overviewContainer {
+    width: 90%;
+    margin: 0px auto;
+}
+
+.genericInfoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 2px #FFD700 dashed;
+    padding-bottom: 4%;
+    margin-bottom: 4%;
+}
+
+.genericInfoContainer>.statGrid {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: auto auto auto;
+    column-gap: 7%;
+    row-gap: max(30%,15px);
+    width: 60%;
+    height: 40%;
+}
+
+.classDiv {
+    margin-top: 2%;
+}
+
+.infoTitle {
+    display: grid;
+    width: 30%;
+    justify-content: center;
+    border-bottom: 1px #FFD700 solid;
+    padding-bottom: 1.5vh;
+    border-radius: 100%;
+}
+
+.infoFrame {
+    margin-top: 3vh;
+}
+
+.HPchoice .HPlabel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+
+.upperDetailsContainer {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+ion-label {
+    width: 100%;
+    height: 100%;
+}
+
+
+.finalChoices {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
+.finalButton {
+    display: grid;
+    justify-content: end;
+}
+
+.finalChoicesContainer {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+
+    margin: 0 auto;
+    border-radius: 18px;
+    width: 90vw;
+}
+
+.nameChoice , .imgChoice {
+    margin: 0 auto;
+    width: 90vw;
+    margin-bottom: 15px;
+}
+
+.HPbuttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.showHP {
+    margin-top: 15%;
+    align-self: center;
+}
+
+.HPframe {
+    margin: 4vh auto;
+}
+
+.dragEntryFrame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+app-drag-entry {
+    margin-top: 2vh;
+}

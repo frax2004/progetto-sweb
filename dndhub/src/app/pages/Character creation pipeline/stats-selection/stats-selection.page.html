@@ -1,158 +1,244 @@
 <ion-content>
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title>Scegli le statisctiche e le lingue</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="imgbackground"></div>
+  <app-title
+  [title] = "'Scegli le statistiche'"
+  ></app-title>
   
   <!-- tre bottoni, uno accanto all'altro che permettono di modificare il metodo di selezione statistiche -->
 
-  <ion-item class="gridContainer">
+  <div class="goBack">
+    <app-button
+    [button] = "{ text: 'Torna indietro', expand: ''}"
+    [context] = "buttonCallbacks['previousPage']"
+    ></app-button>
+    <!-- manca il context -->
+  </div>
+
+  <div class="gridContainer buttonGrid">
     <ion-grid>
       <ion-row>
 
         <!-- bottono selezione manuale -->
         <ion-col>
-          <app-button
-          [button] = "{ text: 'Scelta manuale', expand: ''}"
-          [context] = "buttonCallbacks['manual']"
-          ></app-button>
+          <div class="HPchoiceButtonContainer">
+            <app-button
+            class = "HPchoiceButton"
+            [margin] = "false"
+            [button] = "{ text: 'Scelta manuale', expand: ''}"
+            [context] = "buttonCallbacks['manual']"
+            ></app-button>
+          </div>
         </ion-col>
 
         <!-- bottone selezione array standard -->
         <ion-col>
-          <app-button
-          [button] = "{ text: 'Scelta array standard', expand: ''}"
-          [context] = "buttonCallbacks['stdArr']"
-          ></app-button>
+          <div class="HPchoiceButtonContainer">
+            <app-button
+            [margin] = "false"
+            class = "HPchoiceButton"
+            [button] = "{ text: 'Scelta array standard', expand: ''}"
+            [context] = "buttonCallbacks['stdArr']"
+            ></app-button>
+          </div>
         </ion-col>
 
         <!-- bottone selezione casuale (4d6 drop one) -->
         <ion-col>
-          <app-button
-          [button] = "{ text: 'Scelta casuale', expand: ''}"
-          [context] = "buttonCallbacks['random']"
-          ></app-button>
+          <div class="HPchoiceButtonContainer">
+            <app-button
+            [margin] = "false"
+            class = "HPchoiceButton"
+            [button] = "{ text: 'Scelta casuale', expand: ''}"
+            [context] = "buttonCallbacks['random']"
+            ></app-button>
+          </div>
         </ion-col>
 
       </ion-row>
     </ion-grid>
-  </ion-item>
+  </div>
 
   <!-- adesso tre grid diverse in base alla flag attiva -->
   @if (manualSelection===true) {
-    <ion-item  class="gridContainer"> 
-      <ion-grid>
+    <div class="manualStatsListContainer">
+      <ul class="manualStatsList">
+        
+        <!-- selettore FORZA -->
+        <div class="statSelectionFrame">
+          <div class="dragEntryBlock">
+            <app-label class="str">Strength</app-label>
+            <app-drag-entry
+              #strengthDragEntry
+              id="strengthDragEntry"
+              [sensitivity] = 1
+              [max] = 18
+              [min] = 1
+              ></app-drag-entry>
+          </div>
+          <div class="modifierContainer">
+            <app-label class="str">Strength modifier: {{statModifierDict[strengthDragEntry.value]}}</app-label>
+          </div>
+        </div>
 
-        <!-- riga con i nomi delle stats -->
-        <ion-row>
+        <!-- selettore DEXTERITY -->
+        <div class="statSelectionFrame">
+          <div class="dragEntryBlock">
+            <app-label class="dex">Dexterity</app-label>
+            <app-drag-entry
+              #dexterityDragEntry
+              id="dexterityDragEntry"
+              [sensitivity] = 1
+              [max] = 18
+              [min] = 1
+              ></app-drag-entry>
+          </div>
+          <div class="modifierContainer">
+            <app-label class="dex">Dexterity modifier: {{statModifierDict[dexterityDragEntry.value]}}</app-label>
+          </div>
+        </div>
 
-          <!-- selettore FORZA -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Forza</ion-label>
-            </ion-item>
-          </ion-col>
+        <!-- selettore CONSTITUTION -->
+        <div class="statSelectionFrame">
+          <div class="dragEntryBlock">
+            <app-label class="cost">Constitution</app-label>
+            <app-drag-entry
+              #constitutionDragEntry
+              id="constitutionDragEntry"
+              [sensitivity] = 1
+              [max] = 18
+              [min] = 1
+              ></app-drag-entry>
+          </div>
+          <div class="modifierContainer">
+            <app-label class="cost">Constitution modifier: {{statModifierDict[constitutionDragEntry.value]}}</app-label>
+          </div>
+        </div>
 
-          <!-- selettore DESTREZZA -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Destrezza</ion-label>
-            </ion-item>
-          </ion-col>
+        <!-- selettore INTELLIGENCE -->
+        <div class="statSelectionFrame">
+          <div class="dragEntryBlock">
+            <app-label class="int">Intelligence</app-label>
+            <app-drag-entry
+              #intelligenceDragEntry
+              id="intelligenceDragEntry"
+              [sensitivity] = 1
+              [max] = 18
+              [min] = 1
+              ></app-drag-entry>
+          </div>
+          <div class="modifierContainer">
+            <app-label class="int">Intelligence modifier: {{statModifierDict[intelligenceDragEntry.value]}}</app-label>
+          </div>
+        </div>
 
-          <!-- selettore COSTITUZIONE -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Costituzione</ion-label>
-            </ion-item>
-          </ion-col>
 
-          <!-- selettore INTELLIGENZA -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Intelligenza</ion-label>
-            </ion-item>
-          </ion-col>
+        <!-- selettore WISDOM -->
+        <div class="statSelectionFrame">
+          <div class="dragEntryBlock">
+            <app-label class="wisd">Wisdom</app-label>
+            <app-drag-entry
+              #wisdomDragEntry
+              id="wisdomDragEntry"
+              [sensitivity] = 1
+              [max] = 18
+              [min] = 1
+              ></app-drag-entry>
+          </div>
+          <div class="modifierContainer">
+            <app-label class="wisd">Wisdom modifier: {{statModifierDict[wisdomDragEntry.value]}}</app-label>
+          </div>
+        </div>
 
-          <!-- selettore SAGGEZZA -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Saggezza</ion-label>
-            </ion-item>
-          </ion-col>
+        <!-- selettore CHARISMA -->
+        <div class="statSelectionFrame">
+          <div class="dragEntryBlock">
+            <app-label class="charisma">Charisma</app-label>
+            <app-drag-entry
+              #charismaDragEntry
+              id="charismaDragEntry"
+              [sensitivity] = 1
+              [max] = 18
+              [min] = 1
+              ></app-drag-entry>
+          </div>
+          <div class="modifierContainer">
+            <app-label class="charisma">Charisma modifier: {{statModifierDict[charismaDragEntry.value]}}</app-label>
+          </div>
+        </div>
 
-          <!-- selettore CARISMA -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Carisma</ion-label>
-            </ion-item>
-          </ion-col>
 
-        </ion-row>
-
-        <!-- riga con number entry -->
-        <ion-row>
-
-          <!-- selettore forza -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Placeholder number entry</ion-label>
-            </ion-item>
-          </ion-col>
-
-          <!-- selettore destrezza -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Placeholder number entry</ion-label>
-            </ion-item>
-          </ion-col>
-
-          <!-- selettore costituzione -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Placeholder number entry</ion-label>
-            </ion-item>
-          </ion-col>
-
-          <!-- selettore intelligenza -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Placeholder number entry</ion-label>
-            </ion-item>
-          </ion-col>
-
-          <!-- selettore saggezza -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Placeholder number entry</ion-label>
-            </ion-item>
-          </ion-col>
-
-          <!-- selettore carisma -->
-          <ion-col>
-            <ion-item>
-              <ion-label>Placeholder number entry</ion-label>
-            </ion-item>
-          </ion-col>
-
-        </ion-row>
-
-      </ion-grid>
-    </ion-item>
-  }
+      </ul>
+    </div>
+  } 
 
   @if (stdArray===true) {
-    <app-radio-button
-    [radios] = "radios"
-    [groupValue] = "'radioGroup'"
-    ></app-radio-button>
+    <div class="gridContainer">
+      <div>
+        <ion-radio-group class="groupRadio">
+          @for(radio of arrayStandards; track radio) {
+            <div class="stdArrayContainer">
+              <div class="statDisplayContainer">
+                @for(statistics of radio; track statistics) {
+                  <app-label [style.color]="statColors[statistics.stat]">{{statistics.stat}}: {{statistics.value}}</app-label>
+                }
+              </div>
+              <div class="radioContainer">
+                <ion-radio (click)="stdArraySetStats(radio)">
+                </ion-radio>
+              </div>
+            </div>
+          }
+          
+          
+        </ion-radio-group>
+      </div>
+    </div>
   }
 
   @if (randomSelection===true) {
-    <ion-item>
-      <ion-label>Le statistiche rollate sono: {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}} / {{rollStats()}}</ion-label>
-    </ion-item>
+    <!-- <app-label>The randomized stats are as follows</app-label> -->
+    <!-- <br> -->
+    <div class="randomListContainer">
+      <div class="randomList">
+        <div class="statDisplayRandom">
+          <app-label class="str">Strength: {{currStats.strength}}</app-label>
+          <app-label class="dex">Dexterity: {{currStats.dexterity}}</app-label>
+          <app-label class="cost">Constitution: {{currStats.constitution}}</app-label>
+          <app-label class="int">Intelligence: {{currStats.intelligence}}</app-label>
+          <app-label class="wisd">Wisdom: {{currStats.wisdom}}</app-label>
+          <app-label class="charisma">Charisma: {{currStats.charisma}}</app-label>
+        </div>
+      </div>
+    </div>
   }
+<!-- 
+  <div>
+    <app-label>Seleziona 3 lingue conosciute dal tuo personaggio, Ancora {{LingueSelezionate.length}}/{{maxLingue}}</app-label>
+  </div>
+@for (lingua of lingue; track lingua.id) {
+
+  <app-checkbox
+    [testo]="lingua.name"
+    [checked]="LingueSelezionate.includes(lingua.name)"
+    [disabled]="
+      LingueSelezionate.length >= maxLingue &&
+      !LingueSelezionate.includes(lingua.name)
+    "
+    (checkedChange)="onLanguageSelect(lingua)">
+  </app-checkbox>
+
+} -->
+ 
+<!-- Io immaginavo un toogle per fare apparire un botton una volta che sia le lingue che le stats 
+erano state selezionate però boh poi ditemi voi -->
+
+  <div class="nextPage">
+    <app-button
+    [button] = "{ text: 'Prossima pagina', expand: ''}"
+    [context] = "buttonCallbacks['nextPage']"
+    ></app-button>
+  </div>
+  
+  
 
 </ion-content>

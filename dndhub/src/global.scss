@@ -35,3 +35,23 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+
+ion-alert.delete-account-alert {
+  --background: rgb(55, 55, 55);
+
+  .alert-button-group {
+    button.alert-button {
+      color: white;
+    }
+
+    button.alert-button-role-confirm {
+      background: rgb(223, 88, 88);
+      color: white;
+    }
+  }
+}
+
+ion-alert.default-alert {
+  --background: rgb(55, 55, 55);
+}

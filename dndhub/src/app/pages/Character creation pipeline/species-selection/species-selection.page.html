@@ -1,25 +1,130 @@
 <ion-content>
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title>Scegli la tua specie</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <app-title
+  [title] = "'Scegli la tua specie'"
+  ></app-title>
 
-  <!-- prima sezione con menù a tendina -->
-   <ion-item class="speciesSelectionFrame">
-    <app-accordion
-      [accordions] = "accordions"
-      [allowMultipleEnabled] = "true"
-    ></app-accordion>
-  </ion-item>
+  <div class="goBack">
+    <app-button
+    [button] = "{ text: 'Torna indietro', expand: ''}"
+    [context] = "buttonCallbacks['previousPage']"
+    ></app-button>
+  </div>
+
+  <div class="speciesSelectionFrame">
+    <ion-accordion-group class="outerAccordionGroup" value="fatherAccordion" [multiple]="false" expand="inset" animated="true">
+      @for (species of speciesArray; track species) {
+        <ion-accordion class="speciesAccordion" [value]="species.value">
+          <ion-item id="accHeader" slot="header" color="light">
+            <!-- togliere commento se prima o poi vogliamo una immagine nell'accordion -->
+            @if (species.imageURL !== undefined) {
+              <ion-thumbnail slot="start">
+                <img id="accImg" alt="placeholder img" [src]="species.imageURL">
+              </ion-thumbnail>
+            }
+            @else {
+              <ion-thumbnail slot="start">
+                <img alt="placeholder img" [src]="'Card.defaultImageURL()'">
+              </ion-thumbnail>
+            }
+            <ion-label class="speciesName">{{ species.name }}</ion-label>
+          </ion-item>
+          <!-- div relativo al contenuto -->
+          <div class="ionPadding" slot="content">
+            <div class="initialDescContainer">
+              <app-label>{{species.desc}}</app-label>
+            </div>
+            <ion-accordion-group [value]="species.value + 'group accordion'" class="innerAccordionGroup" [multiple]="true">
+            @for(accordion of species.content; track accordion) {
+              @if(accordion.content !== undefined && accordion.content !== null && accordion.content !== [] && accordion.lenght !== 0) {
+                <ion-accordion class="innerAccordion redBorderBottom" [value]="accordion.value">
+                  <ion-item id="accHeader" slot="header" color="light">
+                    <app-label [fontSize]="'3.5cqmin'">{{accordion.title}}</app-label>
+                  </ion-item>
+                  <div class="ionPaddin innerContent" slot="content">
+                    <app-label>{{accordion.content}}</app-label>
+                  </div>
+                </ion-accordion>
+              }
+            }
+              @if(species.subspecies !== undefined) {
+                <ion-accordion class="innerAccordion" [value]="species.name + ' subspecies accordiom'" >
+                  <ion-item id="accHeader" slot="header" color="light">
+                    <app-label [fontSize]="'3.5cqmin'">Subspecies</app-label>
+                  </ion-item>
+                  <div class="ionPaddin innerContent" slot="content">
+                    <!-- ion accordion group delle sottospeci -->
+                    <ion-accordion-group class="subspeciesAccordionGroup" [value]="species.name + ' subspecies accordion group'" [multiple]="false">
+                      @for(sub of species.subspecies; track sub) {
+                        <ion-accordion class="yellowBorderBottom subAccordion">
+                          <ion-item id="accHeader" slot="header" color="light">
+                            <app-label [fontSize]="'3.5cqmin'">{{sub.name}}</app-label>
+                          </ion-item>
+                          <div class="ionPaddin innerContent" slot="content">
+                            <app-label>{{sub.desc}}</app-label>
+                            
+                            <ion-accordion-group class="innerSubspeciesAccordionGroup" [value]="sub.name + ' accordion group'" [multiple]="true">
+                                <div class="subspeciesFrame">
+                                <ion-accordion class="subInfoAccordion redBottomBorder">
+                                  <ion-item id="accHeader" slot="header" color="light">
+                                    <app-label [fontSize]="'3.5cqmin'">Ability Scores</app-label>
+                                  </ion-item>
+                                  <div class="ionPaddin innerContent" slot="content">
+                                    <app-label>{{sub.name}} gives the following ability score bonuses:</app-label>
+                                    <br>
+                                    @for(bon of sub.ability_bonuses; track bon) {
+                                      <app-label>+{{bon.bonus}} to {{bon.ability_score.name}}</app-label>
+                                    }
+                                  </div>
+                                </ion-accordion>
+                                <ion-accordion class="subInfoAccordion redBottomBorder">
+                                  <ion-item id="accHeader" slot="header" color="light">
+                                    <app-label [fontSize]="'3.5cqmin'">Traits</app-label>
+                                  </ion-item>
+                                  <div class="ionPaddin innerContent" slot="content">
+                                    <app-label>{{sub.name}} gives the following traits:</app-label>
+                                    <br>
+                                    @for(trait of sub.racial_traits; track trait) {
+                                      <app-label>- {{trait.name}}</app-label>
+                                    }
+                                  </div>
+                                </ion-accordion>
+                                </div>
+                            </ion-accordion-group>
+                          </div>
+                        </ion-accordion>
+                      }
+                    </ion-accordion-group>
+                  </div>
+                </ion-accordion>    
+              
+                
+              }
+            </ion-accordion-group>
+            <ion-button
+            class="speciesSelectionButton"
+            (click) = "species.choiceButton.context($event)"
+            >
+            {{species.choiceButton.button.text}}
+            </ion-button>
+          </div>
+        </ion-accordion>
+      }
+
+    </ion-accordion-group>
+  </div>
 
   <!-- footer con bottone per andare alla prossima pagina -->
-  <ion-footer>
-    <ion-item slot="end">
-      <app-button
-      [button] = "b1_button"
-      [context] = "b2_context"
-      ></app-button>
-    </ion-item>
-  </ion-footer>
+  <div class="nextPage">
+    <app-button
+    [button] = "{ text: 'Prossima pagina', expand: ''}"
+    [context] = "buttonCallbacks['nextPage']"
+    ></app-button>
+  </div>
+  <ion-alert
+  [isOpen]="nextPageAlertOpen"
+  header="Error"
+  message="Species not chosen"
+  [buttons]="['Close']"
+  (didDismiss)="setOpenAlert(false)"
+  ></ion-alert>
 </ion-content>

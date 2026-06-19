@@ -1,102 +1,103 @@
 <ion-content>
-  <div id="pageTitle">
-    <div id="title">DnDHUB</div>
+  <div class="backgroundimage"></div>
+  <div class="accordionDiv">
+    <ion-accordion-group>
+      <ion-accordion class="optsAccordion">
+        <div slot="header" class="accImgFrame">
+          <img class="optImg" alt="placeholderImg" src="\assets\icon\Menu-dato.dndhub.SVG">
+        </div>
+        <div class="ion-padding accContent" slot="content">
+          @if(!isLogged()) {
+          <div class="linkContainer">
+            <a href="/login-page">
+              Login
+            </a>
+          </div>
+          <div class="linkContainer bottomLinkContainer">
+            <a href="/signin-page">
+              Registrati
+            </a>
+          </div>
+          }
+          @else {
+          <div class="linkContainer">
+            <a routerLink="/type-player-login">
+              Accedi alle aree personali
+            </a>
+          </div>
+          <div class="linkContainer bottomLinkContainer">
+            <a routerLink="/profile">
+              Profilo personale
+            </a>
+          </div>
+          }
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
   </div>
-  
-  <!-- ricordarsi che OGNI pagina deve essere dentro tag ion-content -->
-  
-  <!-- prima sezione dedicata solamente ala carousel con le card  -->
-  
-  <ion-item id="carousel-block">
-    <div id="carousel-content">
-      <div id="carousel-title">
-        <div id="carousel-label">Personaggi creati recentemente</div>
+
+  <div class="gridTitolo">
+    <ion-title class="title">DnDhub</ion-title>
+  </div>
+
+  <section id="carousel-block">
+    <div id="carousel-label">Personaggi creati recentemente</div>
+    <app-carousel class="carousel" [cards]="cards"></app-carousel>
+  </section>
+
+
+  <div class="gallerySection">
+    <div class="galleryRow">
+      <div class="immagine campagna"></div>
+      <div class="descrizione">
+        <h3>Campagne</h3>
+        <p>Boh fai la tua campagna Freezer</p>
       </div>
-      <app-carousel [cards]="cards"></app-carousel>
     </div>
-  </ion-item>
-  
-  <!-- seconda sezione con svariate card con informazioni varie -->
-  
-  <ion-item class="galleryBlock">
-    <ion-grid>
-      <ion-row>
-        <app-card
-        [card]= "{ title: 'Galleria 1', subtitle: 'Sottotitolo 1', content: 'Mi piacciono molto i gattini :]', imageURL: 'https://magazine.arcaplanet.it/wp-content/uploads/2022/06/blog-consigli-benessere-gattini-appena-nati.png'}"
-        ></app-card>
-      </ion-row>
-      <ion-row>
-        <app-card
-        [card]= "{ title: 'Galleria 2', subtitle: 'Sottotitolo 2', content: 'UNA TARTARUGA!!!!!', imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO7UMalsSQZGTzND5et3nJ9wsuOIAiPqExzQ&s'}"
-        ></app-card>
-      </ion-row>
-      <ion-row>
-        <app-card
-        [card]= "{ title: 'Galleria 3', subtitle: 'Sottotitolo 3', content: 'Questo puo essere il tuo pg cattivissimo!!!', imageURL: 'https://static.wikitide.net/criticalrolewiki/3/34/Gruumsh_-_Kent_Davis.jpg'}"
-        ></app-card>
-      </ion-row>
-    </ion-grid>
-  </ion-item>
-  
-  <!-- footer che conterrà informazioni utili a sito o contatti e simili -->
-  
-  <ion-footer class="informationBlock">
-    <ion-grid>
-      <ion-row>
-        
-        <ion-col>
-          <ion-item>
-            <ion-grid>
-              <ion-row>
-                <ion-label class="footerTitle">Informazioni</ion-label>
-              </ion-row>
-              <ion-row>
-                <ion-label class="footerInformation">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                  ùModi laboriosam in dignissimos mollitia. 
-                  Aliquam eveniet ipsa eaque laboriosam, quisquam cupiditate cum quas, 
-                  ratione repudiandae sequi provident exercitationem aperiam, omnis totam.
-                </ion-label>
-              </ion-row>
-            </ion-grid>
-          </ion-item>
-        </ion-col>
-        
-        
-        <ion-col>
-          <ion-item>
-            <ion-grid>
-              <ion-row>
-                <ion-label class="footerTitle">Contattaci</ion-label>
-              </ion-row>
-              <ion-row>
-                <ion-label class="footerInformation">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                  ùModi laboriosam in dignissimos mollitia. 
-                  Aliquam eveniet ipsa eaque laboriosam, quisquam cupiditate cum quas, 
-                  ratione repudiandae sequi provident exercitationem aperiam, omnis totam.
-                </ion-label>
-              </ion-row>
-            </ion-grid>
-          </ion-item>
-        </ion-col>
-        
-        <ion-col>
-          <ion-item>
-            <ion-grid>
-              <ion-row>
-                <ion-label class="footerTitle">Crediti</ion-label>
-              </ion-row>
-              <ion-row>
-                <ion-label class="footerInformation">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                  ùModi laboriosam in dignissimos mollitia. 
-                  Aliquam eveniet ipsa eaque laboriosam, quisquam cupiditate cum quas, 
-                  ratione repudiandae sequi provident exercitationem aperiam, omnis totam.
-                </ion-label>
-              </ion-row>
-            </ion-grid>
-          </ion-item>
-        </ion-col>
-        
-      </ion-row>
-    </ion-grid>
+
+    <div class="galleryRow">
+      <div class="immagine personaggio"></div>
+      <div class="descrizione">
+        <h3>Personaggi</h3>
+        <p>Puoi creare qui i tuoi personaggi e anche, gestirli tramite la nostra pagine riservata!
+        </p>
+      </div>
+    </div>
+
+    <div class="galleryRow">
+      <div class="immagine campagna1"></div>
+      <div class="descrizione">
+        <h3>Gestione</h3>
+        <p>Gestisci le tue campagne O BROLY LO FARÀ AL POSTO TUO</p>
+      </div>
+    </div>
+  </div>
+
+
+  <ion-footer>
+    <div class="info-panel-feedback">
+      <div class="info-panel">
+        <div class="info-panel-title">Lascia un feedback</div>
+        <div class="info-panel-content">
+          <ion-input #feedback_title
+          placeholder="Titolo"
+          ></ion-input>
+          <ion-textarea #feedback_content
+          placeholder="Descrizione"
+          rows="7"
+          ></ion-textarea>
+          <app-button
+          [button]="{text: 'Invia feedback', expand: 'false'}"
+          [context]="{onClick: sendFeedback}"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+    <div class="info-panel-contacts">
+      <div class="info-panel">
+        <div class="info-panel-title">Contattaci</div>
+        <div class="info-panel-content"></div>
+      </div>
+    </div>
   </ion-footer>
 </ion-content>

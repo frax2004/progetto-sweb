@@ -1,3 +1,3 @@
 export interface ULelemContext {
-    onClick: Function;
+    onClick?: Function;
 }

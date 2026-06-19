@@ -1,0 +1,83 @@
+<ion-content>
+  <div class="imgbackground"></div>
+
+  <div class="contentContainer">
+
+    <div class="buttonsAndDetails">
+
+      <div class="buttonPost">
+        <app-button [button]="{text: 'Torna indietro', expand: ''}" [context]="buttonCallbacks['placeholder']">
+        </app-button>
+      </div>
+
+      <div class="details">
+
+        <div class="campaignName">
+          <ion-label>{{ campaignName }}</ion-label>
+        </div>
+
+        <div class="players">
+          <ion-label class="titoloGiocatori">Giocatori</ion-label>
+
+          @for (player of players; track player) {
+          <div class="playerNames">
+            <ion-label>{{ player.name }}</ion-label>
+            <ion-label>{{ player.character }}</ion-label>
+          </div>  
+          }
+<!-- poi se mi va faccio una sorta di card anche per questo -->
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="postContainer">
+
+      <div class="postBox1">
+
+        <div class="CreaContent">
+          <ion-label>Pubblica il tuo nuovo post</ion-label>
+        </div>
+
+        <ion-textarea class="TextAreaDesign" [(ngModel)]="postText" value="Andrea" placeholder="scrivi qua"
+          auto-grow="true">
+        </ion-textarea>
+
+        <div class="postLowerInformation1">
+          <ion-label>{{ campaignName }}</ion-label>
+
+          <div class="buttonPost">
+            <app-button [button]="{text: 'pubblica', expand: ''}"
+              [context]="buttonContextPost['newPost']">
+            </app-button>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      @for (post of posts; track post) {
+      <div class="postBox">
+
+        <div class="postContent">
+          <ion-label class="scrollbar">{{ post.text }}</ion-label>
+        </div>
+
+        <div class="postLowerInformation">
+          <ion-label>{{ campaignName }}</ion-label>
+          <ion-label>{{ post.time_stamp }}</ion-label>
+          <app-button 
+          [button]="{text:'elimina', expand:''}"
+          [context]="{ onClick: deletePostClick(post.time_stamp) }">
+          </app-button>
+        </div>
+
+      </div>
+      }
+
+    </div>
+
+  </div>
+</ion-content>

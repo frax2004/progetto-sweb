@@ -1,41 +1,285 @@
-* {
-  border: 1px solid rgb(0, 255, 0);
+
+
+ion-content {
+  --overflow: auto;
+}
+
+.gridTitolo {
+  display: flex;
+  text-align: center;
+  height: 100%;
+  justify-items: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #carousel-block {
-  width: 70%;
-  margin: 0 auto; /* Centra il blocco orizzontalmente */
-}
-
-#carousel-content {
+  width: 100%;
+  height: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 100%; /* Forza il contenuto a occupare tutta la larghezza disponibile */
-}
-
-#carousel-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding-bottom: 20px;
   padding-top: 20px;
+  row-gap: 5cqmin;
 }
 
 #carousel-label {
   font-size: 5cqmin;
 }
 
-#pageTitle {
-  width: 100%;
-  height: 100%;
-  container-type: size;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.carousel {
+  flex: 1;
 }
 
-#title {
-  font-size: 15cqmin;
+ion-accordion.accordion-expanding,
+ion-accordion.accordion-expanded {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: min(60vw,400px);
+  transition: 1000ms;
+
+  .accImgFrame {
+    transition: transform 1000ms;
+  }
+}
+
+
+.accImgFrame { // questo modifica l'accordion quando si apre, cambia l'svg
+  display: flex;
+  justify-content: center;
+  padding: 6px;
+  border: 2px solid #d4af37;
+  border-radius: 12px;
+  background-color: rgba(115, 115, 115, 0.515);
+
+}
+
+.linkContainer { // modifica tutti i button dentro l'accordion
+   text-align: center;
+   margin-top: 1vmin;
+   background-color: rgba(33, 31, 28, 0.856);
+   padding-left: 3vmin;
+   padding-top: 2vmin;
+   padding-bottom: 2vmin;
+   border: 2px solid rgb(139, 60, 60);
+   width: 100%;
+   margin-left: 4vmi;
+   border-radius: 20px;
+   box-shadow: 4px 4px 4px 0px rgba(229, 56, 8, 0.532);
+ }
+
+
+
+a {
+  color: #d4af37;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: clamp(4px, 16px, 20px);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.accordionDiv { 
+  position: absolute;
+  z-index: 9999;
+}
+
+.title {
+  font-size: clamp(3rem, 5vw, 6rem);
+  font-weight: 400;
+  color:rgb(255, 75, 75);
+}
+
+.accordion-collapsed .accImgFrame {
+  border: 2px solid #d4af37;
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.campagna{
+  background-image: url('/assets/Campagna-creazione-idea.jpg');
+}
+.campagna1{
+  background-image: url('/assets/Broly-Gestirà-la-campagna.jpg');
+}
+.personaggio{
+  background-image: url('/assets/Nanami-piango.jpg');
+}
+
+
+.gallerySection {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.galleryRow {
+  background: rgba(157, 157, 157, 0.333);
+  display: grid;
+  grid-template-columns: 215px 1fr;
+  min-height: 220px;
+  border: 3px solid rgba(241, 188, 13, 0.411);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.backgroundimage {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: url('/assets/Idea-sfondo-landingpage1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.35;
+  z-index:0;
+}
+
+.immagine {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.descrizione {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  color: white;
+  gap: 8px;
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  font-weight: 500;
+}
+
+.descrizione h3 {
+  margin: 0;
+  color: #d4af37;
+  font-size: clamp(1rem, 2vw, 1.8rem);
+  font-weight: bold;
+}
+
+.footerTitle {
+  color:gold
+}
+
+.informazioniTitoli {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border: 0.2rem solid red;
+  border-radius: 8px;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+}
+
+.tabellabordi {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+
+@media (max-width: 768px) {
+
+  .accordionDiv{
+    position: relative;
+  }
+  ion-accordion.accordion-expanding,
+  ion-accordion.accordion-expanded {
+    min-width: 100%;
+  }
+  .title {
+    margin-top: 1rem;
+  }
+}
+
+@keyframes blurrize {
+  from {
+    backdrop-filter: blur(0);
+  }
+  to {
+    backdrop-filter: blur(2em);
+  }
+}
+
+@media (hover: hover) {
+  .galleryRow:hover {
+    animation: blurrize 1.5s linear;
+    transition: 350ms;
+    transform: scale(1.05);
+    border-color: gold;
+    cursor: pointer;
+  }
+  .linkContainer:hover {
+    transform: scale(1.05);
+    transition: 200ms;
+  }
+
+}
+
+ion-footer {
+  border-radius: 2.5em 2.5em 0 0;
+  height: 50%;
+  background: rgba(255, 255, 255, 0.167);
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  padding: 2.5em 2.5em 0 2.5em;
+  gap: 2.5em;
+}
+
+
+
+.info-panel-feedback {
+  flex: 2 1 0;
+}
+
+.info-panel-contacts {
+  flex: 1 1 0;
+}
+
+.info-panel {
+  border-radius: 2.5em 2.5em 0 0;
+  background: rgba(127, 127, 127, 0.69);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+}
+
+.info-panel-title {
+  margin: 1cqh;
+  font-size: clamp(1em, 1.5em, 2em);
+  text-align: center;
+}
+
+.info-panel-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+
+  ion-input {
+    font-size: 1.5em;
+    --padding-start: 1em;
+    --background: rgb(63, 63, 63);
+  }
+
+  ion-textarea {
+    --padding-start: 1em;
+    --background: rgb(63, 63, 63);
+    font-size: 1.25em;
+  }
 }

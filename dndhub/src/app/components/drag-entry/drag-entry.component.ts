@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, HostListener, signal } from '@angular/core';
 import { IonItem } from '@ionic/angular/standalone';
 
 @Component({
@@ -13,17 +13,32 @@ export class DragEntryComponent implements OnInit {
   @Input() sensitivity: number = 0.05;
   @Input() min: number | null = null;
   @Input() max: number | null = null;
+  @Input() onDidValueChange?: (x: number) => void | undefined = undefined;
+  @Input() disabled: boolean = false;
   @ViewChild("entry") private entry!: ElementRef<HTMLInputElement>;
-
+  
   private previousInput: string = "0";
   private isDragging: boolean = false;
   private isMouseDown: boolean = false;
   
   private startX: number = 0;
-  private initialValue: number = 0;
+  private initialValue: number = this.min || 0;
   private dragThreshold: number = 4;
 
-  ngOnInit() {}
+  ngOnInit() {
+    // //uso jquery per sistemare css
+    // $(function() {
+    //   $(".entry-arrow").css("height", $(#entry).height());
+    // });
+  }
+
+  public get value(): number {
+    return this.getValue();
+  }
+
+  public set value(item: number) {
+    this.setValue(item);
+  }
 
   private getValue(): number {
     return this.previousInput === "" ? 0 : parseFloat(this.previousInput);
@@ -33,6 +48,7 @@ export class DragEntryComponent implements OnInit {
     const clamp = (min: number, val: number, max: number) => Math.max(min, Math.min(max, val));
     const clamped = clamp(this.min ?? -Infinity, val, this.max ?? Infinity);
     const rounded = Math.round(clamped * 1000) / 1000;
+    if (this.onDidValueChange !== undefined) this.onDidValueChange(rounded - this.getValue());
     this.entry.nativeElement.value = this.previousInput = rounded.toString();
   }
 
@@ -121,4 +137,6 @@ export class DragEntryComponent implements OnInit {
       }
     }
   }
+
+  
 }

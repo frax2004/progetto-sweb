@@ -1,0 +1,385 @@
+<ion-content>
+  <app-title
+  [title] = "'Selezione delle proprietà opzionali'"
+  ></app-title>
+
+  <div class="goBackButtonContainer">
+    <app-button
+    class="goBackButton"
+    [button]="{ text: 'Go back', expand: '', color: '#C72E10'}"
+    [context]="buttonCallbacks['previousPage']"
+    >
+    </app-button>
+  </div>
+
+  <div class="listContainerFrame">
+    <ion-list class="optionList">
+      <!-- scelte opzionali classe -->
+      <div class="choiceBlock classChoiceBlock">
+        <div class="paragraphStartContainer">
+          <h1>Class choices: {{className}}</h1>
+        </div>
+        @for(option of classContent; track option) {
+          @if(option.content !== undefined) {
+            @if(option.title === 'Proficiency choices') {
+              <h3>{{option.title}}</h3>
+              @if(option.content.regularProficiencies.length !== 0) {
+                <app-label class="choiceTitleLabel">Choose {{option.content.quantity}} of the following proficiencies:</app-label>
+                @for(opt of option.content.regularProficiencies; track opt) {
+                  <div class="genericChoiceContainer" [id]="option.value + ' skill class choice'">
+                    <div class="labelBox">
+                      <app-label>{{opt}}</app-label>
+                    </div>
+                    <div class="checkboxContainer">
+                      <input class="genericCheckbox" type="checkbox" [value]="opt" [id]="opt" (click)="addRegularProficiency(opt,opt)">
+                    </div>
+                  </div>
+                }
+              }
+              @if(option.content.extraProficiencies.length !== 0) {
+                <app-label class="choiceTitleLabel">Choose {{option.content.quantity}} of the following proficiencies:</app-label>
+                @for(opt of option.content.extraProficiencies; track opt) {
+                  <div class="genericChoiceContainer" [id]="option.value + ' skill class choice'">
+                    <div class="labelBox">
+                      <app-label>{{opt}}</app-label>
+                    </div>
+                    <div class="checkboxContainer">
+                      <input class="genericCheckbox" type="checkbox" [value]="opt" [id]="opt" (click)="addExtraProficiency(opt,opt)">
+                    </div>
+                  </div>
+                }
+              }
+            }
+            
+            @if(option.title === 'Starting equipment options') {
+              <h3>{{option.title}}</h3>
+              @for(opt of option.content; track opt) {
+                <app-label class="choiceTitleLabel">Choose {{opt.quantity}} of the following:</app-label>
+                @for(equip of opt.choose; track equip) {
+                  @if(equip.includes('any simple weapon')) {
+                    <app-label>or {{equip}}:</app-label>
+                    @for(weapon of simpleWeapons; track weapon) {
+                      <div class="equipmentChoice genericChoiceContainer">
+                        <div class="labelBox">
+                          <app-label>{{weapon}}</app-label>
+                        </div>
+                        <div class="checkboxContainer">
+                          <input class="genericCheckbox" type="checkbox" [value]="weapon" [id]="weapon" (click)="addOptionalEquipment(weapon,opt.index, weapon)">
+                        </div>
+                      </div>
+                    }
+                  }
+                  @else if (equip.includes('any simple melee weapon')) {
+                    <app-label>or {{equip}}:</app-label>
+                    @for(weapon of simpleMeleeWeapons; track weapon) {
+                      <div class="equipmentChoice genericChoiceContainer">
+                        <div class="labelBox">
+                          <app-label>{{weapon}}</app-label>
+                        </div>
+                        <div class="checkboxContainer">
+                          <input class="genericCheckbox" type="checkbox" [value]="weapon" [id]="weapon" (click)="addOptionalEquipment(weapon,opt.index, weapon)">
+                        </div>
+                      </div>
+                    }
+                  }
+                  @else if (equip.includes('martial weapon and a shield')) {
+                    <app-label>{{equip}}:</app-label>
+                    @for(weapon of martialWeapons; track weapon) {
+                      <div class="equipmentChoice genericChoiceContainer">
+                        <div class="labelBox">
+                          <app-label>{{weapon}} + shield</app-label>
+                        </div>
+                        <div class="checkboxContainer">
+                          <input class="genericCheckbox" type="checkbox" [value]="weapon" [id]="weapon + 'shield'" (click)="addOptionalEquipment(weapon + 'shield',opt.index, weapon + 'shield')">
+                        </div>
+                      </div>
+                    }
+                  }
+                  @else if (equip.includes('any martial weapon')) {
+                    <app-label>or {{equip}}:</app-label>
+                    @for(weapon of martialWeapons; track weapon) {
+                      <div class="equipmentChoice genericChoiceContainer">
+                        <div class="labelBox">
+                          <app-label>{{weapon}}</app-label>
+                        </div>
+                        <div class="checkboxContainer">
+                          <input class="genericCheckbox" type="checkbox" [value]="weapon" [id]="weapon" (click)="addOptionalEquipment(weapon,opt.index, weapon)">
+                        </div>
+                      </div>
+                    }
+                  }
+                  @else if (equip.includes('any martial melee weapon')) {
+                    <app-label>or {{equip}}:</app-label>
+                    @for(weapon of martialMeleeWeapons; track weapon) {
+                      <div class="equipmentChoice genericChoiceContainer">
+                        <div class="labelBox">
+                          <app-label>{{weapon}}</app-label>
+                        </div>
+                        <div class="checkboxContainer">
+                          <input class="genericCheckbox" type="checkbox" [value]="weapon" [id]="weapon" (click)="addOptionalEquipment(weapon,opt.index, weapon)">
+                        </div>
+                      </div>
+                    }
+                  }
+                  @else if (equip.includes('any other musical instrument')) {
+                    <app-label>or {{equip}}:</app-label>
+                    @for(inst of musicalInstruments; track inst) {
+                      <div class="equipmentChoice genericChoiceContainer">
+                        <div class="labelBox">
+                          <app-label>{{inst}}</app-label>
+                        </div>
+                        <div class="checkboxContainer">
+                          <input class="genericCheckbox" type="checkbox" [value]="inst" [id]="inst" (click)="addOptionalEquipment(inst,opt.index, inst)">
+                        </div>
+                      </div>
+                    }
+                  }
+                  @else {
+                    <div class="equipmentChoice genericChoiceContainer">
+                      <div class="labelBox">
+                        <app-label>{{equip}}</app-label>
+                      </div>
+                      <div class="checkboxContainer">
+                        <input class="genericCheckbox" type="checkbox" [value]="equip + ' generic equipment'" [id]="equip + ' generic equipment'" (click)="addOptionalEquipment(equip,opt.index, equip + ' generic equipment')">
+                      </div>
+                    </div>
+                  }
+                }
+                <div class="bottomDivider"></div>
+              }
+            }
+
+
+            @if(option.title === 'Subclasses') {
+              <h3>{{option.title}}</h3>
+              <app-label class="choiceTitleLabel">Choose 1 of the following:</app-label>
+              @for(subclass of option.content; track subclass) {
+                <div class="genericChoiceContainer" [id]="option.value + ' other class choice'">
+                  <div class="labelBox">
+                    <app-label>{{subclass.name}}</app-label>
+                  </div>
+                  <div class="checkboxContainer">
+                    <input class="genericCheckbox" type="checkbox" [value]="subclass.name" [id]="subclass.name" (click)="addSubclass(subclass.name,subclass.name)">
+                  </div>
+                </div>
+              }
+            }
+          } 
+        }
+      </div>
+
+      <!-- scelte opzionali ASI (Ability Score Increment)-->
+      @if(maxStats > 0) {
+        <div class="choiceBlock">
+          <div class="paragraphStartContainer">
+            <h1>Ability Score Increment Choices</h1>
+            <br>
+            <h3>You have {{statsToChoose()}} ability score increments to choose</h3>
+            <div class="statisticsChoice">
+
+              <!-- number entry STRENGTH -->
+              <div class="statSelection">
+                <app-label>STRENGTH</app-label>
+                <app-drag-entry
+                id="strengthDragEntry"
+                [min]="0"
+                [max]="maxStats - dexMax() - conMax() - intMax() - wisMax() - chaMax()"
+                [sensitivity]="1"
+                [disabled]="true"
+                [onDidValueChange]="addStatStr"
+                >
+                </app-drag-entry>
+              </div>
+
+              <div class="bottomDivider"></div>
+
+              <div class="statSelection">
+                <app-label>DEXTERITY</app-label>
+                <app-drag-entry
+                id="dexterityDragEntry"
+                [min]="0"
+                [max]="maxStats - strMax() - conMax() - intMax() - wisMax() - chaMax()"
+                [sensitivity]="1"
+                [disabled]="true"
+                [onDidValueChange]="addStatDex"
+                >
+                </app-drag-entry>
+              </div>
+
+              <div class="bottomDivider"></div>
+
+              <div class="statSelection">
+                <app-label>CONSTITUTION</app-label>
+                <app-drag-entry
+                id="constitutionDragEntry"
+                [min]="0"
+                [max]="maxStats - dexMax() - strMax() - intMax() - wisMax() - chaMax()"
+                [sensitivity]="1"
+                [disabled]="true"
+                [onDidValueChange]="addStatCon"
+                >
+                </app-drag-entry>
+              </div>
+
+              <div class="bottomDivider"></div>
+
+              <div class="statSelection">
+                <app-label>INTELLIGENCE</app-label>
+                <app-drag-entry
+                id="intelligenceDragEntry"
+                [min]="0"
+                [max]="maxStats - dexMax() - conMax() - strMax() - wisMax() - chaMax()"
+                [sensitivity]="1"
+                [disabled]="true"
+                [onDidValueChange]="addStatInt"
+                >
+                </app-drag-entry>
+              </div>
+
+              <div class="bottomDivider"></div>
+
+              <div class="statSelection">
+                <app-label>WISDOM</app-label>
+                <app-drag-entry
+                id="wisdomDragEntry"
+                [min]="0"
+                [max]="maxStats - dexMax() - conMax() - intMax() - strMax() - chaMax()"
+                [sensitivity]="1"
+                [disabled]="true"
+                [onDidValueChange]="addStatWis"
+                >
+                </app-drag-entry>
+              </div>
+
+              <div class="bottomDivider"></div>
+
+              <div class="statSelection">
+                <app-label>CHARISMA</app-label>
+                <app-drag-entry
+                id="charismaDragEntry"
+                [min]="0"
+                [max]="maxStats - dexMax() - conMax() - intMax() - wisMax() - strMax()"
+                [sensitivity]="1"
+                [disabled]="true"
+                [onDidValueChange]="addStatCha"
+                >
+                </app-drag-entry>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      }
+      
+
+      <!-- scelte opzionali specie -->
+      <div class="choiceBlock">
+        <div class="paragraphStartContainer">
+          <h1>Species choices: {{speciesName}}</h1>
+        </div>
+        @for(option of speciesContent; track option) {
+          @if(option.content !== undefined) {
+            <!-- <div class="genericChoice">
+              <h3>{{option.title}}</h3>
+              <app-label>{{option.content}}</app-label>
+            </div> -->
+  
+            @if(option.title === 'Ability bonus options') {
+              <h3>{{option.title}}</h3>
+              <app-label class="choiceTitleLabel">Choose {{option.content.choose}} among the following ability scores to give a bonus of +{{option.content.bonus}} to:</app-label>
+              @for(abName of option.content.abilities; track abName) {
+                <div class="genericChoiceContainer" [id]="option.value + ' other class choice'">
+                  <div class="labelBox">
+                    <app-label>{{abName}}</app-label>
+                  </div>
+                  <div class="checkboxContainer">
+                    <input class="genericCheckbox" type="checkbox" [value]="abName" [id]="abName" (click)="addAbilityBonus(abName,option.content.bonus,abName)">
+                  </div>
+                </div>
+              }
+            }
+  
+            @if(option.title === 'Language options') {
+              <h3>{{option.title}}</h3>
+              <app-label class="choiceTitleLabel">Choose {{option.content.choose}} among the following languages:</app-label>
+              @for(langName of option.content.languages; track langName) {
+                <div class="genericChoiceContainer" [id]="option.value + ' other class choice'">
+                  <div class="labelBox">
+                    <app-label>{{langName}}</app-label>
+                  </div>
+                  <div class="checkboxContainer">
+                    <input class="genericCheckbox" type="checkbox" [value]="langName" [id]="langName" (click)="addLanguage(langName,langName)">
+                  </div>
+                </div>
+              }
+            }
+  
+            <!-- stampa anche quando è vuoto, perché? -->
+            @if(option.title === 'Subspecies' && hasSubspecies === true) {
+              <h3>{{option.title}}</h3>
+              <app-label class="choiceTitleLabel">Choose 1 of the following:</app-label>
+              @for(subspecies of option.content; track subspecies) {
+                <div class="genericChoiceContainer" [id]="option.value + ' other class choice'">
+                  <div class="labelBox">
+                    <app-label>{{subspecies.name}}</app-label>
+                  </div>
+                  <div class="checkboxContainer">
+                    <input class="genericCheckbox" type="checkbox" [value]="subspecies.name" [id]="subspecies.name" (click)="addSubspecies( subspecies.name,subspecies.name)">
+                  </div>
+                </div>
+              }
+            }
+          }
+        }
+      </div>
+
+      <!-- scelte opzionali background -->
+      <div class="choiceBlock">
+        <div class="paragraphStartContainer">
+          <h1>Background choices: {{backgroundName}}</h1>
+        </div>
+        @for(option of backgroundContent; track option) {
+
+          @if(option.title === 'Language options') {
+            <h3>{{option.title}}</h3>
+              <app-label class="choiceTitleLabel">Choose {{option.content.choose}} among the following languages:</app-label>
+              @for(langName of option.content.languages; track langName) {
+                <div class="genericChoiceContainer" [id]="option.value + ' other class choice'">
+                  <div class="labelBox">
+                    <app-label>{{langName}}</app-label>
+                  </div>
+                  <div class="checkboxContainer">
+                    <input class="genericCheckbox" type="checkbox" [value]="langName" [id]="langName" (click)="addBACKGROUNDlanguage(langName,langName)">
+                  </div>
+                </div>
+              }
+          }
+
+          @if(option.title === 'Starting equipment options') {
+            <h3>{{option.title}}</h3>
+            @for(equip of option.content; track equip) {
+              <app-label class="choiceTitleLabel">Choose {{equip.quantity}} of the following:</app-label>
+              <div class="genericChoiceContainer" [id]="option.value + ' other class choice'">
+                <div class="labelBox">
+                  <app-label>{{equip.choose}}</app-label>
+                </div>
+                <div class="checkboxContainer">
+                  <input class="genericCheckbox" type="checkbox" [value]="equip.choose" [id]="equip.choose" (click)="addOptionalEquipmentFromBackground(equip.choose, equip.index, equip.choose)">
+                </div>
+              </div>
+            }
+          }
+
+        }
+      </div>
+    </ion-list>
+  </div>
+
+  <div class="nextPageButtonContainer">
+    <app-button
+    [button]="{ text: 'Next page', expand: '', color: '#C72E10'}"
+    [context]="buttonCallbacks['nextPage']"
+    ></app-button>
+  </div>
+
+</ion-content>

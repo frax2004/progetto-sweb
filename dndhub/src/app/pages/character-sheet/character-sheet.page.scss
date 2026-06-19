@@ -1,8 +1,36 @@
-.placeholderFrame {
-    max-width: 30vmin;
-    max-height: 40vmin;
+
+.nome,.title{
+font-size: clamp(24px, 4vw, 32px); 
+text-align: center;
+font-weight:bold;
+background-color:#796a47;
+margin-bottom: 3px;
+}
+.title{
+  color:rgb(255, 255, 255);
+  border: 5px solid #7a4f1d;
+  border-radius: 8px;
+}
+.nome{
+  border: 5px solid #7a4f1d;
+border-radius: 8px;
 }
 
+
+.placeholderFrame {
+  width: 250px;
+  height: 350px;
+
+  border: 3px solid #7a4f1d;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.placeholderFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 .gridContainer {
     height: 42vh;
 }
@@ -10,4 +38,79 @@
 .statAccordion {
     white-space: pre-wrap;
     // serve affiché \n vada a capo
+}
+
+.upperGrid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 16px;
+  padding: 12px;
+  height: 42vh;
+  background: #796a47; // pergamena base
+}
+
+.right{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.fight,.species,.informazioni{
+  background: #a48625;
+  border: 2px solid #7a4f1d;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+}
+
+.fight{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+}
+
+.species{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 8px;
+}
+.informazioni{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.TiriVSmorte {
+  background: #a48625;
+  border: 2px solid #7a4f1d;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+  align-items: center
+}
+.Tiri {
+  display: grid;
+  grid-template-columns: 120px repeat(3, 40px);
+  align-items: center;
+  gap: 6px;
+}
+
+.TiriGenerici{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.Ispirazione-Eroica {
+  background: #a48625;
+  border: 2px solid #7a4f1d;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+  align-items: center;
 }

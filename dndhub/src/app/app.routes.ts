@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
+import { environment } from 'src/environments/environment';
 
 export const routes: Routes = [
   {
@@ -9,13 +10,14 @@ export const routes: Routes = [
   { path: 'radio-button', component: RadioButtonComponent },
   {
     path: '',
-    redirectTo: 'landing-page',
+    redirectTo: environment.defaultRoute,
     pathMatch: 'full',
   },
   {
     path: 'landing-page',
     loadComponent: () => import('./pages/landing-page/landing-page.page').then( m => m.LandingPagePage)
-  },  {
+  },
+  {
     path: 'characters',
     loadComponent: () => import('./pages/characters/characters.page').then( m => m.CharactersPage)
   },
@@ -56,9 +58,52 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/Character creation pipeline/stats-selection/stats-selection.page').then( m => m.StatsSelectionPage)
   },
   {
-    path: 'overview',
+    path: 'dettagli-campagna',
+    loadComponent: () => import('./pages/dettagi-campagna/dettagi-campagna.page').then( m => m.DettagiCampagnaPage)
+  },
+  {
+    path: 'login-page',
+    loadComponent: () => import('./pages/login-page/login-page.page').then( m => m.LoginPagePage)
+  },
+  { 
+    path: 'signin-page',
+    loadComponent: () => import('./pages/signin-page/signin-page.page').then( m => m.SigninPagePage)
+  },
+  {
+   path: 'overview',
     loadComponent: () => import('./pages/Character creation pipeline/overview/overview.page').then( m => m.OverviewPage)
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./pages/profile/profile.page').then( m => m.ProfilePage)
+  },
+  {
+    path: 'campaign-chat',
+    loadComponent: () => import('./pages/campaign-chat/campaign-chat.page').then( m => m.CampaignChatPage)
+  },
+  {
+    path: 'type-player-login',
+    loadComponent: () => import('./pages/type-player-login/type-player-login.page').then( m => m.TypePlayerLoginPage)
+  },  {
+    path: 'spell-selection',
+    loadComponent: () => import('./pages/Character creation pipeline/spell-selection/spell-selection.page').then( m => m.SpellSelectionPage)
+  },
+  {
+    path: 'option-selection',
+    loadComponent: () => import('./pages/Character creation pipeline/option-selection/option-selection.page').then( m => m.OptionSelectionPage)
+  },
+  {
+    path: 'character-creation-info',
+    loadComponent: () => import('./pages/character-creation-info/character-creation-info.page').then( m => m.CharacterCreationInfoPage)
+  },
+  {
+    path: 'campaign-creation-info',
+    loadComponent: () => import('./pages/campaign-creation-info/campaign-creation-info.page').then( m => m.CampaignCreationInfoPage)
   },
 
 
+
+
 ];
+   
+

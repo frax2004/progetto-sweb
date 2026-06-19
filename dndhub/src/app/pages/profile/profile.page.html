@@ -1,0 +1,181 @@
+<ion-content>
+  <ion-split-pane when="xs" contentId="main">
+    <ion-menu contentId="main" id="menu">
+      <ion-header id="menu-title">
+        <ion-toolbar>
+          <ion-title>Profilo Personale</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content id="content">
+        <div id="profile-image">
+          <img src="https://static.wikia.nocookie.net/dragonball/images/9/91/SSJ4_20.jpg/revision/latest/scale-to-width-down/985?cb=20240630012825" alt="'imgPlaceholder'">
+        </div>
+
+        <div id="buttons">
+          <app-button class="button" 
+            [margin]="false"
+            [button]="{text: 'Torna indietro', expand: 'false'}"
+            [context] = "{ onClick: goBack }"
+            ></app-button>
+          <app-button class="button"
+            [margin]="false"
+            [button] = "{ text: 'Modifica account', expand: ''}"
+            [context] = "{ onClick: enableAccountEdit }"
+          ></app-button>
+          <app-button class="button"
+            [margin]="false"
+            [button] = "{ text: 'Elimina account', expand: ''}"
+            [context] = "{ onClick: deleteAccount }"
+          ></app-button>
+          <app-button class="button"
+            [margin]="false"
+            [button] = "{ text: 'Effettua l\'uscita', expand: ''}"
+            [context] = "{ onClick: logOut }"
+          ></app-button>
+        </div>
+
+        @if(isAdmin()) {
+          <div class="admin-info">
+            <div class="info">Sei un amministratore</div>
+          </div>
+        }
+      </ion-content>
+    </ion-menu>
+
+    <div id="main">
+      @if(isAdmin()) {
+        
+        <ion-tabs (ionTabsDidChange)="onTabChange($event.tab)">
+          
+          <ion-tab tab="credentials">
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>Credenziali</ion-title>
+              </ion-toolbar>
+            </ion-header>
+
+            <div class="dashboard">
+              <div id="info-pane">
+                <app-entry
+                  [onValueChanged]="setUsernameField"
+                  placeholder="Inserisci il nome utente"
+                  fill="outline"
+                  label="Nome utente"
+                  labelPlacement="floating"
+                  [value]="usernameField()"
+                  [disabled]="!editMode()"
+                ></app-entry>
+                <div class="padding"></div>
+                <app-entry
+                  [onValueChanged]="setEmailField"
+                  placeholder="Inserisci l'indirizzo email"
+                  fill="outline"
+                  label="Email"
+                  labelPlacement="floating"
+                  [value]="emailField()"
+                  [disabled]="!editMode()"
+                ></app-entry>
+                <div class="padding"></div>
+                <app-entry
+                  [onValueChanged]="setPasswordField"
+                  placeholder="Inserisci la password"
+                  fill="outline"
+                  label="Password"
+                  labelPlacement="floating"
+                  [value]="passwordField()"
+                  [disabled]="!editMode()"
+                ></app-entry>
+                <div class="padding"></div>
+
+                <app-button class="save-button" id="save-alert"
+                  [margin]="false"
+                  [button] = "{ text: 'Salva', expand: ''}"
+                  [context] = "{ onClick: save }"
+                ></app-button>
+              </div>
+            </div>
+          </ion-tab>
+          
+          <ion-tab tab="reports">
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>Sengalazioni</ion-title>
+              </ion-toolbar>
+            </ion-header>
+            
+            <div class="reports-content">
+
+              <app-entry
+              placeholder="Cerca"
+              [onValueChanged]="setReportsFilter"
+              ></app-entry>
+              
+              @for(report of reports(); track report) {
+                <app-report-card
+                [sender] = "report.sender"
+                [when] = "report.when"
+                [reason] = "report.reason"
+                [description] = "report.description"
+                [onClose] = "report.onClose"
+                ></app-report-card>
+              }
+
+              <app-button
+              [button]="{text: 'Carica altre segnalazioni', expand: 'false'}"
+              [context]="{ onClick: moreReports }"
+              ></app-button>
+            </div>
+          </ion-tab>
+
+          <ion-tab-bar slot="bottom">
+            <ion-tab-button tab="credentials">Profilo</ion-tab-button>
+            <ion-tab-button tab="reports">Sengalazioni</ion-tab-button>
+          </ion-tab-bar>
+    
+        </ion-tabs>
+      } @else {
+        <div class="dashboard">
+          <div id="info-pane">
+            <app-entry
+              [onValueChanged]="setUsernameField"
+              placeholder="Inserisci il nome utente"
+              fill="outline"
+              label="Nome utente"
+              labelPlacement="floating"
+              [value]="usernameField()"
+              [disabled]="!editMode()"
+            ></app-entry>
+            <div class="padding"></div>
+            <app-entry
+              [onValueChanged]="setEmailField"
+              placeholder="Inserisci l'indirizzo email"
+              fill="outline"
+              label="Email"
+              labelPlacement="floating"
+              [value]="emailField()"
+              [disabled]="!editMode()"
+            ></app-entry>
+            <div class="padding"></div>
+            <app-entry
+              [onValueChanged]="setPasswordField"
+              placeholder="Inserisci la password"
+              fill="outline"
+              label="Password"
+              labelPlacement="floating"
+              [value]="passwordField()"
+              [disabled]="!editMode()"
+            ></app-entry>
+            <div class="padding"></div>
+            <app-button class="save-button" id="save-alert"
+              [margin]="false"
+              [button] = "{ text: 'Salva', expand: ''}"
+              [context] = "{ onClick: save }"
+            ></app-button>
+          </div>
+        </div>
+      }
+    </div>
+
+  </ion-split-pane>
+</ion-content>

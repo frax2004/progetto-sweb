@@ -1,0 +1,30 @@
+<div class="content">
+  <div class="background"></div>
+  <div class="panel">
+    <div class="title">ASPETTA UN ATTIMO!</div>
+    <div class="gallery">
+      @if(currentCard() !== -1) {
+        <div 
+        class="gallery-img" 
+        [style.background-image]="'url(' + cards[currentCard()].imageURL + ')'"
+        ></div>
+
+        <div class="gallery-info">
+          <div class="info-button" (click)="advance(-1)"><</div>
+          <div class="desc">
+            <div class="gallery-title">{{cards[currentCard()].title}}</div>
+            <div class="gallery-subtitle">{{cards[currentCard()].subtitle}}</div>
+            <div class="gallery-content">{{cards[currentCard()].content}}</div>
+          </div>
+          <div class="info-button" (click)="advance(1)">></div>
+        </div>
+      }
+    </div>
+  </div>
+
+  @if(currentCard() === cards.length-1) {
+    <app-button id="link-button"
+    [button]="{text: 'Cominciamo!', expand: 'false'}"
+    ></app-button>
+  }
+</div>

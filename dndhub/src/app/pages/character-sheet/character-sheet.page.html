@@ -1,10 +1,11 @@
 <ion-content>
 
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title>Scheda personaggio</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="pageTitle">
+    <div>
+      <ion-title class="title">Scheda personaggio</ion-title>
+      <ion-title class="nome">Pino Il Ballerino</ion-title>
+    </div>
+  </div>
 
   <!-- settore iniziale con:
        prima colonna: 
@@ -26,142 +27,65 @@
         - velocità -->
 
 
-  <!-- PER FAVORE non toccate la grid, è stato un bordello da sistemare -->
-
-  <ion-item class="gridContainer">
-    <ion-grid class="upperGrid">
-      
-
-      <ion-row>
+  <div class="gridContainer">
+    <div class="upperGrid">
         <!-- solo immagine qua -->
-        <ion-col>
-          <!-- prima colonna solo immagine -->
           <!-- manca il frame, metto un placeholder -->
-          <ion-item class="placeholderFrame">
+          <div class="placeholderFrame">
             <img src="https://i.redd.it/c8u5n61j3pic1.png" alt="character img">
-          </ion-item>
-        </ion-col>
-
-        <ion-col>
-          <!-- hp -->
-           <ion-row>
-
-            <ion-col>
-              <ion-item>
+          </div>
+            <div class="right">
                 <!-- dati mock, da aggiungere col db -->
+              <div class="fight">
                 <ion-label>Punti ferita: 20/40 + 5</ion-label>
-                <!-- 20 / 40 rappresenta gli hp normali, il +5 sono gli hp temporanei -->
-              </ion-item>
-            </ion-col>
-
-            <ion-col>
-              <!-- livello -->
-              <ion-item>
-                <ion-label>Chierico lvl 10/Mago lvl 10</ion-label>
-              </ion-item>
-            </ion-col>
-            
-            <!-- ispirazione eroica -->
-            <ion-col>
-              <ion-item>
-                <app-checkbox [testo]="'Ispirazione eroica'"></app-checkbox>
-              </ion-item>
-            </ion-col>
-
-            <!-- razza -->
-            <ion-col>
-                <ion-item>
-                  <ion-label>Elfo dei boschi</ion-label>
-                </ion-item>
-            </ion-col>
-
-           </ion-row>
-
-           <ion-row>
-
-            <!-- dadi vita -->
-            <ion-col>
-              <ion-item>
-                <!-- il + è per le multiclassi -->
-                <ion-label>Dadi vita: 6/10 (d6) + 7/10 (d8)</ion-label>
-              </ion-item>
-            </ion-col>
-
-            <!-- bonus competenza -->
-            <ion-col>
-              <ion-item>
-                <ion-label>Bonus Competenza: +6</ion-label>
-              </ion-item>
-            </ion-col>
-
-            <!-- iniziativa -->
-            <ion-col>
-              <ion-item>
-                <ion-label>Iniziativa: +36</ion-label>
-              </ion-item>
-            </ion-col>
-
-            <!-- taglia -->
-              <ion-col>
-                <ion-item>
-                  <ion-label>Taglia: media</ion-label>
-                </ion-item>
-              </ion-col>
-
-           </ion-row>
-
-           <ion-row>
-
-            <!-- ca -->
-            <ion-col>
-              <ion-item>
-                <ion-label>CA: 45</ion-label>
-              </ion-item>
-            </ion-col>
-
-            <!-- tiri salvezza contro la morte -->
-            <ion-col>
-              <ion-item>
-                <ion-label>Tiri salvezza contro la morte</ion-label>
-                <ion-label>Successi</ion-label>
-                <app-checkbox></app-checkbox>
-                <app-checkbox></app-checkbox>
-                <app-checkbox></app-checkbox>
-              </ion-item>
-
-              <ion-item>
-                <ion-label>Fallimenti</ion-label>
-                <app-checkbox></app-checkbox>
-                <app-checkbox></app-checkbox>
-                <app-checkbox></app-checkbox>
-              </ion-item>
-            </ion-col>
-
-            <!-- velocità -->
-            <ion-col>
-              <ion-item>
+                <ion-label>CA:44330</ion-label>
+                <ion-label>DadiVita: 50/60</ion-label>
+              </div>
+          <div class=TiriGenerici>
+            <div class="TiriVSmorte">
+              <div class="TiriSalvezza">Tiri salvezza</div>
+                <div class="Tiri">
+                  <ion-label>Successi</ion-label>
+                  <ion-checkbox></ion-checkbox>
+                  <ion-checkbox></ion-checkbox>
+                  <ion-checkbox></ion-checkbox>
+                </div>
+                 <div class="Tiri">
+                  <ion-label>Fallimenti</ion-label>
+                  <ion-checkbox></ion-checkbox>
+                  <ion-checkbox></ion-checkbox>
+                  <ion-checkbox></ion-checkbox>
+              </div>
+            </div>
+            <div Class="Ispirazione-Eroica">
+              <ion-label class="Eroica">Ispirazione Eroica</ion-label>
+              <ion-checkbox></ion-checkbox>
+            </div>
+          </div>
+              <div class="species">
+                <ion-label>Classe:Mago finale</ion-label>
+                <ion-label>Sottoclasse:HoSonno</ion-label>
+                <ion-label>Bonus Competenza: +399</ion-label>
+                <ion-label>Specie:Inferiore</ion-label>
+             </div>
+    
+             <div class="informazioni">
+                <ion-label>Iniziativa: 20 Naturale</ion-label>
+                <ion-label>taglia: pacchione</ion-label>
+                <ion-label>Percezione Passiva: Ti vedo</ion-label>
                 <ion-label>Velocità: 180 metri</ion-label>
-              </ion-item>
-            </ion-col>
 
-
-            <!-- percezione passiva -->
-              <ion-col>
-                <ion-item>
-                  <ion-label>Percezione passiva: 300</ion-label>
-                </ion-item>
-              </ion-col>
-           </ion-row>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-item>
+             </div>
+            </div>
+    </div>
+  </div>
 
 
  <!-- adesso una griglia con le statistiche -->
  <!-- le prime tre sono quelle fisiche, le altre quelle mentali
   Le statistiche saranno accordion con le abilità dentro -->
-  <ion-item>
+  <!-- Tutti questi infiniti ion-item, ion-grid, row e col sono probabilmente da sostituire perché hanno un layout tutto per i fatti loro -->
+   <ion-item>
     <ion-grid>
       <!-- prima riga -->
       <ion-row>

@@ -1,11 +1,17 @@
-
 .card-image {
   width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  object-position: center;
+  height: 75%;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-ion-card {
+.card {
+  display: flex;
+  flex-direction: column;
+  background: rgb(94, 94, 94);
+  border-radius: 2cqmin;
   height: 100%;
+  overflow: hidden;
 }

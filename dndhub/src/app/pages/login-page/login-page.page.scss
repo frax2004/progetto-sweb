@@ -1,0 +1,97 @@
+.title {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: bold;
+  color: rgb(220, 68, 68);
+  text-align: center;
+}
+
+.logo {
+  text-align: center;
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-family: 'Papyrus', fantasy;
+  margin-bottom: 10px;
+}
+
+.entry-group {
+  background: rgba(132, 132, 132, 0.263);
+  border: 2px solid rgba(193, 193, 193, 0.761);
+  border-radius: 20px;
+  padding: 5cqmin;
+  backdrop-filter: blur(.5rem);
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5cqmin;
+}
+
+
+ion-toolbar {
+  --background: transparent;
+}
+
+ion-content {
+  --background: transparent;
+}
+
+.signin-content {
+  position: relative;
+  --background: transparent;
+}
+
+.subtitle {
+  display: block;
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.background {
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0;
+
+  background-image: url("https://static0.gamerantimages.com/wordpress/wp-content/uploads/2019/09/dungeons-and-dragons-dm-screen.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 0.5;
+  filter: blur(1px);
+
+  z-index: 0;
+}
+
+.link-wrapper {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-top: 15px;
+}
+
+.signin-page-link {
+  display: block;
+  margin-top: 8px;
+
+  color: #d4af37;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.signin-page-link:hover {
+  text-decoration: underline;
+}

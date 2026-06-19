@@ -1,0 +1,248 @@
+ .gridContainer {
+     --padding-start: 0;
+     --inner-padding-end: 0;
+     width: 90vw;
+     margin: 0 auto;
+     border-radius: 18px;
+ }
+
+.imgbackground {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: url('/assets/icon/GattoCarino-sfondoStats2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.20;
+  z-index:-1;
+}
+
+.nextPage {
+    display: grid;
+    justify-content: end;
+}
+
+.buttonGrid {
+    margin-bottom: 10px;
+}
+
+.HPchoiceButtonContainer {
+    display: grid;
+    justify-content: center;
+    width: 100%;
+}
+
+ion-grid {
+    padding: 0;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+}
+
+#randomLabel {
+    padding-left: 15px;
+}
+
+.statSelectionFrame {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px #FFD700 dashed;
+    padding-bottom: 20px;
+    font-family: Copperplate, Copperplate Gothic Light, fantasy;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 500;
+    width: 95%;
+    padding-left: 10%;
+    padding-right: 5%; 
+}
+
+.statSelectionFrame:last-child {
+    border-bottom: none;
+    padding-bottom: 0px;
+}
+
+.str{
+    color:red;
+}
+
+.dex{
+    color: green;
+}
+
+.int{
+    color:blue;
+}
+
+.wisd{
+    color:gold;
+}
+
+.cost{
+    color:rgb(216, 103, 22);
+}
+
+.charisma{
+    color:purple;
+}
+
+// .modifierContainer { volevo fare una cosa bella ma non worka 
+//   width: 40%;
+//   border: 1px solid rgba(255, 215, 0, 0.5);
+//   border-radius: 999px;
+//   background: rgba(255, 215, 0, 0.08);
+// }
+
+.manualStatsList {
+    padding: 0;
+    list-style-type: none;
+    border-radius: 24px;
+}
+
+.dragEntryBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    justify-items: center;
+    align-self: center;
+    align-content: center;
+}
+
+.manualStatsListContainer {
+    padding-top: 0.2vh;
+    padding-bottom: 0.2vh;
+    background-color: rgba(0, 0, 0, 0.331);
+    backdrop-filter: blur(3em);
+    width: 70vw;
+    border-radius: 20px;
+    border-right: 1px #FFD700 solid;
+    border-left:1px #FFD700 solid;
+    border-bottom: 3px #FFD700 solid;;
+    border-top: 3px #FFD700 solid;;
+    margin: 4vmin auto;
+}
+
+.stdArrayContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.statDisplayContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.radioContainer {
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5%;
+}
+
+.groupRadio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    font-family: Copperplate, Copperplate Gothic Light, fantasy;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 500;
+    
+}
+
+.stdArrayContainer{
+    border-radius: 20px;
+    border: 3px #FFD700 solid;
+    width: 70%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba(0, 0, 0, 0.331);
+    backdrop-filter: blur(3em);
+    padding-top: 0.8rem;
+}
+
+
+.statDisplayRandom{
+    gap: 1.5rem;
+    width: 100%;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    font-family: Copperplate, Copperplate Gothic Light, fantasy;
+    font-size: clamp(1.5rem, 5.5vw, 1.8rem);
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.randomListContainer{
+    width: 100%;
+    border-radius: 20px;
+    border: 3px #FFD700 solid;
+    width: 50%;
+    margin: auto;
+    height: fit-content;
+    background-color: black;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    background-color: rgba(0, 0, 0, 0.331);
+    backdrop-filter: blur(3em);
+
+}
+
+.statDisplayRandom app-label {
+    display: block;
+    width: 100%;
+    border-bottom: 1px dashed #FFD700;
+    padding-bottom: 0.9rem;
+}
+.statDisplayRandom app-label:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+@media screen and (max-width: 768px) {
+
+    .randomListContainer{
+        width: 90%;   /* invece di 50% */
+    }
+
+    .statDisplayRandom{
+        font-size: 1.2rem;  /* override del clamp */
+        gap: 1rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .statDisplayRandom app-label{
+        padding-bottom: 0.7rem;
+    }
+    .groupRadio{
+        grid-template-columns: repeat(2,1fr);
+        gap:0.5rem;
+    }
+    .radioContainer {
+    margin-left: 2px;
+    padding-bottom: 1%;
+}
+.stdArrayContainer{
+    width: 100%;
+}
+}

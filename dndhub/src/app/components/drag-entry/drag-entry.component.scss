@@ -4,6 +4,7 @@
   align-items: center;
   padding: 3px;
   justify-content: center;
+  max-width: 20vw;
 }
 
 #entry {
@@ -16,6 +17,8 @@
   &:hover {
     background-color: rgb(91, 91, 91);;
   }
+
+  width: 150%;
 }
 
 .entry-arrow {
@@ -29,4 +32,6 @@
     background-color: rgb(91, 91, 91);;
   }
   user-select: none;
+
+  height: 100%;
 }

@@ -1,0 +1,81 @@
+.listContainerFrame {
+    white-space: pre-wrap;
+    
+}
+
+.spellChoiceFrame {
+    border-bottom: 1px gray solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+   
+}
+
+
+.typeSpell{
+    text-align: center;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color:gold;
+    box-shadow:0 0 10px rgb(93, 80, 9), 0 0 20px rgb(186, 250, 58);
+    text-shadow:0 0 5px rgba(255,215,0,0.8),
+    0 0 10px rgba(255,215,0,0.6),
+    0 0 20px rgba(255,215,0,0.4),
+    0 0 40px rgba(255,215,0,0.2);
+    border-radius: 50px;
+}
+
+.checkboxContainer {
+    margin-left: 3vw;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+}
+
+.checkboxContainer:hover {
+    box-shadow: 4px 4px 4px 4px rgb(42, 41, 41);
+    transition: box-shadow 300ms;
+}
+
+.genericCheckbox:hover {
+    width: 125%;
+    height: 125%;
+    transition: all 300ms;
+}
+
+.genericCheckbox {
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    border: 1px solid gold;
+    border-radius: 50%;
+    background: transparent;
+    transition: all 300ms;
+}
+
+.genericCheckbox:checked {
+    background: radial-gradient(circle,#ffd700, #ff8c00);
+    box-shadow: 0 0 10px gold,0 0 20px orange;
+}
+
+
+.spellDisplayFrame{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 15%;
+    margin-left: 15%;
+    border: 2px solid gold;
+    border-radius: 32px;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-bottom: 2%;
+    padding-bottom: 1rem;
+    font-family: Copperplate, Copperplate Gothic Light, fantasy;
+    color: #f5e6c8;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 500;
+    background: linear-gradient(180deg,#4a3928 0%, #3b2f24 50%, #2f241b 100%);
+}

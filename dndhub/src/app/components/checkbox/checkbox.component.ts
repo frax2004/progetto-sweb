@@ -1,17 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IonCheckbox } from '@ionic/angular/standalone';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IonCheckbox, IonItem, IonLabel } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-checkbox',
+  standalone: true,
   templateUrl: './checkbox.component.html',
-  imports: [IonCheckbox],
   styleUrls: ['./checkbox.component.scss'],
+  imports: [IonCheckbox, IonItem, IonLabel]
 })
-export class CheckboxComponent  implements OnInit {
+export class CheckboxComponent {
 
-  constructor() { }
+  @Input() checked: boolean = false;
 
-  ngOnInit() {}
+  @Input() disabled: boolean = false;
 
   @Input() testo: string = '';
+
+  @Output() checkedChange = new EventEmitter<boolean>();
+
+onChange(event: any) {
+  this.checkedChange.emit(event.detail.checked);
 }
+  }

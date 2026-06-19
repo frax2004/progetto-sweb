@@ -19,7 +19,7 @@ app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/user-utilities", userUtilitiesRouter);
 app.use("/api/character-management", characterManagementRouter)
-app.use('/api/campagna', campagnaRouter);
+app.use('/api/campaign', campagnaRouter);
 app.use('/api/reports', reportsRouter);
 
 // per impostare la formattazione a 2 spazi di indentazione
@@ -50,22 +50,6 @@ async function loadTable(name, base_dir) {
   }
 
   console.log("Lodaded ", name, " table");
-
-  // const query = JSON
-  // .parse(text)
-  // .map(obj => {""
-  //   const keys = Object.keys(obj).join(", ");
-  //   const values = Object.values(obj).map(ObjToString).join(", ");
-  //   return `INSERT OR IGNORE INTO ${name} (${keys}) VALUES (${values})`;
-  // })
-  // .join("; ");
-
-  // const db = Database.INSTANCE;
-
-  // db.exec(query, err => { 
-  //   if(err) console.log(err); 
-  //   else console.log("lodaded '", name, "' table"); 
-  // });
 }
 
 
@@ -129,6 +113,7 @@ const new_tables = [
   "Campagna",
   "ArrayCampagnaPersonaggiItem",
   "Segnalazione",
+  "ArrayPostItem",
 ];
 
 await Database.load(DatabasePaths.SCHEMAS);

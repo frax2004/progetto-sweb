@@ -8,11 +8,19 @@ export class CampagnaResponses {
     };
   }
 
-  static get CAMPAIGN_NAME_REQUIRED() {
+  static get USER_DOES_NOT_EXIST() {
     return {
-      status_code: 400,
+      status_code: 401,
       success: false,
-      message: "Il nome della campagna è obbligatorio"
+      message: "L'utente richiesto non esiste"
+    };
+  }
+
+  static get CAMPAIGN_NAME_REQUIRED_OR_INVALID() {
+    return {
+      status_code: 401,
+      success: false,
+      message: "Il nome della campagna è mancante o non è valido"
     };
   }
 
@@ -26,14 +34,13 @@ export class CampagnaResponses {
     };
   }
 
-
-   static get DATABASE_ERROR(){
-    return{
-        status_code:400,
-        success:false,
-        message:"Errore del DB"
-    }
-   }
+  static get DATABASE_ERROR() {
+    return {
+      status_code:400,
+      success:false,
+      message:"Errore del DB"
+    };
+  }
 
 
 }

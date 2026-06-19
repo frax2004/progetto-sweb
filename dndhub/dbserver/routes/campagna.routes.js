@@ -1,12 +1,15 @@
 import express from "express";
-import { creaCampagnaMiddleware } from "../middlewares/campagna.Middleware.js";
-import { creaCampagnaController } from "../controllers/campagna.controller.js";
-
+import middleware from '../middlewares/campagna.Middleware.js'
+import controller from "../controllers/campagna.controller.js";
+import authMiddleware from "../middlewares/auth.middleware.js";
 
 export const campagnaRouter = express.Router();
 
 campagnaRouter.post(
-  "/",
-  creaCampagnaMiddleware,
-  creaCampagnaController,
+  "/create_campaign",
+  authMiddleware.isLogged,
+  middleware.assertValidCampaignInfo,
+  middleware.assertPlayersExists,
+  middleware.assertCampaignNotExists,
+  controller.createCampaign,
 );

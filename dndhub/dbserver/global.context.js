@@ -66,6 +66,17 @@ export class UserInstance {
     return `(dungeon_master): ${email}`;
   }
 
+  get info() {
+    return JSON.stringify({
+      email: this.email,
+      dm_token: this.dm_token,
+      player_token: this.player_token,
+      generic_token: this.generic_token,
+      player_id: this.player_id,
+      dm_id: this.dm_id,
+    }, null, 2);
+  }
+
   static get USER() {
     return UserInstance.__USER__;
   }

@@ -17,3 +17,10 @@ userUtilitiesRouter.post(
   user_middleware.canChangeEmail,
   user_controller.setUserInfo
 );
+
+userUtilitiesRouter.post(
+  '/get-player-ID',
+  user_middleware.isLogged,
+  user_middleware.isPlayerIdNotNull,
+  user_controller.getLoggedUtenteGiocatore
+);

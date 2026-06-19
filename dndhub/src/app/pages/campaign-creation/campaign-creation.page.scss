@@ -1,15 +1,12 @@
-.scrollDiv {
-  max-height: 20vh;
-  overflow-y: auto;
-}
 
 .background {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
-   background-image: url('/assets/icon/sfondo-dndhub2.jpeg');
+  background-image: url('/assets/icon/sfondo-dndhub2.jpeg');
   background-size: cover;
+  object-fit: cover;
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0.20;
@@ -17,46 +14,63 @@
 
 }
 
-.descrizione {
-  grid-column: 1 / -1;
-}
-
-.textarea {
+#content {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  overflow-y: scroll;
+  
 }
 
-.title{
-    text-align: center;
-    font-weight: 500;
-    font-size: clamp(32px, 4px, 48px);
-    border: 6px solid gold;
-    border-radius: 12px;
-    margin-top: 12px;
-    padding: 12px 24px;
-    margin-bottom: 36px;
-    margin-left: 10%;
-    margin-right: 10%;
+#entries {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+
+  @media (orientation: landscape) {
+    margin-inline: 20%;
+    margin-bottom: 2.5%;
+  }
+  @media (orientation: portrait) {
+    margin-inline: 5%;
+    margin-bottom: 1%;
+  }
+
+  * {
+    flex: 1 1 0;
+  }
+
+  gap: 2cqmin;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 40% 40%;
+.label {
+  font-size: clamp(2cqmin, 3cqmin, 3.5cqmin);
+}
+
+.title {
+  flex: 0 0 0;
+  text-align: center;
+  font-weight: 500;
+  font-size: 5cqmin;
+  border: 6px solid gold;
+  border-radius: 12px;
+  margin-top: 12px;
+  padding: 12px 24px;
+  margin-bottom: 36px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.frame {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 8px;
-}
 
-.riquadro{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    gap: 10px;
-    border:3px solid orange;
-    border-radius: 16px; 
-    padding: 8px;
-    font-weight: 300;
-    font-size: clamp(16px, 4px, 32px);
-}
-
-.full-width{
-    width: 100%;
+  text-align: center;
+  gap: 10px;
+  border: 3px solid orange;
+  border-radius: 16px; 
+  padding: 8px;
+  font-weight: 300;
+  font-size: clamp(16px, 4px, 32px);
 }

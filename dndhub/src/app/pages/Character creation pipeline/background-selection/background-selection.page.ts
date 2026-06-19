@@ -23,30 +23,22 @@ import { CharacterInstance } from '../CharacterInformation';
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, AccordionComponent, IonFooter, ButtonComponent, TitleComponent, IonAccordionGroup, IonAccordion, IonThumbnail, IonLabel, LabelComponent, IonButton, IonAlert]
 })
 export class BackgroundSelectionPage implements OnInit {
-  b1_button: Button = { text: 'clicca qui', expand: ''};
-    b1_context: ButtonContext = { onClick: Popups.ofSimpleText(this.popoverController, "Hai scelto questo background")};
-    b1: ButtonComponent = {
-      button: this.b1_button, context: this.b1_context,
-      // questa riga sotto l'ha aggiunta automaticamente l'estensione, non so perché
-      ngOnInit: function (): void {
-        throw new Error('Function not implemented.');
-      }
-    }
 
-  b2_context: ButtonContext = { onClick: Popups.ofSimpleText(this.popoverController, "Andiamo les go les go milano")};
-
+  showClass: string;
+  showLevel: number;
+  showSpecies: string;
   nextPageAlertOpen: boolean = false;
 
   nextPage = () => {
-    if (BackgroundSelectionPage.selectedBackground !== undefined) {
+    if (this.selectedBackground !== undefined) {
       for (const background of this.backgroundsArray) {
-        if (background.name.toLowerCase() === BackgroundSelectionPage.selectedBackground.toLowerCase()){
+        if (background.name.toLowerCase() === this.selectedBackground.toLowerCase()){
           CharacterInstance.backgroundEquipment = background.equipment;
           CharacterInstance.backgroundFeature = background.feature;
           CharacterInstance.backgroundStartingGold = background.starting_gold;
         }
       }
-      CharacterInstance.chosenBackground = BackgroundSelectionPage.selectedBackground;
+      CharacterInstance.chosenBackground = this.selectedBackground;
       this.router.navigate(['/stats-selection']);
     }
     else this.setOpenAlert(true);
@@ -66,7 +58,7 @@ export class BackgroundSelectionPage implements OnInit {
   };
   backgroundsArray = [];
 
-  static selectedBackground: string = undefined;
+  selectedBackground: string = undefined;
   placeholderAlert(event: Event) {alert('Non ancora implementato');}
 
   static displayProficiencies(bgName,stProf: dnd.APIReference[]) {
@@ -147,8 +139,14 @@ export class BackgroundSelectionPage implements OnInit {
   }
 
   constructor(public popoverController: PopoverController, private router: Router, private bgsDisplayer: CharacterManagementService) {
-    BackgroundSelectionPage.selectedBackground = undefined;
-    
+    this.showClass = CharacterInstance.chosenClass;
+    this.showLevel = CharacterInstance.chosenLevel;
+    this.showSpecies = CharacterInstance.chosenSpecies;
+
+    const createButton = (name) => {
+      return (event: Event) => this.selectedBackground = name;
+    }
+
     this.bgsDisplayer
     .displayBackgrounds()
     .subscribe({
@@ -159,7 +157,7 @@ export class BackgroundSelectionPage implements OnInit {
             value: item.name + ' accordion',
             imageURL: "../assets/icon/d20.svg",
             name: item.name,
-            btnCtx: (event: Event) => BackgroundSelectionPage.selectedBackground = item.name,
+            btnCtx: createButton(item.name),
             starting_gold: item.starting_gold,
             feature: item.feature,
             equipment: BackgroundSelectionPage.generateBaseEquipment(item.starting_equipment),

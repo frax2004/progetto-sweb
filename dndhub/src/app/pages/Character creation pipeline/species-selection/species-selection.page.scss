@@ -171,3 +171,24 @@ div[slot="content"] {
     justify-content: end;
     margin-left: 65%;
 }
+
+.showChosen {
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+    margin: 3vh auto;
+    border: 2px solid rgb(171, 32, 32);
+    border-radius: 20px;
+    background-color: rgba(255, 109, 109, 0.331);
+    backdrop-filter: blur(5em);
+}
+
+// ho bisogno di una mano con questo css
+.upperDetailsContainer {
+    margin: 0px auto;
+    margin-left: 2%;
+}
+
+.rightBorder {
+    border-right: 2px solid rgb(171, 32, 32);
+}

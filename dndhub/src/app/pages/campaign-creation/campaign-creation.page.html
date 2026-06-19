@@ -1,65 +1,43 @@
-<ion-content>
-  <div class="background"></div>
+<div class="background"></div>
 
-  <div class="pageTitle">
-    <ion-title class="title">Crea una campagna</ion-title>
+<div id="content">
+  <ion-title class="title">Create a campaign</ion-title>
+
+  <div id="entries">
+    <div class="frame">
+      <ion-label class="label">Insert the campaign's name</ion-label>
+      <ion-input [(ngModel)]="name" placeholder="Name"></ion-input>
+    </div>
+    
+    <div class="frame">
+      <ion-label class="label">Select party players</ion-label>
+      @for(player of selectedPlayers(); track $index) {
+        <ion-label>{{player}}</ion-label>
+      }
+      <ion-searchbar 
+      debounce="500" 
+      placeholder="Search player"
+      (ionInput)="loadPlayers"
+      ></ion-searchbar>
+      @for(player of availablePlayers(); track $index) {
+        <ion-label>{{player}}</ion-label>
+      }
+    </div>
+    
+    <div class="frame">
+      <ion-label class="label">Insert a description</ion-label>
+      <ion-textarea [(ngModel)]="description" placeholder="Description"></ion-textarea>
+    </div>
+  
+    <div class="frame">
+      <ion-label class="label">Link(s) to useful documents</ion-label>
+      <ion-input placeholder="Documents"></ion-input>
+    </div>
+  
+    <app-button
+      [button]="{ text: 'Create', expand: 'false'}"
+      [context]="{ onClick: createCampaign }">
+    </app-button>
   </div>
 
-  <div class="grid">
-
-    <!-- Riga 1 -->
-    <div class="riquadro">
-      <ion-label>Inserire il nome della campagna:</ion-label>
-      <ion-input [(ngModel)]="nome" placeholder="nome"></ion-input>
-    </div>
-
-    <div class="riquadro">
-      <ion-label>Inserire i giocatori che parteciperanno:</ion-label>
-      <ion-input [(ngModel)]="giocatori" placeholder="giocatori"></ion-input>
-    </div>
-
-    <!-- Riga 2 -->
-    <div class="riquadro descrizione">
-      <ion-label>descrizione:</ion-label>
-
-      <div class="scrollDiv">
-      <ion-label class="textarea"></ion-label>
-      <ion-input [(ngModel)]="descrizione" placeholder="descrizione"></ion-input>
-       
-
-        <!-- <ion-textarea
-        [value]="descrizione"
-        (ionInput)="descrizione = $event.detail.value"
-        placeholder="Descrizione">
-        </ion-textarea> -->
-      </div>
-    </div>
-
-    <!-- Riga 3 -->
-     <!-- questo non dovrermmo generarlo noi? -->
-    <div class="riquadro">
-      <ion-label>Link d'invito:</ion-label>
-      <ion-input placeholder="Link"></ion-input>
-    </div>
-
-    <div class="riquadro">
-      <ion-label>Link dell'immagine banner:</ion-label>
-      <ion-input [(ngModel)]="banner" placeholder="Banner"></ion-input>
-    </div>
-
-    <!-- Riga 4 -->
-    <div class="riquadro">
-      <ion-label>Link(s) a documenti utili:</ion-label>
-      <ion-input placeholder="Documenti"></ion-input>
-    </div>
-
-    <div class="riquadro button-riquadro">
-      <app-button
-        [button]="{ text: 'Conferma e crea campagna', expand: '' }"
-        [context]="buttonCallbacks['finishCreation']">
-      </app-button>
-    </div>
-
-  </div>
-
-</ion-content>
+</div>

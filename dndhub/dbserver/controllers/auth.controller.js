@@ -35,41 +35,26 @@ export async function login(req, res) {
 
   const query = `
   SELECT * 
-  FROM Account
-  WHERE email = '${email}'
+  FROM UtenteGenerico
+  WHERE account = '${email}'
   `;
 
   try {
     const account = await Database.queryOne(query);
-
-HEAD
-  const db = Database.INSTANCE;
-
-  const generic_user_callback = (err, user) => {
-    if(user === undefined) {
-      console.log(err);
-      sendResponse(AuthResponses.UNABLE_TO_GET_USER_INFOS, res);
-    } else {
-      const generic_token = generateToken({ email: email });
-      const player_token = generateToken({ id: user.utente_giocatore });
-      const dm_token = generateToken({ id: user.utente_dungeon_master });
-
-      UserInstance.USER = new UserInstance(generic_token, player_token, dm_token);
-      sendResponse(AuthResponses.loginResponse(generic_token, player_token, dm_token), res);
-    }
-  };
-
-  const login_callback = (err, row) => {
-    if(row === undefined || err) {
-      sendResponse(AuthResponses.EMAIL_NOT_PRESENT, res);
-    } else if(row["password"] === password) {
-      db.get(AuthQueries.getGenericUser(email), generic_user_callback);
-    } else sendResponse(AuthResponses.INCORRECT_PASSWORD, res);
-  };
-  db.get(AuthQueries.isSignedIn(email), login_callback);
+    
     const generic_token = generateToken({ email: email });
     const player_token = generateToken({ id: account.utente_giocatore });
     const dm_token = generateToken({ id: account.utente_dungeon_master });
+
+    const x = {
+      generic_token: generic_token,
+      player_token: player_token,
+      dm_token: dm_token,
+      email: email,
+      player_id: account.utente_giocatore,
+      dm_id: account.utente_dungeon_master
+    };
+
   
     UserInstance.USER = new UserInstance(generic_token, player_token, dm_token);
     sendResponse(AuthResponses.loginResponse(generic_token, player_token, dm_token), res);

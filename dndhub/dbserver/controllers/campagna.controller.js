@@ -1,32 +1,67 @@
+import { UserInstance } from "../global.context.js";
 import { CampagnaResponses } from "../controllers/campagna.responses.js";
+import { Database } from "../database.js";
 
-export function creaCampagnaController(req, res) {
+let canSend = true;
+function sendResponse(obj, res) {
+  if(canSend) {
+    res.status(obj.status_code).json(obj);
+    canSend = false;
+  } else throw new Error("Chiamata a sendResponse() gia effettuata");
+}
 
-  const {
-    nome,
-    descrizione,
-    banner,
-    utente_dungeon_master,
-    idx,
-    db
-  } = req.campagnaData;
 
-  const query = `INSERT INTO Campagna (utente_dungeon_master, nome, idx_campagna, banner, descrizione)
-    VALUES (?, ?, ?, ?, ?)`;
+export async function createCampaign(req, res) {
+  canSend = true;
 
-  db.run(
-    query,[utente_dungeon_master, nome, idx, banner, descrizione],
-    function (err) 
-    {
-      if (err) 
-        {
-        const responde=CampagnaResponses.DATABASE_ERROR; 
-        return res.status(response.status_code).json(response);
-        }
+  const name = req.body.name;
+  const campaign_idx = req.body.campaign_idx;
+  const banner = req.body.banner;
+  const desc = req.body.desc;
 
-    const response=CampagnaResponses.CAMPAIGN_CREATED(idx,nome);
-    return res.status(response.status_code).json(response);
+  const arrayEntriesQuery = req
+  .body
+  .players
+  .map(character_idx => `
+    INSERT INTO ArrayCampagnaPersonaggiItem (idx_campagna, idx_personaggio) VALUES (
+      '${campaign_idx}', '${character_idx}'
+    );
+  `);
 
+  const query = `
+    BEGIN TRANSACTION;
+
+    INSERT INTO Campagna (utente_generico, nome, idx_campagna, banner, descrizione) VALUES (
+      '${UserInstance.USER.email}',
+      '${name}',
+      '${campaign_idx}',
+      '${banner}',
+      '${desc}'
+    );
+
+    ${ arrayEntriesQuery.join("\n") }
+
+    COMMIT;
+  `;
+
+
+  try {
+    await Database.execAll(query);
+    sendResponse(CampagnaResponses.CAMPAIGN_CREATED(campaign_idx, name), res);
+  } catch(err) {
+    try {
+      await Database.execOne("ROLLBACK;"); 
+    } finally {
+      sendResponse({
+        message: "Creazione della campagna fallita.",
+        success: false,
+        status_code: 401
+      });
     }
-  );
+  }
+}
+
+
+export default {
+  createCampaign,
 }

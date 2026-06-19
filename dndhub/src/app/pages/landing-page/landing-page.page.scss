@@ -12,18 +12,23 @@ ion-content {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-
-
-#carousel-title {
+#carousel-block {
+  width: 100%;
+  height: 70%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
   padding-bottom: 20px;
   padding-top: 20px;
+  row-gap: 5cqmin;
 }
 
 #carousel-label {
   font-size: 5cqmin;
+}
+
+.carousel {
+  flex: 1;
 }
 
 ion-accordion.accordion-expanding,
@@ -216,6 +221,7 @@ a:hover {
     transform: scale(1.05);
     border-color: gold;
     cursor: pointer;
+    backdrop-filter: blur(2em);
   }
   .linkContainer:hover {
     transform: scale(1.05);

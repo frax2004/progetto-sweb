@@ -32,6 +32,7 @@ export async function login(req, res) {
   canSend = true;
 
   const email = req.body.email;
+  const password = req.body.password;
 
   const query = `
   SELECT * 
@@ -40,14 +41,12 @@ export async function login(req, res) {
   `;
 
   try {
-    const account = await Database.queryOne(query);
+  const account = await Database.queryOne(query);
 
-HEAD
   const db = Database.INSTANCE;
 
   const generic_user_callback = (err, user) => {
     if(user === undefined) {
-      console.log(err);
       sendResponse(AuthResponses.UNABLE_TO_GET_USER_INFOS, res);
     } else {
       const generic_token = generateToken({ email: email });

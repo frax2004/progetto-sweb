@@ -22,7 +22,7 @@ export class DragEntryComponent implements OnInit {
   private isMouseDown: boolean = false;
   
   private startX: number = 0;
-  private initialValue: number = 0;
+  private initialValue: number = this.min || 0;
   private dragThreshold: number = 4;
 
   ngOnInit() {

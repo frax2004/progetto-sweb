@@ -37,6 +37,9 @@ BACKGROUNDS = ['acolyte']
 SPECIES = 'dwarf elf halfling human dragonborn gnome half-elf half-orc tiefling'
 SPECIES = SPECIES.split(' ')
 
+with open('chat.json', 'r') as f:
+  CHAT: list[str] = json.load(f)
+
 years = list(range(2020, 2027))
 months = list(range(13))
 days = list(range(1, 29))
@@ -327,6 +330,40 @@ def compile_reports(accounts):
 
   return compile(REPORT_TABLE, max_count=512)
 
+def compile_posts(campaigns):
+
+  POST_TABLE = {
+    'name': 'ArrayPostItem',
+    'primary': ['idx_campagna', 'time_stamp'],
+    'rules': {
+      'idx_campagna': {
+        'fmt': '{}',
+        'args': [
+          list(campaign['idx_campagna'] for campaign in campaigns)
+        ]
+      },
+      'time_stamp': {
+        'fmt': '{:04}-{:02}-{:02} {:02}:{:02}:{:02}',
+        'args': [
+          years,
+          months,
+          days,
+          hours,
+          mins,
+          secs
+        ]
+      },
+      'contenuto': {
+        'fmt': '{}',
+        'args': [
+          CHAT
+        ]
+      }
+    }
+  }
+
+  return compile(POST_TABLE, max_count=2048)
+
 accounts = compile_accounts()
 generic_users = compile_generic_users(accounts)
 admins = compile_admins(accounts, .1)
@@ -334,3 +371,4 @@ characters = compile_characters(accounts)
 campaigns = compile_campaigns(accounts)
 char_camp_relationship = compile_char_camp_relationship(characters, campaigns)
 reports = compile_reports(accounts)
+posts = compile_posts(campaigns)

@@ -74,28 +74,8 @@ export function isLogged(req, res, next) {
     }
 }
 
-function isPlayerIdNotNull(req,res,next) {
-  canSend = true;
-  
-  const goNext = UserInstance.USER.player_id !== undefined && UserInstance.USER.player_id !== null;
-  
-  if (goNext) {
-    next()
-  }
-  else {
-    sendResponse({
-          status_code: 401,
-          success: false,
-          message: "Player ID è nullo",
-        },
-        res
-      );
-  }
-}
-
 export default {
   validateInfo,
   isLogged,
   canChangeEmail,
-  isPlayerIdNotNull,
 }

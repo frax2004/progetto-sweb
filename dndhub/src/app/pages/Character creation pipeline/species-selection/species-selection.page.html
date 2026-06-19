@@ -10,26 +10,6 @@
     ></app-button>
   </div>
 
-  @if(showClass !== undefined || showLevel !== undefined || selectedSpecies !== undefined) {
-    <div class="showChosen">
-      @if(showClass !== undefined) {
-        <div class="upperDetailsContainer rightBorder">
-          <app-label>Chosen Class: {{showClass}}</app-label>
-        </div>
-      }
-      @if(showLevel !== undefined) {
-        <div class="upperDetailsContainer rightBorder">
-          <app-label>Chosen Level: {{showLevel}}</app-label>
-        </div>
-      }
-      @if(selectedSpecies !== undefined) {
-        <div class="upperDetailsContainer ">
-          <app-label>Chosen Species: {{selectedSpecies}}</app-label>
-        </div>
-      }
-    </div>
-  }
-
   <div class="speciesSelectionFrame">
     <ion-accordion-group class="outerAccordionGroup" value="fatherAccordion" [multiple]="false" expand="inset" animated="true">
       @for (species of speciesArray; track species) {

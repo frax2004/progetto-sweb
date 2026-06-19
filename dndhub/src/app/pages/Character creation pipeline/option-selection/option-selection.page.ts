@@ -61,7 +61,7 @@ export class OptionSelectionPage implements OnInit {
   optEquip = [];
   //
   // charLevel settato a 3 per testing, levare non appena non serve più
-  charLevel = CharacterInstance.chosenLevel = 2;
+  charLevel = CharacterInstance.chosenLevel;
   chosenSubclass: string | undefined = undefined;
   //
   abBonusToChoose: number | undefined;
@@ -119,7 +119,7 @@ export class OptionSelectionPage implements OnInit {
     const validateBGlanguages: boolean = this.BACKGROUNDlanguagesToChoose===0;
     const validateBGoptEquipment: boolean = this.BACKGROUNDoptEquip.length === this.backgroundContent[1].content.length;
     const validateASI: boolean = this.statsToChoose() === 0;
-    const className: string  = 'fighter';//CharacterInstance.chosenClass.toLowerCase();
+    const className = CharacterInstance.chosenClass.toLowerCase();
     const validateSpellSelection = (className!==undefined) && (className === 'bard' || className === 'cleric' || className === 'druid' || className === 'paladin' || className === 'ranger' || className === 'sorcerer' || className === 'warlock' || className === 'wizard');
     if (
       validateRegularProf &&
@@ -145,11 +145,11 @@ export class OptionSelectionPage implements OnInit {
         'wisdom' : 0,
         'charisma' : 0,
       };
-      this.chosenAbBonus.forEach(el => CharacterInstance.setSpeciesAbilityBonusStatistic(el.statName,el.bonus));
+      this.chosenAbBonus.forEach(el => CharacterInstance.chosenAbilityScoreIncrements[el.statName] = el.bonus);
       CharacterInstance.chosenSubspecies = this.chosenSubspecies;
-      CharacterInstance.chosenLanguages = this.chosenLanguages;
       CharacterInstance.chosenBackgroundLanguages = this.BACKGROUNDchosenLanguages;
       CharacterInstance.chosenBackgroundEquipment = this.BACKGROUNDoptEquip;
+
 
       // setto le statistiche
       CharacterInstance.chosenAbilityScoreIncrements = {
@@ -173,8 +173,7 @@ export class OptionSelectionPage implements OnInit {
       //        validateLanguages = ${validateLanguages}
       //        validateSubspecies = ${validateSubspecies}
       //        validateBGlanguages = ${validateBGlanguages} 
-      //        validateBGoptEquipment = ${validateBGoptEquipment}
-      //        validateASI = ${validateASI}`);
+      //        validateBGoptEquipment = ${validateBGoptEquipment}`);
     }
   }
 
@@ -460,7 +459,7 @@ export class OptionSelectionPage implements OnInit {
       let allLanguages= ['Common','Common Sign Language','Draconic','Dwarvish','Elvish','Giant','Gnomish','Goblin','Halfling','Orc','Abyssal','Celestial','Deep Speech','Druidic','Infernal','Primordial','Sylvan','Thieves Cant','Undercommon'];
       if(CharacterInstance.speciesLanguages !== undefined) {
         for(const lang of CharacterInstance.speciesLanguages) {
-          if(allLanguages.includes(lang.name)) allLanguages.splice(allLanguages.indexOf(lang.name),1);
+          if(allLanguages.includes(lang)) allLanguages.splice(allLanguages.indexOf(lang),1);
         }
       }
       return {
@@ -500,15 +499,15 @@ export class OptionSelectionPage implements OnInit {
 
   constructor(private router: Router, private choicesDiplayer: CharacterManagementService) {
     //inizializzo stats too choose
-    this.statsToChoose.set(CharacterInstance.chosenASI * 2);
+    // this.statsToChoose = CharacterInstance.chosenASI * 2;
     //da levare, è così solo per i test
-    // this.statsToChoose.set(6);
+    this.statsToChoose.set(6);
     this.maxStats = this.statsToChoose()
 
     this.choicesDiplayer
     .displayClassByName(
       // scritto così per testing, da levare || quando finiremo coi test
-      CharacterInstance.chosenClass
+      CharacterInstance.chosenClass || 'fighter'
     )
     .subscribe({
       next: (value: any) => {
@@ -529,7 +528,7 @@ export class OptionSelectionPage implements OnInit {
         this.extraProfToChoose = OptionSelectionPage.displayClassProficiencyChoices(value.classes[0].proficiency_choices).extraProficiencies.length === 0 ? 0 : this.regularProfToChoose;
         this.choicesDiplayer
         .displaySpeciesByName(
-          CharacterInstance.chosenSpecies
+          CharacterInstance.chosenSpecies || 'human'
         )
         .subscribe({
           next: (value: any) => {
@@ -550,7 +549,7 @@ export class OptionSelectionPage implements OnInit {
             this.languagestoChoose = value.species[0].language_options?.choose === undefined ? 0 : value.species[0].language_options.choose;
             this.choicesDiplayer
             .displayBackgroundByName(
-              CharacterInstance.chosenBackground
+              CharacterInstance.chosenBackground || 'acolyte'
             )
             .subscribe({
               next: (value: any) => {

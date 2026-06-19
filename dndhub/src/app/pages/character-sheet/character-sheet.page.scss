@@ -1,10 +1,10 @@
 
 .nome,.title{
-font-size: clamp(24px, 4vw, 32px); 
+font-size: clamp(1.5rem, 4vw, 2rem); 
 text-align: center;
 font-weight:bold;
 background-color:#796a47;
-margin-bottom: 3px;
+margin-bottom: 0.2rem;
 }
 .title{
   color:rgb(255, 255, 255);
@@ -18,21 +18,23 @@ border-radius: 8px;
 
 
 .placeholderFrame {
-  width: 250px;
-  height: 350px;
-
+  width: fit-content;
   border: 3px solid #7a4f1d;
-  border-radius: 8px;
+  border-radius: 16px;
   overflow: hidden;
+  min-height: 10vw;
+  max-height: 16.3vw;
+  max-width: 20vw;
 }
 
 .placeholderFrame img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  display: block;
 }
 .gridContainer {
-    height: 42vh;
+    height: 50vw;
 }
 
 .statAccordion {
@@ -42,75 +44,74 @@ border-radius: 8px;
 
 .upperGrid {
   display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 16px;
-  padding: 12px;
-  height: 42vh;
-  background: #796a47; // pergamena base
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  padding: 0.8rem;
+  max-height: 42vw;
+  background: #796a47; 
 }
 
-.right{
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+
 .fight,.species,.informazioni{
   background: #a48625;
   border: 2px solid #7a4f1d;
   border-radius: 8px;
-  padding: 10px;
+  padding: 0.8rem;
   box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
 }
 
 .fight{
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  align-items: center;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  text-align: center;
+
 }
 
 .species{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 8px;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap: 0.5rem;
+  text-align: center;
 }
 .informazioni{
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap: 0.6rem;
+  text-align: center;
 }
 
 .TiriVSmorte {
   background: #a48625;
   border: 2px solid #7a4f1d;
   border-radius: 8px;
-  padding: 10px;
+  padding: 0.8rem;
   box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
   text-align: center;
   align-items: center
 }
 .Tiri {
   display: grid;
-  grid-template-columns: 120px repeat(3, 40px);
+  grid-template-columns: 1fr repeat(3, 20px);
   align-items: center;
-  gap: 6px;
+  gap: 0.4rem;
 }
 
 .TiriGenerici{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 }
 .Ispirazione-Eroica {
   background: #a48625;
   border: 2px solid #7a4f1d;
   border-radius: 8px;
-  padding: 10px;
+  padding: 0.6rem;
   box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
   text-align: center;
   align-items: center;
 }

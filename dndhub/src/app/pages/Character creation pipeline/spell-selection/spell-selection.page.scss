@@ -1,6 +1,22 @@
 .listContainerFrame {
     white-space: pre-wrap;
-    
+
+}
+
+
+.imgbackground {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: url('/assets/icon/spellselectionImage.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.20;
+  z-index:-1;
 }
 
 .spellChoiceFrame {
@@ -8,29 +24,57 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
     align-items: center;
    
 }
 
+.sottotitolo{
+    width: 50%;
+    height: fit-content;
+    margin-inline: auto;
+    margin-bottom: 1rem;
+    text-align: center;
+    justify-content: center;
+    margin-top: 1rem;
+    background-color: #3b2f24;
+    border-radius: 32px;
+}
+
+.cantripsAndSpells{
+    font-family: Copperplate, Copperplate Gothic Light, fantasy;
+    color: #f5e6c8;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 500;    
+}
 
 .typeSpell{
     text-align: center;
     font-size: clamp(1.5rem, 2.5vw, 2rem);
-    color:gold;
-    box-shadow:0 0 10px rgb(93, 80, 9), 0 0 20px rgb(186, 250, 58);
-    text-shadow:0 0 5px rgba(255,215,0,0.8),
-    0 0 10px rgba(255,215,0,0.6),
-    0 0 20px rgba(255,215,0,0.4),
-    0 0 40px rgba(255,215,0,0.2);
+    color: #ff4d2e; 
+    text-shadow:0 0 6px rgba(155, 34, 13, 0.7),
+    0 0 12px rgba(155, 34, 13, 0.5),
+    0 0 20px rgba(255, 34, 11, 0.3);
+    font-weight: 700;
+    background-color: black;
+    box-shadow:0 0 40px rgba(128, 15, 15, 0.8),
+    0 0 30px rgba(128, 15, 15, 0.60),
+    0 0 20px rgba(128, 15, 15, 0.4),
+    0 0 10px rgba(128, 15, 15, 0.20);
+    // color:gold;
+    // box-shadow:0 0 10px rgb(93, 80, 9), 0 0 20px rgb(186, 250, 58);
+    // text-shadow:0 0 5px rgba(255,215,0,0.8),
+    // 0 0 10px rgba(255,215,0,0.6),
+    // 0 0 20px rgba(255,215,0,0.4), c'è un po' troppo giallo però non sono sicuro
+    // 0 0 40px rgba(255,215,0,0.2);
     border-radius: 50px;
+    margin-bottom: 1.5rem;
 }
-
 .checkboxContainer {
     margin-left: 3vw;
-    width: 20px;
-    height: 20px;
+    width: 1.2rem;
+    height: 1.2rem;
     border-radius: 3px;
 }
 
@@ -61,21 +105,36 @@
 }
 
 
+
 .spellDisplayFrame{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-right: 15%;
-    margin-left: 15%;
+    margin-inline: calc(10vw + 10px);
     border: 2px solid gold;
     border-radius: 32px;
-    padding-left: 5%;
-    padding-right: 5%;
-    margin-bottom: 2%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-bottom: 2rem;
     padding-bottom: 1rem;
     font-family: Copperplate, Copperplate Gothic Light, fantasy;
     color: #f5e6c8;
     font-size: clamp(1rem, 2.5vw, 1.4rem);
     font-weight: 500;
     background: linear-gradient(180deg,#4a3928 0%, #3b2f24 50%, #2f241b 100%);
+    box-shadow:  0 0 10px rgba(255, 140, 0, 0.2),0 0 25px rgba(255, 115, 0, 0.25);
+    }
+    
+
+
+
+
+@media (hover: hover) and (pointer: fine) {
+
+    .labelContainer:hover {
+    color: #ff3b3b;
+    text-shadow:0 0 5px #ff3b3b,0 0 10px #ff0000,0 0 20px #ff0000;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+}
 }

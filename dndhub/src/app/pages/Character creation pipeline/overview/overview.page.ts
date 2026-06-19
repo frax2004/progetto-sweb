@@ -218,6 +218,13 @@ export class OverviewPage implements OnInit {
       });
     }
 
+    for(const prof of CharacterInstance.backgroundProficiencies) {
+      profArray.push({
+        idx: prof.index.trim(),
+        name: prof.name
+      })
+    }
+
     for(const prof of CharacterInstance.baseSavingThrows) {
       profArray.push({
         idx: prof.index.trim(),
@@ -246,15 +253,15 @@ export class OverviewPage implements OnInit {
     let langArray = [];
 
     for (const language of CharacterInstance.speciesLanguages) {
-      langArray.push(language.index.trim().replace(' ','-'));
+      langArray.push(language.index.trim().replace('common sign language','common-sign-language').replace(' ','-'));
     }
 
     for (const language of CharacterInstance.chosenLanguages) {
-      langArray.push(language.toLowerCase().trim().replace(' ','-'));
+      langArray.push(language.toLowerCase().trim().replace('common sign language','common-sign-language').replace(' ','-'));
     }
 
     for (const language of CharacterInstance.chosenBackgroundLanguages) {
-      langArray.push(language.toLowerCase().trim().replace(' ','-'));
+      langArray.push(language.toLowerCase().trim().replace('common sign language','common-sign-language').replace(' ','-'));
     }
 
     return langArray;

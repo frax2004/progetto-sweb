@@ -18,9 +18,10 @@ userUtilitiesRouter.post(
   user_controller.setUserInfo
 );
 
+//TODO togliere i commenti dai middleware
 userUtilitiesRouter.post(
   '/get-player-ID',
-  user_middleware.isLogged,
-  user_middleware.isPlayerIdNotNull,
+  // user_middleware.isLogged,
+  // user_middleware.isPlayerIdNotNull,
   user_controller.getLoggedUtenteGiocatore
 );

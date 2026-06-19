@@ -4,7 +4,6 @@
     <div>
       <ion-title class="title">Scheda personaggio</ion-title>
       <ion-title class="nome">Pino Il Ballerino</ion-title>
-      <ion-title>{{characterInfo.health}} - level {{characterInfo.level}}</ion-title>
     </div>
   </div>
 
@@ -38,7 +37,7 @@
       <div class="right">
         <!-- dati mock, da aggiungere col db -->
         <div class="fight">
-          <ion-label>Punti ferita: 20/40 + 5</ion-label>
+          <ion-label>Health Points: {{currHealth}}/{{characterInfo.health}}</ion-label>
           <ion-label>CA:44330</ion-label>
           <ion-label>DadiVita: 50/60</ion-label>
         </div>
@@ -65,23 +64,58 @@
           </div>
         </div>
         <div class="species">
-          <ion-label>Classe:Mago finale</ion-label>
-          <ion-label>Sottoclasse:HoSonno</ion-label>
-          <ion-label>Bonus Competenza: +399</ion-label>
-          <ion-label>Specie:Inferiore</ion-label>
+          <ion-label>Class: {{characterInfo.class}}</ion-label>
+          <ion-label>Subclass: {{characterInfo.subclass}}</ion-label>
+          <ion-label>Proficiency bonus: +{{characterInfo.proficiency_bonus}}</ion-label>
+          <ion-label>Species: {{characterInfo.species}}</ion-label>
+          @if(characterInfo.subspecies !== undefined) {
+            <ion-label>{{characterInfo.subspecies}}</ion-label>
+          }
         </div>
 
         <div class="informazioni">
           <ion-label>Iniziativa: 20 Naturale</ion-label>
-          <ion-label>taglia: pacchione</ion-label>
+          <ion-label>Size: {{characterInfo.size}}</ion-label>
           <ion-label>Percezione Passiva: Ti vedo</ion-label>
-          <ion-label>Velocità: 180 metri</ion-label>
+          <ion-label>Speed: {{characterInfo.speed}} ft</ion-label>
 
         </div>
       </div>
     </div>
   </div>
 
+
+  <div class="statAccordionFrame">
+    <ion-accordion-group class="accordionGroup" value="statAccordionGroup" [multiple]="true" expand="inset" animated="true">
+      @for(abilityScore of abilityScoresInfos; track abilityScore) {
+        <ion-accordion class="statAccordion" [value]="abilityScore.index">
+          <ion-item id="accHeader" slot="header" color="light">
+            @if (abilityScore.imageURL !== undefined) {
+              <ion-thumbnail slot="start">
+                <img id="accImg" alt="placeholder img" [src]="abilityScore.imageURL">
+              </ion-thumbnail>
+            }
+            @else {
+              <ion-thumbnail slot="start">
+                <img alt="placeholder img" [src]="'Card.defaultImageURL()'">
+              </ion-thumbnail>
+            }
+            <h1 class="classTitle">{{abilityScore.full_name}}</h1>
+          </ion-item>
+          <div class="ionPadding" slot="content">
+            <h3>Saving throw: {{abilityScore.saving_throw_value}}</h3>
+            <div class="skillsContainer">
+              @for(skill of abilityScore.skills; track skill) {
+                <div class="skill">
+                  <ion-label>{{skill.name}}: placeholder modifier</ion-label>
+                </div>
+              }
+            </div>
+          </div>
+        </ion-accordion>
+      }
+    </ion-accordion-group>
+  </div>
 
   <!-- adesso una griglia con le statistiche -->
   <!-- le prime tre sono quelle fisiche, le altre quelle mentali

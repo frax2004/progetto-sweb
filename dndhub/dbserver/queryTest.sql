@@ -33,288 +33,238 @@
     )
     VALUES (
       'giovanniDM@gmail.com',
-      'Maurone',
-      22,
+      'Pino',
+      12,
       2,
-      'Maurone @ (giocatore): giovanniDM@gmail.com',
-      'cleric',
-      'life',
-      'human',
+      'Pino @ (giocatore): giovanniDM@gmail.com',
+      'barbarian',
       null,
+      'dwarf',
+      'hill-dwarf',
       'acolyte',
-      4,
+      1,
       15,
-      8,
-      4,
-      4,
-      3,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      30,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      25,
       'Medium',
       'Shelter of the Faithful',
       null
       );
       
       
-      INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Warding Bond',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
-        0
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Enhance Ability',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
-        1
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Aid',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
-        2
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Inflict Wounds',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
-        3
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Detect Evil and Good',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
-        4
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Purify Food and Drink',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
-        5
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Shield of Faith',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
-        6
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Silence',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
-        7
-      );
-          INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-          'Guidance',
-          'Maurone @ (giocatore): giovanniDM@gmail.com',
-          8
-        );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-          'Light',
-          'Maurone @ (giocatore): giovanniDM@gmail.com',
-          9
-        );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-          'Mending',
-          'Maurone @ (giocatore): giovanniDM@gmail.com',
-          10
-        );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-          'Resistance',
-          'Maurone @ (giocatore): giovanniDM@gmail.com',
-          11
-        );;
+      ;
   
       INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'clothes-common',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'pouch',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'shield',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'explorers-pack',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'clothes-common',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'javelin',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         3
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'pouch',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'clothes-common',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         4
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'mace',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'pouch',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         5
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'scale mail',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'greataxe',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         6
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'handaxe',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         7
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'explorer’s pack',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
-        8
-      );
-INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'holy symbols',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
-        9
+        'Pino @ (giocatore): giovanniDM@gmail.com',
+        8
       );;
   
       INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
         'common',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'celestial',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'dwarvish',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'sylvan',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'giant',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'undercommon',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'common-sign-language',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         3
       );;
   
       INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'str',
-        15,
+        14,
         2,
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'dex',
-        9,
-        -1,
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        12,
+        1,
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'con',
         11,
         0,
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'int',
-        14,
-        2,
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        11,
+        0,
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         3
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'wis',
-        18,
-        4,
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        15,
+        2,
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         4
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'cha',
-        13,
-        1,
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        7,
+        -2,
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         5
       );;
       
       INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'light armor',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'medium armor',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'shields',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'simple weapons',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         3
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'saving throw: wisdom',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'martial weapons',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         4
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'saving throw: charisma',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'skill: insight',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         5
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'skill: religion',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         6
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'skill: medicine',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'saving throw: strength',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         7
+      );
+INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
+        'saving throw: constitution',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
+        8
+      );
+INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
+        'skill: intimidation',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
+        9
+      );
+INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
+        'skill: animal handling',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
+        10
       );;
   
-      ;
-  
       INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'spellcasting-cleric',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'darkvision',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'divine-domain',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'dwarven-resilience',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'domain-spells-1',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'stonecunning',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'channel-divinity-1-rest',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'dwarven-combat-training',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         3
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'channel-divinity-turn-undead',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
+        'tool-proficiency',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
         4
+      );;
+  
+      INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'rage',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
+        0
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'divine-domain-improvement-1',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
-        5
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'domain-spells-2',
-        'Maurone @ (giocatore): giovanniDM@gmail.com',
-        6
+        'barbarian-unarmored-defense',
+        'Pino @ (giocatore): giovanniDM@gmail.com',
+        1
       );;
       
       COMMIT;

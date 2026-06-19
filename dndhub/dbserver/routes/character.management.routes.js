@@ -21,9 +21,22 @@ characterManagementRouter.post("/insert-character",
     controller.insertCharacter
 );
 characterManagementRouter.post("/get-ability-scores", controller.getAbilityScores);
-characterManagementRouter.post("/get-character_by_idx", 
-    authMiddleware.isLogged,
+//TODO togliere commenti dai middleware
+characterManagementRouter.post("/get-character-by-idx", 
+    // authMiddleware.isLogged,
     characterMiddleware.doesCharacterExist,
     controller.getCharacterByIdx
+);
+//togliere commenti dai middleware
+characterManagementRouter.post("/get-character-stats",
+    // authMiddleware.isLogged,
+    characterMiddleware.doesCharacterExist,
+    controller.getCharacterAbilityScores
+);
+//togliere commenti dai middleware
+characterManagementRouter.post("/get-character-proficiencies",
+    // authMiddleware.isLogged,
+    characterMiddleware.doesCharacterExist,
+    controller.getCharacterProficiencies
 );
 // characterManagementRouter

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonCheckbox, IonItem, IonGrid, IonCol, IonRow, IonLabel, IonList, PopoverController } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCheckbox, IonItem, IonGrid, IonCol, IonRow, IonLabel, IonList, PopoverController, IonAccordionGroup, IonAccordion, IonThumbnail } from '@ionic/angular/standalone';
 import { CheckboxComponent } from "src/app/components/checkbox/checkbox.component";
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
@@ -18,14 +18,34 @@ import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
   templateUrl: './character-sheet.page.html',
   styleUrls: ['./character-sheet.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar,IonCheckbox ,CommonModule, FormsModule, IonItem, IonGrid, IonCol, IonRow, IonLabel, CheckboxComponent, AccordionComponent, IonList, UnorderedListElementComponent, EntryComponent, ButtonComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonCheckbox, CommonModule, FormsModule, IonItem, IonGrid, IonCol, IonRow, IonLabel, CheckboxComponent, AccordionComponent, IonList, UnorderedListElementComponent, EntryComponent, ButtonComponent, IonAccordionGroup, IonAccordion, IonThumbnail]
 })
 export class CharacterSheetPage implements OnInit {
 
   playerID;
   // characterName in teoria dovrà essere passato da fuori
-  characterName = 'qualcosa';
-  characterInfo: any;
+  characterName = 'Maurone';
+  currHealth: number = 0;
+  //devo definirlo così altrimenti ho problemi
+  characterInfo: any = {
+    health: undefined,
+    proficiency_bonus: undefined,
+    class: undefined,
+    subclasse: undefined,
+    species: undefined,
+    subspecies: undefined,
+    background: undefined,
+    level: undefined,
+    gold_quantity: undefined,
+    speed: undefined,
+    size: undefined,
+    extra_abilities: undefined,
+    character_description: undefined,
+    image: undefined,
+  };
+  characterStats = [];
+  characterProficiencies: any[];
+  abilityScoresInfos: any[];
 
   accordions = {
     // per qualche motivo \n non va a capo e neanche <br/>
@@ -54,12 +74,29 @@ changeCallback={
   changes:{onClick: Alerts.notImplemetedError}
 }
   
+  static generateSavingThrowValues(statModifier: number, profBonus: number, statName: string, proficiencies: string[]) {
+    for(const el of proficiencies) {
+      if (el.includes(statName.toLowerCase()) && el.includes('saving throw')) return statModifier + profBonus; 
+    }
+
+    return statModifier;
+  }
+
+  static getStatModifierByIndex(index: string, statsArray: any[]) {
+    for (const el of statsArray) {
+      if (el.index === index) return el.stat_modifier;
+    }
+
+    return 0;
+  }
+
   constructor(public popoverController: PopoverController, private router: Router, private characterServices: CharacterManagementService, private userServices: UserUtilitiesService) {
     this.userServices
     .getPlayerID()
     .subscribe({
       next: (value: any) => {
-        this.playerID = value.utente_giocatore;
+        // ?? da levare dopo tests
+        this.playerID = value.utente_giocatore ?? '(giocatore): giovanniDM@gmail.com';
         const idx_personaggio = `${this.characterName} @ ${this.playerID}`;
         this.characterServices
         .getCharacterByIdx(idx_personaggio)
@@ -69,7 +106,7 @@ changeCallback={
               health: value.character.punti_vita,
               proficiency_bonus: value.character.bonus_competenza,
               class: value.character.classe,
-              subclasse: value.character.sottoclasse,
+              subclass: value.character.sottoclasse || 'none',
               species: value.character.specie,
               subspecies: value.character.subspecies,
               background: value.character.background,
@@ -82,21 +119,71 @@ changeCallback={
               character_description: value.character.descrizione_personaggio,
               image: value.character.imgURL,
             };
+            this.currHealth = this.characterInfo.health;
+            //prendo statistiche personaggio
+            this.characterServices
+            .getCharacterAbilityScores(idx_personaggio)
+            .subscribe({
+              next: (value: any) => {
+                for (const item of value.stats) {
+                  this.characterStats.push({
+                    index: item.stat_idx,
+                    stat_value: item.stat_value,
+                    stat_modifier: item.stat_modifier
+                  });
+                }
+                // this.characterStats = value.stats.map(async function (item: any) {
+                //   return {
+                //     index: item.stat_idx,
+                //     stat_value: item.stat_value,
+                //     stat_modifier: item.stat_modifier
+                //   };
+                // });
+                //adesso prendo le competenze dal db
+                this.characterServices
+                .getCharacterProficiencies(idx_personaggio)
+                .subscribe({
+                  next: (value: any) => {
+                    this.characterProficiencies = value.proficiencies.map(item => item.proficiency);
+                    //prendo ability scores dal db
+                    this.characterServices
+                    .getAbilityScores()
+                    .subscribe({
+                      next: (value: any) => {
+                        this.abilityScoresInfos = value.ability_scores.map(function (item: any) {
+                          return {
+                            index: item.index,
+                            name: item.name,
+                            full_name: item.full_name,
+                            saving_throw_value: CharacterSheetPage.generateSavingThrowValues(
+                              CharacterSheetPage.getStatModifierByIndex(item.index,this.characterStats),
+                              this.characterInfo.proficiency_bonus,
+                              item.full_name,
+                              this.characterProficiencies
+                            ),
+                            //ricorda che è un array di APIreference con index e name
+                            skills: item.skills,
+                            imageURL: undefined,
+                          };
+                        });
+                      },
+                      error: (err) => Alerts.error(err.error)
+                    });
+                  },
+                  error: (err) => Alerts.error(err.error)
+                });
+
+
+              },
+              error: (err) => Alerts.error(err.error)
+            });
           },
-          error: (err) => Alerts.error(err.error.message)
-        })
+          error: (err) => Alerts.error(err)
+        });
       },
-      error: (err) => Alerts.error(err.error.message)
+      error: (err) => Alerts.error(err)
     });
     
-    this.characterServices
-    .getAbilityScores()
-    .subscribe({
-      next: (value: any) => {
-
-      },
-      error: (err) => Alerts.error(err.error.message)
-    });
   }
 
   ngOnInit() {

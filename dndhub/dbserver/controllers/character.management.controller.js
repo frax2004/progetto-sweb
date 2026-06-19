@@ -524,10 +524,10 @@ async function insertCharacter(req,res) {
       ${levelSpecifics.proficiency_bonus},
       '${idx_personaggio}',
       '${characterClass.toLowerCase()}',
-      ${subclass !== undefined ? `'${subclass.toLowerCase()}'` : null},
+      ${subclass !== undefined ? `'${subclass.toLowerCase().replace(' ','-')}'` : null},
       '${species.toLowerCase()}',
-      ${subspecies !== undefined ? `'${subspecies.toLowerCase()}'` : null},
-      '${background.toLowerCase()}',
+      ${subspecies !== undefined ? `'${subspecies.toLowerCase().replace(' ','-')}'` : null},
+      '${background.toLowerCase().replace(' ','-')}',
       ${level},
       ${startingGold.quantity},
       ${spellsKnown !== undefined ? spellsKnown : null},
@@ -616,7 +616,7 @@ function getAbilityScores(req,res) {
   });
 }
 
-async function getCharacterByIdx(req,res) {
+function getCharacterByIdx(req,res) {
   canSend = true;
 
   const idx = req.body.idx_personaggio;
@@ -642,6 +642,57 @@ async function getCharacterByIdx(req,res) {
   });
 }
 
+function getCharacterAbilityScores(req,res) {
+  canSend = true;
+
+  const idx = req.body.idx_personaggio;
+
+  DatabaseQueries.retrieve(`SELECT * FROM ArrayStatsItem WHERE idx_personaggio = '${idx}'`, (el) => el)
+  .catch(err => {
+    sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare le statistiche dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then(stats => {
+    sendResponse({
+        stats: stats,
+        status_code: 200,
+        success: true,
+        message: 'Statistiche caricate con successo'
+      },
+      res
+    );
+  });
+}
+
+function getCharacterProficiencies(req,res) {
+  canSend = true;
+
+  const idx = req.body.idx_personaggio;
+
+  DatabaseQueries.retrieve(`SELECT * FROM ArrayProficienciesItem WHERE idx_personaggio = '${idx}'`, (el) => el)
+  .catch(err => {
+    sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare le competenze dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then(profs => {
+    sendResponse({
+        proficiencies: profs,
+        status_code: 200,
+        success: true,
+        message: 'Competenze caricate con successo'
+      },
+      res
+    );
+  });
+}
 
 export default {
   displayClasses,
@@ -656,4 +707,6 @@ export default {
   insertCharacter,
   getAbilityScores,
   getCharacterByIdx,
+  getCharacterAbilityScores,
+  getCharacterProficiencies,
 }

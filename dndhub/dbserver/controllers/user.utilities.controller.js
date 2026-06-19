@@ -163,7 +163,7 @@ function getLoggedUtenteGiocatore(req,res) {
     status_code: 200,
     success:true,
     message: 'Id utente giocatore caricato con successo',
-    utente_giocatore: UserInstance.USER.player_id,
+    utente_giocatore: UserInstance?.USER?.player_id,
   }, res);
 }
 

@@ -36,6 +36,7 @@ export class BackgroundSelectionPage implements OnInit {
           CharacterInstance.backgroundEquipment = background.equipment;
           CharacterInstance.backgroundFeature = background.feature;
           CharacterInstance.backgroundStartingGold = background.starting_gold;
+          CharacterInstance.backgroundProficiencies = background.starting_proficiencies;
         }
       }
       CharacterInstance.chosenBackground = this.selectedBackground;
@@ -110,6 +111,18 @@ export class BackgroundSelectionPage implements OnInit {
     return retArray;
   }
 
+  static generateProficiencies(proficiencies: dnd.APIReference[]) {
+    let retArray = [];
+    for (const el of proficiencies) {
+      retArray.push({
+        index: el.index,
+        name: el.name,
+      });
+    }
+
+    return retArray;
+  }
+
   static displayLanguages(bgName, languages: dnd.Choice) {
     let retValue = bgName + ' can choose ' + languages.choose + ' languages among the following:\n';
     for(const lang of this.allLanguages) {
@@ -159,6 +172,7 @@ export class BackgroundSelectionPage implements OnInit {
             name: item.name,
             btnCtx: createButton(item.name),
             starting_gold: item.starting_gold,
+            starting_proficiencies: BackgroundSelectionPage.generateProficiencies(item.starting_proficiencies),
             feature: item.feature,
             equipment: BackgroundSelectionPage.generateBaseEquipment(item.starting_equipment),
             content: [

@@ -43,6 +43,15 @@ export class StatsSelectionPage implements OnInit {
     [ { stat: 'strength', value: 10}, { stat: 'dexterity', value: 14}, { stat: 'constitution', value: 8}, {stat: 'intelligence', value: 13}, {stat: 'wisdom', value: 12}, {stat:'charisma', value: 15}], 
   ]
   
+statColors: any = {
+  strength: 'red',
+  dexterity: 'green',
+  constitution: 'brown',
+  intelligence: 'blue',
+  wisdom: 'purple',
+  charisma: 'gold'
+};
+
   stdArraySetStats(statsArray) {
     if (this.stdArray === false) return;
     for (const statistic of statsArray) {

@@ -5,16 +5,18 @@ import { IonContent, IonHeader, IonTitle, IonToolbar,IonCheckbox, IonItem, IonGr
 import { CheckboxComponent } from "src/app/components/checkbox/checkbox.component";
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
-import { Navigate, Popups } from 'src/app/core/core';
+import { Alerts, Navigate, Popups } from 'src/app/core/core';
 import { EntryComponent } from "src/app/components/entry/entry.component";
 import { Router } from '@angular/router';
+import { ButtonComponent } from 'src/app/components/button/button.component';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-character-sheet',
   templateUrl: './character-sheet.page.html',
   styleUrls: ['./character-sheet.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar,IonCheckbox ,CommonModule, FormsModule, IonItem, IonGrid, IonCol, IonRow, IonLabel, CheckboxComponent, AccordionComponent, IonList, UnorderedListElementComponent, EntryComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar,IonCheckbox ,CommonModule, FormsModule, IonItem, IonGrid, IonCol, IonRow, IonLabel, CheckboxComponent, AccordionComponent, IonList, UnorderedListElementComponent, EntryComponent, ButtonComponent]
 })
 export class CharacterSheetPage implements OnInit {
   accordions = {
@@ -35,10 +37,20 @@ export class CharacterSheetPage implements OnInit {
   buttonCallbacks = {
     placeholder: { onClick: Navigate.toPath(this.router,'character-spells')},
   };
+
+  deleteCallback ={
+    deletePG:{onClick: Alerts.notImplemetedError}
+  }
+
+changeCallback={
+  changes:{onClick: Alerts.notImplemetedError}
+}
   
   constructor(public popoverController: PopoverController, private router: Router) { }
 
   ngOnInit() {
-  }
+}
 
 }
+
+

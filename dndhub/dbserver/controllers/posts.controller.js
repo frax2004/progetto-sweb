@@ -17,13 +17,14 @@ function sendResponse(obj, res) {
 
 function getPosts(req, res) {
   canSend = true;
-
+  console.log("non funziona niente")
   const idx_campagna = req.campagna; // lo posso passare così perché già ho 
   // il risultato del db fatto dal middleware
   const db = Database.INSTANCE;
 
   const postCallback = (err, rows) => {
     if (err) {
+
       sendResponse(PostsResponses.POSTS_FETCH_ERROR, res); // le risposte di errore generico
     } else {
       sendResponse(

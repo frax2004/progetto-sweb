@@ -90,7 +90,7 @@
                           <app-label>{{weapon}} + shield</app-label>
                         </div>
                         <div class="checkboxContainer">
-                          <input class="genericCheckbox" type="checkbox" [value]="weapon" [id]="weapon + 'shield'" (click)="addOptionalEquipment(weapon + '+shield',opt.index, weapon + '+shield')">
+                          <input class="genericCheckbox" type="checkbox" [value]="weapon" [id]="weapon + 'shield'" (click)="addOptionalEquipment(weapon + 'shield',opt.index, weapon + 'shield')">
                         </div>
                       </div>
                     }
@@ -150,7 +150,7 @@
             }
 
 
-            @if(option.title === 'Subclasses' && charLevel >= 3) {
+            @if(option.title === 'Subclasses') {
               <h3>{{option.title}}</h3>
               <app-label class="choiceTitleLabel">Choose 1 of the following:</app-label>
               @for(subclass of option.content; track subclass) {

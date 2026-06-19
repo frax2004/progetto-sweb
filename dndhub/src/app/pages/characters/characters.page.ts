@@ -19,7 +19,7 @@ export class CharactersPage implements OnInit {
 
   buttonCallbacks = {
     goToCampaigns: { onClick: Popups.ofSimpleText(this.popupController, "Hello, World") },
-    createChar: { onClick: Navigate.toPath(this.router, '/character-creation-info') },
+    createChar: { onClick: Navigate.toPath(this.router, '/class-selection') },
   };
 
   img = Card.defaultImageURL();

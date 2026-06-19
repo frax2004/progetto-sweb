@@ -54,64 +54,10 @@ export class OverviewPage implements OnInit {
   'I punti ferita del personaggio saranno: ' + this.calcAverageHP() + ' - ' + ((StatModifierNumber[this.finalStatistics['constitution']] * CharacterInstance.chosenLevel) * (-1)) + ' = ' + (this.calcAverageHP() + (StatModifierNumber[this.finalStatistics['constitution']] * CharacterInstance.chosenLevel));
 
   previousPage = () => {
-    const className = CharacterInstance.chosenClass.toLowerCase();
+    const className = CharacterInstance.chosenClass.toLowerClass();
     const validateSpellSelection = (className!==undefined) && (className === 'bard' || className === 'cleric' || className === 'druid' || className === 'paladin' || className === 'ranger' || className === 'sorcerer' || className === 'warlock' || className === 'wizard');
     if (validateSpellSelection) this.router.navigate(['spell-selection']);
     else this.router.navigate(['option-selection']);
-  }
-
-
-  completeChar = () => {
-    if (this.averageHP === true) {
-      this.chosenHP = this.calcAverageHP();
-    }
-    else {
-      if (this.hpEntry.value>=this.minHP() && this.hpEntry.value<=this.maxHP()) {
-        this.chosenHP = this.hpEntry.value;
-      }
-      else {
-        Alerts.personalizedMessage('The inserted Hit Points value is not valid, please insert a value within range','Chosen Hit Points invalid')
-        return undefined;
-      }
-    }
-
-    for (const stat of this.finalStatistics) {
-      CharacterInstance.setStatistics(stat.statName,stat.value);
-    }
-
-    this.characterManagement
-    .insertCharacter(
-      this.characterName,
-      this.chosenHP,
-      this.imgURL,
-      CharacterInstance.chosenClass,
-      CharacterInstance.chosenSubclass,
-      CharacterInstance.chosenSpecies,
-      CharacterInstance.chosenSubspecies,
-      CharacterInstance.chosenBackground,
-      CharacterInstance.chosenLevel,
-      CharacterInstance.levelSpecifics,
-      this.allEquipmentArray,
-      this.allProficienciesArray,
-      this.allLanguagesArray,
-      CharacterInstance.speciesTraits,
-      CharacterInstance.speciesSpeed,
-      CharacterInstance.speciesSize,
-      CharacterInstance.backgroundStartingGold,
-      CharacterInstance.backgroundFeature,
-      CharacterInstance.statistics,
-      CharacterInstance.spellsKnown,
-      CharacterInstance.cantripsKnown,
-      CharacterInstance.chosenSpells,
-      CharacterInstance.chosenCantrips
-    ).subscribe({
-      next: (value: any) => {
-        Alerts.personalizedMessage('GOOOOOOODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOQOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO','PERSONAGGIO CARICATO!');
-      },
-      error: (err) => {
-        Alerts.message(err.error.message);
-      }
-    });
   }
 
   buttonCallbacks = {
@@ -167,105 +113,13 @@ export class OverviewPage implements OnInit {
 
   static generateAllEquipment() {
     //da finire
-    for(const equip of CharacterInstance.backgroundEquipment) {
-      equipArray.push({
-        idx: equip.index.trim(),
-        quantity: equip.quantity,
-      });
-    }
-
-    for(const equip of CharacterInstance.baseEquipment) {
-      equipArray.push({
-        idx: equip.index.trim(),
-        quantity: equip.quantity,
-      });
-    }
-
-    for(const equip of CharacterInstance.backgroundEquipment) {
-      equipArray.push({
-        idx: equip.index.trim(),
-        quantity: equip.quantity,
-      });
-    }
-
-    //questi ultimi due array sono salvati in maniera diversa
-    for(const equip of CharacterInstance?.chosenOptionalEquipment) {
-      if (equip.includes('+')) {
-        for (const subEquip of equip.split('+')) {
-          equipArray.push({
-            idx: subEquip.toLowerCase().trim(),
-            quantity: 1,
-          });    
-        }
-      }
-      else {
-        equipArray.push({
-          idx: equip.toLowerCase().trim(),
-          quantity: 1,
-        });
-      }
-    }
-
-    for(const equip of CharacterInstance?.chosenBackgroundEquipment) {
-      equipArray.push({
-        idx: equip.toLowerCase().trim(),
-        quantity: 1,
-      });
-    }
-
-    return equipArray;
-  }
-
-  static generateAllProficiencies() {
-    let profArray = [];
-
-    for(const prof of CharacterInstance.baseProficiencies) {
-      profArray.push({
-        idx: prof.index.trim(),
-        name: prof.name,
-      });
-    }
-
-    for(const prof of CharacterInstance.baseSavingThrows) {
-      profArray.push({
-        idx: prof.index.trim(),
-        name: prof.fullName,
-      });
-    }
-
-    for(const prof of CharacterInstance.chosenRegularProficiencies) {
-      profArray.push({
-        idx: prof.toLowerCase().trim(),
-        name: prof,
-      });
-    }
-
-    for(const prof of CharacterInstance.chosenExtraProficiencies) {
-      profArray.push({
-        idx: prof.toLowerCase().trim(),
-        name: prof,
-      });
-    }
-
-    return profArray;
-  }
-
-  static generateAllLanguages() {
-    let langArray = [];
-
-    for (const language of CharacterInstance.speciesLanguages) {
-      langArray.push(language.index.trim());
-    }
-
-    for (const language of CharacterInstance.chosenLanguages) {
-      langArray.push(language.toLowerCase().trim());
-    }
-
-    for (const language of CharacterInstance.chosenBackgroundLanguages) {
-      langArray.push(language.toLowerCase().trim());
-    }
-
-    return langArray;
+    CharacterInstance.backgroundEquipment.array.forEach(element => console.log(element));
+    console.log('\n-----------\n');
+    CharacterInstance.baseEquipment.array.forEach(element => console.log(element));
+    console.log('\n-----------\n');
+    CharacterInstance.chosenOptionalEquipment.array.forEach(element => console.log(element));
+    console.log('\n-----------\n');
+    CharacterInstance.chosenBackgroundEquipment.array.forEach(element => console.log(element));
   }
 
   constructor(private router: Router, public popoverController: PopoverController, private characterManagement: CharacterManagementService) { 

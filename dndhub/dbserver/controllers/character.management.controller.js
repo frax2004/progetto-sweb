@@ -1,8 +1,5 @@
-import { UserInstance } from "../global.context.js";
 import { Database } from "../database.js";
 import { DatabaseQueries } from "../database.queries.ts";
-import fs from 'fs';
-import { freemem } from "os";
 
 
 let canSend = true;
@@ -44,7 +41,6 @@ async function unwrapLevelSpecific(levelRow) {
 }
 
 async function displayLevelByNameAndLevel(req, res) {
-  canSend = true;
   // lower case fatto in caso eventuale di errori
   const className = req.body.className.toLowerCase();
   // non voglio sottoclassi quindi subclass is null in query
@@ -59,15 +55,6 @@ async function displayLevelByNameAndLevel(req, res) {
       lvlsArray.push(await unwrapLevelSpecific((await levelInfo)[0]));
       //console.log(lvlsArray[level-1]);
     } 
-
-    sendResponse({
-        levels: lvlsArray,
-        status_code: 200,
-        success: true,
-        message: 'Livelli caricati con successo'
-      },
-      res
-    );
   }
   catch(err) {
     console.log(err);
@@ -77,10 +64,20 @@ async function displayLevelByNameAndLevel(req, res) {
       success: false,
     }, res);
   }
+
+  // arrivo qui se non ci sono stati problemi
+  sendResponse({
+      levels: lvlsArray,
+      status_code: 200,
+      success: true,
+      message: 'Livelli caricati con successo'
+    },
+    res
+  );
+  
 }
 
 async function displayLevelRowByClassAndLevel(req,res) {
-  canSend = true;
   const className = req.body.className.toLowerCase();
   const level = req.body.level;
 
@@ -92,15 +89,7 @@ async function displayLevelRowByClassAndLevel(req,res) {
     // console.log(await levelInfo);
 
     levelRow = await unwrapLevelSpecific((await levelInfo)[0]);
-  
-    sendResponse({
-        level: levelRow,
-        status_code: 200,
-        success: true,
-        message: 'Livelli caricati con successo'
-      },
-      res
-    );
+    console.log(levelRow);
   }
   catch (err) {
     console.log(err);
@@ -110,6 +99,16 @@ async function displayLevelRowByClassAndLevel(req,res) {
       success: false,
     }, res);
   }
+
+  // arrivo qui se non ci sono stati problemi
+  sendResponse({
+      level: levelRow,
+      status_code: 200,
+      success: true,
+      message: 'Livelli caricati con successo'
+    },
+    res
+  );
 }
 
 export function displayClasses(req, res) {
@@ -134,6 +133,8 @@ export function displayClasses(req, res) {
       res
     );
   });
+
+  canSend = true;
 }
 
 async function unwrapSubspecies(subspecies) {
@@ -193,12 +194,6 @@ async function displaySpecies(req,res) {
       // da levare è solo per debug
       // console.log(speciesArray[speciesArray.length-1]);
     }
-    sendResponse({
-      status_code: 200,
-      message: 'Speci caricate con successo',
-      success: true,
-      species: speciesArray,
-    }, res);
   }
   catch (err) {
     console.log(err);
@@ -207,10 +202,19 @@ async function displaySpecies(req,res) {
       message: 'Non è stato possibile caricare le speci dal database',
       success: false,
     }, res);
+    return;
   }
+
+  //arrivo qui se non ci sono stati problemi
+  sendResponse({
+    status_code: 200,
+    message: 'Speci caricate con successo',
+    success: true,
+    species: speciesArray,
+  }, res);
 }
 
-function displayBackgrounds(req,res) {
+async function displayBackgrounds(req,res) {
   canSend=true;
 
   DatabaseQueries.retrieve("SELECT * FROM Background", DatabaseQueries.unwrapBackground)
@@ -234,7 +238,7 @@ function displayBackgrounds(req,res) {
   });
 }
 
-function displaySpellsByClass(req,res) {
+async function displaySpellsByClass(req,res) {
   canSend=true;
 
   const className = req.body.className.toLowerCase();
@@ -261,7 +265,7 @@ function displaySpellsByClass(req,res) {
   });
 }
 
-function displayClassByName(req,res) {
+async function displayClassByName(req,res) {
   canSend = true;
 
   const class_idx = req.body.className.toLowerCase();
@@ -287,7 +291,7 @@ function displayClassByName(req,res) {
   });
 }
 
-function displaySpeciesByName(req,res) {
+async function displaySpeciesByName(req,res) {
   canSend = true;
 
   const species_idx = req.body.speciesName.toLowerCase();
@@ -313,7 +317,7 @@ function displaySpeciesByName(req,res) {
   });
 }
 
-function displayBackgroundByName(req,res) {
+async function displayBackgroundByName(req,res) {
   canSend = true;
 
   const bg_idx = req.body.bgName.toLowerCase();
@@ -339,311 +343,6 @@ function displayBackgroundByName(req,res) {
   });
 }
 
-function insertSpells(idx_personaggio,spells,cantrips,res) {
-  //funzione di appoggio per insertCharacter
-
-  if (spells === undefined || spells === null) return '';
-
-  let array_idx = 0;
-
-  let finalSpellsQuery = spells.map((spell) => `INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        '${spell.name}',
-        '${idx_personaggio}',
-        ${array_idx++}
-      );`
-    );
-
-  if (cantrips === undefined || cantrips === null) return finalSpellsQuery.join('\n');
-    
-  let finalCantripsQuery = cantrips.map((cantrip) => `INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-          '${cantrip.name}',
-          '${idx_personaggio}',
-          ${array_idx++}
-        );`
-  );
-
-
-  return `${finalSpellsQuery.join('\n')}
-          ${finalCantripsQuery.join('\n')}`;
-}
-
-function insertEquipment(idx_personaggio,equipment,res) {
-  //funzione di appoggio per insertCharacter
-
-  let finalQuery = equipment.map((equip,array_idx) => `INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        '${equip.idx}',
-        '${idx_personaggio}',
-        ${array_idx}
-      );`
-    );
-
-
-  return finalQuery.join('\n');
-}
-
-function insertLanguage(idx_personaggio,languages,res) {
-  //funzione di appoggio per insertCharacter
-
-  let finalQuery = languages.map((lang,array_idx) => `INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        '${lang}',
-        '${idx_personaggio}',
-        ${array_idx}
-      );`
-    );
-
-  return finalQuery.join('\n');
-}
-
-function insertStats(idx_personaggio,statistics,res) {
-  //funzione di appoggio per insertCharacter
-  const statsName = ['strength',
-  'dexterity',
-  'constitution',
-  'intelligence',
-  'wisdom',
-  'charisma' ];
-
-  let finalQuery = statsName.map((stat,array_idx) => {
-    const statIdx = stat === 'strength' ? 'str' :
-                    stat === 'dexterity' ? 'dex' :
-                    stat === 'constitution' ? 'con' :
-                    stat === 'intelligence' ? 'int' :
-                    stat === 'wisdom' ? 'wis' : 'cha';
-    return `INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
-        '${statIdx}',
-        ${statistics[stat].value},
-        ${statistics[stat].modifier},
-        '${idx_personaggio}',
-        ${array_idx}
-      );`;
-  });
-  
-
-  return finalQuery.join('\n');
-}
-
-function insertFeats(idx_personaggio,feats,res) {
-  //funzione di appoggio per insertCharacter
-
-  if (feats === undefined || feats === null) return '';
-
-  let finalQuery = feats.map((feat,array_idx) => `INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        '${feat}',
-        '${idx_personaggio}',
-        ${array_idx}
-      );`
-  );
-
-
-  return finalQuery.join('\n');
-}
-
-function insertProficiencies(idx_personaggio,proficiencies,res) {
-  //funzione di appoggio per insertCharacter
-
-  let finalQuery = proficiencies.map((prof,array_idx) => `INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        '${prof.name.toLowerCase()}',
-        '${idx_personaggio}',
-        ${array_idx}
-      );`
-    );
-
-
-  return finalQuery.join('\n');
-}
-
-async function insertCharacter(req,res) {
-  canSend = true;
-
-  const name = req.body.name;
-  const healthPoints = req.body.healthPoints;
-  const imgURL = req.body.imgURL;
-  const characterClass = req.body.characterClass;
-  const subclass = req.body.subclass;
-  const species = req.body.species;
-  const subspecies = req.body.subspecies;
-  const background = req.body.background;
-  const level = req.body.level;
-  const levelSpecifics = req.body.levelSpecifics;
-  const equipment = req.body.equipment;
-  const proficiencies = req.body.proficiencies;
-  const languages = req.body.languages;
-  const speciesTraits = req.body.speciesTraits;
-  const speed = req.body.speed;
-  const size = req.body.size;
-  const startingGold = req.body.startingGold;
-  const backgroundFeature = req.body.backgroundFeature;
-  const statistics = req.body.statistics;
-  const spellsKnown = req.body.spellsKnown;
-  const cantripsKnown = req.body.cantripsKnown;
-  const spells = req.body.spells;
-  const cantrips = req.body.cantrips;
-
-  const idx_personaggio = `${name} @ ${UserInstance.USER.player_id}`;
-  const utente_generico = UserInstance.USER.email;
-
-  //log di testing, da levare dopo
-  console.log('idx_personaggio: ' + idx_personaggio);
-
-  try {
-    const insertCharQuery = `
-    BEGIN TRANSACTION;
-
-
-    INSERT OR IGNORE INTO Personaggio (
-      utente_generico,
-      nome,
-      punti_vita,
-      bonus_competenza,
-      idx_personaggio,
-      classe,
-      sottoclasse,
-      specie,
-      sottospecie,
-      background,
-      livello,
-      quantita_oro,
-      numero_incantesimi,
-      numero_trucchetti,
-      slot_livello_1,
-      slot_livello_2,
-      slot_livello_3,
-      slot_livello_4,
-      slot_livello_5,
-      slot_livello_6,
-      slot_livello_7,
-      slot_livello_8,
-      slot_livello_9,
-      velocita,
-      taglia,
-      abilita_extra,
-      imgURL
-    )
-    VALUES (
-      '${utente_generico}',
-      '${name}',
-      ${healthPoints},
-      ${levelSpecifics.proficiency_bonus},
-      '${idx_personaggio}',
-      '${characterClass.toLowerCase()}',
-      ${subclass !== undefined ? `'${subclass.toLowerCase()}'` : null},
-      '${species.toLowerCase()}',
-      ${subspecies !== undefined ? `'${subspecies.toLowerCase()}'` : null},
-      '${background.toLowerCase()}',
-      ${level},
-      ${startingGold.quantity},
-      ${spellsKnown !== undefined ? spellsKnown : null},
-      ${cantripsKnown !== undefined ? cantripsKnown : null},
-      ${levelSpecifics.spell_slots_level_1 !== undefined ? levelSpecifics.spell_slots_level_1 : null},
-      ${levelSpecifics.spell_slots_level_2 !== undefined ? levelSpecifics.spell_slots_level_2 : null},
-      ${levelSpecifics.spell_slots_level_3 !== undefined ? levelSpecifics.spell_slots_level_3 : null},
-      ${levelSpecifics.spell_slots_level_4 !== undefined ? levelSpecifics.spell_slots_level_4 : null},
-      ${levelSpecifics.spell_slots_level_5 !== undefined ? levelSpecifics.spell_slots_level_5 : null},
-      ${levelSpecifics.spell_slots_level_6 !== undefined ? levelSpecifics.spell_slots_level_6 : null},
-      ${levelSpecifics.spell_slots_level_7 !== undefined ? levelSpecifics.spell_slots_level_7 : null},
-      ${levelSpecifics.spell_slots_level_8 !== undefined ? levelSpecifics.spell_slots_level_8 : null},
-      ${levelSpecifics.spell_slots_level_9 !== undefined ? levelSpecifics.spell_slots_level_9 : null},
-      ${speed},
-      '${size}',
-      '${backgroundFeature.name}',
-      ${imgURL !== undefined ? `'${imgURL}'` : null}
-      );
-      
-      
-      ${insertSpells(idx_personaggio,spells,cantrips,res)};
-  
-      ${insertEquipment(idx_personaggio,equipment,res)};
-  
-      ${insertLanguage(idx_personaggio,languages,res)};
-  
-      ${insertStats(idx_personaggio,statistics,res)};
-      
-      ${insertProficiencies(idx_personaggio,proficiencies,res)};
-  
-      ${insertFeats(idx_personaggio,speciesTraits,res)};
-  
-      ${insertFeats(idx_personaggio,levelSpecifics.feats,res)};
-      
-      COMMIT;
-      `;
-      
-      fs.writeFileSync('queryTest.sql',insertCharQuery,'utf-8');
-      await Database.execAll(insertCharQuery);
-      
-    sendResponse({
-      status_code: 200,
-      message: 'Personaggio caricato!',
-      success: true,
-    }, res);
-  } 
-  catch (err) {
-    console.log('Errore nel catch di character.management.controller.insertCharacter():\n ' , err);
-    try {
-      await Database.execOne('ROLLBACK;');
-    }
-    finally {
-      sendResponse({
-        status_code: 400,
-        message: 'Errore nell\'inserimento dei dati personaggio',
-        success: false,
-        err: err,
-      }, res);
-    }
-  }
-
-  
-}
-
-function getAbilityScores(req,res) {
-  canSend = true;
-
-   DatabaseQueries.retrieve("SELECT * FROM AbilityScore", DatabaseQueries.unwrapAbilityScore)
-  .catch(err => {
-    sendResponse({
-        status_code: 404,
-        message: 'Non è stato possibile caricare gli ability scores dal database',
-        success: false,
-      }, 
-      res
-    );
-  }).then(abScores => {
-    sendResponse({
-        ability_scores: abScores,
-        status_code: 200,
-        success: true,
-        message: 'backgrounds caricati con successo'
-      },
-      res
-    );
-  });
-}
-
-async function getCharacterByIdx(req,res) {
-  canSend = true;
-
-  const idx = req.body.idx_personaggio;
-
-  DatabaseQueries.retrieve(`SELECT * FROM Personaggio WHERE idx_personaggio = '${idx}'`, (el) => el)
-  .catch(err => {
-    sendResponse({
-        status_code: 404,
-        message: 'Non è stato possibile caricare il personaggio dal database',
-        success: false,
-      }, 
-      res
-    );
-  }).then(character => {
-    sendResponse({
-        character: character[0],
-        status_code: 200,
-        success: true,
-        message: 'Personaggio caricato con successo'
-      },
-      res
-    );
-  });
-}
-
 
 export default {
   displayClasses,
@@ -655,7 +354,4 @@ export default {
   displayClassByName,
   displayBackgroundByName,
   displaySpeciesByName,
-  insertCharacter,
-  getAbilityScores,
-  getCharacterByIdx,
 }

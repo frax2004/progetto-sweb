@@ -1,6 +1,7 @@
  .gridContainer {
      --padding-start: 0;
      --inner-padding-end: 0;
+     max-width: 1000px;
      width: 90vw;
      margin: 0 auto;
      border-radius: 18px;
@@ -27,7 +28,7 @@
 }
 
 .buttonGrid {
-    margin-bottom: 10px;
+    margin-bottom: 0.8rem;
 }
 
 .HPchoiceButtonContainer {
@@ -45,24 +46,25 @@ ion-grid {
 }
 
 #randomLabel {
-    padding-left: 15px;
+    padding-left: 1rem;
 }
 
 .statSelectionFrame {
     display: flex;
     flex-direction: row;
     justify-content: space-between; 
+    flex-wrap: wrap;
     align-items: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
     border-bottom: 1px #FFD700 dashed;
-    padding-bottom: 20px;
+    padding-bottom: 1.2rem;
     font-family: Copperplate, Copperplate Gothic Light, fantasy;
     font-size: clamp(1rem, 2.5vw, 1.4rem);
     font-weight: 500;
     width: 95%;
-    padding-left: 10%;
-    padding-right: 5%; 
+    padding-left: 2rem;
+    padding-right: 1rem; 
 }
 
 .statSelectionFrame:last-child {
@@ -79,7 +81,7 @@ ion-grid {
 }
 
 .int{
-    color:blue;
+    color:rgb(39, 144, 255);
 }
 
 .wisd{
@@ -110,6 +112,7 @@ ion-grid {
 .dragEntryBlock {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     justify-self: center;
@@ -121,9 +124,10 @@ ion-grid {
 .manualStatsListContainer {
     padding-top: 0.2vh;
     padding-bottom: 0.2vh;
-    background-color: rgba(0, 0, 0, 0.331);
+    background-color: rgba(0, 0, 0, 0.55);
     backdrop-filter: blur(3em);
-    width: 70vw;
+    max-width: 900px;
+    width: 95vw;
     border-radius: 20px;
     border-right: 1px #FFD700 solid;
     border-left:1px #FFD700 solid;
@@ -144,16 +148,16 @@ ion-grid {
 }
 
 .radioContainer {
-    margin-left: 20px;
+    margin-left: 1.2rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 5%;
+    padding-bottom: 3rem;
 }
 
 .groupRadio {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns:repeat(3, 1fr);
     gap: 2rem;
     width: 100%;
     justify-items: center;
@@ -161,7 +165,7 @@ ion-grid {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     font-family: Copperplate, Copperplate Gothic Light, fantasy;
-    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-size: clamp(1.5rem, 3.5vw, 1.9rem);
     font-weight: 500;
     
 }
@@ -169,11 +173,12 @@ ion-grid {
 .stdArrayContainer{
     border-radius: 20px;
     border: 3px #FFD700 solid;
-    width: 70%;
+    width: 100% ;
     height: fit-content;
     display: flex;
     justify-content: space-around;
-    background-color: rgba(0, 0, 0, 0.331);
+    flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, 0.55);
     backdrop-filter: blur(3em);
     padding-top: 0.8rem;
 }
@@ -185,7 +190,7 @@ ion-grid {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     font-family: Copperplate, Copperplate Gothic Light, fantasy;
-    font-size: clamp(1.5rem, 5.5vw, 1.8rem);
+    font-size: clamp(1.5rem, 5.5vw, 1.9rem);
     font-weight: 500;
     display: flex;
     flex-direction: column;
@@ -193,16 +198,15 @@ ion-grid {
 }
 
 .randomListContainer{
-    width: 100%;
     border-radius: 20px;
     border: 3px #FFD700 solid;
-    width: 50%;
+    width: min(600px, 95vw);
     margin: auto;
     height: fit-content;
     background-color: black;
     margin-top: 4%;
     margin-bottom: 4%;
-    background-color: rgba(0, 0, 0, 0.331);
+    background-color: rgba(0, 0, 0, 0.55);
     backdrop-filter: blur(3em);
 
 }
@@ -220,12 +224,8 @@ ion-grid {
 
 @media screen and (max-width: 768px) {
 
-    .randomListContainer{
-        width: 90%;   /* invece di 50% */
-    }
-
     .statDisplayRandom{
-        font-size: 1.2rem;  /* override del clamp */
+        font-size: 1.2rem;  
         gap: 1rem;
         padding-top: 1rem;
         padding-bottom: 1rem;
@@ -235,7 +235,7 @@ ion-grid {
         padding-bottom: 0.7rem;
     }
     .groupRadio{
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: auto;
         gap:0.5rem;
     }
     .radioContainer {
@@ -245,4 +245,23 @@ ion-grid {
 .stdArrayContainer{
     width: 100%;
 }
+.statSelectionFrame {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px #FFD700 dashed;
+    padding-bottom: 20px;
+    font-family: Copperplate, Copperplate Gothic Light, fantasy;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 500;
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem; 
+}
+
+ion-col{
+    width: 100%;
+}
+  .imgbackground{
+        opacity: 0.10;
+    }
 }

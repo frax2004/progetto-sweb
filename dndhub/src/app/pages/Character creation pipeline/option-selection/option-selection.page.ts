@@ -119,7 +119,7 @@ export class OptionSelectionPage implements OnInit {
     const validateBGlanguages: boolean = this.BACKGROUNDlanguagesToChoose===0;
     const validateBGoptEquipment: boolean = this.BACKGROUNDoptEquip.length === this.backgroundContent[1].content.length;
     const validateASI: boolean = this.statsToChoose() === 0;
-    const className: string  = 'fighter';//CharacterInstance.chosenClass.toLowerCase();
+    const className: string  = CharacterInstance.chosenClass.toLowerCase();
     const validateSpellSelection = (className!==undefined) && (className === 'bard' || className === 'cleric' || className === 'druid' || className === 'paladin' || className === 'ranger' || className === 'sorcerer' || className === 'warlock' || className === 'wizard');
     if (
       validateRegularProf &&

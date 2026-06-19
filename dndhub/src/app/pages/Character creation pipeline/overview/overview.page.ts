@@ -246,15 +246,15 @@ export class OverviewPage implements OnInit {
     let langArray = [];
 
     for (const language of CharacterInstance.speciesLanguages) {
-      langArray.push(language.index.trim());
+      langArray.push(language.index.trim().replace(' ','-'));
     }
 
     for (const language of CharacterInstance.chosenLanguages) {
-      langArray.push(language.toLowerCase().trim());
+      langArray.push(language.toLowerCase().trim().replace(' ','-'));
     }
 
     for (const language of CharacterInstance.chosenBackgroundLanguages) {
-      langArray.push(language.toLowerCase().trim());
+      langArray.push(language.toLowerCase().trim().replace(' ','-'));
     }
 
     return langArray;

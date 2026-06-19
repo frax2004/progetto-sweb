@@ -207,6 +207,7 @@ export class OverviewPage implements OnInit {
     return equipArray;
   }
 
+  // commento prova
   static generateAllProficiencies() {
     let profArray = [];
 

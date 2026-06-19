@@ -180,6 +180,15 @@ export class CharacterInstance {
     return this.cantrips_known;
   }
 
+
+  static set spellsKnown(numOfSpells) {
+    this.spells_known = numOfSpells;
+  } 
+
+  static get spellsKnown() {
+    return this.spells_known;
+  }
+
   static set hitDie(dice) {
     this.hp_die = dice;
   }  

@@ -93,6 +93,8 @@ export class CharacterInstance {
     'wisdom': { value: 0, modifier: StatModifierNumber[0]},
     'charisma': { value: 0, modifier: StatModifierNumber[0]},
   }
+  private static cantrips_known = undefined;
+  private static spells_known = undefined;
   private static chosen_spells = undefined;
   private static chosen_cantrips = undefined;
   private static chosen_languages = undefined;
@@ -101,7 +103,15 @@ export class CharacterInstance {
   //ricorda che optional_equipment non ha quantity all'interno ma solo nome, quantity è sempre 1
   private static optional_equipment = undefined;
   private static chosen_subclass = undefined;
-  private static chosen_species_ability_bonuses = undefined;
+  private static chosen_species_ability_bonuses = 
+  {
+    'strength' : 0,
+    'dexterity' : 0,
+    'constitution' : 0,
+    'intelligence' : 0,
+    'wisdom' : 0,
+    'charisma' : 0,
+  };
   private static chosen_subspecies = undefined;
   private static chosen_background_languages = undefined;
   //ricorda che chosen_background_equipment non ha quantity all'interno ma solo nome, quantity è sempre 1
@@ -115,6 +125,69 @@ export class CharacterInstance {
     this.chosen_class = undefined;
     this.chosen_species = undefined;
     this.chosen_background = undefined;
+    this.chosen_level = undefined;
+    this.level_specifics = undefined;
+    this.base_equipment = undefined;
+    this.base_proficiencies = undefined;
+    this.base_saving_throws = undefined;
+    this.hp_die = undefined;
+    this.species_ab_bonus = undefined;
+    this.species_languages = undefined;
+    this.species_traits = undefined;
+    this.species_speed = undefined;
+    this.species_size = undefined;
+    this.background_starting_gold = undefined;
+    this.background_feature = undefined;
+    this.background_equipment = undefined;
+    this._statistics = {
+      'strength': { value: 0, modifier: StatModifierNumber[0]},
+      'dexterity': { value: 0, modifier: StatModifierNumber[0]},
+      'constitution': { value: 0, modifier: StatModifierNumber[0]},
+      'intelligence': { value: 0, modifier: StatModifierNumber[0]},
+      'wisdom': { value: 0, modifier: StatModifierNumber[0]},
+      'charisma': { value: 0, modifier: StatModifierNumber[0]},
+    };
+    this.cantrips_known = undefined;
+    this.spells_known = undefined;
+    this.chosen_spells = undefined;
+    this.chosen_cantrips = undefined;
+    this.chosen_languages = undefined;
+    this.chosen_regular_proficiencies = undefined;
+    this.chosen_extra_proficiencies = undefined;
+    this.optional_equipment = undefined;
+    this.chosen_subclass = undefined;
+    this.chosen_species_ability_bonuses = 
+    {
+      'strength' : 0,
+      'dexterity' : 0,
+      'constitution' : 0,
+      'intelligence' : 0,
+      'wisdom' : 0,
+      'charisma' : 0,
+    };
+    this.chosen_subspecies = undefined;
+    this.chosen_background_languages = undefined;
+    this.chosen_background_equipment = undefined;
+    this.chosen_asi = undefined;
+    this.chosen_ability_score_increments = undefined;
+  }
+
+  static set cantripsKnown(numOfCantrips) {
+    this.cantrips_known = numOfCantrips;
+  }
+
+  static get cantripsKnown() {
+    return this.cantrips_known;
+  }
+
+  // commento prova
+
+  static set spellsKnown(numOfSpells) {
+    this.spells_known = numOfSpells;
+  } 
+
+  static get spellsKnown() {
+    return this.spells_known;
   }
 
   static set hitDie(dice) {
@@ -195,6 +268,10 @@ export class CharacterInstance {
 
   static get speciesLanguages() {
     return this.species_languages;
+  }
+
+  static setSpeciesAbilityBonusStatistic(statName,statValue) {
+    this.species_ab_bonus[statName] = statValue;
   }
 
   static set speciesAbilityBonus(abBonus) {

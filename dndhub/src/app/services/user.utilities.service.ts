@@ -38,4 +38,11 @@ export class UserUtilitiesService {
   setCurrentPersonalArea(area: 'player' | 'dm' | 'generic'): Observable<any>  {
     throw Error("funzione UserUtilitiesService.setCurrentPersonalArea() non ancora implementata (fallo)");
   }
+
+  getPlayerID() {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/user-utilities/get-player-ID`,
+      {}
+    );
+  }
 }

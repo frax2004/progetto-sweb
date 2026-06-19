@@ -839,6 +839,8 @@ create table if not exists UtenteGenerico (
 create table if not exists Personaggio (
   utente_generico text not null,
   nome text not null,
+  punti_vita number,
+  bonus_competenza number,
   -- primary key creata da interpolazione
   -- utente_giocatore + nome
   idx_personaggio text not null primary key,
@@ -848,6 +850,20 @@ create table if not exists Personaggio (
   sottospecie text,
   background text not null,
   livello text not null,
+  quantita_oro number,
+  numero_incantesimi number,
+  numero_trucchetti number,
+  slot_livello_1 number,
+  slot_livello_2 number,
+  slot_livello_3 number,
+  slot_livello_4 number,
+  slot_livello_5 number,
+  slot_livello_6 number,
+  slot_livello_7 number,
+  slot_livello_8 number,
+  slot_livello_9 number,
+  velocita number,
+  taglia text,
   -- i talenti sono salvati su un array come foreign keys
   -- stessa cosa vale per equipaggiamenti, incantesimi e lingue parlate
   -- e anche per statistiche
@@ -858,6 +874,7 @@ create table if not exists Personaggio (
   -- stringhe, lascio come semplice stringa?
   abilita_extra text,
   descrizione_personaggio text,
+  imgURL text,
 
   foreign key (classe) references Class(idx),
   -- foreign key (idx_personaggio) references ArrayFeatItem(idx_personaggio),
@@ -870,8 +887,7 @@ create table if not exists Personaggio (
   foreign key (sottoclasse) references Subclass(idx),
   foreign key (specie) references Species(idx),
   foreign key (sottospecie) references Subspecies(idx),
-  foreign key (background) references Background(idx),
-  foreign key (livello) references Level(idx)
+  foreign key (background) references Background(idx)
 );
 
 create table if not exists ArraySpellItem (
@@ -890,8 +906,7 @@ create table if not exists ArrayEquipmentItem (
   array_idx number not null,
 
   primary key (idx_personaggio,array_idx),
-  foreign key (idx_personaggio) references Personaggio(idx_personaggio) on update cascade on delete cascade,
-  foreign key (item) references Equipment(idx)
+  foreign key (idx_personaggio) references Personaggio(idx_personaggio) on update cascade on delete cascade
 );
 
 create table if not exists ArrayLanguageItem (
@@ -907,6 +922,7 @@ create table if not exists ArrayLanguageItem (
 create table if not exists ArrayStatsItem (
   stat_idx text not null,
   stat_value number not null,
+  stat_modifier number not null,
   idx_personaggio text not null,
   array_idx number not null,
 
@@ -922,8 +938,7 @@ create table if not exists ArrayFeatItem (
   array_idx number not null,
 
   primary key (idx_personaggio,array_idx),
-  foreign key (idx_personaggio) references Personaggio(idx_personaggio) on update cascade on delete cascade,
-  foreign key (item) references Feat(idx)
+  foreign key (idx_personaggio) references Personaggio(idx_personaggio) on update cascade on delete cascade
 );
 
 create table if not exists ArrayProficienciesItem (
@@ -956,7 +971,7 @@ create table if not exists Campagna (
 create table if not exists ArrayCampagnaPersonaggiItem (
   idx_campagna text not null,
   idx_personaggio text not null,
-
+  stato_personaggio text not null DEFAULT 'pending' CHECK(stato_personaggio in('pending, accepted, banned, out')),
   primary key (idx_campagna,idx_personaggio)
   foreign key (idx_personaggio) references Personaggio(idx_personaggio) on update cascade on delete cascade,
   foreign key (idx_campagna) references Campagna(idx_campagna) on update cascade on delete cascade

@@ -76,4 +76,77 @@ export class CharacterManagementService {
       {bgName: bgName}
     );
   }
+
+  insertCharacter(
+    name: string,
+    healthPoints: number,
+    imgURL: string,
+    characterClass: string,
+    subclass: string | undefined,
+    species: string,
+    subspecies: string | undefined,
+    background: string,
+    level: number,
+    levelSpecifics: any | undefined,
+    equipment: any[],
+    proficiencies: any[],
+    languages: any[],
+    speciesTraits: any[] | undefined,
+    speed: number,
+    size: string,
+    startingGold: any,
+    backgroundFeature: any,
+    statistics: any,
+    spellsKnown: number | undefined,
+    cantripsKnown: number | undefined,
+    spells: any[] | undefined,
+    cantrips: any[] | undefined,
+  ) {
+
+     return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/insert-character`,
+      {
+        name: name,
+        healthPoints: healthPoints,
+        imgURL: imgURL, 
+        characterClass: characterClass,
+        subclass: subclass,
+        species: species,
+        subspecies: subspecies,
+        background: background,
+        level: level,
+        levelSpecifics: levelSpecifics,
+        equipment: equipment,
+        proficiencies: proficiencies,
+        languages: languages,
+        speciesTraits: speciesTraits,
+        speed: speed,
+        size: size,
+        startingGold: startingGold,
+        backgroundFeature: backgroundFeature,
+        statistics: statistics,
+        spellsKnown: spellsKnown,
+        cantripsKnown: cantripsKnown,
+        spells: spells,
+        cantrips: cantrips,
+      }
+    )
+    .pipe(
+      tap(res => sessionStorage.setItem("Risposta:  ", JSON.stringify(res,null,2)))
+    );
+  }
+
+  getAbilityScores() {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/get-ability-scores`,
+      {}
+    );
+  }
+
+  getCharacterByIdx(idx_personaggio: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/get-character-by-idx`,
+      {idx_personaggio: idx_personaggio}
+    );
+  }
 }

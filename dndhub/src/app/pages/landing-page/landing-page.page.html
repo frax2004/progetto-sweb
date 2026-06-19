@@ -45,33 +45,24 @@
     <app-carousel class="carousel" [cards]="cards"></app-carousel>
   </section>
 
-
   <div class="gallerySection">
+  @for(card of descriptionCards; track card) {
+    
     <div class="galleryRow">
-      <div class="immagine campagna"></div>
+      <div class="immagine"
+      style="
+      background-image: url({{card.img}});
+      "
+      ></div>
       <div class="descrizione">
-        <h3>Campagne</h3>
-        <p>Boh fai la tua campagna Freezer</p>
+        <h3>{{card.title}}</h3>
+        <p>{{card.content}}</p>
       </div>
-    </div>
-
-    <div class="galleryRow">
-      <div class="immagine personaggio"></div>
-      <div class="descrizione">
-        <h3>Personaggi</h3>
-        <p>Puoi creare qui i tuoi personaggi e anche, gestirli tramite la nostra pagine riservata!
-        </p>
-      </div>
-    </div>
-
-    <div class="galleryRow">
-      <div class="immagine campagna1"></div>
-      <div class="descrizione">
-        <h3>Gestione</h3>
-        <p>Gestisci le tue campagne O BROLY LO FARÀ AL POSTO TUO</p>
-      </div>
-    </div>
+    </div>  
+  }
   </div>
+
+ 
 
 
   <ion-footer>

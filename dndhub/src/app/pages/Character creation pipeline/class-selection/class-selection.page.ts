@@ -9,7 +9,7 @@ import { ButtonComponent } from 'src/app/components/button/button.component';
 import { expand } from 'rxjs';
 import { Button } from 'src/app/components/button/Button';
 import { ButtonContext } from 'src/app/components/button/ButtonContext';
-import { Navigate, Popups } from 'src/app/core/core';
+import { Alerts, Navigate, Popups } from 'src/app/core/core';
 import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.component";
 import { Router } from '@angular/router';
 import { TitleComponent } from "src/app/components/title/title.component";
@@ -18,6 +18,8 @@ import { CharacterManagementService } from 'src/app/services/character.managemen
 import { dnd } from 'dbserver/database.queries';
 import { AfterViewInit } from '@angular/core';
 import { CharacterInstance } from '../CharacterInformation';
+import { resolve } from 'dns';
+import { rejects } from 'assert';
 
 @Component({
   selector: 'app-class-selection',
@@ -28,6 +30,7 @@ import { CharacterInstance } from '../CharacterInformation';
 })
 export class ClassSelectionPage implements OnInit, AfterViewInit {
 
+  chosenClass: string;
   nextPageAlertOpen = false;
 
   setOpen(isOpen: boolean) {
@@ -37,7 +40,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
   nextPage = () => {
     // alert(this instanceof ClassSelectionPage);
     CharacterInstance.chosenLevel = this.levelEntry.value;
-    const validClass: boolean = CharacterInstance.chosenClass !== undefined;
+    const validClass: boolean = this.chosenClass !== undefined;
     if (CharacterInstance.chosenLevel>0 && validClass) {
       for (const _class of this.classesArray) {
         if (CharacterInstance.chosenClass === _class.title) {
@@ -47,6 +50,8 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
           CharacterInstance.hitDie = _class.hit_die;
         }
       }
+      alert(JSON.stringify(CharacterInstance.baseEquipment,null,2));
+      CharacterInstance.chosenClass = this.chosenClass;
       CharacterInstance.levelSpecifics = this.getLevelSpecifics();
       CharacterInstance.chosenASI = this.getNumberOfASI();
       this.router.navigate(['/species-selection']);
@@ -54,11 +59,14 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     else this.setOpen(true);
   }
 
-  b2_context: ButtonContext = { onClick: Popups.ofSimpleText(this.popoverController, "Andiamo les go les go milano")};
 
   buttonCallbacks = {
     // manca la pagina precedente a cui linkare il primo bottone
-    nextPage: { onClick: this.nextPage}
+    nextPage: { onClick: this.nextPage},
+    previousPage: {onClick: () => {
+      CharacterInstance.unsetAll();
+      Navigate.toPath(this.router,'character-creation-info')();
+    }}
   }
 
 
@@ -101,7 +109,6 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
           spell_slots_level_7 : level.content[this.levelEntry.value-1].spell_slots_level_7,
           spell_slots_level_8 : level.content[this.levelEntry.value-1].spell_slots_level_8,
           spell_slots_level_9 : level.content[this.levelEntry.value-1].spell_slots_level_9,
-          spells_known: level.content[this.levelEntry.value-1].spells_known,
           aura_range: level.content[this.levelEntry.value-1].aura_range,
         };        
       }
@@ -141,9 +148,15 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
   static generateBaseSavingThrows(savingThrows: dnd.APIReference[]) {
     let retArray = [];
     for (const el of savingThrows) {
+      const full_name = el.index === 'str' ? 'strength' :
+                        el.index === 'dex' ? 'dexterity' :
+                        el.index === 'con' ? 'constitution' :
+                        el.index === 'int' ? 'intelligence' :
+                        el.index === 'wis' ? 'wisdom' : 'charisma';
       retArray.push({
         index: el.index,
         name: el.name,
+        fullName: 'saving throw: ' + full_name,
       })
     }
 
@@ -204,82 +217,6 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
                       \nThe closest a Wizard is likely to come to an ordinary life is working as a sage or lecturer. Other Wizards sell their services as advisers, serve in military forces, or pursue lives of crime or domination.
                       \nBut the lure of knowledge calls even the most unadventurous Wizards from the safety of their libraries and laboratories and into crumbling ruins and lost cities. Most Wizards believe that their counterparts in ancient civilizations knew secrets of magic that have been lost to the ages, and discovering those secrets could unlock the path to a power greater than any magic available in the present age.`},  
   };
-  static selectedClass: string;
-
-  static classesButtons = {
-    'Barbarian': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Barbarian';
-      }
-    },
-    'Bard': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Bard';
-      }
-    }, 
-    'Cleric': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Cleric';
-      }
-    }, 
-    'Druid': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Druid';
-      }
-    }, 
-    'Fighter': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Fighter';
-      }
-    }, 
-    'Monk': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Monk';
-      }
-    }, 
-    'Paladin': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Paladin';
-      }
-    }, 
-    'Ranger': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Ranger';
-      }
-    }, 
-    'Rogue': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Rogue';
-      }
-    }, 
-    'Sorcerer': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Sorcerer';
-      }
-    }, 
-    'Warlock': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Warlock';
-      }
-    }, 
-    'Wizard': {
-      button: { text: 'Select this class', expand: ''},
-      context: (event: Event) => {
-        CharacterInstance.chosenClass = 'Wizard';
-      }
-    }
-  }
 
 
   // le funzioni display devono essere static altrimenti non possono essere accedute all'interno del costruttore
@@ -308,7 +245,6 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
   }
 
   static displayProficiencyChoices(className,choices) {
-    // forse abbiamo flattato un po' troppa roba...
     let retValue = '';
     for (const el of choices) {
       if (el.desc !== undefined && el.desc !== null) retValue = retValue + '\n- ' + el.desc;
@@ -522,11 +458,8 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     return 'C\'è stato qualche errore';
   }
 
-  constructor(public popoverController: PopoverController, private router: Router, private classDisplayer: CharacterManagementService) {
-    ClassSelectionPage.selectedClass = undefined;
-    
-    
-    for (const name of this.classesNames) {
+  generateClassLevels = (name) => {
+    return new Promise<any>((resolve: (x: void) => void,reject: (x:any) => void) => {
       this.classDisplayer
       .displaySpecificLevel(name)
       .subscribe({
@@ -536,11 +469,98 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
             idx: value.levels[0].name,
             content: value.levels,
           });
+          resolve();
         },
-        error: (err: any) => console.log(err)
-      })
+        error: (err: any) => reject(err)
+      });
+    });   
+  }
+
+
+  retrieveAllClassLevels = async () => {
+
+    for (const name of this.classesNames) {
+      try {
+        await this.generateClassLevels(name);
+      }
+      catch (err) {Alerts.error(err);}
     }
 
+    // this.chosenClass = '';
+    const classesButtons = {
+    'Barbarian': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Barbarian';
+      }
+    },
+    'Bard': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Bard';
+      }
+    }, 
+    'Cleric': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Cleric';
+      }
+    }, 
+    'Druid': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Druid';
+      }
+    }, 
+    'Fighter': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Fighter';
+      }
+    }, 
+    'Monk': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Monk';
+      }
+    }, 
+    'Paladin': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Paladin';
+      }
+    }, 
+    'Ranger': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Ranger';
+      }
+    }, 
+    'Rogue': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Rogue';
+      }
+    }, 
+    'Sorcerer': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Sorcerer';
+      }
+    }, 
+    'Warlock': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Warlock';
+      }
+    }, 
+    'Wizard': {
+      button: { text: 'Select this class', expand: ''},
+      context: (event: Event) => {
+        this.chosenClass = 'Wizard';
+      }
+    }
+  }
 
     this.classDisplayer
     .displayClasses()
@@ -551,7 +571,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
             imageURL: "../assets/icon/classes_icons/" + item.name.toLowerCase() + ".svg",
             desc: ClassSelectionPage.classesDescriptions[item.name].text,
             value: item.name + " accordion",
-            choiceButton: ClassSelectionPage.classesButtons[item.name],
+            choiceButton: classesButtons[item.name],
             title: item.name,
             hit_die: item.hit_die, 
             base_equipment: ClassSelectionPage.generateBaseEquipment(item.starting_equipment),
@@ -577,6 +597,10 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
         console.log(err);
       }
     });
+  }
+
+  constructor(public popoverController: PopoverController, private router: Router, private classDisplayer: CharacterManagementService) {
+    this.retrieveAllClassLevels();
   }
 
   ngOnInit() {}

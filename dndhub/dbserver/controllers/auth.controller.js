@@ -32,6 +32,7 @@ export async function login(req, res) {
   canSend = true;
 
   const email = req.body.email;
+  const password = req.body.password;
 
   const query = `
   SELECT * 

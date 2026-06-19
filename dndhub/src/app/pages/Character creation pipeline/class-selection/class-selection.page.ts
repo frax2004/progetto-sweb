@@ -50,6 +50,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
           CharacterInstance.hitDie = _class.hit_die;
         }
       }
+      alert(JSON.stringify(CharacterInstance.baseEquipment,null,2));
       CharacterInstance.chosenClass = this.chosenClass;
       CharacterInstance.levelSpecifics = this.getLevelSpecifics();
       CharacterInstance.chosenASI = this.getNumberOfASI();
@@ -211,8 +212,6 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
                       \nBut the lure of knowledge calls even the most unadventurous Wizards from the safety of their libraries and laboratories and into crumbling ruins and lost cities. Most Wizards believe that their counterparts in ancient civilizations knew secrets of magic that have been lost to the ages, and discovering those secrets could unlock the path to a power greater than any magic available in the present age.`},  
   };
 
-  
-
 
   // le funzioni display devono essere static altrimenti non possono essere accedute all'interno del costruttore
   static displayProficiencies(className, proficiencies) {
@@ -240,7 +239,6 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
   }
 
   static displayProficiencyChoices(className,choices) {
-    // forse abbiamo flattato un po' troppa roba...
     let retValue = '';
     for (const el of choices) {
       if (el.desc !== undefined && el.desc !== null) retValue = retValue + '\n- ' + el.desc;

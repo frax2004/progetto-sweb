@@ -37,8 +37,8 @@ export class LoginPagePage implements OnInit {
 
   doLogin = (event: Event) => {
     this.authService.login(
-      this.emailField.entry.value?.toString() ?? '',
-      this.passwordField.entry.value?.toString() ?? ''
+      this.emailField.entry.value.toString() ?? '',
+      this.passwordField.entry.value.toString() ?? ''
     ).subscribe({
       next: (value) => {
         State.User.isLogged.set(true);

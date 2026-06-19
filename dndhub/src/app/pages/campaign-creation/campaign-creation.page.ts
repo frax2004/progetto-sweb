@@ -62,12 +62,9 @@ export class CampaignCreationPage implements OnInit {
       _ => Alerts.good("Campagna creata con successo!"),
       err => Alerts.error(err.error)
     );
-  }
+  };
 
-
-  public loadPlayers = () => {
-    this.
-  }
+  loadPlayers = () => {};
 
   ngOnInit() { }
 

@@ -1,0 +1,176 @@
+<ion-content>
+  <app-title
+  [title] = "'Overview'"
+  ></app-title>
+
+  <div class="previousPageButton">
+    <app-button
+    [button]="{ text: 'Go back', expand: ''}"
+    [context]="buttonCallbacks['previousPage']"
+    ></app-button>
+  </div>
+
+<!-- la pagina sarà divisa in due metà  (1/3 + 2/3) per larghezza -->
+  
+    <div class="upperDetails">
+      <div class="upperDetailsContainer">
+        <app-label>Level: {{showLevel}}</app-label>
+      </div>
+
+      <div class="upperDetailsContainer">
+        <app-label>Speed: {{showSpeed}}</app-label>
+      </div>
+      
+      <div class="upperDetailsContainer">
+        <app-label>Size: {{showSize}}</app-label>
+      </div>
+      
+      <div class="upperDetailsContainer">
+        <app-label>Background: {{showBackground}}</app-label>
+      </div>
+    </div>
+
+  
+  <div class="overviewContainer">
+    <ion-list class="infoList">
+      <!-- classe -->
+      <div class="genericInfoContainer classDiv">
+        <div class="infoTitle">
+          <app-label >Class</app-label>
+        </div>
+        <div class="infoFrame">
+          <!-- {{showClass}} -->
+          <app-label>placeholder</app-label>
+        </div>
+      </div>
+
+      
+      @if(showSubclass !== undefined) {
+        <div class="genericInfoContainer">
+          <div class="infoTitle">
+            <app-label>Subclass</app-label>
+          </div>
+          <div class="infoFrame">
+            <!-- {{showSubclass}} -->
+            <app-label>placeholder</app-label>
+          </div>
+        </div>
+      }
+
+      <!-- specie -->
+      <div class="genericInfoContainer">
+        <div class="infoTitle">
+          <app-label>Species</app-label>
+        </div>
+        <div class="infoFrame">
+          <!-- {{showSpecies}} -->
+          <app-label>placeholder</app-label>
+        </div>
+      </div>
+
+
+      @if(showSubspecies !== undefined) {
+        <div class="genericInfoContainer">
+          <div class="infoTitle">
+            <app-label>Subspecies</app-label>
+          </div>
+          <div class="infoFrame">
+            <!-- {{showSubspecies}} -->
+            <app-label>placeholder</app-label>
+          </div>
+        </div>
+      }
+
+      <!-- stats -->
+      <div class="genericInfoContainer">
+        <div class="infoTitle">
+          <app-label>Statistics: </app-label>
+        </div>
+        <div class="infoFrame statGrid">
+          @for (stat of finalStatistics; track stat) {
+            <div class="statFrame">
+              <app-label>{{stat.statName}}: {{stat.value}}</app-label>
+            </div>
+          }
+        </div>
+      </div>
+    </ion-list>
+  </div>
+
+  <!-- quale preferite tra i due tipi di text area? -->
+  <div class="finalChoicesContainer">
+    <div class="finalChoices">
+      <div class="nameChoice">
+        <ion-textarea
+        class = "genericTextArea"
+        label = "Insert the character's name"
+        fill = "outline"
+        labelPlacement="floating"
+        ></ion-textarea>
+      </div>
+
+      <div class="imgChoice">
+        <ion-textarea
+        class = "genericTextArea"
+        label = "(optional) Insert URL image for the character"
+        fill = "outline"
+        labelPlacement="floating"
+        ></ion-textarea>
+      </div>
+
+      <div class="HPframe">
+      <div class="HPchoice">
+        <app-label class="HPlabel">Seleziona metodo di calcolo HP</app-label>
+        <div class="HPbuttons">
+          <app-button
+          [margin] = "false"
+          [button] = "{ text: 'Media', expand: ''}"
+          [context] = "buttonCallbacks['avHP']"
+          ></app-button>
+          <app-button
+          [margin] = "false"
+          [button] = "{ text: 'Manualmente', expand: ''}"
+          [context] = "buttonCallbacks['manHP']"
+          ></app-button>
+        </div>
+        
+        
+      </div>
+
+      <div class="showHP">
+          
+          @if(averageHP===true) {
+            <div>
+              <app-label>{{avHPlabel}}</app-label>
+            </div>
+          }
+
+          @if(manualHP===true) {
+            <div class="dragEntryFrame">
+              <app-label>Inserire HP in range {{HPrange()}}:</app-label>
+
+              <app-drag-entry
+              [sensitivity]="1"
+              [min]="minHP()"
+              [max]="maxHP()"
+              ></app-drag-entry>
+            </div>
+          }
+
+      </div>
+      </div>
+    </div>
+
+    
+
+  </div>
+
+  <div class="finalButton">
+    <app-button
+    [button] = "{ text: 'Crea personaggio', expand: ''}"
+    [context] = "buttonCallbacks['completeChar']"
+    ></app-button>
+  </div>
+
+
+</ion-content>

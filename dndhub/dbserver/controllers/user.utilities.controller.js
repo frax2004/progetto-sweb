@@ -156,19 +156,7 @@ export async function getUserInfo(req, res) {
 
 }
 
-function getLoggedUtenteGiocatore(req,res) {
-  canSend = true;
-
-  sendResponse({
-    status_code: 200,
-    success:true,
-    message: 'Id utente giocatore caricato con successo',
-    utente_giocatore: UserInstance.USER.player_id,
-  }, res);
-}
-
 export default {
   getUserInfo,
   setUserInfo,
-  getLoggedUtenteGiocatore,
 }

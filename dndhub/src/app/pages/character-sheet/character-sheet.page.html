@@ -4,7 +4,6 @@
     <div>
       <ion-title class="title">Scheda personaggio</ion-title>
       <ion-title class="nome">Pino Il Ballerino</ion-title>
-      <ion-title>{{characterInfo.health}} - level {{characterInfo.level}}</ion-title>
     </div>
   </div>
 
@@ -30,149 +29,166 @@
 
   <div class="gridContainer">
     <div class="upperGrid">
-      <!-- solo immagine qua -->
-      <!-- manca il frame, metto un placeholder -->
-      <div class="placeholderFrame">
-        <img src="https://i.redd.it/c8u5n61j3pic1.png" alt="character img">
-      </div>
-      <div class="right">
-        <!-- dati mock, da aggiungere col db -->
-        <div class="fight">
-          <ion-label>Punti ferita: 20/40 + 5</ion-label>
-          <ion-label>CA:44330</ion-label>
-          <ion-label>DadiVita: 50/60</ion-label>
-        </div>
-        <div class=TiriGenerici>
-          <div class="TiriVSmorte">
-            <div class="TiriSalvezza">death saving throw</div>
-            <div class="Tiri">
-              <!-- <ion-label>Success</ion-label> -->
-              <ion-checkbox></ion-checkbox>
-              <ion-checkbox></ion-checkbox>
-              <ion-checkbox></ion-checkbox>
+        <!-- solo immagine qua -->
+          <!-- manca il frame, metto un placeholder -->
+          <div class="placeholderFrame">
+            <img src="https://i.redd.it/c8u5n61j3pic1.png" alt="character img">
+          </div>
+            <div class="right">
+                <!-- dati mock, da aggiungere col db -->
+              <div class="fight">
+                <ion-label>Punti ferita: 20/40 + 5</ion-label>
+                <ion-label>CA:44330</ion-label>
+                <ion-label>DadiVita: 50/60</ion-label>
+              </div>
+          <div class=TiriGenerici>
+            <div class="TiriVSmorte">
+              <div class="TiriSalvezza">Tiri salvezza</div>
+                <div class="Tiri">
+                  <ion-label>Successi</ion-label>
+                  <ion-checkbox></ion-checkbox>
+                  <ion-checkbox></ion-checkbox>
+                  <ion-checkbox></ion-checkbox>
+                </div>
+                 <div class="Tiri">
+                  <ion-label>Fallimenti</ion-label>
+                  <ion-checkbox></ion-checkbox>
+                  <ion-checkbox></ion-checkbox>
+                  <ion-checkbox></ion-checkbox>
+              </div>
             </div>
-            <div class="Tiri">
-              <!-- <ion-label>Fallimenti</ion-label> -->
-               <!-- in certe schede non scrivono fallimenti o successi ma sono checkbox colorate in maniera diverse -->
-              <ion-checkbox></ion-checkbox>
-              <ion-checkbox></ion-checkbox>
+            <div Class="Ispirazione-Eroica">
+              <ion-label class="Eroica">Ispirazione Eroica</ion-label>
               <ion-checkbox></ion-checkbox>
             </div>
           </div>
-          <div Class="Ispirazione-Eroica">
-            <ion-label class="Eroica">Eroic Inspiration</ion-label>
-            <ion-checkbox></ion-checkbox>
-          </div>
-        </div>
-        <div class="species">
-          <ion-label>Classe:Mago finale</ion-label>
-          <ion-label>Sottoclasse:HoSonno</ion-label>
-          <ion-label>Bonus Competenza: +399</ion-label>
-          <ion-label>Specie:Inferiore</ion-label>
-        </div>
+              <div class="species">
+                <ion-label>Classe:Mago finale</ion-label>
+                <ion-label>Sottoclasse:HoSonno</ion-label>
+                <ion-label>Bonus Competenza: +399</ion-label>
+                <ion-label>Specie:Inferiore</ion-label>
+             </div>
+    
+             <div class="informazioni">
+                <ion-label>Iniziativa: 20 Naturale</ion-label>
+                <ion-label>taglia: pacchione</ion-label>
+                <ion-label>Percezione Passiva: Ti vedo</ion-label>
+                <ion-label>Velocità: 180 metri</ion-label>
 
-        <div class="informazioni">
-          <ion-label>Iniziativa: 20 Naturale</ion-label>
-          <ion-label>taglia: pacchione</ion-label>
-          <ion-label>Percezione Passiva: Ti vedo</ion-label>
-          <ion-label>Velocità: 180 metri</ion-label>
-
-        </div>
-      </div>
+             </div>
+            </div>
     </div>
   </div>
 
 
-  <!-- adesso una griglia con le statistiche -->
-  <!-- le prime tre sono quelle fisiche, le altre quelle mentali
+ <!-- adesso una griglia con le statistiche -->
+ <!-- le prime tre sono quelle fisiche, le altre quelle mentali
   Le statistiche saranno accordion con le abilità dentro -->
   <!-- Tutti questi infiniti ion-item, ion-grid, row e col sono probabilmente da sostituire perché hanno un layout tutto per i fatti loro -->
-  <ion-grid>
-    <!-- prima riga -->
-    <ion-row>
-      <!-- prima colonna FORZA -->
-      <ion-col>
-        <div class="statAccordion">
-          <app-accordion [accordions]="[accordions['forza']]"></app-accordion>
-        </div>
-      </ion-col>
+   <ion-item>
+    <ion-grid>
+      <!-- prima riga -->
+      <ion-row>
+        <!-- prima colonna FORZA -->
+        <ion-col>
+          <div class="statAccordion">
+            <app-accordion
+            [accordions] = "[accordions['forza']]"
+            ></app-accordion>
+          </div>
+        </ion-col>
 
-      <!-- seconda colonna DESTREZZA -->
-      <ion-col>
-        <div class="statAccordion">
-          <app-accordion [accordions]="[accordions['destrezza']]"></app-accordion>
-        </div>
-      </ion-col>
+        <!-- seconda colonna DESTREZZA -->
+        <ion-col>
+          <div class="statAccordion">
+            <app-accordion
+            [accordions] = "[accordions['destrezza']]"
+            ></app-accordion>
+          </div>
+        </ion-col>
 
-      <!-- terza colonna COSTITUZIONE -->
-      <ion-col>
-        <div class="statAccordion">
-          <app-accordion [accordions]="[accordions['costituzione']]"></app-accordion>
-        </div>
-      </ion-col>
-    </ion-row>
+        <!-- terza colonna COSTITUZIONE -->
+        <ion-col>
+          <div class="statAccordion">
+            <app-accordion
+            [accordions] = "[accordions['costituzione']]"
+            ></app-accordion>
+          </div>
+        </ion-col>
+      </ion-row>
 
 
-    <!-- seconda riga -->
-    <ion-row>
-      <!-- prima colonna INTELLIGENZA -->
-      <ion-col>
-        <div class="statAccordion">
-          <app-accordion [accordions]="[accordions['intelligenza']]"></app-accordion>
-        </div>
-      </ion-col>
+      <!-- seconda riga -->
+      <ion-row>
+        <!-- prima colonna INTELLIGENZA -->
+        <ion-col>
+          <div class="statAccordion">
+            <app-accordion
+            [accordions] = "[accordions['intelligenza']]"
+            ></app-accordion>
+          </div>
+        </ion-col>
 
-      <!-- seconda colonna SAGGEZZA -->
-      <ion-col>
-        <div class="statAccordion">
-          <app-accordion [accordions]="[accordions['saggezza']]"></app-accordion>
-        </div>
-      </ion-col>
+        <!-- seconda colonna SAGGEZZA -->
+        <ion-col>
+          <div class="statAccordion">
+            <app-accordion
+            [accordions] = "[accordions['saggezza']]"
+            ></app-accordion>
+          </div>
+        </ion-col>
 
-      <!-- terza colonna COSTITUZIONE -->
-      <ion-col>
-        <div class="statAccordion">
-          <app-accordion [accordions]="[accordions['costituzione']]"></app-accordion>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        <!-- terza colonna COSTITUZIONE -->
+        <ion-col>
+          <div class="statAccordion">
+            <app-accordion
+            [accordions] = "[accordions['costituzione']]"
+            ></app-accordion>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
 
   <!-- ULTIMA griglia con lista abilità e piccolo div per le note -->
-  <ion-grid>
-    <ion-row>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
 
-      <!-- prima colonna con lista -->
-      <ion-col>
+        <!-- prima colonna con lista -->
+        <ion-col>
+          
+          <ion-list>
+            <!-- menu abilità -->
+            <ion-item>
+              <app-accordion
+              [accordions] = "[abilityAccordions['abilita']]"
+              ></app-accordion>
+            </ion-item>
+          
+            <!-- menu inventario -->
+            <ion-item>
+              <app-accordion
+              [accordions] = "[abilityAccordions['inventario']]"
+              ></app-accordion>
+            </ion-item>
 
-        <ion-list>
-          <!-- menu abilità -->
-          <app-accordion [accordions]="[abilityAccordions['abilita']]"></app-accordion>
+            <app-unordered-list-element
+            [text] = "'Incantesimi'"
+            [context] = "buttonCallbacks['placeholder']"
+            ></app-unordered-list-element>
+          </ion-list>
+        </ion-col>
 
-          <!-- menu inventario -->
-          <app-accordion [accordions]="[abilityAccordions['inventario']]"></app-accordion>
+        <!-- seconda colonna per inserire note personali -->
+        <ion-col>
+          <div class="personalNotes" style="border: 1px solid white;">
+            <ion-label>Note personali</ion-label>
+            <app-entry label="''"></app-entry>
+          </div>
+        </ion-col>
 
-          <app-button [button]="{text: 'Incantesimi', expand:''}" 
-            [context]="buttonCallbacks['placeholder']"></app-button>
-        </ion-list>
-      </ion-col>
-
-      <!-- seconda colonna per inserire note personali -->
-      <ion-col>
-        <div class="personalNotes" style="border: 1px solid white;">
-          <ion-label>Note personali</ion-label>
-          <app-entry label="''"></app-entry>
-        </div>
-        <div buttonChange>
-          <app-button [button]="{text:'Edit', expand:''}"
-          [context]="changeCallback['changes']"></app-button>
-        </div>
-        <div buttonDelete>
-          <app-button [button]="{text:'Delete', expand:''}"
-          [context]="deleteCallback['deletePG']"></app-button>
-        </div>
-      </ion-col>
-
-    </ion-row>
-  </ion-grid>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
 </ion-content>

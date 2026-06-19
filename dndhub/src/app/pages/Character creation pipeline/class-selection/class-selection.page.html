@@ -12,7 +12,7 @@
   <div class="goBack genericButton">
     <app-button
     [button] = "{ text: 'Torna indietro', expand: ''}"
-    [context] = "buttonCallbacks['previousPage']"
+    [context] = "b2_context"
     ></app-button>
   </div>
 <!-- 
@@ -22,14 +22,6 @@
       [allowMultipleEnabled] = "true"
     ></app-accordion>
   </div> -->
-
-  @if(chosenClass !== undefined) {
-    <div class="showChosen">
-        <div class="upperDetailsContainer">
-          <app-label>Chosen Class: {{chosenClass}}</app-label>
-        </div>
-    </div>
-  }
 
   <!-- uso ion-accordion piuttosto che la nostra componente perché più semplice da modificare
    se mi piace, farò una componente di questo particolare tipo di accordion -->

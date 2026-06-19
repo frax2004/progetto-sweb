@@ -136,8 +136,6 @@ async function doesCharacterAlreadyExist(req,res,next) {
 
     const character = await DatabaseQueries.retrieve(`SELECT * FROM Personaggio WHERE idx_personaggio = '${idx_personaggio}'`, (el => el));
 
-    console.log('personaggio: ' , JSON.stringify(character[0],null,2));
-
     if (character[0] === null || character[0] === undefined) next();
     else {
         sendResponse({
@@ -146,9 +144,27 @@ async function doesCharacterAlreadyExist(req,res,next) {
             message: 'You already have a character with this name'
         }, res);
     }
-} 
+}
+
+async function doesCharacterExist(req,res,next) {
+    canSend = true;
+
+    const idx = req.body.idx_personaggio;
+
+    const character = await DatabaseQueries.retrieve(`SELECT * FROM Personaggio WHERE idx_personaggio = '${idx_personaggio}'`, (el => el));
+
+    if (character[0] === null || character[0] === undefined) {
+        sendResponse({
+            status_code: 400,
+            success: false,
+            message: 'No character corresponds to this idx'
+        }, res);
+    }
+    else next();
+}
 
 export default {
     validateCharacter,
     doesCharacterAlreadyExist,
+    doesCharacterExist,
 }

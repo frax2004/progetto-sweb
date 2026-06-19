@@ -592,6 +592,56 @@ async function insertCharacter(req,res) {
   
 }
 
+function getAbilityScores(req,res) {
+  canSend = true;
+
+   DatabaseQueries.retrieve("SELECT * FROM AbilityScore", DatabaseQueries.unwrapAbilityScore)
+  .catch(err => {
+    sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare gli ability scores dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then(abScores => {
+    sendResponse({
+        ability_scores: abScores,
+        status_code: 200,
+        success: true,
+        message: 'backgrounds caricati con successo'
+      },
+      res
+    );
+  });
+}
+
+async function getCharacterByIdx(req,res) {
+  canSend = true;
+
+  const idx = req.body.idx_personaggio;
+
+  DatabaseQueries.retrieve(`SELECT * FROM Personaggio WHERE idx_personaggio = '${idx}'`, (el) => el)
+  .catch(err => {
+    sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare il personaggio dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then(character => {
+    sendResponse({
+        character: character[0],
+        status_code: 200,
+        success: true,
+        message: 'Personaggio caricato con successo'
+      },
+      res
+    );
+  });
+}
+
 
 export default {
   displayClasses,
@@ -604,4 +654,6 @@ export default {
   displayBackgroundByName,
   displaySpeciesByName,
   insertCharacter,
+  getAbilityScores,
+  getCharacterByIdx,
 }

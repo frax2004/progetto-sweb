@@ -20,4 +20,10 @@ characterManagementRouter.post("/insert-character",
     characterMiddleware.doesCharacterAlreadyExist,
     controller.insertCharacter
 );
+characterManagementRouter.post("/get-ability-scores", controller.getAbilityScores);
+characterManagementRouter.post("/get-character_by_idx", 
+    authMiddleware.isLogged,
+    characterMiddleware.doesCharacterExist,
+    controller.getCharacterByIdx
+);
 // characterManagementRouter

@@ -135,4 +135,18 @@ export class CharacterManagementService {
       tap(res => sessionStorage.setItem("Risposta:  ", JSON.stringify(res,null,2)))
     );
   }
+
+  getAbilityScores() {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/get-ability-scores`,
+      {}
+    );
+  }
+
+  getCharacterByIdx(idx_personaggio: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/get-character-by-idx`,
+      {idx_personaggio: idx_personaggio}
+    );
+  }
 }

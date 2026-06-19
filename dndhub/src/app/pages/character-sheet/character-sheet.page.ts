@@ -10,6 +10,8 @@ import { EntryComponent } from "src/app/components/entry/entry.component";
 import { Router } from '@angular/router';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { AlertController } from '@ionic/angular';
+import { CharacterManagementService } from 'src/app/services/character.management.service';
+import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
 
 @Component({
   selector: 'app-character-sheet',
@@ -19,6 +21,12 @@ import { AlertController } from '@ionic/angular';
   imports: [IonContent, IonHeader, IonTitle, IonToolbar,IonCheckbox ,CommonModule, FormsModule, IonItem, IonGrid, IonCol, IonRow, IonLabel, CheckboxComponent, AccordionComponent, IonList, UnorderedListElementComponent, EntryComponent, ButtonComponent]
 })
 export class CharacterSheetPage implements OnInit {
+
+  playerID;
+  // characterName in teoria dovrà essere passato da fuori
+  characterName = 'qualcosa';
+  characterInfo: any;
+
   accordions = {
     // per qualche motivo \n non va a capo e neanche <br/>
     forza: { value: 'Strength accordion', title: 'FORZA - 10', content: 'Tiro salvezza: +0\nAtletica: +0'},
@@ -46,7 +54,50 @@ changeCallback={
   changes:{onClick: Alerts.notImplemetedError}
 }
   
-  constructor(public popoverController: PopoverController, private router: Router) { }
+  constructor(public popoverController: PopoverController, private router: Router, private characterServices: CharacterManagementService, private userServices: UserUtilitiesService) {
+    this.userServices
+    .getPlayerID()
+    .subscribe({
+      next: (value: any) => {
+        this.playerID = value.utente_giocatore;
+        const idx_personaggio = `${this.characterName} @ ${this.playerID}`;
+        this.characterServices
+        .getCharacterByIdx(idx_personaggio)
+        .subscribe({
+          next: (value: any) => {
+            this.characterInfo = {
+              health: value.character.punti_vita,
+              proficiency_bonus: value.character.bonus_competenza,
+              class: value.character.classe,
+              subclasse: value.character.sottoclasse,
+              species: value.character.specie,
+              subspecies: value.character.subspecies,
+              background: value.character.background,
+              level: value.character.livello,
+              gold_quantity: value.character.quantita_oro,
+              //in teoria non mi servono incantesimi
+              speed: value.character.velocita,
+              size: value.character.taglia,
+              extra_abilities: value.character.abilita_extra,
+              character_description: value.character.descrizione_personaggio,
+              image: value.character.imgURL,
+            };
+          },
+          error: (err) => Alerts.error(err.error.message)
+        })
+      },
+      error: (err) => Alerts.error(err.error.message)
+    });
+    
+    this.characterServices
+    .getAbilityScores()
+    .subscribe({
+      next: (value: any) => {
+
+      },
+      error: (err) => Alerts.error(err.error.message)
+    });
+  }
 
   ngOnInit() {
 }

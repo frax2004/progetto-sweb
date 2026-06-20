@@ -899,7 +899,7 @@ export class DatabaseQueries {
     let damage_dc = Database.queryAll(`SELECT * FROM DifficultyClass WHERE id = ${equip.damage_dc}`);
     let mastery = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${equip.mastery}'`);
     let storage = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${equip.storage}`);
-    let two_handed_dc = Database.queryAll(`SELECT * FROM DifficultyClass WHERE id = ${equip.two_handed_dc}`);
+    let two_handed_dc = Database.queryAll(`SELECT * FROM DifficultyClass WHERE id = ${equip.two_handed_dc === undefined ? null : equip.two_handed_dc}`);
     let utilize = Database.queryAll(`SELECT * FROM ArrayUtilizeItem WHERE array_id = ${equip.utilize}`);
     let properties = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem where array_id = ${equip.properties}`);
     

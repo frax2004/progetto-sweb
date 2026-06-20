@@ -47,6 +47,9 @@ export class CharacterSheetPage implements OnInit {
   characterStats = [];
   characterProficiencies: any[];
   abilityScoresInfos: any[];
+  characterEquipment: any[];
+  characterLanguages: any[];
+  characterFeats: any[];
 
   accordions = {
     // per qualche motivo \n non va a capo e neanche <br/>
@@ -77,7 +80,7 @@ changeCallback={
   
   static generateSavingThrowValues(statModifier: number, profBonus: number, statName: string, proficiencies: string[]) {
     for(const el of proficiencies) {
-      if (el.includes(statName.toLowerCase()) && el.includes('saving throw')) return statModifier + profBonus; 
+      if (el.includes(statName.toLowerCase()) && el.includes('saving throw')) return (statModifier + profBonus) + ' (proficient)'; 
     }
 
     return statModifier;
@@ -89,6 +92,25 @@ changeCallback={
     }
 
     return 0;
+  }
+
+  static getStatValueByIndex(index: string, statsArray: any[]) {
+    for (const el of statsArray) {
+      if (el.index === index) return el.stat_value;
+    }
+
+    return 0;
+  }
+
+  static generateSkills(statModifier: number, profBonus: number, skillName: string, skillIndex: string, proficiencies: string[]) {
+    for(const el of proficiencies) {
+        if(el.includes(skillIndex) && el.includes('skill')) return {name: skillName, modifier: (statModifier + profBonus) + ' (proficient)'};  
+    }
+
+    return {
+      name: skillName,
+      modifier: statModifier
+    };
   }
 
   public static toPromise = (subscription: Observable<any>) => {
@@ -152,6 +174,8 @@ changeCallback={
           index: item.index,
           name: item.name,
           full_name: item.full_name,
+          stat_value: CharacterSheetPage.getStatValueByIndex(item.index,this.characterStats),
+          stat_modifier: CharacterSheetPage.getStatModifierByIndex(item.index,this.characterStats),
           saving_throw_value: CharacterSheetPage.generateSavingThrowValues(
             CharacterSheetPage.getStatModifierByIndex(item.index,this.characterStats),
             this.characterInfo.proficiency_bonus,
@@ -159,12 +183,71 @@ changeCallback={
             this.characterProficiencies
           ),
           //ricorda che è un array di APIreference con index e name
-          skills: item.skills,
+          skills: item.skills.map(skill => CharacterSheetPage.generateSkills(
+            CharacterSheetPage.getStatModifierByIndex(item.index,this.characterStats),
+            this.characterInfo.proficiency_bonus,
+            skill.name,
+            skill.index,
+            this.characterProficiencies
+          )),
           imageURL: undefined,
         };
       });
+
+      //prendo lingue
+      const languageValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterLanguages(idx_personaggio));
+      this.characterLanguages = languageValues.languages.map((item: any) => {
+        return {
+          index: item.idx,
+          name: item.name,
+          is_rare: item.is_rare,
+          note: item.note
+        };
+      });
     
-    
+      //prendo talenti
+      const featValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterFeats(idx_personaggio));
+      this.characterFeats = featValues.feats.map(item => item.item);
+
+      //prendo equipaggimento
+      const equipmentValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterEquipment(idx_personaggio));
+      this.characterEquipment = equipmentValues.equipment.map((item: any) => {
+        return {
+          name: item.name,
+          properties: item.properties,
+          equipment_categories: item.equipment_categories,
+          ammunition: item.ammunition,
+          contents: item.contents,
+          craft: item.craft,
+          damage_type: item.damage?.type,
+          damage_dc: item.damage?.dc,
+          damage_dice: item.damage?.dice,
+          mastery: item.mastery,
+          storage: item.storage,
+          two_handed_damage_type: item.two_handed_damage?.type,
+          two_handed_damage_dc: item.two_handed_damage?.dc,
+          two_handed_damage_dice: item.two_handed_damage?.dice,
+          utilize: item.utilize,
+          cost_quantity: item.cost?.cost_quantity,
+          cost_unit: item.cost?.two_handed_damage,
+          description: item.description,
+          weight: item.weight,
+          doff_time: item.doff_time,
+          don_time: item.don_time,
+          image: item.image,
+          notes: item.notes,
+          quantity: item.quantity,
+          stealth_disadvantage: item.stealth_disadvantage,
+          str_minimum: item.str_minimum,
+          armor_class_base: item.armor_class?.base,
+          armor_class_dex_bonus: item.armor_class?.dex_bonus,
+          armor_class_max_bonus: item.armor_class?.max_bonus,
+          range_normal: item.range?.normal,
+          range_long: item.range?.long,
+          throw_range_normal: item.throw_range?.normal,
+          throw_range_long: item.throw_range?.long, 
+        };
+      });
     } catch (err) {
       Alerts.error(err);
     } 

@@ -39,4 +39,21 @@ characterManagementRouter.post("/get-character-proficiencies",
     characterMiddleware.doesCharacterExist,
     controller.getCharacterProficiencies
 );
-// characterManagementRouter
+//togliere commenti dai middleware
+characterManagementRouter.post("/get-character-equipment",
+    // authMiddleware.isLogged,
+    characterMiddleware.doesCharacterExist,
+    controller.getCharacterEquipment
+);
+//togliere commenti dai middleware
+characterManagementRouter.post("/get-character-languages",
+    // authMiddleware.isLogged,
+    characterMiddleware.doesCharacterExist,
+    controller.getCharacterLanguages
+);
+//togliere commenti dai middleware
+characterManagementRouter.post("/get-character-feats",
+    // authMiddleware.isLogged,
+    characterMiddleware.doesCharacterExist,
+    controller.getCharacterFeats
+);

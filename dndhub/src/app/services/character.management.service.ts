@@ -164,4 +164,25 @@ export class CharacterManagementService {
       {idx_personaggio: idx_personaggio}
     );
   }
+
+  getCharacterEquipment(idx_personaggio: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/get-character-equipment`,
+      {idx_personaggio: idx_personaggio}
+    );
+  }
+
+  getCharacterLanguages(idx_personaggio: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/get-character-languages`,
+      {idx_personaggio: idx_personaggio}
+    );
+  }
+
+  getCharacterFeats(idx_personaggio: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/get-character-feats`,
+      {idx_personaggio: idx_personaggio}
+    );
+  }
 }

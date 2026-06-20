@@ -160,21 +160,21 @@ export class OverviewPage implements OnInit {
     //da finire
     for(const equip of CharacterInstance.backgroundEquipment) {
       equipArray.push({
-        idx: equip.index.trim(),
+        idx: equip.index.trim().replace(' ','-'),
         quantity: equip.quantity,
       });
     }
 
     for(const equip of CharacterInstance.baseEquipment) {
       equipArray.push({
-        idx: equip.index.trim(),
+        idx: equip.index.trim().replace(' ','-'),
         quantity: equip.quantity,
       });
     }
 
     for(const equip of CharacterInstance.backgroundEquipment) {
       equipArray.push({
-        idx: equip.index.trim(),
+        idx: equip.index.trim().replace(' ','-'),
         quantity: equip.quantity,
       });
     }
@@ -184,14 +184,14 @@ export class OverviewPage implements OnInit {
       if (equip.includes('+')) {
         for (const subEquip of equip.split('+')) {
           equipArray.push({
-            idx: subEquip.toLowerCase().trim(),
+            idx: subEquip.toLowerCase().trim().replace(' ','-'),
             quantity: 1,
           });    
         }
       }
       else {
         equipArray.push({
-          idx: equip.toLowerCase().trim(),
+          idx: equip.toLowerCase().trim().replace(' ','-'),
           quantity: 1,
         });
       }
@@ -199,7 +199,7 @@ export class OverviewPage implements OnInit {
 
     for(const equip of CharacterInstance?.chosenBackgroundEquipment) {
       equipArray.push({
-        idx: equip.toLowerCase().trim(),
+        idx: equip.toLowerCase().trim().replace(' ','-'),
         quantity: 1,
       });
     }

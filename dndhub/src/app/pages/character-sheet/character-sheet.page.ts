@@ -12,6 +12,7 @@ import { ButtonComponent } from 'src/app/components/button/button.component';
 import { AlertController } from '@ionic/angular';
 import { CharacterManagementService } from 'src/app/services/character.management.service';
 import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-character-sheet',
@@ -90,104 +91,93 @@ changeCallback={
     return 0;
   }
 
-  constructor(public popoverController: PopoverController, private router: Router, private characterServices: CharacterManagementService, private userServices: UserUtilitiesService) {
-    this.userServices
-    .getPlayerID()
-    .subscribe({
-      next: (value: any) => {
-        // ?? da levare dopo tests
-        this.playerID = value.utente_giocatore ?? '(giocatore): giovanniDM@gmail.com';
-        const idx_personaggio = `${this.characterName} @ ${this.playerID}`;
-        this.characterServices
-        .getCharacterByIdx(idx_personaggio)
-        .subscribe({
-          next: (value: any) => {
-            this.characterInfo = {
-              health: value.character.punti_vita,
-              proficiency_bonus: value.character.bonus_competenza,
-              class: value.character.classe,
-              subclass: value.character.sottoclasse || 'none',
-              species: value.character.specie,
-              subspecies: value.character.subspecies,
-              background: value.character.background,
-              level: value.character.livello,
-              gold_quantity: value.character.quantita_oro,
-              //in teoria non mi servono incantesimi
-              speed: value.character.velocita,
-              size: value.character.taglia,
-              extra_abilities: value.character.abilita_extra,
-              character_description: value.character.descrizione_personaggio,
-              image: value.character.imgURL,
-            };
-            this.currHealth = this.characterInfo.health;
-            //prendo statistiche personaggio
-            this.characterServices
-            .getCharacterAbilityScores(idx_personaggio)
-            .subscribe({
-              next: (value: any) => {
-                for (const item of value.stats) {
-                  this.characterStats.push({
-                    index: item.stat_idx,
-                    stat_value: item.stat_value,
-                    stat_modifier: item.stat_modifier
-                  });
-                }
-                // this.characterStats = value.stats.map(async function (item: any) {
-                //   return {
-                //     index: item.stat_idx,
-                //     stat_value: item.stat_value,
-                //     stat_modifier: item.stat_modifier
-                //   };
-                // });
-                //adesso prendo le competenze dal db
-                this.characterServices
-                .getCharacterProficiencies(idx_personaggio)
-                .subscribe({
-                  next: (value: any) => {
-                    this.characterProficiencies = value.proficiencies.map(item => item.proficiency);
-                    //prendo ability scores dal db
-                    this.characterServices
-                    .getAbilityScores()
-                    .subscribe({
-                      next: (value: any) => {
-                        this.abilityScoresInfos = value.ability_scores.map(function (item: any) {
-                          return {
-                            index: item.index,
-                            name: item.name,
-                            full_name: item.full_name,
-                            saving_throw_value: CharacterSheetPage.generateSavingThrowValues(
-                              CharacterSheetPage.getStatModifierByIndex(item.index,this.characterStats),
-                              this.characterInfo.proficiency_bonus,
-                              item.full_name,
-                              this.characterProficiencies
-                            ),
-                            //ricorda che è un array di APIreference con index e name
-                            skills: item.skills,
-                            imageURL: undefined,
-                          };
-                        });
-                      },
-                      error: (err) => Alerts.error(err.error)
-                    });
-                  },
-                  error: (err) => Alerts.error(err.error)
-                });
-
-
-              },
-              error: (err) => Alerts.error(err.error)
-            });
-          },
-          error: (err) => Alerts.error(err)
-        });
-      },
-      error: (err) => Alerts.error(err)
-    });
+  public static toPromise = (subscription: Observable<any>) => {
+    const executor = (resolve: (value: any) => void,reject: (value: any) => void) => {
+      subscription.subscribe({
+        next: resolve,
+        error: reject
+      });
+    };
     
+    return new Promise<any>(executor);
   }
 
+  init = async () => {
+    try {
+      // ?? da levare dopo tests
+      const playerIDvalues = (await CharacterSheetPage.toPromise(this.userServices.getPlayerID())).utente_giocatore;
+      this.playerID = playerIDvalues === undefined ? '(giocatore): giovanniDM@gmail.com' : playerIDvalues;
+      const idx_personaggio = `${this.characterName} @ ${this.playerID}`;
+
+
+      //prendo character
+      const characterValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterByIdx(idx_personaggio));
+      this.characterInfo = {
+        health: characterValues.character.punti_vita,
+        proficiency_bonus: characterValues.character.bonus_competenza,
+        class: characterValues.character.classe,
+        subclass: characterValues.character.sottoclasse || 'none',
+        species: characterValues.character.specie,
+        subspecies: characterValues.character.subspecies,
+        background: characterValues.character.background,
+        level: characterValues.character.livello,
+        gold_quantity: characterValues.character.quantita_oro,
+        //incharacterValues non mi servono incantesimi
+        speed: characterValues.character.velocita,
+        size: characterValues.character.taglia,
+        extra_abilities: characterValues.character.abilita_extra,
+        character_description: characterValues.character.descrizione_personaggio,
+        image: characterValues.character.imgURL,
+      };
+      this.currHealth = this.characterInfo.health;
+
+      //prendo statistiche pg
+      const scoresValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterAbilityScores(idx_personaggio));
+      this.characterStats = scoresValues.stats.map((item: any) => {
+        return {
+          index: item.stat_idx,
+          stat_value: item.stat_value,
+          stat_modifier: item.stat_modifier
+        };
+      });
+
+      //prendo competenze pg
+      const charProficiencies = await CharacterSheetPage.toPromise(this.characterServices.getCharacterProficiencies(idx_personaggio));
+      this.characterProficiencies = charProficiencies.proficiencies.map(item => item.proficiency);
+
+
+      const abilityScores = await CharacterSheetPage.toPromise(this.characterServices.getAbilityScores());
+      this.abilityScoresInfos = abilityScores.ability_scores.map((item: any) => {
+        return {
+          index: item.index,
+          name: item.name,
+          full_name: item.full_name,
+          saving_throw_value: CharacterSheetPage.generateSavingThrowValues(
+            CharacterSheetPage.getStatModifierByIndex(item.index,this.characterStats),
+            this.characterInfo.proficiency_bonus,
+            item.full_name,
+            this.characterProficiencies
+          ),
+          //ricorda che è un array di APIreference con index e name
+          skills: item.skills,
+          imageURL: undefined,
+        };
+      });
+    
+    
+    } catch (err) {
+      Alerts.error(err);
+    } 
+
+  }
+
+
+  constructor(public popoverController: PopoverController, private router: Router, private characterServices: CharacterManagementService, private userServices: UserUtilitiesService) {
+    this.init()
+  }
+  
   ngOnInit() {
-}
+  }
 
 }
 

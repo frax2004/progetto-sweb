@@ -8,6 +8,7 @@ import { userUtilitiesRouter } from './routes/user.utilities.routes.js';
 import { characterManagementRouter } from './routes/character.management.routes.js';
 import { campagnaRouter } from './routes/campagna.routes.js';
 import { reportsRouter } from './routes/reports.routes.js';
+import { postRoutes } from './routes/post.routes.js';
 
 
 const app = express();
@@ -21,6 +22,7 @@ app.use("/api/user-utilities", userUtilitiesRouter);
 app.use("/api/character-management", characterManagementRouter)
 app.use('/api/campaign', campagnaRouter);
 app.use('/api/reports', reportsRouter);
+app.use('/api/Posts', postRoutes);
 
 // per impostare la formattazione a 2 spazi di indentazione
 app.set('json spaces', 2);

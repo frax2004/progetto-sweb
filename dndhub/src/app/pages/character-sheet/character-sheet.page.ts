@@ -55,48 +55,48 @@ changeCallback={
 }
   
   constructor(public popoverController: PopoverController, private router: Router, private characterServices: CharacterManagementService, private userServices: UserUtilitiesService) {
-    this.userServices
-    .getPlayerID()
-    .subscribe({
-      next: (value: any) => {
-        this.playerID = value.utente_giocatore;
-        const idx_personaggio = `${this.characterName} @ ${this.playerID}`;
-        this.characterServices
-        .getCharacterByIdx(idx_personaggio)
-        .subscribe({
-          next: (value: any) => {
-            this.characterInfo = {
-              health: value.character.punti_vita,
-              proficiency_bonus: value.character.bonus_competenza,
-              class: value.character.classe,
-              subclasse: value.character.sottoclasse,
-              species: value.character.specie,
-              subspecies: value.character.subspecies,
-              background: value.character.background,
-              level: value.character.livello,
-              gold_quantity: value.character.quantita_oro,
-              //in teoria non mi servono incantesimi
-              speed: value.character.velocita,
-              size: value.character.taglia,
-              extra_abilities: value.character.abilita_extra,
-              character_description: value.character.descrizione_personaggio,
-              image: value.character.imgURL,
-            };
-          },
-          error: (err) => Alerts.error(err.error.message)
-        })
-      },
-      error: (err) => Alerts.error(err.error.message)
-    });
+    // this.userServices
+    // .getPlayerID()
+    // .subscribe({
+    //   next: (value: any) => {
+    //     this.playerID = value.utente_giocatore;
+    //     const idx_personaggio = `${this.characterName} @ ${this.playerID}`;
+    //     this.characterServices
+    //     .getCharacterByIdx(idx_personaggio)
+    //     .subscribe({
+    //       next: (value: any) => {
+    //         this.characterInfo = {
+    //           health: value.character.punti_vita,
+    //           proficiency_bonus: value.character.bonus_competenza,
+    //           class: value.character.classe,
+    //           subclasse: value.character.sottoclasse,
+    //           species: value.character.specie,
+    //           subspecies: value.character.subspecies,
+    //           background: value.character.background,
+    //           level: value.character.livello,
+    //           gold_quantity: value.character.quantita_oro,
+    //           //in teoria non mi servono incantesimi
+    //           speed: value.character.velocita,
+    //           size: value.character.taglia,
+    //           extra_abilities: value.character.abilita_extra,
+    //           character_description: value.character.descrizione_personaggio,
+    //           image: value.character.imgURL,
+    //         };
+    //       },
+    //       error: (err) => Alerts.error(err.error.message)
+    //     })
+    //   },
+    //   error: (err) => Alerts.error(err.error.message)
+    // });
     
-    this.characterServices
-    .getAbilityScores()
-    .subscribe({
-      next: (value: any) => {
+    // this.characterServices
+    // .getAbilityScores()
+    // .subscribe({
+    //   next: (value: any) => {
 
-      },
-      error: (err) => Alerts.error(err.error.message)
-    });
+    //   },
+    //   error: (err) => Alerts.error(err.error.message)
+    // });
   }
 
   ngOnInit() {

@@ -20,17 +20,17 @@ export class CampaignChatPage implements OnInit {
     placeholder: { onClick: Popups.ofSimpleText(this.popoverController, 'Funzione non ancora implementata') },
   };
 
-  campaignName: string = 'Nome campagna';
-  idx_campagna: string = '';
+campaignName: string = '';
+  idx_campagna: string = 'The-Frozen-Frontier @ (dungeon_master): antonio.ferri90@unipa.net';
   postText: string = '';
 
-  // posts=[];
-  posts = [
-    {
-      text: 'ciao freezer',
-      time_stamp: '16/04/2005',
-    },
-  ];
+    posts=[];
+  // posts = [
+  //   {
+  //     text: 'ciao freezer',
+  //     time_stamp: '16/04/2005',
+  //   },
+  // ];
 
   players = [
     { name: 'Gorillicrya', character: 'Tiefling barbaro lvl 999' },

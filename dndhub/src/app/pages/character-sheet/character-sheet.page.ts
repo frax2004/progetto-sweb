@@ -249,7 +249,7 @@ changeCallback={
         };
       });
     } catch (err) {
-      Alerts.error(err);
+      Alerts.message(err.error.message);
     } 
 
   }

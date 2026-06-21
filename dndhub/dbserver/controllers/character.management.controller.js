@@ -713,11 +713,9 @@ async function getCharacterEquipment(req,res) {
       let retEquip = [];
       for (const item of equipmentArray) {
 
-        const unwrappedEquip = await DatabaseQueries.retrieve(`SELECT * FROM Equipment WHERE idx = '%${item.item}%'`, DatabaseQueries.unwrapEquipment);
+        const unwrappedEquip = await DatabaseQueries.retrieve(`SELECT * FROM Equipment WHERE idx like '%${item.item}%'`, DatabaseQueries.unwrapEquipment);
 
-        //console.log(JSON.stringify(unwrappedEquip,null,2));
-
-        retEquip.push(unwrappedEquip);
+        if (unwrappedEquip[0] !== undefined) retEquip.push(unwrappedEquip[0]);
       }
       sendResponse({
         equipment: retEquip,
@@ -727,9 +725,10 @@ async function getCharacterEquipment(req,res) {
       }, res);
     }
     catch (err) {
+      // console.log(err);
       sendResponse({
         status_code: 404,
-        message: 'Non è stato possibile caricare equipaggiamento dal database',
+        message: 'Non è stato possibile caricare equipaggiamento dal database ' + err.message,
         success: false,
       }, res);
     }

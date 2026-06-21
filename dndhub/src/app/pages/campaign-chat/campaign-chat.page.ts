@@ -7,6 +7,7 @@ import { Popups } from 'src/app/core/core';
 import { timestamp } from 'rxjs';
 import { PostsService } from 'src/app/services/PostsService';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-campaign-chat',
@@ -17,20 +18,20 @@ import { AlertController } from '@ionic/angular';
 })
 export class CampaignChatPage implements OnInit {
   buttonCallbacks = {
-    placeholder: { onClick: Popups.ofSimpleText(this.popoverController, 'Funzione non ancora implementata') },
-  };
+  placeholder: { onClick: () => this.router.navigate(['/campaigns'])
+  }
+};
 
-campaignName: string = '';
+  buttonCampaignCallBacks = {
+  placeholder: { onClick: () => this.router.navigate(['/dettagli-campagna'])
+  }
+};
+
+campaignName: string = 'Pippo';
   idx_campagna: string = 'The-Frozen-Frontier @ (dungeon_master): antonio.ferri90@unipa.net';
   postText: string = '';
 
     posts=[];
-  // posts = [
-  //   {
-  //     text: 'ciao freezer',
-  //     time_stamp: '16/04/2005',
-  //   },
-  // ];
 
   players = [
     { name: 'Gorillicrya', character: 'Tiefling barbaro lvl 999' },
@@ -39,7 +40,7 @@ campaignName: string = '';
     { name: 'Gorillicrya', character: 'Tiefling barbaro lvl 999' },
   ]
 
-  constructor(public popoverController: PopoverController, private PostsService: PostsService, private alertCtrl: AlertController) { }
+  constructor(private router: Router, public popoverController: PopoverController, private PostsService: PostsService, private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.loadPosts(); // quando la pagina viene caricata prende subito i post se presenti

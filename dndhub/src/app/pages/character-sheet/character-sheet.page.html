@@ -4,7 +4,6 @@
     <div>
       <ion-title class="title">Scheda personaggio</ion-title>
       <ion-title class="nome">Pino Il Ballerino</ion-title>
-      <!-- <ion-title>{{characterInfo.health}} - level {{characterInfo.level}}</ion-title> -->
     </div>
   </div>
 
@@ -38,7 +37,7 @@
       <div class="right">
         <!-- dati mock, da aggiungere col db -->
         <div class="fight">
-          <ion-label>Punti ferita: 20/40 + 5</ion-label>
+          <ion-label>Health Points: {{currHealth}}/{{characterInfo.health}}</ion-label>
           <ion-label>CA:44330</ion-label>
           <ion-label>DadiVita: 50/60</ion-label>
         </div>
@@ -65,17 +64,30 @@
           </div>
         </div>
         <div class="species">
-          <ion-label>Classe:Mago finale</ion-label>
-          <ion-label>Sottoclasse:HoSonno</ion-label>
-          <ion-label>Bonus Competenza: +399</ion-label>
-          <ion-label>Specie:Inferiore</ion-label>
+          <ion-label>Class: {{characterInfo.class}}</ion-label>
+          <ion-label>Subclass: {{characterInfo.subclass}}</ion-label>
+          <ion-label>Proficiency bonus: +{{characterInfo.proficiency_bonus}}</ion-label>
+          <ion-label>Species: {{characterInfo.species}}</ion-label>
+          @if(characterInfo.subspecies !== undefined) {
+            <ion-label>{{characterInfo.subspecies}}</ion-label>
+          }
         </div>
 
         <div class="informazioni">
-          <ion-label>Iniziativa: 20 Naturale</ion-label>
-          <ion-label>taglia: pacchione</ion-label>
-          <ion-label>Percezione Passiva: Ti vedo</ion-label>
-          <ion-label>Velocità: 180 metri</ion-label>
+          @for(abilityScore of abilityScoresInfos; track abilityScore) {
+            @if(abilityScore.index === 'dex') {
+              <ion-label>Initiative: {{abilityScore.stat_modifier}}</ion-label>
+            }
+          }
+          <ion-label>Size: {{characterInfo.size}}</ion-label>
+          @for(abilityScore of abilityScoresInfos; track abilityScore) {
+            @for(skill of abilityScore.skills; track skill) {
+              @if (skill.name === 'Perception') {
+                <ion-label>Passive perception: {{skill.modifier}}</ion-label>
+              }
+            }
+          }
+          <ion-label>Speed: {{characterInfo.speed}} ft</ion-label>
 
         </div>
       </div>
@@ -83,60 +95,42 @@
   </div>
 
 
-  <!-- adesso una griglia con le statistiche -->
-  <!-- le prime tre sono quelle fisiche, le altre quelle mentali
-  Le statistiche saranno accordion con le abilità dentro -->
-  <!-- Tutti questi infiniti ion-item, ion-grid, row e col sono probabilmente da sostituire perché hanno un layout tutto per i fatti loro -->
-  <ion-grid>
-    <!-- prima riga -->
-    <ion-row>
-      <!-- prima colonna FORZA -->
-      <ion-col>
-        <div class="statAccordion">
-          <app-accordion [accordions]="[accordions['forza']]"></app-accordion>
-        </div>
-      </ion-col>
-
-      <!-- seconda colonna DESTREZZA -->
-      <ion-col>
-        <div class="statAccordion">
-          <app-accordion [accordions]="[accordions['destrezza']]"></app-accordion>
-        </div>
-      </ion-col>
-
-      <!-- terza colonna COSTITUZIONE -->
-      <ion-col>
-        <div class="statAccordion">
-          <app-accordion [accordions]="[accordions['costituzione']]"></app-accordion>
-        </div>
-      </ion-col>
-    </ion-row>
-
-
-    <!-- seconda riga -->
-    <ion-row>
-      <!-- prima colonna INTELLIGENZA -->
-      <ion-col>
-        <div class="statAccordion">
-          <app-accordion [accordions]="[accordions['intelligenza']]"></app-accordion>
-        </div>
-      </ion-col>
-
-      <!-- seconda colonna SAGGEZZA -->
-      <ion-col>
-        <div class="statAccordion">
-          <app-accordion [accordions]="[accordions['saggezza']]"></app-accordion>
-        </div>
-      </ion-col>
-
-      <!-- terza colonna COSTITUZIONE -->
-      <ion-col>
-        <div class="statAccordion">
-          <app-accordion [accordions]="[accordions['costituzione']]"></app-accordion>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div class="statAccordionFrame">
+    <ion-accordion-group class="accordionGroup" value="statAccordionGroup" [multiple]="true" expand="inset" animated="true">
+      @for(abilityScore of abilityScoresInfos; track abilityScore) {
+        <ion-accordion class="statAccordion genericAccordion" [value]="abilityScore.index">
+          <ion-item class="accHeader" slot="header" color="light">
+            @if (abilityScore.imageURL !== undefined) {
+              <ion-thumbnail slot="start">
+                <img id="accImg" alt="placeholder img" [src]="abilityScore.imageURL">
+              </ion-thumbnail>
+            }
+            @else {
+              <ion-thumbnail slot="start">
+                <img alt="placeholder img" [src]="'Card.defaultImageURL()'">
+              </ion-thumbnail>
+            }
+            <div class="headerContentFrame">
+              <h1 class="accTitle">{{abilityScore.full_name}}</h1>
+              <h1>-</h1>
+              <h1>{{abilityScore.stat_value}}</h1>
+              <h1>  [ {{abilityScore.stat_modifier}} ]</h1>
+            </div>
+          </ion-item>
+          <div class="ionPadding accContent" slot="content">
+            <h3>Saving throw: {{abilityScore.saving_throw_value}}</h3>
+            <div class="skillsContainer">
+              @for(skill of abilityScore.skills; track skill) {
+                <div class="skill">
+                  <ion-label>{{skill.name}}: {{skill.modifier}}</ion-label>
+                </div>
+              }
+            </div>
+          </div>
+        </ion-accordion>
+      }
+    </ion-accordion-group>
+  </div>
 
   <!-- ULTIMA griglia con lista abilità e piccolo div per le note -->
   <ion-grid>
@@ -146,11 +140,59 @@
       <ion-col>
 
         <ion-list>
+          <div class="languageAccordionContainer">
+            <ion-accordion-group class="accordionGroup" value="languageAccordionGroup" [multiple]="true" expand="inset" animated="true">
+              <ion-accordion class="languageAccordion genericAccordion" value="languageAccordion">
+                <ion-item class="accHeader" slot="header" color="light">
+                  <h1 class="accTitle">Languages</h1>
+                </ion-item>
+                <div class="ionPadding accContent" slot="content">
+                  @for (lang of characterLanguages; track lang) {
+                    <div class="language">
+                      <ion-label>- {{lang.name}}</ion-label>
+                    </div>
+                  }
+                </div>
+              </ion-accordion>
+            </ion-accordion-group>
+          </div>
+
           <!-- menu abilità -->
-          <app-accordion [accordions]="[abilityAccordions['abilita']]"></app-accordion>
+          <div class="featAccordionContainer">
+            <ion-accordion-group class="accordionGroup" value="featAccordionGroup" [multiple]="true" expand="inset" animated="true">
+              <ion-accordion class="featAccordion genericAccordion" value="featAccordion">
+                <ion-item class="accHeader" slot="header" color="light">
+                  <h1 class="accTitle">Feats</h1>
+                </ion-item>
+                <div class="ionPadding accContent" slot="content">
+                  @for (feat of characterFeats; track feat) {
+                    <div class="language">
+                      <ion-label>- {{feat}}</ion-label>
+                    </div>
+                  }
+                </div>
+              </ion-accordion>
+            </ion-accordion-group>
+          </div>
 
           <!-- menu inventario -->
-          <app-accordion [accordions]="[abilityAccordions['inventario']]"></app-accordion>
+          <div class="equipmentAccordionContainer">
+            <ion-accordion-group class="accordionGroup" value="equipmentAccordionGroup" [multiple]="true" expand="inset" animated="true">
+              <ion-accordion class="equipAccordion genericAccordion" value="equipmentAccordion">
+                <ion-item class="accHeader" slot="header" color="light">
+                  <h1 class="accTitle">Equipment</h1>
+                </ion-item>
+                <div class="ionPadding accContent" slot="content">
+                  ciao
+                  @for (equip of characterEquipment; track equip) {
+                    <div class="equipment">
+                      <ion-label>- {{equip.name}}</ion-label>
+                    </div>
+                  }
+                </div>
+              </ion-accordion>
+            </ion-accordion-group>
+          </div>
 
           <app-button [button]="{text: 'Incantesimi', expand:''}" 
             [context]="buttonCallbacks['placeholder']"></app-button>

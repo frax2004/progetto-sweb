@@ -160,21 +160,21 @@ export class OverviewPage implements OnInit {
     //da finire
     for(const equip of CharacterInstance.backgroundEquipment) {
       equipArray.push({
-        idx: equip.index.trim(),
+        idx: equip.index.trim().replace(' ','-'),
         quantity: equip.quantity,
       });
     }
 
     for(const equip of CharacterInstance.baseEquipment) {
       equipArray.push({
-        idx: equip.index.trim(),
+        idx: equip.index.trim().replace(' ','-'),
         quantity: equip.quantity,
       });
     }
 
     for(const equip of CharacterInstance.backgroundEquipment) {
       equipArray.push({
-        idx: equip.index.trim(),
+        idx: equip.index.trim().replace(' ','-'),
         quantity: equip.quantity,
       });
     }
@@ -184,14 +184,14 @@ export class OverviewPage implements OnInit {
       if (equip.includes('+')) {
         for (const subEquip of equip.split('+')) {
           equipArray.push({
-            idx: subEquip.toLowerCase().trim(),
+            idx: subEquip.toLowerCase().trim().replace(' ','-'),
             quantity: 1,
           });    
         }
       }
       else {
         equipArray.push({
-          idx: equip.toLowerCase().trim(),
+          idx: equip.toLowerCase().trim().replace(' ','-'),
           quantity: 1,
         });
       }
@@ -199,7 +199,7 @@ export class OverviewPage implements OnInit {
 
     for(const equip of CharacterInstance?.chosenBackgroundEquipment) {
       equipArray.push({
-        idx: equip.toLowerCase().trim(),
+        idx: equip.toLowerCase().trim().replace(' ','-'),
         quantity: 1,
       });
     }
@@ -216,6 +216,13 @@ export class OverviewPage implements OnInit {
         idx: prof.index.trim(),
         name: prof.name,
       });
+    }
+
+    for(const prof of CharacterInstance.backgroundProficiencies) {
+      profArray.push({
+        idx: prof.index.trim(),
+        name: prof.name
+      })
     }
 
     for(const prof of CharacterInstance.baseSavingThrows) {
@@ -246,15 +253,15 @@ export class OverviewPage implements OnInit {
     let langArray = [];
 
     for (const language of CharacterInstance.speciesLanguages) {
-      langArray.push(language.index.trim().replace(' ','-'));
+      langArray.push(language.index.trim().replace('common sign language','common-sign-language').replace(' ','-'));
     }
 
     for (const language of CharacterInstance.chosenLanguages) {
-      langArray.push(language.toLowerCase().trim().replace(' ','-'));
+      langArray.push(language.toLowerCase().trim().replace('common sign language','common-sign-language').replace(' ','-'));
     }
 
     for (const language of CharacterInstance.chosenBackgroundLanguages) {
-      langArray.push(language.toLowerCase().trim().replace(' ','-'));
+      langArray.push(language.toLowerCase().trim().replace('common sign language','common-sign-language').replace(' ','-'));
     }
 
     return langArray;

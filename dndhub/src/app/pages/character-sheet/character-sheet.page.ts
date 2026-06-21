@@ -50,6 +50,13 @@ export class CharacterSheetPage implements OnInit {
   characterEquipment: any[];
   characterLanguages: any[];
   characterFeats: any[];
+  characterCA: {
+    maxCA: number,
+    shieldCA: number
+  };
+  dexModifier: number;
+  currHitDies: number;
+  hitDie: number;
 
   accordions = {
     // per qualche motivo \n non va a capo e neanche <br/>
@@ -110,6 +117,32 @@ changeCallback={
     return {
       name: skillName,
       modifier: statModifier
+    };
+  }
+
+  static getMaxAC(dexModifier: number, equipments: any[]) {
+    let maxCA = 10 + dexModifier;
+    let shieldCA = 0;
+    for (const equip of equipments) {
+      if (equip.armor_class_base !== undefined && equip.armor_class_base !== null) {
+        if(equip.name.toLowerCase() === 'shield') shieldCA = equip.armor_class_base;
+        else { 
+          let ca = equip.armor_class_base;
+          if (equip.armor_class_dex_bonus === true) {
+            if (equip.armor_class_max_bonus !== undefined && equip.armor_class_max_bonus !== null) {
+              ca = dexModifier > equip.armor_class_max_bonus ? ca + equip.armor_class_max_bonus : ca + dexModifier;
+            }
+            else ca = ca + dexModifier;
+          }
+          
+          maxCA = ca > maxCA ? ca : maxCA;
+        }
+      }
+    }
+
+    return {
+      maxCA: maxCA,
+      shieldCA: shieldCA
     };
   }
 
@@ -194,6 +227,10 @@ changeCallback={
         };
       });
 
+      for (const ab of this.abilityScoresInfos) {
+        if (ab.index === 'dex') this.dexModifier = ab.stat_modifier;
+      }
+
       //prendo lingue
       const languageValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterLanguages(idx_personaggio));
       this.characterLanguages = languageValues.languages.map((item: any) => {
@@ -248,6 +285,12 @@ changeCallback={
           throw_range_long: item.throw_range?.long, 
         };
       });
+
+      this.characterCA = CharacterSheetPage.getMaxAC(this.dexModifier,this.characterEquipment);
+
+      const classValues = await CharacterSheetPage.toPromise(this.characterServices.displayClassByName(this.characterInfo.class));
+      this.hitDie = classValues.classes.map(item  => item.hit_die);
+      this.currHitDies = this.characterInfo.level;
     } catch (err) {
       Alerts.message(err.error.message);
     } 

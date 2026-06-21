@@ -38,9 +38,9 @@
         <!-- dati mock, da aggiungere col db -->
         <div class="fight">
           <ion-label>Health Points: {{currHealth}}/{{characterInfo.health}}</ion-label>
-          <ion-label>Armor Class: {{characterCA.maxCA}}</ion-label>
-          @if(characterCA.shieldCA !== 0) {
-            <ion-label>Armor Class with Shield: {{characterCA.maxCA + characterCA.shieldCA}}</ion-label>
+          <ion-label>Armor Class: {{maxCA}}</ion-label>
+          @if(shieldCA !== 0) {
+            <ion-label>Armor Class with Shield: {{maxCA + shieldCA}}</ion-label>
           }
           <ion-label>Hit die: {{currHitDies}}d{{hitDie}}/{{characterInfo.level}}d{{hitDie}}</ion-label>
         </div>

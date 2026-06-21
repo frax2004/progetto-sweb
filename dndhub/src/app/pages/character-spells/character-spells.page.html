@@ -14,32 +14,14 @@
       </div> 
       <!-- fine ButtonIndietro -->
     <div class="grid">  
-      <div class="toogleOrdine">
-          <!-- toggle mago -->
-                <app-button
-                [button] = "{ text: 'Mago', expand:'',color:'blue'}"
-                [context] = "buttonCallbacks['mago']"
-                ></app-button>
-
-            <!-- toggle chierico -->
-                <app-button
-                [button] = "{ text: 'Chierico', expand:'', color:'yellow'}"
-                [context] = "buttonCallbacks['chierico']"
-                ></app-button>
-
-            <!-- toggle warlock -->
-                <app-button
-                [button] = "{ text: 'Warlock', expand:'', color:'purple'}"
-                [context] = "buttonCallbacks['warlock']"
-                ></app-button>
-      </div>  
+      
       <div class="ordimamento-slot">
 
   <div class="Slot">
     <ion-label>SLOT INCANTESIMO</ion-label>
   </div>
 
-  @if (currClass !== 'Warlock') {
+  @if (characterInfo.class !== 'Warlock') {
 
     <div class="primaRiga">
 
@@ -150,10 +132,10 @@
 
 
   <div class="caratteristiche-incantatore">
-    <ion-label>Bonus attacco incantesimo: {{ currAttBonus }}</ion-label>
-    <ion-label>CD tiro salvezza: {{ currCD }}</ion-label>
-    <ion-label>Modificatore da incantatore: {{ currModifier }}</ion-label>
-    <ion-label>Caratteristica da incantatore: {{ currAbility }}</ion-label>
+    <ion-label>Bonus attacco incantesimo: {{ spellAttBonus }}</ion-label>
+    <ion-label>CD tiro salvezza: {{ spellcastingCD }}</ion-label>
+    <ion-label>Modificatore da incantatore: {{ spellcastingModifier }}</ion-label>
+    <ion-label>Caratteristica da incantatore: {{ spellcastingAbility }}</ion-label>
   </div>
 
   <!-- altra mega griglia per incantesimi -->
@@ -209,62 +191,62 @@
     <div class="scrollbar">
       <ion-grid>
 
-      @for (incantesimo of currIncantesimi; track incantesimo) {
+      @for (incantesimo of characterSpells; track incantesimo) {
         <ion-row class="Centrare">
 
           <!-- nome -->
           <ion-col class="NomeSpell">
             <ion-item>
-              <ion-label class="NomeVisualizzato"  (click)="incantesimo.descrizione($event)">{{incantesimo.nome}}</ion-label>
+              <ion-label class="NomeVisualizzato"  (click)="incantesimo.description($event)">{{incantesimo.name}}</ion-label>
             </ion-item>
           </ion-col>
 
           <!-- Livello -->
           <ion-col>
             <ion-item>
-              <ion-label>{{incantesimo.livello}}</ion-label>
+              <ion-label>{{incantesimo.level}}</ion-label>
             </ion-item>
           </ion-col>
 
           <!-- tempo di lancio + rituale -->
           <ion-col>
             <ion-item>
-              <ion-label>{{incantesimo.tmpLanc}}</ion-label>
+              <ion-label>{{incantesimo.casting_time}}</ion-label>
             </ion-item>
           </ion-col>
 
           <!-- durata -->
           <ion-col>
             <ion-item>
-              <ion-label>{{incantesimo.durata}}</ion-label>
+              <ion-label>{{incantesimo.duration}}</ion-label>
             </ion-item>
           </ion-col>
 
           <!-- gittata -->
           <ion-col>
             <ion-item>
-              <ion-label>{{incantesimo.gittata}}</ion-label>
+              <ion-label>{{incantesimo.range}}</ion-label>
             </ion-item>
           </ion-col>
 
           <!-- concentrazione -->
           <ion-col>
             <ion-item>
-              <ion-label>{{incantesimo.concentrazione}}</ion-label>
+              <ion-label>{{incantesimo.concentration}}</ion-label>
             </ion-item>
           </ion-col>
 
           <!-- componenti -->
           <ion-col>
             <ion-item>
-              <ion-label>{{incantesimo.componenti}}</ion-label>
+              <ion-label>{{incantesimo.components}}</ion-label>
             </ion-item>
           </ion-col>
 
           <!-- Scuola di magia -->
           <ion-col>
             <ion-item>
-              <ion-label>{{incantesimo.scMag}}</ion-label>
+              <ion-label>{{incantesimo.school}}</ion-label>
             </ion-item>
           </ion-col>
 

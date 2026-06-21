@@ -57,3 +57,9 @@ characterManagementRouter.post("/get-character-feats",
     characterMiddleware.doesCharacterExist,
     controller.getCharacterFeats
 );
+//togliere commenti dai middleware
+characterManagementRouter.post("/get-character-spells",
+    // authMiddleware.isLogged,
+    characterMiddleware.doesCharacterExist,
+    controller.getCharacterSpells
+);

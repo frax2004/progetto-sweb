@@ -185,4 +185,11 @@ export class CharacterManagementService {
       {idx_personaggio: idx_personaggio}
     );
   }
+
+  getCharacterSpells(idx_personaggio: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/get-character-spells`,
+      {idx_personaggio: idx_personaggio}
+    );
+  }
 }

@@ -2,9 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonGrid, IonRow, IonItem, IonCheckbox ,IonCol, IonLabel, PopoverController } from '@ionic/angular/standalone';
-import { Navigate, Popups } from 'src/app/core/core';
+import { Alerts, Navigate, Popups } from 'src/app/core/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from "src/app/components/button/button.component";
+import { CharacterSheetPage } from '../character-sheet/character-sheet.page';
+import { CharacterManagementService } from 'src/app/services/character.management.service';
+import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
+import { range } from 'rxjs';
 
 @Component({
   selector: 'app-character-spells',
@@ -14,11 +18,36 @@ import { ButtonComponent } from "src/app/components/button/button.component";
   imports: [IonContent, IonCheckbox, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonGrid, IonRow, IonItem, IonCol, ButtonComponent, IonLabel]
 })
 export class CharacterSpellsPage implements OnInit {
+
+  // da cambiare dopo i tests
+  characterName = 'Maurone';
+  playerID: string;
+  characterInfo = {
+    proficiency_bonus: undefined,
+    class: undefined,
+    level: undefined,
+    spellsNumber: undefined,
+    cantripsNumber: undefined,
+    slot_lvl_1: undefined,
+    slot_lvl_2: undefined,
+    slot_lvl_3: undefined,
+    slot_lvl_4: undefined,
+    slot_lvl_5: undefined,
+    slot_lvl_6: undefined,
+    slot_lvl_7: undefined,
+    slot_lvl_8: undefined,
+    slot_lvl_9: undefined,
+  };
+  characterStats: any[];
+  abilityScoresInfos: any[];
+  spellcastingAbility: string;
+  spellcastingModifier: number;
+  spellcastingCD: number;
+  spellAttBonus: number;
+  characterSpells: any[];
+  
   buttonCallbacks = {
     indietro: { onClick: Navigate.toPath(this.router,'character-sheet')},
-    mago: { onClick: this.toggleClass('Mago'),},
-    chierico: { onClick: this.toggleClass('Chierico')},
-    warlock: { onClick: this.toggleClass('Warlock')},
   };
 
   incantesimiWarlock = [
@@ -42,46 +71,87 @@ export class CharacterSpellsPage implements OnInit {
     warlock: this.incantesimiWarlock,
   };
 
-  currClass: String = 'Mago'
-  currAbility: String = 'Intelligenza';
-  currModifier: String = '+9';
-  currCD: String = '18';
-  currAttBonus: String = '+15';
-  currIncantesimi: any = this.incantesimi['mago'];
 
-  toggleClass(className: String) {
-    const f = () => {
-        if (className==='Mago') {
-        this.currClass = 'Mago';
-        this.currAbility = 'Intelligenza';
-        this.currModifier = '+9';
-        this.currCD = '18'; // ovviamente questi parametri dipenderanno dal db
-        this.currAttBonus = '+15';
-        this.currIncantesimi = this.incantesimi['mago'];
-        //più avanti pensare a disattivare il bottone una volta che viene cliccato
-      }
-      else if (className==='Chierico') {
-        this.currClass = 'Chierico';
-        this.currAbility = 'Saggezza';
-        this.currModifier = '+8'
-        this.currCD = '13';
-        this.currAttBonus = '+36'
-        this.currIncantesimi = this.incantesimi['chierico'];
-      }
-      else if (className==='Warlock') {
-        this.currClass = 'Warlock';
-        this.currAbility = 'Carisma';
-        this.currModifier = '+7'
-        this.currCD = '16';
-        this.currAttBonus = '+0'
-        this.currIncantesimi = this.incantesimi['warlock'];
-      }
-    } 
+  
 
-    return f;
+  init = async () => {
+    try {
+      // ?? da levare dopo tests
+      const playerIDvalues = (await CharacterSheetPage.toPromise(this.userServices.getPlayerID())).utente_giocatore;
+      this.playerID = playerIDvalues === undefined ? '(giocatore): giovanniDM@gmail.com' : playerIDvalues;
+      const idx_personaggio = `${this.characterName} @ ${this.playerID}`;
+
+      const characterValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterByIdx(idx_personaggio));
+      this.characterInfo = {
+        proficiency_bonus: characterValues.character.bonus_competenza,
+        class: characterValues.character.classe,
+        level: characterValues.character.livello,
+        spellsNumber: characterValues.character.numero_incantesimi,
+        cantripsNumber: characterValues.character.numero_trucchetti,
+        slot_lvl_1: characterValues.character.slot_livello_1,
+        slot_lvl_2: characterValues.character.slot_livello_2,
+        slot_lvl_3: characterValues.character.slot_livello_3,
+        slot_lvl_4: characterValues.character.slot_livello_4,
+        slot_lvl_5: characterValues.character.slot_livello_5,
+        slot_lvl_6: characterValues.character.slot_livello_6,
+        slot_lvl_7: characterValues.character.slot_livello_7,
+        slot_lvl_8: characterValues.character.slot_livello_8,
+        slot_lvl_9: characterValues.character.slot_livello_9,
+      };
+
+      //prendo statistiche pg
+      const scoresValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterAbilityScores(idx_personaggio));
+      this.characterStats = scoresValues.stats.map((item: any) => {
+        return {
+          index: item.stat_idx,
+          stat_value: item.stat_value,
+          stat_modifier: item.stat_modifier
+        };
+      });
+
+      const abilityScores = await CharacterSheetPage.toPromise(this.characterServices.getAbilityScores());
+      this.abilityScoresInfos = abilityScores.ability_scores.map((item: any) => {
+        return {
+          index: item.index,
+          name: item.name,
+          full_name: item.full_name,
+          stat_value: CharacterSheetPage.getStatValueByIndex(item.index,this.characterStats),
+          stat_modifier: CharacterSheetPage.getStatModifierByIndex(item.index,this.characterStats),
+        };
+      });
+
+      const spellValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterSpells(idx_personaggio));
+      this.characterSpells = spellValues.spells.map((item: any) => {
+        return {
+          name: item.name,
+          level: item.level,
+          school: item.school,
+          classes: item.classes,
+          action_type: item.actionType,
+          concentration: item.concentration,
+          ritual: item.ritual,
+          range: item.range,
+          components: item.components?.replace('$$$', ' - ')?.replace('$$$', ' - '),
+          material: item.material,
+          duration: item.duration,
+          description: item.description,
+          cantrip_upgrade: item.cantripUpgrade,
+          higher_level_slot: item.higherLevelSlot,
+          casting_trigger: item.castingTrigger,
+          casting_time: item.castingTime,
+        };
+      });
+
+
+    }
+    catch (err) {
+      Alerts.message(err.error.message);
+    }
   }
 
-  constructor(private router: Router, public popoverController: PopoverController) { }
+  constructor(private router: Router, public popoverController: PopoverController,private userServices: UserUtilitiesService ,private characterServices: CharacterManagementService) {
+    this.init();
+  }
 
   ngOnInit() {
   }

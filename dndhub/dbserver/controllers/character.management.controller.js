@@ -807,6 +807,50 @@ function getCharacterFeats(req,res) {
   });
 }
 
+function getCharacterSpells(req,res) {
+  canSend = true;
+
+  const idx = req.body.idx_personaggio;
+  
+  DatabaseQueries.retrieve(`SELECT * FROM ArraySpellItem WHERE idx_personaggio = '${idx}'`, (el) => el)
+  .catch(err => {
+    sendResponse({
+      status_code: 404,
+      message: 'Non è stato possibile caricare gli incantesimi dal database',
+      success: false,
+      }, 
+      res
+    );
+  }).then(spells => {
+    let spellArray = []
+    for (const spell of spells) {
+      DatabaseQueries.retrieve(`SELECT * FROM Spell WHERE name = '${spell.item}'`, el => el)
+      .catch(err => {
+        console.log('\nSono nel secondo catch\n');
+        sendResponse({
+            status_code: 404,
+            message: 'Non è stato possibile caricare gli incantesimi dal database',
+            success: false,
+          }, 
+          res
+        );
+      })
+      .then(spell => {
+        spellArray.push(spell[0]);
+
+        if(spellArray.length === spells.length) {
+          sendResponse({
+            spells: spellArray,
+            status_code: 200,
+            message: 'Incantesimi caricati con successo',
+            success: true,
+          }, res);
+        }
+      })
+    }
+  });
+}
+
 export default {
   displayClasses,
   displayLevelByNameAndLevel,
@@ -825,4 +869,5 @@ export default {
   getCharacterEquipment,
   getCharacterLanguages,
   getCharacterFeats,
+  getCharacterSpells,
 }

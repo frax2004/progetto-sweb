@@ -87,6 +87,11 @@ export class UserInstance {
 
 }
 
+export function decodeCampaign(hashcode) {
+  const decoder = ch => ch - 8;
+  return Buffer.from(hashcode).map(decoder).toString();
+}
+
 export const generateToken = (body) => jwt.sign(
   body, 
   JWT_SECRET, 

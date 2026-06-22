@@ -34,12 +34,12 @@
       <!-- manca il frame, metto un placeholder -->
       @if (characterInfo.image !== undefined) {
         <div class="placeholderFrame">
-          <div [style.background-image]="'url('+ characterInfo.image +')'" alt="character img">
+          <div [style.background-image]="'url('+ characterInfo.image +')'" alt="character img"></div>
         </div>
       }
       @else {
         <div class="placeholderFrame">
-          <div [style.background-image]="'url('+ defaultIMG +')'" alt="character img">
+          <div [style.background-image]="'url('+ defaultIMG +')'" alt="character img"></div> 
         </div>
       }
 

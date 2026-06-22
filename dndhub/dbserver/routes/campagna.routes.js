@@ -31,6 +31,6 @@ campagnaRouter.post(
   controller.loadAcceptedCharacterCampaigns
 );
 
-campagnaRouter.post(
+// campagnaRouter.post(
 
-)
+// )

@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { alertController, AlertOptions } from '@ionic/core';
 import { bytes } from "stream/consumers";
 import { Readable } from "stream";
+import { signal } from "@angular/core";
 
 
 export namespace Popups {
@@ -102,3 +103,8 @@ export function encodeCampaign(campaign_idx: string) {
   const encoder = ch => ch + 8;
   return Buffer.from(campaign_idx).map(encoder).toString();
 }
+
+
+export let currentGlobalCampaignName = signal<string>('');
+export let currentGlobalCharacterName = signal<string>(''); 
+export const defualtCharacterImgURL = "https://i.pinimg.com/736x/8e/fd/55/8efd55212da85ed2fb9d5ccc533c7550.jpg";

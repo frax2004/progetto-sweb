@@ -5,31 +5,33 @@
     </div>
   </div>
 
+
+  <app-button id="goback"
+    [button]="{text: 'Go Back', expand: 'false'}"
+    [context]="buttonCallbacks['goBack']"
+  ></app-button>
   <app-button
     [button]= "{ text: 'Vai alle campagne', expand: ''}"
     [context]= "buttonCallbacks['goToCampaigns']"
   ></app-button>
 
-  <ion-grid>
-    <ion-row>
-      <app-button
-        [button]= "{ text: 'Vai alle campagne', expand: ''}"
-        [context]= "buttonCallbacks['goToCampaigns']"
-      ></app-button>
-  <app-button
-    [button] = "{ text: 'Crea Personaggio', expand: ''}"
-    [context] = "buttonCallbacks['createChar']"
-  ></app-button>
+  <div class="characters">
+    <div class="add-button">
+      <div>
+        <app-button
+        [button]="{text: '+', expand: 'false'}"
+        [context]="buttonCallbacks['createChar']"
+        ></app-button>
+      </div>
+    </div>
+    @for(card of cards(); track $index) {
+      <div class="separator"></div>
+      <app-character-card 
+      [card]="card"
+      ></app-character-card>
+    }
+  </div>
 
 
-<ion-content>
-  <ion-grid>
-    <ion-row>
-    </ion-row>
-     <ion-row>
-      <app-card
-        [card] = "cards"
-      ></app-card>
-     </ion-row>
-  </ion-grid>
 </ion-content>
+

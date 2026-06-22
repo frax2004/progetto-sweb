@@ -21,45 +21,50 @@ characterManagementRouter.post("/insert-character",
     controller.insertCharacter
 );
 characterManagementRouter.post("/get-ability-scores", controller.getAbilityScores);
-//TODO togliere commenti dai middleware
+
 characterManagementRouter.post("/get-character-by-idx", 
-    // authMiddleware.isLogged,
+    authMiddleware.isLogged,
     characterMiddleware.doesCharacterExist,
     controller.getCharacterByIdx
 );
-//togliere commenti dai middleware
+
 characterManagementRouter.post("/get-character-stats",
-    // authMiddleware.isLogged,
+    authMiddleware.isLogged,
     characterMiddleware.doesCharacterExist,
     controller.getCharacterAbilityScores
 );
-//togliere commenti dai middleware
+
 characterManagementRouter.post("/get-character-proficiencies",
-    // authMiddleware.isLogged,
+    authMiddleware.isLogged,
     characterMiddleware.doesCharacterExist,
     controller.getCharacterProficiencies
 );
-//togliere commenti dai middleware
+
 characterManagementRouter.post("/get-character-equipment",
-    // authMiddleware.isLogged,
+    authMiddleware.isLogged,
     characterMiddleware.doesCharacterExist,
     controller.getCharacterEquipment
 );
-//togliere commenti dai middleware
+
 characterManagementRouter.post("/get-character-languages",
-    // authMiddleware.isLogged,
+    authMiddleware.isLogged,
     characterMiddleware.doesCharacterExist,
     controller.getCharacterLanguages
 );
-//togliere commenti dai middleware
+
 characterManagementRouter.post("/get-character-feats",
-    // authMiddleware.isLogged,
+    authMiddleware.isLogged,
     characterMiddleware.doesCharacterExist,
     controller.getCharacterFeats
 );
-//togliere commenti dai middleware
+
 characterManagementRouter.post("/get-character-spells",
-    // authMiddleware.isLogged,
+    authMiddleware.isLogged,
     characterMiddleware.doesCharacterExist,
     controller.getCharacterSpells
+);
+
+characterManagementRouter.post("/get-characters",
+    authMiddleware.isLogged,
+    controller.getCharacters
 );

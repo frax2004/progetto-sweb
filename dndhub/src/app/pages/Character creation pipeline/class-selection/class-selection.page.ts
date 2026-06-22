@@ -43,14 +43,13 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
     const validClass: boolean = this.chosenClass !== undefined;
     if (CharacterInstance.chosenLevel>0 && validClass) {
       for (const _class of this.classesArray) {
-        if (CharacterInstance.chosenClass === _class.title) {
+        if (this.chosenClass === _class.title) {
           CharacterInstance.baseEquipment = _class.base_equipment;
           CharacterInstance.baseProficiencies = _class.base_proficiencies;
           CharacterInstance.baseSavingThrows = _class.base_saving_throws;
           CharacterInstance.hitDie = _class.hit_die;
         }
       }
-      alert(JSON.stringify(CharacterInstance.baseEquipment,null,2));
       CharacterInstance.chosenClass = this.chosenClass;
       CharacterInstance.levelSpecifics = this.getLevelSpecifics();
       CharacterInstance.chosenASI = this.getNumberOfASI();

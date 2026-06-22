@@ -524,10 +524,10 @@ async function insertCharacter(req,res) {
       ${levelSpecifics.proficiency_bonus},
       '${idx_personaggio}',
       '${characterClass.toLowerCase()}',
-      ${subclass !== undefined ? `'${subclass.toLowerCase()}'` : null},
+      ${subclass !== undefined ? `'${subclass.toLowerCase().replace(' ','-')}'` : null},
       '${species.toLowerCase()}',
-      ${subspecies !== undefined ? `'${subspecies.toLowerCase()}'` : null},
-      '${background.toLowerCase()}',
+      ${subspecies !== undefined ? `'${subspecies.toLowerCase().replace(' ','-')}'` : null},
+      '${background.toLowerCase().replace(' ','-')}',
       ${level},
       ${startingGold.quantity},
       ${spellsKnown !== undefined ? spellsKnown : null},
@@ -616,7 +616,7 @@ function getAbilityScores(req,res) {
   });
 }
 
-async function getCharacterByIdx(req,res) {
+function getCharacterByIdx(req,res) {
   canSend = true;
 
   const idx = req.body.idx_personaggio;
@@ -642,6 +642,214 @@ async function getCharacterByIdx(req,res) {
   });
 }
 
+function getCharacterAbilityScores(req,res) {
+  canSend = true;
+
+  const idx = req.body.idx_personaggio;
+
+  DatabaseQueries.retrieve(`SELECT * FROM ArrayStatsItem WHERE idx_personaggio = '${idx}'`, (el) => el)
+  .catch(err => {
+    sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare le statistiche dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then(stats => {
+    sendResponse({
+        stats: stats,
+        status_code: 200,
+        success: true,
+        message: 'Statistiche caricate con successo'
+      },
+      res
+    );
+  });
+}
+
+function getCharacterProficiencies(req,res) {
+  canSend = true;
+
+  const idx = req.body.idx_personaggio;
+
+  DatabaseQueries.retrieve(`SELECT * FROM ArrayProficienciesItem WHERE idx_personaggio = '${idx}'`, (el) => el)
+  .catch(err => {
+    sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare le competenze dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then(profs => {
+    sendResponse({
+        proficiencies: profs,
+        status_code: 200,
+        success: true,
+        message: 'Competenze caricate con successo'
+      },
+      res
+    );
+  });
+}
+
+async function getCharacterEquipment(req,res) {
+  canSend = true;
+
+  const idx = req.body.idx_personaggio;
+
+  DatabaseQueries.retrieve(`SELECT item FROM ArrayEquipmentItem WHERE idx_personaggio = '${idx}'`, (el) => el)
+  .catch(err => {
+    sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare equipaggiamento dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then( async (equipmentArray) => {
+    try {
+      let retEquip = [];
+      for (const item of equipmentArray) {
+
+        const unwrappedEquip = await DatabaseQueries.retrieve(`SELECT * FROM Equipment WHERE idx like '%${item.item}%'`, DatabaseQueries.unwrapEquipment);
+
+        if (unwrappedEquip[0] !== undefined) retEquip.push(unwrappedEquip[0]);
+      }
+      sendResponse({
+        equipment: retEquip,
+        status_code: 200,
+        message: 'Equipaggiamento ottenuto correttamente',
+        success: true,
+      }, res);
+    }
+    catch (err) {
+      // console.log(err);
+      sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare equipaggiamento dal database ' + err.message,
+        success: false,
+      }, res);
+    }
+  });
+}
+
+function getCharacterLanguages(req,res) {
+  canSend = true;
+
+  const idx = req.body.idx_personaggio;
+
+  DatabaseQueries.retrieve(`SELECT item FROM ArrayLanguageItem WHERE idx_personaggio = '${idx}'`, (el) => el)
+  .catch(err => {
+    sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare le lingue dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then(languages => {
+    let langArray = [];
+    for(const language of languages) {
+      DatabaseQueries.retrieve(`SELECT * FROM Language WHERE idx = '${language.item}'`, el => el)
+      .catch(err => {
+          sendResponse({
+          status_code: 404,
+          message: 'Non è stato possibile caricare le lingue dal database',
+          success: false,
+        }, 
+        res
+      );
+      return;
+      })
+      .then(lang => {
+        langArray.push(lang[0])
+
+        if (langArray.length === languages.length) {
+          console.log('sono qui');
+          sendResponse({
+            status_code: 200,
+            languages: langArray,
+            message: 'Lingue caricate',
+            success: true,
+          }, res);
+        }
+      })
+    }
+
+  });
+}
+
+function getCharacterFeats(req,res) {
+  canSend = true;
+
+  const idx = req.body.idx_personaggio;
+
+  DatabaseQueries.retrieve(`SELECT * FROM ArrayFeatItem WHERE idx_personaggio = '${idx}'`, (el) => el)
+  .catch(err => {
+    sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare i talenti dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then(feats => {
+    sendResponse({
+        feats: feats,
+        status_code: 200,
+        success: true,
+        message: 'Talenti caricati con successo'
+      },
+      res
+    );
+  });
+}
+
+function getCharacterSpells(req,res) {
+  canSend = true;
+
+  const idx = req.body.idx_personaggio;
+  
+  DatabaseQueries.retrieve(`SELECT * FROM ArraySpellItem WHERE idx_personaggio = '${idx}'`, (el) => el)
+  .catch(err => {
+    sendResponse({
+      status_code: 404,
+      message: 'Non è stato possibile caricare gli incantesimi dal database',
+      success: false,
+      }, 
+      res
+    );
+  }).then(spells => {
+    let spellArray = []
+    for (const spell of spells) {
+      DatabaseQueries.retrieve(`SELECT * FROM Spell WHERE name = '${spell.item}'`, el => el)
+      .catch(err => {
+        console.log('\nSono nel secondo catch\n');
+        sendResponse({
+            status_code: 404,
+            message: 'Non è stato possibile caricare gli incantesimi dal database',
+            success: false,
+          }, 
+          res
+        );
+      })
+      .then(spell => {
+        spellArray.push(spell[0]);
+
+        if(spellArray.length === spells.length) {
+          sendResponse({
+            spells: spellArray,
+            status_code: 200,
+            message: 'Incantesimi caricati con successo',
+            success: true,
+          }, res);
+        }
+      })
+    }
+  });
+}
 
 export default {
   displayClasses,
@@ -656,4 +864,10 @@ export default {
   insertCharacter,
   getAbilityScores,
   getCharacterByIdx,
+  getCharacterAbilityScores,
+  getCharacterProficiencies,
+  getCharacterEquipment,
+  getCharacterLanguages,
+  getCharacterFeats,
+  getCharacterSpells,
 }

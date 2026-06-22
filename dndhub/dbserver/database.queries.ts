@@ -844,7 +844,7 @@ export class DatabaseQueries {
   
     return {
       magic_school: (await DatabaseQueries.map(await magicSchool, DatabaseQueries.unwrapMagicSchool))[0],
-      classes: spell.classes.split("$$$"),
+      classes: spell.classes?.split("$$$") ?? [],
       name: spell.name,
       level: spell.level,
       action_type: spell.actionType,
@@ -854,7 +854,7 @@ export class DatabaseQueries {
       material: spell.material,
       duration: spell.duration,
       description: spell.description,
-      components: spell.components.split("$$$"),
+      components: spell.components?.split("$$$") ?? [],
       cantrip_upgrade: spell.cantripUpgrade,
       higher_level_slot: spell.higherLevelSlot,
       casting_trigger: spell.castingTrigger,
@@ -899,7 +899,7 @@ export class DatabaseQueries {
     let damage_dc = Database.queryAll(`SELECT * FROM DifficultyClass WHERE id = ${equip.damage_dc}`);
     let mastery = Database.queryAll(`SELECT * FROM APIReference WHERE idx = '${equip.mastery}'`);
     let storage = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${equip.storage}`);
-    let two_handed_dc = Database.queryAll(`SELECT * FROM DifficultyClass WHERE id = ${equip.two_handed_dc}`);
+    let two_handed_dc = Database.queryAll(`SELECT * FROM DifficultyClass WHERE id = ${equip.two_handed_dc === undefined ? null : equip.two_handed_dc}`);
     let utilize = Database.queryAll(`SELECT * FROM ArrayUtilizeItem WHERE array_id = ${equip.utilize}`);
     let properties = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem where array_id = ${equip.properties}`);
     
@@ -937,7 +937,7 @@ export class DatabaseQueries {
       doff_time: equip.doff_time,
       don_time: equip.don_time,
       image: equip.image,
-      notes: equip.notes.split("$$$"),
+      notes: equip.notes?.split("$$$") ?? [],
       quantity: equip.quantity,
       range: {
         long: equip.range_long,
@@ -946,13 +946,14 @@ export class DatabaseQueries {
       stealth_disadvantage: equip.stealth_disadvantage,
       str_minimum: equip.str_minimum,
       throw_range: {
-        normal: equip.throw_range.normal,
-        long: equip.throw_range.long,
+        normal: equip.throw_range?.normal,
+        long: equip.throw_range?.long,
       },
     };
   }
   
   
+
   static async unwrapClass(classRow): Promise<dnd.Class> {
     let multiclassing = Database.queryAll(`SELECT * FROM MultiClassing WHERE id = ${classRow.multi_classing}`);
     let proficiencies = Database.queryAll(`SELECT * FROM ArrayAPIReferenceItem WHERE array_id = ${classRow.proficiencies}`);

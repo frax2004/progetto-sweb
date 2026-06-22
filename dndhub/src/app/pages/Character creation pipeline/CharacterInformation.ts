@@ -85,6 +85,7 @@ export class CharacterInstance {
   private static background_starting_gold = undefined;
   private static background_feature = undefined;
   private static background_equipment = undefined;
+  private static background_proficiencies = undefined;
   private static _statistics = {
     'strength': { value: 0, modifier: StatModifierNumber[0]},
     'dexterity': { value: 0, modifier: StatModifierNumber[0]},
@@ -139,6 +140,7 @@ export class CharacterInstance {
     this.background_starting_gold = undefined;
     this.background_feature = undefined;
     this.background_equipment = undefined;
+    this.background_proficiencies = undefined;
     this._statistics = {
       'strength': { value: 0, modifier: StatModifierNumber[0]},
       'dexterity': { value: 0, modifier: StatModifierNumber[0]},
@@ -172,6 +174,14 @@ export class CharacterInstance {
     this.chosen_ability_score_increments = undefined;
   }
 
+  static set backgroundProficiencies(proficiencies) {
+    this.background_proficiencies = proficiencies;
+  }
+
+  static get backgroundProficiencies() {
+    return this.background_proficiencies;
+  }
+
   static set cantripsKnown(numOfCantrips) {
     this.cantrips_known = numOfCantrips;
   }
@@ -179,8 +189,6 @@ export class CharacterInstance {
   static get cantripsKnown() {
     return this.cantrips_known;
   }
-
-  // commento prova
 
   static set spellsKnown(numOfSpells) {
     this.spells_known = numOfSpells;

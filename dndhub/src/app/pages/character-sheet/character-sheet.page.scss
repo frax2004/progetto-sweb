@@ -115,3 +115,8 @@ border-radius: 8px;
   text-align: center;
   align-items: center;
 }
+
+.headerContentFrame {
+  display: flex;
+  flex-direction: row;
+}

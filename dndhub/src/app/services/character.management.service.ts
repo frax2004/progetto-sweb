@@ -143,9 +143,52 @@ export class CharacterManagementService {
     );
   }
 
+  
   getCharacterByIdx(idx_personaggio: string) {
     return this.httpclient.post<any>(
       `${environment.api_url}/api/character-management/get-character-by-idx`,
+      {idx_personaggio: idx_personaggio}
+    );
+  }
+
+  getCharacterAbilityScores(idx_personaggio: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/get-character-stats`,
+      {idx_personaggio: idx_personaggio}
+    );
+  }
+
+  getCharacterProficiencies(idx_personaggio: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/get-character-proficiencies`,
+      {idx_personaggio: idx_personaggio}
+    );
+  }
+
+  getCharacterEquipment(idx_personaggio: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/get-character-equipment`,
+      {idx_personaggio: idx_personaggio}
+    );
+  }
+
+  getCharacterLanguages(idx_personaggio: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/get-character-languages`,
+      {idx_personaggio: idx_personaggio}
+    );
+  }
+
+  getCharacterFeats(idx_personaggio: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/get-character-feats`,
+      {idx_personaggio: idx_personaggio}
+    );
+  }
+
+  getCharacterSpells(idx_personaggio: string) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/get-character-spells`,
       {idx_personaggio: idx_personaggio}
     );
   }

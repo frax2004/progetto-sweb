@@ -187,6 +187,29 @@ async function loadAcceptedCharacterCampaigns(req, res) {
 
 }
 
+function createCampaignParticipationRequest(req,res) {
+  canSend = true;
+
+  const idx_campagna = req.body.idx;
+  const name = req.body.name;
+  const idx_personaggio = `${name} @ ${UserInstance?.USER?.player_id}`;
+
+  try {
+    Database.execOne(`INSERT OR IGNORE INTO ArrayCampagnaPersonaggiItem (idx_campagna,idx_personaggio,stato_personaggio) VALUES ('${idx_campagna}','${idx_personaggio}','pending')`);
+    sendResponse({
+      status_code: 200,
+      message: 'Request has been sent',
+      success: true,
+    }, res);
+  } catch (err) {
+    sendResponse({
+      status_code: 400,
+      message: 'There was some kind of error in the databse',
+      success: false,
+    }, res);
+  }
+}
+
 export default {
   createCampaign,
   loadPlayers,

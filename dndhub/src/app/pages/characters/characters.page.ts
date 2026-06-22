@@ -39,12 +39,21 @@ export class CharactersPage implements OnInit {
 
   joinCampaignAlert = async () => {
     await (await alertController.create({
-      inputs: [{
-        name: 'alertInput',
+      header: 'Choose a character to participate in a new campaign',
+      inputs: [
+      {
+        name: 'codeInput',
         type: 'text',
         placeholder: 'Insert campaign code',
         cssClass: 'alertInput',
-      }],
+      },
+      {
+        name: 'nameInput',
+        type: 'text',
+        placeholder: 'Insert character name',
+        cssClass: 'alertInput',
+      }
+    ],
       buttons: [
         {
           text: 'Go back',
@@ -56,7 +65,7 @@ export class CharactersPage implements OnInit {
           text: 'Send request',
           cssClass: 'alertButton',
           handler: (alertData) => {
-            alert(alertData.alertInput);
+            alert(alertData.codeInput + '     ' + alertData.nameInput);
           }
         }
       ]

@@ -69,21 +69,23 @@ export async function assertCampaignNotExists(req, res, next) {
   }
 }
 
-export async function doesCampaignExist(req,res,next) {
+export async function doesCampaignCodeExist(req,res,next) {
   canSend = true;
+
 
   const idx = decodeCampaign(req.body.idx);
 
   const campaign = await DatabaseQueries.retrieve(`SELECT * FROM Campagna WHERE idx_campagna = '${idx}'`, el => el);
 
-  if (campaign[0] === undefined || campaign[0] === null) {
+  if (campaign[0] === undefined || campaign[0] === null) {    
     sendResponse({
-      status_code: 200,
+      status_code: 400,
       message: 'Specified code does not correspond to an existing campaign',
       success: false
     }, res);
   }
   else {
+    console.log('campaign code ok\n');
     req.body.idx = idx;
     next();
   }
@@ -91,13 +93,16 @@ export async function doesCampaignExist(req,res,next) {
 
 export async function checkIfCharacterAlreadyInCampaign(req, res, next) {
   canSend = true;
-  
+
   const name = req.body.name;
   const idx_personaggio = `${name} @ ${UserInstance?.USER?.player_id}`;
   
   const character = await DatabaseQueries.retrieve(`SELECT * FROM ArrayCampagnaPersonaggiItem WHERE idx_personaggio = '${idx_personaggio}' AND stato_personaggio = 'accepted'`, (el => el));
   
-  if (character[0] === null || character[0] === undefined) next();
+  if (character[0] === null || character[0] === undefined) {
+    req.body.idx_personaggio = idx_personaggio;
+    next();
+  }
   else {
       sendResponse({
           status_code: 400,
@@ -131,5 +136,6 @@ export default {
   assertPlayersExists,
   assertValidCampaignInfo,
   checkIfCharacterAlreadyInCampaign,
-  doesCampaignExist,
+  doesCampaignCodeExist,
+  doesRequestAlreadyExist,
 }

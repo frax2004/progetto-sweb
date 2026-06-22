@@ -37,7 +37,11 @@ export class CampagnaService {
     );
   };
 
-  public createCampaignRequest(idx: string) {
-    
+  //idx si riferisce al codice della campagna, scusate se crea confuzione
+  public createCampaignParticipationRequest(name: string,idx: string) {
+    return this.http.post<any>(
+      `${environment.api_url}/api/campaign/create-campaign-participation-request`, 
+      {name: name, idx: idx}
+    );
   }
 }

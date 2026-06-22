@@ -199,4 +199,5 @@ export class CharacterManagementService {
       {}
     );
   }
+
 }

@@ -65,7 +65,14 @@ export class CharactersPage implements OnInit {
           text: 'Send request',
           cssClass: 'alertButton',
           handler: (alertData) => {
-            alert(alertData.codeInput + '     ' + alertData.nameInput);
+            this.campaignServices.createCampaignParticipationRequest(alertData.nameInput,alertData.codeInput)
+            .subscribe({
+              next: (value: any) => {
+                alert(alertData.nameInput);
+                Alerts.personalizedMessage('Request succesfully sent!','Request sent');
+              },
+              error: (err) => Alerts.error(err.error)
+            });
           }
         }
       ]

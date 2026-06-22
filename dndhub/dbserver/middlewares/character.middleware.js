@@ -150,7 +150,7 @@ async function doesCharacterExist(req,res,next) {
     canSend = true;
 
     const idx = req.body.idx_personaggio;
-
+    
     const character = await DatabaseQueries.retrieve(`SELECT * FROM Personaggio WHERE idx_personaggio = '${idx}'`, (el => el));
 
     if (character[0] === null || character[0] === undefined) {

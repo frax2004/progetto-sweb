@@ -2,6 +2,7 @@ import express from "express";
 import middleware from '../middlewares/campagna.Middleware.js'
 import controller from "../controllers/campagna.controller.js";
 import authMiddleware from "../middlewares/auth.middleware.js";
+import characterMiddleware from "../middlewares/character.middleware.js";
 
 export const campagnaRouter = express.Router();
 
@@ -31,6 +32,12 @@ campagnaRouter.post(
   controller.loadAcceptedCharacterCampaigns
 );
 
-// campagnaRouter.post(
-
-// )
+campagnaRouter.post(
+  "/create-campaign-participation-request",
+  authMiddleware.isLogged,
+  middleware.doesCampaignCodeExist,
+  middleware.checkIfCharacterAlreadyInCampaign,
+  characterMiddleware.doesCharacterExist,
+  middleware.doesRequestAlreadyExist,
+  controller.createCampaignParticipationRequest
+);

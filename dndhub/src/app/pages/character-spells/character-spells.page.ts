@@ -42,7 +42,7 @@ export class CharacterSpellsPage implements OnInit {
   abilityScoresInfos: any[];
   spellcastingAbility: string;
   spellcastingModifier: number;
-  spellcastingCD: number;
+  spellcastingDC: number;
   spellAttBonus: number;
   characterSpells: any[];
   
@@ -50,29 +50,50 @@ export class CharacterSpellsPage implements OnInit {
     indietro: { onClick: Navigate.toPath(this.router,'character-sheet')},
   };
 
-  incantesimiWarlock = [
-    {nome: 'Witch bolt', livello: '1', tmpLanc: 'Azione', durata: 'Istantaneo', gittata: 'un miliardo', concentrazione: 'no', componenti: 'M,V,S', scMag: 'Invocazione', descrizione: Popups.ofSimpleText(this.popoverController,'HOLLOW PURPLE')},
-    {nome: 'Hex', livello: '1', tmpLanc: 'Azione', durata: 'Istantaneo', gittata: 'un miliardo', concentrazione: 'no', componenti: 'M,V,S', scMag: 'Invocazione', descrizione: Popups.ofSimpleText(this.popoverController,'HOLLOW PURPLE')},
-  ]
-
-  incantesimiMago = [
-    {nome: 'Chromatic Orb', livello: '1', tmpLanc: 'Azione', durata: 'Istantaneo', gittata: 'un miliardo', concentrazione: 'no', componenti: 'M,V,S', scMag: 'Invocazione', descrizione: Popups.ofSimpleText(this.popoverController,'HOLLOW PURPLE')},
-    {nome: 'Divinazione', livello: '99', tmpLanc: 'istantaneo o rituale', durata: '5o giorni', gittata: 'si', concentrazione: 'si' , componenti: '', scMag: 'Necromanzia', descrizione:  Popups.ofSimpleText(this.popoverController,'Si')},
-    {nome: 'Palla di fuoco', livello: '3', tmpLanc: 'Azione', durata: 'istantaneo', gittata: 'assai', concentrazione: 'no', componenti: 'M,S,V', scMag: 'Esplosioni', descrizione:  Popups.ofSimpleText(this.popoverController,'Non ho chiesto quanto è grande la stanza')},
-  ];
-
-  incantesimiChierico = [
-    {nome: 'Curare Ferite', livello: '1' , tmpLanc: 'Azione', durata: 'Istantanea', gittata: 'Tocco', concentrazione: 'no', componenti: 'V,S', scMag: 'Cura', descrizione: Popups.ofSimpleText(this.popoverController,'Viva gesù')},
-  ];
-
-  incantesimi = {
-    mago: this.incantesimiMago,
-    chierico: this.incantesimiChierico, 
-    warlock: this.incantesimiWarlock,
-  };
 
 
+  static generateSpellcastingUtilities(stats: any[], className: string, profBonus: number) {
+    let spellcastingAbility: string;
+    if(className==='wizard') spellcastingAbility = 'intelligence';
+    else if (className === 'druid' || className === 'cleric' || className === 'ranger') spellcastingAbility = 'wisdom';
+    else if (className === 'bard' || className === 'paladin' || className === 'sorcerer' || className === 'warlock') spellcastingAbility = 'charisma';
+    else return {
+      spellcastingAbility: 'error',
+      spellcastingModifier: 'error',
+      spellcastingDC: 'error',
+      spellAttBonus: 'error',
+    };
+
+    for(const stat of stats) {
+      if (stat.full_name.toLowerCase() === spellcastingAbility) {
+        return {
+          spellcastingAbility: spellcastingAbility,
+          spellcastingModifier: stat.stat_modifier,
+          spellcastingDC: stat.stat_modifier + profBonus + 8,
+          spellAttBonus: stat.stat_modifier + profBonus,
+        };
+      }
+    }
+
+    return {
+      spellcastingAbility: 'error',
+      spellcastingModifier: 'error',
+      spellcastingDC: 'error',
+      spellAttBonus: 'error',
+    };
+  }
   
+
+  spellDescription(desc: string, cantrip_upgrade: string, higher_level: string) {
+    if (cantrip_upgrade !== undefined && cantrip_upgrade !== null) return desc + '\n\n' + 'Cantrip upgrade: '+ cantrip_upgrade;
+    if (higher_level !== undefined && higher_level !== null) return  desc + '\n\n' + 'At higher spell slot level: '+ higher_level;
+
+    return desc;
+  }
+
+  createSpellPopup(spellName: string, desc: string, cantrip_upgrade: string, higher_level: string, event: Event) {
+    (Popups.ofSimpleText(this.popoverController,this.spellDescription(desc, cantrip_upgrade, higher_level)))(event);
+  } 
 
   init = async () => {
     try {
@@ -142,7 +163,11 @@ export class CharacterSpellsPage implements OnInit {
         };
       });
 
-
+      const app = CharacterSpellsPage.generateSpellcastingUtilities(this.abilityScoresInfos,this.characterInfo.class,this.characterInfo.proficiency_bonus);
+      this.spellcastingAbility = app.spellcastingAbility;
+      this.spellcastingDC = app.spellcastingDC;
+      this.spellcastingModifier = app.spellcastingModifier;
+      this.spellAttBonus = app.spellAttBonus;
     }
     catch (err) {
       Alerts.message(err.error.message);

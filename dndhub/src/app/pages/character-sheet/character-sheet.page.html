@@ -83,7 +83,7 @@
           @for(abilityScore of abilityScoresInfos; track abilityScore) {
             @for(skill of abilityScore.skills; track skill) {
               @if (skill.name === 'Perception') {
-                <ion-label>Passive perception: {{skill.modifier}}</ion-label>
+                <ion-label>Passive perception: {{10 + skill.modifier}}</ion-label>
               }
             }
           }

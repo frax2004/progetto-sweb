@@ -1,7 +1,7 @@
 import { UserInstance } from "../global.context.js";
 import { CampagnaResponses } from "../controllers/campagna.responses.js";
 import { Database } from "../database.js";
-import { decodeCampaign } from "../../src/app/core/core.js"
+import { decodeCampaign } from "../../src/app/core/core.ts"
 import { DatabaseQueries } from "../database.queries.ts";
 
 let canSend = true;

@@ -24,3 +24,9 @@ campagnaRouter.post(
   authMiddleware.isLogged,
   controller.loadCampaigns
 );
+
+campagnaRouter.post(
+  "/load-accepted-character-campaigns",
+  authMiddleware.isLogged,
+  controller.loadAcceptedCharacterCampaigns
+);

@@ -10,9 +10,10 @@
     [button]="{text: 'Go Back', expand: 'false'}"
     [context]="buttonCallbacks['goBack']"
   ></app-button>
+  @if (!seeCampaigns) {
   <app-button
-    [button]= "{ text: 'Vai alle campagne', expand: ''}"
-    [context]= "buttonCallbacks['goToCampaigns']"
+    [button]= "{ text: 'See campaigns', expand: ''}"
+    [context]= "buttonCallbacks['toggle']"
   ></app-button>
 
   <div class="characters">
@@ -24,13 +25,40 @@
         ></app-button>
       </div>
     </div>
-    @for(card of cards(); track $index) {
+    @for(card of characterCards(); track $index) {
       <div class="separator"></div>
       <app-character-card 
       [card]="card"
-      ></app-character-card>
+      ></app-character-card>    
+      <ion-button class="genericButton"
+      (click)="setCharacterName(card.title)"
+      >Character details</ion-button>
     }
   </div>
+  }
+  @else {
+    <app-button
+    [button]= "{ text: 'See characters', expand: ''}"
+    [context]= "buttonCallbacks['toggle']"
+  ></app-button>
+
+  <div class="campaigns">
+    <div class="add-button">
+      <div>
+        <app-button
+        [button]="{text: '+', expand: 'false'}"
+        [context]="buttonCallbacks['joinCampaign']"
+        ></app-button>
+      </div>
+    </div>
+    @for(card of campaignCards(); track $index) {
+      <div class="separator"></div>
+      <app-campaign-card 
+      [card]="card"
+      ></app-campaign-card>
+    }
+  </div>
+  }
 
 
 </ion-content>

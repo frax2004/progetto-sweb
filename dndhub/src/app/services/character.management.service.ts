@@ -193,10 +193,10 @@ export class CharacterManagementService {
     );
   }
 
-  loadCharacters(success: (x: any) => void, fail: (x: any) => void) {
+  loadCharacters() {
     return this.httpclient.post<any>(
       `${environment.api_url}/api/character-management/get-characters`,
       {}
-    ).subscribe({next: success, error: fail});;
+    );
   }
 }

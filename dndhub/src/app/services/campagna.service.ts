@@ -29,4 +29,15 @@ export class CampagnaService {
       {}
     ).subscribe({next: success, error: fail});
   };
+
+  public loadAcceptedCharacterCampaigns() {
+    return this.http.post<any>(
+      `${environment.api_url}/api/campaign/load-accepted-character-campaigns`, 
+      {}
+    );
+  };
+
+  public createCampaignRequest(idx: string) {
+    
+  }
 }

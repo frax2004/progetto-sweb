@@ -63,6 +63,9 @@
     border: 2px solid black;
 
     .gallery-img {
+      border-top:0;
+      border-left:0;
+      border-right:0;
       border-bottom: 2px solid black;
       flex: 2 0 0;
       background-size: cover;
@@ -143,3 +146,9 @@
 }
 
 
+#goBack {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}

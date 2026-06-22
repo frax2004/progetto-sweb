@@ -1,7 +1,13 @@
 <div class="content">
   <div class="background"></div>
+
+    <app-button id="goBack"
+    [button]="{ text: 'Go back', expand: 'false'}"
+    [context]="{onClick: goBack}"
+    ></app-button>
+
   <div class="panel">
-    <div class="title">ASPETTA UN ATTIMO!</div>
+    <div class="title">WAIT A MINUTE</div>
     <div class="gallery">
       @if(currentCard() !== -1) {
         <div 
@@ -22,10 +28,8 @@
     </div>
   </div>
 
-  @if(currentCard() === cards.length-1) {
     <app-button id="link-button"
-    [button]="{text: 'Cominciamo!', expand: 'false'}"
+    [button]="{text: 'Let\'s begin', expand: 'false'}"
     [context]="{onClick: createCampaign}"
     ></app-button>
-  }
 </div>

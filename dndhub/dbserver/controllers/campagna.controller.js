@@ -1,6 +1,7 @@
 import { UserInstance } from "../global.context.js";
 import { CampagnaResponses } from "../controllers/campagna.responses.js";
 import { Database } from "../database.js";
+import { DatabaseQueries } from "../database.queries.ts";
 
 let canSend = true;
 function sendResponse(obj, res) {
@@ -184,9 +185,72 @@ export async function loadAcceptedPlayers(req, res) {
   }
 }
 
+async function loadAcceptedCharacterCampaigns(req, res) {
+  canSend = true;
+
+  const idx = UserInstance.USER.player_id;
+  try {
+    const campaigns = await DatabaseQueries.retrieve(`SELECT idx_campagna FROM ArrayCampagnaPersonaggiItem WHERE idx_personaggio LIKE '%${idx}%' AND stato_personaggio = 'accepted'`, el => el)
+
+    let retArray = [];
+      for (const campaign of campaigns) {
+        let campInfo = await DatabaseQueries.retrieve(`SELECT * FROM Campagna WHERE idx_campagna = '${campaign.idx_campagna}'`, el => el);
+  
+        campInfo = campInfo[0];
+        
+        campInfo.playersCount = (await Database.queryOne(`
+          SELECT count(*) AS playersCount
+          FROM ArrayCampagnaPersonaggiItem
+          WHERE idx_campagna = '${campInfo.idx_campagna}'
+          AND stato_personaggio = 'accepted'
+        `)).playersCount;
+
+        retArray.push(campInfo);
+      }
+
+      sendResponse({
+        status_code: 200,
+        message: 'Campagne caricate con successo',
+        success: true,
+        campaigns: retArray,
+      }, res);
+
+  }catch (err) {
+    sendResponse({
+      status_code: 404,
+      message: 'Non è stato possibile caricare le campagne dal database ' + err,
+      success: false,
+    }, res);
+  }
+
+}
+
+function createCampaignParticipationRequest(req,res) {
+  canSend = true;
+
+  const idx_campagna = req.body.idx;
+  const name = req.body.name;
+  const idx_personaggio = `${name} @ ${UserInstance?.USER?.player_id}`;
+
+  try {
+    Database.execOne(`INSERT OR IGNORE INTO ArrayCampagnaPersonaggiItem (idx_campagna,idx_personaggio,stato_personaggio) VALUES ('${idx_campagna}','${idx_personaggio}','pending')`);
+    sendResponse({
+      status_code: 200,
+      message: 'Request has been sent',
+      success: true,
+    }, res);
+  } catch (err) {
+    sendResponse({
+      status_code: 400,
+      message: 'There was some kind of error in the databse',
+      success: false,
+    }, res);
+  }
+}
+
 export default {
   createCampaign,
   loadPlayers,
   loadCampaigns,
-  loadAcceptedPlayers,
+  loadAcceptedCharacterCampaigns,
 }

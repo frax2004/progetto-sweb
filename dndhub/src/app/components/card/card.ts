@@ -1,6 +1,6 @@
 export abstract class Card {
   imageURL?: String;
-  title?: String;
+  title?: string;
   subtitle?: String;
   content?: String;
 

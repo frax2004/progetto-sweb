@@ -1,6 +1,8 @@
 import { UserInstance } from "../global.context.js";
 import { CampagnaResponses } from "../controllers/campagna.responses.js";
 import { Database } from "../database.js";
+import { decodeCampaign } from "src/app/core/core.js";
+import { DatabaseQueries } from "dbserver/database.queries.js";
 
 let canSend = true;
 function sendResponse(obj, res) {
@@ -67,41 +69,8 @@ export async function assertCampaignNotExists(req, res, next) {
   }
 }
 
-export async function assertCampaignExists(req, res, next) {
-  canSend = true;
-
-  const campaign_idx = req.body.campaign_idx;
-  
-  const query = `SELECT * FROM Campagna WHERE idx_campagna = '${campaign_idx}'`;
-
-  try {
-    const rows = await Database.queryAll(query);
-
-    if(rows !== undefined && rows !== null && rows.length > 0) {
-      next();
-    } else {
-      sendResponse({
-          message: "La campagna specificata non esiste.",
-          status_code: 401,
-          success: false
-        },
-        res
-      );
-    }
-  } catch(err) {
-    sendResponse({
-        message: err,
-        status_code: 401,
-        success: false
-      },
-      res
-    );
-  }
-}
-
 export default {
   assertCampaignNotExists,
   assertPlayersExists,
   assertValidCampaignInfo,
-  assertCampaignExists,
 }

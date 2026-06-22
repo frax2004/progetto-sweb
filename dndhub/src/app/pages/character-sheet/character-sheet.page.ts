@@ -5,7 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonCheckbox, IonItem, IonG
 import { CheckboxComponent } from "src/app/components/checkbox/checkbox.component";
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
-import { Alerts, Navigate, Popups } from 'src/app/core/core';
+import { Alerts, currentGlobalCharacterName, Navigate, Popups } from 'src/app/core/core';
 import { EntryComponent } from "src/app/components/entry/entry.component";
 import { Router } from '@angular/router';
 import { ButtonComponent } from 'src/app/components/button/button.component';
@@ -25,7 +25,7 @@ export class CharacterSheetPage implements OnInit {
 
   playerID;
   // characterName in teoria dovrà essere passato da fuori
-  characterName = 'Maurone';
+  characterName: string;
   currHealth: number = 0;
   //devo definirlo così altrimenti ho problemi
   characterInfo: any = {
@@ -142,6 +142,7 @@ changeCallback={
 
   init = async () => {
     try {
+      this.characterName = currentGlobalCharacterName();
       // ?? da levare dopo tests
       const playerIDvalues = (await CharacterSheetPage.toPromise(this.userServices.getPlayerID())).utente_giocatore;
       this.playerID = playerIDvalues === undefined ? '(giocatore): giovanniDM@gmail.com' : playerIDvalues;

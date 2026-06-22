@@ -33,238 +33,292 @@
     )
     VALUES (
       'giovanniDM@gmail.com',
-      'Pino',
-      12,
-      2,
-      'Pino @ (giocatore): giovanniDM@gmail.com',
-      'barbarian',
+      'Trapezio',
+      56,
+      3,
+      'Trapezio @ (giocatore): giovanniDM@gmail.com',
+      'warlock',
+      'fiend',
+      'tiefling',
       null,
-      'dwarf',
-      'hill-dwarf',
       'acolyte',
-      1,
+      7,
       15,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      25,
+      8,
+      3,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      30,
       'Medium',
       'Shelter of the Faithful',
       null
       );
       
       
-      ;
+      INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Hex',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
+        0
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Illusory Script',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
+        1
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Unseen Servant',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
+        2
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Misty Step',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
+        3
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Invisibility',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
+        4
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Fly',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
+        5
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Magic Circle',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
+        6
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Blight',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
+        7
+      );
+          INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+          'Mage Hand',
+          'Trapezio @ (giocatore): giovanniDM@gmail.com',
+          8
+        );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+          'Chill Touch',
+          'Trapezio @ (giocatore): giovanniDM@gmail.com',
+          9
+        );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+          'Prestidigitation',
+          'Trapezio @ (giocatore): giovanniDM@gmail.com',
+          10
+        );;
   
       INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'clothes-common',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'pouch',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'explorers-pack',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'dagger',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'javelin',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'leather-armor',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         3
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'clothes-common',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         4
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'pouch',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         5
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'greataxe',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'club',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         6
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'handaxe',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'arcane-focus',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         7
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'holy symbols',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'scholar’s-pack',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         8
+      );
+INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
+        'mace',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
+        9
+      );
+INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
+        'holy-symbols',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
+        10
       );;
   
       INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
         'common',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'dwarvish',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'infernal',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'giant',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'deep-speech',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'common-sign-language',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'thieves-cant',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         3
       );;
   
       INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'str',
-        14,
-        2,
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        8,
+        -1,
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'dex',
         12,
         1,
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'con',
-        11,
-        0,
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        16,
+        3,
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'int',
-        11,
-        0,
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        16,
+        3,
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         3
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'wis',
-        15,
+        14,
         2,
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         4
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'cha',
-        7,
-        -2,
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        19,
+        4,
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         5
       );;
       
       INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'light armor',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'medium armor',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'simple weapons',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'shields',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'skill: insight',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'simple weapons',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'skill: religion',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         3
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'martial weapons',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'saving throw: wisdom',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         4
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'skill: insight',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'saving throw: charisma',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         5
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'skill: religion',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'skill: nature',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         6
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'saving throw: strength',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'skill: history',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         7
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'saving throw: constitution',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
-        8
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'skill: intimidation',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
-        9
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'skill: animal handling',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
-        10
       );;
   
       INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
         'darkvision',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'dwarven-resilience',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'hellish-resistance',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'stonecunning',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'infernal-legacy',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         2
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'dwarven-combat-training',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
-        3
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'tool-proficiency',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
-        4
       );;
   
       INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'rage',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'otherworldly-patron',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'barbarian-unarmored-defense',
-        'Pino @ (giocatore): giovanniDM@gmail.com',
+        'pact-magic',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
         1
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'eldritch-invocations',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
+        2
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'pact-boon',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
+        3
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'otherworldly-patron-improvement-1',
+        'Trapezio @ (giocatore): giovanniDM@gmail.com',
+        4
       );;
       
       COMMIT;

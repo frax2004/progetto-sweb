@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonGrid, IonRow, IonItem, IonCheckbox ,IonCol, IonLabel, PopoverController } from '@ionic/angular/standalone';
-import { Alerts, Navigate, Popups } from 'src/app/core/core';
+import { Alerts, currentGlobalCharacterName, Navigate, Popups } from 'src/app/core/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from "src/app/components/button/button.component";
 import { CharacterSheetPage } from '../character-sheet/character-sheet.page';
@@ -20,7 +20,7 @@ import { range } from 'rxjs';
 export class CharacterSpellsPage implements OnInit {
 
   // da cambiare dopo i tests
-  characterName = 'Maurone';
+  characterName: string;
   playerID: string;
   characterInfo = {
     proficiency_bonus: undefined,
@@ -97,6 +97,7 @@ export class CharacterSpellsPage implements OnInit {
 
   init = async () => {
     try {
+      this.characterName = currentGlobalCharacterName();
       // ?? da levare dopo tests
       const playerIDvalues = (await CharacterSheetPage.toPromise(this.userServices.getPlayerID())).utente_giocatore;
       this.playerID = playerIDvalues === undefined ? '(giocatore): giovanniDM@gmail.com' : playerIDvalues;

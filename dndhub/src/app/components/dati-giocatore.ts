@@ -3,7 +3,6 @@ export interface DatiGiocatore {
     classe: string;
     livello: number;
     razza: string;
-    id: number;
     profilo: string;
     immagine?: string;
 }

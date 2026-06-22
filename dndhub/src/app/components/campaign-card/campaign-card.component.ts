@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Card } from '../card/Card';
 import { ButtonComponent } from '../button/button.component';
-import { Alerts, currentGlobalCampaignName } from 'src/app/core/core';
 import { Router } from '@angular/router';
+import { State } from 'src/app/core/state';
 
 @Component({
   selector: 'app-campaign-card',
@@ -21,7 +21,7 @@ export class CampaignCardComponent  implements OnInit {
   ngOnInit() {}
 
   public gotoCampaign = (e: Event) => {
-    currentGlobalCampaignName.set(this.campaign.idx_campagna);
+    State.currentCampaign.set(this.campaign);
     this.router.navigate(['/campaign-chat']);
   }
 

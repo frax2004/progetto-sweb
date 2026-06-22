@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTextarea, IonTitle, IonToolbar, PopoverController, IonItem, IonLabel } from '@ionic/angular/standalone';
 import { ButtonComponent } from "src/app/components/button/button.component";
-import { Alerts, currentGlobalCampaignName, Popups } from 'src/app/core/core';
+import { Alerts, Popups } from 'src/app/core/core';
 import { firstValueFrom, timestamp } from 'rxjs';
 import { PostsService } from 'src/app/services/PostsService';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { CampagnaService } from 'src/app/services/campagna.service';
+import { State } from 'src/app/core/state';
 
 @Component({
   selector: 'app-campaign-chat',
@@ -30,7 +31,7 @@ export class CampaignChatPage implements OnInit {
   public posts = signal<any[]>([]);
   public players = signal<any[]>([]);
   
-  public idx_campagna = currentGlobalCampaignName;
+  public campaign = State.currentCampaign;
   public postText: string = '';
 
   constructor(private router: Router, private PostsService: PostsService, private alertCtrl: AlertController, private campaignService: CampagnaService) { }
@@ -46,7 +47,7 @@ export class CampaignChatPage implements OnInit {
   }
 
   public get campaignName() {
-    return this.idx_campagna().split('@')[0].trim();
+    return this.campaign().nome;
   }
   
   async deletePost(time_stamp: string) { // questa funzione serve per mostrare a schermo il popup di verifica 
@@ -66,7 +67,7 @@ export class CampaignChatPage implements OnInit {
           //questo serve per fargli fare una funzione nel caso lo si clicchi ed esegue
           // la funzione per cancellare il post
           handler: () => this.PostsService
-          .deletePost(this.idx_campagna(), time_stamp) // questa dovete andarla a 
+          .deletePost(this.campaign().idx_campagna, time_stamp) // questa dovete andarla a 
           .subscribe({
             next: this.loadPosts,
             error: err => Alerts.error(err.error)
@@ -81,8 +82,7 @@ export class CampaignChatPage implements OnInit {
 
   public loadPlayers = async () => {
     try {
-      const res = await firstValueFrom<any>(this.campaignService.loadAcceptedPlayers(this.idx_campagna()));
-      console.log(JSON.stringify(res, null, 2));
+      const res = await firstValueFrom<any>(this.campaignService.loadAcceptedPlayers(this.campaign().idx_campagna));
       this.players.set(res.players);
     } catch(err) {
       Alerts.error(err.error);
@@ -91,7 +91,7 @@ export class CampaignChatPage implements OnInit {
 
   public loadPosts = async () => {
     try {
-      const res = await firstValueFrom<any>(this.PostsService.getPosts(this.idx_campagna()));
+      const res = await firstValueFrom<any>(this.PostsService.getPosts(this.campaign().idx_campagna));
       this.posts.set(res.data);
     } catch(err) {
       Alerts.error(err.error);
@@ -122,7 +122,7 @@ export class CampaignChatPage implements OnInit {
               time_stamp: new Date().toISOString()
             };
 
-            this.PostsService.createPost(this.idx_campagna(), body)
+            this.PostsService.createPost(this.campaign().idx_campagna, body)
             .subscribe({
               next: (res: any) => {
                 this.postText = '';

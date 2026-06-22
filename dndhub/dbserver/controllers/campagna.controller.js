@@ -184,9 +184,51 @@ export async function loadAcceptedPlayers(req, res) {
   }
 }
 
+
+export async function loadCampaignPlayers(req, res) {
+  canSend = true;
+
+  const campaign_idx = req.body.campaign_idx;
+  const query = `
+  SELECT * FROM ArrayCampagnaPersonaggiItem
+  WHERE idx_campagna = '${campaign_idx}'
+  `;
+
+  try {
+    const players_idx_rows = await Database.queryAll(query);
+
+    let players = [];
+    for(const row of players_idx_rows) {
+      const player_query = `SELECT * FROM Personaggio WHERE idx_personaggio = '${row.idx_personaggio}'`;
+      const player = await Database.queryOne(player_query);
+      player.stato = row.stato_personaggio;
+      players.push(player);
+    }
+
+    sendResponse({
+        message: "Giocatori ottenuti con successo",
+        status_code: 200,
+        success: true,
+        players: players
+      },
+      res
+    );
+  } catch(err) {
+    sendResponse({
+        status_code: 401,
+        success: false,
+        message: "Impossibile ottenere i personaggi: " + err
+      },
+      res
+    );
+  }
+}
+
+
 export default {
   createCampaign,
   loadPlayers,
   loadCampaigns,
   loadAcceptedPlayers,
+  loadCampaignPlayers,
 }

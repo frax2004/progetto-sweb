@@ -1,8 +1,8 @@
 import { UserInstance } from "../global.context.js";
 import { CampagnaResponses } from "../controllers/campagna.responses.js";
 import { Database } from "../database.js";
-import { decodeCampaign } from "src/app/core/core.js";
-import { DatabaseQueries } from "dbserver/database.queries.js";
+import { decodeCampaign } from "../../src/app/core/core.js"
+import { DatabaseQueries } from "../database.queries.ts";
 
 let canSend = true;
 function sendResponse(obj, res) {
@@ -66,6 +66,63 @@ export async function assertCampaignNotExists(req, res, next) {
     }
   } catch(err) {
     sendResponse(CampagnaResponses.DATABASE_ERROR, res);
+  }
+}
+
+export async function doesCampaignExist(req,res,next) {
+  canSend = true;
+
+  const idx = decodeCampaign(req.body.idx);
+
+  const campaign = await DatabaseQueries.retrieve(`SELECT * FROM Campagna WHERE idx_campagna = '${idx}'`, el => el);
+
+  if (campaign[0] === undefined || campaign[0] === null) {
+    sendResponse({
+      status_code: 200,
+      message: 'Specified code does not correspond to an existing campaign',
+      success: false
+    }, res);
+  }
+  else {
+    req.body.idx = idx;
+    next();
+  }
+}
+
+export async function checkIfCharacterAlreadyInCampaign(req, res, next) {
+  canSend = true;
+  
+  const name = req.body.name;
+  const idx_personaggio = `${name} @ ${UserInstance?.USER?.player_id}`;
+  
+  const character = await DatabaseQueries.retrieve(`SELECT * FROM ArrayCampagnaPersonaggiItem WHERE idx_personaggio = '${idx_personaggio}' AND stato_personaggio = 'accepted'`, (el => el));
+  
+  if (character[0] === null || character[0] === undefined) next();
+  else {
+      sendResponse({
+          status_code: 400,
+          success: false,
+          message: 'Character already is in a campaign, they can\'t participate in another one',
+      }, res);
+  }
+}
+
+export async function  doesRequestAlreadyExist(req,res,next) {
+  canSend = true;
+
+  const name = req.body.name;
+  const idx_personaggio = `${name} @ ${UserInstance?.USER?.player_id}`;
+  const idx_campagna = req.body.idx;
+
+  const character = await DatabaseQueries.retrieve(`SELECT * FROM ArrayCampagnaPersonaggiItem WHERE idx_personaggio = '${idx_personaggio}' AND idx_campagna = '${idx_campagna}'`, (el => el));
+
+  if (character[0] === undefined || character[0] === null) next();
+  else {
+    sendResponse({
+          status_code: 400,
+          success: false,
+          message: 'Character is already waiting for response by this campaign',
+      }, res);
   }
 }
 

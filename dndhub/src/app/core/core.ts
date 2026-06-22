@@ -2,6 +2,8 @@ import { PopoverController } from "@ionic/angular/standalone";
 import { PopUpComponent } from "../components/pop-up/pop-up.component";
 import { Router } from "@angular/router";
 import { alertController, AlertOptions } from '@ionic/core';
+import { bytes } from "stream/consumers";
+import { Readable } from "stream";
 
 
 export namespace Popups {
@@ -88,4 +90,12 @@ export namespace Alerts {
       cssClass: 'default-alert'
     });
   }
+
+}
+
+
+export function getCampaignCode(campaign_idx: string) {
+  const hash = ch => ch + 8;
+
+  return Buffer.from(campaign_idx).map(hash).toString();
 }

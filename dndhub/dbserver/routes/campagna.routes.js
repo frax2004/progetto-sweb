@@ -13,3 +13,8 @@ campagnaRouter.post(
   middleware.assertCampaignNotExists,
   controller.createCampaign,
 );
+
+campagnaRouter.post(
+  "/load_players",
+  controller.loadPlayers
+)

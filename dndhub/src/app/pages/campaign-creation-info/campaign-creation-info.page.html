@@ -25,6 +25,7 @@
   @if(currentCard() === cards.length-1) {
     <app-button id="link-button"
     [button]="{text: 'Cominciamo!', expand: 'false'}"
+    [context]="{onClick: createCampaign}"
     ></app-button>
   }
 </div>

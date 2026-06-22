@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { Card } from 'src/app/components/card/Card';
@@ -31,7 +32,7 @@ export class CampaignCreationInfoPage implements OnInit {
 
   currentCard = signal<number>(this.cards[0] !== undefined ? 0 : -1);
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -44,4 +45,5 @@ export class CampaignCreationInfoPage implements OnInit {
     );
   }
 
+  public createCampaign = () => this.router.navigate(["/campaign-creation"]);
 }

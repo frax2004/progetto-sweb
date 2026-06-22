@@ -21,7 +21,7 @@ cose da fare:
 - (chiunque) Implementare tutti i bottoni e simili vuoti
 - (chiunque) Scrivere in inglese
 
-- (polarezza) Barra di ricerca per inserimento giocatori in campagna 
+<!-- - (polarezza) Barra di ricerca per inserimento giocatori in campagna  -->
 - (polarezza) Generatore link di invito a campagna 
 - (polarezza) Modifica db per inserimento di: immagine profilo account, immagine personaggio e link utili documenti campagna
 - (polarezza) Funzione caricamento immagine

@@ -12,16 +12,37 @@
     <div class="frame">
       <ion-label class="label">Select party players</ion-label>
       @for(player of selectedPlayers(); track $index) {
-        <ion-label>{{player}}</ion-label>
+        <div 
+        class="selected-player"
+        (click)="removePlayer(player)"
+        >{{player}}</div>
       }
-      <ion-searchbar 
-      debounce="500" 
-      placeholder="Search player"
-      (ionInput)="loadPlayers"
-      ></ion-searchbar>
-      @for(player of availablePlayers(); track $index) {
-        <ion-label>{{player}}</ion-label>
-      }
+      <div class="search-container">
+        <ion-searchbar 
+          debounce="500" 
+          placeholder="Search player"
+          (ionInput)="onSearchEnter($event)"
+        ></ion-searchbar>
+
+        @if(currentPrefix().length > 0) {
+          <div class="results-overlay">
+            <ion-content id="available-content">
+              <li id="available-list">
+                @for(player of availablePlayers(); track $index) {
+                  <div 
+                  class="available-player"
+                  (click)="addPlayer(player)"
+                  >{{player}}</div>
+                }
+              </li>
+              <ion-infinite-scroll (ionInfinite)="onScrollForMore($event)">
+                <ion-infinite-scroll-content></ion-infinite-scroll-content>
+              </ion-infinite-scroll>
+            </ion-content>
+          </div>
+        }
+      </div>
+
     </div>
     
     <div class="frame">

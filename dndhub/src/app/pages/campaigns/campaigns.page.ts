@@ -21,11 +21,8 @@ import { Card } from 'src/app/components/card/Card';
   ]
 })
 export class CampaignsPage implements OnInit {
+
   
-  // buttonCallbacks = {
-  //   // da cambiare con bottone che va nella creazione della campagna quando si avrà l'apposita pagina
-  //   createCampaign: { onClick: Popups.ofSimpleText(this.popoverController, 'Funzione non ancora implementata')},
-  // };
 
   cards = signal<Card[]>([
     {title: 'nome campagna + nome DM' , subtitle: '344', content: 'descrizione della campagna', imageURL: Card.defaultImageURL()},

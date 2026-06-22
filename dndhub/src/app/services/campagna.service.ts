@@ -15,4 +15,11 @@ export class CampagnaService {
       data
     ).subscribe({next: success, error: fail});
   }
+
+  public loadPlayers(queryInfo: any, success: (x: any) => void, fail: (x: any) => void) {
+    return this.http.post<any>(
+      `${environment.api_url}/api/campaign/load_players`, 
+      queryInfo
+    ).subscribe({next: success, error: fail});
+  }
 }

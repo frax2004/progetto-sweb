@@ -971,7 +971,7 @@ create table if not exists Campagna (
 create table if not exists ArrayCampagnaPersonaggiItem (
   idx_campagna text not null,
   idx_personaggio text not null,
-  stato_personaggio text not null DEFAULT 'pending' CHECK(stato_personaggio in('pending, accepted, banned, out')),
+  stato_personaggio text not null DEFAULT 'pending' CHECK(stato_personaggio in('pending', 'accepted', 'banned', 'out')),
   primary key (idx_campagna,idx_personaggio)
   foreign key (idx_personaggio) references Personaggio(idx_personaggio) on update cascade on delete cascade,
   foreign key (idx_campagna) references Campagna(idx_campagna) on update cascade on delete cascade

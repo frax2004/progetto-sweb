@@ -23,8 +23,8 @@ export async function createCampaign(req, res) {
   .body
   .players
   .map(character_idx => `
-    INSERT INTO ArrayCampagnaPersonaggiItem (idx_campagna, idx_personaggio) VALUES (
-      '${campaign_idx}', '${character_idx}'
+    INSERT INTO ArrayCampagnaPersonaggiItem (idx_campagna, idx_personaggio, stato_personaggio) VALUES (
+      '${campaign_idx}', '${character_idx}', 'pending'
     );
   `);
 
@@ -53,15 +53,65 @@ export async function createCampaign(req, res) {
       await Database.execOne("ROLLBACK;"); 
     } finally {
       sendResponse({
-        message: "Creazione della campagna fallita.",
-        success: false,
-        status_code: 401
-      });
+          message: "Creazione della campagna fallita. Motivo: " + err.message,
+          success: false,
+          status_code: 401
+        },
+        res
+      );
     }
   }
 }
 
+export async function loadPlayers(req, res) {
+  canSend = true;
+
+  const limit = req.body.limit;
+  const offset = req.body.offset;
+  const regex = req.body.regex;
+  const excludes = req.body.excludes;
+  const filters = [];
+  const quotify = s => `'${s}'`;
+
+  if(regex !== '') {
+    filters.push(`idx_personaggio LIKE ${quotify(regex)}`)
+  }
+
+  if(excludes.length > 0) {
+    filters.push(`idx_personaggio NOT IN (${excludes.map(quotify).join(", ")})`);
+  }
+  
+  const filter = filters.length > 0 ? `WHERE ${filters.join(" AND ")}` : "";
+
+  const query = `
+  SELECT * FROM Personaggio 
+  ${filter} 
+  LIMIT ${limit} 
+  OFFSET ${offset}
+  `;
+
+  try {
+    const players = await Database.queryAll(query);
+    sendResponse({
+        message: "Personaggi ottenuti con successo",
+        success: true,
+        status_code: 200,
+        players: players
+      }, 
+      res
+    );
+  } catch(err) {
+    sendResponse({
+        message: "Impossibile ottenere i personaggi",
+        success: false,
+        status_code: 401
+      }, 
+      res
+    );
+  }
+}
 
 export default {
   createCampaign,
+  loadPlayers
 }

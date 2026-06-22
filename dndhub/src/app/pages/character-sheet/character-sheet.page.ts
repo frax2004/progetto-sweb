@@ -5,7 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonCheckbox, IonItem, IonG
 import { CheckboxComponent } from "src/app/components/checkbox/checkbox.component";
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
-import { Alerts, currentGlobalCharacterName, Navigate, Popups } from 'src/app/core/core';
+import { Alerts, currentGlobalCharacterName, Navigate, defualtCharacterImgURL, Popups } from 'src/app/core/core';
 import { EntryComponent } from "src/app/components/entry/entry.component";
 import { Router } from '@angular/router';
 import { ButtonComponent } from 'src/app/components/button/button.component';
@@ -27,6 +27,7 @@ export class CharacterSheetPage implements OnInit {
   // characterName in teoria dovrà essere passato da fuori
   characterName: string;
   currHealth: number = 0;
+  defaultIMG = defualtCharacterImgURL;
   //devo definirlo così altrimenti ho problemi
   characterInfo: any = {
     health: undefined,
@@ -166,7 +167,7 @@ changeCallback={
         size: characterValues.character.taglia,
         extra_abilities: characterValues.character.abilita_extra,
         character_description: characterValues.character.descrizione_personaggio,
-        image: characterValues.character.imgURL,
+        image: characterValues.character.imgURL ?? undefined,
       };
       this.currHealth = this.characterInfo.health;
 

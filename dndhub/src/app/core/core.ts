@@ -105,5 +105,6 @@ export function encodeCampaign(campaign_idx: string) {
 }
 
 
-export let currentGlobalCampaignName = signal<string>(undefined);
-export let currentGlobalCharacterName = signal<string>(undefined); 
+export let currentGlobalCampaignName = signal<string>('');
+export let currentGlobalCharacterName = signal<string>(''); 
+export const defualtCharacterImgURL = "https://i.pinimg.com/736x/8e/fd/55/8efd55212da85ed2fb9d5ccc533c7550.jpg";

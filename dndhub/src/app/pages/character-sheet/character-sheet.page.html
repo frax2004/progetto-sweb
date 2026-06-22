@@ -32,9 +32,17 @@
     <div class="upperGrid">
       <!-- solo immagine qua -->
       <!-- manca il frame, metto un placeholder -->
-      <div class="placeholderFrame">
-        <img src="https://i.redd.it/c8u5n61j3pic1.png" alt="character img">
-      </div>
+      @if (characterInfo.image !== undefined) {
+        <div class="placeholderFrame">
+          <div [style.background-image]="'url('+ characterInfo.image +')'" alt="character img">
+        </div>
+      }
+      @else {
+        <div class="placeholderFrame">
+          <div [style.background-image]="'url('+ defaultIMG +')'" alt="character img">
+        </div>
+      }
+
       <div class="right">
         <!-- dati mock, da aggiungere col db -->
         <div class="fight">

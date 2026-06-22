@@ -16,6 +16,13 @@ export class CampagnaService {
     ).subscribe({next: success, error: fail});
   }
 
+  public loadAcceptedPlayers = (campaign_idx: string) => {
+    return this.http.post(
+      `${environment.api_url}/api/campaign/load_accepted_players`, 
+      { campaign_idx: campaign_idx }
+    );
+  }
+
   public loadPlayers(queryInfo: any, success: (x: any) => void, fail: (x: any) => void) {
     return this.http.post<any>(
       `${environment.api_url}/api/campaign/load_players`, 

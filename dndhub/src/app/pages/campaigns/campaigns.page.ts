@@ -25,6 +25,7 @@ import { CampagnaService } from 'src/app/services/campagna.service';
 export class CampaignsPage implements OnInit {
 
   cards = signal<Card[]>([]);
+  campaigns: any[] = [];
 
   constructor(private router: Router, private campaignService: CampagnaService) {
     this.loadCampaigns();
@@ -43,8 +44,8 @@ export class CampaignsPage implements OnInit {
   
   private loadCampaigns = () => {
     const success = (res: any) => {
+      this.campaigns = res.campaigns;
       this.cards.set(res.campaigns.map(CampaignsPage.toCard));
-      console.log(JSON.stringify(res, null, 2));
     }
     const fail = res => Alerts.error(res.error);
 

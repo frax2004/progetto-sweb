@@ -24,3 +24,10 @@ campagnaRouter.post(
   authMiddleware.isLogged,
   controller.loadCampaigns
 );
+
+campagnaRouter.post(
+  "/load_accepted_players",
+  authMiddleware.isLogged,
+  middleware.assertCampaignExists,
+  controller.loadAcceptedPlayers,
+)

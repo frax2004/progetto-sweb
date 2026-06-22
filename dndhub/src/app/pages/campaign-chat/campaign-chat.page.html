@@ -19,11 +19,11 @@
         <div class="players">
           <ion-label class="titoloGiocatori">Players</ion-label>
 
-          @for (player of players; track player) {
-          <div class="playerNames">
-            <ion-label>{{ player.name }}</ion-label>
-            <ion-label>{{ player.character }}</ion-label>
-          </div>
+          @for (player of players(); track player) {
+            <div class="playerNames">
+              <ion-label>{{ player.nome }}</ion-label>
+              <ion-label>{{ `${player.classe} lvl ${player.livello}` }}</ion-label>
+            </div>
           }
           <!-- poi se mi va faccio una sorta di card anche per questo -->
 
@@ -59,7 +59,7 @@
       </div>
 
 
-      @for (post of posts; track post) {
+      @for (post of posts(); track post) {
       <div class="postBox">
 
         <div class="postContent">

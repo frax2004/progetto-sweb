@@ -30,3 +30,7 @@ campagnaRouter.post(
   authMiddleware.isLogged,
   controller.loadAcceptedCharacterCampaigns
 );
+
+campagnaRouter.post(
+
+)

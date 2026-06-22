@@ -215,4 +215,5 @@ export default {
   loadPlayers,
   loadCampaigns,
   loadAcceptedCharacterCampaigns,
+  createCampaignParticipationRequest,
 }

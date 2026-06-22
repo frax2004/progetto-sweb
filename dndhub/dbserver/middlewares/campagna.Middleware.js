@@ -1,8 +1,8 @@
 import { UserInstance } from "../global.context.js";
 import { CampagnaResponses } from "../controllers/campagna.responses.js";
 import { Database } from "../database.js";
-import { decodeCampaign } from "src/app/core/core.js";
-import { DatabaseQueries } from "dbserver/database.queries.js";
+import { decodeCampaign } from "../../src/app/core/core.js"
+import { DatabaseQueries } from "../database.queries.ts";
 
 let canSend = true;
 function sendResponse(obj, res) {
@@ -121,7 +121,7 @@ export async function  doesRequestAlreadyExist(req,res,next) {
     sendResponse({
           status_code: 400,
           success: false,
-          message: 'Character already is in waiting for response by this campaign',
+          message: 'Character is already waiting for response by this campaign',
       }, res);
   }
 }

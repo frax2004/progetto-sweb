@@ -42,5 +42,11 @@ export class CampagnaResponses {
     };
   }
 
-
+  static get CANNOT_OBTAIN_CAMPAIGNS() {
+    return {
+      status_code: 400,
+      success: false,
+      message: "Non è stato possibile ottenere le campagne dal db"
+    };
+  }
 }

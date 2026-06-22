@@ -1,7 +1,9 @@
 -- database: ./dndhub.db
 
 
-
+select *
+from Campagna
+where idx_campagna = "Fate-of-the-Forgotten-Realm @ (dungeon_master): marco.russo70@gmail.com";
 
 select * 
 from Account

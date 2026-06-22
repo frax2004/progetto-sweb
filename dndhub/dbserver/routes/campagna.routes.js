@@ -17,4 +17,10 @@ campagnaRouter.post(
 campagnaRouter.post(
   "/load_players",
   controller.loadPlayers
-)
+);
+
+campagnaRouter.post(
+  "/load_campaigns",
+  authMiddleware.isLogged,
+  controller.loadCampaigns
+);

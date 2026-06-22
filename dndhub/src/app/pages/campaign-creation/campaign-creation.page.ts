@@ -80,10 +80,10 @@ export class CampaignCreationPage implements OnInit {
 
   public createCampaign = () => {
     const data = {
-      name: this.name,
+      name: this.name !== '' ? this.name : null,
       players: this.selectedPlayers(),
-      desc: this.description,
-      banner: this.banner
+      desc: this.description !== '' ? this.description : null,
+      banner: this.banner !== '' ? this.banner : null
     };
 
     this.campagnaService.createCampaign(

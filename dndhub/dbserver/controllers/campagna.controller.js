@@ -19,6 +19,8 @@ export async function createCampaign(req, res) {
   const banner = req.body.banner;
   const desc = req.body.desc;
 
+  const quotify = s => s !== null && s !== undefined ? `'${s}'` : null;
+
   const arrayEntriesQuery = req
   .body
   .players
@@ -33,16 +35,18 @@ export async function createCampaign(req, res) {
 
     INSERT INTO Campagna (utente_generico, nome, idx_campagna, banner, descrizione) VALUES (
       '${UserInstance.USER.email}',
-      '${name}',
+      ${quotify(name)},
       '${campaign_idx}',
-      '${banner}',
-      '${desc}'
+      ${quotify(banner)},
+      ${quotify(desc)}
     );
 
     ${ arrayEntriesQuery.join("\n") }
 
     COMMIT;
   `;
+
+  console.log(query);
 
 
   try {
@@ -60,6 +64,38 @@ export async function createCampaign(req, res) {
         res
       );
     }
+  }
+}
+
+export async function loadCampaigns(req, res) {
+  canSend = true;
+
+  const email = UserInstance.USER.email;
+  const query = `SELECT * FROM Campagna WHERE utente_generico = '${email}'`;
+
+  try {
+    let campaigns = await Database.queryAll(query);
+
+    for(const campaign of campaigns) {
+      campaign.playersCount = (await Database.queryOne(`
+        SELECT count(*) AS playersCount
+        FROM ArrayCampagnaPersonaggiItem
+        WHERE idx_campagna = '${campaign.idx_campagna}'
+        AND stato_personaggio = 'accepted'
+      `)).playersCount;
+    }
+
+    sendResponse({
+        status_code: 200,
+        success: true,
+        message: "Campagne ottenute con successo",
+        campaigns: campaigns
+      },
+      res
+    )
+  } catch(err) {
+    console.log(err);
+    sendResponse(CampagnaResponses.CANNOT_OBTAIN_CAMPAIGNS, res);
   }
 }
 
@@ -113,5 +149,6 @@ export async function loadPlayers(req, res) {
 
 export default {
   createCampaign,
-  loadPlayers
+  loadPlayers,
+  loadCampaigns,
 }

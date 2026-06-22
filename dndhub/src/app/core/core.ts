@@ -93,9 +93,12 @@ export namespace Alerts {
 
 }
 
+export function decodeCampaign(hashcode: string) {
+  const decoder = ch => ch - 8;
+  return Buffer.from(hashcode).map(decoder).toString();
+}
 
-export function getCampaignCode(campaign_idx: string) {
-  const hash = ch => ch + 8;
-
-  return Buffer.from(campaign_idx).map(hash).toString();
+export function encodeCampaign(campaign_idx: string) {
+  const encoder = ch => ch + 8;
+  return Buffer.from(campaign_idx).map(encoder).toString();
 }

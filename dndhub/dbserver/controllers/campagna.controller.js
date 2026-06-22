@@ -18,6 +18,7 @@ export async function createCampaign(req, res) {
   const campaign_idx = req.body.campaign_idx;
   const banner = req.body.banner;
   const desc = req.body.desc;
+  const links = req.body.documents;
 
   const quotify = s => s !== null && s !== undefined ? `'${s}'` : null;
 
@@ -33,21 +34,19 @@ export async function createCampaign(req, res) {
   const query = `
     BEGIN TRANSACTION;
 
-    INSERT INTO Campagna (utente_generico, nome, idx_campagna, banner, descrizione) VALUES (
+    INSERT INTO Campagna (utente_generico, nome, idx_campagna, banner, descrizione, links_documenti) VALUES (
       '${UserInstance.USER.email}',
       ${quotify(name)},
       '${campaign_idx}',
       ${quotify(banner)},
-      ${quotify(desc)}
+      ${quotify(desc)},
+      ${quotify(links.length > 0 ? links.join('\n') : null)}
     );
 
     ${ arrayEntriesQuery.join("\n") }
 
     COMMIT;
   `;
-
-  console.log(query);
-
 
   try {
     await Database.execAll(query);

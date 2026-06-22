@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { 
   IonContent, 
@@ -51,13 +51,31 @@ export class CampaignCreationPage implements OnInit {
   public name: string = '';
   public description: string = '';
   public banner: string = '';
+  public documentsLinks = signal<string[]>([]);
   public selectedPlayers = signal<string[]>([]);
   public availablePlayers = signal<string[]>([]);
   public currentPrefix = signal<string>("");
+  @ViewChild("doc_entry") public documentEntry: IonInput;
 
   private static PLAYERS_LOADER_THRESHOLD = 8;
 
   constructor(private router: Router, private campagnaService: CampagnaService) {}
+
+  public addDocumentLink = (_: Event) => {
+    this.documentsLinks.update(links => {
+      const link = this.documentEntry.value.toString() ?? '';
+      if(link !== '')
+        links.push(link);
+      return links;
+    });
+  }
+
+  public removeDocumentLink(doc: string) {
+    this.documentsLinks.update(links => {
+      links.splice(links.indexOf(doc));
+      return links;
+    });
+  }
 
   public removePlayer = (player: any) => {
     this.selectedPlayers.update(selected => {
@@ -83,7 +101,8 @@ export class CampaignCreationPage implements OnInit {
       name: this.name !== '' ? this.name : null,
       players: this.selectedPlayers(),
       desc: this.description !== '' ? this.description : null,
-      banner: this.banner !== '' ? this.banner : null
+      banner: this.banner !== '' ? this.banner : null,
+      documents: this.documentsLinks()
     };
 
     this.campagnaService.createCampaign(

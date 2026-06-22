@@ -958,6 +958,7 @@ create table if not exists Campagna (
   idx_campagna text not null primary key,
   banner text,
   descrizione text,
+  links_documenti text,
   -- i post vengono acceduti tramite foreign key
   -- non so cosa fare con i personaggi
   -- avrebbe più senso avere un array di giocatori?

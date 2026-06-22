@@ -13,3 +13,21 @@ campagnaRouter.post(
   middleware.assertCampaignNotExists,
   controller.createCampaign,
 );
+
+campagnaRouter.post(
+  "/load_players",
+  controller.loadPlayers
+);
+
+campagnaRouter.post(
+  "/load_campaigns",
+  authMiddleware.isLogged,
+  controller.loadCampaigns
+);
+
+campagnaRouter.post(
+  "/load_accepted_players",
+  authMiddleware.isLogged,
+  middleware.assertCampaignExists,
+  controller.loadAcceptedPlayers,
+)

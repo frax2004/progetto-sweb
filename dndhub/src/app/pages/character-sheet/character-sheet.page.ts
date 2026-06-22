@@ -5,7 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonCheckbox, IonItem, IonG
 import { CheckboxComponent } from "src/app/components/checkbox/checkbox.component";
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
-import { Alerts, Navigate, Popups } from 'src/app/core/core';
+import { Alerts, currentGlobalCharacterName, Navigate, defualtCharacterImgURL, Popups } from 'src/app/core/core';
 import { EntryComponent } from "src/app/components/entry/entry.component";
 import { Router } from '@angular/router';
 import { ButtonComponent } from 'src/app/components/button/button.component';
@@ -25,8 +25,9 @@ export class CharacterSheetPage implements OnInit {
 
   playerID;
   // characterName in teoria dovrà essere passato da fuori
-  characterName = 'Maurone';
+  characterName: string;
   currHealth: number = 0;
+  defaultIMG = defualtCharacterImgURL;
   //devo definirlo così altrimenti ho problemi
   characterInfo: any = {
     health: undefined,
@@ -50,21 +51,11 @@ export class CharacterSheetPage implements OnInit {
   characterEquipment: any[];
   characterLanguages: any[];
   characterFeats: any[];
-
-  accordions = {
-    // per qualche motivo \n non va a capo e neanche <br/>
-    forza: { value: 'Strength accordion', title: 'FORZA - 10', content: 'Tiro salvezza: +0\nAtletica: +0'},
-    destrezza: { value: 'Dexterity accordion', title: 'DESTREZZA - 86', content: 'Tiro salvezza: +10\nAcrobazia: +100 (competenza)\nVelocità di mano: -30\nFurtività: +1000 (maestria)'},
-    costituzione: { value: 'Constitution accordion', title: 'COSTITUZIONE - 9', content: 'Tiro salvezza: -1000'},
-    intelligenza: { value: 'Intelligence accordion', title: 'INTELLIGENZA - 34', content:'Tiro salvezza: +80 (competenza)\nArcano: +0\nStoria: +9\nInvestigare: +7\nNatura: +80\nReligione: +7'},
-    saggezza: { value: 'Wisdom accordion', title: 'SAGGEZZA - 120', content:'Tiro salvezza: +1Milione (competenza)\nAddestrare animali: +50(maestria)\nIntuire: +0\nMedicina: +4\nPercezione: assai\nSopravvivenza: -5'},
-    carisma: { value: 'Charisma accordion', title: 'CARISMA - 90', content:'Tiro salvezza: bho (competenza)\nInganno: +5\nIntimidire: -20 (competenza)\nIntrattenere: +9\nPersuasione: no'},
-  };
-
-  abilityAccordions = {
-    abilita: { value: 'Ability accordion', title: 'Abilità e talenti', content:'dofcnsdlkndlfnqwoeiubscklsbelwksjandxlkjsnklcjsnbqwlkjdlksajd.khjslkhjsdlkjsd'},
-    inventario: { value: 'Inventary accordion', title: 'Inventario', content:'200 monete d\'oro Genitore 1 genitore 2'},
-  }
+  maxCA: number = 0;
+  shieldCA: number = 0;
+  dexModifier: number;
+  currHitDies: number;
+  hitDie: number;
 
   buttonCallbacks = {
     placeholder: { onClick: Navigate.toPath(this.router,'character-spells')},
@@ -113,6 +104,32 @@ changeCallback={
     };
   }
 
+  static getMaxAC(dexModifier: number, equipments: any[]) {
+    let maxCA = 10 + dexModifier;
+    let shieldCA = 0;
+    for (const equip of equipments) {
+      if (equip.armor_class_base !== undefined && equip.armor_class_base !== null) {
+        if(equip.name.toLowerCase() === 'shield') shieldCA = equip.armor_class_base;
+        else { 
+          let ca = equip.armor_class_base;
+          if (equip.armor_class_dex_bonus === true) {
+            if (equip.armor_class_max_bonus !== undefined && equip.armor_class_max_bonus !== null) {
+              ca = dexModifier > equip.armor_class_max_bonus ? ca + equip.armor_class_max_bonus : ca + dexModifier;
+            }
+            else ca = ca + dexModifier;
+          }
+          
+          maxCA = ca > maxCA ? ca : maxCA;
+        }
+      }
+    }
+
+    return {
+      maxCA: maxCA,
+      shieldCA: shieldCA
+    };
+  }
+
   public static toPromise = (subscription: Observable<any>) => {
     const executor = (resolve: (value: any) => void,reject: (value: any) => void) => {
       subscription.subscribe({
@@ -126,6 +143,7 @@ changeCallback={
 
   init = async () => {
     try {
+      this.characterName = currentGlobalCharacterName();
       // ?? da levare dopo tests
       const playerIDvalues = (await CharacterSheetPage.toPromise(this.userServices.getPlayerID())).utente_giocatore;
       this.playerID = playerIDvalues === undefined ? '(giocatore): giovanniDM@gmail.com' : playerIDvalues;
@@ -149,7 +167,7 @@ changeCallback={
         size: characterValues.character.taglia,
         extra_abilities: characterValues.character.abilita_extra,
         character_description: characterValues.character.descrizione_personaggio,
-        image: characterValues.character.imgURL,
+        image: characterValues.character.imgURL ?? undefined,
       };
       this.currHealth = this.characterInfo.health;
 
@@ -193,6 +211,10 @@ changeCallback={
           imageURL: undefined,
         };
       });
+
+      for (const ab of this.abilityScoresInfos) {
+        if (ab.index === 'dex') this.dexModifier = ab.stat_modifier;
+      }
 
       //prendo lingue
       const languageValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterLanguages(idx_personaggio));
@@ -248,8 +270,17 @@ changeCallback={
           throw_range_long: item.throw_range?.long, 
         };
       });
+
+      const app = CharacterSheetPage.getMaxAC(this.dexModifier,this.characterEquipment);
+
+      this.maxCA = app.maxCA;
+      this.shieldCA = app.shieldCA;
+
+      const classValues = await CharacterSheetPage.toPromise(this.characterServices.displayClassByName(this.characterInfo.class));
+      this.hitDie = classValues.classes.map(item  => item.hit_die);
+      this.currHitDies = this.characterInfo.level;
     } catch (err) {
-      Alerts.error(err);
+      Alerts.message(err.error.message);
     } 
 
   }

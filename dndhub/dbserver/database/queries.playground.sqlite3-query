@@ -1,7 +1,6 @@
 -- database: ./dndhub.db
 
-
-
+select * from ArrayPostItem where idx_campagna = "Scourge-of-the-Abyss @ (dungeon_master): giorgia.marino34@unipa.net";
 
 select * 
 from Account

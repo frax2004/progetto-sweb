@@ -14,59 +14,39 @@
       </div> 
       <!-- fine ButtonIndietro -->
     <div class="grid">  
-      <div class="toogleOrdine">
-          <!-- toggle mago -->
-                <app-button
-                [button] = "{ text: 'Mago', expand:'',color:'blue'}"
-                [context] = "buttonCallbacks['mago']"
-                ></app-button>
-
-            <!-- toggle chierico -->
-                <app-button
-                [button] = "{ text: 'Chierico', expand:'', color:'yellow'}"
-                [context] = "buttonCallbacks['chierico']"
-                ></app-button>
-
-            <!-- toggle warlock -->
-                <app-button
-                [button] = "{ text: 'Warlock', expand:'', color:'purple'}"
-                [context] = "buttonCallbacks['warlock']"
-                ></app-button>
-      </div>  
+      
       <div class="ordimamento-slot">
 
   <div class="Slot">
     <ion-label>SLOT INCANTESIMO</ion-label>
   </div>
 
-  @if (currClass !== 'Warlock') {
-
     <div class="primaRiga">
 
       <div class="slot-spell">
         <ion-label class="Slot-indipendeti">lvl 1</ion-label>
         <div class="checkbox-group">
-          <ion-checkbox></ion-checkbox>
-          <ion-checkbox></ion-checkbox>
-          <ion-checkbox></ion-checkbox>
-          <ion-checkbox></ion-checkbox>
+          @for(item of [].constructor(characterInfo.slot_lvl_1); track item; let i = $index) {
+            <ion-checkbox></ion-checkbox>
+          }
         </div>
       </div>
 
       <div class="slot-spell">
         <ion-label class="Slot-indipendeti">lvl 4</ion-label>
         <div class="checkbox-group">
-          <ion-checkbox></ion-checkbox>
-          <ion-checkbox></ion-checkbox>
-          <ion-checkbox></ion-checkbox>
+          @for(item of [].constructor(characterInfo.slot_lvl_4); track item; let i = $index) {
+            <ion-checkbox></ion-checkbox>
+          }
         </div>
       </div>
 
       <div class="slot-spell">
         <ion-label class="Slot-indipendeti">lvl 7</ion-label>
         <div class="checkbox-group">
-          <ion-checkbox></ion-checkbox>
-          <ion-checkbox></ion-checkbox>
+          @for(item of [].constructor(characterInfo.slot_lvl_7); track item; let i = $index) {
+            <ion-checkbox></ion-checkbox>
+          }
         </div>
       </div>
 
@@ -77,25 +57,27 @@
       <div class="slot-spell">
         <ion-label class="Slot-indipendeti">lvl 2</ion-label>
         <div class="checkbox-group">
-          <ion-checkbox></ion-checkbox>
-          <ion-checkbox></ion-checkbox>
-          <ion-checkbox></ion-checkbox>
+          @for(item of [].constructor(characterInfo.slot_lvl_2); track item; let i = $index) {
+            <ion-checkbox></ion-checkbox>
+          }
         </div>
       </div>
 
       <div class="slot-spell">
         <ion-label class="Slot-indipendeti">lvl 5</ion-label>
         <div class="checkbox-group">
-          <ion-checkbox></ion-checkbox>
-          <ion-checkbox></ion-checkbox>
-          <ion-checkbox></ion-checkbox>
+          @for(item of [].constructor(characterInfo.slot_lvl_5); track item; let i = $index) {
+            <ion-checkbox></ion-checkbox>
+          }
         </div>
       </div>
 
       <div class="slot-spell">
         <ion-label class="Slot-indipendeti">lvl 8</ion-label>
         <div class="checkbox-group">
-          <ion-checkbox></ion-checkbox>
+          @for(item of [].constructor(characterInfo.slot_lvl_8); track item; let i = $index) {
+            <ion-checkbox></ion-checkbox>
+          }
         </div>
       </div>
 
@@ -106,54 +88,45 @@
       <div class="slot-spell">
         <ion-label class="Slot-indipendeti">lvl 3</ion-label>
         <div class="checkbox-group">
-          <ion-checkbox></ion-checkbox>
-          <ion-checkbox></ion-checkbox>
-          <ion-checkbox></ion-checkbox>
+          @for(item of [].constructor(characterInfo.slot_lvl_3); track item; let i = $index) {
+            <ion-checkbox></ion-checkbox>
+          }
         </div>
       </div>
 
       <div class="slot-spell">
         <ion-label class="Slot-indipendeti">lvl 6</ion-label>
         <div class="checkbox-group">
-          <ion-checkbox></ion-checkbox>
-          <ion-checkbox></ion-checkbox>
-          <ion-checkbox></ion-checkbox>
+          @for(item of [].constructor(characterInfo.slot_lvl_6); track item; let i = $index) {
+            <ion-checkbox></ion-checkbox>
+          }
         </div>
       </div>
 
+      <!-- vuoi che slot incantesimo vuoti non vengano stampati? -->
       <div class="slot-spell">
         <ion-label class="Slot-indipendeti">lvl 9</ion-label>
         <div class="checkbox-group">
-          <ion-checkbox></ion-checkbox>
+          @for(item of [].constructor(characterInfo.slot_lvl_9); track item; let i = $index) {
+            <ion-checkbox></ion-checkbox>
+          }
         </div>
       </div>
 
     </div>
 
-  } @else {
+  
 
-    <div class="warlock">
-
-      <div class="slot-spell">
-        <ion-label class="Slot-warlock">lvl 5</ion-label>
-
-        <div class="checkbox-group">
-          <ion-checkbox></ion-checkbox>
-          <ion-checkbox></ion-checkbox>
-          <ion-checkbox></ion-checkbox>
-        </div>
-      </div>
-    </div>
-  }
+  
   </div>
 </div>
 
 
   <div class="caratteristiche-incantatore">
-    <ion-label>Bonus attacco incantesimo: {{ currAttBonus }}</ion-label>
-    <ion-label>CD tiro salvezza: {{ currCD }}</ion-label>
-    <ion-label>Modificatore da incantatore: {{ currModifier }}</ion-label>
-    <ion-label>Caratteristica da incantatore: {{ currAbility }}</ion-label>
+    <ion-label>Spell attack bonus: {{ spellAttBonus }}</ion-label>
+    <ion-label>Saving throw DC: {{ spellcastingDC }}</ion-label>
+    <ion-label>Spellcasting modifier: {{ spellcastingModifier }}</ion-label>
+    <ion-label>Spellcasting statistic: {{ spellcastingAbility }}</ion-label>
   </div>
 
   <!-- altra mega griglia per incantesimi -->
@@ -166,42 +139,62 @@
 
         <!-- nome -->
         <ion-col class="ColonnaTabella">
-            <ion-label class=Base>Nome</ion-label>
+            <ion-label class=Base>Name</ion-label>
         </ion-col>
 
         <!-- Livello -->
         <ion-col class="ColonnaTabella">
-            <ion-label class=Base>Livello</ion-label>
+            <ion-label class=Base>Level</ion-label>
         </ion-col>
 
         <!-- tempo di lancio + rituale -->
         <ion-col class="ColonnaTabella">
-            <ion-label class=Base>Tempo di lancio</ion-label>
+            <ion-label class=Base>Casting time</ion-label>
+        </ion-col>
+
+        <!-- tipo di azione -->
+        <ion-col class="ColonnaTabella">
+          <ion-label class="Base">Action type</ion-label>
         </ion-col>
 
         <!-- durata -->
         <ion-col class="ColonnaTabella">
-            <ion-label class=Base>Durata</ion-label>
+            <ion-label class=Base>Duration</ion-label>
         </ion-col>
 
         <!-- gittata -->
         <ion-col class="ColonnaTabella">
-            <ion-label class=Base>Gittata</ion-label>
+            <ion-label class=Base>Range</ion-label>
         </ion-col>
 
         <!-- concentrazione -->
         <ion-col class="ColonnaTabella">
-            <ion-label class=Base>Concentrazione</ion-label>
+            <ion-label class=Base>Concentration</ion-label>
         </ion-col>
 
+        <!-- rituale -->
+        <ion-col class="ColonnaTabella">
+          <ion-label class="Base">Ritual</ion-label>
+        </ion-col>
+        
         <!-- componenti -->
         <ion-col class="ColonnaTabella">
-            <ion-label class=Base>Componenti</ion-label>
+          <ion-label class=Base>Components</ion-label>
         </ion-col>
 
+        <!-- materiale -->
+        <ion-col class="ColonnaTabella">
+          <ion-label class="Base">Material</ion-label>
+        </ion-col>
+        
         <!-- Scuola di magia -->
         <ion-col class="ColonnaTabella">
-            <ion-label class=Base>Scuola di magia</ion-label>
+            <ion-label class=Base>Magic school</ion-label>
+        </ion-col>
+
+        <!-- reazione -->
+        <ion-col class="ColonnaTabella">
+          <ion-label class="Base">Casting trigger</ion-label>
         </ion-col>
 
       </ion-row>
@@ -209,62 +202,97 @@
 
       <ion-grid>
 
-      @for (incantesimo of currIncantesimi; track incantesimo) {
+      @for (incantesimo of characterSpells; track incantesimo) {
         <ion-row class="Centrare">
 
           <!-- nome -->
           <ion-col class="NomeSpell">
             <ion-item>
-              <ion-label class="NomeVisualizzato"  (click)="incantesimo.descrizione($event)">{{incantesimo.nome}}</ion-label>
+              <ion-label class="NomeVisualizzato"  (click)="createSpellPopup(
+                incantesimo.name,
+                incantesimo.description,
+                incantesimo.cantrip_upgrade,
+                incantesimo.higher_level_slot,
+                $event
+              )">{{incantesimo.name}}</ion-label>
             </ion-item>
           </ion-col>
 
           <!-- Livello -->
           <ion-col>
             <ion-item>
-              <ion-label>{{incantesimo.livello}}</ion-label>
+              <ion-label>{{incantesimo.level}}</ion-label>
             </ion-item>
           </ion-col>
 
-          <!-- tempo di lancio + rituale -->
+          <!-- tempo di lancio -->
           <ion-col>
             <ion-item>
-              <ion-label>{{incantesimo.tmpLanc}}</ion-label>
+              <ion-label>{{incantesimo.casting_time}}</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- tipo di azione utilizzata -->
+          <ion-col>
+            <ion-item>
+              <ion-label>{{incantesimo.action_type}}</ion-label>
             </ion-item>
           </ion-col>
 
           <!-- durata -->
           <ion-col>
             <ion-item>
-              <ion-label>{{incantesimo.durata}}</ion-label>
+              <ion-label>{{incantesimo.duration}}</ion-label>
             </ion-item>
           </ion-col>
 
           <!-- gittata -->
           <ion-col>
             <ion-item>
-              <ion-label>{{incantesimo.gittata}}</ion-label>
+              <ion-label>{{incantesimo.range}}</ion-label>
             </ion-item>
           </ion-col>
 
+          
           <!-- concentrazione -->
           <ion-col>
             <ion-item>
-              <ion-label>{{incantesimo.concentrazione}}</ion-label>
+              <ion-label>{{incantesimo.concentration}}</ion-label>
+            </ion-item>
+          </ion-col>
+          
+          <!-- rituale -->
+          <ion-col>
+            <ion-item>
+              <ion-label>{{incantesimo.ritual}}</ion-label>
             </ion-item>
           </ion-col>
 
           <!-- componenti -->
           <ion-col>
             <ion-item>
-              <ion-label>{{incantesimo.componenti}}</ion-label>
+              <ion-label>{{incantesimo.components}}</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- materiali -->
+          <ion-col>
+            <ion-item>
+              <ion-label>{{incantesimo.material}}</ion-label>
             </ion-item>
           </ion-col>
 
           <!-- Scuola di magia -->
           <ion-col>
             <ion-item>
-              <ion-label>{{incantesimo.scMag}}</ion-label>
+              <ion-label>{{incantesimo.school}}</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- casting trigger -->
+          <ion-col>
+            <ion-item>
+              <ion-label>{{incantesimo.casting_trigger}}</ion-label>
             </ion-item>
           </ion-col>
 

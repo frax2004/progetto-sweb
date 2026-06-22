@@ -7,7 +7,7 @@ import { AccordionComponent } from "src/app/components/accordion/accordion.compo
 import { EntryComponent } from "src/app/components/entry/entry.component";
 import { TextAreaComponent } from "src/app/components/text-area/text-area.component";
 import { ButtonComponent } from "src/app/components/button/button.component";
-import { Alerts, Navigate, Popups } from 'src/app/core/core';
+import { Alerts, currentGlobalCharacterName, Navigate, Popups } from 'src/app/core/core';
 import { TitleComponent } from "src/app/components/title/title.component";
 import { LabelComponent } from "src/app/components/label/label.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
@@ -108,7 +108,8 @@ export class OverviewPage implements OnInit {
       CharacterInstance.chosenCantrips
     ).subscribe({
       next: (value: any) => {
-        Alerts.personalizedMessage('GOOOOOOODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOQOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO','PERSONAGGIO CARICATO!');
+        currentGlobalCharacterName.set(this.characterName);
+        this.router.navigate(['/character-sheet']);
       },
       error: (err) => {
         Alerts.message(err.error.message);

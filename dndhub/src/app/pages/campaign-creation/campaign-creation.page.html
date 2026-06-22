@@ -5,33 +5,75 @@
 
   <div id="entries">
     <div class="frame">
-      <ion-label class="label">Insert the campaign's name</ion-label>
-      <ion-input [(ngModel)]="name" placeholder="Name"></ion-input>
+      <ion-label class="label">Campaign's name</ion-label>
+      <ion-input [(ngModel)]="name" placeholder="Insert the campaign's name"></ion-input>
     </div>
     
     <div class="frame">
       <ion-label class="label">Select party players</ion-label>
       @for(player of selectedPlayers(); track $index) {
-        <ion-label>{{player}}</ion-label>
+        <div 
+        class="selected-player"
+        (click)="removePlayer(player)"
+        >{{player}}</div>
       }
-      <ion-searchbar 
-      debounce="500" 
-      placeholder="Search player"
-      (ionInput)="loadPlayers"
-      ></ion-searchbar>
-      @for(player of availablePlayers(); track $index) {
-        <ion-label>{{player}}</ion-label>
-      }
+      <div class="search-container">
+        <ion-searchbar 
+          debounce="500" 
+          placeholder="Search player"
+          (ionInput)="onSearchEnter($event)"
+        ></ion-searchbar>
+
+        @if(currentPrefix().length > 0) {
+          <div class="results-overlay">
+            <ion-content id="available-content">
+              <li id="available-list">
+                @for(player of availablePlayers(); track $index) {
+                  <div 
+                  class="available-player"
+                  (click)="addPlayer(player)"
+                  >{{player}}</div>
+                }
+              </li>
+              <ion-infinite-scroll (ionInfinite)="onScrollForMore($event)">
+                <ion-infinite-scroll-content></ion-infinite-scroll-content>
+              </ion-infinite-scroll>
+            </ion-content>
+          </div>
+        }
+      </div>
+
     </div>
     
     <div class="frame">
-      <ion-label class="label">Insert a description</ion-label>
+      <ion-label class="label">Choose a description</ion-label>
       <ion-textarea [(ngModel)]="description" placeholder="Description"></ion-textarea>
+    </div>
+
+    <div class="frame">
+      <ion-label class="label">Select a banner</ion-label>
+      <ion-input [(ngModel)]="banner" placeholder="Insert a link or leave blank"></ion-input>
     </div>
   
     <div class="frame">
       <ion-label class="label">Link(s) to useful documents</ion-label>
-      <ion-input placeholder="Documents"></ion-input>
+      @for(doc of documentsLinks(); track $index) {
+        <div 
+        class="document-link"
+        (click)="removeDocumentLink(doc)"
+        >{{doc}}</div>
+      }
+      <div class="insert-document">
+        <ion-input 
+        #doc_entry
+        id="doc-entry" 
+        placeholder="Insert a document"
+        ></ion-input>
+        <app-button id="doc-add"
+        [button]="{text: 'Add', expand: 'false'}"
+        [context]="{onClick: addDocumentLink}"
+        ></app-button>
+      </div>
     </div>
   
     <app-button

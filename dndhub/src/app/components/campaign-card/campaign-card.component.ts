@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Card } from '../card/Card';
 import { ButtonComponent } from '../button/button.component';
+import { Alerts, currentGlobalCampaignName } from 'src/app/core/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-campaign-card',
@@ -13,8 +15,15 @@ import { ButtonComponent } from '../button/button.component';
 export class CampaignCardComponent  implements OnInit {
 
   @Input() card: Card;
+  @Input() campaign: any;
 
-  constructor() { }
+  constructor(private router: Router) { }
   ngOnInit() {}
+
+  public gotoCampaign = (e: Event) => {
+    currentGlobalCampaignName.set(this.campaign.idx_campagna);
+    this.router.navigate(['/campaign-chat']);
+  }
+
 
 }

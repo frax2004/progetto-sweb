@@ -1,10 +1,10 @@
 import { Database } from "../database.js";
-import { PostsQueries } from "./PostsQueries.js";
-import { PostsResponses } from "./posts.responses.js";
-import { PostsValidators } from "./post.validator.js";
+import { PostsQueries } from "../controllers/PostsQueries.js";
+import { PostsResponses } from "../controllers/post.controller.response.js";
+import { PostsValidators } from "../controllers/post.validator.js";
 
 export function checkCampagnaExists(req, res, next) { 
-
+  console.log("verifica Middleware");
   const idx_campagna = req.params.idx_campagna; // prendo idx campagna dalla richiesta http e le assegno valore
   console.log("idx_campagna: " + idx_campagna) 
   const ok = PostsValidators.assertIdxCampagna(idx_campagna,() => { // uso il validator per vederese l'indice della campagna è valida

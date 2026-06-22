@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PostsService {
 
-  private baseUrl = 'http://localhost:10000'; 
+  private baseUrl = 'http://localhost:10000/api/Posts';
 
   constructor(private http: HttpClient) {}
 

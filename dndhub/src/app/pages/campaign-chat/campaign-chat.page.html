@@ -6,7 +6,7 @@
     <div class="buttonsAndDetails">
 
       <div class="buttonPost">
-        <app-button [button]="{text: 'Torna indietro', expand: ''}" [context]="buttonCallbacks['placeholder']">
+        <app-button [button]="{text: 'Go Back', expand: ''}" [context]="buttonCallbacks['placeholder']">
         </app-button>
       </div>
 
@@ -17,18 +17,20 @@
         </div>
 
         <div class="players">
-          <ion-label class="titoloGiocatori">Giocatori</ion-label>
+          <ion-label class="titoloGiocatori">Players</ion-label>
 
           @for (player of players; track player) {
           <div class="playerNames">
             <ion-label>{{ player.name }}</ion-label>
             <ion-label>{{ player.character }}</ion-label>
-          </div>  
+          </div>
           }
-<!-- poi se mi va faccio una sorta di card anche per questo -->
+          <!-- poi se mi va faccio una sorta di card anche per questo -->
 
         </div>
       </div>
+      <app-button [button]="{text:'Campaign details', expand:''}" [context]="buttonCampaignCallBacks['placeholder']">
+      </app-button>
     </div>
 
 
@@ -37,7 +39,7 @@
       <div class="postBox1">
 
         <div class="CreaContent">
-          <ion-label>Pubblica il tuo nuovo post</ion-label>
+          <ion-label>Write your post</ion-label>
         </div>
 
         <ion-textarea class="TextAreaDesign" [(ngModel)]="postText" value="Andrea" placeholder="scrivi qua"
@@ -48,8 +50,7 @@
           <ion-label>{{ campaignName }}</ion-label>
 
           <div class="buttonPost">
-            <app-button [button]="{text: 'pubblica', expand: ''}"
-              [context]="buttonContextPost['newPost']">
+            <app-button [button]="{text: 'Post', expand: ''}" [context]="buttonContextPost['newPost']">
             </app-button>
           </div>
 
@@ -62,15 +63,15 @@
       <div class="postBox">
 
         <div class="postContent">
-          <ion-label class="scrollbar">{{ post.text }}</ion-label>
+          <ion-label class="scrollbar">{{post.contenuto}}</ion-label>
         </div>
 
         <div class="postLowerInformation">
           <ion-label>{{ campaignName }}</ion-label>
-          <ion-label>{{ post.time_stamp }}</ion-label>
-          <app-button 
-          [button]="{text:'elimina', expand:''}"
-          [context]="{ onClick: deletePostClick(post.time_stamp) }">
+          <ion-label>
+            {{ post.time_stamp | date:'dd/MM/yy HH:mm' }}
+          </ion-label>
+          <app-button [button]="{text:'delete', expand:''}" [context]="{ onClick: deletePostClick(post.time_stamp) }">
           </app-button>
         </div>
 

@@ -1,6 +1,6 @@
 import { Database } from "../database.js";
 import { PostsQueries } from "./PostsQueries.js";
-import { PostsResponses } from "./posts.responses.js";
+import { PostsResponses } from "./post.controller.response.js";
 import { PostsValidators } from "./post.validator.js";
 
 
@@ -17,9 +17,8 @@ function sendResponse(obj, res) {
 
 function getPosts(req, res) {
   canSend = true;
-  console.log("non funziona niente")
-  const idx_campagna = req.campagna; // lo posso passare così perché già ho 
-  // il risultato del db fatto dal middleware
+  console.log("get prova ")
+  const idx_campagna = req.params.idx_campagna;
   const db = Database.INSTANCE;
 
   const postCallback = (err, rows) => {
@@ -41,7 +40,7 @@ function getPosts(req, res) {
 function createPost(req, res) {
   canSend = true;
 
-  const idx_campagna = req.campagna;
+  const idx_campagna = req.params.idx_campagna;
   const contenuto = req.body.contenuto;
   const time_stamp = req.body.time_stamp;
 
@@ -73,7 +72,7 @@ function createPost(req, res) {
 function deletePost(req, res) {
   canSend = true;
 
-  const idx_campagna = req.campagna;
+  const idx_campagna = req.params.idx_campagna;
   const time_stamp = req.body.time_stamp;
 
   const ok = PostsValidators.assertTimestamp(time_stamp, () => sendResponse(PostsResponses.TIMESTAMP_NOT_VALID, res)

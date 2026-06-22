@@ -851,6 +851,32 @@ function getCharacterSpells(req,res) {
   });
 }
 
+function getCharacters(req,res) {
+  canSend = true;
+
+  const email = UserInstance.USER.email;
+
+  DatabaseQueries.retrieve(`SELECT * FROM Personaggio WHERE utente_generico = '${email}'`, el => el)
+  .catch(err => {
+    sendResponse({
+        status_code: 404,
+        message: 'Non è stato possibile caricare i personaggi dal database',
+        success: false,
+      }, 
+      res
+    );
+  }).then(characters => {
+    sendResponse({
+        characters: characters,
+        status_code: 200,
+        success: true,
+        message: 'Personaggi caricati con successo'
+      },
+      res
+    );
+  });
+}
+
 export default {
   displayClasses,
   displayLevelByNameAndLevel,
@@ -870,4 +896,5 @@ export default {
   getCharacterLanguages,
   getCharacterFeats,
   getCharacterSpells,
+  getCharacters,
 }

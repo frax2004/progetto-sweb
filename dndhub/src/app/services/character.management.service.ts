@@ -192,4 +192,11 @@ export class CharacterManagementService {
       {idx_personaggio: idx_personaggio}
     );
   }
+
+  loadCharacters(success: (x: any) => void, fail: (x: any) => void) {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/get-characters`,
+      {}
+    ).subscribe({next: success, error: fail});;
+  }
 }

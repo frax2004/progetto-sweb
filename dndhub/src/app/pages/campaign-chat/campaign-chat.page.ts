@@ -27,7 +27,7 @@ export class CampaignChatPage implements OnInit {
   }
 };
 
-campaignName: string = 'Pippo';
+  campaignName: string = 'Pippo';
   idx_campagna: string = 'The-Frozen-Frontier @ (dungeon_master): antonio.ferri90@unipa.net';
   postText: string = '';
 

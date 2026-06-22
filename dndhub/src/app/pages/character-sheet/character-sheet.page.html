@@ -1,30 +1,30 @@
 <ion-content>
 
   <div class="pageTitle">
-    <div>
+    <ion-toolbar>
       <ion-title class="title">Scheda personaggio</ion-title>
       <ion-title class="nome">Pino Il Ballerino</ion-title>
-    </div>
+    </ion-toolbar>
   </div>
 
   <!-- settore iniziale con:
-       prima colonna: 
-        - immagine
-       
-       seconda colonna
-        - hp
-        - dadi vita
-        - ca
-       
-       terza colonna: 
-        - livello
-        - bonus competenza 
-        - tiri salvezza contro la morte 
+        prima colonna: 
+          - immagine
         
-       quarta colonna:
-        - inspirazione eroica 
-        - iniziativa 
-        - velocità -->
+        seconda colonna
+          - hp
+          - dadi vita
+          - ca
+        
+        terza colonna: 
+          - livello
+          - bonus competenza 
+          - tiri salvezza contro la morte 
+          
+        quarta colonna:
+          - inspirazione eroica 
+          - iniziativa 
+          - velocità -->
 
 
   <div class="gridContainer">
@@ -44,23 +44,24 @@
         <div class=TiriGenerici>
           <div class="TiriVSmorte">
             <div class="TiriSalvezza">death saving throw</div>
-            <div class="Tiri">
+            <div class="checkboxContainer">
               <!-- <ion-label>Success</ion-label> -->
-              <ion-checkbox></ion-checkbox>
-              <ion-checkbox></ion-checkbox>
-              <ion-checkbox></ion-checkbox>
-            </div>
-            <div class="Tiri">
-              <!-- <ion-label>Fallimenti</ion-label> -->
-               <!-- in certe schede non scrivono fallimenti o successi ma sono checkbox colorate in maniera diverse -->
-              <ion-checkbox></ion-checkbox>
-              <ion-checkbox></ion-checkbox>
-              <ion-checkbox></ion-checkbox>
+              <div class="Tiri">
+                <input type="checkbox" class="genericCheckbox">
+                <input type="checkbox" class="genericCheckbox">
+                <input type="checkbox" class="genericCheckbox">
+
+                <input type="checkbox" class="deathCheckbox">
+                <input type="checkbox" class="deathCheckbox">
+                <input type="checkbox" class="deathCheckbox">
+              </div>
             </div>
           </div>
           <div Class="Ispirazione-Eroica">
             <ion-label class="Eroica">Eroic Inspiration</ion-label>
-            <ion-checkbox></ion-checkbox>
+            <div class="eroicCheckBox">
+              <input type="checkbox" class="Checkbox">
+            </div>
           </div>
         </div>
         <div class="species">
@@ -69,23 +70,23 @@
           <ion-label>Proficiency bonus: +{{characterInfo.proficiency_bonus}}</ion-label>
           <ion-label>Species: {{characterInfo.species}}</ion-label>
           @if(characterInfo.subspecies !== undefined) {
-            <ion-label>{{characterInfo.subspecies}}</ion-label>
+          <ion-label>{{characterInfo.subspecies}}</ion-label>
           }
         </div>
 
         <div class="informazioni">
           @for(abilityScore of abilityScoresInfos; track abilityScore) {
-            @if(abilityScore.index === 'dex') {
-              <ion-label>Initiative: {{abilityScore.stat_modifier}}</ion-label>
-            }
+          @if(abilityScore.index === 'dex') {
+          <ion-label>Initiative: {{abilityScore.stat_modifier}}</ion-label>
+          }
           }
           <ion-label>Size: {{characterInfo.size}}</ion-label>
           @for(abilityScore of abilityScoresInfos; track abilityScore) {
-            @for(skill of abilityScore.skills; track skill) {
-              @if (skill.name === 'Perception') {
-                <ion-label>Passive perception: {{skill.modifier}}</ion-label>
-              }
-            }
+          @for(skill of abilityScore.skills; track skill) {
+          @if (skill.name === 'Perception') {
+          <ion-label>Passive perception: {{skill.modifier}}</ion-label>
+          }
+          }
           }
           <ion-label>Speed: {{characterInfo.speed}} ft</ion-label>
 
@@ -96,38 +97,39 @@
 
 
   <div class="statAccordionFrame">
-    <ion-accordion-group class="accordionGroup" value="statAccordionGroup" [multiple]="true" expand="inset" animated="true">
+    <ion-accordion-group class="accordionGroup" value="statAccordionGroup" [multiple]="true" expand="inset"
+      animated="true">
       @for(abilityScore of abilityScoresInfos; track abilityScore) {
-        <ion-accordion class="statAccordion genericAccordion" [value]="abilityScore.index">
-          <ion-item class="accHeader" slot="header" color="light">
-            @if (abilityScore.imageURL !== undefined) {
-              <ion-thumbnail slot="start">
-                <img id="accImg" alt="placeholder img" [src]="abilityScore.imageURL">
-              </ion-thumbnail>
-            }
-            @else {
-              <ion-thumbnail slot="start">
-                <img alt="placeholder img" [src]="'Card.defaultImageURL()'">
-              </ion-thumbnail>
-            }
-            <div class="headerContentFrame">
-              <h1 class="accTitle">{{abilityScore.full_name}}</h1>
-              <h1>-</h1>
-              <h1>{{abilityScore.stat_value}}</h1>
-              <h1>  [ {{abilityScore.stat_modifier}} ]</h1>
-            </div>
-          </ion-item>
-          <div class="ionPadding accContent" slot="content">
-            <h3>Saving throw: {{abilityScore.saving_throw_value}}</h3>
-            <div class="skillsContainer">
-              @for(skill of abilityScore.skills; track skill) {
-                <div class="skill">
-                  <ion-label>{{skill.name}}: {{skill.modifier}}</ion-label>
-                </div>
-              }
-            </div>
+      <ion-accordion class="statAccordion genericAccordion" [value]="abilityScore.index">
+        <ion-item class="accHeader" slot="header" color="light">
+          @if (abilityScore.imageURL !== undefined) {
+          <ion-thumbnail slot="start">
+            <img id="accImg" alt="placeholder img" [src]="abilityScore.imageURL">
+          </ion-thumbnail>
+          }
+          @else {
+          <ion-thumbnail slot="start">
+            <img alt="placeholder img" [src]="'Card.defaultImageURL()'">
+          </ion-thumbnail>
+          }
+          <div class="headerContentFrame">
+            <h2 class="accTitle">{{abilityScore.full_name}}</h2>
+            <h2>-</h2>
+            <h2>{{abilityScore.stat_value}}</h2>
+            <h2> [ {{abilityScore.stat_modifier}} ]</h2>
           </div>
-        </ion-accordion>
+        </ion-item>
+        <div class="ionPadding accContent" slot="content">
+          <h3>Saving throw: {{abilityScore.saving_throw_value}}</h3>
+          <div class="skillsContainer">
+            @for(skill of abilityScore.skills; track skill) {
+            <div class="skill">
+              <ion-label class="borderText">{{skill.name}}: {{skill.modifier}}</ion-label>
+            </div>
+            }
+          </div>
+        </div>
+      </ion-accordion>
       }
     </ion-accordion-group>
   </div>
@@ -137,20 +139,21 @@
     <ion-row>
 
       <!-- prima colonna con lista -->
-      <ion-col>
+      <ion-col class="noPadding">
 
         <ion-list>
           <div class="languageAccordionContainer">
-            <ion-accordion-group class="accordionGroup" value="languageAccordionGroup" [multiple]="true" expand="inset" animated="true">
+            <ion-accordion-group class="accordionGroup" value="languageAccordionGroup" [multiple]="true" expand="inset"
+              animated="true">
               <ion-accordion class="languageAccordion genericAccordion" value="languageAccordion">
                 <ion-item class="accHeader" slot="header" color="light">
-                  <h1 class="accTitle">Languages</h1>
+                  <h2 class="accTitle">Languages</h2>
                 </ion-item>
                 <div class="ionPadding accContent" slot="content">
                   @for (lang of characterLanguages; track lang) {
-                    <div class="language">
-                      <ion-label>- {{lang.name}}</ion-label>
-                    </div>
+                  <div class="language">
+                    <ion-label>- {{lang.name}}</ion-label>
+                  </div>
                   }
                 </div>
               </ion-accordion>
@@ -159,16 +162,17 @@
 
           <!-- menu abilità -->
           <div class="featAccordionContainer">
-            <ion-accordion-group class="accordionGroup" value="featAccordionGroup" [multiple]="true" expand="inset" animated="true">
+            <ion-accordion-group class="accordionGroup" value="featAccordionGroup" [multiple]="true" expand="inset"
+              animated="true">
               <ion-accordion class="featAccordion genericAccordion" value="featAccordion">
                 <ion-item class="accHeader" slot="header" color="light">
-                  <h1 class="accTitle">Feats</h1>
+                  <h2 class="accTitle">Feats</h2>
                 </ion-item>
                 <div class="ionPadding accContent" slot="content">
                   @for (feat of characterFeats; track feat) {
-                    <div class="language">
-                      <ion-label>- {{feat}}</ion-label>
-                    </div>
+                  <div class="language">
+                    <ion-label>- {{feat}}</ion-label>
+                  </div>
                   }
                 </div>
               </ion-accordion>
@@ -177,24 +181,25 @@
 
           <!-- menu inventario -->
           <div class="equipmentAccordionContainer">
-            <ion-accordion-group class="accordionGroup" value="equipmentAccordionGroup" [multiple]="true" expand="inset" animated="true">
+            <ion-accordion-group class="accordionGroup" value="equipmentAccordionGroup" [multiple]="true" expand="inset"
+              animated="true">
               <ion-accordion class="equipAccordion genericAccordion" value="equipmentAccordion">
                 <ion-item class="accHeader" slot="header" color="light">
-                  <h1 class="accTitle">Equipment</h1>
+                  <h2 class="accTitle">Equipment</h2>
                 </ion-item>
                 <div class="ionPadding accContent" slot="content">
                   ciao
                   @for (equip of characterEquipment; track equip) {
-                    <div class="equipment">
-                      <ion-label>- {{equip.name}}</ion-label>
-                    </div>
+                  <div class="equipment">
+                    <ion-label>- {{equip.name}}</ion-label>
+                  </div>
                   }
                 </div>
               </ion-accordion>
             </ion-accordion-group>
           </div>
 
-          <app-button [button]="{text: 'Incantesimi', expand:''}" 
+          <app-button [button]="{text: 'Incantesimi', expand:''}"
             [context]="buttonCallbacks['placeholder']"></app-button>
         </ion-list>
       </ion-col>
@@ -206,12 +211,10 @@
           <app-entry label="''"></app-entry>
         </div>
         <div buttonChange>
-          <app-button [button]="{text:'Edit', expand:''}"
-          [context]="changeCallback['changes']"></app-button>
+          <app-button [button]="{text:'Edit', expand:''}" [context]="changeCallback['changes']"></app-button>
         </div>
         <div buttonDelete>
-          <app-button [button]="{text:'Delete', expand:''}"
-          [context]="deleteCallback['deletePG']"></app-button>
+          <app-button [button]="{text:'Delete', expand:''}" [context]="deleteCallback['deletePG']"></app-button>
         </div>
       </ion-col>
 

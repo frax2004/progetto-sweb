@@ -2,10 +2,7 @@ import { PopoverController } from "@ionic/angular/standalone";
 import { PopUpComponent } from "../components/pop-up/pop-up.component";
 import { Router } from "@angular/router";
 import { alertController, AlertOptions } from '@ionic/core';
-import { bytes } from "stream/consumers";
-import { Readable } from "stream";
 import { signal } from "@angular/core";
-
 
 export namespace Popups {
   export function ofSimpleText(controller: PopoverController, text: String) {
@@ -91,20 +88,31 @@ export namespace Alerts {
       cssClass: 'default-alert'
     });
   }
-
 }
 
+export interface Campaign {
+  utente_generico: string;
+  nome: string;
+  idx_campagna: string;
+  banner?: string;
+  descrizione?: string;
+  links_documenti?: string;
+}
+
+
 export function decodeCampaign(hashcode: string) {
-  const decoder = ch => ch - 8;
-  return Buffer.from(hashcode).map(decoder).toString();
+  encodeCampaign(hashcode);
 }
 
 export function encodeCampaign(campaign_idx: string) {
-  const encoder = ch => ch + 8;
-  return Buffer.from(campaign_idx).map(encoder).toString();
+  return campaign_idx.replace(/[a-zA-Z]/g, (char) => 
+    String.fromCharCode(
+      char.charCodeAt(0) + (char.toLowerCase() < 'n' ? 13 : -13)
+    )
+  );
 }
 
 
-export let currentGlobalCampaignName = signal<string>('');
+
 export let currentGlobalCharacterName = signal<string>(''); 
 export const defualtCharacterImgURL = "https://i.pinimg.com/736x/8e/fd/55/8efd55212da85ed2fb9d5ccc533c7550.jpg";

@@ -41,3 +41,18 @@ campagnaRouter.post(
   middleware.doesRequestAlreadyExist,
   controller.createCampaignParticipationRequest
 );
+
+campagnaRouter.post(
+  "/load_accepted_players",
+  authMiddleware.isLogged,
+  middleware.assertCampaignExists,
+  controller.loadAcceptedPlayers,
+);
+
+
+campagnaRouter.post(
+  "/load_campaign_players",
+  authMiddleware.isLogged,
+  middleware.assertCampaignExists,
+  controller.loadCampaignPlayers,
+);

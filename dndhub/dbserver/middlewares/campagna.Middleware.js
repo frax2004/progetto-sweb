@@ -130,7 +130,43 @@ export async function  doesRequestAlreadyExist(req,res,next) {
       }, res);
   }
 }
+      
+      
+      
+export async function assertCampaignExists(req, res, next) {
+  canSend = true;
 
+  const campaign_idx = req.body.campaign_idx;
+  
+  const query = `SELECT * FROM Campagna WHERE idx_campagna = '${campaign_idx}'`;
+
+  try {
+    const rows = await Database.queryAll(query);
+
+    if(rows !== undefined && rows !== null && rows.length > 0) {
+      next();
+    } else {
+      sendResponse({
+          message: "La campagna specificata non esiste.",
+          status_code: 401,
+          success: false
+        },
+        res
+      );
+    }
+  } catch(err) {
+    sendResponse({
+        message: err,
+        status_code: 401,
+        success: false
+      },
+      res
+    );
+  }
+}
+
+
+      
 export default {
   assertCampaignNotExists,
   assertPlayersExists,
@@ -138,4 +174,5 @@ export default {
   checkIfCharacterAlreadyInCampaign,
   doesCampaignCodeExist,
   doesRequestAlreadyExist,
+  assertCampaignExists,
 }

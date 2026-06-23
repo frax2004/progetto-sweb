@@ -104,7 +104,6 @@ ion-title {
 }
 
 .codice,
-.link-join,
 .documenti-label {
   width: 100%;
   display: flex;
@@ -112,8 +111,7 @@ ion-title {
   text-align: center;
 }
 
-.codice,
-.link-join {
+.codice {
   padding: 14px 16px;
 
   background: #121212;
@@ -180,7 +178,7 @@ ion-title {
   margin-top: 10px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
 
   .contenitore {
     grid-template-columns: 1fr;

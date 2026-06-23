@@ -37,3 +37,8 @@ export function checkCampagnaExists(req, res, next) {
   // funzione che prende l'idx campagna per vedere se esiste gli passo il 
   // callback così che nel mentre viene eseguita runna il db 
 };
+
+
+export default {
+  checkCampagnaExists,
+}

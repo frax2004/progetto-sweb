@@ -37,17 +37,18 @@ import { CampagnaService } from 'src/app/services/campagna.service';
   styleUrls: ['./landing-page.page.scss'],
   standalone: true,
   imports: [
-    IonContent, 
-    IonHeader, RouterLink ,
-    IonTitle, 
-    IonToolbar, CommonModule, FormsModule, 
-    IonLabel, 
-    IonItem, CarouselComponent, 
-    IonFooter, CardComponent, 
-    AccordionComponent, 
-    IonAccordion, 
+    IonContent,
+    IonHeader, RouterLink,
+    IonTitle,
+    IonToolbar, CommonModule, FormsModule,
+    IonLabel,
+    IonItem, CarouselComponent,
+    IonFooter, CardComponent,
+    AccordionComponent,
+    IonAccordion,
     IonAccordionGroup,
-  ]
+    LabelComponent
+]
 })
 export class LandingPagePage implements OnInit {
   

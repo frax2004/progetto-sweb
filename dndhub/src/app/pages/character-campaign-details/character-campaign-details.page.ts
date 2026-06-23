@@ -24,13 +24,9 @@ import { firstValueFrom } from 'rxjs';
 export class CharacterCampaignDetailsPage implements OnInit {
 
   public campaign = State.currentCampaign;
-
-  public get campaignCode() {
-    return encodeCampaign(this.campaign()?.idx_campagna ?? 'Secrets-of-the-Shattered-Isles @ (dungeon_master): pino.gerardi88@microsoft.ru');
-  }
   
   public get campaignName() {
-    return this.campaign()?.nome ?? 'Secrets-of-the-Shattered-Isles';
+    return this.campaign()?.nome;
   }
 
   players = signal<DatiGiocatore[]>([]);
@@ -62,7 +58,7 @@ export class CharacterCampaignDetailsPage implements OnInit {
 
 
   public loadPlayers = async () => {
-    const res = await firstValueFrom<any>(this.campagnaService.loadCampaignPlayers(this.campaign()?.idx_campagna ?? 'Secrets-of-the-Shattered-Isles @ (dungeon_master): pino.gerardi88@microsoft.ru'));
+    const res = await firstValueFrom<any>(this.campagnaService.loadCampaignPlayers(this.campaign()?.idx_campagna));
   
     console.log(JSON.stringify(res, null, 2));
   

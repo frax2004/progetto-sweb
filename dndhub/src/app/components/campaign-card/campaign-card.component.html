@@ -1,14 +1,33 @@
-<div id="card">
-  <div id="card-content">
-    <div id="image" [style.background-image]="'url(' + card.imageURL + ')'"></div>
-    <div id="card-desc">
-      <div id="name">{{card.title}}</div>
-      <div id="players">Giocatori: {{card.subtitle}}</div>
-      <div id="desc">{{card.content}}</div>
+
+@if(buttonCampaign === true) {
+  <div id="card">
+    <div id="card-content">
+      <div id="image" [style.background-image]="'url(' + card.imageURL + ')'"></div>
+      <div id="card-desc">
+        <div id="name">{{card.title}}</div>
+        <div id="players">Giocatori: {{card.subtitle}}</div>
+        <div id="desc">{{card.content}}</div>
+      </div>
     </div>
+    <app-button
+    [button]="{text: 'Go to campaign', expand: 'false'}"
+    [context]="{onClick: gotoCampaign}"
+    ></app-button>
   </div>
-  <app-button
-  [button]="{text: 'Go to campaign', expand: 'false'}"
-  [context]="{onClick: gotoCampaign}"
-  ></app-button>
-</div>
+}
+@else {
+  <div id="card">
+    <div id="card-content">
+      <div id="image" [style.background-image]="'url(' + card.imageURL + ')'"></div>
+      <div id="card-desc">
+        <div id="name">{{card.title}}</div>
+        <div id="players">Giocatori: {{card.subtitle}}</div>
+        <div id="desc">{{card.content}}</div>
+      </div>
+    </div>
+    <app-button
+    [button]="{text: 'Go to campaign', expand: 'false'}"
+    [context]="{onClick: gotoCampaignCharacter}"
+    ></app-button>
+  </div>
+}

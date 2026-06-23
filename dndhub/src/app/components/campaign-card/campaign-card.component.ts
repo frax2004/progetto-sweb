@@ -16,6 +16,7 @@ export class CampaignCardComponent  implements OnInit {
 
   @Input() card: Card;
   @Input() campaign: any;
+  @Input() buttonCampaign?: boolean = true;
 
   constructor(private router: Router) { }
   ngOnInit() {}
@@ -23,6 +24,11 @@ export class CampaignCardComponent  implements OnInit {
   public gotoCampaign = (e: Event) => {
     State.currentCampaign.set(this.campaign);
     this.router.navigate(['/campaign-chat']);
+  }
+
+  public gotoCampaignCharacter = (e: Event) => {
+    State.currentCampaign.set(this.campaign);
+    this.router.navigate(['/character-campaign-chat']);
   }
 
 

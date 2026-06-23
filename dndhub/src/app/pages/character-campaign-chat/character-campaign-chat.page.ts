@@ -34,7 +34,7 @@ export class CharacterCampaignChatPage implements OnInit {
 
   public loadPlayers = async () => {
     try {
-      const res = await firstValueFrom<any>(this.campaignService.loadAcceptedPlayers(this.campaign()?.idx_campagna ?? 'Secrets-of-the-Shattered-Isles @ (dungeon_master): pino.gerardi88@microsoft.ru'));
+      const res = await firstValueFrom<any>(this.campaignService.loadAcceptedPlayers(this.campaign()?.idx_campagna));
       this.players.set(res.players);
     } catch(err) {
       Alerts.error(err.error);
@@ -43,7 +43,7 @@ export class CharacterCampaignChatPage implements OnInit {
 
   public loadPosts = async () => {
     try {
-      const res = await firstValueFrom<any>(this.PostsService.getPosts(this.campaign()?.idx_campagna ?? 'Secrets-of-the-Shattered-Isles @ (dungeon_master): pino.gerardi88@microsoft.ru'));
+      const res = await firstValueFrom<any>(this.PostsService.getPosts(this.campaign()?.idx_campagna));
       this.posts.set(res.data);
     } catch(err) {
       Alerts.error(err.error);
@@ -51,7 +51,7 @@ export class CharacterCampaignChatPage implements OnInit {
   }
 
   public get campaignName() {
-    return this.campaign()?.nome ?? 'Secrets-of-the-Shattered-Isles';
+    return this.campaign()?.nome;
   }
 
   private loadInfo = async () => {

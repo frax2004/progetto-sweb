@@ -88,8 +88,15 @@ export class UserInstance {
 }
 
 export function decodeCampaign(hashcode) {
-  const decoder = ch => ch - 8;
-  return Buffer.from(hashcode).map(decoder).toString();
+  encodeCampaign(hashcode);
+}
+
+export function encodeCampaign(campaign_idx) {
+  return campaign_idx.replace(/[a-zA-Z]/g, (char) => 
+    String.fromCharCode(
+      char.charCodeAt(0) + (char.toLowerCase() < 'n' ? 13 : -13)
+    )
+  );
 }
 
 export const generateToken = (body) => jwt.sign(

@@ -27,7 +27,7 @@ export class CharactersPage implements OnInit {
 
   characterCards = signal<Card[]>([]);
   campaignCards = signal<Card[]>([]);
-  campaignCode: string;
+  campaigns: any[] = [];
 
 
   seeCampaigns = false;
@@ -117,6 +117,7 @@ export class CharactersPage implements OnInit {
   private loadCampaigns = async () => {
     try {
       const resValue = await firstValueFrom(this.campaignServices.loadAcceptedCharacterCampaigns());
+      this.campaigns = resValue.campaigns;
       this.campaignCards.set(resValue.campaigns.map(CharactersPage.toCampaignCard));
     }
     catch (err) {

@@ -45,14 +45,7 @@ import { Alerts } from 'src/app/core/core';
     IonFooter, CardComponent, 
     AccordionComponent, 
     IonAccordion, 
-    IonAccordionGroup, 
-    IonThumbnail, 
-    LabelComponent, 
-    IonList, 
-    UnorderedListElementComponent,
-    IonInput,
-    IonTextarea,
-    ButtonComponent,
+    IonAccordionGroup,
   ]
 })
 export class LandingPagePage implements OnInit {

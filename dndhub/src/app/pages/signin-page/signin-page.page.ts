@@ -13,18 +13,19 @@ import { EntryComponent } from 'src/app/components/entry/entry.component';
   styleUrls: ['./signin-page.page.scss'],
   standalone: true,
   imports: [
-    EntryComponent, 
-    IonContent, 
-    IonInput, 
-    RouterLink, 
-    IonHeader, 
-    IonTitle, 
-    IonText, 
-    IonToolbar, 
-    IonItem, 
-    IonLabel, 
-    ButtonComponent, 
-  ]
+    EntryComponent,
+    IonContent,
+    IonInput,
+    RouterLink,
+    IonHeader,
+    IonTitle,
+    IonText,
+    IonToolbar,
+    IonItem,
+    IonLabel,
+    ButtonComponent,
+    IonInputPasswordToggle
+]
 })
 export class SigninPagePage implements OnInit {
 

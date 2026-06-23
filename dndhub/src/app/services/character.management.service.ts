@@ -199,4 +199,11 @@ export class CharacterManagementService {
       {}
     );
   }
+
+  deleteCharacter(idx_personaggio:string){
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/deleteCharacter`,
+      {idx_personaggio: idx_personaggio}
+    );
+  }
 }

@@ -14,7 +14,9 @@
       </div> 
       <!-- fine ButtonIndietro -->
     <div class="grid">  
-      
+      <app-button 
+      [button]="{text:'change spells', expand:'block'}";>
+      </app-button>
       <div class="ordimamento-slot">
 
   <div class="Slot">
@@ -183,19 +185,19 @@
         </ion-col>
 
         <!-- materiale -->
-        <ion-col class="ColonnaTabella">
+        <!-- <ion-col class="ColonnaTabella">
           <ion-label class="Base">Material</ion-label>
-        </ion-col>
-        
+        </ion-col> le tolgo perché deformano molto il layout ionic perché sono scritte molto lunghe--> 
+         
         <!-- Scuola di magia -->
         <ion-col class="ColonnaTabella">
             <ion-label class=Base>Magic school</ion-label>
         </ion-col>
 
         <!-- reazione -->
-        <ion-col class="ColonnaTabella">
+        <!-- <ion-col class="ColonnaTabella">
           <ion-label class="Base">Casting trigger</ion-label>
-        </ion-col>
+        </ion-col> la tolgo per stesso motivo di prima -->
 
       </ion-row>
     </ion-grid>
@@ -276,11 +278,11 @@
           </ion-col>
 
           <!-- materiali -->
-          <ion-col>
+          <!-- <ion-col>
             <ion-item>
               <ion-label>{{incantesimo.material}}</ion-label>
             </ion-item>
-          </ion-col>
+          </ion-col> -->
 
           <!-- Scuola di magia -->
           <ion-col>
@@ -290,11 +292,11 @@
           </ion-col>
 
           <!-- casting trigger -->
-          <ion-col>
+          <!-- <ion-col>
             <ion-item>
               <ion-label>{{incantesimo.casting_trigger}}</ion-label>
             </ion-item>
-          </ion-col>
+          </ion-col> -->
 
         </ion-row>
       }

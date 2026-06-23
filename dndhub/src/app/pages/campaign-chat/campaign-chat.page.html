@@ -71,7 +71,8 @@
           <ion-label>
             {{ post.time_stamp | date:'dd/MM/yy HH:mm' }}
           </ion-label>
-          <app-button [button]="{text:'delete', expand:''}" [context]="{ onClick: deletePostClick(post.time_stamp) }">
+          <app-button [button]="{text:'delete', expand:''}" 
+          [context]="{ onClick: deletePostClick(post.time_stamp) }">
           </app-button>
         </div>
 

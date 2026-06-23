@@ -1,4 +1,8 @@
-
+.buttonBack {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 1rem;
+}
 .nome,.title{
 font-size: clamp(1.5rem, 4vw, 2rem); 
 text-align: center;

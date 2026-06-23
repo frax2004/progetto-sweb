@@ -7,7 +7,10 @@
       <!-- <ion-title>{{characterInfo.health}} - level {{characterInfo.level}}</ion-title> -->
     </ion-toolbar>
   </div>
-
+  <div class="buttonBack">
+    <app-button [button]="{text: 'Go Back', expand: ''}" [context]="buttonGobacks['placeholder']">
+    </app-button>
+  </div>
   <!-- settore iniziale con:
         prima colonna: 
           - immagine
@@ -214,15 +217,16 @@
 
       <!-- seconda colonna per inserire note personali -->
       <ion-col>
-        <div class="personalNotes" style="border: 1px solid white;">
+        <!-- <div class="personalNotes" style="border: 1px solid white;">
           <ion-label>Note personali</ion-label>
           <app-entry label="''"></app-entry>
-        </div>
+        </div> -->
         <div buttonChange>
           <app-button [button]="{text:'Edit', expand:''}" [context]="changeCallback['changes']"></app-button>
         </div>
         <div buttonDelete>
-          <app-button [button]="{text:'Delete', expand:''}" [context]="deleteCallback['deletePG']"></app-button>
+          <app-button [button]="{text:'Delete', expand:''}"
+            [context]="{ onClick: deleteCallback(idx_personaggio) }"></app-button>
         </div>
       </ion-col>
 

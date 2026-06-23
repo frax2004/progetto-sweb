@@ -27,7 +27,7 @@ export class CharactersPage implements OnInit {
 
   characterCards = signal<Card[]>([]);
   campaignCards = signal<Card[]>([]);
-  campaignCode: string;
+  campaigns: any[] = [];
 
 
   seeCampaigns = false;
@@ -65,6 +65,7 @@ export class CharactersPage implements OnInit {
           text: 'Send request',
           cssClass: 'alertButton',
           handler: (alertData) => {
+            alert(alertData.codeInput);
             this.campaignServices.createCampaignParticipationRequest(alertData.nameInput,alertData.codeInput)
             .subscribe({
               next: (value: any) => {
@@ -117,6 +118,7 @@ export class CharactersPage implements OnInit {
   private loadCampaigns = async () => {
     try {
       const resValue = await firstValueFrom(this.campaignServices.loadAcceptedCharacterCampaigns());
+      this.campaigns = resValue.campaigns;
       this.campaignCards.set(resValue.campaigns.map(CharactersPage.toCampaignCard));
     }
     catch (err) {

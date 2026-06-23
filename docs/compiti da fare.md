@@ -23,7 +23,7 @@ cose da fare:
 
 <!-- - (polarezza) Barra di ricerca per inserimento giocatori in campagna  -->
 <!-- - (polarezza) Generatore link di invito a campagna  -->
-- (polarezza) Modifica db per inserimento di: immagine profilo account, immagine personaggio e link utili documenti campagna
+<!-- - (polarezza) Modifica db per inserimento di: immagine profilo account, immagine personaggio e link utili documenti campagna -->
 <!-- - (polarezza) Funzione caricamento immagine -->
 <!-- - (polarezza) Rimuovere o risolvere pannello di feedback in landing page -->
 <!-- - (polarezza) Cambiare codice e link in dettagli campagna -->

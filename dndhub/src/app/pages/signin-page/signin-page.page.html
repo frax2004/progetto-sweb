@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title class="logo">DnDhub</ion-title>
-    <ion-title class="title">Registrati</ion-title>
+    <ion-title class="title">Register</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,19 +11,19 @@
 
   <div class="form">
     <ion-text class="subtitle">
-      Inserisci le tue credenziali per registrarti.
+      Insert the following credentials to register a new account
     </ion-text>
 
     <div class="entry-group">
       <app-entry #username class="entry"
-        placeholder="Inserisci il nome utente"
+        placeholder="Insert a username"
         fill="outline"
-        label="Nome utente"
+        label="Username"
         labelPlacement="floating"
       ></app-entry>
       <div class="padding"></div>
       <app-entry #email class="entry"
-        placeholder="Inserisci l'indirizzo email"
+        placeholder="Insert an email"
         fill="outline"
         label="Email"
         labelPlacement="floating"
@@ -31,24 +31,24 @@
       <div class="padding"></div>
       <app-entry #password class="entry"
         [passwordToggle]=true
-        placeholder="Inserisci la password"
+        placeholder="Insert a password"
         fill="outline"
         label="Password"
         labelPlacement="floating"
       ></app-entry>
       <app-button
-      [button]="{text: 'Registrati', expand: 'false'}"
+      [button]="{text: 'Register', expand: 'false'}"
       [context]="{onClick: doRegister}"
       ></app-button>
     </div>
 
     <div class="link-wrapper">
       <ion-text>
-        Hai già un account?
+        Already own an account?
       </ion-text>
 
       <a routerLink="/login-page" class="login-page-link">
-        Accedi ora!
+        Login now!
       </a> 
     </div>
 

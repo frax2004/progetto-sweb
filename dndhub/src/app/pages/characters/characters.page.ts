@@ -65,6 +65,7 @@ export class CharactersPage implements OnInit {
           text: 'Send request',
           cssClass: 'alertButton',
           handler: (alertData) => {
+            alert(alertData.codeInput);
             this.campaignServices.createCampaignParticipationRequest(alertData.nameInput,alertData.codeInput)
             .subscribe({
               next: (value: any) => {

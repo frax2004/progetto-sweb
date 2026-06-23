@@ -88,7 +88,7 @@ export class UserInstance {
 }
 
 export function decodeCampaign(hashcode) {
-  encodeCampaign(hashcode);
+  return encodeCampaign(hashcode);
 }
 
 export function encodeCampaign(campaign_idx) {

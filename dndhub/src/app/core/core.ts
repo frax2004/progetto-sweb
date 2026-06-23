@@ -101,7 +101,7 @@ export interface Campaign {
 
 
 export function decodeCampaign(hashcode: string) {
-  encodeCampaign(hashcode);
+  return encodeCampaign(hashcode);
 }
 
 export function encodeCampaign(campaign_idx: string) {

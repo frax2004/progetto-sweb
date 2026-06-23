@@ -15,19 +15,19 @@
           </div>
           <div class="linkContainer bottomLinkContainer">
             <a href="/signin-page">
-              Registrati
+              Register
             </a>
           </div>
           }
           @else {
           <div class="linkContainer">
             <a routerLink="/type-player-login">
-              Accedi alle aree personali
+              Access to personal areas
             </a>
           </div>
           <div class="linkContainer bottomLinkContainer">
             <a routerLink="/profile">
-              Profilo personale
+              Profile
             </a>
           </div>
           }
@@ -41,8 +41,8 @@
   </div>
 
   <section id="carousel-block">
-    <div id="carousel-label">Personaggi creati recentemente</div>
-    <app-carousel class="carousel" [cards]="cards"></app-carousel>
+    <div id="carousel-label">Characters created on DnDHUB</div>
+    <app-carousel class="carousel" [cards]="charCards()"></app-carousel>
   </section>
 
   <div class="gallerySection">
@@ -63,10 +63,21 @@
   </div>
 
   <ion-footer>
-    <div class="info-panel-contacts">
-      <div class="info-panel">
-        <div class="info-panel-title">Contattaci</div>
-        <div class="info-panel-content"></div>
+    <div class="footerInfo">
+      <div class="infoContainer">
+        <h3>Developers</h3>
+        <ul>
+          <li>Giovanni Butera</li>
+          <li>Francesco Pollarà</li>
+          <li>Riccardo Campanella</li>
+        </ul>
+      </div>
+      <div class="infoContainer secondInfo">
+        <h3>Credits</h3>
+        <ul>
+          <li>DataBase 1: 'https://github.com/5e-bits/5e-database'</li>
+          <li>DataBase 2: 'https://gist.github.com/dmcb/4b67869f962e3adaa3d0f7e5ca8f4912'</li>
+        </ul>
       </div>
     </div>
   </ion-footer>

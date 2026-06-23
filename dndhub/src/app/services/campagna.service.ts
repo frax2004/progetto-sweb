@@ -86,4 +86,10 @@ export class CampagnaService {
       { campaign_idx: campaign_idx }
     );
   };
+  public exitCampaign(idx_campagna: string) {
+    return this.http.post<any>(
+      `${environment.api_url}/api/campaign/exit-campaign`, 
+      {idx_campagna: idx_campagna}
+    );
+  }
 }

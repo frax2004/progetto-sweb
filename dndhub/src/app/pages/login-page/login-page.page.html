@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title class="logo">DnDhub</ion-title>
-    <ion-title class="title">Accedi</ion-title>
+    <ion-title class="title">Log in</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,35 +11,36 @@
 
   <div class="form">
     <ion-text class="subtitle">
-      Inserisci le tue credenziali per accedere.
+      Insert your credentials to access
     </ion-text>
 
     <div class="entry-group">
       <app-entry #email class="entry"
-        placeholder="Inserisci l'indirizzo email"
+        placeholder="Insert your email"
         fill="outline"
         label="Email"
         labelPlacement="floating"
       ></app-entry>
       <app-entry #password class="entry"
-        placeholder="Inserisci la password"
+        [passwordToggle]="true"
+        placeholder="Insert your password"
         fill="outline"
         label="Password"
         labelPlacement="floating"
       ></app-entry>
       <app-button
-      [button]="{text: 'Accedi', expand: 'false'}"
+      [button]="{text: 'Log in', expand: 'false'}"
       [context]="{onClick: doLogin}"
       ></app-button>
     </div>
 
     <div class="link-wrapper">
       <ion-text>
-        Non hai un account?
+        Do you not own an account?
       </ion-text>
 
       <a routerLink="/signin-page" class="signin-page-link">
-        Registrati ora!
+        Register now!
       </a> 
     </div>
 

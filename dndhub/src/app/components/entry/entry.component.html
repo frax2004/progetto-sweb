@@ -1,11 +1,28 @@
-<ion-input #input
-[label]="label" 
-[labelPlacement]="labelPlacement"
-[type]="type"
-[placeholder]="placeholder"
-[disabled]="disabled"
-[value]="value"
-></ion-input>
+@if (passwordToggle === true) {
+    <ion-input #input
+    [label]="label" 
+    [labelPlacement]="labelPlacement"
+    [type]="type"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [value]="value"
+    >
+    <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+    </ion-input>
+}
+@else {
+    <ion-input #input
+    [label]="label" 
+    [labelPlacement]="labelPlacement"
+    [type]="type"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [value]="value"
+    ></ion-input>
+}
+
+
+
 
 <!-- l'entry l'ho fatta ma onestamente mi sembra un po' inutile, anche perchè non
  penso faremo chissà quale css per l'input di stringhe -->

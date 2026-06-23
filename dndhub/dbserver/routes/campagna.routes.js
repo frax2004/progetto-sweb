@@ -88,3 +88,11 @@ campagnaRouter.post(
   middleware.assertCampaignExists,
   controller.deleteCampaign
 )
+
+campagnaRouter.post(
+  "/exit-campaign",
+  authMiddleware.isLogged,
+  middleware.assertCampaignExists,
+  middleware.checkIfCharacterIsInSpecifiedCampaign,
+  controller.exitCampaign
+);

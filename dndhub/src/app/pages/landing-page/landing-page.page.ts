@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, signal, Signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
@@ -27,7 +27,8 @@ import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
 import { RouterLink } from '@angular/router';
 import { State } from 'src/app/core/state';
 import { ButtonComponent } from 'src/app/components/button/button.component';
-import { Alerts } from 'src/app/core/core';
+import { Alerts, defualtCharacterImgURL } from 'src/app/core/core';
+import { CampagnaService } from 'src/app/services/campagna.service';
 
 
 @Component({
@@ -45,20 +46,15 @@ import { Alerts } from 'src/app/core/core';
     IonFooter, CardComponent, 
     AccordionComponent, 
     IonAccordion, 
-    IonAccordionGroup, 
-    IonThumbnail, 
-    LabelComponent, 
-    IonList, 
-    UnorderedListElementComponent,
-    IonInput,
-    IonTextarea,
-    ButtonComponent,
+    IonAccordionGroup,
   ]
 })
 export class LandingPagePage implements OnInit {
   
   @ViewChild('feedback_title') feedbackTitle: IonInput;
   @ViewChild('feedback_content') feedbackContent: IonTextarea;
+
+  charCards = signal<Card[]>([]);
 
   sendFeedback = () => {
     const feed = {
@@ -85,9 +81,33 @@ export class LandingPagePage implements OnInit {
     return this.router.navigate(['landing-page']);
   }
 
+  static toCharacterCard(character: any): Card {
+    return {
+      imageURL: character.imgURL === null ? defualtCharacterImgURL : character.imgURL === undefined ? defualtCharacterImgURL : character.imgURL,
+      title: character.nome,
+      subtitle: character.specie + ' - ' + character.classe + ' lvl ' + character.livello,
+    };
+  }
+   
   isLogged = State.User.isLogged;
 
-  constructor(private router: Router, private userUtilities: UserUtilitiesService) { }
+  constructor(private router: Router, private userUtilities: UserUtilitiesService, private campaignServices: CampagnaService) {
+    const queryInfo = {
+      limit: 10,
+      offset: Math.floor(Math.random() * 4000),
+      regex: '',
+    };
+
+    const success = (res: any) => {
+      this.charCards.set(res.players.map(LandingPagePage.toCharacterCard));
+    }
+    
+    this.campaignServices.loadPlayers(
+      queryInfo,
+      success,
+      (res: any) => Alerts.error(res.error)
+    );
+  }
 
   ngOnInit() {}
 

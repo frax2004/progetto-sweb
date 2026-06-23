@@ -93,7 +93,7 @@ export class LandingPagePage implements OnInit {
 
   constructor(private router: Router, private userUtilities: UserUtilitiesService, private campaignServices: CampagnaService) {
     const queryInfo = {
-      limit: 10,
+      limit: 5,
       offset: Math.floor(Math.random() * 4000),
       regex: '',
     };

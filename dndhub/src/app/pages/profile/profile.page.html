@@ -3,7 +3,7 @@
     <ion-menu contentId="main" id="menu">
       <ion-header id="menu-title">
         <ion-toolbar>
-          <ion-title>Profilo Personale</ion-title>
+          <ion-title>Personal Profile</ion-title>
         </ion-toolbar>
       </ion-header>
 
@@ -13,29 +13,29 @@
         <div id="buttons">
           <app-button class="button" 
             [margin]="false"
-            [button]="{text: 'Torna indietro', expand: 'false'}"
+            [button]="{text: 'Go back', expand: 'false'}"
             [context] = "{ onClick: goBack }"
             ></app-button>
           <app-button class="button"
             [margin]="false"
-            [button] = "{ text: 'Modifica account', expand: ''}"
+            [button] = "{ text: 'Modify account', expand: ''}"
             [context] = "{ onClick: enableAccountEdit }"
           ></app-button>
           <app-button class="button"
             [margin]="false"
-            [button] = "{ text: 'Elimina account', expand: ''}"
+            [button] = "{ text: 'Delete account', expand: ''}"
             [context] = "{ onClick: deleteAccount }"
           ></app-button>
           <app-button class="button"
             [margin]="false"
-            [button] = "{ text: 'Effettua l\'uscita', expand: ''}"
+            [button] = "{ text: 'Log out', expand: ''}"
             [context] = "{ onClick: logOut }"
           ></app-button>
         </div>
 
         @if(isAdmin()) {
           <div class="admin-info">
-            <div class="info">Sei un amministratore</div>
+            <div class="info">You are an admin</div>
           </div>
         }
       </ion-content>
@@ -49,7 +49,7 @@
           <ion-tab tab="credentials">
             <ion-header>
               <ion-toolbar>
-                <ion-title>Credenziali</ion-title>
+                <ion-title>Credentials</ion-title>
               </ion-toolbar>
             </ion-header>
 
@@ -57,9 +57,9 @@
               <div id="info-pane">
                 <app-entry
                   [onValueChanged]="setUsernameField"
-                  placeholder="Inserisci il nome utente"
+                  placeholder="Insert username"
                   fill="outline"
-                  label="Nome utente"
+                  label="Username"
                   labelPlacement="floating"
                   [value]="usernameField()"
                   [disabled]="!editMode()"
@@ -67,7 +67,7 @@
                 <div class="padding"></div>
                 <app-entry
                   [onValueChanged]="setEmailField"
-                  placeholder="Inserisci l'indirizzo email"
+                  placeholder="Insert email address"
                   fill="outline"
                   label="Email"
                   labelPlacement="floating"
@@ -77,7 +77,7 @@
                 <div class="padding"></div>
                 <app-entry
                   [onValueChanged]="setPasswordField"
-                  placeholder="Inserisci la password"
+                  placeholder="Insert password"
                   fill="outline"
                   label="Password"
                   labelPlacement="floating"
@@ -88,7 +88,7 @@
 
                 <app-button class="save-button" id="save-alert"
                   [margin]="false"
-                  [button] = "{ text: 'Salva', expand: ''}"
+                  [button] = "{ text: 'Save', expand: ''}"
                   [context] = "{ onClick: save }"
                 ></app-button>
               </div>
@@ -98,14 +98,14 @@
           <ion-tab tab="reports">
             <ion-header>
               <ion-toolbar>
-                <ion-title>Sengalazioni</ion-title>
+                <ion-title>Reports</ion-title>
               </ion-toolbar>
             </ion-header>
             
             <div class="reports-content">
 
               <app-entry
-              placeholder="Cerca"
+              placeholder="Search"
               [onValueChanged]="setReportsFilter"
               ></app-entry>
               
@@ -120,15 +120,15 @@
               }
 
               <app-button
-              [button]="{text: 'Carica altre segnalazioni', expand: 'false'}"
+              [button]="{text: 'CLoad more reports', expand: 'false'}"
               [context]="{ onClick: moreReports }"
               ></app-button>
             </div>
           </ion-tab>
 
           <ion-tab-bar slot="bottom">
-            <ion-tab-button tab="credentials">Profilo</ion-tab-button>
-            <ion-tab-button tab="reports">Sengalazioni</ion-tab-button>
+            <ion-tab-button tab="credentials">Profile</ion-tab-button>
+            <ion-tab-button tab="reports">Reports</ion-tab-button>
           </ion-tab-bar>
     
         </ion-tabs>
@@ -137,9 +137,9 @@
           <div id="info-pane">
             <app-entry
               [onValueChanged]="setUsernameField"
-              placeholder="Inserisci il nome utente"
+              placeholder="Insert username"
               fill="outline"
-              label="Nome utente"
+              label="Username"
               labelPlacement="floating"
               [value]="usernameField()"
               [disabled]="!editMode()"
@@ -147,7 +147,7 @@
             <div class="padding"></div>
             <app-entry
               [onValueChanged]="setEmailField"
-              placeholder="Inserisci l'indirizzo email"
+              placeholder="Insert email address"
               fill="outline"
               label="Email"
               labelPlacement="floating"
@@ -157,7 +157,7 @@
             <div class="padding"></div>
             <app-entry
               [onValueChanged]="setPasswordField"
-              placeholder="Inserisci la password"
+              placeholder="Insert password"
               fill="outline"
               label="Password"
               labelPlacement="floating"
@@ -167,7 +167,7 @@
             <div class="padding"></div>
             <app-button class="save-button" id="save-alert"
               [margin]="false"
-              [button] = "{ text: 'Salva', expand: ''}"
+              [button] = "{ text: 'Save', expand: ''}"
               [context] = "{ onClick: save }"
             ></app-button>
           </div>

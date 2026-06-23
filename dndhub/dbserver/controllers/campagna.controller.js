@@ -112,7 +112,7 @@ export async function loadPlayers(req, res) {
     filters.push(`idx_personaggio LIKE ${quotify(regex)}`)
   }
 
-  if(excludes.length > 0) {
+  if(excludes?.length > 0 && excludes !== undefined && excludes !== null) {
     filters.push(`idx_personaggio NOT IN (${excludes.map(quotify).join(", ")})`);
   }
   

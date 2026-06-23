@@ -18,3 +18,9 @@ reportsRouter.post(
   reports_middleware.isValidReport,
   reports_controller.closeReport
 )
+
+reportsRouter.post(
+  "/create-report",
+  reports_middleware.isLogged,
+  reports_controller.createReport
+)

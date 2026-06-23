@@ -1,3 +1,4 @@
+import { UserInstance } from "../global.context.js";
 import { Database } from "../database.js";
 
 
@@ -78,7 +79,49 @@ export async function closeReport(req, res) {
   }
 }
 
+export async function createReport(req, res) {
+  canSend = true;
+
+  const account = UserInstance.USER.email;
+  const tipo = req.body.tipo;
+  const quando = req.body.quando;
+  const tipo_contenuto = req.body.tipo_contenuto;
+  const contenuto = req.body.contenuto;
+
+  const query = `
+    INSERT INTO Segnalazione (
+      account, tipo, quando, tipo_contenuto, contenuto
+    ) VALUES (
+      '${account}',
+      '${tipo}',
+      '${quando}',
+      '${tipo_contenuto}',
+      '${contenuto}'
+    )
+  `;
+
+  try {
+    await Database.execOne(query);
+    sendResponse({
+        message: "Report succesfully sent",
+        status_code: 200,
+        success: true
+      },
+      res
+    );
+  } catch(err) {
+    sendResponse({
+        message: "Report could not be registered",
+        status_code: 401,
+        success: false
+      },
+      res
+    );
+  }
+}
+
 export default {
   loadReports,
   closeReport,
+  createReport
 }

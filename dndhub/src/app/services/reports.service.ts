@@ -29,4 +29,11 @@ export class ReportsService {
       error: fail
     });
   }
+
+  public createReport = (report: {tipo: string, quando: string, tipo_contenuto: string, contenuto: string}) => {
+    return this.httpClient.post<any>(
+      `${environment.api_url}/api/reports/create-report`,
+      report
+    );
+  };
 }

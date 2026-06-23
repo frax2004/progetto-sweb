@@ -19,6 +19,7 @@ import { Alerts, defaultCampaignImageURL, defualtCharacterImgURL, encodeCampaign
 import { CampagnaService } from 'src/app/services/campagna.service';
 import { CampaignChatPage } from '../campaign-chat/campaign-chat.page';
 import { CampaignsPage } from '../campaigns/campaigns.page';
+import { ReportsService } from 'src/app/services/reports.service';
 
 
 @Component({
@@ -75,7 +76,7 @@ export class DettagiCampagnaPage implements OnInit {
     }
   };
   
-  constructor(private campagnaService: CampagnaService, private router: Router, private alertCtrl: AlertController) {
+  constructor(private campagnaService: CampagnaService, private router: Router, private alertCtrl: AlertController, private reportService: ReportsService) {
     this.loadInfo();
   }
 
@@ -166,9 +167,97 @@ export class DettagiCampagnaPage implements OnInit {
 
     await alert.present(); 
   };
-  
-  public reportPlayer = async (player: DatiGiocatore) => {
 
+  public presentReportDescriptionAlert = async (reason: string, player: DatiGiocatore) => {
+    const alert = await this.alertCtrl.create({
+      header: 'Report this player: Reason',
+      inputs: [
+        {
+          cssClass: 'alertInput',
+          placeholder: 'Tell us the problem',
+          type: 'text',
+          name: 'descInput'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'alertButton secondary',
+        },
+        {
+          text: 'Send Report',
+          cssClass: 'alertButton',
+          handler: data => this.submitReport({
+            tipo: reason, 
+            quando: new Date().toISOString(),
+            tipo_contenuto: 'content',
+            contenuto: `The player "${player.nome} @ ${player.profilo}" was reported for this reason: ${data.descInput}`,
+          })
+        }
+      ]
+    });
+
+    await alert.present();
+  };
+
+  public submitReport = async (report: {tipo: string, quando: string, tipo_contenuto: string, contenuto: string}) => {
+    const handle = this.reportService.createReport(report);
+
+    try {
+      const response = await firstValueFrom<any>(handle);
+      Alerts.good(response.message);
+    } catch(err) {
+      Alerts.error(err.error);
+    }
+  };
+
+  public reportPlayer = async (player: DatiGiocatore) => {
+    const alert = await this.alertCtrl.create({
+      header: 'Report this player: Reason',
+      inputs: [
+        {
+          cssClass: 'alertInput',
+          value: 'inappropriate',
+          label:  'inappropriate',
+          type: 'radio'
+        },
+        {
+          cssClass: 'alertInput',
+          value: 'explicit',
+          label:  'explicit',
+          type: 'radio'
+        },
+        {
+          cssClass: 'alertInput',
+          value: 'offensive',
+          label:  'offensive',
+          type: 'radio',
+          checked: true
+        },
+        {
+          cssClass: 'alertInput',
+          value: 'cheat',
+          label:  'cheat',
+          type: 'radio'
+        },
+        {
+          cssClass: 'alertInput',
+          value: 'other',
+          label: 'other',
+          type: 'radio',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Next',
+          cssClass: 'alertButton',
+          handler: reason => this.presentReportDescriptionAlert(reason, player)
+        }
+      ]
+    });
+
+    await alert.present();
   };
 
   public acceptRequest = async (request: DatiRichiesta) => {

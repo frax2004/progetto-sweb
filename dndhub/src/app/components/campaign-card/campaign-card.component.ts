@@ -3,6 +3,7 @@ import { Card } from '../card/Card';
 import { ButtonComponent } from '../button/button.component';
 import { Router } from '@angular/router';
 import { State } from 'src/app/core/state';
+import { Campaign } from 'src/app/core/core';
 
 @Component({
   selector: 'app-campaign-card',
@@ -15,7 +16,7 @@ import { State } from 'src/app/core/state';
 export class CampaignCardComponent  implements OnInit {
 
   @Input() card: Card;
-  @Input() campaign: any;
+  @Input() campaign: Campaign;
   @Input() buttonCampaign?: boolean = true;
 
   constructor(private router: Router) { }

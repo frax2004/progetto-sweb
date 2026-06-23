@@ -165,6 +165,91 @@ export async function assertCampaignExists(req, res, next) {
   }
 }
 
+export async function assertValidRequest(req, res, next) {
+  canSend = true;
+
+  const player_idx = req.body.player_idx;
+  const campaign_idx = req.body.campaign_idx;
+
+  const query = `
+  SELECT * 
+  FROM ArrayCampagnaPersonaggiItem
+  WHERE idx_campagna = '${campaign_idx}'
+  AND idx_personaggio = '${player_idx}'
+  AND stato_personaggio = 'pending'
+  `;
+
+  try {
+    const row = await Database.queryOne(query);
+    if(row !== undefined && row !== null) {
+      next();
+    } else {
+      sendResponse({
+          message: "Richiesta di accettazione invalida.",
+          status_code: 401,
+          success: false
+        },
+        res
+      );
+    }
+  } catch(err) {
+    sendResponse({
+        message: err,
+        status_code: 401,
+        success: false
+      },
+      res
+    );
+  }
+}
+
+export async function assertPlayerExists(req, res, next) {
+  canSend = true;
+  
+  const player_idx = req.body.player_idx;
+  const query = `SELECT * FROM Personaggio WHERE idx_personaggio = '${player_idx}'`;
+
+  try {
+    const row = await Database.queryOne(query);
+    if(row === undefined || row === null) {
+      return sendResponse(
+        CampagnaResponses.USER_DOES_NOT_EXIST,
+        res
+      );
+    } else next();
+  } catch(err) {
+    sendResponse(CampagnaResponses.DATABASE_ERROR, res);
+  }
+}
+
+export async function assertCanRemove(req, res, next) {
+  canSend = true;
+
+  const player_idx = req.body.player_idx;
+  const campaign_idx = req.body.campaign_idx;
+
+  const query = `
+  SELECT * FROM ArrayCampagnaPersonaggiItem 
+  WHERE idx_campagna = '${campaign_idx}'
+  AND idx_personaggio = '${player_idx}'
+  `;
+
+  try {
+    const row = await Database.queryOne(query);
+
+    if(row !== null && row !== undefined) {
+      next();
+    } else sendResponse(CampagnaResponses.USER_DOES_NOT_EXIST, res);
+  } catch(err) {
+    sendResponse({
+        message: "Impossibile ottenere informazioni circa il giocatore specificato: " + err,
+        status_code: 401,
+        success: false
+      },
+      res
+    );
+  }
+}
 
       
 export default {
@@ -175,4 +260,7 @@ export default {
   doesCampaignCodeExist,
   doesRequestAlreadyExist,
   assertCampaignExists,
+  assertValidRequest,
+  assertPlayerExists,
+  assertCanRemove,
 }

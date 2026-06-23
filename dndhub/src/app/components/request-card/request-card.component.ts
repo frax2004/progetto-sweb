@@ -14,6 +14,8 @@ import { ButtonComponent } from '../button/button.component';
 export class RequestCardComponent implements OnInit {
 
   @Input() richiesta!: DatiRichiesta;
+  @Input() onAccept: (richiesta: DatiRichiesta) => void;
+  @Input() onReject: (richiesta: DatiRichiesta) => void;
 
   acceptButton: Button = {
     text: 'Accetta',
@@ -27,25 +29,11 @@ export class RequestCardComponent implements OnInit {
     color: 'danger'
   };
 
-  acceptContext: ButtonContext = {
-    onClick: () => this.accetta()
-  };
-
-  rejectContext: ButtonContext = {
-    onClick: () => this.rifiuta()
-  };
+  acceptContext: ButtonContext = { onClick: () => this.onAccept(this.richiesta) };
+  rejectContext: ButtonContext = { onClick: () => this.onReject(this.richiesta) };
 
   constructor() {}
 
   ngOnInit() {}
 
-  accetta() {
-    this.richiesta.stato = 'accepted';
-    console.log('Richiesta accettata');
-  }
-
-  rifiuta() {
-    this.richiesta.stato = 'rejected';
-    console.log('Richiesta rifiutata');
-  }
 }

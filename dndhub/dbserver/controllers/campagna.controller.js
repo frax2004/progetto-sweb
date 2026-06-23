@@ -288,6 +288,147 @@ export async function loadCampaignPlayers(req, res) {
   }
 }
 
+export async function getDungeonMasterName(req, res) {
+  canSend = true;
+
+  const campaign_idx = req.body.campaign_idx;
+
+  const query = `
+  SELECT username 
+  FROM Account 
+  WHERE email IN (
+    SELECT utente_generico FROM Campagna WHERE idx_campagna = '${campaign_idx}'
+  )
+  `;
+
+  try {
+    const row = await Database.queryOne(query);
+    if(row.username === null || row.username === undefined) {
+      sendResponse({
+          status_code: 404,
+          message: "Non è stato possibile trovare il dungeon master della campagna specificata.",
+          success: false
+        },
+        res
+      );
+    } else {
+      sendResponse({
+          message: "Dungeon Master ottenuto con successo.",
+          success: true,
+          status_code: 200,
+          dungeonMaster: row.username
+        },
+        res
+      );
+    }
+  } catch(err) {
+    sendResponse({
+        message: "Erorre interno del db: " + err,
+        status_code: 500,
+        success: false
+      },
+      res
+    );
+  }
+}
+
+
+export async function acceptPlayerRequest(req, res) {
+  canSend = true;
+
+  const player_idx = req.body.player_idx;
+  const campaign_idx = req.body.campaign_idx;
+
+  const query = `
+  UPDATE ArrayCampagnaPersonaggiItem 
+  SET stato_personaggio = 'accepted'
+  WHERE idx_campagna = '${campaign_idx}'
+  AND idx_personaggio = '${player_idx}'
+  `;
+
+  try {
+    await Database.execOne(query);
+    
+    sendResponse({
+        message: "Giocatore accettato con successo",
+        success: true,
+        status_code: 200
+      },
+      res
+    );
+  } catch(err) {
+    sendResponse({
+        message: "Non è stato possibile accettare il giocatore: " + err,
+        success: false,
+        status_code: 401
+      },
+      res
+    );
+  }
+}
+
+export async function removePlayer(req, res) {
+  canSend = true;
+
+  const player_idx = req.body.player_idx;
+  const campaign_idx = req.body.campaign_idx;
+
+  const query = `
+  DELETE FROM ArrayCampagnaPersonaggiItem 
+  WHERE idx_campagna = '${campaign_idx}'
+  AND idx_personaggio = '${player_idx}'
+  `;
+
+  try {
+    await Database.execOne(query);
+    sendResponse({
+        message: "Giocatore espulso con successo.",
+        status_code: 200,
+        success: true
+      },
+      res
+    );
+  } catch(err) {
+    sendResponse({
+        message: "Impossibile rimuovere il giocatore: " + err,
+        status_code: 401,
+        success: false
+      },
+      res
+    );
+  }
+}
+
+export async function deleteCampaign(req, res) {
+  canSend = true;
+
+  const campaign_idx = req.body.campaign_idx;
+
+  const query = `
+  DELETE FROM Campagna
+  WHERE idx_campagna = '${campaign_idx}'
+  `;
+
+  try {
+    await Database.queryOne(query);
+    sendResponse({
+        message: "Campagna eliminata con successo!",
+        status_code: 200,
+        success: true
+      },
+      res
+    );
+  } catch(err) {
+    sendResponse({
+        message: "Impossibile rimuovere la campagna: " + err,
+        status_code: 401,
+        success: false
+      },
+      res
+    );
+  }
+}
+
 
 export default {
   createCampaign,
@@ -297,4 +438,8 @@ export default {
   createCampaignParticipationRequest,
   loadAcceptedPlayers,
   loadCampaignPlayers,
+  getDungeonMasterName,
+  acceptPlayerRequest,
+  removePlayer,
+  deleteCampaign,
 }

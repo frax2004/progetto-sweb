@@ -90,11 +90,11 @@ export namespace Alerts {
   }
 }
 
-export interface Campaign {
+export class Campaign {
   utente_generico: string;
   nome: string;
   idx_campagna: string;
-  banner?: string;
+  banner: string = defualtCharacterImgURL;
   descrizione?: string;
   links_documenti?: string;
 }
@@ -116,3 +116,4 @@ export function encodeCampaign(campaign_idx: string) {
 
 export let currentGlobalCharacterName = signal<string>(''); 
 export const defualtCharacterImgURL = "https://i.pinimg.com/736x/8e/fd/55/8efd55212da85ed2fb9d5ccc533c7550.jpg";
+export const defaultCampaignImageURL = "https://i.pinimg.com/1200x/e6/99/06/e699060b283cbbb93c08ca270fa0d9f7.jpg";

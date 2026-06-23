@@ -21,6 +21,7 @@ import { EntryComponent } from "src/app/components/entry/entry.component";
 import { CampagnaService } from 'src/app/services/campagna.service';
 import { Alerts } from 'src/app/core/core';
 import { Router } from '@angular/router';
+import { CampaignsPage } from '../campaigns/campaigns.page';
 
 @Component({
   selector: 'app-campaign-creation',
@@ -107,8 +108,9 @@ export class CampaignCreationPage implements OnInit {
 
     this.campagnaService.createCampaign(
       data,
-      _ => {
-        this.router.navigate(["/campaigns"]);
+      async _ => {
+        await this.router.navigate(["/campaigns"]);
+        CampaignsPage.CURRENT_PAGE.loadCampaigns();
         Alerts.good("Campagna creata con successo!");
       },
       err => Alerts.error(err.error)

@@ -170,7 +170,7 @@ export class DettagiCampagnaPage implements OnInit {
 
   public presentReportDescriptionAlert = async (reason: string, player: DatiGiocatore) => {
     const alert = await this.alertCtrl.create({
-      header: 'Report this player: Reason',
+      header: 'Report this player: Description',
       inputs: [
         {
           cssClass: 'alertInput',

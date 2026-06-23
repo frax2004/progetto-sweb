@@ -46,10 +46,14 @@
         <div class="postLowerInformation">
           <ion-label>{{ campaignName }}</ion-label>
           <ion-label>
-            {{ post.time_stamp | date:'dd/MM/yy HH:mm' }}
+            {{ post.time_stamp | date:'yyyy/MM/dd HH:mm:ss' }}
           </ion-label>
         </div>
 
+        <app-button
+        [button]="{text: 'Report', expand: 'false'}"
+        [context]="{onClick: reportPost(post)}"
+        ></app-button>
       </div>
       }
 

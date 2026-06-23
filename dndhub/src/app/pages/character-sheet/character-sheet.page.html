@@ -1,14 +1,10 @@
 <ion-content>
 
   <div class="pageTitle">
-    <div>
+    <ion-toolbar>
       <ion-title class="title">Character sheet</ion-title>
       <ion-title class="nome">{{characterName}}</ion-title>
       <!-- <ion-title>{{characterInfo.health}} - level {{characterInfo.level}}</ion-title> -->
-    </div>
-    <ion-toolbar>
-      <ion-title class="title">Scheda personaggio</ion-title>
-      <ion-title class="nome">Pino Il Ballerino</ion-title>
     </ion-toolbar>
   </div>
 
@@ -37,14 +33,14 @@
       <!-- solo immagine qua -->
       <!-- manca il frame, metto un placeholder -->
       @if (characterInfo.image !== undefined) {
-        <div class="placeholderFrame">
-          <div [style.background-image]="'url('+ characterInfo.image +')'" alt="character img"></div>
-        </div>
+      <div class="placeholderFrame">
+        <img [src]="characterInfo.image" alt="character img">
+      </div>
       }
       @else {
-        <div class="placeholderFrame">
-          <div [style.background-image]="'url('+ defaultIMG +')'" alt="character img"></div> 
-        </div>
+      <div class="placeholderFrame">
+        <img [src]="defaultIMG" alt="character img">
+      </div>
       }
 
       <div class="right">
@@ -53,7 +49,7 @@
           <ion-label>Health Points: {{currHealth}}/{{characterInfo.health}}</ion-label>
           <ion-label>Armor Class: {{maxCA}}</ion-label>
           @if(shieldCA !== 0) {
-            <ion-label>Armor Class with Shield: {{maxCA + shieldCA}}</ion-label>
+          <ion-label>Armor Class with Shield: {{maxCA + shieldCA}}</ion-label>
           }
           <ion-label>Hit die: {{currHitDies}}d{{hitDie}}/{{characterInfo.level}}d{{hitDie}}</ion-label>
         </div>
@@ -92,14 +88,14 @@
 
         <div class="informazioni">
           <ion-label>Initiative: {{dexModifier}}</ion-label>
-      
+
           <ion-label>Size: {{characterInfo.size}}</ion-label>
           @for(abilityScore of abilityScoresInfos; track abilityScore) {
-            @for(skill of abilityScore.skills; track skill) {
-              @if (skill.name === 'Perception') {
-                <ion-label>Passive perception: {{10 + skill.modifier}}</ion-label>
-              }
-            }
+          @for(skill of abilityScore.skills; track skill) {
+          @if (skill.name === 'Perception') {
+          <ion-label>Passive perception: {{10 + skill.modifier}}</ion-label>
+          }
+          }
           }
           <ion-label>Speed: {{characterInfo.speed}} ft</ion-label>
 

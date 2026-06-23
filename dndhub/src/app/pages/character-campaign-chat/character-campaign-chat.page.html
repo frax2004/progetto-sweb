@@ -1,0 +1,59 @@
+<ion-content>
+  <div class="imgbackground"></div>
+
+  <div class="contentContainer">
+
+    <div class="buttonsAndDetails">
+
+      <div class="buttonPost">
+        <app-button [button]="{text: 'Go Back', expand: ''}" [context]="buttonCallbacks['placeholder']">
+        </app-button>
+      </div>
+
+      <div class="details">
+
+        <div class="campaignName">
+          <ion-label>{{ campaignName }}</ion-label>
+        </div>
+
+        <div class="players">
+          <ion-label class="titoloGiocatori">Players</ion-label>
+
+          @for (player of players(); track player) {
+            <div class="playerNames">
+              <ion-label>{{ player.nome }}</ion-label>
+              <ion-label>{{ `${player.classe} lvl ${player.livello}` }}</ion-label>
+            </div>
+          }
+          <!-- poi se mi va faccio una sorta di card anche per questo -->
+
+        </div>
+      </div>
+      <app-button [button]="{text:'Campaign details', expand:''}" [context]="buttonCampaignCallBacks['placeholder']">
+      </app-button>
+    </div>
+
+
+    <div class="postContainer">
+
+      @for (post of posts(); track post) {
+      <div class="postBox">
+
+        <div class="postContent">
+          <ion-label class="scrollbar">{{post.contenuto}}</ion-label>
+        </div>
+
+        <div class="postLowerInformation">
+          <ion-label>{{ campaignName }}</ion-label>
+          <ion-label>
+            {{ post.time_stamp | date:'dd/MM/yy HH:mm' }}
+          </ion-label>
+        </div>
+
+      </div>
+      }
+
+    </div>
+
+  </div>
+</ion-content>

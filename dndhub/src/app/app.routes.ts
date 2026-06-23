@@ -100,6 +100,14 @@ export const routes: Routes = [
     path: 'campaign-creation-info',
     loadComponent: () => import('./pages/campaign-creation-info/campaign-creation-info.page').then( m => m.CampaignCreationInfoPage)
   },
+  {
+    path: 'character-campaign-chat',
+    loadComponent: () => import('./pages/character-campaign-chat/character-campaign-chat.page').then( m => m.CharacterCampaignChatPage)
+  },
+  {
+    path: 'character-campaign-details',
+    loadComponent: () => import('./pages/character-campaign-details/character-campaign-details.page').then( m => m.CharacterCampaignDetailsPage)
+  },
 
 
 

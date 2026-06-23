@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> {{ campaignName }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="dettagli-campagna-content">
+
+  <div class="wrapper-pagina">
+
+    <div class="immagine-campagna">
+      <img
+        [src]="campaign().banner"
+        class="immagine-centrata"
+      >
+    </div>
+
+    <p class="card">{{ campaign().descrizione }}</p>
+    <ion-item>
+      <ion-label class="proprietario">
+        Nome del proprietario della campagna
+      </ion-label>
+
+    </ion-item>
+    <div class="contenitore">
+      <div class="left">
+        <p class="Risposta">Giocatori</p>
+
+        @for (giocatore of players(); track $index) {
+          <app-player-card
+            class="player-pannello"
+            [player]="giocatore">
+          </app-player-card>
+        }
+      </div>
+
+    </div>
+
+    <div class="specifiche">
+
+      <app-label class="codice">
+        Codice campagna: {{ campaignCode }}
+      </app-label>
+
+    </div>
+
+    <div class="button-wrapper">
+      <app-button
+        [button]="DocButton"
+        [context]="DocContext">
+      </app-button>
+    </div>
+
+    <div class="lista-documenti">
+      @if (Docs && campaign().links_documenti !== null && campaign().links_documenti !== undefined) {
+        @for (doc of campaign().links_documenti.split("\n"); track $index) {
+          <ion-item button>
+            <ion-label>{{ doc }}</ion-label>
+            <ion-icon
+              slot="end"
+              name="document-outline">
+            </ion-icon>
+          </ion-item>
+        }
+      }
+    </div>
+  </div>
+</ion-content>

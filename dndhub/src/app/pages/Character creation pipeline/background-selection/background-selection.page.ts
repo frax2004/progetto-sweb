@@ -60,7 +60,6 @@ export class BackgroundSelectionPage implements OnInit {
   backgroundsArray = [];
 
   selectedBackground: string = undefined;
-  placeholderAlert(event: Event) {alert('Non ancora implementato');}
 
   static displayProficiencies(bgName,stProf: dnd.APIReference[]) {
     if(stProf.length === 0) return undefined;

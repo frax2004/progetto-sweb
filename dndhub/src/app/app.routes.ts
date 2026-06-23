@@ -50,10 +50,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/character-spells/character-spells.page').then( m => m.CharacterSpellsPage)
   },
   {
-    path: 'equipment-selection',
-    loadComponent: () => import('./pages/Character creation pipeline/equipment-selection/equipment-selection.page').then( m => m.EquipmentSelectionPage)
-  },
-  {
     path: 'stats-selection',
     loadComponent: () => import('./pages/Character creation pipeline/stats-selection/stats-selection.page').then( m => m.StatsSelectionPage)
   },
@@ -84,7 +80,8 @@ export const routes: Routes = [
   {
     path: 'type-player-login',
     loadComponent: () => import('./pages/type-player-login/type-player-login.page').then( m => m.TypePlayerLoginPage)
-  },  {
+  },
+  {
     path: 'spell-selection',
     loadComponent: () => import('./pages/Character creation pipeline/spell-selection/spell-selection.page').then( m => m.SpellSelectionPage)
   },

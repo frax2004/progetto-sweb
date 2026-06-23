@@ -5,10 +5,12 @@
 
   <div class="imgbackground"></div>
 
-  <app-button
-  [button]="{ text: 'Go back', expand: ''}"
-  [context]="buttonCallbacks['previousPage']"
-  ></app-button>
+  <div class="genericButtonContainer">
+    <app-button
+    [button]="{ text: 'Go back', expand: ''}"
+    [context]="buttonCallbacks['previousPage']"
+    ></app-button>
+  </div>
   
   <!-- divido tra trucchetti e incantesimi non solo per una questione visiva
    ma anche perchè i trucchetti conosciuti non hanno nulla a che fare 

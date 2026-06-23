@@ -1,18 +1,43 @@
 <ion-content>
   <div class="imgbackground"></div>
   <app-title
-  [title] = "'Scegli le statistiche'"
+  [title] = "'Choose your statistics'"
   ></app-title>
   
   <!-- tre bottoni, uno accanto all'altro che permettono di modificare il metodo di selezione statistiche -->
 
   <div class="goBack">
     <app-button
-    [button] = "{ text: 'Torna indietro', expand: ''}"
+    [button] = "{ text: 'Go back', expand: ''}"
     [context] = "buttonCallbacks['previousPage']"
     ></app-button>
     <!-- manca il context -->
   </div>
+
+  @if(showClass !== undefined || showLevel !== undefined || showSpecies !== undefined || showBackground !== undefined) {
+    <div class="showChosen">
+      @if(showClass !== undefined) {
+        <div class="upperDetailsContainer rightBorder">
+          <app-label class="selectedShow">Chosen Class: {{showClass}}</app-label>
+        </div>
+      }
+      @if(showLevel !== undefined) {
+        <div class="upperDetailsContainer rightBorder">
+          <app-label class="selectedShow">Chosen Level: {{showLevel}}</app-label>
+        </div>
+      }
+      @if(showSpecies !== undefined) {
+        <div class="upperDetailsContainer rightBorder">
+          <app-label class="selectedShow">Chosen Species: {{showSpecies}}</app-label>
+        </div>
+      }
+      @if(showBackground !== undefined) {
+        <div class="upperDetailsContainer">
+          <app-label class="selectedShow">Chosen Background: {{showBackground}}</app-label>
+        </div>
+      }
+    </div>
+  }
 
   <div class="gridContainer buttonGrid">
     <ion-grid>
@@ -24,7 +49,7 @@
             <app-button
             class = "HPchoiceButton"
             [margin] = "false"
-            [button] = "{ text: 'Scelta manuale', expand: ''}"
+            [button] = "{ text: 'Manual selection', expand: ''}"
             [context] = "buttonCallbacks['manual']"
             ></app-button>
           </div>
@@ -36,7 +61,7 @@
             <app-button
             [margin] = "false"
             class = "HPchoiceButton"
-            [button] = "{ text: 'Scelta array standard', expand: ''}"
+            [button] = "{ text: 'Standard array selection', expand: ''}"
             [context] = "buttonCallbacks['stdArr']"
             ></app-button>
           </div>
@@ -48,7 +73,7 @@
             <app-button
             [margin] = "false"
             class = "HPchoiceButton"
-            [button] = "{ text: 'Scelta casuale', expand: ''}"
+            [button] = "{ text: 'Random selection', expand: ''}"
             [context] = "buttonCallbacks['random']"
             ></app-button>
           </div>
@@ -211,30 +236,10 @@
       </div>
     </div>
   }
-<!-- 
-  <div>
-    <app-label>Seleziona 3 lingue conosciute dal tuo personaggio, Ancora {{LingueSelezionate.length}}/{{maxLingue}}</app-label>
-  </div>
-@for (lingua of lingue; track lingua.id) {
-
-  <app-checkbox
-    [testo]="lingua.name"
-    [checked]="LingueSelezionate.includes(lingua.name)"
-    [disabled]="
-      LingueSelezionate.length >= maxLingue &&
-      !LingueSelezionate.includes(lingua.name)
-    "
-    (checkedChange)="onLanguageSelect(lingua)">
-  </app-checkbox>
-
-} -->
- 
-<!-- Io immaginavo un toogle per fare apparire un botton una volta che sia le lingue che le stats 
-erano state selezionate però boh poi ditemi voi -->
 
   <div class="nextPage">
     <app-button
-    [button] = "{ text: 'Prossima pagina', expand: ''}"
+    [button] = "{ text: 'Next page', expand: ''}"
     [context] = "buttonCallbacks['nextPage']"
     ></app-button>
   </div>

@@ -135,6 +135,42 @@ export class DettagiCampagnaPage implements OnInit {
     }
   }
 
+  public kickPlayer = async (player: DatiGiocatore) => {
+    const alert = await this.alertCtrl.create({
+      header: 'Conferma espulsione',
+      message: 'Vuoi davvero espellere questo giocatore dalla campagna?',
+      buttons: [
+        {
+          text: 'Annulla',
+          role: 'cancel' 
+        },
+        {
+          text: 'Conferma',
+          role: 'destructive',
+          handler: async () => {
+            const handle = this.campagnaService.removePlayer({
+              campaign_idx: this.campaign().idx_campagna, 
+              player_idx: `${player.nome} @ (giocatore): ${player.profilo}`, 
+            });
+            try {
+              await firstValueFrom(handle);
+              await this.loadPlayers();
+              Alerts.good("Giocatore espulso con successo");
+            } catch(err) {
+              Alerts.error(err.error);
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present(); 
+  };
+  
+  public reportPlayer = async (player: DatiGiocatore) => {
+
+  };
+
   public acceptRequest = async (request: DatiRichiesta) => {
     const handle = this.campagnaService.acceptPlayer({
       campaign_idx: this.campaign().idx_campagna, 

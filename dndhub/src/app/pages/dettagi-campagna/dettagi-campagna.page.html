@@ -33,8 +33,10 @@
         @for (giocatore of players(); track $index) {
           <app-player-card
             class="player-pannello"
-            [player]="giocatore">
-          </app-player-card>
+            [player]="giocatore"
+            [onKick]="kickPlayer"
+            [onReport]="reportPlayer"
+          ></app-player-card>
         }
       </div>
       <div class="right">

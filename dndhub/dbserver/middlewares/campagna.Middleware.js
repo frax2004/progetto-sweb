@@ -136,7 +136,9 @@ export async function  doesRequestAlreadyExist(req,res,next) {
 export async function assertCampaignExists(req, res, next) {
   canSend = true;
 
-  const campaign_idx = req.body.campaign_idx;
+  let campaign_idx = '';
+  if (req.body.campaign_idx !== undefined && req.body.campaign_idx !== null) campaign_idx = req.body.campaign_idx;
+  else campaign_idx = req.body.idx_campagna;
   
   const query = `SELECT * FROM Campagna WHERE idx_campagna = '${campaign_idx}'`;
 
@@ -165,7 +167,32 @@ export async function assertCampaignExists(req, res, next) {
   }
 }
 
+export async function checkIfCharacterIsInSpecifiedCampaign(req,res,next) {
+  canSend = true;
 
+  const idx_personaggio = UserInstance.USER.player_id;
+  const idx_campagna = req.body.idx_campagna;
+
+  const query = `SELECT * FROM ArrayCampagnaPersonaggiItem WHERE idx_campagna = '${idx_campagna}' AND idx_personaggio LIKE '%${idx_personaggio}%'`;
+
+
+  const row = await DatabaseQueries.retrieve(`SELECT * FROM ArrayCampagnaPersonaggiItem WHERE idx_campagna = '${idx_campagna}' AND idx_personaggio LIKE '%${idx_personaggio}%'`, el => el);
+
+
+  if (row[0] === undefined || row[0] === null) {
+    sendResponse({
+        message: 'Specified row does not exist',
+        status_code: 401,
+        success: false
+      },
+      res
+    );
+  }
+  else {
+    console.log('questo contorllo e\' andato a buon fine');
+    next();
+  }
+}
       
 export default {
   assertCampaignNotExists,
@@ -175,4 +202,5 @@ export default {
   doesCampaignCodeExist,
   doesRequestAlreadyExist,
   assertCampaignExists,
+  checkIfCharacterIsInSpecifiedCampaign,
 }

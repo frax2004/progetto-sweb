@@ -27,6 +27,7 @@ export class CharactersPage implements OnInit {
 
   characterCards = signal<Card[]>([]);
   campaignCards = signal<Card[]>([]);
+  static CURRENT_INSTANCE: CharactersPage;
   campaigns: any[] = [];
 
 
@@ -65,11 +66,9 @@ export class CharactersPage implements OnInit {
           text: 'Send request',
           cssClass: 'alertButton',
           handler: (alertData) => {
-            alert(alertData.codeInput);
             this.campaignServices.createCampaignParticipationRequest(alertData.nameInput,alertData.codeInput)
             .subscribe({
               next: (value: any) => {
-                alert(alertData.nameInput);
                 Alerts.personalizedMessage('Request succesfully sent!','Request sent');
               },
               error: (err) => Alerts.error(err.error)
@@ -115,7 +114,7 @@ export class CharactersPage implements OnInit {
     }
   }
 
-  private loadCampaigns = async () => {
+  public loadCampaigns = async () => {
     try {
       const resValue = await firstValueFrom(this.campaignServices.loadAcceptedCharacterCampaigns());
       this.campaigns = resValue.campaigns;
@@ -132,9 +131,11 @@ export class CharactersPage implements OnInit {
   }
 
   constructor(public popupController: PopoverController, private campaignServices: CampagnaService, private router: Router, private characterServices: CharacterManagementService) { 
-    this.loadUtils();
+    CharactersPage.CURRENT_INSTANCE = this;
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.loadUtils();
+  }
 
 }

@@ -289,6 +289,35 @@ export async function loadCampaignPlayers(req, res) {
 }
 
 
+export async function exitCampaign(req,res) {
+  canSend = true;
+
+  const idx_personaggio = UserInstance.USER.player_id;
+  const idx_campagna = req.body.idx_campagna;
+
+  try {
+    Database.execOne(`DELETE FROM ArrayCampagnaPersonaggiItem WHERE idx_campagna = '${idx_campagna}' AND idx_personaggio LIKE '%${idx_personaggio}%'`);
+
+    sendResponse({
+        status_code: 200,
+        success: true,
+        message: 'Personaggio rimosso da campagna con successo'
+      },
+      res
+    );
+  }
+  catch (err) {
+    sendResponse({
+        status_code: 401,
+        success: false,
+        message: "Problema col database: " + err
+      },
+      res
+    );
+  }
+
+}
+
 export default {
   createCampaign,
   loadPlayers,
@@ -297,4 +326,5 @@ export default {
   createCampaignParticipationRequest,
   loadAcceptedPlayers,
   loadCampaignPlayers,
+  exitCampaign,
 }

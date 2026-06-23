@@ -42,6 +42,12 @@
       </app-button>
     </div>
 
+    <div class="genericButton destroyButton">
+      <ion-button
+      (click)="exitCampaignAlert()"
+      >Exit campaign</ion-button>
+    </div>
+
     <div class="lista-documenti">
       @if (Docs && campaign().links_documenti !== null && campaign().links_documenti !== undefined) {
         @for (doc of campaign().links_documenti.split("\n"); track $index) {

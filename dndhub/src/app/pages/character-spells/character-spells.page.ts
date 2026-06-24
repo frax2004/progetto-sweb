@@ -59,7 +59,7 @@ export class CharacterSpellsPage implements OnInit {
 
   private filterAvailableSpells(spells: any[]) { // il filtro per non fare prendere le spell che non
   //  hanno o la stessa classe oppure già presenti nella spell list del pg
-    const possesedSpell = new Set(this.characterSpells.map(s => s.name)); // ritornarci dopo 
+    const possesedSpell = new Set(this.characterSpells.map(s => s.name)); 
 
     return spells.filter(spell => { // qua applico il filtro alle spell perché succedevano porcherie
       const isOwned = possesedSpell.has(spell.name);
@@ -79,7 +79,7 @@ export class CharacterSpellsPage implements OnInit {
   selectOldSpell(spell: any) { //  qua mi prendo la spell da cambiare
     this.selectedSpellToReplace.set(spell);
     this.currentPrefix.set("");
-    this.availableSpells.set([]); //rivedere
+    this.availableSpells.set([]); 
     this.loadMoreSpells(); // appena viene selezionato la spell carico dal db la lista con la quale cambiare 
   }
 
@@ -87,7 +87,7 @@ export class CharacterSpellsPage implements OnInit {
   // prendo il livello dello spell che tolgo 
     const queryInfo = {
       limit: CharacterSpellsPage.SPELLS_LOADER_THRESHOLD, 
-      offset: this.availableSpells().length,// non capisco che cosa fa di preciso
+      offset: this.availableSpells().length,
       regex: this.currentPrefix() ? `${this.currentPrefix()}%` : "", // questa è la scritta che si mette nella barra
       level: this.selectedSpellToReplace()?.level ?? null, 
       className: this.characterInfo.class // in teoria già questo doveva fare filtro ma siccome funzionava a metà ho messo un filtro

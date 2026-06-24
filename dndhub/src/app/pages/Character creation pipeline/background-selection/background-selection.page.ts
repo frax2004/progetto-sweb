@@ -7,7 +7,7 @@ import { Accordion } from 'src/app/components/accordion/Accordion';
 import { Button } from 'src/app/components/button/Button';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { ButtonContext } from 'src/app/components/button/ButtonContext';
-import { Navigate, Popups } from 'src/app/core/core';
+import { Alerts, Navigate, Popups } from 'src/app/core/core';
 import { Router } from '@angular/router';
 import { TitleComponent } from "src/app/components/title/title.component";
 import { CharacterManagementService } from 'src/app/services/character.management.service';
@@ -186,7 +186,7 @@ export class BackgroundSelectionPage implements OnInit {
           };
         });
       },
-      error: (err) => console.log(err)
+      error: (err) => Alerts.error(err.error)
     });
   }
 

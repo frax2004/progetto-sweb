@@ -53,15 +53,6 @@ export class LandingPagePage implements OnInit {
 
   charCards = signal<Card[]>([]);
 
-  sendFeedback = () => {
-    const feed = {
-      title: this.feedbackTitle.value,
-      desc: this.feedbackContent.value,
-    };
-    console.log("sending feedback " + JSON.stringify(feed));
-    Alerts.good("Ti ringraziamo per il tuo feedback");
-  }
-
   descriptionCards = [
     { img: '../../assets/landing-page-imgs/landing-page-intro.png', title: 'Welcome to DnDHub!', content: 'With DnDHub you can immerse yourself in the wonderful world of Dungeons & Dragons. Create characters to play and connect with others thanks to the campaigns!'},
     { img: '../../assets/landing-page-imgs/landing-page-character.jpg', title: 'Create your characters!', content: 'Create a new character with the character creation system! Go to your player personal area and let the magic begin! You will also be able to manage and consult the characters you already created'},

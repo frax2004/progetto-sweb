@@ -98,9 +98,7 @@ export class CharacterCampaignDetailsPage implements OnInit {
 
   public loadPlayers = async () => {
     const res = await firstValueFrom<any>(this.campagnaService.loadCampaignPlayers(this.campaign()?.idx_campagna));
-  
-    console.log(JSON.stringify(res, null, 2));
-  
+
     const accepted = res.players
     .filter(pl => pl.stato === 'accepted')
     .map(CharacterCampaignDetailsPage.toAcceptedPlayer);

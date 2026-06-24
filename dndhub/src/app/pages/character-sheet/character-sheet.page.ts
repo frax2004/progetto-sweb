@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader,IonInput, IonTitle, IonToolbar, IonCheckbox, IonItem, IonGrid, IonCol, IonRow, IonLabel, IonList, PopoverController, IonAccordionGroup, IonAccordion, IonThumbnail } from '@ionic/angular/standalone';
-import { CheckboxComponent } from "src/app/components/checkbox/checkbox.component";
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
-import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
 import { Alerts, currentGlobalCharacterName, Navigate, defualtCharacterImgURL, Popups } from 'src/app/core/core';
 import { EntryComponent } from "src/app/components/entry/entry.component";
 import { Router } from '@angular/router';
@@ -12,14 +10,35 @@ import { ButtonComponent } from 'src/app/components/button/button.component';
 import { AlertController } from '@ionic/angular';
 import { CharacterManagementService } from 'src/app/services/character.management.service';
 import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-character-sheet',
   templateUrl: './character-sheet.page.html',
   styleUrls: ['./character-sheet.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonInput, IonToolbar, IonCheckbox, CommonModule, FormsModule, IonItem, IonGrid, IonCol, IonRow, IonLabel, CheckboxComponent, AccordionComponent, IonList, UnorderedListElementComponent, EntryComponent, ButtonComponent, IonAccordionGroup, IonAccordion, IonThumbnail]
+  imports: [
+    IonContent, 
+    IonHeader, 
+    IonTitle, 
+    IonInput, 
+    IonToolbar, 
+    IonCheckbox, 
+    CommonModule, 
+    FormsModule, 
+    IonItem, 
+    IonGrid, 
+    IonCol, 
+    IonRow, 
+    IonLabel, 
+    AccordionComponent, 
+    IonList, 
+    EntryComponent, 
+    ButtonComponent, 
+    IonAccordionGroup, 
+    IonAccordion, 
+    IonThumbnail
+  ]
 })
 export class CharacterSheetPage implements OnInit {
 

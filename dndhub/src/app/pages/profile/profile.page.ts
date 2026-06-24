@@ -35,7 +35,6 @@ import {
   Navigate 
 } from 'src/app/core/core';
 import { ButtonComponent } from "src/app/components/button/button.component";
-import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
 import { TitleComponent } from "src/app/components/title/title.component";
 import { LabelComponent } from "src/app/components/label/label.component";
 import { EntryComponent } from 'src/app/components/entry/entry.component';
@@ -75,7 +74,6 @@ import { ButtonContext } from 'src/app/components/button/ButtonContext';
     ButtonComponent, 
     IonLabel, 
     IonList, 
-    UnorderedListElementComponent, 
     IonItem, 
     TitleComponent, 
     LabelComponent, 
@@ -261,7 +259,6 @@ export class ProfilePage implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.userService.getUserInfo(
       value => {
-        console.log(JSON.stringify(value)); // TODO Da togliere (debug)
         State.User.isAdmin.set(value.isAdmin);
         this.usernameField.set(value.username);
         this.emailField.set(value.email);

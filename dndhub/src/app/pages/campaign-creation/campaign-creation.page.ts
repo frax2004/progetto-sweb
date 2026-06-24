@@ -15,7 +15,6 @@ import {
   IonInfiniteScrollContent,
   IonList
 } from '@ionic/angular/standalone';
-import { TextAreaComponent } from "src/app/components/text-area/text-area.component";
 import { ButtonComponent } from "src/app/components/button/button.component";
 import { EntryComponent } from "src/app/components/entry/entry.component";
 import { CampagnaService } from 'src/app/services/campagna.service';
@@ -36,7 +35,6 @@ import { CampaignsPage } from '../campaigns/campaigns.page';
     FormsModule, 
     IonItem, 
     IonLabel, 
-    TextAreaComponent, 
     ButtonComponent, 
     EntryComponent, 
     IonInput, 

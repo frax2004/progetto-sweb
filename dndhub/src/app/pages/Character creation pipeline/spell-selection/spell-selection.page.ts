@@ -131,7 +131,7 @@ export class SpellSelectionPage implements OnInit {
 
   displaySpellDescription(spell) {
     const desc = `Action Type: ${spell.action_type}\nCasting Time: ${spell.casting_time}\nCasting Trigger: ${spell.casting_trigger}\nRange: ${spell.range}\nComponents: ${spell.components}\nMaterial: ${spell.material}\nDuration: ${spell.duration}\nConcentration: ${spell.concentration}\nRitual: ${spell.ritual}\n\n${spell.description}\n\nAt Higher Levels: ${spell.higher_level_slot}`;
-    return Popups.ofSimpleText(this.popoverController,desc);
+    return Popups.ofSimpleText(this.popoverController, desc);
   }
 
   displayCantripDescription(spell) {

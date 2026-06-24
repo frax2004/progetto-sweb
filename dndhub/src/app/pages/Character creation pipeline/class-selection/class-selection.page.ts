@@ -1,15 +1,10 @@
-import { Component, ElementRef, OnInit, viewChild, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonGrid, IonLabel, PopoverController, IonCol, IonRow, IonFooter, IonAccordionGroup, IonAccordion, IonThumbnail, IonButton, IonAlert } from '@ionic/angular/standalone';
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
-import { Accordion } from 'src/app/components/accordion/Accordion';
-import { TextAreaComponent } from "src/app/components/text-area/text-area.component";
 import { ButtonComponent } from 'src/app/components/button/button.component';
-import { expand } from 'rxjs';
-import { Button } from 'src/app/components/button/Button';
-import { ButtonContext } from 'src/app/components/button/ButtonContext';
-import { Alerts, Navigate, Popups } from 'src/app/core/core';
+import { Alerts, Navigate } from 'src/app/core/core';
 import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.component";
 import { Router } from '@angular/router';
 import { TitleComponent } from "src/app/components/title/title.component";
@@ -18,15 +13,13 @@ import { CharacterManagementService } from 'src/app/services/character.managemen
 import { dnd } from 'dbserver/database.queries';
 import { AfterViewInit } from '@angular/core';
 import { CharacterInstance } from '../CharacterInformation';
-import { resolve } from 'dns';
-import { rejects } from 'assert';
 
 @Component({
   selector: 'app-class-selection',
   templateUrl: './class-selection.page.html',
   styleUrls: ['./class-selection.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, AccordionComponent, IonLabel, TextAreaComponent, IonCol, ButtonComponent, IonRow, IonFooter, DragEntryComponent, TitleComponent, LabelComponent, IonAccordionGroup, IonAccordion, IonThumbnail, IonButton, IonAlert]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonGrid, AccordionComponent, IonLabel, IonCol, ButtonComponent, IonRow, IonFooter, DragEntryComponent, TitleComponent, LabelComponent, IonAccordionGroup, IonAccordion, IonThumbnail, IonButton, IonAlert]
 })
 export class ClassSelectionPage implements OnInit, AfterViewInit {
 
@@ -463,7 +456,6 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
       .displaySpecificLevel(name)
       .subscribe({
         next: (value: any) => {
-          console.log('sono nel subscribe --> ', name);
           ClassSelectionPage.lvlsArray.push({
             idx: value.levels[0].name,
             content: value.levels,
@@ -592,9 +584,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
           };
         });
       },
-      error: (err) => {
-        console.log(err);
-      }
+      error: (err) => Alerts.error(err.error)
     });
   }
 

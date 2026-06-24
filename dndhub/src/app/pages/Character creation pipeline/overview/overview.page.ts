@@ -1,16 +1,13 @@
-import { Component, OnInit, ViewChild, viewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonRow, IonCol, IonGrid, IonLabel, IonInput, PopoverController, IonList, IonTextarea } from '@ionic/angular/standalone';
-import { ScrollBarComponent } from "src/app/components/scrollbar/scrollbar.component";
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { EntryComponent } from "src/app/components/entry/entry.component";
-import { TextAreaComponent } from "src/app/components/text-area/text-area.component";
 import { ButtonComponent } from "src/app/components/button/button.component";
-import { Alerts, currentGlobalCharacterName, Navigate, Popups } from 'src/app/core/core';
+import { Alerts, currentGlobalCharacterName } from 'src/app/core/core';
 import { TitleComponent } from "src/app/components/title/title.component";
 import { LabelComponent } from "src/app/components/label/label.component";
-import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
 import { Router } from '@angular/router';
 import { CharacterInstance, StatModifierNumber } from '../CharacterInformation';
 import { CharacterManagementService } from 'src/app/services/character.management.service';
@@ -21,7 +18,28 @@ import { DragEntryComponent } from "src/app/components/drag-entry/drag-entry.com
   templateUrl: './overview.page.html',
   styleUrls: ['./overview.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ScrollBarComponent, IonItem, IonRow, IonCol, IonGrid, IonLabel, AccordionComponent, IonInput, EntryComponent, TextAreaComponent, ButtonComponent, TitleComponent, LabelComponent, IonList, UnorderedListElementComponent, IonTextarea, DragEntryComponent]
+  imports: [
+    IonContent, 
+    IonHeader, 
+    IonTitle, 
+    IonToolbar, 
+    CommonModule, 
+    FormsModule, 
+    IonItem, 
+    IonRow, 
+    IonCol, 
+    IonGrid, 
+    IonLabel, 
+    AccordionComponent, 
+    IonInput, 
+    EntryComponent, 
+    ButtonComponent, 
+    TitleComponent, 
+    LabelComponent, 
+    IonList, 
+    IonTextarea, 
+    DragEntryComponent
+  ]
 })
 export class OverviewPage implements OnInit {
   showLevel: number;

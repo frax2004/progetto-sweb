@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCheckbox, IonItem, IonGrid, IonCol, IonRow, IonLabel, IonList, PopoverController, IonAccordionGroup, IonAccordion, IonThumbnail } from '@ionic/angular/standalone';
+import { IonContent, IonHeader,IonInput, IonTitle, IonToolbar, IonCheckbox, IonItem, IonGrid, IonCol, IonRow, IonLabel, IonList, PopoverController, IonAccordionGroup, IonAccordion, IonThumbnail } from '@ionic/angular/standalone';
 import { CheckboxComponent } from "src/app/components/checkbox/checkbox.component";
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
@@ -19,7 +19,7 @@ import { Observable, Subscription } from 'rxjs';
   templateUrl: './character-sheet.page.html',
   styleUrls: ['./character-sheet.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonCheckbox, CommonModule, FormsModule, IonItem, IonGrid, IonCol, IonRow, IonLabel, CheckboxComponent, AccordionComponent, IonList, UnorderedListElementComponent, EntryComponent, ButtonComponent, IonAccordionGroup, IonAccordion, IonThumbnail]
+  imports: [IonContent, IonHeader, IonTitle, IonInput, IonToolbar, IonCheckbox, CommonModule, FormsModule, IonItem, IonGrid, IonCol, IonRow, IonLabel, CheckboxComponent, AccordionComponent, IonList, UnorderedListElementComponent, EntryComponent, ButtonComponent, IonAccordionGroup, IonAccordion, IonThumbnail]
 })
 export class CharacterSheetPage implements OnInit {
 
@@ -57,6 +57,36 @@ export class CharacterSheetPage implements OnInit {
   currHitDies: number;
   hitDie: number;
   idx_personaggio:string; // mi serve per definire globalmente sto coso e usare il delete 
+  toggleChange = false;
+
+saveStats = () => {
+  this.characterServices.updateCharacterStats({
+    idx_personaggio: this.idx_personaggio,
+    health: this.characterInfo.health,
+    speed: this.characterInfo.speed,
+    size: this.characterInfo.size,
+  })
+  .subscribe({
+    next: (res) => {
+      Alerts.message(res.message || 'Stats aggiornate');
+      this.currHealth = this.characterInfo.health;
+      this.toggleChange = false;
+    },
+    error: (err) => {
+      Alerts.error(err.error?.message || 'Errore aggiornamento stats');
+    }
+  });
+}
+
+ toggleSelectionMode() {
+  this.toggleChange = !this.toggleChange;
+  }
+
+toggleCallbacks = {
+  changeStats: {
+    onClick: () => this.toggleSelectionMode()
+    }
+  };
 
   buttonCallbacks = {
     placeholder: { onClick: Navigate.toPath(this.router,'character-spells')},

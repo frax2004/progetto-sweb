@@ -49,7 +49,12 @@
       <div class="right">
         <!-- dati mock, da aggiungere col db -->
         <div class="fight">
+          @if(toggleChange){
+          <ion-input placeholder="Insert new health points" [(ngModel)]="characterInfo.health"></ion-input>
+          }
+          @else{
           <ion-label>Health Points: {{currHealth}}/{{characterInfo.health}}</ion-label>
+          }
           <ion-label>Armor Class: {{maxCA}}</ion-label>
           @if(shieldCA !== 0) {
           <ion-label>Armor Class with Shield: {{maxCA + shieldCA}}</ion-label>
@@ -91,8 +96,14 @@
 
         <div class="informazioni">
           <ion-label>Initiative: {{dexModifier}}</ion-label>
+          @if(toggleChange){
 
+          <ion-input placeholder="Insert new size" [(ngModel)]="characterInfo.size"></ion-input>
+          }
+          @else{
           <ion-label>Size: {{characterInfo.size}}</ion-label>
+          }
+
           @for(abilityScore of abilityScoresInfos; track abilityScore) {
           @for(skill of abilityScore.skills; track skill) {
           @if (skill.name === 'Perception') {
@@ -100,7 +111,13 @@
           }
           }
           }
+          @if(toggleChange){
+          <ion-input placeholder="Insert new speed" [(ngModel)]="characterInfo.speed"></ion-input>
+          }
+          @else{
           <ion-label>Speed: {{characterInfo.speed}} ft</ion-label>
+          }
+
 
         </div>
       </div>
@@ -222,8 +239,17 @@
           <app-entry label="''"></app-entry>
         </div> -->
         <div buttonChange>
-          <app-button [button]="{text:'Edit', expand:''}" [context]="changeCallback['changes']"></app-button>
+          <app-button [button]="{text:'Edit', expand:''}" [context]="toggleCallbacks['changeStats']"></app-button>
         </div>
+        @if(toggleChange){
+        <app-button [button]="{text:'Save', expand:''}" [context]="{onClick:saveStats}">
+        </app-button>
+
+        <app-button 
+        [button]="{text:'Cancel', expand:''}" 
+        [context]="toggleCallbacks['changeStats']">
+        </app-button>
+        }
         <div buttonDelete>
           <app-button [button]="{text:'Delete', expand:''}"
             [context]="{ onClick: deleteCallback(idx_personaggio) }"></app-button>

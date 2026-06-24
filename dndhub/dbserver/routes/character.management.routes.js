@@ -74,3 +74,15 @@ characterManagementRouter.post("/deleteCharacter",
     characterMiddleware.doesCharacterExist,
     controller.deleteCharacter
 );
+
+characterManagementRouter.post(
+  "/loadSpells",
+  controller.loadSpells);
+
+characterManagementRouter.post(
+  "/replaceSpell",
+  controller.replaceSpell);
+
+characterManagementRouter.post(
+    "/updateCharacterStats", 
+    controller.updateCharacterStats); 

@@ -53,6 +53,7 @@ export class SpellSelectionPage implements OnInit {
     previousPage: { onClick: Navigate.toPath(this.router,'option-selection')},
     nextPage: { onClick: this.nextPage},
   };
+  static SPELLS_LOADER_THRESHOLD: any;
 
   
   static calcMaxSpellSlotLevel(levelRow: dnd.Level): number {

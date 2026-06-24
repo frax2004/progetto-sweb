@@ -917,6 +917,120 @@ async function deleteCharacter(req, res) {
   }
 }
 
+export async function loadSpells(req, res) {
+  canSend = true;
+
+  const limit = req.body.limit;
+  const offset = req.body.offset;
+  const regex = req.body.regex;
+  const level = req.body.level;
+  const className = req.body.className;
+  const filters = [];
+  const quotify = (s) => `'${s}'`;
+
+  if (className !== undefined && className !== null && className !== '') {
+    filters.push(`classes LIKE ${quotify('%' + className.toLowerCase() + '%')}`);
+  }
+
+  if (regex !== '') {
+    filters.push(`name LIKE ${quotify(regex)}`);
+  }
+
+  if (level !== null && level !== undefined) {
+    filters.push(`level = ${level}`);
+  }
+
+  const filter = filters.length > 0 ? `WHERE ${filters.join(" AND ")}` : "";
+
+  const query = `
+    SELECT * FROM Spell
+    ${filter}
+    LIMIT ${limit}
+    OFFSET ${offset}
+  `;
+
+  try {
+    const spells = await Database.queryAll(query);
+    sendResponse({
+      message: "Incantesimi ottenuti con successo",
+      success: true,
+      status_code: 200,
+      spells: spells
+    }, res);
+  } catch (err) {
+    sendResponse({
+      message: "Impossibile ottenere gli incantesimi",
+      success: false,
+      status_code: 401
+    }, res);
+  }
+}
+
+export async function replaceSpell(req, res) {
+  canSend = true;
+
+  const idx_personaggio = req.body.idx_personaggio;
+  const oldSpell = req.body.oldSpell;
+  const newSpell = req.body.newSpell;
+
+  const query = `
+    UPDATE ArraySpellItem
+    SET item = '${newSpell}'
+    WHERE idx_personaggio = '${idx_personaggio}'
+    AND item = '${oldSpell}'
+  `;
+
+  try {
+    await Database.execOne(query);
+    sendResponse({
+      message: "Incantesimo sostituito con successo",
+      success: true,
+      status_code: 200
+    }, res);
+  } catch (err) {
+    sendResponse({
+      message: "Impossibile sostituire l'incantesimo",
+      success: false,
+      status_code: 401
+    }, res);
+  }
+}
+
+export async function updateCharacterStats(req, res) {
+  canSend = true;
+
+const idx_personaggio = req.body.idx_personaggio;
+const health = req.body.health;
+const speed = req.body.speed;
+const size = req.body.size;
+
+  try {
+    const query = `
+      UPDATE Personaggio
+      SET punti_vita = '${health}',
+          velocita = '${speed}',
+          taglia = '${size}'
+      WHERE idx_personaggio = '${idx_personaggio}'
+    `;
+
+    await Database.execOne(query);
+
+    sendResponse({
+      status_code: 200,
+      success: true,
+      message: 'Personaggio modificato con successo'
+    }, res);
+
+  } catch (err) {
+    sendResponse({
+      status_code: 500,
+      success: false,
+      message: 'Errore nella modifica del personaggio: ' + err.message
+    }, res);
+  }
+};
+
+
 export default {
   displayClasses,
   displayLevelByNameAndLevel,
@@ -938,4 +1052,7 @@ export default {
   getCharacterSpells,
   getCharacters,
   deleteCharacter,
+  loadSpells,
+  replaceSpell,
+  updateCharacterStats,
 }

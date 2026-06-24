@@ -33,28 +33,28 @@
     )
     VALUES (
       'Peppe@gmail.com',
-      'ELICRYA FINALE A  3 TESTE',
-      140,
-      6,
-      'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-      'wizard',
-      'evocation',
-      'human',
-      null,
+      'Prova cambia incantesimi',
+      11,
+      2,
+      'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+      'cleric',
+      'life',
+      'elf',
+      'high-elf',
       'acolyte',
-      20,
+      3,
       15,
-      24,
-      5,
       4,
       3,
-      3,
-      3,
-      3,
+      4,
       2,
-      2,
-      1,
-      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
       30,
       'Medium',
       'Shelter of the Faithful',
@@ -63,358 +63,262 @@
       
       
       INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Alarm',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'Bane',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Burning Hands',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'Bless',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Charm Person',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'Create or Destroy Water',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Chromatic Orb',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'Command',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         3
       );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Color Spray',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        4
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Comprehend Languages',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        5
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Detect Magic',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        6
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Disguise Self',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        7
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Expeditious Retreat',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        8
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'False Life',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        9
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Feather Fall',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        10
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Find Familiar',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        11
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Fog Cloud',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        12
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Grease',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        13
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Ice Knife',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        14
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Identify',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        15
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Illusory Script',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        16
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Jump',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        17
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Longstrider',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        18
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Mage Armor',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        19
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Magic Missile',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        20
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Protection from Evil and Good',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        21
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Ray of Sickness',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        22
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Shield',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        23
-      );
           INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-          'Acid Splash',
-          'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-          24
+          'Guidance',
+          'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+          4
         );
 INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-          'Chill Touch',
-          'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-          25
+          'Light',
+          'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+          5
         );
 INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-          'Dancing Lights',
-          'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-          26
-        );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-          'Elementalism',
-          'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-          27
-        );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-          'Fire Bolt',
-          'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-          28
+          'Mending',
+          'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+          6
         );;
   
       INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'clothes-common',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'pouch',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'spellbook',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'shield',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'clothes-common',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         3
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'pouch',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         4
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'a-dagger',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'a-warhammer',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         5
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'component-pouch',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'scale-mail',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         6
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'scholar’s-pack',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'club',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         7
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'holy-symbols',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'priest’s-pack',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         8
+      );
+INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
+        'holy-symbols',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        9
       );;
   
       INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
         'common',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'gnomish',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'elvish',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'dwarvish',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'common-sign-language',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
         'draconic',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         3
       );;
   
       INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'str',
-        13,
+        12,
         1,
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'dex',
-        14,
-        2,
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        16,
+        3,
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'con',
-        12,
-        1,
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        7,
+        -2,
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'int',
-        19,
-        4,
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        17,
+        3,
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         3
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'wis',
-        10,
-        0,
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        12,
+        1,
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         4
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'cha',
-        15,
-        2,
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        12,
+        1,
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         5
       );;
       
       INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'daggers',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'light armor',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'darts',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'medium armor',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'slings',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'shields',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'quarterstaffs',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'simple weapons',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         3
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'crossbows, light',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        4
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'skill: insight',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        5
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        4
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'skill: religion',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        6
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'saving throw: intelligence',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        7
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        5
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'saving throw: wisdom',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        8
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        6
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'skill: arcana',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        9
+        'saving throw: charisma',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        7
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'skill: history',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        10
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        8
+      );
+INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
+        'skill: insight',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        9
       );;
   
-      ;
-  
       INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'spellcasting-wizard',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'darkvision',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'arcane-recovery',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'fey-ancestry',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'arcane-tradition',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'trance',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'arcane-tradition-improvement-1',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'keen-senses',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        3
+      );;
+  
+      INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'spellcasting-cleric',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        0
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'divine-domain',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        1
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'domain-spells-1',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        2
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'channel-divinity-1-rest',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         3
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'arcane-tradition-improvement-2',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'channel-divinity-turn-undead',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         4
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'arcane-tradition-improvement-3',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'divine-domain-improvement-1',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         5
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'spell-mastery',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
+        'domain-spells-2',
+        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
         6
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'signature-spell',
-        'ELICRYA FINALE A  3 TESTE @ (giocatore): Peppe@gmail.com',
-        7
       );;
       
       COMMIT;

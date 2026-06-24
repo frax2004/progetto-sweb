@@ -1,11 +1,24 @@
-  <div class="player-card">
-    <div class="avatar" [style.backgroundImage]="'url(' + player.immagine + ')'"></div>
 
-    <div class="right">
-      <p class="row">Account: {{ player.profilo }}</p>
-      <p class="row">Nome: {{ player.nome }}</p>
-      <p class="row">Classe: {{ player.classe }}</p>
-      <p class="row">Razza: {{ player.razza }}</p>
-      <p class="row">Livello: {{ player.livello }}</p>
-    </div>
+<div class="player-card">
+  <div class="avatar" [style.backgroundImage]="'url(' + player.immagine + ')'"></div>
+
+  <div class="right">
+    <p class="row">Account: {{ player.profilo }}</p>
+    <p class="row">Nome: {{ player.nome }}</p>
+    <p class="row">Classe: {{ player.classe }}</p>
+    <p class="row">Razza: {{ player.razza }}</p>
+    <p class="row">Livello: {{ player.livello }}</p>
   </div>
+  
+  <div class="actions">
+    <app-button [margin]="false" 
+    [button]="reportButton"
+    [context]="reportContext"
+    ></app-button>
+    
+    <app-button [margin]="false" 
+    [button]="kickButton"
+    [context]="kickContext"
+    ></app-button>
+  </div>
+</div>

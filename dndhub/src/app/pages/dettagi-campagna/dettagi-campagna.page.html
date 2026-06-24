@@ -7,6 +7,10 @@
 <ion-content [fullscreen]="true" class="dettagli-campagna-content">
 
   <div class="wrapper-pagina">
+    <app-button
+    [button]="{text: 'Torna Indietro', expand: 'false'}"
+    [context]="{onClick: goBack}"
+    ></app-button>
 
     <div class="immagine-campagna">
       <img
@@ -18,7 +22,7 @@
     <p class="card">{{ campaign().descrizione }}</p>
     <ion-item>
       <ion-label class="proprietario">
-        Nome del proprietario della campagna
+        {{ dungeonMaster() }}
       </ion-label>
 
     </ion-item>
@@ -29,8 +33,10 @@
         @for (giocatore of players(); track $index) {
           <app-player-card
             class="player-pannello"
-            [player]="giocatore">
-          </app-player-card>
+            [player]="giocatore"
+            [onKick]="kickPlayer"
+            [onReport]="reportPlayer"
+          ></app-player-card>
         }
       </div>
       <div class="right">
@@ -41,9 +47,12 @@
             Non ci sono richieste in sospeso
           </p>
         } @else {
-          @for (richiesta of requested(); track $index) {
+          @for (richiesta of requested(); track richiesta) {
             <app-request-card
-              [richiesta]="richiesta">
+              [richiesta]="richiesta"
+              [onAccept]="acceptRequest"
+              [onReject]="rejectRequest"
+              >
             </app-request-card>
           }
         }
@@ -56,7 +65,10 @@
       <app-label class="codice">
         Codice campagna: {{ campaignCode }}
       </app-label>
-
+      <app-button
+      [button]="{text: 'Elimina Campagna', expand: 'false'}"
+      [context]="{onClick: deleteCampaign}"
+      ></app-button>
     </div>
 
     <div class="button-wrapper">

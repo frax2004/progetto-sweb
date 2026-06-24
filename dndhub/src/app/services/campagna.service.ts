@@ -65,4 +65,32 @@ export class CampagnaService {
       {idx_campagna: idx_campagna}
     );
   }
+  
+  public getDungeonMasterName(campaign_idx: string) {
+    return this.http.post<any>(
+      `${environment.api_url}/api/campaign/get-dungeon-master-name`, 
+      { campaign_idx: campaign_idx }
+    );
+  }
+
+  public acceptPlayer(info: {campaign_idx: string, player_idx: string}) {
+    return this.http.post<any>(
+      `${environment.api_url}/api/campaign/accept-request`, 
+      info
+    );
+  };
+
+  public removePlayer(info: {campaign_idx: string, player_idx: string}) {
+    return this.http.post<any>(
+      `${environment.api_url}/api/campaign/remove-player`, 
+      info
+    );
+  };
+
+  public deleteCampaign = (campaign_idx: string) => {
+    return this.http.post<any>(
+      `${environment.api_url}/api/campaign/delete-campaign`,
+      { campaign_idx: campaign_idx }
+    );
+  };
 }

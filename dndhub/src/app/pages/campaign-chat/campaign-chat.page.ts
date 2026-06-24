@@ -10,6 +10,7 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { CampagnaService } from 'src/app/services/campagna.service';
 import { State } from 'src/app/core/state';
+import { CampaignsPage } from '../campaigns/campaigns.page';
 
 @Component({
   selector: 'app-campaign-chat',
@@ -19,8 +20,16 @@ import { State } from 'src/app/core/state';
   imports: [IonContent, IonHeader, IonTitle, IonTextarea, IonToolbar, CommonModule, FormsModule, ButtonComponent, IonItem, IonLabel]
 })
 export class CampaignChatPage implements OnInit {
+  
+  static CURRENT_PAGE: CampaignChatPage;
+
   public buttonCallbacks = {
-    placeholder: { onClick: () => this.router.navigate(['/campaigns'])}
+    placeholder: {
+      onClick: async () => {
+        await this.router.navigate(['/campaigns']);
+        CampaignsPage.CURRENT_PAGE.loadCampaigns();
+      }
+    }
   };
 
   public buttonCampaignCallBacks = {
@@ -34,7 +43,9 @@ export class CampaignChatPage implements OnInit {
   public campaign = State.currentCampaign;
   public postText: string = '';
 
-  constructor(private router: Router, private PostsService: PostsService, private alertCtrl: AlertController, private campaignService: CampagnaService) { }
+  constructor(private router: Router, private PostsService: PostsService, private alertCtrl: AlertController, private campaignService: CampagnaService) {
+    CampaignChatPage.CURRENT_PAGE = this;
+  }
   
   public loadInfo = async () => {
     await this.loadPosts();

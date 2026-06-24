@@ -64,3 +64,35 @@ campagnaRouter.post(
   middleware.checkIfCharacterIsInSpecifiedCampaign,
   controller.exitCampaign
 );
+
+campagnaRouter.post(
+  "/get-dungeon-master-name",
+  authMiddleware.isLogged,
+  middleware.assertCampaignExists,
+  controller.getDungeonMasterName
+);
+
+campagnaRouter.post(
+  "/accept-request",
+  authMiddleware.isLogged,
+  middleware.assertCampaignExists,
+  middleware.assertPlayerExists,
+  middleware.assertValidRequest,
+  controller.acceptPlayerRequest
+);
+
+campagnaRouter.post(
+  "/remove-player",
+  authMiddleware.isLogged,
+  middleware.assertCampaignExists,
+  middleware.assertPlayerExists,
+  middleware.assertCanRemove,
+  controller.removePlayer
+);
+
+campagnaRouter.post(
+  "/delete-campaign",
+  authMiddleware.isLogged,
+  middleware.assertCampaignExists,
+  controller.deleteCampaign
+);

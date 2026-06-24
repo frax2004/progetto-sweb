@@ -1,23 +1,24 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent,IonInput, IonHeader, IonTitle, IonButton, IonText, IonToolbar,IonIcon, IonItem, IonGrid, IonLabel, IonCol, IonRow, IonFooter,  } from '@ionic/angular/standalone';
+import { IonContent,IonInput, IonHeader, IonTitle, IonButton, IonText, IonToolbar,IonIcon, IonItem, IonGrid, IonLabel, IonCol, IonRow, IonFooter, AlertController,  } from '@ionic/angular/standalone';
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
-import { Accordion } from 'src/app/components/accordion/Accordion';
 import { TextAreaComponent } from "src/app/components/text-area/text-area.component";
 import { ButtonComponent } from 'src/app/components/button/button.component';
-import { expand, firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { Button } from 'src/app/components/button/Button';
 import { ButtonContext } from 'src/app/components/button/ButtonContext';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DatiRichiesta } from 'src/app/components/dati-richiesta';
 import { DatiGiocatore } from 'src/app/components/dati-giocatore';
 import { PlayerCardComponent } from 'src/app/components/player-card/player-card.component';
 import { RequestCardComponent } from 'src/app/components/request-card/request-card.component';
 import { LabelComponent } from 'src/app/components/label/label.component';
 import { State } from 'src/app/core/state';
-import { defualtCharacterImgURL, encodeCampaign } from 'src/app/core/core';
+import { Alerts, defaultCampaignImageURL, defualtCharacterImgURL, encodeCampaign } from 'src/app/core/core';
 import { CampagnaService } from 'src/app/services/campagna.service';
+import { CampaignChatPage } from '../campaign-chat/campaign-chat.page';
+import { CampaignsPage } from '../campaigns/campaigns.page';
 
 
 @Component({
@@ -39,8 +40,14 @@ export class DettagiCampagnaPage implements OnInit {
     return this.campaign().nome;
   }
 
+  public goBack = async (e: Event) => {
+    await this.router.navigate(["/campaign-chat"]);
+    await CampaignChatPage.CURRENT_PAGE.loadPlayers();
+  }
+
   players = signal<DatiGiocatore[]>([]);
   requested = signal<DatiRichiesta[]>([]);
+  dungeonMaster = signal<string>("");
 
   Docs: boolean = false;
 
@@ -54,8 +61,54 @@ export class DettagiCampagnaPage implements OnInit {
     this.Docs = !this.Docs;
   }
 
+  public loadInfo = async () => {
+    await this.loadPlayers();
+    await this.loadDungeonMaster();
+  };
+
+  public loadDungeonMaster = async () => {
+    try {
+      const res = await firstValueFrom<any>(this.campagnaService.getDungeonMasterName(this.campaign().idx_campagna));
+      this.dungeonMaster.set(res.dungeonMaster);
+    } catch(err) {
+      Alerts.message(err);
+    }
+  };
   
-  constructor(private campagnaService: CampagnaService) {}
+  constructor(private campagnaService: CampagnaService, private router: Router, private alertCtrl: AlertController) {
+    this.loadInfo();
+  }
+
+  public deleteCampaign = async (_: Event) => {
+    
+    const alert = await this.alertCtrl.create({
+      header: 'Conferma eliminazione',
+      message: 'Vuoi davvero eliminare questa campagna?',
+      buttons: [
+        {
+          text: 'Annulla',
+          role: 'cancel' 
+        },
+        {
+          text: 'Elimina',
+          role: 'destructive',
+          handler: async () => {
+            const result = this.campagnaService.deleteCampaign(this.campaign().idx_campagna);
+            try {
+              await firstValueFrom(result);
+              CampaignsPage.CURRENT_PAGE.loadCampaigns();
+              await this.router.navigate(["/campaigns"]);
+              Alerts.good("Campagna eliminata con successo!");
+            } catch(err) {
+              Alerts.error(err.error);
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present(); 
+  };
 
   public static toPendingPlayer = function (pl: any): DatiRichiesta {
     return {
@@ -65,7 +118,7 @@ export class DettagiCampagnaPage implements OnInit {
         livello: pl.livello,
         razza: pl.specie,
         profilo: pl.utente_generico,
-        immagine: pl.imgURL ?? defualtCharacterImgURL
+        immagine: pl.imgURL ?? defaultCampaignImageURL
       },
       stato: 'pending'
     }
@@ -82,26 +135,93 @@ export class DettagiCampagnaPage implements OnInit {
     }
   }
 
+  public kickPlayer = async (player: DatiGiocatore) => {
+    const alert = await this.alertCtrl.create({
+      header: 'Conferma espulsione',
+      message: 'Vuoi davvero espellere questo giocatore dalla campagna?',
+      buttons: [
+        {
+          text: 'Annulla',
+          role: 'cancel' 
+        },
+        {
+          text: 'Conferma',
+          role: 'destructive',
+          handler: async () => {
+            const handle = this.campagnaService.removePlayer({
+              campaign_idx: this.campaign().idx_campagna, 
+              player_idx: `${player.nome} @ (giocatore): ${player.profilo}`, 
+            });
+            try {
+              await firstValueFrom(handle);
+              await this.loadPlayers();
+              Alerts.good("Giocatore espulso con successo");
+            } catch(err) {
+              Alerts.error(err.error);
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present(); 
+  };
+  
+  public reportPlayer = async (player: DatiGiocatore) => {
+
+  };
+
+  public acceptRequest = async (request: DatiRichiesta) => {
+    const handle = this.campagnaService.acceptPlayer({
+      campaign_idx: this.campaign().idx_campagna, 
+      player_idx: `${request.giocatore.nome} @ (giocatore): ${request.giocatore.profilo}`, 
+    });
+
+    try {
+      await firstValueFrom(handle);
+      await this.loadPlayers();
+    } catch(err) {
+      Alerts.error(err.error);
+    }
+  };
+
+  public rejectRequest = async (request: DatiRichiesta) => {
+    const handle = this.campagnaService.removePlayer({
+      campaign_idx: this.campaign().idx_campagna, 
+      player_idx: `${request.giocatore.nome} @ (giocatore): ${request.giocatore.profilo}`, 
+    });
+
+    try {
+      await firstValueFrom(handle);
+      await this.loadPlayers();
+    } catch(err) {
+      Alerts.error(err.error);
+    }
+
+  };
+
 
   public loadPlayers = async () => {
-    const res = await firstValueFrom<any>(this.campagnaService.loadCampaignPlayers(this.campaign().idx_campagna));
+    try {
+      const res = await firstValueFrom<any>(this.campagnaService.loadCampaignPlayers(this.campaign().idx_campagna));
+    
+      const pending = res.players
+      .filter(pl => pl.stato === 'pending')
+      .map(DettagiCampagnaPage.toPendingPlayer);
+  
+      const accepted = res.players
+      .filter(pl => pl.stato === 'accepted')
+      .map(DettagiCampagnaPage.toAcceptedPlayer);
+  
+      this.players.set(accepted);
+      this.requested.set(pending);
 
-    console.log(JSON.stringify(res, null, 2));
+    } catch(err) {
+      Alerts.message(err);
+    }
 
-    const pending = res.players
-    .filter(pl => pl.stato === 'pending')
-    .map(DettagiCampagnaPage.toPendingPlayer);
-
-    const accepted = res.players
-    .filter(pl => pl.stato === 'accepted')
-    .map(DettagiCampagnaPage.toAcceptedPlayer);
-
-    this.players.set(accepted);
-    this.requested.set(pending);
   }
 
-  ngOnInit() {
-    this.loadPlayers();
-  }
+  ngOnInit() {}
 
 }

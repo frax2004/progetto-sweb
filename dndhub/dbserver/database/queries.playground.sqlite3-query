@@ -1,15 +1,16 @@
 -- database: ./dndhub.db
 
-select * from ArrayPostItem where idx_campagna = "Scourge-of-the-Abyss @ (dungeon_master): giorgia.marino34@unipa.net";
+
+select * from ArrayCampagnaPersonaggiItem where idx_campagna = "Scourge-of-the-Abyss @ (dungeon_master): pino.pollara68@unipa.net";
+
+select * 
+from ArrayCampagnaPersonaggiItem 
+where idx_campagna = 'Secrets-of-the-Shattered-Isles @ (dungeon_master): simona.conte10@microsoft.eu';
+
 
 select * 
 from Account
 where email in (
-  select * from Amministratore
+  select * 
+  from Amministratore
 );
-
-select *
-from Segnalazione
-order by quando asc
-limit 16
-offset 500;

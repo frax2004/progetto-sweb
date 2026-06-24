@@ -71,7 +71,7 @@ export class CampaignCreationPage implements OnInit {
 
   public removeDocumentLink(doc: string) {
     this.documentsLinks.update(links => {
-      links.splice(links.indexOf(doc));
+      links.splice(links.indexOf(doc), 1);
       return links;
     });
   }

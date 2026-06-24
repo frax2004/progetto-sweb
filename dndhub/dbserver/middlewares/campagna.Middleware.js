@@ -72,7 +72,6 @@ export async function assertCampaignNotExists(req, res, next) {
 export async function doesCampaignCodeExist(req,res,next) {
   canSend = true;
 
-
   const idx = decodeCampaign(req.body.idx);
 
   const campaign = await DatabaseQueries.retrieve(`SELECT * FROM Campagna WHERE idx_campagna = '${idx}'`, el => el);

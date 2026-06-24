@@ -200,4 +200,31 @@ export class CharacterManagementService {
     );
   }
 
+  deleteCharacter(idx_personaggio:string){
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/character-management/deleteCharacter`,
+      {idx_personaggio: idx_personaggio}
+    );
+  }
+
+loadSpells(queryInfo: any) {
+  return this.httpclient.post<any>(
+    `${environment.api_url}/api/character-management/loadSpells`,
+    queryInfo
+  );
 }
+
+replaceSpell(data: { idx_personaggio: string; oldSpell: string; newSpell: string }) {
+  return this.httpclient.post<any>(
+    `${environment.api_url}/api/character-management/replaceSpell`,
+    data
+  );
+}
+
+
+updateCharacterStats(data: {idx_personaggio: string; health: number; speed: number;size: string;}) {
+  return this.httpclient.post<any>(`${environment.api_url}/api/character-management/updateCharacterStats`,data);}
+
+}
+
+

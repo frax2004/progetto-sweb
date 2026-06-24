@@ -26,6 +26,12 @@ campagnaRouter.post(
   controller.loadCampaigns
 );
 
+// campagnaRouter.post(
+//   "/load_accepted_players",
+//   authMiddleware.isLogged,
+//   middleware.assertCampaignExists,
+//   controller.loadAcceptedPlayers
+// );
 campagnaRouter.post(
   "/load-accepted-character-campaigns",
   authMiddleware.isLogged,

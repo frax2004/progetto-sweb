@@ -15,7 +15,7 @@ characterManagementRouter.post("/class-display-by-name", controller.displayClass
 characterManagementRouter.post("/species-display-by-name", controller.displaySpeciesByName);
 characterManagementRouter.post("/background-display-by-name", controller.displayBackgroundByName);
 characterManagementRouter.post("/insert-character",
-    authMiddleware.isLogged,
+ authMiddleware.isLogged,
     characterMiddleware.validateCharacter,
     characterMiddleware.doesCharacterAlreadyExist,
     controller.insertCharacter
@@ -68,3 +68,21 @@ characterManagementRouter.post("/get-characters",
     authMiddleware.isLogged,
     controller.getCharacters
 );
+
+characterManagementRouter.post("/deleteCharacter",
+    authMiddleware.isLogged,
+    characterMiddleware.doesCharacterExist,
+    controller.deleteCharacter
+);
+
+characterManagementRouter.post(
+  "/loadSpells",
+  controller.loadSpells);
+
+characterManagementRouter.post(
+  "/replaceSpell",
+  controller.replaceSpell);
+
+characterManagementRouter.post(
+    "/updateCharacterStats", 
+    controller.updateCharacterStats); 

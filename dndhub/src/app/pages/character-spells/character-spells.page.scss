@@ -148,9 +148,9 @@ ion-title {
 
 .BaseTabella {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 6px; /* 👈 QUESTO crea separazione visiva */
-  margin-bottom: 10px;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
 }
 
 .ColonnaTabella {
@@ -195,7 +195,7 @@ ion-row {
 }
 
 .scrollbar {
-  max-height: 70vh;   /* altezza scroll */
+  max-height: 70vh;   
   overflow-y: auto;
   overflow-x: auto;
 }

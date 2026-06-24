@@ -143,7 +143,7 @@ export class DettagiCampagnaPage implements OnInit {
         livello: pl.livello,
         razza: pl.specie,
         profilo: pl.utente_generico,
-        immagine: pl.imgURL ?? defaultCampaignImageURL
+        immagine: pl.imgURL ?? defualtCharacterImgURL
       },
       stato: 'pending'
     }

@@ -32,298 +32,294 @@
       imgURL
     )
     VALUES (
-      'Peppe1@gmail.com',
-      'Pino',
-      7,
-      2,
-      'Pino @ (giocatore): Peppe1@gmail.com',
-      'druid',
+      'francesco.marzano25@microsoft.eu',
+      'Charlie Kirk',
+      240,
+      6,
+      'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+      'fighter',
+      'champion',
+      'dragonborn',
       null,
-      'elf',
-      'high-elf',
       'acolyte',
-      1,
+      20,
       15,
-      1,
-      2,
-      2,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
       30,
       'Medium',
       'Shelter of the Faithful',
-      null
+      'https://i.pinimg.com/736x/1e/92/9d/1e929d6b18f10aed40264dd02362aef4.jpg'
       );
       
       
-      INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Animal Friendship',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        0
-      );
-          INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-          'Druidcraft',
-          'Pino @ (giocatore): Peppe1@gmail.com',
-          1
-        );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-          'Elementalism',
-          'Pino @ (giocatore): Peppe1@gmail.com',
-          2
-        );;
+      ;
   
       INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'clothes-common',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'pouch',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'leather-armor',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'clothes-common',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'explorers-pack',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'pouch',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         3
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'clothes-common',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'chain-mail',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         4
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'pouch',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'maul',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         5
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'wooden-shield',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'shield',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         6
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'scimitar',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'light-crossbow',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         7
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'druidic-focus',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'dungeoneer’s-pack',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         8
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'holy-symbols',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         9
       );;
   
       INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
         'common',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'elvish',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'draconic',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'common-sign-language',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'goblin',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'draconic',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'sylvan',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         3
       );;
   
       INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'str',
-        17,
-        3,
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        20,
+        5,
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'dex',
-        11,
-        0,
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        12,
+        1,
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'con',
-        9,
-        -1,
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        14,
+        2,
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'int',
-        8,
-        -1,
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        15,
+        2,
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         3
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'wis',
-        10,
-        0,
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        15,
+        2,
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         4
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'cha',
-        11,
-        0,
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        9,
+        -1,
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         5
       );;
       
       INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'light armor',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'all armor',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         0
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'medium armor',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        1
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'shields',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        1
+      );
+INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
+        'simple weapons',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'clubs',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'martial weapons',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         3
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'daggers',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        4
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'javelins',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        5
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'maces',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        6
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'quarterstaffs',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        7
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'sickles',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        8
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'spears',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        9
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'darts',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        10
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'slings',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        11
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'scimitars',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        12
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'herbalism kit',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        13
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'skill: insight',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        14
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        4
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'skill: religion',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        15
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        5
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'saving throw: intelligence',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        16
+        'saving throw: strength',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        6
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'saving throw: wisdom',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        17
+        'saving throw: constitution',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        7
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'skill: animal handling',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        18
+        'skill: history',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        8
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'skill: arcana',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        19
+        'skill: insight',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        9
       );;
   
       INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'darkvision',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'draconic-ancestry',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'fey-ancestry',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'breath-weapon',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'trance',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'damage-resistance',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        2
+      );;
+  
+      INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'fighter-fighting-style',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        0
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'second-wind',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        1
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'action-surge-1-use',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'keen-senses',
-        'Pino @ (giocatore): Peppe1@gmail.com',
+        'martial-archetype',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         3
-      );;
-  
-      INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'spellcasting-druid',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        0
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'druidic',
-        'Pino @ (giocatore): Peppe1@gmail.com',
-        1
+        'extra-attack-1',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        4
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'martial-archetype-improvement-1',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        5
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'indomitable-1-use',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        6
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'martial-archetype-improvement-2',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        7
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'extra-attack-2',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        8
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'indomitable-2-uses',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        9
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'martial-archetype-improvement-3',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        10
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'action-surge-2-uses',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        11
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'indomitable-3-uses',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        12
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'martial-archetype-improvement-4',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        13
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'extra-attack-3',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        14
       );;
       
       COMMIT;

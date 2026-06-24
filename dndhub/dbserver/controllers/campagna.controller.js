@@ -437,7 +437,7 @@ export async function exitCampaign(req,res) {
   const idx_campagna = req.body.idx_campagna;
 
   try {
-    Database.execOne(`DELETE FROM ArrayCampagnaPersonaggiItem WHERE idx_campagna = '${idx_campagna}' AND idx_personaggio LIKE '%${idx_personaggio}%'`);
+    await Database.execOne(`DELETE FROM ArrayCampagnaPersonaggiItem WHERE idx_campagna = '${idx_campagna}' AND idx_personaggio LIKE '%${idx_personaggio}%'`);
 
     sendResponse({
         status_code: 200,

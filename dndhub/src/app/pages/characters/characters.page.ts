@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, PopoverController, IonItem, IonGrid, IonRow, NavController, IonLabel, IonButtons, IonButton, IonAlert, IonInput } from '@ionic/angular/standalone';
 import { ButtonComponent } from "src/app/components/button/button.component";
-import { Alerts, currentGlobalCharacterName, defualtCharacterImgURL, Navigate, Popups } from 'src/app/core/core';
+import { Alerts, currentGlobalCharacterName, defaultCampaignImageURL, defualtCharacterImgURL, Navigate, Popups } from 'src/app/core/core';
 import { CardComponent } from "src/app/components/card/card.component";
 import { Card } from 'src/app/components/card/Card';
 import { Router } from '@angular/router';
@@ -97,7 +97,7 @@ export class CharactersPage implements OnInit {
 
   private static toCampaignCard(campaign: any): Card {
     return {
-      imageURL: campaign.banner ?? Card.defaultImageURL(),
+      imageURL: campaign.banner ?? defaultCampaignImageURL,
       title: campaign.nome,
       subtitle: `${campaign.playersCount}`,
       content: campaign.descrizione,

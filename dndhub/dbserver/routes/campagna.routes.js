@@ -26,6 +26,12 @@ campagnaRouter.post(
   controller.loadCampaigns
 );
 
+// campagnaRouter.post(
+//   "/load_accepted_players",
+//   authMiddleware.isLogged,
+//   middleware.assertCampaignExists,
+//   controller.loadAcceptedPlayers
+// );
 campagnaRouter.post(
   "/load-accepted-character-campaigns",
   authMiddleware.isLogged,
@@ -58,6 +64,14 @@ campagnaRouter.post(
 );
 
 campagnaRouter.post(
+  "/exit-campaign",
+  authMiddleware.isLogged,
+  middleware.assertCampaignExists,
+  middleware.checkIfCharacterIsInSpecifiedCampaign,
+  controller.exitCampaign
+);
+
+campagnaRouter.post(
   "/get-dungeon-master-name",
   authMiddleware.isLogged,
   middleware.assertCampaignExists,
@@ -87,12 +101,4 @@ campagnaRouter.post(
   authMiddleware.isLogged,
   middleware.assertCampaignExists,
   controller.deleteCampaign
-)
-
-campagnaRouter.post(
-  "/exit-campaign",
-  authMiddleware.isLogged,
-  middleware.assertCampaignExists,
-  middleware.checkIfCharacterIsInSpecifiedCampaign,
-  controller.exitCampaign
 );

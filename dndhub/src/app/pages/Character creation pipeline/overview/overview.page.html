@@ -128,13 +128,15 @@
         <app-label class="HPlabel">Seleziona metodo di calcolo HP</app-label>
         <div class="HPbuttons">
           <app-button
+          class="leftButton"
           [margin] = "false"
-          [button] = "{ text: 'Media', expand: ''}"
+          [button] = "{ text: 'Average', expand: ''}"
           [context] = "buttonCallbacks['avHP']"
           ></app-button>
           <app-button
+          class="rightButton"
           [margin] = "false"
-          [button] = "{ text: 'Manualmente', expand: ''}"
+          [button] = "{ text: 'Manually', expand: ''}"
           [context] = "buttonCallbacks['manHP']"
           ></app-button>
         </div>
@@ -146,13 +148,13 @@
           
           @if(averageHP===true) {
             <div>
-              <app-label>I punti ferita del personaggio, selezionando la media, saranno {{calcAverageHP()}}</app-label>
+              <app-label>Health points of the character, selecting the average, will be {{calcAverageHP()}}</app-label>
             </div>
           }
 
           @if(manualHP===true) {
             <div class="dragEntryFrame">
-              <app-label>Inserire HP in range {{HPrange()}}:</app-label>
+              <app-label>Insert HP in range {{HPrange()}}:</app-label>
 
               <app-drag-entry
               #hpEntry
@@ -173,7 +175,7 @@
 
   <div class="finalButton">
     <app-button
-    [button] = "{ text: 'Crea personaggio', expand: ''}"
+    [button] = "{ text: 'Create character', expand: ''}"
     [context] = "buttonCallbacks['completeChar']"
     ></app-button>
   </div>

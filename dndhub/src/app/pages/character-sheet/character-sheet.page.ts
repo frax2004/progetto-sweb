@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCheckbox, IonItem, IonGrid, IonCol, IonRow, IonLabel, IonList, PopoverController, IonAccordionGroup, IonAccordion, IonThumbnail } from '@ionic/angular/standalone';
+import { IonContent, IonHeader,IonInput, IonTitle, IonToolbar, IonCheckbox, IonItem, IonGrid, IonCol, IonRow, IonLabel, IonList, PopoverController, IonAccordionGroup, IonAccordion, IonThumbnail } from '@ionic/angular/standalone';
 import { CheckboxComponent } from "src/app/components/checkbox/checkbox.component";
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
@@ -19,7 +19,7 @@ import { Observable, Subscription } from 'rxjs';
   templateUrl: './character-sheet.page.html',
   styleUrls: ['./character-sheet.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonCheckbox, CommonModule, FormsModule, IonItem, IonGrid, IonCol, IonRow, IonLabel, CheckboxComponent, AccordionComponent, IonList, UnorderedListElementComponent, EntryComponent, ButtonComponent, IonAccordionGroup, IonAccordion, IonThumbnail]
+  imports: [IonContent, IonHeader, IonTitle, IonInput, IonToolbar, IonCheckbox, CommonModule, FormsModule, IonItem, IonGrid, IonCol, IonRow, IonLabel, CheckboxComponent, AccordionComponent, IonList, UnorderedListElementComponent, EntryComponent, ButtonComponent, IonAccordionGroup, IonAccordion, IonThumbnail]
 })
 export class CharacterSheetPage implements OnInit {
 
@@ -56,14 +56,84 @@ export class CharacterSheetPage implements OnInit {
   dexModifier: number;
   currHitDies: number;
   hitDie: number;
+  idx_personaggio:string; // mi serve per definire globalmente sto coso e usare il delete 
+  toggleChange = false;
+
+saveStats = () => {
+  this.characterServices.updateCharacterStats({
+    idx_personaggio: this.idx_personaggio,
+    health: this.characterInfo.health,
+    speed: this.characterInfo.speed,
+    size: this.characterInfo.size,
+  })
+  .subscribe({
+    next: (res) => {
+      Alerts.message(res.message || 'Stats aggiornate');
+      this.currHealth = this.characterInfo.health;
+      this.toggleChange = false;
+    },
+    error: (err) => {
+      Alerts.error(err.error?.message || 'Errore aggiornamento stats');
+    }
+  });
+}
+
+ toggleSelectionMode() {
+  this.toggleChange = !this.toggleChange;
+  }
+
+toggleCallbacks = {
+  changeStats: {
+    onClick: () => this.toggleSelectionMode()
+    }
+  };
 
   buttonCallbacks = {
     placeholder: { onClick: Navigate.toPath(this.router,'character-spells')},
   };
 
-  deleteCallback ={
-    deletePG:{onClick: Alerts.notImplemetedError}
+  async deletePG(idx_personaggio: string) { // questa funzione serve per mostrare a schermo il popup di verifica 
+    // l'ho importata da ionic, vi fa fare i popup belli
+    const alert = await this.alertCtrl.create({ // qua ti limiti a dichiarare e creare l'oggetto alert
+      // siccome ci vuole un po ' di tempo si usa await
+      header: 'Confirm deletion', // questi semplicemente sono i suoi attributi e bottoni
+      message: 'Do you really want to delete this character?',
+      buttons: [
+        {
+          text: 'cancel', // sono semplici oggetti
+          role: 'cancel'  // questo non fa nulla se si clicca qui 
+        },
+        {
+          text: 'delete',
+          role: 'destructive',
+          //questo serve per fargli fare una funzione nel caso lo si clicchi ed esegue
+          // la funzione per cancellare il post
+          handler: () => this.characterServices.deleteCharacter(idx_personaggio)
+          .subscribe({
+            next: ()=> {Alerts.message('personaggio eliminato');
+              this.router.navigate(['characters'])
+            },
+            error: err => Alerts.error(err.error)
+          })
+        }
+      ]
+    });
+
+    await alert.present(); 
   }
+
+
+
+  deleteCallback = (idx_personaggio: string) => {
+    return () => this.deletePG(idx_personaggio);
+  };
+
+    public buttonGobacks = {
+    placeholder: { onClick: () => this.router.navigate(['/characters'])}
+  };
+
+
+
 
 changeCallback={
   changes:{onClick: Alerts.notImplemetedError}
@@ -147,11 +217,11 @@ changeCallback={
       // ?? da levare dopo tests
       const playerIDvalues = (await CharacterSheetPage.toPromise(this.userServices.getPlayerID())).utente_giocatore;
       this.playerID = playerIDvalues === undefined ? '(giocatore): giovanniDM@gmail.com' : playerIDvalues;
-      const idx_personaggio = `${this.characterName} @ ${this.playerID}`;
+      this.idx_personaggio = `${this.characterName} @ ${this.playerID}`; // reso locale per poter usare delete
 
 
       //prendo character
-      const characterValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterByIdx(idx_personaggio));
+      const characterValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterByIdx(this.idx_personaggio));
       this.characterInfo = {
         health: characterValues.character.punti_vita,
         proficiency_bonus: characterValues.character.bonus_competenza,
@@ -172,7 +242,7 @@ changeCallback={
       this.currHealth = this.characterInfo.health;
 
       //prendo statistiche pg
-      const scoresValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterAbilityScores(idx_personaggio));
+      const scoresValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterAbilityScores(this.idx_personaggio));
       this.characterStats = scoresValues.stats.map((item: any) => {
         return {
           index: item.stat_idx,
@@ -182,7 +252,7 @@ changeCallback={
       });
 
       //prendo competenze pg
-      const charProficiencies = await CharacterSheetPage.toPromise(this.characterServices.getCharacterProficiencies(idx_personaggio));
+      const charProficiencies = await CharacterSheetPage.toPromise(this.characterServices.getCharacterProficiencies(this.idx_personaggio));
       this.characterProficiencies = charProficiencies.proficiencies.map(item => item.proficiency);
 
 
@@ -217,7 +287,7 @@ changeCallback={
       }
 
       //prendo lingue
-      const languageValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterLanguages(idx_personaggio));
+      const languageValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterLanguages(this.idx_personaggio));
       this.characterLanguages = languageValues.languages.map((item: any) => {
         return {
           index: item.idx,
@@ -228,11 +298,11 @@ changeCallback={
       });
     
       //prendo talenti
-      const featValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterFeats(idx_personaggio));
+      const featValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterFeats(this.idx_personaggio));
       this.characterFeats = featValues.feats.map(item => item.item);
 
       //prendo equipaggimento
-      const equipmentValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterEquipment(idx_personaggio));
+      const equipmentValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterEquipment(this.idx_personaggio));
       this.characterEquipment = equipmentValues.equipment.map((item: any) => {
         return {
           name: item.name,
@@ -286,7 +356,7 @@ changeCallback={
   }
 
 
-  constructor(public popoverController: PopoverController, private router: Router, private characterServices: CharacterManagementService, private userServices: UserUtilitiesService) {
+  constructor(public popoverController: PopoverController, private router: Router, private characterServices: CharacterManagementService, private userServices: UserUtilitiesService,private alertCtrl: AlertController) {
     this.init()
   }
   

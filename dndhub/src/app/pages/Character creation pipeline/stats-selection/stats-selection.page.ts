@@ -24,6 +24,10 @@ export class StatsSelectionPage implements OnInit {
   manualSelection: Boolean = true;
   stdArray: Boolean = false;
   randomSelection: Boolean = false;
+  showClass: any;
+  showLevel: any;
+  showSpecies: any;
+  showBackground: any;
 
   currStats = {
     strength: 0,
@@ -187,7 +191,12 @@ onLanguageSelect(lingua: any) {
   }
 }
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.showClass = CharacterInstance.chosenClass;
+    this.showLevel = CharacterInstance.chosenLevel;
+    this.showSpecies = CharacterInstance.chosenSpecies;
+    this.showBackground = CharacterInstance.chosenBackground;
+   }
 
   ngOnInit() {
   }

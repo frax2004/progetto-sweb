@@ -132,7 +132,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
     const success = _ => {
       this.currentEdit = undefined;
       this.editMode.set(false);
-      Alerts.good("Le informazioni sono state salvate con successo");
+      Alerts.good("Information saved with success");
     };
 
     const fail = res => {
@@ -166,18 +166,18 @@ export class ProfilePage implements OnInit, AfterViewInit {
     const fail = res => Alerts.error(res.error);
 
     Alerts.show({
-      header: "Attenzione!",
-      subHeader: "Azione irreversibile",
-      message: "Sicuro di voler eliminare l'account?",
+      header: "Be careful!",
+      subHeader: "Irreversible action",
+      message: "Are you sure you want to delete the account",
       cssClass: 'delete-account-alert',
       buttons: [
         {
-          text: 'Cancella',
+          text: 'Cancel',
           role: 'cancel',
           handler: () => {}
         },
         {
-          text: 'Procedi',
+          text: 'Proceed',
           role: 'confirm',
           handler: () => this.authService.deleteAccount(success, fail)
         }
@@ -199,7 +199,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
         reports.splice(reports.indexOf(report, 0), 1);
         return reports;
       });
-      Alerts.good("Segnalazione chiusa con successo");
+      Alerts.good("Report closed with success");
     };
 
     return (_: any) => this.reportsService.closeReport(

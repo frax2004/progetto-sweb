@@ -1,7 +1,8 @@
 <ion-content>
+<div id="content">
   <div id="pageTitle">
     <div>
-      <ion-title id="title">Area personale giocatore</ion-title>
+      <ion-title class="title">Player personal area</ion-title>
     </div>
   </div>
 
@@ -11,10 +12,12 @@
     [context]="buttonCallbacks['goBack']"
   ></app-button>
   @if (!seeCampaigns) {
-  <app-button
-    [button]= "{ text: 'See campaigns', expand: ''}"
-    [context]= "buttonCallbacks['toggle']"
-  ></app-button>
+  <div class="toggleFrame">
+    <app-button
+      [button]= "{ text: 'See campaigns', expand: ''}"
+      [context]= "buttonCallbacks['toggle']"
+    ></app-button>
+  </div>
 
   <div class="characters">
     <div class="add-button">
@@ -37,10 +40,12 @@
   </div>
   }
   @else {
+  <div class="toggleFrame">
     <app-button
     [button]= "{ text: 'See characters', expand: ''}"
     [context]= "buttonCallbacks['toggle']"
-  ></app-button>
+    ></app-button>
+  </div>  
 
   <div class="campaigns">
     <div class="add-button">
@@ -62,6 +67,6 @@
   </div>
   }
 
-
+</div>
 </ion-content>
 

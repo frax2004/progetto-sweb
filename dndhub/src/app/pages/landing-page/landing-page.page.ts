@@ -37,17 +37,18 @@ import { CampagnaService } from 'src/app/services/campagna.service';
   styleUrls: ['./landing-page.page.scss'],
   standalone: true,
   imports: [
-    IonContent, 
-    IonHeader, RouterLink ,
-    IonTitle, 
-    IonToolbar, CommonModule, FormsModule, 
-    IonLabel, 
-    IonItem, CarouselComponent, 
-    IonFooter, CardComponent, 
-    AccordionComponent, 
-    IonAccordion, 
+    IonContent,
+    IonHeader, RouterLink,
+    IonTitle,
+    IonToolbar, CommonModule, FormsModule,
+    IonLabel,
+    IonItem, CarouselComponent,
+    IonFooter, CardComponent,
+    AccordionComponent,
+    IonAccordion,
     IonAccordionGroup,
-  ]
+    LabelComponent
+]
 })
 export class LandingPagePage implements OnInit {
   
@@ -93,7 +94,7 @@ export class LandingPagePage implements OnInit {
 
   constructor(private router: Router, private userUtilities: UserUtilitiesService, private campaignServices: CampagnaService) {
     const queryInfo = {
-      limit: 10,
+      limit: 5,
       offset: Math.floor(Math.random() * 4000),
       regex: '',
     };

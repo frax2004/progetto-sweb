@@ -1,11 +1,11 @@
 <ion-content>
   <app-title
-  [title] = "'Scegli il tuo background'"
+  [title] = "'Choose your background'"
   ></app-title>
 
   <div class="goBack">
     <app-button
-    [button] = "{ text: 'Torna indietro', expand: ''}"
+    [button] = "{ text: 'Go back', expand: ''}"
     [context] = "buttonCallbacks['previousPage']"
     ></app-button>
   </div>
@@ -14,22 +14,22 @@
     <div class="showChosen">
       @if(showClass !== undefined) {
         <div class="upperDetailsContainer rightBorder">
-          <app-label>Chosen Class: {{showClass}}</app-label>
+          <app-label class="selectedShow">Chosen Class: {{showClass}}</app-label>
         </div>
       }
       @if(showLevel !== undefined) {
         <div class="upperDetailsContainer rightBorder">
-          <app-label>Chosen Level: {{showLevel}}</app-label>
+          <app-label class="selectedShow">Chosen Level: {{showLevel}}</app-label>
         </div>
       }
       @if(showSpecies !== undefined) {
         <div class="upperDetailsContainer rightBorder">
-          <app-label>Chosen Species: {{showSpecies}}</app-label>
+          <app-label class="selectedShow">Chosen Species: {{showSpecies}}</app-label>
         </div>
       }
       @if(selectedBackground !== undefined) {
         <div class="upperDetailsContainer">
-          <app-label>Chosen Background: {{selectedBackground}}</app-label>
+          <app-label class="selectedShow">Chosen Background: {{selectedBackground}}</app-label>
         </div>
       }
     </div>
@@ -89,7 +89,7 @@
   <!-- footer con bottone per andare alla prossima pagina -->
   <div class="nextPage">
       <app-button
-      [button] = "{ text: 'Prossima pagina', expand: ''}"
+      [button] = "{ text: 'Next page', expand: ''}"
       [context] = "buttonCallbacks['nextPage']"
       ></app-button>
   </div>

@@ -1,10 +1,15 @@
-
+.buttonBack {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 1rem;
+}
 .nome,.title{
 font-size: clamp(1.5rem, 4vw, 2rem); 
 text-align: center;
 font-weight:bold;
-background-color:#796a47;
+background-color:#aa893c;
 margin-bottom: 0.2rem;
+margin-inline: auto;  
 }
 .title{
   color:rgb(255, 255, 255);
@@ -16,6 +21,11 @@ margin-bottom: 0.2rem;
 border-radius: 8px;
 }
 
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
 
 .placeholderFrame {
   width: fit-content;
@@ -23,9 +33,9 @@ border-radius: 8px;
   border-radius: 16px;
   overflow: hidden;
   min-height: 10vw;
-  max-height: 16.3vw;
+  max-height: 19vw;
   max-width: 20vw;
-}
+} // non so come renderla responsive e buona allo stesso tempo più di cosi 
 
 .placeholderFrame img {
   width: 100%;
@@ -34,7 +44,7 @@ border-radius: 8px;
   display: block;
 }
 .gridContainer {
-    height: 50vw;
+  min-height: auto;
 }
 
 .statAccordion {
@@ -47,14 +57,17 @@ border-radius: 8px;
   grid-template-columns: auto 1fr;
   gap: 1rem;
   padding: 0.8rem;
-  max-height: 42vw;
-  background: #796a47; 
+  height: auto;
+  max-height: none;
+  background: #000000; 
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 500;
 }
 
 
 .fight,.species,.informazioni{
-  background: #a48625;
-  border: 2px solid #7a4f1d;
+  background: #6e512c; // non sono convinto dei colori
+  border: 2px solid hsl(32, 62%, 30%);
   border-radius: 8px;
   padding: 0.8rem;
   box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
@@ -64,7 +77,6 @@ border-radius: 8px;
   display: grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   text-align: center;
-
 }
 
 .species{
@@ -81,7 +93,7 @@ border-radius: 8px;
 }
 
 .TiriVSmorte {
-  background: #a48625;
+  background: #6e512c;
   border: 2px solid #7a4f1d;
   border-radius: 8px;
   padding: 0.8rem;
@@ -94,7 +106,7 @@ border-radius: 8px;
 }
 .Tiri {
   display: grid;
-  grid-template-columns: 1fr repeat(3, 20px);
+  grid-template-columns: repeat(3, 1fr);;
   align-items: center;
   gap: 0.4rem;
 }
@@ -102,9 +114,10 @@ border-radius: 8px;
 .TiriGenerici{
     display: grid;
     grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap: 0.4rem;
 }
 .Ispirazione-Eroica {
-  background: #a48625;
+  background: #6e512c;
   border: 2px solid #7a4f1d;
   border-radius: 8px;
   padding: 0.6rem;
@@ -116,7 +129,155 @@ border-radius: 8px;
   align-items: center;
 }
 
+.checkboxContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.genericCheckbox {
+    appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 50%;
+    background: transparent;
+}
+
+.Checkbox {
+    appearance: none;
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid #0374d1;
+    border-radius: 50%;
+    background: transparent;
+}
+
+.Checkbox:checked {
+  background: radial-gradient(circle, #cfd8dc 0%, #2c3e50 45%, #0b1a2b 100%);
+  box-shadow: 0 0 6px #b0bec5, 0 0 14px #90a4ae;
+}
+
+
+.deathCheckbox {
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 50%;
+  background: transparent;
+}
+
+.genericCheckbox:checked {
+  background: radial-gradient(circle, #b8f5c2 0%, #4caf50 55%, #1f6b2d 100%);
+  box-shadow: 0 0 6px #a8f0b2, 0 0 14px #2e7d32;
+}
+
+.deathCheckbox:checked {
+  background: radial-gradient(circle, #ff6b6b 0%, #b22222 60%, #5a0a0a 100%);
+  box-shadow: 0 0 6px #ff6b6b, 0 0 14px #8b0000;
+}
+
+.eroicCheckBox {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+// .statAccordionFrame{
+//   display: grid;
+//   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+//   gap: 0.8rem;
+// }
+// .accordionGroup{
+//     display: grid;
+//   grid-template-columns: repeat(auto-fit, minmax(560px, 1fr));
+//   gap: 0.8rem;
+// } funziona male e non saprei come sistemarlo
+
 .headerContentFrame {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.borderText{
+  border-bottom: 1px solid gold;
+  font-size: clamp(0.7rem, 2vw, 1.2rem);
+}
+
+.genericAccordion {
+  color: #e6b514;
+  border: 2px solid #7a4f1d;
+  border-radius: 14px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 0px 8px rgba(228, 155, 9, 0.801);
+}
+
+.genericAccordion:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+.accContent {
+  padding: 0.5rem;
+  color: #e6b514;
+  background: rgba(0,0,0,0.331);
+  display: grid;
+  grid-template-columns : repeat(auto-fit, minmax(60px, 1fr));
+  justify-content: space-between;
+
+}
+
+
+.skillsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.6rem;
+  margin-top: 0.2rem;
+  width: 100%;
+  align-items: start;
+}
+
+.skill {
+  padding: 0.3rem;
+}
+
+ion-list {
+  background: transparent;
+  padding: 0;
+}
+
+.personalNotes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: rgba(0,0,0,0.331);
+  border: 2px solid #4f2d12;
+  border-radius: 12px;
+  padding: 0.8rem;
+  color: #ffffff;
+}
+
+.personalNotes {
+  min-height: 5vw;
+  max-height: 10vw;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+
+  .upperGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .placeholderFrame {
+    margin: 0 auto;
+    max-width: 200px;
+    max-height: none;
+  }
+
 }

@@ -110,6 +110,8 @@ app-label {
 
 .goBack {
     width: 30vmin;
+    margin-top: 2vh;
+    margin-left: 2vw;
 }
 
 div[slot="content"] {
@@ -136,21 +138,20 @@ div[slot="content"] {
 .showChosen {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     width: 90vw;
     margin: 3vh auto;
+}
+
+.upperDetailsContainer {
+    margin: 0px auto;
+    margin-left: 2%;
     border: 2px solid rgb(171, 32, 32);
     border-radius: 20px;
+    width: 20vw;
     background-color: rgba(255, 109, 109, 0.331);
     backdrop-filter: blur(5em);
 }
 
-.upperDetailsContainer {
-    align-self: center;
-    justify-self: center;
-    margin-left: 2%;
-}
-
-.rightBorder {
-    border-right: 2px solid rgb(171, 32, 32);
+.selectedShow {
+    margin-left: 1vw;
 }

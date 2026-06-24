@@ -15,16 +15,23 @@
       >
     </div>
 
+    <div class="goBackContainer">
+      <app-button
+      [button]="{text: 'Go Back' , expand: ''}"
+      [context]="buttonCallbacks['goBack']"
+      ></app-button>
+    </div>
+
     <p class="card">{{ campaign().descrizione }}</p>
     <ion-item>
       <ion-label class="proprietario">
-        Nome del proprietario della campagna
+        Campaign master name
       </ion-label>
 
     </ion-item>
     <div class="contenitore">
       <div class="left">
-        <p class="Risposta">Giocatori</p>
+        <p class="Risposta">Players</p>
 
         @for (giocatore of players(); track $index) {
           <app-player-card
@@ -44,8 +51,9 @@
       </app-button>
     </div>
 
-    <div class="genericButton destroyButton">
+    <div class="genericButton destroyButtonContainer">
       <ion-button
+      class="destroyButton"
       (click)="exitCampaignAlert()"
       >Exit campaign</ion-button>
     </div>

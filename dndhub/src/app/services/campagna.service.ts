@@ -59,6 +59,13 @@ export class CampagnaService {
     );
   }
 
+  public exitCampaign(idx_campagna: string) {
+    return this.http.post<any>(
+      `${environment.api_url}/api/campaign/exit-campaign`, 
+      {idx_campagna: idx_campagna}
+    );
+  }
+  
   public getDungeonMasterName(campaign_idx: string) {
     return this.http.post<any>(
       `${environment.api_url}/api/campaign/get-dungeon-master-name`, 
@@ -86,10 +93,4 @@ export class CampagnaService {
       { campaign_idx: campaign_idx }
     );
   };
-  public exitCampaign(idx_campagna: string) {
-    return this.http.post<any>(
-      `${environment.api_url}/api/campaign/exit-campaign`, 
-      {idx_campagna: idx_campagna}
-    );
-  }
 }

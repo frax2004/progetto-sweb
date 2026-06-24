@@ -566,13 +566,13 @@ export class OptionSelectionPage implements OnInit {
                 this.backgroundContent = this.backgroundChoices.content;
                 this.BACKGROUNDlanguagesToChoose = OptionSelectionPage.displayLanguageOptions(value.background[0].language_options,true).choose === undefined ? 0 : OptionSelectionPage.displayLanguageOptions(value.background[0].language_options,true).choose; 
               },
-              error: (err) => alert(err)
+              error: (err) => Alerts.error(err.error)
             });
           },
-          error: (err) => alert(err)
+          error: (err) => Alerts.error(err.error)
         })
       },
-      error: (err) => alert(err)
+      error: (err) => Alerts.error(err.error)
     })
   }
 

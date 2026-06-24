@@ -227,8 +227,10 @@
             </ion-accordion-group>
           </div>
 
-          <app-button [button]="{text: 'Incantesimi', expand:''}"
+          @if (characterInfo.slot_lvl_1 !== undefined && characterInfo.slot_lvl_1 !== null && characterInfo.slot_lvl_1 > 0) {
+          <app-button [button]="{text: 'Spells', expand:''}"
             [context]="buttonCallbacks['placeholder']"></app-button>
+          }
         </ion-list>
       </ion-col>
 

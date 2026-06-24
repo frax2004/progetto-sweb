@@ -238,6 +238,7 @@ changeCallback={
         extra_abilities: characterValues.character.abilita_extra,
         character_description: characterValues.character.descrizione_personaggio,
         image: characterValues.character.imgURL ?? undefined,
+        slot_lvl_1: characterValues.character.slot_livello_1,
       };
       this.currHealth = this.characterInfo.health;
 

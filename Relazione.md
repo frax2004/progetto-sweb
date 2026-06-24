@@ -10,56 +10,56 @@
 
 ## Front-End
 ### Componenti
-##### Accordion
-##### Button
+##### (Giovanni) Accordion
+##### (Giovanni) Button
 ##### (Polarezza) Campaign Card
 ##### (Polarezza) Card
 ##### (Polarezza) Carousel
-##### Character Card
-##### Checkbox
+##### (Giovanni) Character Card
+##### Checkbox ///////
 ##### (Polarezza) Drag Entry
-##### Entry
-##### Label
-##### Player Card
-##### Pop Up
-##### Radio Button
-##### Report Card
+##### (Giovanni) Entry
+##### (Riccardo) Label
+##### (Riccardo) Player Card
+##### Pop Up ////////
+##### Radio Button //////////
+##### (Polarezza) Report Card
 ##### (Polarezza) Request Card
-##### Scrollbar
-##### Text Area
-##### Title
-##### Unordered List Element
+##### Scrollbar ///////////////
+##### Text Area /////////////
+##### (Giovanni) Title
+##### Unordered List Element /////////////
 
 ### Pagine
-##### (Polarezza) Campaign Chat
-##### Campaign Creation
+##### (Riccardo) Campaign Chat
+##### (Polarezza) Campaign Creation
 ##### (Polarezza) Campaign Creation Info
-##### Campaigns
-##### Character Creation Pipeline
-##### Character Campaign Chat
-##### Character Campaign Details
-##### Character Creation Info
-##### Character Sheet
-##### Character Spells
-##### Characters
-##### Campaign Details
-##### Landing Page
-##### Login Page
-##### Profile
-##### Signin Page
-##### Type Player Login
+##### (Polarezza) Campaigns
+##### (Giovanni) Character Creation Pipeline
+##### (Giovanni) Character Campaign Chat
+##### (Giovanni) Character Campaign Details
+##### (Giovanni) Character Creation Info
+##### (Giovanni) Character Sheet
+##### (Riccardo) Character Spells
+##### (Giovanni) Characters
+##### (Polarezza) Campaign Details
+##### (Riccardo) Landing Page
+##### (Riccardo) Login Page
+##### (Polarezza) Profile
+##### (Riccardo) Signin Page
+##### (Riccardo) Type Player Login
 
 ### Servizi
-##### Auth Service
-##### Campaign Service
-##### Character Management Service
-##### Posts Service
-##### Reports Service
-##### User Utilities Service
+##### (Polarezza) Auth Service
+##### (Riccardo) Campaign Service
+##### (Giovanni) Character Management Service
+##### (Riccardo) Posts Service
+##### (Polarezza) Reports Service
+##### (Riccardo) User Utilities Service
 
 ### Utility
-##### (Pollarà) Core Utilities
-##### (Pollarà) State Utilities
+##### (Polarezza) Core Utilities
+##### (Polarezza) State Utilities
 
 ## Back-end
 ### (Giovanni) Database
@@ -67,20 +67,20 @@
 ##### (Polarezza) Generazione dei dati mock per il Database
 
 ### Controllers
-##### Auth Controller
-##### Campaign Controller
-##### Character Management Contoller
-##### Post Controller
-##### Reports Controller
-##### User Utilities Controller
+##### (Polarezza) Auth Controller
+##### (Riccardo) Campaign Controller
+##### (Giovanni) Character Management Contoller
+##### (Riccardo) Post Controller
+##### (Polarezza) Reports Controller
+##### (Riccardo) User Utilities Controller
 
 ### Middlewares
-##### Auth Middleware
-##### Campaign Middleware
-##### Character Middleware
-##### Post Middleware
-##### Reports Middleware
-##### User Utilities Middleware
+##### (Polarezza) Auth Middleware
+##### (Riccardo) Campaign Middleware
+##### (Giovanni) Character Middleware
+##### (Riccardo) Post Middleware
+##### (Polarezza) Reports Middleware
+##### (Riccardo) User Utilities Middleware
 
 ## Flusso di esecuzione front-end / back-end
 

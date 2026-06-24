@@ -13,6 +13,7 @@ import { AlertController } from '@ionic/angular';
 import { CharacterManagementService } from 'src/app/services/character.management.service';
 import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
 import { Observable, Subscription } from 'rxjs';
+import { CharactersPage } from '../characters/characters.page';
 
 @Component({
   selector: 'app-character-sheet',
@@ -92,26 +93,26 @@ toggleCallbacks = {
     placeholder: { onClick: Navigate.toPath(this.router,'character-spells')},
   };
 
-  async deletePG(idx_personaggio: string) { // questa funzione serve per mostrare a schermo il popup di verifica 
-    // l'ho importata da ionic, vi fa fare i popup belli
-    const alert = await this.alertCtrl.create({ // qua ti limiti a dichiarare e creare l'oggetto alert
-      // siccome ci vuole un po ' di tempo si usa await
-      header: 'Confirm deletion', // questi semplicemente sono i suoi attributi e bottoni
+  async deletePG(idx_personaggio: string) { 
+    const alert = await this.alertCtrl.create({ 
+    
+      header: 'Confirm deletion',
       message: 'Do you really want to delete this character?',
       buttons: [
         {
-          text: 'cancel', // sono semplici oggetti
-          role: 'cancel'  // questo non fa nulla se si clicca qui 
+          text: 'cancel', 
+          role: 'cancel'  
         },
         {
           text: 'delete',
           role: 'destructive',
-          //questo serve per fargli fare una funzione nel caso lo si clicchi ed esegue
-          // la funzione per cancellare il post
+
           handler: () => this.characterServices.deleteCharacter(idx_personaggio)
           .subscribe({
-            next: ()=> {Alerts.message('personaggio eliminato');
-              this.router.navigate(['characters'])
+            next: async ()=> {await this.router.navigate(['characters']);
+              await CharactersPage.CURRENT_INSTANCE.loadCharacters();
+              Alerts.personalizedMessage('Character eliminated!', 'SUCCESS');
+              
             },
             error: err => Alerts.error(err.error)
           })

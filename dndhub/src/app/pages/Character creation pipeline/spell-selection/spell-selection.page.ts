@@ -250,7 +250,7 @@ export class SpellSelectionPage implements OnInit {
                   material: item.material,
                   duration: item.duration,
                   description: item.description,
-                  components: item.components,
+                  components: item.components.replace('$$$',' - ').replace('$$$',' - '),
                   cantrip_upgrade: item.cantrip_upgrade,
                   higher_level_slot: item.higher_level_slot,
                   casting_trigger: item.casting_trigger,

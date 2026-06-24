@@ -104,7 +104,7 @@ export class CharactersPage implements OnInit {
     };
   }
 
-  private loadCharacters = async () => {
+  public loadCharacters = async () => {
     try {
       const resValue = await firstValueFrom(this.characterServices.loadCharacters());
       this.characterCards.set(resValue.characters.map(CharactersPage.toCharacterCard));

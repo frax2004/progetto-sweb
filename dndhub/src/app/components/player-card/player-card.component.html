@@ -15,10 +15,11 @@
     [button]="reportButton"
     [context]="reportContext"
     ></app-button>
-    
-    <app-button [margin]="false" 
-    [button]="kickButton"
-    [context]="kickContext"
-    ></app-button>
+    @if(showKickButton) {
+      <app-button [margin]="false" 
+      [button]="kickButton"
+      [context]="kickContext"
+      ></app-button>
+    }
   </div>
 </div>

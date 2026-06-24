@@ -29,7 +29,9 @@
         @for (giocatore of players(); track $index) {
           <app-player-card
             class="player-pannello"
-            [player]="giocatore">
+            [player]="giocatore"
+            [showKickButton]="false"
+            >
           </app-player-card>
         }
       </div>

@@ -19,6 +19,7 @@ export class PlayerCardComponent implements OnInit {
   @Input() player!: DatiGiocatore;
   @Input() onReport: (player: DatiGiocatore) => void;
   @Input() onKick: (player: DatiGiocatore) => void;
+  @Input() showKickButton?: boolean = true;
   
   reportButton: Button = {
     text: 'Segnala',

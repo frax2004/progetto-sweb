@@ -238,10 +238,15 @@ changeCallback={
     try {
       this.characterName = currentGlobalCharacterName();
       // ?? da levare dopo tests
+      console.log('<' + this.characterName + '>')
       const playerIDvalues = (await CharacterSheetPage.toPromise(this.userServices.getPlayerID())).utente_giocatore;
-      this.playerID = playerIDvalues === undefined ? '(giocatore): giovanniDM@gmail.com' : playerIDvalues;
+      this.playerID = playerIDvalues;
+
+      console.log('<' + this.playerID + '>');
       this.idx_personaggio = `${this.characterName} @ ${this.playerID}`; // reso locale per poter usare delete
 
+
+      console.log('<'+ this.idx_personaggio + '>');
 
       //prendo character
       const characterValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterByIdx(this.idx_personaggio));

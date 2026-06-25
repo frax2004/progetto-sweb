@@ -151,6 +151,8 @@ async function doesCharacterExist(req,res,next) {
 
     const idx = req.body.idx_personaggio;
     
+    console.log(idx);
+
     const character = await DatabaseQueries.retrieve(`SELECT * FROM Personaggio WHERE idx_personaggio = '${idx}'`, (el => el));
 
     if (character[0] === null || character[0] === undefined) {

@@ -34,3 +34,9 @@ authRouter.post(
   auth_middleware.isLogged,
   auth_controller.deleteAccount
 );
+
+authRouter.post(
+  "/auto-login",
+  auth_middleware.validateTokens,
+  auth_controller.autoLogin
+);

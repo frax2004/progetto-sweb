@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IonApp, IonRouterOutlet, IonContent } from '@ionic/angular/standalone';
+import { Services } from './core/state';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +10,7 @@ import { IonApp, IonRouterOutlet, IonContent } from '@ionic/angular/standalone';
 })
 export class AppComponent {
   constructor() {
+    Services.authService = inject(AuthService);
   }
 
 }

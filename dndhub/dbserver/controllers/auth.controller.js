@@ -46,15 +46,6 @@ export async function login(req, res) {
     const player_token = generateToken({ id: account.utente_giocatore });
     const dm_token = generateToken({ id: account.utente_dungeon_master });
 
-    const x = {
-      generic_token: generic_token,
-      player_token: player_token,
-      dm_token: dm_token,
-      email: email,
-      player_id: account.utente_giocatore,
-      dm_id: account.utente_dungeon_master
-    };
-
   
     UserInstance.USER = new UserInstance(generic_token, player_token, dm_token);
     sendResponse(AuthResponses.loginResponse(generic_token, player_token, dm_token), res);
@@ -137,9 +128,22 @@ export async function deleteAccount(req, res) {
   }
 }
 
+function autoLogin(req,res) {
+  canSend = true;
+
+  UserInstance.USER = new UserInstance(req.body.generic_token,req.body.player_token,req.body.dm_token);
+
+  sendResponse({
+    success: true,
+    status_code: 200,
+    message: 'Tokens succesfully auto-logged',
+  }, res);
+}
+
 export default {
   login,
   register,
   logout,
   deleteAccount,
+  autoLogin,
 }

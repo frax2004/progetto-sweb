@@ -1,7 +1,8 @@
 import { AuthValidators } from "../controllers/auth.controllers.validators.js";
 import { AuthResponses } from "../controllers/auth.controller.responses.js";
 import { Database } from "../database.js";
-import { UserInstance } from "../global.context.js";
+import { JWT_SECRET, UserInstance } from "../global.context.js";
+import jwt from 'jsonwebtoken';
 
 let canSend = true;
 function sendResponse(obj, res) {
@@ -91,6 +92,45 @@ export async function isSigninAvailable(req, res, next) {
   else sendResponse(AuthResponses.USER_ALREADY_SIGNEDIN, res);
 }
 
+function validateTokens(req,res,next) {
+  canSend = true;
+
+  let ok = jwt.verify(req.body.generic_token,JWT_SECRET);
+
+  if (!ok) {
+    sendResponse({
+      status_code: 401,
+      message: 'Generic token not valid or expired',
+      success: false
+    }, res);
+  }
+  else {
+    ok = jwt.verify(req.body.player_token,JWT_SECRET);
+
+    if (!ok) {
+      sendResponse({
+        status_code: 401,
+        message: 'Player token not valid or expired',
+        success: false
+      }, res);
+    }
+    else {
+      ok = jwt.verify(req.body.dm_token,JWT_SECRET);
+    
+      if (ok) {
+        next();
+      }
+      else {
+        sendResponse({
+          status_code: 401,
+          message: 'DM token not valid or expired',
+          success: false
+        }, res);
+      }
+    }
+  }
+}
+
 export default {
   validateEmail,
   validatePassword,
@@ -99,4 +139,5 @@ export default {
   checkPassword,
   isLogged,
   isSignedIn,
+  validateTokens,
 }

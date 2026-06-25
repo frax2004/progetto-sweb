@@ -76,13 +76,17 @@ characterManagementRouter.post("/deleteCharacter",
 );
 
 characterManagementRouter.post(
-  "/loadSpells",
+  "/loadSpells", 
   controller.loadSpells);
 
 characterManagementRouter.post(
-  "/replaceSpell",
+  "/replaceSpell",    
+   authMiddleware.isLogged,
+  characterMiddleware.doesCharacterExist,
   controller.replaceSpell);
 
 characterManagementRouter.post(
-    "/updateCharacterStats", 
+    "/updateCharacterStats",    
+    authMiddleware.isLogged,
+    characterMiddleware.doesCharacterExist,
     controller.updateCharacterStats); 

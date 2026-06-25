@@ -126,7 +126,6 @@ validateHealth(event: any) {
 
   saveStats = () => {
     if (this.characterInfo.image?.trim() === '') {
-      this.characterInfo.image = undefined;
     }
 
     this.characterServices.updateCharacterStats({
@@ -302,7 +301,7 @@ validateHealth(event: any) {
       this.characterName = currentGlobalCharacterName();
       // ?? da levare dopo tests
       const playerIDvalues = (await CharacterSheetPage.toPromise(this.userServices.getPlayerID())).utente_giocatore;
-      this.playerID = playerIDvalues === undefined ? '(giocatore): giovanniDM@gmail.com' : playerIDvalues;
+      this.playerID = playerIDvalues;
       this.idx_personaggio = `${this.characterName} @ ${this.playerID}`; // reso locale per poter usare delete
 
 

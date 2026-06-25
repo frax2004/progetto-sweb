@@ -40,8 +40,7 @@ import { LabelComponent } from "src/app/components/label/label.component";
 import { EntryComponent } from 'src/app/components/entry/entry.component';
 import { Router } from '@angular/router';
 import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { State } from 'src/app/core/state';
+import { Services, State } from 'src/app/core/state';
 import { ReportCardComponent } from 'src/app/components/report-card/report-card.component';
 import { ReportRequest } from 'src/app/components/report-card/report';
 import { ReportsService } from 'src/app/services/reports.service';
@@ -99,7 +98,6 @@ export class ProfilePage implements OnInit, AfterViewInit {
 
   constructor(
     private reportsService: ReportsService,
-    private authService: AuthService,
     private userService: UserUtilitiesService, 
     public popoverController: PopoverController, 
     private router: Router
@@ -177,7 +175,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
         {
           text: 'Proceed',
           role: 'confirm',
-          handler: () => this.authService.deleteAccount(success, fail)
+          handler: () => Services.authService.deleteAccount(success, fail)
         }
       ]
     });
@@ -253,7 +251,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
 
     const fail = res => Alerts.error(res.error);
 
-    this.authService.logout(success, fail);
+    Services.authService.logout(success, fail);
   }
 
   ngAfterViewInit() {

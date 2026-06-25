@@ -2,9 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent, IonInput, IonHeader, IonTitle, IonText, IonToolbar, IonItem, IonGrid, IonLabel, IonCol, IonRow, IonFooter, IonInputPasswordToggle, PopoverController } from '@ionic/angular/standalone';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
 import { Alerts, Navigate } from 'src/app/core/core';
-import { State } from 'src/app/core/state';
+import { Services, State } from 'src/app/core/state';
 import { EntryComponent } from 'src/app/components/entry/entry.component';
 
 @Component({
@@ -29,14 +28,14 @@ import { EntryComponent } from 'src/app/components/entry/entry.component';
 })
 export class SigninPagePage implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private router: Router) {}
 
   @ViewChild("email") emailField: EntryComponent;
   @ViewChild("password") passwordField: EntryComponent;
   @ViewChild("username") usernameField: EntryComponent;
 
   doRegister = (event: Event) => {
-    this.authService.register(
+    Services.authService.register(
       this.emailField.entry.value?.toString() ?? '',
       this.passwordField.entry.value?.toString() ?? '',
       this.usernameField.entry.value?.toString() ?? ''

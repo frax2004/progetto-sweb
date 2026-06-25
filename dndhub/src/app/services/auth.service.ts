@@ -26,7 +26,6 @@ export class AuthService {
 
 
   constructor (private httpclient: HttpClient) {
-    console.log('sono nel costruttore di attempt auto login')
     this.attemptAutoLogin();
   }
 

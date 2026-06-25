@@ -14,16 +14,27 @@ export class AuthService {
 
   attemptAutoLogin = async () => {
     try {
-      const credentials = JSON.parse(localStorage.getItem("Credenziali"));
-      const res = await firstValueFrom(this.login(credentials.email, credentials.password));
-      State.User.isLogged.set(true);
-      
+      const tokens = JSON.parse(localStorage.getItem("User_Tokens"));
+      if (tokens !== null && tokens !== undefined) {
+        const res = await firstValueFrom(this.autoLogin(
+          tokens.generic_token,
+          tokens.player_token,
+          tokens.dm_token
+        ));
+        State.User.isLogged.set(true);
+      }
     }
     catch (err) {
-      Alerts.error(err.error);
+      Alerts.error(err);
     }
   }
 
+  autoLogin = (generic_token: string, player_token: string, dm_token: string) => {
+    return this.httpclient.post<any>(
+      `${environment.api_url}/api/auth/auto-login`,
+      {generic_token: generic_token, player_token: player_token, dm_token: dm_token}
+    );
+  }
 
   constructor (private httpclient: HttpClient) {
     this.attemptAutoLogin();
@@ -36,9 +47,10 @@ export class AuthService {
     )
     .pipe(
       tap(
-        res => localStorage.setItem("Credenziali", JSON.stringify({
-          email: email,
-          password: password
+        res => localStorage.setItem("User_Tokens", JSON.stringify({
+          generic_token: res.generic_token,
+          player_token: res.player_token,
+          dm_token: res.dm_token
         }))
       )
     );
@@ -50,9 +62,10 @@ export class AuthService {
       { email: email, password: password }
     ).pipe(
       tap(
-        res => localStorage.setItem("Credenziali", JSON.stringify({
-          email: email,
-          password: password
+        res => localStorage.setItem("User_Tokens", JSON.stringify({
+          generic_token: res.generic_token,
+          player_token: res.player_token,
+          dm_token: res.dm_token
         }))
       )
     );
@@ -62,7 +75,10 @@ export class AuthService {
     return this.httpclient.post<any>(
       `${environment.api_url}/api/auth/logout`,
       {}
-    ).subscribe({
+    ).pipe(
+      tap(res => localStorage.removeItem("User_Tokens"))
+    )
+    .subscribe({
       next: success,
       error: fail
     });
@@ -72,7 +88,10 @@ export class AuthService {
     return this.httpclient.post<any>(
       `${environment.api_url}/api/auth/delete_account`,
       {}
-    ).subscribe({
+    ).pipe(
+      tap(res => localStorage.removeItem("User_Tokens"))
+    )
+    .subscribe({
       next: success,
       error: fail
     });

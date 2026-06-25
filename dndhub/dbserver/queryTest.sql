@@ -32,25 +32,25 @@
       imgURL
     )
     VALUES (
-      'GianpieroTecnologia@gmail.com',
-      'Messmer',
-      14,
-      2,
-      'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
-      'barbarian',
-      null,
+      'simone.parisi92@gmail.eu',
+      'Maicol mecduarf',
+      220,
+      6,
+      'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+      'paladin',
+      'devotion',
       'dwarf',
       'hill-dwarf',
       'acolyte',
-      1,
+      20,
       15,
+      12,
       null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
+      4,
+      3,
+      3,
+      3,
+      2,
       null,
       null,
       null,
@@ -58,76 +58,141 @@
       25,
       'Medium',
       'Shelter of the Faithful',
-      'https://tse1.mm.bing.net/th/id/OIP.n2xvN_CRRRIz1Ile-rUNpwHaEK?rs=1&pid=ImgDetMain&o=7&rm=3'
+      'https://darksouls.wiki.fextralife.com/file/Dark-Souls/smough.jpg'
       );
       
       
-      ;
+      INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Bless',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        0
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Command',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        1
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Cure Wounds',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        2
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Detect Evil and Good',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        3
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Detect Magic',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        4
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Detect Poison and Disease',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        5
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Divine Favor',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        6
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Protection from Poison',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        7
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Prayer of Healing',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        8
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Revivify',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        9
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Aura of Life',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        10
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Dispel Evil and Good',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        11
+      );
+          ;
   
       INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'clothes-common',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'pouch',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'explorers-pack',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'chain-mail',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'javelin',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'clothes-common',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         3
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'clothes-common',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'pouch',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         4
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'pouch',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'greataxe',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         5
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'greataxe',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'shield',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         6
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'handaxe',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'spear',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         7
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'holy-symbols',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'explorer’s-pack',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         8
+      );
+INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
+        'holy-symbols',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        9
       );;
   
       INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
         'common',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
         'dwarvish',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'draconic',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'infernal',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'common-sign-language',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'undercommon',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         3
       );;
   
@@ -135,136 +200,211 @@ INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES 
         'str',
         16,
         3,
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'dex',
-        15,
+        14,
         2,
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'con',
-        15,
-        2,
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        12,
+        1,
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'int',
-        8,
-        -1,
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        6,
+        -2,
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         3
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'wis',
-        15,
-        2,
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        13,
+        1,
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         4
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'cha',
-        9,
-        -1,
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        15,
+        2,
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         5
       );;
       
       INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'light armor',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'all armor',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'medium armor',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'shields',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'shields',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'simple weapons',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'simple weapons',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'martial weapons',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         3
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'martial weapons',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'skill: insight',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         4
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'skill: insight',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'skill: religion',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         5
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'skill: religion',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'saving throw: wisdom',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         6
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'saving throw: strength',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'saving throw: charisma',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         7
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'saving throw: constitution',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'skill: religion',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         8
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'skill: animal handling',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'skill: intimidation',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         9
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'skill: athletics',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
-        10
       );;
   
       INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
         'darkvision',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
         'dwarven-resilience',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
         'stonecunning',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
         'dwarven-combat-training',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         3
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
         'tool-proficiency',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         4
       );;
   
       INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'rage',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'divine-sense',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'barbarian-unarmored-defense',
-        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        'lay-on-hands',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         1
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'paladin-fighting-style',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        2
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'spellcasting-paladin',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        3
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'divine-smite',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        4
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'divine-health',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        5
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'sacred-oath',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        6
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'oath-spells',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        7
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'channel-divinity',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        8
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'paladin-extra-attack',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        9
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'aura-of-protection',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        10
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'sacred-oath-improvement-1',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        11
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'aura-of-courage',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        12
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'improved-divine-smite',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        13
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'cleansing-touch',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        14
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'sacred-oath-improvement-2',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        15
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'aura-improvements',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        16
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'sacred-oath-improvement-3',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        17
       );;
       
       COMMIT;

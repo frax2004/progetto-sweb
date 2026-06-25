@@ -111,7 +111,7 @@ export class CampaignChatPage implements OnInit {
 
   async confermaPubblicazione() {
     if (!this.postText?.trim()) {
-      Alerts.message("Scrivi qualcosa prima di creare il post");
+      Alerts.personalizedMessage("Scrivi qualcosa prima di creare il post",'Message');
       return;
     }
 

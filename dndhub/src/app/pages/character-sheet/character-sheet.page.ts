@@ -79,7 +79,8 @@ export class CharacterSheetPage implements OnInit {
   idx_personaggio: string; // mi serve per definire globalmente sto coso e usare il delete 
   toggleChange = false;
 
-  validateHealth(event: any) {
+
+validateHealth(event: any) {
     const value = event.target.value?.trim() || '';
 
     if (!/^\d{0,3}$/.test(value)) {
@@ -210,8 +211,11 @@ export class CharacterSheetPage implements OnInit {
     return () => this.deletePG(idx_personaggio);
   };
 
-  public buttonGobacks = {
-    placeholder: { onClick: () => this.router.navigate(['/characters']) }
+    public buttonGobacks = {
+    placeholder: { onClick: async () => {
+      await CharactersPage.CURRENT_INSTANCE.loadCharacters();
+      await this.router.navigate(['/characters']);
+    }}
   };
 
 

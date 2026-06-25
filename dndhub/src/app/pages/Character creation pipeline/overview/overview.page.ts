@@ -60,14 +60,14 @@ export class OverviewPage implements OnInit {
   ];
   conValue: number = 0;
   classDetails;
-  //
+  
   allEquipmentArray = [];
   allProficienciesArray = [];
   allLanguagesArray = [];
-  //
+  
   imgURL: string;
   characterName: string;
-  //
+  
   averageHP: boolean = true;
   manualHP: boolean = false;
   @ViewChild('hpEntry') private hpEntry: DragEntryComponent;
@@ -176,7 +176,7 @@ export class OverviewPage implements OnInit {
 
   static generateAllEquipment() {
     let equipArray = [];
-    //da finire
+    
     for(const equip of CharacterInstance.backgroundEquipment) {
       equipArray.push({
         idx: equip.index.trim().replace(' ','-'),
@@ -198,7 +198,7 @@ export class OverviewPage implements OnInit {
       });
     }
 
-    //questi ultimi due array sono salvati in maniera diversa
+    
     for(const equip of CharacterInstance?.chosenOptionalEquipment) {
       if (equip.includes('+')) {
         for (const subEquip of equip.split('+')) {
@@ -226,7 +226,7 @@ export class OverviewPage implements OnInit {
     return equipArray;
   }
 
-  // commento prova
+  
   static generateAllProficiencies() {
     let profArray = [];
 

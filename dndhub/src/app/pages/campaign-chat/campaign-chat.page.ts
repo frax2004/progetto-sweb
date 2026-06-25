@@ -53,7 +53,7 @@ export class CampaignChatPage implements OnInit {
   }
 
   ngOnInit() {
-    // quando la pagina viene caricata prende subito i post se presenti
+    
     this.loadInfo();
   }
 
@@ -61,24 +61,24 @@ export class CampaignChatPage implements OnInit {
     return this.campaign().nome;
   }
   
-  async deletePost(time_stamp: string) { // questa funzione serve per mostrare a schermo il popup di verifica 
-    // l'ho importata da ionic, vi fa fare i popup belli
-    const alert = await this.alertCtrl.create({ // qua ti limiti a dichiarare e creare l'oggetto alert
-      // siccome ci vuole un po ' di tempo si usa await
-      header: 'Conferma eliminazione', // questi semplicemente sono i suoi attributi e bottoni
+  async deletePost(time_stamp: string) { 
+    
+    const alert = await this.alertCtrl.create({ 
+      
+      header: 'Conferma eliminazione', 
       message: 'Vuoi davvero eliminare questo post?',
       buttons: [
         {
-          text: 'Annulla', // sono semplici oggetti
-          role: 'cancel'  // questo non fa nulla se si clicca qui 
+          text: 'Annulla', 
+          role: 'cancel'  
         },
         {
           text: 'Elimina',
           role: 'destructive',
-          //questo serve per fargli fare una funzione nel caso lo si clicchi ed esegue
-          // la funzione per cancellare il post
+          
+          
           handler: () => this.PostsService
-          .deletePost(this.campaign().idx_campagna, time_stamp) // questa dovete andarla a 
+          .deletePost(this.campaign().idx_campagna, time_stamp) 
           .subscribe({
             next: this.loadPosts,
             error: err => Alerts.error(err.error)
@@ -87,7 +87,7 @@ export class CampaignChatPage implements OnInit {
       ]
     });
 
-    // poco fa create serviva soltanto a crearlo però solo ora lo stiamo mostrando a schermo cosi
+    
     await alert.present(); 
   }
 
@@ -148,7 +148,7 @@ export class CampaignChatPage implements OnInit {
 
     await alert.present();
   }
-  //devo ancora fare il buttom per cancellare i post ma questo poi ci penso perché mi siddia e devo cambiare l'ui
+  
   buttonContextPost = {
     newPost: {
       onClick: () => this.confermaPubblicazione()

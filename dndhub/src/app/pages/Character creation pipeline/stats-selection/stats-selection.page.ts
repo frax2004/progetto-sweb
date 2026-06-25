@@ -149,8 +149,8 @@ statColors: any = {
     }
   }
 
-  // da fare mi raccomando
-  //da levare parte randomica e array standard
+  
+  
   buttonCallbacks = {
     manual: { onClick: () => {
       this.manualSelection=true;

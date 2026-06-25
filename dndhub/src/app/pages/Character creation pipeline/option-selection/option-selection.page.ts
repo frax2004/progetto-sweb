@@ -25,18 +25,18 @@ export class OptionSelectionPage implements OnInit {
   martialWeapons = ['battleaxe','flail','glaive','greataxe','greatsword','halberd','lance','longsword','maul','morningstar','pike','rapier','scimitar','trident','war pick','warhammer','whip','blowgun','hand-crossbow','heavy-crossbow','longbow','net'];
   martialMeleeWeapons = ['battleaxe','flail','glaive','greataxe','greatsword','halberd','lance','longsword','maul','morningstar','pike','rapier','scimitar','trident','war pick','warhammer','whip'];
   musicalInstruments = ['Bagpipes','Drum','Dulcimer','Flute','Lyre','Horn','Pan flute','Shawm','Viol'];
-  //
+  
   classChoices;
   speciesChoices;
   backgroundChoices;
-  // attributi di utility
+  
   classContent;
   speciesContent;
   backgroundContent;
   className;
   speciesName;
   backgroundName;
-  //
+  
   statsToChoose = signal<number>(0);
   strMax = signal<number>(0);
   dexMax = signal<number>(0);
@@ -45,37 +45,37 @@ export class OptionSelectionPage implements OnInit {
   wisMax = signal<number>(0);
   chaMax = signal<number>(0);
   maxStats: number;
-  // @ViewChild('strengthDragEntry') private strengthDragEntry: DragEntryComponent; 
-  // @ViewChild('dexterityDragEntry') private dexterityDragEntry: DragEntryComponent; 
-  // @ViewChild('constitutionDragEntry') private constitutionDragEntry: DragEntryComponent; 
-  // @ViewChild('intelligenceDragEntry') private intelligenceDragEntry: DragEntryComponent; 
-  // @ViewChild('wisdomDragEntry') private wisdomDragEntry: DragEntryComponent; 
-  // @ViewChild('charismaDragEntry') private charismaDragEntry: DragEntryComponent; 
-  //
+  
+  
+  
+  
+  
+  
+  
   regularProfToChoose: number;
   regularProfArray = [];
-  //
+  
   extraProfToChoose: number | undefined;
   extraProfArray = [];
-  //
+  
   optEquip = [];
-  //
-  // charLevel settato a 3 per testing, levare non appena non serve più
+  
+  
   charLevel = CharacterInstance.chosenLevel;
   chosenSubclass: string | undefined = undefined;
-  //
+  
   abBonusToChoose: number | undefined;
   chosenAbBonus = [];
-  //
+  
   languagestoChoose: number | undefined;
   chosenLanguages = [];
-  //
+  
   hasSubspecies: boolean;
   chosenSubspecies: string | undefined = undefined;
-  //
+  
   BACKGROUNDlanguagesToChoose: number | undefined;
   BACKGROUNDchosenLanguages = [];
-  //
+  
   BACKGROUNDoptEquip = [];
 
   addStatStr = (amount: number) => {
@@ -108,7 +108,7 @@ export class OptionSelectionPage implements OnInit {
   }
 
   nextPage = () => {
-    //controlli per andare avanti
+    
     const validateRegularProf: boolean = this.regularProfToChoose===0;
     const validateExtraProf: boolean = this.extraProfToChoose===0;
     const validateOptEquipment: boolean = this.optEquip.length === this.classContent[1].content.length;
@@ -151,7 +151,7 @@ export class OptionSelectionPage implements OnInit {
       CharacterInstance.chosenBackgroundLanguages = this.BACKGROUNDchosenLanguages;
       CharacterInstance.chosenBackgroundEquipment = this.BACKGROUNDoptEquip;
 
-      // setto le statistiche
+      
       CharacterInstance.chosenAbilityScoreIncrements = {
         'strength' : this.strMax(),
         'dexterity' : this.dexMax(),
@@ -489,24 +489,24 @@ export class OptionSelectionPage implements OnInit {
   }
 
   constructor(private router: Router, private choicesDiplayer: CharacterManagementService) {
-    //inizializzo stats too choose
+    
     this.statsToChoose.set(CharacterInstance.chosenASI * 2);
-    //da levare, è così solo per i test
-    // this.statsToChoose.set(6);
+    
+    
     this.maxStats = this.statsToChoose()
 
     this.choicesDiplayer
     .displayClassByName(
-      // scritto così per testing, da levare || quando finiremo coi test
+      
       CharacterInstance.chosenClass
     )
     .subscribe({
       next: (value: any) => {
-        // faccio [0] perché torna un solo oggetto ma il retrieve lo conta come array
+        
         this.classChoices = {
             name: value.classes[0].name,
             value: value.classes[0].name + ' value',
-            // value.classes[0].proficiency_choices || 'placeholder'
+            
             content: [
               { value: value.classes[0].name + ' proficiency_choices value', title: 'Proficiency choices', content: OptionSelectionPage.displayClassProficiencyChoices(value.classes[0].proficiency_choices)},
               { value: value.classes[0].name + ' starting_equipment_options value', title: 'Starting equipment options', content: OptionSelectionPage.displayStartingEquipmentOptions(value.classes[0].starting_equipment_options)},
@@ -528,7 +528,7 @@ export class OptionSelectionPage implements OnInit {
               value: value.species[0].name + ' value',
               content: [
                 { value: value.species[0].name + ' ability_bonus_options', title: 'Ability bonus options', content: OptionSelectionPage.displayAbilityBonusOptions(value.species[0].ability_bonus_options)},
-                //{ value: value.species[0].name + ' starting_proficiency_options', title: 'Starting proficiency options', content: JSON.stringify(value.species[0].starting_proficiency_options) || undefined},
+                
                 { value: value.species[0].name + ' languages_options', title: 'Language options', content: OptionSelectionPage.displayLanguageOptions(value.species[0].language_options)},
                 { value: value.species[0].name + ' subspecies_options', title: 'Subspecies', content: value.species[0].subraces === null  ? undefined : value.species[0].subraces === undefined ? undefined : value.species[0].subraces},
               ],

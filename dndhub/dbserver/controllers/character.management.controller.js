@@ -43,11 +43,11 @@ async function unwrapLevelSpecific(levelRow) {
 
 async function displayLevelByNameAndLevel(req, res) {
   canSend = true;
-  // lower case fatto in caso eventuale di errori
+  
   const className = req.body.className.toLowerCase();
-  // non voglio sottoclassi quindi subclass is null in query
+  
 
-  // console.log('Sono nella funzione --> ', className);
+  
 
   let lvlsArray = [];
   try {
@@ -55,7 +55,7 @@ async function displayLevelByNameAndLevel(req, res) {
       let levelInfo = Database.queryAll(`SELECT * FROM Level WHERE (character_class = '${className}' AND level = ${level} AND subclass is null)`);
 
       lvlsArray.push(await unwrapLevelSpecific((await levelInfo)[0]));
-      //console.log(lvlsArray[level-1]);
+      
     }
 
     sendResponse({
@@ -87,7 +87,7 @@ async function displayLevelRowByClassAndLevel(req, res) {
   try {
     let levelInfo = Database.queryAll(`SELECT * FROM Level WHERE (character_class = '${className}' AND level = ${level} AND subclass is null)`);
 
-    // console.log(await levelInfo);
+    
 
     levelRow = await unwrapLevelSpecific((await levelInfo)[0]);
 
@@ -186,10 +186,10 @@ async function displaySpecies(req, res) {
     const species = await Database.queryAll(`SELECT * FROM Species`);
 
     for (const sp of species) {
-      //console.log(sp);
+      
       speciesArray.push(await unwrapSpeciesSpecific(sp));
-      // da levare è solo per debug
-      // console.log(speciesArray[speciesArray.length-1]);
+      
+      
     }
     sendResponse({
       status_code: 200,
@@ -247,7 +247,7 @@ function displaySpellsByClass(req, res) {
         res
       );
     }).then(spells => {
-      // console.log(JSON.stringify(spells));
+      
       sendResponse({
         spells: spells,
         status_code: 200,
@@ -338,7 +338,7 @@ function displayBackgroundByName(req, res) {
 }
 
 function insertSpells(idx_personaggio, spells, cantrips, res) {
-  //funzione di appoggio per insertCharacter
+  
 
   if (spells === undefined || spells === null) return '';
 
@@ -366,7 +366,7 @@ function insertSpells(idx_personaggio, spells, cantrips, res) {
 }
 
 function insertEquipment(idx_personaggio, equipment, res) {
-  //funzione di appoggio per insertCharacter
+  
 
   let finalQuery = equipment.map((equip, array_idx) => `INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         '${equip.idx}',
@@ -380,7 +380,7 @@ function insertEquipment(idx_personaggio, equipment, res) {
 }
 
 function insertLanguage(idx_personaggio, languages, res) {
-  //funzione di appoggio per insertCharacter
+  
 
   let finalQuery = languages.map((lang, array_idx) => `INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
         '${lang}',
@@ -393,7 +393,7 @@ function insertLanguage(idx_personaggio, languages, res) {
 }
 
 function insertStats(idx_personaggio, statistics, res) {
-  //funzione di appoggio per insertCharacter
+  
   const statsName = ['strength',
     'dexterity',
     'constitution',
@@ -421,7 +421,7 @@ function insertStats(idx_personaggio, statistics, res) {
 }
 
 function insertFeats(idx_personaggio, feats, res) {
-  //funzione di appoggio per insertCharacter
+  
 
   if (feats === undefined || feats === null) return '';
 
@@ -437,7 +437,7 @@ function insertFeats(idx_personaggio, feats, res) {
 }
 
 function insertProficiencies(idx_personaggio, proficiencies, res) {
-  //funzione di appoggio per insertCharacter
+  
 
   let finalQuery = proficiencies.map((prof, array_idx) => `INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         '${prof.name.toLowerCase()}',
@@ -722,7 +722,7 @@ async function getCharacterEquipment(req, res) {
         }, res);
       }
       catch (err) {
-        // console.log(err);
+        
         sendResponse({
           status_code: 404,
           message: 'Non è stato possibile caricare equipaggiamento dal database ' + err.message,

@@ -44,11 +44,11 @@ import { CharactersPage } from '../characters/characters.page';
 export class CharacterSheetPage implements OnInit {
 
   playerID;
-  // characterName in teoria dovrà essere passato da fuori
+  
   characterName: string;
   currHealth: number = 0;
   defaultIMG = defualtCharacterImgURL;
-  //devo definirlo così altrimenti ho problemi
+  
   characterInfo: any = {
     health: undefined,
     proficiency_bonus: undefined,
@@ -76,7 +76,7 @@ export class CharacterSheetPage implements OnInit {
   dexModifier: number;
   currHitDies: number;
   hitDie: number;
-  idx_personaggio:string; // mi serve per definire globalmente sto coso e usare il delete 
+  idx_personaggio:string; 
   toggleChange = false;
 
 saveStats = () => {
@@ -237,18 +237,18 @@ changeCallback={
   init = async () => {
     try {
       this.characterName = currentGlobalCharacterName();
-      // ?? da levare dopo tests
+      
       console.log('<' + this.characterName + '>')
       const playerIDvalues = (await CharacterSheetPage.toPromise(this.userServices.getPlayerID())).utente_giocatore;
       this.playerID = playerIDvalues;
 
       console.log('<' + this.playerID + '>');
-      this.idx_personaggio = `${this.characterName} @ ${this.playerID}`; // reso locale per poter usare delete
+      this.idx_personaggio = `${this.characterName} @ ${this.playerID}`; 
 
 
       console.log('<'+ this.idx_personaggio + '>');
 
-      //prendo character
+      
       const characterValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterByIdx(this.idx_personaggio));
       this.characterInfo = {
         health: characterValues.character.punti_vita,
@@ -260,7 +260,7 @@ changeCallback={
         background: characterValues.character.background,
         level: characterValues.character.livello,
         gold_quantity: characterValues.character.quantita_oro,
-        //incharacterValues non mi servono incantesimi
+        
         speed: characterValues.character.velocita,
         size: characterValues.character.taglia,
         extra_abilities: characterValues.character.abilita_extra,
@@ -270,7 +270,7 @@ changeCallback={
       };
       this.currHealth = this.characterInfo.health;
 
-      //prendo statistiche pg
+      
       const scoresValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterAbilityScores(this.idx_personaggio));
       this.characterStats = scoresValues.stats.map((item: any) => {
         return {
@@ -280,7 +280,7 @@ changeCallback={
         };
       });
 
-      //prendo competenze pg
+      
       const charProficiencies = await CharacterSheetPage.toPromise(this.characterServices.getCharacterProficiencies(this.idx_personaggio));
       this.characterProficiencies = charProficiencies.proficiencies.map(item => item.proficiency);
 
@@ -299,7 +299,7 @@ changeCallback={
             item.full_name,
             this.characterProficiencies
           ),
-          //ricorda che è un array di APIreference con index e name
+          
           skills: item.skills.map(skill => CharacterSheetPage.generateSkills(
             CharacterSheetPage.getStatModifierByIndex(item.index,this.characterStats),
             this.characterInfo.proficiency_bonus,
@@ -315,7 +315,7 @@ changeCallback={
         if (ab.index === 'dex') this.dexModifier = ab.stat_modifier;
       }
 
-      //prendo lingue
+      
       const languageValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterLanguages(this.idx_personaggio));
       this.characterLanguages = languageValues.languages.map((item: any) => {
         return {
@@ -326,11 +326,11 @@ changeCallback={
         };
       });
     
-      //prendo talenti
+      
       const featValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterFeats(this.idx_personaggio));
       this.characterFeats = featValues.feats.map(item => item.item);
 
-      //prendo equipaggimento
+      
       const equipmentValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterEquipment(this.idx_personaggio));
       this.characterEquipment = equipmentValues.equipment.map((item: any) => {
         return {

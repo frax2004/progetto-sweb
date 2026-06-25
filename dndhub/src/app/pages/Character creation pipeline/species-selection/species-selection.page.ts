@@ -150,12 +150,12 @@ export class SpeciesSelectionPage implements OnInit {
     }
 
     return retValue;
-    // return languages?.from === undefined ? undefined : JSON.stringify(languages.from);
+    
   }
 
   static displayAbilityBonusOptions(specName: string) {
     if (specName.toLowerCase() !== 'half-elf') return undefined;
-    //lo faccio così tanto solo il mezzelfo ha questa opzione
+    
     return specName + ' also grants a bonus of +1 to 2 other ability scores of your choice between the following\n\n- Strength (STR)\n- Dexterity (DEX)\n- Constitution (CON)\n- Intelligence (INT)\n- Wisdom (WIS)';
   }
 

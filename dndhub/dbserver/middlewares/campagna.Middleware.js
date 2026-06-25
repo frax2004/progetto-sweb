@@ -27,7 +27,7 @@ export function assertValidCampaignInfo(req, res, next) {
 export async function assertPlayersExists(req, res, next) {
   canSend = true;
 
-  // console.log(`campagna.middleware.assertPlayersExists(req.body = ${JSON.stringify(req.body, null, 2)})`);
+  
   const players = req.body.players;
 
   const query = `SELECT * FROM Personaggio WHERE idx_personaggio in (${players.map(x => `'${x}'`).join(', ')})`;

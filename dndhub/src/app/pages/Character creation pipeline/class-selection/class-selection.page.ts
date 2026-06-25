@@ -32,7 +32,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
   }
 
   nextPage = () => {
-    // alert(this instanceof ClassSelectionPage);
+    
     CharacterInstance.chosenLevel = this.levelEntry.value;
     const validClass: boolean = this.chosenClass !== undefined;
     if (CharacterInstance.chosenLevel>0 && validClass) {
@@ -54,7 +54,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
 
 
   buttonCallbacks = {
-    // manca la pagina precedente a cui linkare il primo bottone
+    
     nextPage: { onClick: this.nextPage},
     previousPage: {onClick: () => {
       CharacterInstance.unsetAll();
@@ -212,7 +212,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
   };
 
 
-  // le funzioni display devono essere static altrimenti non possono essere accedute all'interno del costruttore
+  
   static displayProficiencies(className, proficiencies) {
     let retValue = '';
     for(const prof of proficiencies) {
@@ -274,11 +274,11 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
       }
     }
 
-    // c'è qualche errore nel db, la parte opzionale la scrivo a mano (circa)
+    
 
     return prereqValue + 'L\'opzione di multiclasse con ' + className + ' conferisce le seguenti competenze:\n' + profValue + choiceValue; 
-    //return JSON.stringify(multiclassing);
-    //return choiceValue;
+    
+    
   }
 
   static displayStartingEquipment(className, startingEquipment: dnd.StartingEquipment[]) {
@@ -300,19 +300,19 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
       ) {
         retValue = retValue + '\n- ' + opt.desc + ' - Choose: ' + opt.choose;
       }
-      // for (const item of opt.from.options){
-      //   if (item.choice?.desc !== undefined && item.choice?.choose !==undefined) {
-      //     retValue = retValue + '\n- ' + item.choice.desc + ' - Choose: ' + item.choice.choose;
-      //   }
-      // }
+      
+      
+      
+      
+      
     }
     
-    // ci perdo le speranze, non capisco come flattarlo
-    //return JSON.stringify(equipOpt);
+    
+    
     return retValue;
   }
 
-  //Spellcasting funziona male quindi mi sto prendendo qualche libertà per scriverla di sana pianta
+  
   static displaySpellcasting(className: string) {
     if (className === 'Wizard') {
       return `Spellcasting ability: INT
@@ -480,7 +480,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
       catch (err) {Alerts.error(err);}
     }
 
-    // this.chosenClass = '';
+    
     const classesButtons = {
     'Barbarian': {
       button: { text: 'Select this class', expand: ''},
@@ -582,7 +582,7 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
             { value: "spellcasting accordion",  title: "Spellcasting infos", content: ClassSelectionPage.displaySpellcasting(item.name)},
             { value: "spell accordion",  title: "Spells list", content: ClassSelectionPage.displaySpells(item.name,item.spells)},
             { value: "subclasses accordion",  title: "Subclasses", content: ClassSelectionPage.displaySubclasses(item.name,item.subclasses)},
-            //{ value: "levels accordion",  title: "Livelli possibili", content: JSON.stringify(item.levels)},
+            
           ],
           levels: ClassSelectionPage.assignlevelsToClass(item.name),
         };

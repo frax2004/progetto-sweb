@@ -35,7 +35,7 @@ border-radius: 8px;
   min-height: 10vw;
   max-height: 19vw;
   max-width: 20vw;
-} // non so come renderla responsive e buona allo stesso tempo più di cosi 
+} 
 
 .placeholderFrame img {
   width: 100%;
@@ -49,7 +49,7 @@ border-radius: 8px;
 
 .statAccordion {
     white-space: pre-wrap;
-    // serve affiché \n vada a capo
+    
 }
 
 .upperGrid {
@@ -66,7 +66,7 @@ border-radius: 8px;
 
 
 .fight,.species,.informazioni{
-  background: #6e512c; // non sono convinto dei colori
+  background: #6e512c; 
   border: 2px solid hsl(32, 62%, 30%);
   border-radius: 8px;
   padding: 0.8rem;
@@ -184,16 +184,16 @@ border-radius: 8px;
   height: 1.8rem;
 }
 
-// .statAccordionFrame{
-//   display: grid;
-//   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-//   gap: 0.8rem;
-// }
-// .accordionGroup{
-//     display: grid;
-//   grid-template-columns: repeat(auto-fit, minmax(560px, 1fr));
-//   gap: 0.8rem;
-// } funziona male e non saprei come sistemarlo
+
+
+
+
+
+
+
+
+
+
 
 .headerContentFrame {
   display: flex;

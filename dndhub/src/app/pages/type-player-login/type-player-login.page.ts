@@ -20,23 +20,23 @@ export class TypePlayerLoginPage implements OnInit {
 
   ngOnInit() {
   }
-// buttonDM = {
-//   text: 'Dungeon Master',
-//   expand:'block',
-//   color:'red'
-// };
-
-// buttonPL = {
-//   text: 'Giocatore',
-//   expand:'block',                              
-//   color:'blue'
-// };
 
 
-// buttonContext = {
-//   onClick: () => {this.router.navigate(['/landing-page']);
-//   }
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   goto(route: string) {
     this.router.navigate([route]);

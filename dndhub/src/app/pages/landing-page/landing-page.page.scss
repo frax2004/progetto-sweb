@@ -44,7 +44,7 @@ ion-accordion.accordion-expanded {
 }
 
 
-.accImgFrame { // questo modifica l'accordion quando si apre, cambia l'svg
+.accImgFrame { 
   display: flex;
   justify-content: center;
   padding: 6px;
@@ -54,7 +54,7 @@ ion-accordion.accordion-expanded {
 
 }
 
-.linkContainer { // modifica tutti i button dentro l'accordion
+.linkContainer { 
    text-align: center;
    margin-top: 1vmin;
    background-color: rgba(33, 31, 28, 0.856);

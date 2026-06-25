@@ -72,7 +72,7 @@ export class BackgroundSelectionPage implements OnInit {
     return retValue;
   }
 
-  // per qualche motivo le lingue non fungono quindi le sto scrivendo a mano
+  
 
   static allLanguages= [
   'Common',
@@ -181,7 +181,7 @@ export class BackgroundSelectionPage implements OnInit {
               { value: "language_options accordion",  title: "Language Options", content: BackgroundSelectionPage.displayLanguages(item.name,item.language_options)},
               { value: "starting_equipment accordion",  title: "Starting Equipment", content: BackgroundSelectionPage.displayStartingEquipment(item.name,item.starting_equipment)},
               { value: "starting_equipment_options accordion",  title: "Starting Equipment Options", content: BackgroundSelectionPage.displayStartingEquipmentOptions(item.name,item.starting_equipment_options)},              
-              //ideals, bond, flaws e personality traits non li sto mettendo perchè sono (parzialmente) legati all'alignment che stiamo saltando
+              
             ],
           };
         });

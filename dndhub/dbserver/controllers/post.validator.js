@@ -4,7 +4,7 @@ export class PostsValidators {
         const ok =
             idx_campagna !== undefined &&
             idx_campagna !== null &&
-            typeof idx_campagna === "string" && //metti che per sbaglio qualcuno scrive dei numeri e il ts lo interpreta come numero rompe trim()
+            typeof idx_campagna === "string" && 
             idx_campagna.trim().length > 0;
 
         if (!ok) reporter();

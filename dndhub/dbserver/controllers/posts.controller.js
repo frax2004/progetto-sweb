@@ -24,16 +24,16 @@ function getPosts(req, res) {
   const postCallback = (err, rows) => {
     if (err) {
 
-      sendResponse(PostsResponses.POSTS_FETCH_ERROR, res); // le risposte di errore generico
+      sendResponse(PostsResponses.POSTS_FETCH_ERROR, res); 
     } else {
       sendResponse(
-        {...PostsResponses.POSTS_FETCH_SUCCESS, data: rows,},res); // i 3 puntini servono a dire salva tutto
-        // dentro questo oggetto
+        {...PostsResponses.POSTS_FETCH_SUCCESS, data: rows,},res); 
+        
     }
   };
 
-  db.all(PostsQueries.getPostsCampaign(idx_campagna), postCallback); // la funzione asincrona 
-  // che poi chiama callback quando finisce
+  db.all(PostsQueries.getPostsCampaign(idx_campagna), postCallback); 
+  
 }
 
 
@@ -48,7 +48,7 @@ function createPost(req, res) {
 
   const ok = PostsValidators.assertContenuto(contenuto, () => sendResponse(PostsResponses.CONTENT_NOT_VALID, res)
   ) &&
-// i validatori per vedere se i contenuti e timestamp sono validi tipo non nulli o indefiniti
+
     PostsValidators.assertTimestamp(time_stamp, () => sendResponse(PostsResponses.TIMESTAMP_NOT_VALID, res)
     )
 

@@ -21,7 +21,7 @@ export namespace Popups {
 }
 
 export namespace Navigate {
-  // il path deve essere quello specificato su app.routes.ts, non il path delle cartelle
+  
   export function toPath(router: Router, path: String) {
     return function() {router.navigate([path]);};
   }

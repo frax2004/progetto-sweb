@@ -27,7 +27,7 @@ export class SpellSelectionPage implements OnInit {
   spellLevels = ['0','1','2','3','4','5','6','7','8','9'];
   cantripsToChoose;
   spellsToChoose;
-  // due di questi array mi servono per gli oggetti incantesimi, gli altri due per controlli
+  
   chosenCantrips = [];
   chosenSpells = [];
   checkedCantrips = [];
@@ -44,7 +44,7 @@ export class SpellSelectionPage implements OnInit {
     else {
       CharacterInstance.chosenCantrips = this.chosenCantrips;
       CharacterInstance.chosenSpells = this.chosenSpells
-      //
+      
       this.router.navigate(['/overview']);
     }
   }
@@ -70,7 +70,7 @@ export class SpellSelectionPage implements OnInit {
   }
 
   static getDisplayableSpells(allSpells: any[], maxLevel: number) {
-    // lo so che è brutto ma per qualche motivo un dizionario non funziona
+    
     let lvl0 = [];
     let lvl1 = [];
     let lvl2 = [];
@@ -235,7 +235,7 @@ export class SpellSelectionPage implements OnInit {
       }
       else {
         this.checkedSpells.push(boxValue);
-        // ricorda che questi incantesimi hanno un sacco di attributi (vedi sotto), sono di tipo dnd.Spell
+        
         this.chosenSpells.push(spell);
         this.spellsToChoose--;
       }
@@ -253,7 +253,7 @@ export class SpellSelectionPage implements OnInit {
   }
 
   constructor(private router: Router, private levelRowDisplayer: CharacterManagementService, public popoverController: PopoverController) {
-    //metto degli or ai fini del testing, da levare quando finiremo col sito
+    
     this.levelRowDisplayer
     .displayLevelRowByClassAndLevel(
       CharacterInstance.chosenLevel, 
@@ -314,13 +314,13 @@ export class SpellSelectionPage implements OnInit {
       error: (err) => alert(err)
     });
 
-    // alert(this.levelRow.length);
-    // maxSpellSlots = 
+    
+    
 
-    // SpellSelectionPage
-    // .getLevelRow(this.levelRowDisplayer)
-    // .catch(err => alert(err))
-    // .then(value => this.levelRow = value);
+    
+    
+    
+    
   }
 
 

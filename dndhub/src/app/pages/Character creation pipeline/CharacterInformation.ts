@@ -101,7 +101,7 @@ export class CharacterInstance {
   private static chosen_languages = undefined;
   private static chosen_regular_proficiencies = undefined;
   private static chosen_extra_proficiencies = undefined;
-  //ricorda che optional_equipment non ha quantity all'interno ma solo nome, quantity è sempre 1
+  
   private static optional_equipment = undefined;
   private static chosen_subclass = undefined;
   private static chosen_species_ability_bonuses = 
@@ -115,7 +115,7 @@ export class CharacterInstance {
   };
   private static chosen_subspecies = undefined;
   private static chosen_background_languages = undefined;
-  //ricorda che chosen_background_equipment non ha quantity all'interno ma solo nome, quantity è sempre 1
+  
   private static chosen_background_equipment = undefined;
   private static chosen_asi = undefined;
   private static chosen_ability_score_increments = undefined;
@@ -459,6 +459,6 @@ export class CharacterInstance {
     this.chosen_level = lvl;
   }
 
-  // non credo mi serva un set o get totale
+  
 
 }

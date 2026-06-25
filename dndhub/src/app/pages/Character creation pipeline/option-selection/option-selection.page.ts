@@ -165,16 +165,6 @@ export class OptionSelectionPage implements OnInit {
     }
     else {
       Alerts.personalizedMessage('There are still abilities to be chosen.','Not done!');
-      // alert(`validateRegularProf = ${validateRegularProf}
-      //        validateExtraProf = ${validateExtraProf}
-      //        validateOptEquipment = ${validateOptEquipment}
-      //        validateSubclass = ${validateSubclass}
-      //        validateAbilityBonuses = ${validateAbilityBonuses}
-      //        validateLanguages = ${validateLanguages}
-      //        validateSubspecies = ${validateSubspecies}
-      //        validateBGlanguages = ${validateBGlanguages} 
-      //        validateBGoptEquipment = ${validateBGoptEquipment}
-      //        validateASI = ${validateASI}`);
     }
   }
 
@@ -320,7 +310,7 @@ export class OptionSelectionPage implements OnInit {
     }
     else {
       if (this.abBonusToChoose===0) {
-        Alerts.personalizedMessage(this.chosenAbBonus[0].abilityName + this.chosenAbBonus[1].abilityName + ' \n\nYou can\'t choose any more bonuses from this group, uncheck a box from this group to choose a new one', 'Too many bonuses');
+        Alerts.personalizedMessage(' \n\nYou can\'t choose any more bonuses from this group, uncheck a box from this group to choose a new one', 'Too many bonuses');
         const box = document.getElementById(`#${boxID}`) as HTMLInputElement;
         box.checked = false;
       }

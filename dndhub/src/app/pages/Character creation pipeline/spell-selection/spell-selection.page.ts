@@ -130,7 +130,40 @@ export class SpellSelectionPage implements OnInit {
   }
 
   displaySpellDescription(spell) {
-    const desc = `Action Type: ${spell.action_type}\nCasting Time: ${spell.casting_time}\nCasting Trigger: ${spell.casting_trigger}\nRange: ${spell.range}\nComponents: ${spell.components}\nMaterial: ${spell.material}\nDuration: ${spell.duration}\nConcentration: ${spell.concentration}\nRitual: ${spell.ritual}\n\n${spell.description}\n\nAt Higher Levels: ${spell.higher_level_slot}`;
+    let desc = ``;
+    if (spell.action_type !== null && spell.action_type !== undefined) {
+      desc = desc + `\nAction Type: ${spell.action_type}`; 
+    }
+    if (spell.casting_time !== null && spell.casting_time !== undefined) {
+      desc = desc + `\nCasting Time: ${spell.casting_time}`; 
+    }
+    if (spell.casting_trigger !== null && spell.casting_trigger !== undefined) {
+      desc = desc + `\nCasting Trigger: ${spell.casting_trigger}`; 
+    }
+    if (spell.range !== null && spell.range !== undefined) {
+      desc = desc + `\nRange: ${spell.range}`; 
+    }
+    if (spell.components !== null && spell.components !== undefined) {
+      desc = desc + `\nComponents: ${spell.components}`; 
+    }
+    if (spell.material !== null && spell.material !== undefined) {
+      desc = desc + `\nMaterial: ${spell.material}`; 
+    }
+    if (spell.duration !== null && spell.duration !== undefined) {
+      desc = desc + `\nDuration: ${spell.duration}`; 
+    }
+    if (spell.concentration !== null && spell.concentration !== undefined) {
+      desc = desc + `\nConcentration: ${spell.concentration}`; 
+    }
+    if (spell.ritual !== null && spell.ritual !== undefined) {
+      desc = desc + `\nRitual: ${spell.ritual}`; 
+    }
+    if (spell.description !== null && spell.description !== undefined) {
+      desc = desc + `\n\n${spell.description}`; 
+    }
+    if (spell.higher_level_slot !== null && spell.higher_level_slot !== undefined) {
+      desc = desc + `\n\nAt Higher Levels: ${spell.higher_level_slot}`; 
+    }
     return Popups.ofSimpleText(this.popoverController, desc);
   }
 
@@ -177,7 +210,7 @@ export class SpellSelectionPage implements OnInit {
     }
     else {
       if (this.cantripsToChoose === 0) {
-        Alerts.personalizedMessage(this.checkedCantrips + '\n\nYou can\'t choose any more cantrips, uncheck a cantrip to choose a new one', 'Too many cantrips');
+        Alerts.personalizedMessage('\n\nYou can\'t choose any more cantrips, uncheck a cantrip to choose a new one', 'Too many cantrips');
         const box = document.getElementById(`#${boxValue}`) as HTMLInputElement;
         box.checked = false;
       }
@@ -196,7 +229,7 @@ export class SpellSelectionPage implements OnInit {
     }
     else {
       if (this.spellsToChoose === 0) {
-        Alerts.personalizedMessage(this.checkedSpells + '\n\nYou can\'t choose any more spells, uncheck a spell to choose a new one', 'Too many spells!');
+        Alerts.personalizedMessage('\n\nYou can\'t choose any more spells, uncheck a spell to choose a new one', 'Too many spells!');
         const box = document.getElementById(`#${boxValue}`) as HTMLInputElement;
         box.checked = false;
       }

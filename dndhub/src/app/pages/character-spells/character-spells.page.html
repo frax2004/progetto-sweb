@@ -12,8 +12,14 @@
   </div>
   <!-- fine ButtonIndietro -->
   <div class="grid">
-    <app-button [button]="{text:'change spells', expand:'block'}" [context]="toggleCallbacks['changeSpells']">
+    @if(!toggleChange){
+    <app-button [button]="{text:'change spells', expand:''}" [context]="toggleCallbacks['changeSpells']">
     </app-button>
+    }
+    @else{
+    <app-button [button]="{text:'cancel', expand:''}" [context]="toggleCallbacks['changeSpells']">
+    </app-button>
+    }
     <div class="ordimamento-slot">
 
       <div class="Slot">
@@ -127,36 +133,7 @@
     <ion-label>Spellcasting modifier: {{ spellcastingModifier }}</ion-label>
     <ion-label>Spellcasting statistic: {{ spellcastingAbility }}</ion-label>
   </div>
-  @if (toggleChange) {
-  <div class="frame">
-    <ion-label class="label">
-      Spell da sostituire:
-      <ion-label>{{ selectedSpellToReplace()?.name ?? 'nessuno' }}</ion-label>
-    </ion-label>
 
-    <div class="search-container">
-      <ion-searchbar debounce="500" placeholder="Search spell" (ionInput)="onSearchEnter($event)"></ion-searchbar>
-
-      @if(selectedSpellToReplace()) {
-      <div>
-        <div>
-          <li>
-            @for (incantesimo of availableSpells(); track incantesimo.name) {
-            <div class="available-player" (click)="replaceSpell(incantesimo)">
-              {{ incantesimo.name }} (lvl {{ incantesimo.level }})
-            </div>
-            }
-          </li>
-
-          <ion-infinite-scroll (ionInfinite)="onScrollForMore($event)">
-            <ion-infinite-scroll-content></ion-infinite-scroll-content>
-          </ion-infinite-scroll>
-        </div>
-      </div>
-      }
-    </div>
-  </div>
-  }
 
 
   <!-- altra mega griglia per incantesimi -->
@@ -214,8 +191,8 @@
 
           <!-- materiale -->
           <!-- <ion-col class="ColonnaTabella">
-          <ion-label class="Base">Material</ion-label>
-        </ion-col> le tolgo perché deformano molto il layout ionic perché sono scritte molto lunghe-->
+            <ion-label class="Base">Material</ion-label>
+          </ion-col> le tolgo perché deformano molto il layout ionic perché sono scritte molto lunghe-->
 
           <!-- Scuola di magia -->
           <ion-col class="ColonnaTabella">
@@ -224,8 +201,8 @@
 
           <!-- reazione -->
           <!-- <ion-col class="ColonnaTabella">
-          <ion-label class="Base">Casting trigger</ion-label>
-        </ion-col> la tolgo per stesso motivo di prima -->
+            <ion-label class="Base">Casting trigger</ion-label>
+          </ion-col> la tolgo per stesso motivo di prima -->
 
         </ion-row>
       </ion-grid>
@@ -240,12 +217,12 @@
             <ion-item>
               @if(!toggleChange){
               <ion-label class="NomeVisualizzato" (click)="createSpellPopup(
-                incantesimo.name,
-                incantesimo.description,
-                incantesimo.cantrip_upgrade,
-                incantesimo.higher_level_slot,
-                $event
-              )">{{incantesimo.name}}</ion-label>
+                  incantesimo.name,
+                  incantesimo.description,
+                  incantesimo.cantrip_upgrade,
+                  incantesimo.higher_level_slot,
+                  $event
+                )">{{incantesimo.name}}</ion-label>
               }
               @else{
               <app-button [button]="{text: incantesimo.name, expand:'', color:'red'}"
@@ -314,10 +291,10 @@
 
           <!-- materiali -->
           <!-- <ion-col>
-            <ion-item>
-              <ion-label>{{incantesimo.material}}</ion-label>
-            </ion-item>
-          </ion-col> -->
+              <ion-item>
+                <ion-label>{{incantesimo.material}}</ion-label>
+              </ion-item>
+            </ion-col> -->
 
           <!-- Scuola di magia -->
           <ion-col>
@@ -328,10 +305,10 @@
 
           <!-- casting trigger -->
           <!-- <ion-col>
-            <ion-item>
-              <ion-label>{{incantesimo.casting_trigger}}</ion-label>
-            </ion-item>
-          </ion-col> -->
+              <ion-item>
+                <ion-label>{{incantesimo.casting_trigger}}</ion-label>
+              </ion-item>
+            </ion-col> -->
 
         </ion-row>
         }
@@ -339,6 +316,35 @@
       </ion-grid>
     </div>
   </div>
+  @if (toggleChange) {
+  <div class="frame">
+    <ion-label class="label">
+      Spell da sostituire:
+      <ion-label>{{ selectedSpellToReplace()?.name ?? 'nessuno' }}</ion-label>
+    </ion-label>
 
+    <div class="search-container">
+      <ion-searchbar debounce="500" placeholder="Search spell" (ionInput)="onSearchEnter($event)"></ion-searchbar>
+
+      @if(selectedSpellToReplace()) {
+      <div>
+        <div>
+          <li>
+            @for (incantesimo of availableSpells(); track incantesimo.name) {
+            <div class="available-spells" (click)="replaceSpell(incantesimo)">
+              {{ incantesimo.name }} (lvl {{ incantesimo.level }})
+            </div>
+            }
+          </li>
+
+          <ion-infinite-scroll (ionInfinite)="onScrollForMore($event)">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+  }
 
 </ion-content>

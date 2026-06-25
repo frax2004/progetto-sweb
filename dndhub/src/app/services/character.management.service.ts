@@ -222,7 +222,7 @@ replaceSpell(data: { idx_personaggio: string; oldSpell: string; newSpell: string
 }
 
 
-updateCharacterStats(data: {idx_personaggio: string; health: number; speed: number;size: string;}) {
+updateCharacterStats(data: {idx_personaggio: string; health: number; speed: number;size: string; image:string}) {
   return this.httpclient.post<any>(`${environment.api_url}/api/character-management/updateCharacterStats`,data);}
 
 }

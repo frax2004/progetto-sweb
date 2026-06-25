@@ -1003,13 +1003,15 @@ const idx_personaggio = req.body.idx_personaggio;
 const health = req.body.health;
 const speed = req.body.speed;
 const size = req.body.size;
+const image= req.body.image;
 
   try {
     const query = `
       UPDATE Personaggio
       SET punti_vita = '${health}',
           velocita = '${speed}',
-          taglia = '${size}'
+          taglia = '${size}',
+          imgURL = '${image}'
       WHERE idx_personaggio = '${idx_personaggio}'
     `;
 

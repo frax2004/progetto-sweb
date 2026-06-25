@@ -184,16 +184,11 @@ border-radius: 8px;
   height: 1.8rem;
 }
 
-// .statAccordionFrame{
-//   display: grid;
-//   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-//   gap: 0.8rem;
-// }
-// .accordionGroup{
-//     display: grid;
-//   grid-template-columns: repeat(auto-fit, minmax(560px, 1fr));
-//   gap: 0.8rem;
-// } funziona male e non saprei come sistemarlo
+.editMode{
+  border:2px solid gold;
+  background:#fff3;
+  border-radius:8px;
+}
 
 .headerContentFrame {
   display: flex;
@@ -232,6 +227,24 @@ border-radius: 8px;
 
 }
 
+.accContentFeat {
+  padding: 0.5rem;
+  color: #e6b514;
+  background: rgba(0,0,0,0.331);
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ItemStyle {
+  padding: 0.5rem 0.8rem;
+  border: 1px solid gold;
+  border-radius: 20px;
+  width: fit-content;
+  max-width: 100%;
+  word-break: break-word;
+}
 
 .skillsContainer {
   display: grid;

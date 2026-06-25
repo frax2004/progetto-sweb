@@ -32,17 +32,17 @@
       imgURL
     )
     VALUES (
-      'francesco.marzano25@microsoft.eu',
-      'Charlie Kirk',
-      240,
-      6,
-      'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-      'fighter',
-      'champion',
-      'dragonborn',
+      'GianpieroTecnologia@gmail.com',
+      'Messmer',
+      14,
+      2,
+      'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+      'barbarian',
       null,
+      'dwarf',
+      'hill-dwarf',
       'acolyte',
-      20,
+      1,
       15,
       null,
       null,
@@ -55,10 +55,10 @@
       null,
       null,
       null,
-      30,
+      25,
       'Medium',
       'Shelter of the Faithful',
-      'https://i.pinimg.com/736x/1e/92/9d/1e929d6b18f10aed40264dd02362aef4.jpg'
+      'https://tse1.mm.bing.net/th/id/OIP.n2xvN_CRRRIz1Ile-rUNpwHaEK?rs=1&pid=ImgDetMain&o=7&rm=3'
       );
       
       
@@ -66,260 +66,205 @@
   
       INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'clothes-common',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'pouch',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'clothes-common',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'explorers-pack',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'pouch',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'javelin',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         3
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'chain-mail',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'clothes-common',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         4
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'maul',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'pouch',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         5
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'shield',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'greataxe',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         6
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'light-crossbow',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'handaxe',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         7
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'dungeoneer’s-pack',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        8
-      );
-INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'holy-symbols',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        9
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        8
       );;
   
       INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
         'common',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'draconic',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'dwarvish',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'goblin',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'draconic',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'sylvan',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'common-sign-language',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         3
       );;
   
       INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'str',
-        20,
-        5,
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        16,
+        3,
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'dex',
-        12,
-        1,
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        15,
+        2,
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'con',
-        14,
+        15,
         2,
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'int',
-        15,
-        2,
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        8,
+        -1,
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         3
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'wis',
         15,
         2,
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         4
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'cha',
         9,
         -1,
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         5
       );;
       
       INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'all armor',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'light armor',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         0
+      );
+INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
+        'medium armor',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        1
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'shields',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        1
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        2
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'simple weapons',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        2
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        3
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'martial weapons',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        3
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        4
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'skill: insight',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        4
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        5
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'skill: religion',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        5
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        6
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'saving throw: strength',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        6
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        7
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'saving throw: constitution',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        7
-      );
-INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'skill: history',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         8
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'skill: insight',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'skill: animal handling',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         9
+      );
+INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
+        'skill: athletics',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        10
       );;
   
       INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'draconic-ancestry',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'darkvision',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         0
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'breath-weapon',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'dwarven-resilience',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         1
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'damage-resistance',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        2
-      );;
-  
-      INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'fighter-fighting-style',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        0
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'second-wind',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        1
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'action-surge-1-use',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'stonecunning',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         2
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'martial-archetype',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'dwarven-combat-training',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         3
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'extra-attack-1',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'tool-proficiency',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
         4
+      );;
+  
+      INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'rage',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        0
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'martial-archetype-improvement-1',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        5
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'indomitable-1-use',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        6
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'martial-archetype-improvement-2',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        7
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'extra-attack-2',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        8
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'indomitable-2-uses',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        9
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'martial-archetype-improvement-3',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        10
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'action-surge-2-uses',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        11
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'indomitable-3-uses',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        12
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'martial-archetype-improvement-4',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        13
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'extra-attack-3',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        14
+        'barbarian-unarmored-defense',
+        'Messmer @ (giocatore): GianpieroTecnologia@gmail.com',
+        1
       );;
       
       COMMIT;

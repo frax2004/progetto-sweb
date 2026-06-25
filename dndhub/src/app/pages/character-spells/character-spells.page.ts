@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle ,IonToolbar, IonGrid, IonRow, IonItem, IonCheckbox, IonCol, IonLabel, PopoverController, InfiniteScrollCustomEvent } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonGrid, IonRow, IonItem, IonCheckbox, IonCol, IonLabel, PopoverController, InfiniteScrollCustomEvent } from '@ionic/angular/standalone';
 import { Alerts, currentGlobalCharacterName, Navigate, Popups } from 'src/app/core/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from "src/app/components/button/button.component";
@@ -18,6 +18,27 @@ import { IonInfiniteScroll, IonInfiniteScrollContent, IonSearchbar } from '@ioni
   imports: [IonContent, IonCheckbox, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonGrid, IonRow, IonItem, IonCol, ButtonComponent, IonLabel, IonSearchbar, IonInfiniteScroll, IonInfiniteScrollContent]
 })
 export class CharacterSpellsPage implements OnInit {
+
+  private mapSpell(item: any) {
+    return {
+      name: item.name,
+      level: item.level,
+      school: item.school,
+      classes: item.classes,
+      action_type: item.actionType,
+      concentration: item.concentration,
+      ritual: item.ritual,
+      range: item.range,
+      components: item.components?.replace(/\$\$\$/g, ' - '),
+      material: item.material,
+      duration: item.duration,
+      description: item.description,
+      cantrip_upgrade: item.cantripUpgrade,
+      higher_level_slot: item.higherLevelSlot,
+      casting_trigger: item.castingTrigger,
+      casting_time: item.castingTime,
+    };
+  }
 
   // da cambiare dopo i tests
   characterName: string;
@@ -47,10 +68,8 @@ export class CharacterSpellsPage implements OnInit {
   characterSpells: any[];
   idx_personaggio: string;
 
-  toggleChange: boolean = false; 
-// Pollarà non mi perculare già ti vedo, mi servono perché non capisco cosa non funziona 
-  selectedSpellToReplace = signal<any | null>(null); // signal serve perché è come una reaction su
-  //  dnd molto figo, comunque questa poi mi serve per assegnargli la spell che poi rimuovo
+  toggleChange: boolean = false;
+  selectedSpellToReplace = signal<any | null>(null); 
   availableSpells = signal<any[]>([]); // questo è l'array per le spell che compaiono a schermo
   currentPrefix = signal<string>(""); // questa sarebbe la barra di ricerca 
 
@@ -58,13 +77,13 @@ export class CharacterSpellsPage implements OnInit {
   // carica solo 5 spell per volta, non tutte insieme se no scoppia il mondo 
 
   private filterAvailableSpells(spells: any[]) { // il filtro per non fare prendere le spell che non
-  //  hanno o la stessa classe oppure già presenti nella spell list del pg
-    const possesedSpell = new Set(this.characterSpells.map(s => s.name)); 
+    //  hanno o la stessa classe oppure già presenti nella spell list del pg
+    const possesedSpell = new Set(this.characterSpells.map(s => s.name));
 
     return spells.filter(spell => { // qua applico il filtro alle spell perché succedevano porcherie
       const isOwned = possesedSpell.has(spell.name);
 
-      const sameClass =!spell.classes || spell.classes.includes(this.characterInfo.class);
+      const sameClass = !spell.classes || spell.classes.includes(this.characterInfo.class);
 
       return !isOwned && sameClass;
     });
@@ -79,25 +98,25 @@ export class CharacterSpellsPage implements OnInit {
   selectOldSpell(spell: any) { //  qua mi prendo la spell da cambiare
     this.selectedSpellToReplace.set(spell);
     this.currentPrefix.set("");
-    this.availableSpells.set([]); 
+    this.availableSpells.set([]);
     this.loadMoreSpells(); // appena viene selezionato la spell carico dal db la lista con la quale cambiare 
   }
 
   loadMoreSpells(callback?: () => void) { //questo invece prende le spell da caricare col 
-  // prendo il livello dello spell che tolgo 
+    // prendo il livello dello spell che tolgo 
     const queryInfo = {
-      limit: CharacterSpellsPage.SPELLS_LOADER_THRESHOLD, 
+      limit: CharacterSpellsPage.SPELLS_LOADER_THRESHOLD,
       offset: this.availableSpells().length,
-      regex: this.currentPrefix() ? `${this.currentPrefix()}%` : "", // questa è la scritta che si mette nella barra
-      level: this.selectedSpellToReplace()?.level ?? null, 
-      className: this.characterInfo.class // in teoria già questo doveva fare filtro ma siccome funzionava a metà ho messo un filtro
+      regex: this.currentPrefix() ? `${this.currentPrefix()}%` : "",
+      level: this.selectedSpellToReplace()?.level ?? null,
+      className: this.characterInfo.class
 
     };
 
     this.characterServices.loadSpells(queryInfo).subscribe({ // chiamo il backend poi gli passo 
-    // query info (non so a cosa gli serve queryinfo) e 
-    //  chiama i metodo loadSpells dal backend che si occupa di prendere le spell da 
-    // fare vedere a schermo e non capisco quel callback?.();
+      // query info (non so a cosa gli serve queryinfo) e 
+      //  chiama i metodo loadSpells dal backend che si occupa di prendere le spell da 
+      // fare vedere a schermo 
       next: (res: any) => {
         const spells = this.filterAvailableSpells(res.spells ?? []); // applico il filtro alle spell del db
         this.availableSpells.update(curr => [...curr, ...spells]); // una volta filtrata la aggiorno 
@@ -107,8 +126,8 @@ export class CharacterSpellsPage implements OnInit {
     });
   }
 
-  onSearchEnter = (e: Event) => { //Questo invece serve a leggere la navbar
-    const target = e.target as HTMLIonSearchbarElement; 
+  onSearchEnter = (e: Event) => { 
+    const target = e.target as HTMLIonSearchbarElement;
     this.currentPrefix.set(target.value ?? "");
     this.availableSpells.set([]);
     this.loadMoreSpells();
@@ -129,13 +148,14 @@ export class CharacterSpellsPage implements OnInit {
     }
 
     this.characterServices.replaceSpell({ // vabbe chiamo il service per cambiare le spell 
-    // gli passo per le robe per le query
+      // gli passo per le robe per le query
       idx_personaggio: this.idx_personaggio,
       oldSpell: oldSpell.name,
       newSpell: newSpell.name
     }).subscribe({ // 
       next: () => {
-        this.characterSpells = this.characterSpells.map(s =>s.name === oldSpell.name ? newSpell : s);
+        const mappedNewSpell = this.mapSpell(newSpell);
+        this.characterSpells = this.characterSpells.map(s => s.name === oldSpell.name ? mappedNewSpell : s);
         // uso map perché aggiornando l'array non aggiorna l'ui quindi praticamente ne creo uno nuovo
         // gli dico che tutti i valori che ora si chiamano s se trova uno con il nome di oldsPELL deve diventare
         //newSpell
@@ -267,26 +287,7 @@ export class CharacterSpellsPage implements OnInit {
       });
 
       const spellValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterSpells(this.idx_personaggio));
-      this.characterSpells = spellValues.spells.map((item: any) => {
-        return {
-          name: item.name,
-          level: item.level,
-          school: item.school,
-          classes: item.classes,
-          action_type: item.actionType,
-          concentration: item.concentration,
-          ritual: item.ritual,
-          range: item.range,
-          components: item.components?.replace('$$$', ' - ')?.replace('$$$', ' - '),
-          material: item.material,
-          duration: item.duration,
-          description: item.description,
-          cantrip_upgrade: item.cantripUpgrade,
-          higher_level_slot: item.higherLevelSlot,
-          casting_trigger: item.castingTrigger,
-          casting_time: item.castingTime,
-        };
-      });
+      this.characterSpells = spellValues.spells.map((item: any) => this.mapSpell(item));
 
       const app = CharacterSpellsPage.generateSpellcastingUtilities(this.abilityScoresInfos, this.characterInfo.class, this.characterInfo.proficiency_bonus);
       this.spellcastingAbility = app.spellcastingAbility;

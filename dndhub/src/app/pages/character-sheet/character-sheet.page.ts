@@ -79,26 +79,37 @@ export class CharacterSheetPage implements OnInit {
   idx_personaggio:string; // mi serve per definire globalmente sto coso e usare il delete 
   toggleChange = false;
 
+onImageError(event: Event) {
+  const img = event.target as HTMLImageElement;
+  img.src = this.defaultIMG;
+}
+
 saveStats = () => {
   this.characterServices.updateCharacterStats({
     idx_personaggio: this.idx_personaggio,
     health: this.characterInfo.health,
     speed: this.characterInfo.speed,
     size: this.characterInfo.size,
+    image: this.characterInfo.image,
   })
   .subscribe({
-    next: (res) => {
-      Alerts.message(res.message || 'Stats aggiornate');
+    next: () => {
+      Alerts.personalizedMessage('Stats changed','SUCCESS');
       this.currHealth = this.characterInfo.health;
       this.toggleChange = false;
     },
-    error: (err) => {
-      Alerts.error(err.error?.message || 'Errore aggiornamento stats');
+    error: () => {
+      Alerts.personalizedMessage('Stats not changed','ERROR');
     }
   });
 }
 
  toggleSelectionMode() {
+  this.toggleChange = !this.toggleChange;
+  Alerts.personalizedMessage('Now you can change: HP, image,speed, and size', 'Stats change mode')
+  }
+
+   toggleSelectionModeOff() {
   this.toggleChange = !this.toggleChange;
   }
 
@@ -107,6 +118,13 @@ toggleCallbacks = {
     onClick: () => this.toggleSelectionMode()
     }
   };
+
+  toggleCallbacksOff = {
+  changeStats: {
+    onClick: () => this.toggleSelectionModeOff()
+    }
+  };
+
 
   buttonCallbacks = {
     placeholder: { onClick: Navigate.toPath(this.router,'character-spells')},
@@ -321,7 +339,6 @@ changeCallback={
       //prendo talenti
       const featValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterFeats(this.idx_personaggio));
       this.characterFeats = featValues.feats.map(item => item.item);
-
       //prendo equipaggimento
       const equipmentValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterEquipment(this.idx_personaggio));
       this.characterEquipment = equipmentValues.equipment.map((item: any) => {

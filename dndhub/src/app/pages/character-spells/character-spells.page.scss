@@ -1,7 +1,7 @@
 ion-title {
   text-align: center;
 
-  font-size: clamp(18px, 3vw, 40px);
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
 
   color: rgb(255, 215, 0);
   background-color: black;
@@ -24,12 +24,12 @@ ion-title {
 
 .caratteristiche-incantatore ion-label {
   display: block;
-  padding: 10px 12px;
+  padding: 0.6rem 0.8rem;
   border-radius: 10px;
   background: rgba(254, 0, 0, 0.806);
   border: 1px solid rgba(255, 200, 0, 0.25);
   text-align: center;
-  font-size: clamp(12px, 2vw, 14px);
+  font-size: clamp(0.8rem, 2vw, 1rem);
 }
 
 @media (max-width: 900px) {
@@ -171,6 +171,24 @@ ion-title {
     color: gold;
     font-weight: bold;
 }
+
+.available-spells{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: clamp(0.9rem, 2vw, 1.3rem);
+  border-radius: 24px;
+  border: 1px solid gold;
+  text-align: center;
+  margin:auto;
+  height:auto;
+}
+
+
+.available-spells:hover{
+  transform:scale(1.10);
+}
+
 
 @media (max-width: 900px) {
     .grid {

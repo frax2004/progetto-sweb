@@ -89,8 +89,7 @@ export class CharactersPage implements OnInit {
   private static toCharacterCard(character: any): Card {
     console.log(character.imgURL);
     return {
-      imageURL: character.imgURL === null ? defualtCharacterImgURL : character.imgURL === undefined ? defualtCharacterImgURL : character.imgURL,
-      title: character.nome,
+      imageURL: character.imgURL ?? defualtCharacterImgURL, 
       subtitle: character.specie + ' - ' + character.classe,
       content: character.background,
     };

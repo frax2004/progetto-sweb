@@ -27,7 +27,7 @@ export function validateCharacter(req,res,next) {
     const size = req.body.size;
     const statistics = req.body.statistics;
 
-    if (name === undefined) {
+    if (name === undefined || name.length <= 0) {
         sendResponse({
             status_code: 400,
             message: 'Nome inserito non valido',

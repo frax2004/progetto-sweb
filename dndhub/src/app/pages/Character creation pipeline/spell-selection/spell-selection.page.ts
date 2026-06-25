@@ -209,6 +209,16 @@ export class SpellSelectionPage implements OnInit {
     }
   }
 
+
+  static assignComponents (components: string) {
+    if (components === null || components === undefined) return undefined;
+
+    if (components.includes('$$$')) {components.replace('$$$', ' - ')};
+    if (components.includes('$$$')) {components.replace('$$$', ' - ')};
+
+    return components;
+  }
+
   constructor(private router: Router, private levelRowDisplayer: CharacterManagementService, public popoverController: PopoverController) {
     //metto degli or ai fini del testing, da levare quando finiremo col sito
     this.levelRowDisplayer
@@ -250,7 +260,7 @@ export class SpellSelectionPage implements OnInit {
                   material: item.material,
                   duration: item.duration,
                   description: item.description,
-                  components: item.components.replace('$$$',' - ').replace('$$$',' - '),
+                  components: SpellSelectionPage.assignComponents(item.components),
                   cantrip_upgrade: item.cantrip_upgrade,
                   higher_level_slot: item.higher_level_slot,
                   casting_trigger: item.casting_trigger,

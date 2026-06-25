@@ -50,11 +50,23 @@ export class CharacterCampaignDetailsPage implements OnInit {
     onClick: () => this.toggleDocs()
   };
 
+  dungeonMaster = signal<string>("");
   toggleDocs() {
     this.Docs = !this.Docs;
   }
 
-  constructor(private campagnaService: CampagnaService, private router: Router) { }
+  public loadDungeonMaster = async () => {
+    try {
+      const res = await firstValueFrom<any>(this.campagnaService.getDungeonMasterName(this.campaign().idx_campagna));
+      this.dungeonMaster.set(res.dungeonMaster);
+    } catch(err) {
+      Alerts.message(err);
+    }
+  };
+  
+  constructor(private campagnaService: CampagnaService, private router: Router) {
+    this.loadInfo();
+  }
 
   public static toAcceptedPlayer = function (pl: any): DatiGiocatore {
     return {
@@ -98,9 +110,7 @@ export class CharacterCampaignDetailsPage implements OnInit {
 
   public loadPlayers = async () => {
     const res = await firstValueFrom<any>(this.campagnaService.loadCampaignPlayers(this.campaign()?.idx_campagna));
-  
-    console.log(JSON.stringify(res, null, 2));
-  
+
     const accepted = res.players
     .filter(pl => pl.stato === 'accepted')
     .map(CharacterCampaignDetailsPage.toAcceptedPlayer);
@@ -108,8 +118,10 @@ export class CharacterCampaignDetailsPage implements OnInit {
     this.players.set(accepted);
   }
 
-  ngOnInit() {
-    this.loadPlayers();
-  }
+  ngOnInit() {}
 
+  public loadInfo = async () => {
+    await this.loadPlayers();
+    await this.loadDungeonMaster();
+  };
 }

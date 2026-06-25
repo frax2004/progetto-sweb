@@ -240,7 +240,8 @@ def compile_char_camp_relationship(characters, campaigns):
     for character in party:
       objects.append({
         'idx_campagna': campaign['idx_campagna'],
-        'idx_personaggio': character['idx_personaggio']
+        'idx_personaggio': character['idx_personaggio'],
+        'stato_personaggio': random.choice(['pending', 'accepted'])
       })
 
   with open(RUNTIME_OUT_DIR + 'ArrayCampagnaPersonaggiItem.json', 'w+') as file:

@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, Signal, ViewChild } from '@angular/core';
+import { Component, OnInit, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
@@ -11,24 +11,20 @@ import {
   IonFooter, 
   IonAccordion, 
   IonAccordionGroup, 
-  IonThumbnail, 
-  IonList,
   IonInput,
   IonTextarea,
 } from '@ionic/angular/standalone';
-import { Card } from 'src/app/components/card/Card';
 import { CarouselComponent } from "src/app/components/carousel/carousel.component";
 import { CardComponent } from "src/app/components/card/card.component";
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { LabelComponent } from "src/app/components/label/label.component";
-import { UnorderedListElementComponent } from "src/app/components/unordered-list-element/unordered-list-element.component";
 import { Router } from '@angular/router';
 import { UserUtilitiesService } from 'src/app/services/user.utilities.service';
 import { RouterLink } from '@angular/router';
 import { State } from 'src/app/core/state';
-import { ButtonComponent } from 'src/app/components/button/button.component';
 import { Alerts, defualtCharacterImgURL } from 'src/app/core/core';
 import { CampagnaService } from 'src/app/services/campagna.service';
+import { Card } from 'src/app/components/card/Card';
 
 
 @Component({
@@ -56,21 +52,6 @@ export class LandingPagePage implements OnInit {
   @ViewChild('feedback_content') feedbackContent: IonTextarea;
 
   charCards = signal<Card[]>([]);
-
-  sendFeedback = () => {
-    const feed = {
-      title: this.feedbackTitle.value,
-      desc: this.feedbackContent.value,
-    };
-    console.log("sending feedback " + JSON.stringify(feed));
-    Alerts.good("Ti ringraziamo per il tuo feedback");
-  }
-  
-  cards: Card[] = [
-    { title:'GOHAN', subtitle:'Umano Mago lvl 999', imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL79C_DSgCRvMOtdv7FOgMbq7OOwNpVIBL7g&s" },
-    { title:'io :]', subtitle:'Gnomo della foresta falegname lvl 1', imageURL: "https://images.findagrave.com/photos/2018/333/UNCEM_639484_c87bef55-735e-4594-ae70-005e6f2e4828.jpeg" },
-    { title:'L\'uomo piu\' sexy di Lignano Sabbiadoro', subtitle:'Fata (trilli) bardo lvl 5', imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStbWsAJpOJ-za6GReXxAYlj-WYYPKqWtIpGw&s" },
-  ]
 
   descriptionCards = [
     { img: '../../assets/landing-page-imgs/landing-page-intro.png', title: 'Welcome to DnDHub!', content: 'With DnDHub you can immerse yourself in the wonderful world of Dungeons & Dragons. Create characters to play and connect with others thanks to the campaigns!'},

@@ -11,7 +11,7 @@ const IP_ADDRESS = POLAREZZA_IP_ADDRESS;
 export const environment = {
   production: false,
   api_url: `http://${IP_ADDRESS}:${PORT}`,
-  defaultRoute: "profile",
+  defaultRoute: "landing-page",
 };
 
 /*

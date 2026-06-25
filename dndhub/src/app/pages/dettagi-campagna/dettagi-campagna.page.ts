@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent,IonInput, IonHeader, IonTitle, IonButton, IonText, IonToolbar,IonIcon, IonItem, IonGrid, IonLabel, IonCol, IonRow, IonFooter, AlertController,  } from '@ionic/angular/standalone';
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
-import { TextAreaComponent } from "src/app/components/text-area/text-area.component";
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { firstValueFrom } from 'rxjs';
 import { Button } from 'src/app/components/button/Button';
@@ -27,7 +26,32 @@ import { ReportsService } from 'src/app/services/reports.service';
   templateUrl: './dettagi-campagna.page.html',
   styleUrls: ['./dettagi-campagna.page.scss'],
   standalone: true,
-  imports: [IonContent, LabelComponent ,IonHeader, IonButton, RequestCardComponent, IonIcon, PlayerCardComponent ,IonTitle, IonToolbar, CommonModule, FormsModule, AccordionComponent, TextAreaComponent, ButtonComponent, RouterLink, IonItem, IonGrid, IonLabel, IonCol, IonRow, IonFooter, IonInput, IonText, AccordionComponent, ButtonComponent]
+  imports: [
+    IonContent, 
+    LabelComponent ,
+    IonHeader, 
+    IonButton, 
+    RequestCardComponent, 
+    IonIcon, 
+    PlayerCardComponent ,
+    IonTitle, 
+    IonToolbar, 
+    CommonModule, 
+    FormsModule, 
+    AccordionComponent, 
+    ButtonComponent, 
+    RouterLink, 
+    IonItem, 
+    IonGrid, 
+    IonLabel, 
+    IonCol, 
+    IonRow, 
+    IonFooter, 
+    IonInput, 
+    IonText, 
+    AccordionComponent, 
+    ButtonComponent
+  ]
 })
 export class DettagiCampagnaPage implements OnInit {
 
@@ -119,7 +143,7 @@ export class DettagiCampagnaPage implements OnInit {
         livello: pl.livello,
         razza: pl.specie,
         profilo: pl.utente_generico,
-        immagine: pl.imgURL ?? defaultCampaignImageURL
+        immagine: pl.imgURL ?? defualtCharacterImgURL
       },
       stato: 'pending'
     }

@@ -25,7 +25,7 @@
     <p class="card">{{ campaign().descrizione }}</p>
     <ion-item>
       <ion-label class="proprietario">
-        Campaign master name
+        {{ dungeonMaster() }}
       </ion-label>
 
     </ion-item>
@@ -37,6 +37,7 @@
           <app-player-card
             class="player-pannello"
             [player]="giocatore"
+            [showReportButton]="false"
             [showKickButton]="false"
             >
           </app-player-card>

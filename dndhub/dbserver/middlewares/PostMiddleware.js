@@ -19,12 +19,10 @@ export function checkCampagnaExists(req, res, next) {
   const postMiddlewarecallback = (err, row) => { // callback 
 
     if (err) { //errore generico del db
-      console.log("Non trovato111")
       return res.status(PostsResponses.GENERIC_DB_ERROR.status_code).json(PostsResponses.GENERIC_DB_ERROR);
     }
 
     if (row === undefined) { // se non quando runno il db non trova corrispondenza della campagna termina
-      console.log("Non trovato pippo")
       return res.status(PostsResponses.CAMPAGNA_NOT_FOUND.status_code).json(PostsResponses.CAMPAGNA_NOT_FOUND);
     }
 

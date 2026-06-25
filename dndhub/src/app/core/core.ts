@@ -94,7 +94,7 @@ export class Campaign {
   utente_generico: string;
   nome: string;
   idx_campagna: string;
-  banner: string = defualtCharacterImgURL;
+  banner: string = defaultCampaignImageURL;
   descrizione?: string;
   links_documenti?: string;
 }

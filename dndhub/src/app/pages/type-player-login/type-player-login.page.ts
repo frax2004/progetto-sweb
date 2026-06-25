@@ -28,7 +28,7 @@ export class TypePlayerLoginPage implements OnInit {
 
 // buttonPL = {
 //   text: 'Giocatore',
-//   expand:'block',
+//   expand:'block',                              
 //   color:'blue'
 // };
 

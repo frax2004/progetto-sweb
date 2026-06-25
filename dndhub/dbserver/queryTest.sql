@@ -32,293 +32,294 @@
       imgURL
     )
     VALUES (
-      'Peppe@gmail.com',
-      'Prova cambia incantesimi',
-      11,
-      2,
-      'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
-      'cleric',
-      'life',
-      'elf',
-      'high-elf',
+      'francesco.marzano25@microsoft.eu',
+      'Charlie Kirk',
+      240,
+      6,
+      'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+      'fighter',
+      'champion',
+      'dragonborn',
+      null,
       'acolyte',
-      3,
+      20,
       15,
-      4,
-      3,
-      4,
-      2,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
       30,
       'Medium',
       'Shelter of the Faithful',
-      null
+      'https://i.pinimg.com/736x/1e/92/9d/1e929d6b18f10aed40264dd02362aef4.jpg'
       );
       
       
-      INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Bane',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
-        0
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Bless',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
-        1
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Create or Destroy Water',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
-        2
-      );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-        'Command',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
-        3
-      );
-          INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-          'Guidance',
-          'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
-          4
-        );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-          'Light',
-          'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
-          5
-        );
-INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
-          'Mending',
-          'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
-          6
-        );;
+      ;
   
       INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'clothes-common',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'pouch',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'shield',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'clothes-common',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'clothes-common',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'pouch',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         3
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'pouch',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'chain-mail',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         4
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'a-warhammer',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'maul',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         5
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'scale-mail',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'shield',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         6
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'club',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'light-crossbow',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         7
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'priest’s-pack',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'dungeoneer’s-pack',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         8
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'holy-symbols',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         9
       );;
   
       INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
         'common',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'elvish',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'draconic',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'common-sign-language',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'goblin',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'draconic',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'sylvan',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         3
       );;
   
       INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'str',
-        12,
-        1,
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        20,
+        5,
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'dex',
-        16,
-        3,
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        12,
+        1,
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'con',
-        7,
-        -2,
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        14,
+        2,
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'int',
-        17,
-        3,
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        15,
+        2,
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         3
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'wis',
-        12,
-        1,
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        15,
+        2,
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         4
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'cha',
-        12,
-        1,
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        9,
+        -1,
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         5
       );;
       
       INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'light armor',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'all armor',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'medium armor',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'shields',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'shields',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'simple weapons',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'simple weapons',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'martial weapons',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         3
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'skill: insight',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         4
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'skill: religion',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         5
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'saving throw: wisdom',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'saving throw: strength',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         6
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'saving throw: charisma',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'saving throw: constitution',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         7
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'skill: history',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         8
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'skill: insight',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         9
       );;
   
       INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'darkvision',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'draconic-ancestry',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'fey-ancestry',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'breath-weapon',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'trance',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'damage-resistance',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         2
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'keen-senses',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
-        3
       );;
   
       INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'spellcasting-cleric',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'fighter-fighting-style',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'divine-domain',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'second-wind',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'domain-spells-1',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'action-surge-1-use',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'channel-divinity-1-rest',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'martial-archetype',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         3
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'channel-divinity-turn-undead',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'extra-attack-1',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         4
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'divine-domain-improvement-1',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'martial-archetype-improvement-1',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         5
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'domain-spells-2',
-        'Prova cambia incantesimi @ (giocatore): Peppe@gmail.com',
+        'indomitable-1-use',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
         6
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'martial-archetype-improvement-2',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        7
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'extra-attack-2',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        8
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'indomitable-2-uses',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        9
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'martial-archetype-improvement-3',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        10
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'action-surge-2-uses',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        11
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'indomitable-3-uses',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        12
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'martial-archetype-improvement-4',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        13
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'extra-attack-3',
+        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        14
       );;
       
       COMMIT;

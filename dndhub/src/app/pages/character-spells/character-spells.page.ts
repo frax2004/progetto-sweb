@@ -99,8 +99,6 @@ export class CharacterSpellsPage implements OnInit {
     //  chiama i metodo loadSpells dal backend che si occupa di prendere le spell da 
     // fare vedere a schermo e non capisco quel callback?.();
       next: (res: any) => {
-        console.log(res); // questistavo vedendo se workava che era buggato
-        console.log('loadspell');
         const spells = this.filterAvailableSpells(res.spells ?? []); // applico il filtro alle spell del db
         this.availableSpells.update(curr => [...curr, ...spells]); // una volta filtrata la aggiorno 
         callback?.(); // questo invece serve a dire a ionic se mi hai passato una funzione eseguila
@@ -110,7 +108,6 @@ export class CharacterSpellsPage implements OnInit {
   }
 
   onSearchEnter = (e: Event) => { //Questo invece serve a leggere la navbar
-    console.log('search');
     const target = e.target as HTMLIonSearchbarElement; 
     this.currentPrefix.set(target.value ?? "");
     this.availableSpells.set([]);
@@ -118,14 +115,12 @@ export class CharacterSpellsPage implements OnInit {
   };
 
   onScrollForMore = (e: InfiniteScrollCustomEvent) => { // quando arrivi in fondo fa caricare le altre spell
-    console.log('scrollbar');
     this.loadMoreSpells(() => {
       setTimeout(() => e.target.complete(), 300);
     });
   };
 
   replaceSpell = (newSpell: any) => { // questa è quella che si occupa di cambiare le spell
-    console.log('replace');
     const oldSpell = this.selectedSpellToReplace();
 
     if (!oldSpell) {
@@ -178,7 +173,6 @@ export class CharacterSpellsPage implements OnInit {
   //     this.selectedSpells.push(spellName);
   //   }
   //    this.selectedSpells = [...this.selectedSpells];
-  //    console.log(this.selectedSpells)
   // }
 
 

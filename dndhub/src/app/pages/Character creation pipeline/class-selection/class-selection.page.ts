@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonGrid, IonLabel, PopoverController, IonCol, IonRow, IonFooter, IonAccordionGroup, IonAccordion, IonThumbnail, IonButton, IonAlert } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonGrid, IonLabel, PopoverController, IonCol, IonRow, IonFooter, IonAccordionGroup, IonAccordion, IonThumbnail, IonButton, IonAlert, LoadingController } from '@ionic/angular/standalone';
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { Alerts, Navigate } from 'src/app/core/core';
@@ -13,6 +13,7 @@ import { CharacterManagementService } from 'src/app/services/character.managemen
 import { dnd } from 'dbserver/database.queries';
 import { AfterViewInit } from '@angular/core';
 import { CharacterInstance } from '../CharacterInformation';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-class-selection',
@@ -469,6 +470,8 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
 
 
   retrieveAllClassLevels = async () => {
+    const loading = await this.loadingController.create({message: 'Loading classes'});
+    await loading.present();
 
     for (const name of this.classesNames) {
       try {
@@ -552,43 +555,47 @@ export class ClassSelectionPage implements OnInit, AfterViewInit {
       }
     }
   }
+  
+  
+    try {
+      const value = await firstValueFrom(this.classDisplayer
+      .displayClasses());
 
-    this.classDisplayer
-    .displayClasses()
-    .subscribe({
-      next: (value: any) => {
-        this.classesArray = value.classes.map(function (item: any) {
-          return {
-            imageURL: "../assets/icon/classes_icons/" + item.name.toLowerCase() + ".svg",
-            desc: ClassSelectionPage.classesDescriptions[item.name].text,
-            value: item.name + " accordion",
-            choiceButton: classesButtons[item.name],
-            title: item.name,
-            hit_die: item.hit_die, 
-            base_equipment: ClassSelectionPage.generateBaseEquipment(item.starting_equipment),
-            base_proficiencies: ClassSelectionPage.generateBaseProficiencies(item.proficiencies),
-            base_saving_throws: ClassSelectionPage.generateBaseSavingThrows(item.saving_throws),
-            content: [
-              { value: "proficiencies accordion",  title: "Proficiencies", content: ClassSelectionPage.displayProficiencies(item.name,item.proficiencies)},
-              { value: "saving_throws accordion",  title: "Saving throws", content: ClassSelectionPage.displaySavingThrows(item.name,item.saving_throws)},
-              { value: "proficiency_choices accordion",  title: "Optional proficiencies", content: ClassSelectionPage.displayProficiencyChoices(item.name, item.proficiency_choices)},
-              { value: "multiclassing accordion",  title: "Multiclass options", content: ClassSelectionPage.displayMulticlassing(item.name,item.multiclassing)},
-              { value: "starting_equipment accordion",  title: "Starting equipment", content: ClassSelectionPage.displayStartingEquipment(item.name,item.starting_equipment)},
-              { value: "starting_equipment_options accordion",  title: "Optional starting equipment", content: ClassSelectionPage.displayStartigEquipmentOptions(item.name,item.starting_equipment_options)},
-              { value: "spellcasting accordion",  title: "Spellcasting infos", content: ClassSelectionPage.displaySpellcasting(item.name)},
-              { value: "spell accordion",  title: "Spells list", content: ClassSelectionPage.displaySpells(item.name,item.spells)},
-              { value: "subclasses accordion",  title: "Subclasses", content: ClassSelectionPage.displaySubclasses(item.name,item.subclasses)},
-              //{ value: "levels accordion",  title: "Livelli possibili", content: JSON.stringify(item.levels)},
-            ],
-            levels: ClassSelectionPage.assignlevelsToClass(item.name),
-          };
-        });
-      },
-      error: (err) => Alerts.error(err.error)
-    });
+      this.classesArray = value.classes.map(function (item: any) {
+        return {
+          imageURL: "../assets/icon/classes_icons/" + item.name.toLowerCase() + ".svg",
+          desc: ClassSelectionPage.classesDescriptions[item.name].text,
+          value: item.name + " accordion",
+          choiceButton: classesButtons[item.name],
+          title: item.name,
+          hit_die: item.hit_die, 
+          base_equipment: ClassSelectionPage.generateBaseEquipment(item.starting_equipment),
+          base_proficiencies: ClassSelectionPage.generateBaseProficiencies(item.proficiencies),
+          base_saving_throws: ClassSelectionPage.generateBaseSavingThrows(item.saving_throws),
+          content: [
+            { value: "proficiencies accordion",  title: "Proficiencies", content: ClassSelectionPage.displayProficiencies(item.name,item.proficiencies)},
+            { value: "saving_throws accordion",  title: "Saving throws", content: ClassSelectionPage.displaySavingThrows(item.name,item.saving_throws)},
+            { value: "proficiency_choices accordion",  title: "Optional proficiencies", content: ClassSelectionPage.displayProficiencyChoices(item.name, item.proficiency_choices)},
+            { value: "multiclassing accordion",  title: "Multiclass options", content: ClassSelectionPage.displayMulticlassing(item.name,item.multiclassing)},
+            { value: "starting_equipment accordion",  title: "Starting equipment", content: ClassSelectionPage.displayStartingEquipment(item.name,item.starting_equipment)},
+            { value: "starting_equipment_options accordion",  title: "Optional starting equipment", content: ClassSelectionPage.displayStartigEquipmentOptions(item.name,item.starting_equipment_options)},
+            { value: "spellcasting accordion",  title: "Spellcasting infos", content: ClassSelectionPage.displaySpellcasting(item.name)},
+            { value: "spell accordion",  title: "Spells list", content: ClassSelectionPage.displaySpells(item.name,item.spells)},
+            { value: "subclasses accordion",  title: "Subclasses", content: ClassSelectionPage.displaySubclasses(item.name,item.subclasses)},
+            //{ value: "levels accordion",  title: "Livelli possibili", content: JSON.stringify(item.levels)},
+          ],
+          levels: ClassSelectionPage.assignlevelsToClass(item.name),
+        };
+      });
+    }
+    catch (err) {
+      Alerts.error(err.error)
+    }
+
+    await loading.dismiss();
   }
 
-  constructor(public popoverController: PopoverController, private router: Router, private classDisplayer: CharacterManagementService) {
+  constructor(public popoverController: PopoverController, private router: Router, private classDisplayer: CharacterManagementService, private loadingController: LoadingController) {
     this.retrieveAllClassLevels();
   }
 

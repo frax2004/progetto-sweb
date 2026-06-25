@@ -32,294 +32,379 @@
       imgURL
     )
     VALUES (
-      'francesco.marzano25@microsoft.eu',
-      'Charlie Kirk',
-      240,
+      'simone.parisi92@gmail.eu',
+      'Maicol mecduarf',
+      220,
       6,
-      'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-      'fighter',
-      'champion',
-      'dragonborn',
-      null,
+      'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+      'paladin',
+      'devotion',
+      'dwarf',
+      'hill-dwarf',
       'acolyte',
       20,
       15,
+      12,
+      null,
+      4,
+      3,
+      3,
+      3,
+      2,
       null,
       null,
       null,
       null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      30,
+      25,
       'Medium',
       'Shelter of the Faithful',
-      'https://i.pinimg.com/736x/1e/92/9d/1e929d6b18f10aed40264dd02362aef4.jpg'
+      'https://darksouls.wiki.fextralife.com/file/Dark-Souls/smough.jpg'
       );
       
       
-      ;
+      INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Bless',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        0
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Command',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        1
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Cure Wounds',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        2
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Detect Evil and Good',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        3
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Detect Magic',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        4
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Detect Poison and Disease',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        5
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Divine Favor',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        6
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Protection from Poison',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        7
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Prayer of Healing',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        8
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Revivify',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        9
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Aura of Life',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        10
+      );
+INSERT OR IGNORE INTO ArraySpellItem (item,idx_personaggio,array_idx) VALUES (
+        'Dispel Evil and Good',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        11
+      );
+          ;
   
       INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'clothes-common',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'pouch',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'clothes-common',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'chain-mail',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'pouch',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'clothes-common',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         3
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'chain-mail',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'pouch',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         4
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'maul',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'greataxe',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         5
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'shield',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         6
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'light-crossbow',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'spear',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         7
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
-        'dungeoneer’s-pack',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'explorer’s-pack',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         8
       );
 INSERT OR IGNORE INTO ArrayEquipmentItem (item,idx_personaggio,array_idx) VALUES (
         'holy-symbols',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         9
       );;
   
       INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
         'common',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'draconic',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'dwarvish',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'goblin',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'infernal',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayLanguageItem (item,idx_personaggio,array_idx) VALUES (
-        'sylvan',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'undercommon',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         3
       );;
   
       INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'str',
-        20,
-        5,
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        16,
+        3,
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'dex',
-        12,
-        1,
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        14,
+        2,
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'con',
-        14,
-        2,
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        12,
+        1,
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'int',
-        15,
-        2,
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        6,
+        -2,
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         3
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'wis',
-        15,
-        2,
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        13,
+        1,
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         4
       );
 INSERT OR IGNORE INTO ArrayStatsItem (stat_idx,stat_value,stat_modifier,idx_personaggio,array_idx) VALUES (
         'cha',
-        9,
-        -1,
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        15,
+        2,
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         5
       );;
       
       INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'all armor',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'shields',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'simple weapons',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'martial weapons',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         3
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'skill: insight',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         4
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
         'skill: religion',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         5
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'saving throw: strength',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'saving throw: wisdom',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         6
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'saving throw: constitution',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'saving throw: charisma',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         7
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'skill: history',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'skill: religion',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         8
       );
 INSERT OR IGNORE INTO ArrayProficienciesItem (proficiency,idx_personaggio,array_idx) VALUES (
-        'skill: insight',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'skill: intimidation',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         9
       );;
   
       INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'draconic-ancestry',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'darkvision',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         0
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'breath-weapon',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'dwarven-resilience',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         1
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'damage-resistance',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        2
-      );;
-  
-      INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'fighter-fighting-style',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        0
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'second-wind',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
-        1
-      );
-INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'action-surge-1-use',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'stonecunning',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         2
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'martial-archetype',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'dwarven-combat-training',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         3
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'extra-attack-1',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'tool-proficiency',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        4
+      );;
+  
+      INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'divine-sense',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        0
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'lay-on-hands',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        1
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'paladin-fighting-style',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        2
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'spellcasting-paladin',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        3
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'divine-smite',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         4
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'martial-archetype-improvement-1',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'divine-health',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         5
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'indomitable-1-use',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'sacred-oath',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         6
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'martial-archetype-improvement-2',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'oath-spells',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         7
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'extra-attack-2',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'channel-divinity',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         8
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'indomitable-2-uses',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'paladin-extra-attack',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         9
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'martial-archetype-improvement-3',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'aura-of-protection',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         10
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'action-surge-2-uses',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'sacred-oath-improvement-1',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         11
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'indomitable-3-uses',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'aura-of-courage',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         12
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'martial-archetype-improvement-4',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'improved-divine-smite',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         13
       );
 INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
-        'extra-attack-3',
-        'Charlie Kirk @ (giocatore): francesco.marzano25@microsoft.eu',
+        'cleansing-touch',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
         14
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'sacred-oath-improvement-2',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        15
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'aura-improvements',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        16
+      );
+INSERT OR IGNORE INTO ArrayFeatItem (item,idx_personaggio,array_idx) VALUES (
+        'sacred-oath-improvement-3',
+        'Maicol mecduarf @ (giocatore): simone.parisi92@gmail.eu',
+        17
       );;
       
       COMMIT;

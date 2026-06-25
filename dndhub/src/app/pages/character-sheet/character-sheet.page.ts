@@ -88,7 +88,7 @@ saveStats = () => {
   })
   .subscribe({
     next: (res) => {
-      Alerts.message(res.message || 'Stats aggiornate');
+      Alerts.personalizedMessage(res.message || 'Stats aggiornate','Message');
       this.currHealth = this.characterInfo.health;
       this.toggleChange = false;
     },
@@ -149,7 +149,10 @@ toggleCallbacks = {
   };
 
     public buttonGobacks = {
-    placeholder: { onClick: () => this.router.navigate(['/characters'])}
+    placeholder: { onClick: async () => {
+      await CharactersPage.CURRENT_INSTANCE.loadCharacters();
+      await this.router.navigate(['/characters']);
+    }}
   };
 
 

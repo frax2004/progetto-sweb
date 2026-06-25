@@ -1,14 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap, Subscription } from 'rxjs';
+import { Observable, tap, Subscription, firstValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Alerts } from '../core/core';
+import { State } from '../core/state';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor (private httpclient: HttpClient) {}
+
+
+  attemptAutoLogin = async () => {
+    try {
+      const credentials = JSON.parse(localStorage.getItem("Credenziali"));
+      const res = await firstValueFrom(this.login(credentials.email, credentials.password));
+      State.User.isLogged.set(true);
+      
+    }
+    catch (err) {
+      Alerts.error(err.error);
+    }
+  }
+
+
+  constructor (private httpclient: HttpClient) {
+    console.log('sono nel costruttore di attempt auto login')
+    this.attemptAutoLogin();
+  }
 
   register(email: string, password: string, username: string): Observable<any> {
     return this.httpclient.post<any>(
@@ -17,7 +37,10 @@ export class AuthService {
     )
     .pipe(
       tap(
-        res => sessionStorage.setItem("Risposta:  ", res.message)
+        res => localStorage.setItem("Credenziali", JSON.stringify({
+          email: email,
+          password: password
+        }))
       )
     );
   }
@@ -26,6 +49,13 @@ export class AuthService {
     return this.httpclient.post<any>(
       `${environment.api_url}/api/auth/login`,
       { email: email, password: password }
+    ).pipe(
+      tap(
+        res => localStorage.setItem("Credenziali", JSON.stringify({
+          email: email,
+          password: password
+        }))
+      )
     );
   }
 

@@ -480,8 +480,6 @@ async function insertCharacter(req, res) {
   const idx_personaggio = `${name} @ ${UserInstance.USER.player_id}`;
   const utente_generico = UserInstance.USER.email;
 
-  //log di testing, da levare dopo
-  console.log('idx_personaggio: ' + idx_personaggio);
 
   try {
     const insertCharQuery = `
@@ -565,7 +563,6 @@ async function insertCharacter(req, res) {
       COMMIT;
       `;
 
-    fs.writeFileSync('queryTest.sql', insertCharQuery, 'utf-8');
     await Database.execAll(insertCharQuery);
 
     sendResponse({

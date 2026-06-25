@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader,IonInput, IonTitle, IonToolbar, IonCheckbox, IonItem, IonGrid, IonCol, IonRow, IonLabel, IonList, PopoverController, IonAccordionGroup, IonAccordion, IonThumbnail } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonInput, IonTitle, IonToolbar, IonCheckbox, IonItem, IonGrid, IonCol, IonRow, IonLabel, IonList, PopoverController, IonAccordionGroup, IonAccordion, IonThumbnail } from '@ionic/angular/standalone';
 import { AccordionComponent } from "src/app/components/accordion/accordion.component";
 import { Alerts, currentGlobalCharacterName, Navigate, defualtCharacterImgURL, Popups } from 'src/app/core/core';
 import { EntryComponent } from "src/app/components/entry/entry.component";
@@ -19,25 +19,25 @@ import { CharactersPage } from '../characters/characters.page';
   styleUrls: ['./character-sheet.page.scss'],
   standalone: true,
   imports: [
-    IonContent, 
-    IonHeader, 
-    IonTitle, 
-    IonInput, 
-    IonToolbar, 
-    IonCheckbox, 
-    CommonModule, 
-    FormsModule, 
-    IonItem, 
-    IonGrid, 
-    IonCol, 
-    IonRow, 
-    IonLabel, 
-    AccordionComponent, 
-    IonList, 
-    EntryComponent, 
-    ButtonComponent, 
-    IonAccordionGroup, 
-    IonAccordion, 
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonInput,
+    IonToolbar,
+    IonCheckbox,
+    CommonModule,
+    FormsModule,
+    IonItem,
+    IonGrid,
+    IonCol,
+    IonRow,
+    IonLabel,
+    AccordionComponent,
+    IonList,
+    EntryComponent,
+    ButtonComponent,
+    IonAccordionGroup,
+    IonAccordion,
     IonThumbnail
   ]
 })
@@ -76,88 +76,132 @@ export class CharacterSheetPage implements OnInit {
   dexModifier: number;
   currHitDies: number;
   hitDie: number;
-  idx_personaggio:string; // mi serve per definire globalmente sto coso e usare il delete 
+  idx_personaggio: string; // mi serve per definire globalmente sto coso e usare il delete 
   toggleChange = false;
 
-onImageError(event: Event) {
-  const img = event.target as HTMLImageElement;
-  img.src = this.defaultIMG;
-}
+  validateHealth(event: any) {
+    const value = event.target.value?.trim() || '';
 
-saveStats = () => {
-  this.characterServices.updateCharacterStats({
-    idx_personaggio: this.idx_personaggio,
-    health: this.characterInfo.health,
-    speed: this.characterInfo.speed,
-    size: this.characterInfo.size,
-    image: this.characterInfo.image,
-  })
-  .subscribe({
-    next: () => {
-      Alerts.personalizedMessage('Stats changed','SUCCESS');
-      this.currHealth = this.characterInfo.health;
-      this.toggleChange = false;
-    },
-    error: () => {
-      Alerts.personalizedMessage('Stats not changed','ERROR');
+    if (!/^\d{0,3}$/.test(value)) {
+      Alerts.personalizedMessage(
+        'Health deve contenere solo numeri consecutivi (max 3 cifre)',
+        'ERROR'
+      );
+
+      this.characterInfo.health = value.replace(/\D/g, '').slice(0, 3);
     }
-  });
-}
-
- toggleSelectionMode() {
-  this.toggleChange = !this.toggleChange;
-  Alerts.personalizedMessage('Now you can change: HP, image,speed, and size', 'Stats change mode')
   }
 
-   toggleSelectionModeOff() {
-  this.toggleChange = !this.toggleChange;
+  validateSpeed(event: any) {
+    const value = event.target.value?.trim() || '';
+
+    if (!/^\d{0,4}$/.test(value)) {
+      Alerts.personalizedMessage(
+        'Speed deve contenere solo numeri consecutivi (max 4 cifre)',
+        'ERROR'
+      );
+
+      this.characterInfo.speed = value.replace(/\D/g, '').slice(0, 4);
+    }
   }
 
-toggleCallbacks = {
-  changeStats: {
-    onClick: () => this.toggleSelectionMode()
+  validateSize(event: any) {
+    const value = event.target.value || '';
+
+    if (!/^[a-zA-ZÀ-ÿ\s]*$/.test(value)) {
+      Alerts.personalizedMessage(
+        'Size può contenere solo lettere',
+        'ERROR'
+      );
+
+      this.characterInfo.size = value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+    }
+  }
+
+  onImageError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    img.src = this.defaultIMG;
+  }
+
+  saveStats = () => {
+    if (this.characterInfo.image?.trim() === '') {
+      this.characterInfo.image = undefined;
+    }
+
+    this.characterServices.updateCharacterStats({
+      idx_personaggio: this.idx_personaggio,
+      health: this.characterInfo.health,
+      speed: this.characterInfo.speed,
+      size: this.characterInfo.size,
+      image: this.characterInfo.image,
+    })
+      .subscribe({
+        next: () => {
+          Alerts.personalizedMessage('Stats changed', 'SUCCESS');
+          this.currHealth = this.characterInfo.health;
+          this.toggleChange = false;
+        },
+        error: () => {
+          Alerts.personalizedMessage('Stats not changed', 'ERROR');
+        }
+      });
+  }
+
+  toggleSelectionMode() {
+    this.toggleChange = !this.toggleChange;
+    Alerts.personalizedMessage('Now you can change: HP, image,speed, and size', 'Stats change mode')
+  }
+
+  toggleSelectionModeOff() {
+    this.toggleChange = !this.toggleChange;
+  }
+
+  toggleCallbacks = {
+    changeStats: {
+      onClick: () => this.toggleSelectionMode()
     }
   };
 
   toggleCallbacksOff = {
-  changeStats: {
-    onClick: () => this.toggleSelectionModeOff()
+    changeStats: {
+      onClick: () => this.toggleSelectionModeOff()
     }
   };
 
 
   buttonCallbacks = {
-    placeholder: { onClick: Navigate.toPath(this.router,'character-spells')},
+    placeholder: { onClick: Navigate.toPath(this.router, 'character-spells') },
   };
 
-  async deletePG(idx_personaggio: string) { 
-    const alert = await this.alertCtrl.create({ 
-    
+  async deletePG(idx_personaggio: string) {
+    const alert = await this.alertCtrl.create({
+
       header: 'Confirm deletion',
       message: 'Do you really want to delete this character?',
       buttons: [
         {
-          text: 'cancel', 
-          role: 'cancel'  
+          text: 'cancel',
+          role: 'cancel'
         },
         {
           text: 'delete',
           role: 'destructive',
 
           handler: () => this.characterServices.deleteCharacter(idx_personaggio)
-          .subscribe({
-            next: async ()=> {await this.router.navigate(['characters']);
-              await CharactersPage.CURRENT_INSTANCE.loadCharacters();
-              Alerts.personalizedMessage('Character eliminated!', 'SUCCESS');
-              
-            },
-            error: err => Alerts.error(err.error)
-          })
+            .subscribe({
+              next: async () => {
+                await this.router.navigate(['characters']);
+                await CharactersPage.CURRENT_INSTANCE.loadCharacters();
+                Alerts.personalizedMessage('Character eliminated!', 'SUCCESS');
+
+              },
+              error: err => Alerts.error(err.error)
+            })
         }
       ]
     });
 
-    await alert.present(); 
+    await alert.present();
   }
 
 
@@ -166,20 +210,20 @@ toggleCallbacks = {
     return () => this.deletePG(idx_personaggio);
   };
 
-    public buttonGobacks = {
-    placeholder: { onClick: () => this.router.navigate(['/characters'])}
+  public buttonGobacks = {
+    placeholder: { onClick: () => this.router.navigate(['/characters']) }
   };
 
 
 
 
-changeCallback={
-  changes:{onClick: Alerts.notImplemetedError}
-}
-  
+  changeCallback = {
+    changes: { onClick: Alerts.notImplemetedError }
+  }
+
   static generateSavingThrowValues(statModifier: number, profBonus: number, statName: string, proficiencies: string[]) {
-    for(const el of proficiencies) {
-      if (el.includes(statName.toLowerCase()) && el.includes('saving throw')) return (statModifier + profBonus) + ' (proficient)'; 
+    for (const el of proficiencies) {
+      if (el.includes(statName.toLowerCase()) && el.includes('saving throw')) return (statModifier + profBonus) + ' (proficient)';
     }
 
     return statModifier;
@@ -202,8 +246,8 @@ changeCallback={
   }
 
   static generateSkills(statModifier: number, profBonus: number, skillName: string, skillIndex: string, proficiencies: string[]) {
-    for(const el of proficiencies) {
-        if(el.includes(skillIndex) && el.includes('skill')) return {name: skillName, modifier: (statModifier + profBonus) + ' (proficient)'};  
+    for (const el of proficiencies) {
+      if (el.includes(skillIndex) && el.includes('skill')) return { name: skillName, modifier: (statModifier + profBonus) + ' (proficient)' };
     }
 
     return {
@@ -217,8 +261,8 @@ changeCallback={
     let shieldCA = 0;
     for (const equip of equipments) {
       if (equip.armor_class_base !== undefined && equip.armor_class_base !== null) {
-        if(equip.name.toLowerCase() === 'shield') shieldCA = equip.armor_class_base;
-        else { 
+        if (equip.name.toLowerCase() === 'shield') shieldCA = equip.armor_class_base;
+        else {
           let ca = equip.armor_class_base;
           if (equip.armor_class_dex_bonus === true) {
             if (equip.armor_class_max_bonus !== undefined && equip.armor_class_max_bonus !== null) {
@@ -226,7 +270,7 @@ changeCallback={
             }
             else ca = ca + dexModifier;
           }
-          
+
           maxCA = ca > maxCA ? ca : maxCA;
         }
       }
@@ -239,13 +283,13 @@ changeCallback={
   }
 
   public static toPromise = (subscription: Observable<any>) => {
-    const executor = (resolve: (value: any) => void,reject: (value: any) => void) => {
+    const executor = (resolve: (value: any) => void, reject: (value: any) => void) => {
       subscription.subscribe({
         next: resolve,
         error: reject
       });
     };
-    
+
     return new Promise<any>(executor);
   }
 
@@ -301,17 +345,17 @@ changeCallback={
           index: item.index,
           name: item.name,
           full_name: item.full_name,
-          stat_value: CharacterSheetPage.getStatValueByIndex(item.index,this.characterStats),
-          stat_modifier: CharacterSheetPage.getStatModifierByIndex(item.index,this.characterStats),
+          stat_value: CharacterSheetPage.getStatValueByIndex(item.index, this.characterStats),
+          stat_modifier: CharacterSheetPage.getStatModifierByIndex(item.index, this.characterStats),
           saving_throw_value: CharacterSheetPage.generateSavingThrowValues(
-            CharacterSheetPage.getStatModifierByIndex(item.index,this.characterStats),
+            CharacterSheetPage.getStatModifierByIndex(item.index, this.characterStats),
             this.characterInfo.proficiency_bonus,
             item.full_name,
             this.characterProficiencies
           ),
           //ricorda che è un array di APIreference con index e name
           skills: item.skills.map(skill => CharacterSheetPage.generateSkills(
-            CharacterSheetPage.getStatModifierByIndex(item.index,this.characterStats),
+            CharacterSheetPage.getStatModifierByIndex(item.index, this.characterStats),
             this.characterInfo.proficiency_bonus,
             skill.name,
             skill.index,
@@ -335,7 +379,7 @@ changeCallback={
           note: item.note
         };
       });
-    
+
       //prendo talenti
       const featValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterFeats(this.idx_personaggio));
       this.characterFeats = featValues.feats.map(item => item.item);
@@ -375,29 +419,29 @@ changeCallback={
           range_normal: item.range?.normal,
           range_long: item.range?.long,
           throw_range_normal: item.throw_range?.normal,
-          throw_range_long: item.throw_range?.long, 
+          throw_range_long: item.throw_range?.long,
         };
       });
 
-      const app = CharacterSheetPage.getMaxAC(this.dexModifier,this.characterEquipment);
+      const app = CharacterSheetPage.getMaxAC(this.dexModifier, this.characterEquipment);
 
       this.maxCA = app.maxCA;
       this.shieldCA = app.shieldCA;
 
       const classValues = await CharacterSheetPage.toPromise(this.characterServices.displayClassByName(this.characterInfo.class));
-      this.hitDie = classValues.classes.map(item  => item.hit_die);
+      this.hitDie = classValues.classes.map(item => item.hit_die);
       this.currHitDies = this.characterInfo.level;
     } catch (err) {
       Alerts.message(err.error.message);
-    } 
+    }
 
   }
 
 
-  constructor(public popoverController: PopoverController, private router: Router, private characterServices: CharacterManagementService, private userServices: UserUtilitiesService,private alertCtrl: AlertController) {
+  constructor(public popoverController: PopoverController, private router: Router, private characterServices: CharacterManagementService, private userServices: UserUtilitiesService, private alertCtrl: AlertController) {
     this.init()
   }
-  
+
   ngOnInit() {
   }
 

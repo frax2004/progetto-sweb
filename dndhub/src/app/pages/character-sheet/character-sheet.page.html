@@ -14,7 +14,7 @@
 
   <div class="gridContainer">
     <div class="upperGrid">
-      @if (characterInfo.image !== undefined) {
+      @if (characterInfo.image != null && characterInfo.image !== '') {
       <div class="placeholderFrame">
         <img [src]="characterInfo.image" alt="character img" (error)="onImageError($event)">
       </div>
@@ -28,8 +28,9 @@
       <div class="right">
         <div class="fight">
           @if(toggleChange){
-          <ion-input class="editMode" placeholder="Insert new health points"
-            [(ngModel)]="characterInfo.health"></ion-input>
+          <ion-input class="editMode" type="text" [(ngModel)]="characterInfo.health"
+            (ionInput)="validateHealth($event)">
+          </ion-input>
           }
           @else{
           <ion-label>Health Points: {{currHealth}}/{{characterInfo.health}}</ion-label>
@@ -77,7 +78,8 @@
           <ion-label>Initiative: {{dexModifier}}</ion-label>
           @if(toggleChange){
 
-          <ion-input class="editMode" placeholder="Insert new size" [(ngModel)]="characterInfo.size"></ion-input>
+          <ion-input class="editMode" type="text" [(ngModel)]="characterInfo.size" (ionInput)="validateSize($event)">
+          </ion-input>
           }
           @else{
           <ion-label>Size: {{characterInfo.size}}</ion-label>
@@ -91,7 +93,10 @@
           }
           }
           @if(toggleChange){
-          <ion-input class="editMode" placeholder="Insert new speed" [(ngModel)]="characterInfo.speed"></ion-input>
+          <ion-input class="editMode" type="text" 
+          [(ngModel)]="characterInfo.speed" (ionInput)="validateSpeed($event)">
+          </ion-input>
+
           }
           @else{
           <ion-label>Speed: {{characterInfo.speed}} ft</ion-label>
@@ -227,10 +232,9 @@
             [context]="{ onClick: deleteCallback(idx_personaggio) }"></app-button>
         </div>
         @if(toggleChange){
-          <ion-input class="editMode" placeholder="Insert new html image"
-          [(ngModel)]="characterInfo.image"></ion-input>
+        <ion-input class="editMode" placeholder="Insert new html image" [(ngModel)]="characterInfo.image"></ion-input>
         }
-        
+
 
       </ion-col>
 

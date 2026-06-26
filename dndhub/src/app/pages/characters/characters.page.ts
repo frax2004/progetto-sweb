@@ -33,6 +33,10 @@ export class CharactersPage implements OnInit {
 
   seeCampaigns = false;
 
+  public getCampagna(index: number) {
+    return this.campaigns[index];
+  }
+
   setCharacterName = (name: string) => {
     currentGlobalCharacterName.set(name)
     this.router.navigate(['/character-sheet']);
@@ -97,7 +101,7 @@ export class CharactersPage implements OnInit {
 
   private static toCampaignCard(campaign: any): Card {
     return {
-      imageURL: campaign.banner ?? defaultCampaignImageURL,
+      imageURL: campaign.banner === null ? defaultCampaignImageURL : campaign.banner ?? defaultCampaignImageURL,
       title: campaign.nome,
       subtitle: `${campaign.playersCount}`,
       content: campaign.descrizione,

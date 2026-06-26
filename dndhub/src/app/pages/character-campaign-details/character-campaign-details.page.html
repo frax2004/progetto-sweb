@@ -7,20 +7,20 @@
 <ion-content [fullscreen]="true" class="dettagli-campagna-content">
 
   <div class="wrapper-pagina">
-
-    <div class="immagine-campagna">
-      <img
-        [src]="campaign().banner"
-        class="immagine-centrata"
-      >
-    </div>
-
     <div class="goBackContainer">
       <app-button
       [button]="{text: 'Go Back' , expand: ''}"
       [context]="buttonCallbacks['goBack']"
       ></app-button>
     </div>
+
+    <div class="immagine-campagna">
+      <img
+        [src]="Banner"
+        class="immagine-centrata"
+      >
+    </div>
+
 
     <p class="card">{{ campaign().descrizione }}</p>
     <ion-item>

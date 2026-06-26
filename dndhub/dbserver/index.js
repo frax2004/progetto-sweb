@@ -120,13 +120,13 @@ const new_tables = [
 
 await Database.load(DatabasePaths.SCHEMAS);
 
-// for(const table of tables) {
-//   await loadTable(table, DatabasePaths.DATA_DIR);
-// }
+for(const table of tables) {
+  await loadTable(table, DatabasePaths.DATA_DIR);
+}
 
-// for(const table of new_tables) {
-//   await loadTable(table, DatabasePaths.MOCK_DATA_DIR);
-// }
+for(const table of new_tables) {
+  await loadTable(table, DatabasePaths.MOCK_DATA_DIR);
+}
 
 await Database.execOne(
   'PRAGMA foreign_keys = ON;', 

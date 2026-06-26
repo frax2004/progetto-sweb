@@ -6,7 +6,7 @@ import { ButtonComponent } from "src/app/components/button/button.component";
 import { PlayerCardComponent } from "src/app/components/player-card/player-card.component";
 import { LabelComponent } from "src/app/components/label/label.component";
 import { State } from 'src/app/core/state';
-import { Alerts, currentGlobalCharacterName, defualtCharacterImgURL, encodeCampaign, Navigate } from 'src/app/core/core';
+import { Alerts, currentGlobalCharacterName, defaultCampaignImageURL, defualtCharacterImgURL, encodeCampaign, Navigate } from 'src/app/core/core';
 import { DatiGiocatore } from 'src/app/components/dati-giocatore';
 import { DatiRichiesta } from 'src/app/components/dati-richiesta';
 import { Button } from 'src/app/components/button/Button';
@@ -31,6 +31,10 @@ export class CharacterCampaignDetailsPage implements OnInit {
   buttonCallbacks = {
     goBack: { onClick: Navigate.toPath(this.router,'character-campaign-chat')},
   };
+
+  public get Banner() {
+    return this.campaign().banner ?? defaultCampaignImageURL;
+  }
 
   public get campaignName() {
     return this.campaign()?.nome;

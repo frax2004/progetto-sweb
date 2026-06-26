@@ -18,9 +18,9 @@ DOMAINS = DOMAINS.split(' ')
 NUMBERS = [n for n in range(1, 100)]
 
 US1 = 'attore cammello cavolfiore ballerina cacciatore drago elefante camomilla lassativo cestino calcolatrice giardiniere orsacchiotto peluche calciatore armadio pirata sgasicchiatore quadro'.split(' ')
-US2 = 'gentile annoiato sbuffone vanitoso allegro sporco bagnato pulito pieno futile indispensabile motorizzato automatizzato smerdacessi'.split(' ')
+US2 = 'gentile annoiato sbuffone vanitoso allegro sporco bagnato pulito pieno futile indispensabile motorizzato automatizzato pelapatate'.split(' ')
 
-USERNAMES = 'bambolina56 cammello1 evaristro23 Hackerman PetrarcaAvevaRagione Shaggy99 Khsora MutandePazze TheRealMarzaa Tumblurr CiccioGamer89 AuraJacket IlMaestro MicheleFiglioDiGiacomo Cornuto77 IlCollega Topolino'
+USERNAMES = 'bambolina56 cammello1 affari_aquilari23 Hackerman PetrarcaAvevaRagione Shaggy99 Khsora MutandePazze TheRealMarzaa Tumblurr CiccioGamer89 AuraJacket IlMaestro MicheleFiglioDiGiacomo Ringhio IlCollega Topolino'
 USERNAMES = USERNAMES.split(' ') + [f'{u}.{v}{random.randint(1, 99)}' for u in US1 for v in US2]
 
 CLASSES = 'barbarian bard cleric druid fighter monk paladin ranger rogue sorcerer warlock wizard'
@@ -285,11 +285,11 @@ def compile_reports(accounts):
   EMAILS = list(account['email'] for account in accounts)
   CONTENT_TYPES = ['username', 'post', 'image', 'content']
   REPORT_CONTENTS = [
-    'genitalemaschile',
+    'Mancanza di rispetto',
     'cretino',
-    'nword',
-    'rword',
-    'fword',
+    'Offesa razziale',
+    'Offesa',
+    'Offesa ancora più offesa',
     'Questo giocatore ha offeso la mia intera dinastia',
     'Contenuti espliciti mostrati in chat'
   ]

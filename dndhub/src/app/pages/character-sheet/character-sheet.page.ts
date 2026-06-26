@@ -238,15 +238,12 @@ changeCallback={
     try {
       this.characterName = currentGlobalCharacterName();
       
-      console.log('<' + this.characterName + '>')
       const playerIDvalues = (await CharacterSheetPage.toPromise(this.userServices.getPlayerID())).utente_giocatore;
       this.playerID = playerIDvalues;
 
-      console.log('<' + this.playerID + '>');
       this.idx_personaggio = `${this.characterName} @ ${this.playerID}`; 
 
 
-      console.log('<'+ this.idx_personaggio + '>');
 
       
       const characterValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterByIdx(this.idx_personaggio));

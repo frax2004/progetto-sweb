@@ -25,7 +25,16 @@ export class UserUtilitiesService {
     return this.httpclient.post<any>(
       `${environment.api_url}/api/user-utilities/setUserInfo`,
       { email: email, password: password, username: username }
-    ).subscribe({next: success, error: fail});
+    ).pipe(
+        tap(
+          res => localStorage.setItem("User_Tokens", JSON.stringify({
+          generic_token: res.generic_token,
+          player_token: res.player_token,
+          dm_token: res.dm_token
+        }))
+      )
+    )
+    .subscribe({next: success, error: fail});
   }
 
   getUserInfo(success: (x: any) => void, fail: (err: any) => void): Subscription {

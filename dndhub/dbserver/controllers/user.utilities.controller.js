@@ -103,7 +103,10 @@ export async function setUserInfo(req, res) {
     sendResponse({
         message: "Credenziali modificate con successo",
         success: true,
-        status_code: 200
+        status_code: 200,
+        generic_token: generic_token,
+        player_token: player_token,
+        dm_token: dm_token
       },
       res
     );

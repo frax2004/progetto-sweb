@@ -325,8 +325,7 @@ changeCallback={
     
       
       const featValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterFeats(this.idx_personaggio));
-      this.characterFeats = featValues.feats.map(item => item.item);
-
+      this.characterFeats = featValues.feats.map(item => item.item.split('-').join(' '));
       
       const equipmentValues = await CharacterSheetPage.toPromise(this.characterServices.getCharacterEquipment(this.idx_personaggio));
       this.characterEquipment = equipmentValues.equipment.map((item: any) => {
